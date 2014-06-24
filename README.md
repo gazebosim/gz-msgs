@@ -1,8 +1,8 @@
-# Ignition <IGN_PROJECT_NAME> 
+# Ignition Messages 
 
-** Igntioin <IGN_PROJECT_NAME> classes and functions for robot applications.**
+** Igntioin Message protobuf messages and functions for robot applications.**
 
-Ignition <IGN_PROJECT_NAME> is a component in the ignition framework, a set
+Ignition Messages is a component in the ignition framework, a set
 of libraries designed to rapidly develop robot applications.
   
   [http://ignitionrobotics.org](http://ignitionrobotics.org)

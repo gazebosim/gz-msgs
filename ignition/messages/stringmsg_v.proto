@@ -1,0 +1,10 @@
+package ignition.messages;
+
+/// \ingroup ignition.messages
+/// \interface StringMsg_V
+/// \brief A message for a vector of string data
+
+message StringMsg_V
+{
+  repeated string data = 1;
+}

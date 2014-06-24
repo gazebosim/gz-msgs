@@ -1,0 +1,15 @@
+package ignition.messages;
+
+/// \ingroup ignition.messages
+/// \interface Clock
+/// \brief A message with clock information
+
+
+import "ignition/messages/time.proto";
+
+message Clock
+{
+  required Time system = 1;
+  required Time real   = 2;
+  optional Time sim    = 3;
+}

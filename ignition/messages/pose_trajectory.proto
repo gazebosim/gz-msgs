@@ -1,0 +1,16 @@
+package ignition.messages;
+
+/// \ingroup ignition.messages
+/// \interface PoseTrajectory
+/// \brief Message for a pose trajectory
+
+import "ignition/messages/pose_stamped.proto";
+
+message PoseTrajectory
+{
+  optional string name              = 1;
+  optional uint32 id                = 2;
+  repeated PoseStamped pose_stamped = 3;
+}
+
+

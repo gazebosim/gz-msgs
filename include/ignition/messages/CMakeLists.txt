@@ -1,10 +1,9 @@
 include (${project_cmake_dir}/Utils.cmake)
 
 set (headers
+  Factory.hh
+  Generator.hh
 )
-
-#################################################
-### Do not change the following
 
 set (ign_headers "" CACHE INTERNAL "Ignition headers" FORCE)
 foreach (hdr ${headers})

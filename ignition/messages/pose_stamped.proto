@@ -1,0 +1,16 @@
+package ignition.messages;
+
+/// \ingroup ignition.messages
+/// \interface PoseStamped
+/// \brief Message for a pose with a time
+
+import "ignition/messages/time.proto";
+import "ignition/messages/pose.proto";
+
+message PoseStamped
+{
+  required Time time          = 1; // Time when the data was captured
+  required Pose pose          = 2;
+}
+
+

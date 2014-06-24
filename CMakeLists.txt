@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
-set(IGN_PROJECT_NAME "Ignition project name, such as 'math', or 'transport'. The name should be one word and lower case.")
-
+set(IGN_PROJECT_NAME "messages")
 
 project (ignition_${IGN_PROJECT_NAME})
 string (TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWER)
@@ -234,6 +233,7 @@ else (build_errors)
     ${PROJECT_BINARY_DIR}/include/ignition/${IGN_PROJECT_NAME}/config.hh)
 
   include_directories(
+    ${PROJECT_SOURCE_DIR}
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_BINARY_DIR}/include
   )
@@ -250,6 +250,7 @@ else (build_errors)
 
   if (BUILD_IGNITION)
     set(TEST_TYPE "UNIT")
+    add_subdirectory(ignition/messages)
     add_subdirectory(src)
     add_subdirectory(include)
     add_subdirectory(test)

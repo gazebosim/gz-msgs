@@ -1,0 +1,10 @@
+package ignition.messages;
+
+/// \ingroup ignition.messages
+/// \interface StringMsg
+/// \brief A message for string data
+
+message StringMsg
+{
+  required string data = 1;
+}

@@ -1,0 +1,11 @@
+package ignition.messages;
+
+/// \ingroup ignition.messages
+/// \interface CmdVel2D
+/// \brief A planar velocity and orientation.
+
+message CmdVel2D
+{
+  required double velocity  = 1;
+  required double theta     = 2;
+}
