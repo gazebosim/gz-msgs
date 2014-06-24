@@ -1,0 +1,39 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Image
+/// \brief Message for an image
+
+message Image
+{
+  enum Format
+  {
+    UNKNOWN_PIXEL_FORMAT     = 1;
+    L_INT8                   = 2;
+    L_INT16                  = 3;
+    RGB_INT8                 = 4;
+    RGBA_INT8                = 5;
+    BGRA_INT8                = 6;
+    RGB_INT16                = 7;
+    RGB_INT32                = 8;
+    BGR_INT8                 = 9;
+    BGR_INT16                = 10;
+    BGR_INT32                = 11;
+    R_FLOAT16                = 12;
+    RGB_FLOAT16              = 13;
+    R_FLOAT32                = 14;
+    RGB_FLOAT32              = 15;
+    BAYER_RGGB8              = 16;
+    BAYER_RGGR8              = 17;
+    BAYER_GBRG8              = 18;
+    BAYER_GRBG8              = 19;
+
+    JPEG                     = 20;
+  }
+
+  required uint32 width   = 1; // Image width (number of columns)
+  required uint32 height  = 2; // Image height (number of rows)
+  required Format format  = 3; // The type of pixel format
+  required uint32 step    = 4; // Full row length in bytes
+  required bytes data     = 5; // Actual data, size if (step * rows)
+}

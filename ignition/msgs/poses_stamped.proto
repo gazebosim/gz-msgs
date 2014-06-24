@@ -1,0 +1,14 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface PosesStamped
+/// \brief Message for a vector of poses with a time stamp
+
+import "ignition/msgs/time.proto";
+import "ignition/msgs/pose.proto";
+
+message PosesStamped
+{
+  required Time time = 1;
+  repeated Pose pose = 2;
+}

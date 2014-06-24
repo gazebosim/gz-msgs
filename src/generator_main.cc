@@ -15,7 +15,7 @@
  *
 */
 #include <google/protobuf/compiler/plugin.h>
-#include "ignition/messages/Generator.hh"
+#include "ignition/msgs/Generator.hh"
 
 int main(int _argc, char *_argv[])
 {
@@ -26,6 +26,6 @@ int main(int _argc, char *_argv[])
 #endif  // !_MSC_VER
 
   google::protobuf::compiler::cpp::Generator
-    generator("ignition_messages_plugin");
+    generator("ignition_msgs_plugin");
   return google::protobuf::compiler::PluginMain(_argc, _argv, &generator);
 }

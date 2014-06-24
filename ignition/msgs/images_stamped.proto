@@ -1,0 +1,18 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface ImagesStamped
+/// \brief Message for a multiple image with a time
+
+
+import "ignition/msgs/time.proto";
+import "ignition/msgs/image.proto";
+
+message ImagesStamped
+{
+  // Time when all the images were captured
+  required Time time          = 1;
+  required string frame       = 2;
+  required uint32 sequence    = 3;
+  repeated Image image        = 4;
+}

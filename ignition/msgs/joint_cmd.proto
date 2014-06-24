@@ -1,0 +1,18 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface JointCmd
+/// \brief Message for joint command
+
+import "ignition/msgs/pid.proto";
+
+message JointCmd
+{
+  required string name     = 1;
+  optional int32 axis      = 2 [default=0];
+  optional double force    = 3;
+
+  optional PID position    = 4;
+  optional PID velocity    = 5;
+  optional bool reset      = 6;
+}

@@ -1,0 +1,14 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface WebRequest 
+/// \brief Message for making request from the web.
+
+message WebRequest
+{
+  required string operation      = 1;
+  required string topic          = 2;
+  optional string msg_type       = 3;
+  optional string compression    = 4;
+  optional double hz             = 5;
+}

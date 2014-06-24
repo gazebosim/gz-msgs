@@ -1,0 +1,15 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface SonarStamped
+/// \brief Message for a time stamped sonar value
+
+import "ignition/msgs/time.proto";
+import "ignition/msgs/sonar.proto";
+
+message SonarStamped
+{
+  // Time when the data was captured
+  required Time time       = 1;
+  required Sonar sonar     = 2;
+}

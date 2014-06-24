@@ -1,0 +1,15 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface WrenchStamped
+/// \brief Message for a time stamped wrench value
+
+import "ignition/msgs/time.proto";
+import "ignition/msgs/wrench.proto";
+
+message WrenchStamped
+{
+  // Time when the data was captured
+  required Time time       = 1;
+  required Wrench wrench   = 2;
+}

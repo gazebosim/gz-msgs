@@ -28,7 +28,7 @@
 #include <utility>
 #include <vector>
 
-#include "ignition/messages/Generator.hh"
+#include "ignition/msgs/Generator.hh"
 
 namespace google {
 namespace protobuf {
@@ -76,7 +76,7 @@ bool Generator::Generate(const FileDescriptor *_file,
         _generator_context->OpenForInsert(sourceFilename, "includes"));
     io::Printer printer(output.get(), '$');
 
-    printer.Print("#include \"ignition/messages/Factory.hh\"\n", "name",
+    printer.Print("#include \"ignition/msgs/Factory.hh\"\n", "name",
                   "includes");
     printer.Print("#pragma GCC diagnostic ignored \"-Wshadow\"\n", "name",
                   "includes");

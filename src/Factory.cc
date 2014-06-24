@@ -14,10 +14,10 @@
  * limitations under the License.
  *
 */
-#include "ignition/messages/Factory.hh"
+#include "ignition/msgs/Factory.hh"
 
 using namespace ignition;
-using namespace messages;
+using namespace msgs;
 
 std::map<std::string, FactoryFn> *Factory::msgMap = NULL;
 
@@ -38,10 +38,10 @@ std::shared_ptr<google::protobuf::Message> Factory::New(
 {
   std::shared_ptr<google::protobuf::Message> msg;
 
-  // FIx typenames that are missing "ignition::messages." at the beginning.
+  // FIx typenames that are missing "ignition::msgs." at the beginning.
   std::string type;
-  if (_msgType.find("ignition/messages.") != 0)
-    type = "ignition::messages.";
+  if (_msgType.find("ignition/msgs.") != 0)
+    type = "ignition::msgs.";
   type += _msgType;
 
   // Create a new message if a FactoryFn has been assigned to the message

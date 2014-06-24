@@ -1,0 +1,14 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface ForceTorque
+/// \brief ForceTorque from constraint solving
+
+import "ignition/msgs/joint_wrench.proto";
+import "ignition/msgs/time.proto";
+
+message ForceTorque
+{
+  repeated JointWrench wrench = 1;
+  required Time time          = 2;
+}

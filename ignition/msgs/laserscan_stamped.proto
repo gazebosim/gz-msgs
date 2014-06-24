@@ -1,0 +1,16 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface LaserScanStamped
+/// \brief Message for an laser scan with a time
+
+
+import "ignition/msgs/time.proto";
+import "ignition/msgs/laserscan.proto";
+
+message LaserScanStamped
+{
+  // Time when the data was captured
+  required Time time          = 1;
+  required LaserScan scan     = 2;
+}
