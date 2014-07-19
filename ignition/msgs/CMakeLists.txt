@@ -57,11 +57,11 @@ set_source_files_properties(${PROTO_SRCS} ${PROTO_HDRS}
   PROPERTIES GENERATED TRUE)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
-ign_add_library(ignition_msgs
+ign_add_library(ignition-msgs
   ${PROTO_SRCS} ${PROJECT_SOURCE_DIR}/src/Factory.cc)
-target_link_libraries(ignition_msgs ${PROTOBUF_LIBRARY})
+target_link_libraries(ignition-msgs ${PROTOBUF_LIBRARY})
 
-add_dependencies(ignition_msgs ign_msgs_gen)
+add_dependencies(ignition-msgs ign_msgs_gen)
 
 set (ign_msgs_headers "" CACHE INTERNAL "Include dirs description")
 
@@ -75,5 +75,5 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/ign_auto_headers.hh.in ${CMAKE_CURRE
 ign_install_includes(${IGN_PROJECT_NAME} ${CMAKE_CURRENT_BINARY_DIR}/${IGN_PROJECT_NAME}.hh)
 
 ign_install_includes(${IGN_PROJECT_NAME} ${PROTO_HDRS})
-ign_install_library(ignition_msgs)
+ign_install_library(ignition-msgs)
 ign_install_includes(${IGN_PROJECT_NAME} ${msgs})

@@ -26,6 +26,6 @@ int main(int _argc, char *_argv[])
 #endif  // !_MSC_VER
 
   google::protobuf::compiler::cpp::Generator
-    generator("ignition_msgs_plugin");
+    generator("ignition-msgs-plugin");
   return google::protobuf::compiler::PluginMain(_argc, _argv, &generator);
 }
