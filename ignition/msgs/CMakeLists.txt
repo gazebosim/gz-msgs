@@ -4,6 +4,7 @@ cmd_vel2d.proto
 color.proto
 stringmsg.proto
 stringmsg_v.proto
+fluid.proto
 image.proto
 images_stamped.proto
 image_stamped.proto
