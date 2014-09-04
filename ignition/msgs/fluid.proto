@@ -1,0 +1,17 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Fluid
+/// \brief Message with the fluids particles positions
+
+
+import "ignition/msgs/vector3d.proto";
+
+message Fluid
+{
+  // Name of the fluid
+  required string name = 1;
+  
+  // Position of each particle in the fluid.
+  repeated Vector3d position  = 2;
+}
