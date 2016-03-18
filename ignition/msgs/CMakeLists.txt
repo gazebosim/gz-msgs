@@ -1,3 +1,5 @@
+include_directories(${PROTOBUF_INCLUDE_DIRS})
+
 set (msgs
 altimeter.proto
 axis.proto
@@ -159,18 +161,32 @@ foreach(FIL ${msgs})
 
   list(APPEND PROTO_SRCS "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc")
   list(APPEND PROTO_HDRS "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h")
-  list(APPEND PROTO_RB "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb")
 
-  add_custom_command(
-    OUTPUT
-      "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc"
-      "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
-      "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb"
-    COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
-    ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary} --cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out=${CMAKE_CURRENT_BINARY_DIR} --ruby_out=${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
-    DEPENDS ${ABS_FIL} ign_msgs_gen
-    COMMENT "Running C++, Java, and Ruby protocol buffer compiler on ${FIL}"
-    VERBATIM )
+  if (WIN32)
+    add_custom_command(
+      OUTPUT
+        "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc"
+        "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
+        "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb"
+      COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
+      ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary} --cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out=${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
+      DEPENDS ${ABS_FIL} ign_msgs_gen
+      COMMENT "Running C++, Java, and Ruby protocol buffer compiler on ${FIL}"
+      VERBATIM )
+  else()
+    list(APPEND PROTO_RB "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb")
+    add_custom_command(
+      OUTPUT
+        "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc"
+        "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
+        "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb"
+      COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
+      ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary} --plugin=protoc-gen-ruby=${RUBY_PROTOBUF} --cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out=${CMAKE_CURRENT_BINARY_DIR} --ruby_out=${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
+      DEPENDS ${ABS_FIL} ign_msgs_gen
+      COMMENT "Running C++, Java, and Ruby protocol buffer compiler on ${FIL}"
+      VERBATIM )
+  endif()
+
 endforeach()
 
 set_source_files_properties(${PROTO_SRCS} ${PROTO_HDRS}

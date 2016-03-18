@@ -35,6 +35,7 @@ if (NOT RUBY_PROTOBUF)
 endif()
 set(RUBY_INSTALL_DIR lib/ruby)
 
+
 ########################################
 # Include man pages stuff
 include (${project_cmake_dir}/Ronn2Man.cmake)

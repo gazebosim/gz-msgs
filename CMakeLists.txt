@@ -180,7 +180,7 @@ unset (CMAKE_CXX_FLAGS CACHE)
 # MSVC generates tons of warnings on gtest code.
 # Recommended to use /W4 instead of /Wall
 if (MSVC)
-  set(WARN_LEVEL "/W4")
+  set(WARN_LEVEL "/W2")
 else()
   set(WARN_LEVEL "-Wall")
 endif()
