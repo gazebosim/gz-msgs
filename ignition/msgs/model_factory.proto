@@ -1,0 +1,16 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface ModelFactory 
+/// \brief Message to create new model in Gazebo
+
+import "ignition/msgs/pose.proto";
+
+message ModelFactory
+{
+  optional string sdf                       = 1;
+  optional string sdf_filename              = 2;
+  optional Pose pose                        = 3;
+  optional string edit_name                 = 4;
+  optional string clone_model_name          = 5;
+}

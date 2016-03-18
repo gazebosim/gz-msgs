@@ -1,0 +1,21 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface GUICamera 
+/// \brief Message for a GUI Camera
+
+
+
+import "ignition/msgs/pose.proto";
+import "ignition/msgs/track_visual.proto";
+
+message GUICamera
+{
+  required string name                  = 1;
+  optional string view_controller       = 2;
+  optional Pose pose                    = 3;
+  optional TrackVisual track            = 4;
+
+  /// \brief Type of projection: "perspective" or "orthographic".
+  optional string projection_type       = 5;
+}

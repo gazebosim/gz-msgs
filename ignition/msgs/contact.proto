@@ -1,0 +1,24 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Contact
+/// \brief Contact message for passing info between two entities
+
+
+import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/time.proto";
+import "ignition/msgs/joint_wrench.proto";
+
+message Contact
+{
+  required string collision1 = 1;
+  required string collision2 = 2;
+
+  repeated Vector3d position  = 3;
+  repeated Vector3d normal    = 4;
+  repeated double depth       = 5;
+  repeated JointWrench wrench = 6;
+
+  required Time time         = 7;
+  required string world      = 8;
+}

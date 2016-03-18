@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2013 Open Source Robotics Foundation
+ * Copyright (C) 2016 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,14 @@
  * limitations under the License.
  *
 */
-
 #ifndef _IGNITION_MSGS_FACTORY_HH_
 #define _IGNITION_MSGS_FACTORY_HH_
 
+#include <google/protobuf/message.h>
 #include <string>
 #include <map>
 #include <memory>
 #include <vector>
-#include <google/protobuf/message.h>
 
 namespace ignition
 {
@@ -30,7 +29,7 @@ namespace ignition
   {
     /// \def FactoryFn
     /// \brief Prototype for message factory generation
-    typedef std::shared_ptr<google::protobuf::Message> (*FactoryFn) ();
+    typedef std::unique_ptr<google::protobuf::Message> (*FactoryFn) ();
 
     /// \class Factory Factory.hh ignition/msgs.hh
     /// \brief A factory that generates protobuf message based on a string
@@ -47,7 +46,7 @@ namespace ignition
       /// \param[in] _msgType Type of message to create.
       /// \return Pointer to a google protobuf message. Null if the message
       /// type could not be handled.
-      public: static std::shared_ptr<google::protobuf::Message> New(
+      public: static std::unique_ptr<google::protobuf::Message> New(
                   const std::string &_msgType);
 
       /// \brief Get all the message types
@@ -58,16 +57,15 @@ namespace ignition
       private: static std::map<std::string, FactoryFn> *msgMap;
     };
 
-
     /// \brief Static message registration macro
     ///
     /// Use this macro to register messages.
     /// \param[in] _msgtype Message type name.
     /// \param[in] _classname Class name for message.
     #define IGN_REGISTER_STATIC_MSG(_msgtype, _classname) \
-    std::shared_ptr<google::protobuf::Message> New##_classname() \
+    std::unique_ptr<google::protobuf::Message> New##_classname() \
     { \
-      return std::shared_ptr<ignition::msgs::_classname>(\
+      return std::unique_ptr<ignition::msgs::_classname>(\
           new ignition::msgs::_classname); \
     } \
     class IgnMsg##_classname \

@@ -1,0 +1,11 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Bool 
+/// \brief Boolean message
+
+message Bool
+{
+  /// \brief Boolean data
+  required bool data = 1;
+}

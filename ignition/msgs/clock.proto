@@ -4,7 +4,6 @@ package ignition.msgs;
 /// \interface Clock
 /// \brief A message with clock information
 
-
 import "ignition/msgs/time.proto";
 
 message Clock

@@ -1,0 +1,17 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface PoseAnimation 
+/// \brief Message for a model pose animation
+
+
+import "ignition/msgs/pose.proto";
+import "ignition/msgs/time.proto";
+
+message PoseAnimation
+{
+  required string model_name      = 1;
+  optional uint32 model_id        = 2;
+  repeated Pose pose              = 3;
+  repeated Time time              = 4;
+}

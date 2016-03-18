@@ -1,0 +1,11 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface UInt64
+/// \brief Integer message
+
+message UInt64
+{
+  /// \brief Integer data
+  required uint64 data = 1;
+}

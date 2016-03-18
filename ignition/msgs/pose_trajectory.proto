@@ -4,6 +4,7 @@ package ignition.msgs;
 /// \interface PoseTrajectory
 /// \brief Message for a pose trajectory
 
+
 import "ignition/msgs/pose_stamped.proto";
 
 message PoseTrajectory

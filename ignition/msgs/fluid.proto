@@ -2,7 +2,7 @@ package ignition.msgs;
 
 /// \ingroup ignition.msgs
 /// \interface Fluid
-/// \brief Message with the fluids particles positions
+/// \brief msg passing fluid particle position
 
 
 import "ignition/msgs/vector3d.proto";

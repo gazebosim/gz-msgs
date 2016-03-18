@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Open Source Robotics Foundation
+ * Copyright 2016 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ namespace protobuf {
 namespace compiler {
 namespace cpp {
 
+/////////////////////////////////////////////////
 void replaceAll(std::string &_src, const std::string &_oldValue,
   const std::string &_newValue)
 {
@@ -45,11 +46,20 @@ void replaceAll(std::string &_src, const std::string &_oldValue,
     }
 }
 
-Generator::Generator(const std::string &/*_name*/) {}
-Generator::~Generator() {}
+/////////////////////////////////////////////////
+Generator::Generator(const std::string &/*_name*/)
+{
+}
+
+/////////////////////////////////////////////////
+Generator::~Generator()
+{
+}
+
+/////////////////////////////////////////////////
 bool Generator::Generate(const FileDescriptor *_file,
-                               const string &/*parameter*/,
-                               OutputDirectory *_generator_context,
+                               const string &/*_parameter*/,
+                               OutputDirectory *_generatorContext,
                                std::string * /*_error*/) const
 {
   std::string headerFilename = _file->name();
@@ -64,7 +74,7 @@ bool Generator::Generate(const FileDescriptor *_file,
   // Add shared point include
   {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
-        _generator_context->OpenForInsert(headerFilename, "includes"));
+        _generatorContext->OpenForInsert(headerFilename, "includes"));
     io::Printer printer(output.get(), '$');
 
     printer.Print("#pragma GCC system_header", "name", "includes");
@@ -73,7 +83,7 @@ bool Generator::Generate(const FileDescriptor *_file,
   // Add shared point include
   {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
-        _generator_context->OpenForInsert(sourceFilename, "includes"));
+        _generatorContext->OpenForInsert(sourceFilename, "includes"));
     io::Printer printer(output.get(), '$');
 
     printer.Print("#include \"ignition/msgs/Factory.hh\"\n", "name",
@@ -85,22 +95,38 @@ bool Generator::Generate(const FileDescriptor *_file,
     factory += _file->message_type(0)->name() + "\", " +
       _file->message_type(0)->name() +")";
     printer.Print(factory.c_str(), "name", "includes");
-
   }
 
 
   {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
-        _generator_context->OpenForInsert(headerFilename, "includes"));
+        _generatorContext->OpenForInsert(headerFilename, "includes"));
     io::Printer printer(output.get(), '$');
 
     printer.Print("#include <memory>\n", "name", "includes");
   }
 
-  // Add shared typedef
+  // Add unique pointer typedef
   {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
-        _generator_context->OpenForInsert(headerFilename, "namespace_scope"));
+        _generatorContext->OpenForInsert(headerFilename, "namespace_scope"));
+    io::Printer printer(output.get(), '$');
+
+    std::string package = _file->package();
+    replaceAll(package, ".", "::");
+
+
+    std::string ptrType = "typedef std::unique_ptr<" + package
+      + "::" + _file->message_type(0)->name() + "> "
+      + _file->message_type(0)->name() + "UniquePtr;\n";
+
+    printer.Print(ptrType.c_str(), "name", "namespace_scope");
+  }
+
+  // Add shared pointer typedef
+  {
+    std::unique_ptr<io::ZeroCopyOutputStream> output(
+        _generatorContext->OpenForInsert(headerFilename, "namespace_scope"));
     io::Printer printer(output.get(), '$');
 
     std::string package = _file->package();
@@ -109,15 +135,15 @@ bool Generator::Generate(const FileDescriptor *_file,
 
     std::string ptrType = "typedef std::shared_ptr<" + package
       + "::" + _file->message_type(0)->name() + "> "
-      + _file->message_type(0)->name() + "Ptr;\n";
+      + _file->message_type(0)->name() + "SharedPtr;\n";
 
     printer.Print(ptrType.c_str(), "name", "namespace_scope");
   }
 
-  // Add const shared typedef
+  // Add const shared pointer typedef
   {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
-        _generator_context->OpenForInsert(headerFilename, "global_scope"));
+        _generatorContext->OpenForInsert(headerFilename, "global_scope"));
     io::Printer printer(output.get(), '$');
 
     std::string package = _file->package();
@@ -125,7 +151,7 @@ bool Generator::Generate(const FileDescriptor *_file,
 
     std::string constType = "typedef const std::shared_ptr<" + package
       + "::" + _file->message_type(0)->name() + " const> Const"
-      + _file->message_type(0)->name() + "Ptr;";
+      + _file->message_type(0)->name() + "SharedPtr;";
 
     printer.Print(constType.c_str(), "name", "global_scope");
   }

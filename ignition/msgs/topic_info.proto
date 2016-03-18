@@ -1,0 +1,16 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface TopicInfo
+/// \brief A message for topic information
+
+
+import "ignition/msgs/publish.proto";
+import "ignition/msgs/subscribe.proto";
+
+message TopicInfo
+{
+  required string msg_type       = 1;
+  repeated Publish publisher    = 2;
+  repeated Subscribe subscriber = 3;
+}

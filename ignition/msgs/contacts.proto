@@ -1,0 +1,15 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Contacts
+/// \brief Contacts from collision detection
+
+
+import "ignition/msgs/contact.proto";
+import "ignition/msgs/time.proto";
+
+message Contacts
+{
+  repeated Contact contact   = 1;
+  required Time time         = 2;
+}

@@ -1,0 +1,15 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Tactile
+/// \brief Message for a tactile data
+
+import "ignition/msgs/time.proto";
+
+message Tactile
+{
+  repeated string collision_name = 1;
+  repeated uint32 collision_id   = 2;
+  repeated double pressure       = 3;
+  required Time time             = 4;
+}

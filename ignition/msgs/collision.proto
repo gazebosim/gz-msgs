@@ -1,0 +1,25 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Collision 
+/// \brief Information about a collision element
+
+
+import "ignition/msgs/pose.proto";
+import "ignition/msgs/geometry.proto";
+import "ignition/msgs/surface.proto";
+import "ignition/msgs/visual.proto";
+
+message Collision
+{
+  required uint32 id            = 1;
+  required string name          = 2;
+  optional double laser_retro   = 3;
+  optional double max_contacts  = 4;
+  optional Pose pose            = 5;
+  optional Geometry geometry    = 6;
+  optional Surface surface      = 7;
+
+  repeated Visual visual        = 8;
+}
+

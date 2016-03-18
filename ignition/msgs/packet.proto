@@ -4,15 +4,14 @@ package ignition.msgs;
 /// \interface Packet 
 /// \brief Message that encapsulates another message with a type description
 
+
 import "ignition/msgs/time.proto";
 
 message Packet
 {
-  optional string op             = 1;
-  optional string msg_type       = 2;
-  optional bytes msg_data        = 3;
-  optional string json           = 4;
-  optional string topic          = 5;
-  optional Time stamp            = 6;
-  optional string compression    = 7;
+  required Time stamp            = 1;
+  required string type           = 2;
+  required bytes serialized_data = 3;
 }
+
+

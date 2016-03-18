@@ -4,6 +4,7 @@ package ignition.msgs;
 /// \interface PID 
 /// \brief Message for simple PID controllers
 
+
 message PID
 {
   optional double target = 1[default=0.0];
@@ -14,3 +15,4 @@ message PID
   optional double i_min  = 6[default=0.0];
   optional double limit  = 7[default=0.0];
 }
+

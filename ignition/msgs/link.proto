@@ -1,0 +1,36 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Link
+/// \brief Information about a link
+
+
+import "ignition/msgs/inertial.proto";
+import "ignition/msgs/collision.proto";
+import "ignition/msgs/visual.proto";
+import "ignition/msgs/sensor.proto";
+import "ignition/msgs/projector.proto";
+import "ignition/msgs/pose.proto";
+import "ignition/msgs/battery.proto";
+import "ignition/msgs/density.proto";
+
+message Link
+{
+  optional uint32 id            = 1;
+  required string name          = 2;
+  optional bool self_collide    = 3;
+  optional bool gravity         = 4;
+  optional bool kinematic       = 5;
+  optional bool enabled         = 6;
+  optional Density density      = 7;
+  optional Inertial inertial    = 8;
+  optional Pose pose            = 9;
+  repeated Visual visual        = 10;
+  repeated Collision collision  = 11;
+  repeated Sensor sensor        = 12;
+  repeated Projector projector  = 13;
+  optional bool canonical       = 14;
+
+  /// \brief An optional vector of batteries that are attached to this link.
+  repeated Battery battery      = 15;
+}

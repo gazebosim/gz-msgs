@@ -4,6 +4,7 @@ package ignition.msgs;
 /// \interface Vector3d 
 /// \brief Message for a vector3 double
 
+
 message Vector3d
 {
   required double x = 2;

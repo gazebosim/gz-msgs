@@ -1,0 +1,11 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Density
+/// \brief Information about density
+
+message Density
+{
+  required double density          = 1;
+}
+

@@ -1,0 +1,11 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Bytes 
+/// \brief Bytes message
+
+message Bytes
+{
+  /// \brief Bytes data
+  required bytes data = 1;
+}

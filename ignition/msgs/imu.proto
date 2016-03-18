@@ -1,0 +1,19 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface IMU
+/// \brief Data from an IMU sensor
+
+
+import "ignition/msgs/time.proto";
+import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/quaternion.proto";
+
+message IMU
+{
+  required Time stamp                   = 1;
+  required string entity_name           = 2;
+  required Quaternion orientation       = 3;
+  required Vector3d angular_velocity    = 4;
+  required Vector3d linear_acceleration = 5;
+}

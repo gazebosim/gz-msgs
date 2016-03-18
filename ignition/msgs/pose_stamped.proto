@@ -4,6 +4,7 @@ package ignition.msgs;
 /// \interface PoseStamped
 /// \brief Message for a pose with a time
 
+
 import "ignition/msgs/time.proto";
 import "ignition/msgs/pose.proto";
 

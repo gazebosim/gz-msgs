@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2013 Open Source Robotics Foundation
+ * Copyright (C) 2016 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,12 +33,12 @@ void Factory::Register(const std::string &_msgType,
 }
 
 /////////////////////////////////////////////////
-std::shared_ptr<google::protobuf::Message> Factory::New(
+std::unique_ptr<google::protobuf::Message> Factory::New(
     const std::string &_msgType)
 {
-  std::shared_ptr<google::protobuf::Message> msg;
+  std::unique_ptr<google::protobuf::Message> msg;
 
-  // FIx typenames that are missing "ignition::msgs." at the beginning.
+  // Fix typenames that are missing "ignition::msgs." at the beginning.
   std::string type;
   if (_msgType.find("ignition/msgs.") != 0)
     type = "ignition::msgs.";

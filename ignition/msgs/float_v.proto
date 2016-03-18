@@ -1,0 +1,11 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Float_V
+/// \brief A message for a vector of float data
+
+message Float_V
+{
+  /// \brief Vector of float data
+  repeated float data = 1;
+}

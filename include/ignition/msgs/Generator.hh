@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2013 Open Source Robotics Foundation
+ * Copyright (C) 2016 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,8 @@
  * limitations under the License.
  *
 */
-#ifndef _IGNITION_MESSAGES_GENERATOR_HH_
-#define _IGNITION_MESSAGES_GENERATOR_HH_
+#ifndef _IGNITION_MSGS_GENERATOR_HH_
+#define _IGNITION_MSGS_GENERATOR_HH_
 
 #include <google/protobuf/compiler/code_generator.h>
 #include <string>
@@ -26,22 +26,30 @@ namespace compiler {
 namespace cpp {
 class GeneratorContext;
 
+/// \internal
 /// \brief Google protobuf message generator for igntion::msgs
 class Generator : public CodeGenerator
 {
+  /// \brief Constructor
+  /// \param[in] _name Name value (currently unused)
   public: Generator(const std::string &_name);
 
+  /// \brief Destructor
   public: virtual ~Generator();
 
-  public: virtual bool Generate(const FileDescriptor* file,
-                const string& parameter,
-                OutputDirectory *directory,
-                string* error) const;
+  /// \brief Generate a message.
+  /// \param[in] _file File descriptor of the message.
+  /// \param[in] _parameter Unused string value
+  /// \param[in] _generatorContext Output directory.
+  /// \param[in] _error Unused string value
+  public: virtual bool Generate(const FileDescriptor *_file,
+              const string &_parameter,
+              OutputDirectory *_generatorContext,
+              string *_error) const;
 
   // private: GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Generator);
 };
 
-/// \}
 }
 }
 }

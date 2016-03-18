@@ -1,13 +1,15 @@
 package ignition.msgs;
 
 /// \ingroup ignition.msgs
-/// \interface Wrench 
+/// \interface Wrench
 /// \brief Message for a wrench value
+
 
 import "ignition/msgs/vector3d.proto";
 
 message Wrench
 {
-  required Vector3d force  = 1;
-  required Vector3d torque = 2;
+  required Vector3d force        = 1;
+  required Vector3d torque       = 2;
+  optional Vector3d force_offset = 3;
 }

@@ -1,0 +1,15 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface GUI 
+/// \brief Message for a GUI
+
+import "ignition/msgs/gui_camera.proto";
+import "ignition/msgs/plugin.proto";
+
+message GUI
+{
+  optional bool fullscreen  = 1;
+  optional GUICamera camera = 2;
+  repeated Plugin plugin    = 3;
+}

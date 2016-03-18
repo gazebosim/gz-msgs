@@ -4,6 +4,7 @@ package ignition.msgs;
 /// \interface Pose 
 /// \brief Message for a pose
 
+
 import "ignition/msgs/vector3d.proto";
 import "ignition/msgs/quaternion.proto";
 

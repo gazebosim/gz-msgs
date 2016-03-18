@@ -12,7 +12,5 @@ message ImagesStamped
 {
   // Time when all the images were captured
   required Time time          = 1;
-  required string frame       = 2;
-  required uint32 sequence    = 3;
-  repeated Image image        = 4;
+  repeated Image image        = 2;
 }

@@ -1,0 +1,10 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface CameraCmd
+/// \brief Message for camera command
+
+message CameraCmd
+{
+  optional string follow_model   = 1;
+}

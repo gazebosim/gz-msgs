@@ -1,0 +1,31 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Scene
+/// \brief A message containing a description of a scene
+
+
+import "ignition/msgs/color.proto";
+import "ignition/msgs/fog.proto";
+import "ignition/msgs/sky.proto";
+import "ignition/msgs/light.proto";
+import "ignition/msgs/joint.proto";
+import "ignition/msgs/model.proto";
+
+message Scene
+{
+  required string name         = 1;
+  optional Color ambient       = 2;
+  optional Color background    = 3;
+  optional Sky sky             = 4;
+  optional bool shadows        = 5 [default = true];
+  optional Fog fog             = 6;
+  optional bool grid           = 7;
+
+  repeated Model model         = 8;
+  repeated Light light         = 9;
+  repeated Joint joint         = 10;
+
+  /// \brief Show/hide world origin indicator.
+  optional bool origin_visual  = 11;
+}

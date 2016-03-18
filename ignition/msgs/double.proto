@@ -1,0 +1,11 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Double
+/// \brief A message for double data
+
+message Double
+{
+  /// \brief Double data
+  required double data = 1;
+}

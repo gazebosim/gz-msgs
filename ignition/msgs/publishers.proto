@@ -1,0 +1,13 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Publishers
+/// \brief A list of publishers 
+
+
+import "ignition/msgs/publish.proto";
+
+message Publishers
+{
+  repeated Publish publisher = 1;
+}

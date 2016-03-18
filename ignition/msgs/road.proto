@@ -1,0 +1,17 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Road 
+/// \brief Message for a road
+
+
+import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/material.proto";
+
+message Road
+{
+  required string name          = 1;
+  required double width         = 2;
+  repeated Vector3d point       = 3;
+  optional Material material    = 4;
+}

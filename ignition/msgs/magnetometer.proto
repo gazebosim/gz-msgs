@@ -1,0 +1,18 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Magnetometer
+/// \brief Data from a magnetic field strength sensor
+
+import "ignition/msgs/time.proto";
+import "ignition/msgs/vector3d.proto";
+
+/// \brief Message that encapsulates sensor data from a magnetometer.
+message Magnetometer
+{
+  /// \brief Global time at which the magnetic field strength was sampled
+  required Time time                 = 1;
+  
+  /// \brief Magnetic field strength (in Tesla) along body-frame axis
+  required Vector3d field_tesla      = 2;
+}

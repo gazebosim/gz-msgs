@@ -1,0 +1,9 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Empty
+/// \brief An empty message
+
+message Empty
+{
+}

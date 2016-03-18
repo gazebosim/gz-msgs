@@ -1,0 +1,11 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Double_V
+/// \brief A message for a vector of double data
+
+message Double_V
+{
+  /// \brief Vector of double data
+  repeated double data = 1;
+}

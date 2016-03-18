@@ -12,7 +12,5 @@ message ImageStamped
 {
   // Time when the data was captured
   required Time time          = 1;
-  required string frame       = 2;
-  required uint32 sequence    = 3;
-  required Image image        = 4;
+  required Image image        = 2;
 }

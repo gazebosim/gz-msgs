@@ -1,0 +1,16 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Header 
+/// \brief General information included by many messages
+
+
+import "ignition/msgs/time.proto";
+
+message Header
+{
+  optional string str_id = 1;
+  optional Time stamp    = 2;
+  optional int32 index   = 3;
+} 
+

@@ -1,0 +1,46 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Geometry
+/// \brief Information about a geometry element
+
+
+import "ignition/msgs/boxgeom.proto";
+import "ignition/msgs/cylindergeom.proto";
+import "ignition/msgs/spheregeom.proto";
+import "ignition/msgs/planegeom.proto";
+import "ignition/msgs/imagegeom.proto";
+import "ignition/msgs/heightmapgeom.proto";
+import "ignition/msgs/meshgeom.proto";
+import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/polylinegeom.proto";
+
+message Geometry
+{
+  enum Type
+  {
+    BOX          = 1;
+    CYLINDER     = 2;
+    SPHERE       = 3;
+    PLANE        = 4;
+    IMAGE        = 5;
+    HEIGHTMAP    = 6;
+    MESH         = 7;
+    TRIANGLE_FAN = 8;
+    LINE_STRIP   = 9;
+    POLYLINE     = 10;
+    EMPTY        = 11;
+  }
+
+  optional Type type                = 1;
+  optional BoxGeom box              = 2;
+  optional CylinderGeom cylinder    = 3;
+  optional PlaneGeom plane          = 4;
+  optional SphereGeom sphere        = 5;
+  optional ImageGeom image          = 6;
+  optional HeightmapGeom heightmap  = 7;
+  optional MeshGeom      mesh       = 8;
+
+  repeated Vector3d points          = 9;
+  repeated Polyline polyline        = 10;
+}

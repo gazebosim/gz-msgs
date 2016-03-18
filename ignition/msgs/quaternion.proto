@@ -4,6 +4,7 @@ package ignition.msgs;
 /// \interface Quaternion
 /// \brief A message for a quaternion
 
+
 message Quaternion
 {
   required double x = 2;
@@ -11,3 +12,5 @@ message Quaternion
   required double z = 4;
   required double w = 5;
 }
+
+

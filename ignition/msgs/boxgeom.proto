@@ -1,0 +1,12 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface BoxGeom 
+/// \brief Information about a box geometry
+
+import "ignition/msgs/vector3d.proto";
+
+message BoxGeom
+{
+  required Vector3d size  = 1;
+}

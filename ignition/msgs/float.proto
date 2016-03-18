@@ -1,0 +1,11 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface Float
+/// \brief A message for float data
+
+message Float
+{
+  /// \brief Float data
+  required float data = 1;
+}

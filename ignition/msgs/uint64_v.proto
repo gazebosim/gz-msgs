@@ -1,0 +1,11 @@
+package ignition.msgs;
+
+/// \ingroup ignition.msgs
+/// \interface UInt64_V
+/// \brief A message for a vector of int data
+
+message UInt64_V
+{
+  /// \brief Vector of int data
+  repeated uint64 data = 1;
+}

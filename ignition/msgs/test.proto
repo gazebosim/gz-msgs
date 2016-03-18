@@ -1,0 +1,15 @@
+package ignition.msgs;
+
+import "ignition/msgs/header.proto";
+
+/// \ingroup ignition.msgs
+/// \interface Test
+/// \brief A test message
+
+
+message Test
+{
+  required Header header = 1;
+}
+
+

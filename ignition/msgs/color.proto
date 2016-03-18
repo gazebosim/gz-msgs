@@ -4,6 +4,7 @@ package ignition.msgs;
 /// \interface Color 
 /// \brief Color message
 
+
 message Color
 {
   required float r = 2;
@@ -11,3 +12,5 @@ message Color
   required float b = 4;
   optional float a = 5 [default = 1.0];
 }
+
+
