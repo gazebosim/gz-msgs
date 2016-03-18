@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "PID";
 
 /// \ingroup ignition.msgs
 /// \interface PID 
 /// \brief Message for simple PID controllers
-
 
 message PID
 {
@@ -15,4 +16,3 @@ message PID
   optional double i_min  = 6[default=0.0];
   optional double limit  = 7[default=0.0];
 }
-

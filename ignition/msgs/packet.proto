@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Packet";
 
 /// \ingroup ignition.msgs
 /// \interface Packet 
 /// \brief Message that encapsulates another message with a type description
-
 
 import "ignition/msgs/time.proto";
 
@@ -13,5 +14,3 @@ message Packet
   required string type           = 2;
   required bytes serialized_data = 3;
 }
-
-

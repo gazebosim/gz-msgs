@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "TopicInfo";
 
 /// \ingroup ignition.msgs
 /// \interface TopicInfo
 /// \brief A message for topic information
-
 
 import "ignition/msgs/publish.proto";
 import "ignition/msgs/subscribe.proto";

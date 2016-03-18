@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "ModelV";
 
 /// \ingroup ignition.msgs
 /// \interface Model_V 
 /// \brief Information about all entities in a world
-
 
 import "ignition/msgs/model.proto";
 
@@ -11,4 +12,3 @@ message Model_V
 {
   repeated Model models  = 2;
 }
-

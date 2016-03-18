@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "ServerControl";
 
 /// \ingroup ignition.msgs
 /// \interface ServerControl
 /// \brief A message that allows for control of the server functions
-
 
 message ServerControl
 {

@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "PoseStamped";
 
 /// \ingroup ignition.msgs
 /// \interface PoseStamped
 /// \brief Message for a pose with a time
-
 
 import "ignition/msgs/time.proto";
 import "ignition/msgs/pose.proto";
@@ -13,5 +14,3 @@ message PoseStamped
   required Time time          = 1; // Time when the data was captured
   required Pose pose          = 2;
 }
-
-

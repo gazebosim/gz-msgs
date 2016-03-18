@@ -1,10 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "GUICamera";
 
 /// \ingroup ignition.msgs
 /// \interface GUICamera 
 /// \brief Message for a GUI Camera
-
-
 
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/track_visual.proto";

@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Collision";
 
 /// \ingroup ignition.msgs
 /// \interface Collision 
 /// \brief Information about a collision element
-
 
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/geometry.proto";

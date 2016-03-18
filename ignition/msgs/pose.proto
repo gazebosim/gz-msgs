@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Pose";
 
 /// \ingroup ignition.msgs
 /// \interface Pose 
 /// \brief Message for a pose
-
 
 import "ignition/msgs/vector3d.proto";
 import "ignition/msgs/quaternion.proto";
@@ -12,6 +13,6 @@ message Pose
 {
   optional string name            = 1;
   optional uint32 id              = 2;
-  required Vector3d position      = 3;
-  required Quaternion orientation = 4;
+  optional Vector3d position      = 3;
+  optional Quaternion orientation = 4;
 }

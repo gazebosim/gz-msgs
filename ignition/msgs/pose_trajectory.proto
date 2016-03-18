@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "PoseTrajectory";
 
 /// \ingroup ignition.msgs
 /// \interface PoseTrajectory
 /// \brief Message for a pose trajectory
-
 
 import "ignition/msgs/pose_stamped.proto";
 
@@ -13,5 +14,3 @@ message PoseTrajectory
   optional uint32 id                = 2;
   repeated PoseStamped pose_stamped = 3;
 }
-
-

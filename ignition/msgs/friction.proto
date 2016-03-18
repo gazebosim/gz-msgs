@@ -1,4 +1,6 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Friction";
 
 /// \ingroup ignition.msgs
 /// \interface Friction
@@ -58,4 +60,3 @@ message Friction
   /// \brief Torsional friction.
   optional Torsional torsional = 6;
 }
-

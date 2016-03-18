@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "LogPlaybackStatistics";
 
 /// \ingroup ignition.msgs
 /// \interface LogPlaybackStatistics
 /// \brief A message with statistics about a log during playback.
-
 
 import "ignition/msgs/time.proto";
 

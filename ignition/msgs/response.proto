@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Response";
 
 /// \ingroup ignition.msgs
 /// \interface Response 
 /// \brief Message that encapsulates a respons message with a type description
-
 
 message Response
 {
@@ -13,5 +14,3 @@ message Response
   optional string type           = 4;
   optional bytes serialized_data = 5;
 }
-
-

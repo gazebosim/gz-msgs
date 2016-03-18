@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Material";
 
 /// \ingroup ignition.msgs
 /// \interface Material
 /// \brief Information about a material
-
 
 import "ignition/msgs/color.proto";
 

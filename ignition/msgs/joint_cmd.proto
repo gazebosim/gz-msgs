@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "JointCmd";
 
 /// \ingroup ignition.msgs
 /// \interface JointCmd
 /// \brief Message for joint command, used by physics::JointControlWidget
-
 
 import "ignition/msgs/pid.proto";
 

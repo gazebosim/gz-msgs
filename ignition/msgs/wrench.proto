@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Wrench";
 
 /// \ingroup ignition.msgs
 /// \interface Wrench
 /// \brief Message for a wrench value
-
 
 import "ignition/msgs/vector3d.proto";
 

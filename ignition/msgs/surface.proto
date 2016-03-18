@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Surface";
 
 /// \ingroup ignition.msgs
 /// \interface Surface
 /// \brief Information about a surface element
-
 
 import "ignition/msgs/friction.proto";
 

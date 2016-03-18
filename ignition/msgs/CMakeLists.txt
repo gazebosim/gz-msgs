@@ -34,7 +34,6 @@ gps.proto
 gps_sensor.proto
 gui_camera.proto
 gui.proto
-gz_string_v.proto
 header.proto
 heightmapgeom.proto
 hydra.proto
@@ -158,7 +157,7 @@ foreach(FIL ${msgs})
       "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc"
       "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
     COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
-    ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/ign_msgs_gen --cpp_out  ${CMAKE_CURRENT_BINARY_DIR}  --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
+    ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/ign_msgs_gen --cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out=${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
     DEPENDS ${ABS_FIL} ign_msgs_gen
     COMMENT "Running C++ protocol buffer compiler on ${FIL}"
     VERBATIM )

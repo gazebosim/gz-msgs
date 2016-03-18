@@ -1,13 +1,13 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "CylinderGeom";
 
 /// \ingroup ignition.msgs
 /// \interface CylinderGeom 
 /// \brief Information about a cylinder geometry
-
 
 message CylinderGeom
 {
   required double radius  = 1;
   required double length  = 2;
 }
-

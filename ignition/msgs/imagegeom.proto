@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "ImageGeom";
 
 /// \ingroup ignition.msgs
 /// \interface ImageGeom 
 /// \brief Message for a image geometry
-
 
 message ImageGeom
 {
@@ -13,5 +14,3 @@ message ImageGeom
   optional double height      = 4;
   optional int32 granularity  = 5;
 }
-
-

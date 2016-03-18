@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "WirelessNodes";
 
 /// \ingroup ignition.msgs
 /// \interface WirelessNodes
 /// \brief Msgs for sending information about a list of wireless transmitters
-
 
 import "ignition/msgs/wireless_node.proto";
 
@@ -11,4 +12,3 @@ message WirelessNodes
 {
   repeated WirelessNode node = 1;
 }
-

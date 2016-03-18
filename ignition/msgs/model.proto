@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Model";
 
 /// \ingroup ignition.msgs
 /// \interface Model
 /// \brief Information about a model
-
 
 import "ignition/msgs/joint.proto";
 import "ignition/msgs/link.proto";

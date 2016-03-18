@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "WirelessNode";
 
 /// \ingroup ignition.msgs
 /// \interface WirelessNode
 /// \brief Message for sending info about a detected wireless transmitter
-
 
 message WirelessNode
 {

@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Sky";
 
 /// \ingroup ignition.msgs
 /// \interface Sky 
 /// \brief Information about the sky
-
 
 import "ignition/msgs/color.proto";
 
@@ -19,4 +20,3 @@ message Sky
   optional double humidity       = 7;
   optional double mean_cloud_size = 8;
 }
-

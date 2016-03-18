@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Quaternion";
 
 /// \ingroup ignition.msgs
 /// \interface Quaternion
 /// \brief A message for a quaternion
-
 
 message Quaternion
 {
@@ -12,5 +13,3 @@ message Quaternion
   required double z = 4;
   required double w = 5;
 }
-
-

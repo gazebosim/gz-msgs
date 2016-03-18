@@ -1,10 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Fog";
 
 /// \ingroup ignition.msgs
 /// \interface Fog 
 /// \brief Message for fog data
-
-
 
 import "ignition/msgs/color.proto";
 
@@ -23,4 +23,3 @@ message Fog
   optional float start = 4;
   optional float end = 5;
 }
-

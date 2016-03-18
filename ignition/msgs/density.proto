@@ -1,4 +1,6 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Density";
 
 /// \ingroup ignition.msgs
 /// \interface Density
@@ -8,4 +10,3 @@ message Density
 {
   required double density          = 1;
 }
-

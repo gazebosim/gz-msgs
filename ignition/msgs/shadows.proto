@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Shadows";
 
 /// \ingroup ignition.msgs
 /// \interface Shadows
 /// \brief A message for shadow data
-
 
 import "ignition/msgs/color.proto";
 
@@ -19,5 +20,3 @@ message Shadows
   optional ShadowType type = 5;
   optional Color color = 6;
 }
-
-

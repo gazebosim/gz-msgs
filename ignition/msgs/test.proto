@@ -1,4 +1,6 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Test";
 
 import "ignition/msgs/header.proto";
 
@@ -6,10 +8,7 @@ import "ignition/msgs/header.proto";
 /// \interface Test
 /// \brief A test message
 
-
 message Test
 {
   required Header header = 1;
 }
-
-

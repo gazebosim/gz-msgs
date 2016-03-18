@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "WorldReset";
 
 /// \ingroup ignition.msgs
 /// \interface WorldReset 
 /// \brief A message that controls how the world is reset
-
 
 message WorldReset
 {
@@ -11,5 +12,3 @@ message WorldReset
   optional bool time_only    = 2[default = false];
   optional bool model_only   = 3[default = false];
 }
-
-

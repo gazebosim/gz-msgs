@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "LaserScanStamped";
 
 /// \ingroup ignition.msgs
 /// \interface LaserScanStamped
 /// \brief Message for an laser scan with a time
-
 
 import "ignition/msgs/time.proto";
 import "ignition/msgs/laserscan.proto";

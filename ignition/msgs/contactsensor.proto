@@ -1,12 +1,12 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "ContactSensor";
 
 /// \ingroup ignition.msgs
 /// \interface ContactSensor 
 /// \brief Information about a contact sensor element
 
-
 message ContactSensor
 {
   optional string collision_name = 1;
 }
-

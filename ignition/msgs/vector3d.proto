@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Vector3d";
 
 /// \ingroup ignition.msgs
 /// \interface Vector3d 
 /// \brief Message for a vector3 double
-
 
 message Vector3d
 {

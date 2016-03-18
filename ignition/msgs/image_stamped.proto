@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "ImageStamped";
 
 /// \ingroup ignition.msgs
 /// \interface ImageStamped
 /// \brief Message for an image with a time
-
 
 import "ignition/msgs/time.proto";
 import "ignition/msgs/image.proto";

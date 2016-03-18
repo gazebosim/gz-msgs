@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Selection";
 
 /// \ingroup ignition.msgs
 /// \interface Selection
 /// \brief A message for GUI selection data
-
 
 message Selection
 {

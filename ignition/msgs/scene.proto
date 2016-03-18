@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Scene";
 
 /// \ingroup ignition.msgs
 /// \interface Scene
 /// \brief A message containing a description of a scene
-
 
 import "ignition/msgs/color.proto";
 import "ignition/msgs/fog.proto";

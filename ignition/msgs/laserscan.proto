@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "LaserScan";
 
 /// \ingroup ignition.msgs
 /// \interface LaserScan
 /// \brief Data from a laser scan
-
 
 import "ignition/msgs/pose.proto";
 

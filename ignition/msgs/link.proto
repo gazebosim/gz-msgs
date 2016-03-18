@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Link";
 
 /// \ingroup ignition.msgs
 /// \interface Link
 /// \brief Information about a link
-
 
 import "ignition/msgs/inertial.proto";
 import "ignition/msgs/collision.proto";

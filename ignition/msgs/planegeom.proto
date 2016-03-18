@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "PlaneGeom";
 
 /// \ingroup ignition.msgs
 /// \interface PlaneGeom
 /// \brief Message for a plane geometry
-
 
 import "ignition/msgs/vector3d.proto";
 import "ignition/msgs/vector2d.proto";
@@ -14,5 +15,3 @@ message PlaneGeom
   required Vector2d size    = 2;
   optional double d         = 3 [default = 0];
 }
-
-

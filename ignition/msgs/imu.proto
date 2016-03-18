@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "IMU";
 
 /// \ingroup ignition.msgs
 /// \interface IMU
 /// \brief Data from an IMU sensor
-
 
 import "ignition/msgs/time.proto";
 import "ignition/msgs/vector3d.proto";

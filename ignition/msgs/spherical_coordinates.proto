@@ -1,4 +1,6 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "SphericalCoordinates";
 
 /// \ingroup ignition.msgs
 /// \interface SphericalCoordinates

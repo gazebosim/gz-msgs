@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Subscribe";
 
 /// \ingroup ignition.msgs
 /// \interface Subscribe
 /// \brief A message for subscription data
-
 
 message Subscribe
 {
@@ -13,5 +14,3 @@ message Subscribe
   required string msg_type = 4;
   optional bool latching   = 5 [default=false];
 }
-
-

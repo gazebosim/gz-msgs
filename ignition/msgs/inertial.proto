@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Inertial";
 
 /// \ingroup ignition.msgs
 /// \interface Inertial 
 /// \brief Information about inertia
-
 
 import "ignition/msgs/pose.proto";
 
@@ -18,4 +19,3 @@ message Inertial
   optional double iyz              = 7;
   optional double izz              = 8;
 }
-

@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "PropagationGrid";
 
 /// \ingroup ignition.msgs
 /// \interface PropagationGrid
 /// \brief Wireless propagation grid
-
 
 import "ignition/msgs/propagation_particle.proto";
 
@@ -11,4 +12,3 @@ message PropagationGrid
 {
   repeated PropagationParticle particle = 1;
 }
-

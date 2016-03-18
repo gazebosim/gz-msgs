@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Request";
 
 /// \ingroup ignition.msgs
 /// \interface Request
 /// \brief A message containing a string request
-
 
 message Request
 {
@@ -12,5 +13,3 @@ message Request
   optional string data      = 3;
   optional double dbl_data  = 4;
 }
-
-

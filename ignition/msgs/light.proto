@@ -1,10 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Light";
 
 /// \ingroup ignition.msgs
 /// \interface Light 
 /// \brief Message for a light
-
-
 
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/vector3d.proto";

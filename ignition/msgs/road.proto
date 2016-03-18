@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "Road";
 
 /// \ingroup ignition.msgs
 /// \interface Road 
 /// \brief Message for a road
-
 
 import "ignition/msgs/vector3d.proto";
 import "ignition/msgs/material.proto";

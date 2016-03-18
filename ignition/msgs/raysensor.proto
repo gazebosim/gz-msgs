@@ -1,9 +1,10 @@
 package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "RaySensor";
 
 /// \ingroup ignition.msgs
 /// \interface RaySensor 
 /// \brief Information about a ray sensor element
-
 
 message RaySensor
 {
@@ -22,4 +23,3 @@ message RaySensor
   optional double range_max             = 11; 
   optional double range_resolution      = 12;
 }
-
