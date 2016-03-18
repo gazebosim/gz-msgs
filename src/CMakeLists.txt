@@ -6,8 +6,14 @@ set (sources
 set (gtest_sources
 )
 
+include_directories (${PROTOBUF_INCLUDE_DIR})
 add_executable(ign_msgs_gen Generator.cc generator_main.cc)
-target_link_libraries(ign_msgs_gen ${PROTOBUF_LIBRARY} ${PROTOBUF_PROTOC_LIBRARY} pthread)
+target_link_libraries(ign_msgs_gen
+  ${PROTOBUF_LIBRARY} ${PROTOBUF_PROTOC_LIBRARY})
+
+if (UNIX)
+  target_link_libraries(ign_msgs_gen pthread)
+endif()
 
 # When the minimum CMake required version will be >= 3.1 
 # we could use the target_compile_features() command 
