@@ -170,11 +170,11 @@ set_source_files_properties(${PROTO_SRCS} ${PROTO_HDRS}
   PROPERTIES GENERATED TRUE)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
-ign_add_library(ignition-msgs
+ign_add_library(${PROJECT_LIBRARY_TARGET_NAME}
   ${PROTO_SRCS} ${PROJECT_SOURCE_DIR}/src/Factory.cc)
-target_link_libraries(ignition-msgs ${PROTOBUF_LIBRARY})
+target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME} ${PROTOBUF_LIBRARY})
 
-add_dependencies(ignition-msgs ign_msgs_gen)
+add_dependencies(${PROJECT_LIBRARY_TARGET_NAME} ign_msgs_gen)
 
 set (ign_msgs_headers "" CACHE INTERNAL "Include dirs description")
 
@@ -187,9 +187,16 @@ endforeach()
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/ign_auto_headers.hh.in ${CMAKE_CURRENT_BINARY_DIR}/${IGN_PROJECT_NAME}.hh)
 ign_install_includes(${IGN_PROJECT_NAME} ${CMAKE_CURRENT_BINARY_DIR}/${IGN_PROJECT_NAME}.hh)
 
+# When the minimum CMake required version will be >= 3.1 
+# we could use the target_compile_features() command 
+# to enable C++11 support in a platform-independent way. 
+if(NOT MSVC)
+  target_compile_options(${PROJECT_LIBRARY_TARGET_NAME} PUBLIC "-std=c++11")
+endif()
+
 message(STATUS "Installing Ruby messages to ${RUBY_INSTALL_DIR}/ignition/msgs")
 install(FILES ${PROTO_RB} DESTINATION ${RUBY_INSTALL_DIR}/ignition/msgs)
 
 ign_install_includes(${IGN_PROJECT_NAME} ${PROTO_HDRS})
-ign_install_library(ignition-msgs)
+ign_install_library(${PROJECT_LIBRARY_TARGET_NAME} ${PROJECT_EXPORT_NAME})
 ign_install_includes(${IGN_PROJECT_NAME} ${msgs})
