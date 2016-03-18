@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Header";
+option java_outer_classname = "HeaderProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Header 

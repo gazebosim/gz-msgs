@@ -144,6 +144,7 @@ wrench_stamped.proto
 
 set(PROTO_SRCS)
 set(PROTO_HDRS)
+set(PROTO_RB)
 
 foreach(FIL ${msgs})
   get_filename_component(ABS_FIL ${FIL} ABSOLUTE)
@@ -151,15 +152,17 @@ foreach(FIL ${msgs})
 
   list(APPEND PROTO_SRCS "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc")
   list(APPEND PROTO_HDRS "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h")
+  list(APPEND PROTO_RB "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb")
 
   add_custom_command(
     OUTPUT
       "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc"
       "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
+      "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb"
     COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
-    ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/ign_msgs_gen --cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out=${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
+    ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/ign_msgs_gen --cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out=${CMAKE_CURRENT_BINARY_DIR} --ruby_out=${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
     DEPENDS ${ABS_FIL} ign_msgs_gen
-    COMMENT "Running C++ protocol buffer compiler on ${FIL}"
+    COMMENT "Running C++, Java, and Ruby protocol buffer compiler on ${FIL}"
     VERBATIM )
 endforeach()
 
@@ -183,6 +186,9 @@ endforeach()
 
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/ign_auto_headers.hh.in ${CMAKE_CURRENT_BINARY_DIR}/${IGN_PROJECT_NAME}.hh)
 ign_install_includes(${IGN_PROJECT_NAME} ${CMAKE_CURRENT_BINARY_DIR}/${IGN_PROJECT_NAME}.hh)
+
+message(STATUS "Installing Ruby messages to ${RUBY_INSTALL_DIR}/ignition/msgs")
+install(FILES ${PROTO_RB} DESTINATION ${RUBY_INSTALL_DIR}/ignition/msgs)
 
 ign_install_includes(${IGN_PROJECT_NAME} ${PROTO_HDRS})
 ign_install_library(ignition-msgs)

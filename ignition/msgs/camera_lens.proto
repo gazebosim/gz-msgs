@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "CameraLens";
+option java_outer_classname = "CameraLensProtos";
 
 /// \ingroup ignition.msgs
 /// \interface CameraLens

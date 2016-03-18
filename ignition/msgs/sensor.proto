@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "SEnsor";
+option java_outer_classname = "SEnsorProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Sensor 

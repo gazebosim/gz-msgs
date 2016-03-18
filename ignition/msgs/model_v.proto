@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "ModelV";
+option java_outer_classname = "ModelVProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Model_V 

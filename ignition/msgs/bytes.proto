@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Bytes";
+option java_outer_classname = "BytesProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Bytes 

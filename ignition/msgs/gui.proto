@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "GUI";
+option java_outer_classname = "GUIProtos";
 
 /// \ingroup ignition.msgs
 /// \interface GUI 

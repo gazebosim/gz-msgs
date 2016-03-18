@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "TopicInfo";
+option java_outer_classname = "TopicInfoProtos";
 
 /// \ingroup ignition.msgs
 /// \interface TopicInfo

@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "DoubleV";
+option java_outer_classname = "DoubleVProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Double_V

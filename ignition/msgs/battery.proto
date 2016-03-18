@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Battery";
+option java_outer_classname = "BatteryProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Battery

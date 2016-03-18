@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "JointWrench";
+option java_outer_classname = "JointWrenchProtos";
 
 /// \ingroup ignition.msgs
 /// \interface JointWrench

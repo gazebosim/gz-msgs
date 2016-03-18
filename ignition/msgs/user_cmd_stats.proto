@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "UserCmdStats";
+option java_outer_classname = "UserCmdStatsProtos";
 
 /// \ingroup ignition.msgs
 /// \interface UserCmdStats

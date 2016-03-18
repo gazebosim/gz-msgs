@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "WrenchStamped";
+option java_outer_classname = "WrenchStampedProtos";
 
 /// \ingroup ignition.msgs
 /// \interface WrenchStamped

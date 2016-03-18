@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Diagnostics";
+option java_outer_classname = "DiagnosticsProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Diagnostics

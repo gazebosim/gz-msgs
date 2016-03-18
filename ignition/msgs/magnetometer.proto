@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Magnetometer";
+option java_outer_classname = "MagnetometerProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Magnetometer

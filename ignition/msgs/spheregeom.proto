@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "SphereGeom";
+option java_outer_classname = "SphereGeomProtos";
 
 /// \ingroup ignition.msgs
 /// \interface SphereGeom 

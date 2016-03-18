@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "ImagesStamped";
+option java_outer_classname = "ImagesStampedProtos";
 
 /// \ingroup ignition.msgs
 /// \interface ImagesStamped

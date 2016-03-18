@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "RestResponse";
+option java_outer_classname = "RestResponseProtos";
 
 /// \ingroup ignition.msgs
 /// \interface RestResponse

@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "ServerControl";
+option java_outer_classname = "ServerControlProtos";
 
 /// \ingroup ignition.msgs
 /// \interface ServerControl

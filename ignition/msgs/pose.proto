@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Pose";
+option java_outer_classname = "PoseProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Pose 

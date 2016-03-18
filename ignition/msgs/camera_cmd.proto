@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "CameraCmd";
+option java_outer_classname = "CameraCmdProtos";
 
 /// \ingroup ignition.msgs
 /// \interface CameraCmd

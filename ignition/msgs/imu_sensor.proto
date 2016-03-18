@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "IMUSensor";
+option java_outer_classname = "IMUSensorProtos";
 
 /// \ingroup ignition.msgs
 /// \interface IMUSensor

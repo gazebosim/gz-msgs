@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Axis";
+option java_outer_classname = "AxisProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Axis

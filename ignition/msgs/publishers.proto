@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Publishers";
+option java_outer_classname = "PublishersProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Publishers

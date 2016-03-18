@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "LogPlaybackStatistics";
+option java_outer_classname = "LogPlaybackStatisticsProtos";
 
 /// \ingroup ignition.msgs
 /// \interface LogPlaybackStatistics

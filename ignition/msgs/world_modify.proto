@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "WorldModify";
+option java_outer_classname = "WorldModifyProtos";
 
 /// \ingroup ignition.msgs
 /// \interface WorldModify

@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Vector3d";
+option java_outer_classname = "Vector3dProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Vector3d 

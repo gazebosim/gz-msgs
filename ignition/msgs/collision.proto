@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Collision";
+option java_outer_classname = "CollisionProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Collision 

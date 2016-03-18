@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Projector";
+option java_outer_classname = "ProjectorProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Projector 

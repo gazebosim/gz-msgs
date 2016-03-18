@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "WebRequest";
+option java_outer_classname = "WebRequestProtos";
 
 /// \ingroup ignition.msgs
 /// \interface WebRequest 

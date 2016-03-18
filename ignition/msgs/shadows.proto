@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Shadows";
+option java_outer_classname = "ShadowsProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Shadows

@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Road";
+option java_outer_classname = "RoadProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Road 

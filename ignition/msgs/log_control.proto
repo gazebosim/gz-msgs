@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "LogControl";
+option java_outer_classname = "LogControlProtos";
 
 /// \ingroup ignition.msgs
 /// \interface LogControl

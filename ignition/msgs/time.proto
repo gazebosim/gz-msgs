@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Time";
+option java_outer_classname = "TimeProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Time

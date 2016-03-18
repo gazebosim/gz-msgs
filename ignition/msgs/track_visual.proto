@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "TrackVisual";
+option java_outer_classname = "TrackVisualProtos";
 
 /// \ingroup ignition.msgs
 /// \interface TrackVisual

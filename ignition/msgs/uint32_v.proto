@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "UInt32V";
+option java_outer_classname = "UInt32VProtos";
 
 /// \ingroup ignition.msgs
 /// \interface UInt32_V

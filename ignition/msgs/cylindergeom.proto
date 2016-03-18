@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "CylinderGeom";
+option java_outer_classname = "CylinderGeomProtos";
 
 /// \ingroup ignition.msgs
 /// \interface CylinderGeom 

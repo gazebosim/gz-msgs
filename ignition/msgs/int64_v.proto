@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Int64V";
+option java_outer_classname = "Int64VProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Int64_V

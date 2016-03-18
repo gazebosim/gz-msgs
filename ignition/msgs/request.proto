@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Request";
+option java_outer_classname = "RequestProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Request

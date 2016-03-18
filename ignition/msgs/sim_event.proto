@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "SimEvent";
+option java_outer_classname = "SimEventProtos";
 
 import "ignition/msgs/world_stats.proto";
 

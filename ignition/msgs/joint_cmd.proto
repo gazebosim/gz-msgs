@@ -1,6 +1,6 @@
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "JointCmd";
+option java_outer_classname = "JointCmdProtos";
 
 /// \ingroup ignition.msgs
 /// \interface JointCmd
