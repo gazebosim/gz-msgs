@@ -162,6 +162,8 @@ foreach(FIL ${msgs})
   list(APPEND PROTO_SRCS "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc")
   list(APPEND PROTO_HDRS "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h")
 
+  # Add Ruby generation into Windows when we start using protobuf 3, which
+  # should have a built in ruby generator
   if (WIN32)
     add_custom_command(
       OUTPUT
@@ -169,7 +171,7 @@ foreach(FIL ${msgs})
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb"
       COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
-      ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary} --cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out=${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
+      ARGS --plugin=protoc-gen-ruby=${RUBY_PROTOBUF} --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary} --cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out ${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
       DEPENDS ${ABS_FIL} ign_msgs_gen
       COMMENT "Running C++, Java, and Ruby protocol buffer compiler on ${FIL}"
       VERBATIM )
@@ -181,7 +183,7 @@ foreach(FIL ${msgs})
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb"
       COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
-      ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary} --plugin=protoc-gen-ruby=${RUBY_PROTOBUF} --cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out=${CMAKE_CURRENT_BINARY_DIR} --ruby_out=${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
+      ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary} -cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out=${CMAKE_CURRENT_BINARY_DIR} --ruby_out=${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
       DEPENDS ${ABS_FIL} ign_msgs_gen
       COMMENT "Running C++, Java, and Ruby protocol buffer compiler on ${FIL}"
       VERBATIM )
