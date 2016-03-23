@@ -15,6 +15,10 @@
  *
 */
 
+#ifdef _WIN32
+#pragma warning(disable : 4244 4267)
+#endif
+
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/compiler/code_generator.h>
 #include <google/protobuf/io/printer.h>
@@ -77,7 +81,12 @@ bool Generator::Generate(const FileDescriptor *_file,
         _generatorContext->OpenForInsert(headerFilename, "includes"));
     io::Printer printer(output.get(), '$');
 
-    printer.Print("#pragma GCC system_header", "name", "includes");
+    printer.Print("#ifndef _WIN32\n", "name", "includes");
+    printer.Print("#pragma GCC system_header\n", "name", "includes");
+    printer.Print("#else\n", "name", "includes");
+    printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512 4127 4068)\n",
+                  "name", "includes");
+    printer.Print("#endif\n", "name", "includes");
   }
 
   // Add shared point include
@@ -88,8 +97,14 @@ bool Generator::Generate(const FileDescriptor *_file,
 
     printer.Print("#include \"ignition/msgs/Factory.hh\"\n", "name",
                   "includes");
+
+    printer.Print("#ifndef _WIN32\n", "name", "includes");
     printer.Print("#pragma GCC diagnostic ignored \"-Wshadow\"\n", "name",
                   "includes");
+    printer.Print("#else\n", "name", "includes");
+    printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512 4127 4068)\n",
+                  "name", "includes");
+    printer.Print("#endif\n", "name", "includes");
 
     std::string factory = "IGN_REGISTER_STATIC_MSG(\"ign_msgs.";
     factory += _file->message_type(0)->name() + "\", " +

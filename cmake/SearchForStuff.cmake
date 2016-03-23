@@ -31,8 +31,8 @@ endif()
 # The protobuf ruby bindings.
 find_program(RUBY_PROTOBUF protoc-gen-ruby)
 set(RUBY_INSTALL_DIR lib/ruby)
-if (NOT RUBY_PROTOBUF)
-  message ("Missing: protobuf ruby bindings (sudo gem install protobuf)")
+if (NOT RUBY_PROTOBUF_FOUND)
+  BUILD_WARNING ("Missing: protobuf ruby bindings (sudo gem install protobuf)")
 endif()
 
 ########################################
