@@ -30,10 +30,10 @@ endif()
 ########################################
 # The protobuf ruby bindings.
 find_program(RUBY_PROTOBUF protoc-gen-ruby)
-if (NOT RUBY_PROTOBUF)
-  message (FATAL_ERROR "Missing: protobuf ruby bindings (sudo gem install protobuf)")
-endif()
 set(RUBY_INSTALL_DIR lib/ruby)
+if (NOT RUBY_PROTOBUF)
+  message ("Missing: protobuf ruby bindings (sudo gem install protobuf)")
+endif()
 
 ########################################
 # Include man pages stuff
