@@ -169,11 +169,11 @@ foreach(FIL ${msgs})
       OUTPUT
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc"
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
-        "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb"
       COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
       ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary} --cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out ${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
       DEPENDS ${ABS_FIL} ign_msgs_gen
-      COMMENT "Running C++, Java, and Ruby protocol buffer compiler on ${FIL}" VERBATIM )
+      COMMENT "Running C++, and Java protocol buffer compiler on ${FIL}"
+      VERBATIM)
   else()
     list(APPEND PROTO_RB "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb")
     add_custom_command(
@@ -208,8 +208,12 @@ foreach (hdr ${PROTO_HDRS})
     "Ignition messages" "#include <${hdr}>\n")
 endforeach()
 
-configure_file (${CMAKE_CURRENT_SOURCE_DIR}/ign_auto_headers.hh.in ${CMAKE_CURRENT_BINARY_DIR}/MessageTypes.hh)
-ign_install_includes( "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_PROJECT_NAME}"${CMAKE_CURRENT_BINARY_DIR}/MessageTypes.hh)
+configure_file (${CMAKE_CURRENT_SOURCE_DIR}/ign_auto_headers.hh.in
+  ${CMAKE_CURRENT_BINARY_DIR}/MessageTypes.hh)
+
+ign_install_includes(
+  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_PROJECT_NAME}"
+  ${CMAKE_CURRENT_BINARY_DIR}/MessageTypes.hh)
 
 # When the minimum CMake required version will be >= 3.1 
 # we could use the target_compile_features() command 
@@ -221,6 +225,8 @@ endif()
 message(STATUS "Installing Ruby messages to ${RUBY_INSTALL_DIR}/ignition/msgs")
 install(FILES ${PROTO_RB} DESTINATION ${RUBY_INSTALL_DIR}/ignition/msgs)
 
-ign_install_includes("${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_PROJECT_NAME}" ${PROTO_HDRS})
+ign_install_includes(
+  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_PROJECT_NAME}" ${PROTO_HDRS})
 ign_install_library(${PROJECT_LIBRARY_TARGET_NAME} ${PROJECT_EXPORT_NAME})
-ign_install_includes("${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_PROJECT_NAME}" ${msgs})
+ign_install_includes(
+  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_PROJECT_NAME}" ${msgs})
