@@ -159,8 +159,10 @@ foreach(FIL ${msgs})
   get_filename_component(ABS_FIL ${FIL} ABSOLUTE)
   get_filename_component(FIL_WE ${FIL} NAME_WE)
 
-  list(APPEND PROTO_SRCS "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc")
-  list(APPEND PROTO_HDRS "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h")
+  list(APPEND PROTO_SRCS
+    "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc")
+  list(APPEND PROTO_HDRS
+    "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h")
 
   # Add Ruby generation when we start using protobuf 3, which
   # should have a built in ruby generator
@@ -175,7 +177,9 @@ foreach(FIL ${msgs})
       COMMENT "Running C++, and Java protocol buffer compiler on ${FIL}"
       VERBATIM)
   else()
-    list(APPEND PROTO_RB "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb")
+    list(APPEND PROTO_RB
+      "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb")
+
     add_custom_command(
       OUTPUT
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc"
@@ -197,6 +201,23 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 ign_add_library(${PROJECT_LIBRARY_TARGET_NAME}
   ${PROTO_SRCS} ${PROJECT_SOURCE_DIR}/src/Factory.cc)
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME} ${PROTOBUF_LIBRARY})
+
+if (UNIX)
+  # Need to add default visibility to ignition-msgs
+  get_target_property(current_property ${PROJECT_LIBRARY_TARGET_NAME}
+    COMPILE_FLAGS)
+
+  # property non-existent or empty
+  if(NOT current_property)
+    set_target_properties(${PROJECT_LIBRARY_TARGET_NAME}
+      PROPERTIES GENERATED TRUE
+      COMPILE_FLAGS "-fvisibility=default")
+  else()
+    set_target_properties(${PROJECT_LIBRARY_TARGET_NAME}
+      PROPERTIES COMPILE_FLAGS
+      "${current_property} -fvisibility=default")
+  endif()
+endif()
 
 add_dependencies(${PROJECT_LIBRARY_TARGET_NAME} ign_msgs_gen)
 

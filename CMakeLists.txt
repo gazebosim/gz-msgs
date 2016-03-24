@@ -295,7 +295,7 @@ else (build_errors)
   endif()
 
   configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/${PROJECT_NAME_NO_VERSION_LOWER}-config.cmake.in"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/ignition-config.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/${cmake_conf_file}"
     PATH_VARS LIB_INSTALL_DIR INCLUDE_INSTALL_DIR_FULL
     INSTALL_DESTINATION ${CMAKE_CONFIG_INSTALL_DIR})

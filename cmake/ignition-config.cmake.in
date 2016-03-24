@@ -1,0 +1,55 @@
+# - Config file for the @PKG_NAME@ package.
+#
+# For finding and loading @PKG_NAME@ from your project, type:
+#
+# find_package(@PROJECT_NAME_LOWER@)
+#
+# It defines the following variables:
+#
+#  @PROJECT_NAME_LOWER@_FOUND       - System has @PKG_NAME@.
+#  @PKG_NAME@_INCLUDE_DIRS - include directories for @PKG_NAME@ and its dependencies.
+#  @PKG_NAME@_LIBRARY_DIRS - Paths in which the linker should search for libraries.
+#  @PKG_NAME@_LIBRARIES    - Libraries to link against.
+#  @PKG_NAME@_CXX_FLAGS    - Compiler flags for compiling C++ sources.
+#  @PKG_NAME@_LDFLAGS      - Linker flags.
+
+include (FindPkgConfig REQUIRED)
+
+if (@PKG_NAME@_CONFIG_INCLUDED)
+  return()
+endif()
+set(@PKG_NAME@_CONFIG_INCLUDED TRUE)
+
+list(APPEND @PKG_NAME@_INCLUDE_DIRS
+"@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_INCLUDEDIR@/ignition/@IGN_PROJECT_NAME@@PROJECT_MAJOR_VERSION@")
+
+list(APPEND @PKG_NAME@_LIBRARY_DIRS
+"@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@")
+
+# Visual Studio enables c++11 support by default
+if (NOT MSVC)
+  list(APPEND @PKG_NAME@_CXX_FLAGS -std=c++11)
+endif()
+if (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
+  set(@PKG_NAME@_CXX_FLAGS "${@PKG_NAME@_CXX_FLAGS} -stdlib=libc++")
+endif ()
+
+# On Windows we produce .dll libraries with no prefix.
+if (WIN32)
+  SET(CMAKE_FIND_LIBRARY_PREFIXES "")
+  SET(CMAKE_FIND_SUFFIXES ".lib" ".dll")
+endif()
+
+foreach(lib @PKG_LIBRARIES@)
+  set(onelib "${lib}-NOTFOUND")
+  find_library(onelib ${lib}
+    PATHS "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@"
+    NO_DEFAULT_PATH
+    )
+  if(NOT onelib)
+    message(FATAL_ERROR "Library '${lib}' in package @PKG_NAME@ is not installed properly")
+  endif()
+  list(APPEND @PKG_NAME@_LIBRARIES ${onelib})
+endforeach()
+
+list(APPEND @PKG_NAME@_LDFLAGS -L"@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@")
