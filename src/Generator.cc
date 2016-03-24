@@ -84,8 +84,9 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print("#ifndef _WIN32\n", "name", "includes");
     printer.Print("#pragma GCC system_header\n", "name", "includes");
     printer.Print("#else\n", "name", "includes");
-    printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512\
-      4127 4068)\n", "name", "includes");
+    printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512",
+        "name", "includes");
+    printer.Print(" 4127 4068)\n", "name", "includes");
     printer.Print("#endif\n", "name", "includes");
   }
 
@@ -102,8 +103,9 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print("#pragma GCC diagnostic ignored \"-Wshadow\"\n", "name",
                   "includes");
     printer.Print("#else\n", "name", "includes");
-    printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512 4127 4068)\n",
+    printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512",
                   "name", "includes");
+    printer.Print(" 4127 4068)\n", "name", "includes");
     printer.Print("#endif\n", "name", "includes");
 
     std::string factory = "IGN_REGISTER_STATIC_MSG(\"ign_msgs.";
