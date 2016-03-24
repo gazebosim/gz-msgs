@@ -4,6 +4,7 @@ set (sources
 )
 
 set (gtest_sources
+  Utility_TEST.cc
 )
 
 include_directories (${PROTOBUF_INCLUDE_DIR})
@@ -22,6 +23,6 @@ if(NOT MSVC)
   target_compile_options(ign_msgs_gen PUBLIC "-std=c++11")
 endif()
 
-# ign_build_tests(${gtest_sources})
+ign_build_tests(${gtest_sources})
 # ign_add_library(${PROJECT_NAME_LOWER} ${sources})
 # ign_install_library(${PROJECT_NAME_LOWER})

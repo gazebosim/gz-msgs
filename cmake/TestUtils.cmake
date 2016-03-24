@@ -14,7 +14,7 @@ macro (ign_build_tests)
     add_executable(${BINARY_NAME} ${GTEST_SOURCE_file})
 
     add_dependencies(${BINARY_NAME}
-      ignition-msgs${PROJECT_MAJOR_VERSION}
+      ${PROJECT_LIBRARY_TARGET_NAME}
       gtest gtest_main
       )
 
@@ -23,12 +23,12 @@ macro (ign_build_tests)
          libgtest_main.a
          libgtest.a
          pthread
-	       ignition-msgs${PROJECT_MAJOR_VERSION})
+         ${PROJECT_LIBRARY_TARGET_NAME})
     elseif(WIN32)
       target_link_libraries(${BINARY_NAME}
          gtest.lib
          gtest_main.lib
-         ignition-msgs${PROJECT_MAJOR_VERSION})
+         ${PROJECT_LIBRARY_TARGET_NAME})
     else()
        message(FATAL_ERROR "Unsupported platform")
     endif()

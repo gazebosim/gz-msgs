@@ -199,8 +199,10 @@ set_source_files_properties(${PROTO_SRCS} ${PROTO_HDRS}
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 ign_add_library(${PROJECT_LIBRARY_TARGET_NAME}
-  ${PROTO_SRCS} ${PROJECT_SOURCE_DIR}/src/Factory.cc)
-target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME} ${PROTOBUF_LIBRARY})
+  ${PROTO_SRCS} ${PROJECT_SOURCE_DIR}/src/Factory.cc
+  ${PROJECT_SOURCE_DIR}/src/Utility.cc)
+target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME} ${PROTOBUF_LIBRARY}
+  ${IGNITION-MATH_LIBRARIES})
 
 if (UNIX)
   # Need to add default visibility to ignition-msgs

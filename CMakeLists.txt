@@ -246,9 +246,12 @@ else (build_errors)
   include_directories(
     ${PROJECT_SOURCE_DIR}
     ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_BINARY_DIR}
     ${PROJECT_BINARY_DIR}/include
+    ${PROJECT_BINARY_DIR}/ignition/msgs
+    ${IGNITION-MATH_INCLUDE_DIRS}
   )
-  link_directories(${PROJECT_BINARY_DIR}/src)
+  link_directories(${PROJECT_BINARY_DIR}/src ${IGNITION-MATH_LINK_DIRS})
 
   if (DEFINED CMAKE_CXX_FLAGS)
     message (STATUS "Custom CFlags:${CMAKE_CXX_FLAGS}")
