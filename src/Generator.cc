@@ -84,8 +84,8 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print("#ifndef _WIN32\n", "name", "includes");
     printer.Print("#pragma GCC system_header\n", "name", "includes");
     printer.Print("#else\n", "name", "includes");
-    printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512 4127 4068)\n",
-                  "name", "includes");
+    printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512\
+      4127 4068)\n", "name", "includes");
     printer.Print("#endif\n", "name", "includes");
   }
 
