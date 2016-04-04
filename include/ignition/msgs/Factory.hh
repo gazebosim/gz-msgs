@@ -23,6 +23,8 @@
 #include <memory>
 #include <vector>
 
+#include "ignition/msgs/Utility.hh"
+
 namespace ignition
 {
   namespace msgs
@@ -63,12 +65,13 @@ namespace ignition
     /// \param[in] _msgtype Message type name.
     /// \param[in] _classname Class name for message.
     #define IGN_REGISTER_STATIC_MSG(_msgtype, _classname) \
+    IGNITION_VISIBLE \
     std::unique_ptr<google::protobuf::Message> New##_classname() \
     { \
       return std::unique_ptr<ignition::msgs::_classname>(\
           new ignition::msgs::_classname); \
     } \
-    class IgnMsg##_classname \
+    class IGNITION_VISIBLE IgnMsg##_classname \
     { \
       public: IgnMsg##_classname() \
       { \
