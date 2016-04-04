@@ -3,7 +3,7 @@
 @echo Configuring for build type %build_type%
 
 @set PROTOBUF_PATH=%cd%\..\..\protobuf-2.6.0-win64-vc12
-@set IGNITION-MATH_PATH=%cd%\..\..\ign-math\build\install\%build_type%
+@set IGNITION_MATH_PATH=%cd%\..\..\ign-math\build\install\%build_type%
 
 cmake -G "NMake Makefiles"^
   -DCMAKE_PREFIX_PATH="%IGNITION-MATH_PATH%"^
