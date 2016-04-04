@@ -18,6 +18,7 @@
 #include <gtest/gtest.h>
 #include "ignition/msgs/MessageTypes.hh"
 #include "ignition/msgs/Utility.hh"
+#include "ignition/math/Helpers.hh" /* M_PI on Windows*/
 
 using namespace ignition;
 
