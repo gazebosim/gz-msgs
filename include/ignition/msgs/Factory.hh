@@ -23,7 +23,7 @@
 #include <memory>
 #include <vector>
 
-#include "ignition/msgs/Utility.hh"
+#include <ignition/msgs/system_util.hh>
 
 namespace ignition
 {

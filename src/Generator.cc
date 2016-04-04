@@ -121,7 +121,7 @@ bool Generator::Generate(const FileDescriptor *_file,
     io::Printer printer(output.get(), '$');
 
     printer.Print("#include <memory>\n", "name", "includes");
-    printer.Print("#include \"ignition/msgs/Utility.hh\"\n",
+    printer.Print("#include \"ignition/msgs/system_util.hh\"\n",
         "name", "includes");
   }
 
