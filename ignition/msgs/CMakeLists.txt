@@ -172,7 +172,11 @@ foreach(FIL ${msgs})
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc"
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
       COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
-      ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary} --cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out ${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
+      ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary}
+           --cpp_out=dllexport_decl=IGNITION_VISIBLE:${CMAKE_CURRENT_BINARY_DIR}
+           --java_out ${CMAKE_CURRENT_BINARY_DIR}
+           --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR}
+           --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
       DEPENDS ${ABS_FIL} ign_msgs_gen
       COMMENT "Running C++, and Java protocol buffer compiler on ${FIL}"
       VERBATIM)
@@ -186,7 +190,12 @@ foreach(FIL ${msgs})
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb"
       COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
-      ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary} --cpp_out ${CMAKE_CURRENT_BINARY_DIR} --java_out=${CMAKE_CURRENT_BINARY_DIR} --ruby_out=${CMAKE_CURRENT_BINARY_DIR} --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR} --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
+      ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary}
+           --cpp_out=dllexport_decl=IGNITION_VISIBLE:${CMAKE_CURRENT_BINARY_DIR}
+           --java_out=${CMAKE_CURRENT_BINARY_DIR}
+           --ruby_out=${CMAKE_CURRENT_BINARY_DIR}
+           --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR}
+           --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
       DEPENDS ${ABS_FIL} ign_msgs_gen
       COMMENT "Running C++, Java, and Ruby protocol buffer compiler on ${FIL}"
       VERBATIM )
