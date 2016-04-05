@@ -14,8 +14,8 @@
  * limitations under the License.
  *
 */
-#ifndef _IGNITION_MSGS_FACTORY_HH_
-#define _IGNITION_MSGS_FACTORY_HH_
+#ifndef IGNITION_MSGS_FACTORY_HH_
+#define IGNITION_MSGS_FACTORY_HH_
 
 #include <google/protobuf/message.h>
 #include <string>
@@ -23,7 +23,7 @@
 #include <memory>
 #include <vector>
 
-#include <ignition/msgs/system_util.hh>
+#include <ignition/msgs/System.hh>
 
 namespace ignition
 {
