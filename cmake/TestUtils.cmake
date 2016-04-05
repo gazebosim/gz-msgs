@@ -33,8 +33,8 @@ macro (ign_build_tests)
       # Copy in ignition-msgs library
       add_custom_command(TARGET ${BINARY_NAME}
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
-	"${CMAKE_BINARY_DIR}/ignition/msgs/${PROJECT_NAME}.dll"
-	$<TARGET_FILE_DIR:${BINARY_NAME}> VERBATIM)
+        "${CMAKE_BINARY_DIR}/ignition/msgs/${PROJECT_NAME}.dll"
+        $<TARGET_FILE_DIR:${BINARY_NAME}> VERBATIM)
 
     else()
        message(FATAL_ERROR "Unsupported platform")
