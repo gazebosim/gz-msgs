@@ -29,6 +29,13 @@ macro (ign_build_tests)
          gtest.lib
          gtest_main.lib
          ${PROJECT_LIBRARY_TARGET_NAME})
+
+      # Copy in ignition-msgs library
+      add_custom_command(TARGET ${BINARY_NAME}
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_BINARY_DIR}/ignition/msgs/${PROJECT_NAME}.dll"
+        $<TARGET_FILE_DIR:${BINARY_NAME}> VERBATIM)
+
     else()
        message(FATAL_ERROR "Unsupported platform")
     endif()

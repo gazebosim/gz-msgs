@@ -14,14 +14,14 @@
  * limitations under the License.
  *
 */
-#ifndef _IGNITION_MSGS_UTILITY_HH_
-#define _IGNITION_MSGS_UTILITY_HH_
+#ifndef IGNITION_MSGS_UTILITY_HH_
+#define IGNITION_MSGS_UTILITY_HH_
 
 #include <ignition/math/Vector3.hh>
 #include <ignition/math/Pose3.hh>
 #include <ignition/math/Plane.hh>
-#include <ignition/msgs/System.hh>
 #include <ignition/msgs/MessageTypes.hh>
+#include <ignition/msgs/System.hh>
 
 namespace ignition
 {

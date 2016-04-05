@@ -23,6 +23,7 @@ if(NOT MSVC)
   target_compile_options(ign_msgs_gen PUBLIC "-std=c++11")
 endif()
 
+link_directories(${IGNITION-MATH_LIBRARY_DIRS}) 
 ign_build_tests(${gtest_sources})
 # ign_add_library(${PROJECT_NAME_LOWER} ${sources})
 # ign_install_library(${PROJECT_NAME_LOWER})

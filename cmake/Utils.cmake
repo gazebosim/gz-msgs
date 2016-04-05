@@ -114,6 +114,8 @@ endmacro()
 
 #################################################
 macro (ign_setup_windows)
+  # Need for M_PI constant
+  add_definitions(-D_USE_MATH_DEFINES -DWINDOWS_LEAN_AND_MEAN)
   if(MSVC)
     add_definitions("/EHsc")
   endif()

@@ -14,14 +14,16 @@
  * limitations under the License.
  *
 */
-#ifndef _IGNITION_MSGS_FACTORY_HH_
-#define _IGNITION_MSGS_FACTORY_HH_
+#ifndef IGNITION_MSGS_FACTORY_HH_
+#define IGNITION_MSGS_FACTORY_HH_
 
 #include <google/protobuf/message.h>
 #include <string>
 #include <map>
 #include <memory>
 #include <vector>
+
+#include <ignition/msgs/System.hh>
 
 namespace ignition
 {
@@ -63,12 +65,13 @@ namespace ignition
     /// \param[in] _msgtype Message type name.
     /// \param[in] _classname Class name for message.
     #define IGN_REGISTER_STATIC_MSG(_msgtype, _classname) \
+    IGNITION_VISIBLE \
     std::unique_ptr<google::protobuf::Message> New##_classname() \
     { \
       return std::unique_ptr<ignition::msgs::_classname>(\
           new ignition::msgs::_classname); \
     } \
-    class IgnMsg##_classname \
+    class IGNITION_VISIBLE IgnMsg##_classname \
     { \
       public: IgnMsg##_classname() \
       { \

@@ -14,8 +14,8 @@
  * limitations under the License.
  *
 */
-#ifndef _IGNITION_MSGS_SYSTEM_HH_
-#define _IGNITION_MSGS_SYSTEM_HH_
+#ifndef IGNITION_MSGS_SYSTEM_HH_
+#define IGNITION_MSGS_SYSTEM_HH_
 
 /** \def IGNITION_VISIBLE
  * Use to represent "symbol visible" if supported
