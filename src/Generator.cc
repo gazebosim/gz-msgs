@@ -86,7 +86,7 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print("#else\n", "name", "includes");
     printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512",
         "name", "includes");
-    printer.Print(" 4127 4068)\n", "name", "includes");
+    printer.Print(" 4127 4068 4275 4251)\n", "name", "includes");
     printer.Print("#endif\n", "name", "includes");
   }
 
