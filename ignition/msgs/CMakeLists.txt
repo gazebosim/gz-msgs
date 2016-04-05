@@ -69,6 +69,7 @@ log_playback_stats.proto
 log_status.proto
 magnetometer.proto
 marker.proto
+marker_v.proto
 material.proto
 meshgeom.proto
 model_configuration.proto
@@ -189,6 +190,7 @@ foreach(FIL ${msgs})
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc"
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb"
+
       COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
       ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary}
            --cpp_out=dllexport_decl=IGNITION_VISIBLE:${CMAKE_CURRENT_BINARY_DIR}

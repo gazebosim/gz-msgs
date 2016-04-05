@@ -114,6 +114,17 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print(factory.c_str(), "name", "includes");
   }
 
+
+  {
+    std::unique_ptr<io::ZeroCopyOutputStream> output(
+        _generatorContext->OpenForInsert(headerFilename, "includes"));
+    io::Printer printer(output.get(), '$');
+
+    printer.Print("#include <memory>\n", "name", "includes");
+    printer.Print("#include <ignition/msgs/System.hh>\n", "name",
+                  "includes");
+  }
+
   // Add unique pointer typedef
   {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
