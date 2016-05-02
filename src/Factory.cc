@@ -14,6 +14,7 @@
  * limitations under the License.
  *
 */
+#include <google/protobuf/text_format.h>
 #include "ignition/msgs/Factory.hh"
 
 using namespace ignition;
@@ -38,16 +39,29 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
 {
   std::unique_ptr<google::protobuf::Message> msg;
 
-  // Fix typenames that are missing "ignition::msgs." at the beginning.
+  // Fix typenames that are missing "ign_msgs." at the beginning.
   std::string type;
-  if (_msgType.find("ignition/msgs.") != 0)
-    type = "ignition::msgs.";
+  if (_msgType.find("ign_msgs.") != 0)
+    type = "ign_msgs.";
   type += _msgType;
 
   // Create a new message if a FactoryFn has been assigned to the message
   // type
   if (msgMap->find(type) != msgMap->end())
     msg = ((*msgMap)[type]) ();
+
+  return msg;
+}
+
+/////////////////////////////////////////////////
+std::unique_ptr<google::protobuf::Message> Factory::New(
+    const std::string &_msgType, const std::string &_args)
+{
+  auto msg = New(_msgType);
+  if (msg)
+  {
+    google::protobuf::TextFormat::ParseFromString(_args, msg.get());
+  }
 
   return msg;
 }

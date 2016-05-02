@@ -48,8 +48,40 @@ namespace ignition
       /// \param[in] _msgType Type of message to create.
       /// \return Pointer to a google protobuf message. Null if the message
       /// type could not be handled.
+      public: template<typename T>
+              static std::unique_ptr<T> New(const std::string &_msgType)
+              {
+                return std::unique_ptr<T>(
+                    static_cast<T*>(New(_msgType).release()));
+              }
+
+      /// \brief Create a new instance of a message.
+      /// \param[in] _msgType Type of message to create.
+      /// \param[in] _args Message arguments. This will populate the message.
+      /// \return Pointer to a google protobuf message. Null if the message
+      /// type could not be handled.
+      public: template<typename T>
+              static std::unique_ptr<T> New(const std::string &_msgType,
+                  const std::string &_args)
+              {
+                return std::unique_ptr<T>(
+                    static_cast<T*>(New(_msgType, _args).release()));
+              }
+
+      /// \brief Create a new instance of a message.
+      /// \param[in] _msgType Type of message to create.
+      /// \return Pointer to a google protobuf message. Null if the message
+      /// type could not be handled.
       public: static std::unique_ptr<google::protobuf::Message> New(
                   const std::string &_msgType);
+
+      /// \brief Create a new instance of a message.
+      /// \param[in] _msgType Type of message to create.
+      /// \param[in] _args Message arguments. This will populate the message.
+      /// \return Pointer to a google protobuf message. Null if the message
+      /// type could not be handled.
+      public: static std::unique_ptr<google::protobuf::Message> New(
+                  const std::string &_msgType, const std::string &_args);
 
       /// \brief Get all the message types
       /// \param[out] _types Vector of strings of the message types.
