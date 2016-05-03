@@ -17,6 +17,7 @@
 
 #include <gtest/gtest.h>
 #include <cstddef>
+#include <algorithm>
 #include "ignition/msgs/MessageTypes.hh"
 #include "ignition/msgs/Factory.hh"
 
@@ -28,7 +29,8 @@ TEST(FactoryTest, Types)
   std::vector<std::string> types;
   msgs::Factory::Types(types);
   EXPECT_FALSE(types.empty());
-  EXPECT_TRUE(std::find(types.begin(), types.end(), "ign_msgs.Vector3d") !=
+  EXPECT_TRUE(std::find(types.begin(), types.end(),
+        std::string("ign_msgs.Vector3d")) !=
       types.end());
 }
 
