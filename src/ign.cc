@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-#include <iostream>
 #include <google/protobuf/descriptor.h>
+#include <iostream>
 #include "ignition/msgs/msgs.hh"
 
 #ifdef _MSC_VER
