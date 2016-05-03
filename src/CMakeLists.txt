@@ -3,7 +3,7 @@ include (${project_cmake_dir}/Utils.cmake)
 set (sources
 )
 
-set (gtet_sources
+set (gtest_sources
   Factory_TEST.cc
   Utility_TEST.cc
 )
