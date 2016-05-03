@@ -174,7 +174,7 @@ foreach(FIL ${msgs})
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
       COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
       ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary}
-           --cpp_out=dllexport_decl=IGNITION_VISIBLE:${CMAKE_CURRENT_BINARY_DIR}
+           --cpp_out=dllexport_decl=IGNITION_MSGS_VISIBLE:${CMAKE_CURRENT_BINARY_DIR}
            --java_out ${CMAKE_CURRENT_BINARY_DIR}
            --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR}
            --proto_path ${PROJECT_SOURCE_DIR} ${ABS_FIL}
@@ -193,7 +193,7 @@ foreach(FIL ${msgs})
 
       COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
       ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary}
-           --cpp_out=dllexport_decl=IGNITION_VISIBLE:${CMAKE_CURRENT_BINARY_DIR}
+           --cpp_out=dllexport_decl=IGNITION_MSGS_VISIBLE:${CMAKE_CURRENT_BINARY_DIR}
            --java_out=${CMAKE_CURRENT_BINARY_DIR}
            --ruby_out=${CMAKE_CURRENT_BINARY_DIR}
            --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR}

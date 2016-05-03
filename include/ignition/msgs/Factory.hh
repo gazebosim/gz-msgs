@@ -36,7 +36,7 @@ namespace ignition
     /// \class Factory Factory.hh ignition/msgs.hh
     /// \brief A factory that generates protobuf message based on a string
     /// type.
-    class IGNITION_VISIBLE Factory
+    class IGNITION_MSGS_VISIBLE Factory
     {
       /// \brief Register a message.
       /// \param[in] _msgType Type of message to register.
@@ -97,13 +97,13 @@ namespace ignition
     /// \param[in] _msgtype Message type name.
     /// \param[in] _classname Class name for message.
     #define IGN_REGISTER_STATIC_MSG(_msgtype, _classname) \
-    IGNITION_VISIBLE \
+    IGNITION_MSGS_VISIBLE \
     std::unique_ptr<google::protobuf::Message> New##_classname() \
     { \
       return std::unique_ptr<ignition::msgs::_classname>(\
           new ignition::msgs::_classname); \
     } \
-    class IGNITION_VISIBLE IgnMsg##_classname \
+    class IGNITION_MSGS_VISIBLE IgnMsg##_classname \
     { \
       public: IgnMsg##_classname() \
       { \
