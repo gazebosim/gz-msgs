@@ -36,7 +36,7 @@ namespace ignition
     /// \class Factory Factory.hh ignition/msgs.hh
     /// \brief A factory that generates protobuf message based on a string
     /// type.
-    class Factory
+    class IGNITION_VISIBLE Factory
     {
       /// \brief Register a message.
       /// \param[in] _msgType Type of message to register.
