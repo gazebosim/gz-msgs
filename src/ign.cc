@@ -14,6 +14,7 @@
  * limitations under the License.
  * */
 #include <iostream>
+#include <google/protobuf/descriptor.h>
 #include "ignition/msgs/msgs.hh"
 
 #ifdef _MSC_VER
