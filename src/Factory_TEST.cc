@@ -24,7 +24,7 @@
 using namespace ignition;
 
 /////////////////////////////////////////////////
-TEST(FactoryTest, Types)
+TEST(FactoryTest, Type)
 {
   std::vector<std::string> types;
   msgs::Factory::Types(types);
