@@ -212,6 +212,7 @@ link_directories(${IGNITION-MATH_LIBRARY_DIRS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 ign_add_library(${PROJECT_LIBRARY_TARGET_NAME}
   ${PROTO_SRCS} ${PROJECT_SOURCE_DIR}/src/Factory.cc
+  ${PROJECT_SOURCE_DIR}/src/ign.cc
   ${PROJECT_SOURCE_DIR}/src/Utility.cc)
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME} ${PROTOBUF_LIBRARY}
   ${IGNITION-MATH_LIBRARIES})

@@ -39,11 +39,24 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
 {
   std::unique_ptr<google::protobuf::Message> msg;
 
-  // Fix typenames that are missing "ign_msgs." at the beginning.
   std::string type;
-  if (_msgType.find("ign_msgs.") != 0)
-    type = "ign_msgs.";
-  type += _msgType;
+  // Convert "ignition.msgs." to "ign_msgs.".
+  if (_msgType.find("ignition.msgs.") == 0)
+  {
+    type = "ign_msgs." + _msgType.substr(14);
+  }
+  // Convert ".ignition.msgs." to "ign_msgs.".
+  else if (_msgType.find(".ignition.msgs.") == 0)
+  {
+    type = "ign_msgs." + _msgType.substr(15);
+  }
+  else
+  {
+    // Fix typenames that are missing "ign_msgs." at the beginning.
+    if (_msgType.find("ign_msgs.") != 0)
+      type = "ign_msgs.";
+    type += _msgType;
+  }
 
   // Create a new message if a FactoryFn has been assigned to the message
   // type
@@ -67,7 +80,7 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
 }
 
 /////////////////////////////////////////////////
-void Factory::GetTypes(std::vector<std::string> &_types)
+void Factory::Types(std::vector<std::string> &_types)
 {
   _types.clear();
 

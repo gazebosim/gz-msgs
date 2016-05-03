@@ -26,7 +26,7 @@ using namespace ignition;
 TEST(FactoryTest, Types)
 {
   std::vector<std::string> types;
-  msgs::Factory::GetTypes(types);
+  msgs::Factory::Types(types);
   EXPECT_FALSE(types.empty());
   EXPECT_TRUE(std::find(types.begin(), types.end(), "ign_msgs.Vector3d") !=
       types.end());

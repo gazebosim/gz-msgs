@@ -60,3 +60,12 @@ if (NOT WIN32)
     message(STATUS "Looking for ignition-math2-config.cmake - found")
   endif()
 endif()
+
+#################################################
+# Find ign command line utility:
+find_package(ignition-tools)
+if (IGNITION-TOOLS_BINARY_DIRS)
+  set (HAVE_IGN TRUE)
+else()
+  BUILD_WARNING ("ignition-tools not found, for command line utilities, please install ignition-tools.")
+endif()

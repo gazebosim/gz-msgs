@@ -50,4 +50,11 @@
   #endif
 #endif
 
+// Use safer functions on Windows
+#ifdef _MSC_VER
+  #define ign_strdup _strdup
+#else
+  #define ign_strdup strdup
+#endif
+
 #endif

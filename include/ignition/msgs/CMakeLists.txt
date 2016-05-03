@@ -5,6 +5,7 @@ set (headers
   Generator.hh
   System.hh
   Utility.hh
+  ign.hh
 )
 
 set (ign_headers "" CACHE INTERNAL "Ignition headers" FORCE)

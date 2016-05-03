@@ -3,7 +3,7 @@ include (${project_cmake_dir}/Utils.cmake)
 set (sources
 )
 
-set (gtest_sources
+set (gtet_sources
   Factory_TEST.cc
   Utility_TEST.cc
 )
@@ -28,3 +28,4 @@ link_directories(${IGNITION-MATH_LIBRARY_DIRS})
 ign_build_tests(${gtest_sources})
 # ign_add_library(${PROJECT_NAME_LOWER} ${sources})
 # ign_install_library(${PROJECT_NAME_LOWER})
+add_subdirectory(cmd)

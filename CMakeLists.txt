@@ -268,6 +268,7 @@ else (build_errors)
     add_subdirectory(src)
     add_subdirectory(include)
     add_subdirectory(test)
+    add_subdirectory(conf)
   endif (BUILD_IGNITION)
 
   ########################################

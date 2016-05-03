@@ -85,7 +85,7 @@ namespace ignition
 
       /// \brief Get all the message types
       /// \param[out] _types Vector of strings of the message types.
-      public: static void GetTypes(std::vector<std::string> &_types);
+      public: static void Types(std::vector<std::string> &_types);
 
       /// \brief A list of registered message types
       private: static std::map<std::string, FactoryFn> *msgMap;
