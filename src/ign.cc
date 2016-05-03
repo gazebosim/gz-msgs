@@ -59,7 +59,7 @@ void cmdMsgList()
 }
 
 //////////////////////////////////////////////////
-char *ignitionVersion()
+char *ignitionMsgsVersion()
 {
   int majorVersion = IGNITION_MSGS_MAJOR_VERSION;
   int minorVersion = IGNITION_MSGS_MINOR_VERSION;

@@ -25,6 +25,7 @@
  * Use to represent "symbol hidden" if supported
  */
 
+#ifndef IGNITION_MSGS_VISIBLE
 #if defined _WIN32 || defined __CYGWIN__
   #ifdef BUILDING_DLL
     #ifdef __GNUC__
@@ -48,6 +49,7 @@
     #define IGNITION_MSGS_VISIBLE
     #define IGNITION_MSGS_HIDDEN
   #endif
+#endif
 #endif
 
 // Use safer functions on Windows
