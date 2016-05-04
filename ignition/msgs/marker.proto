@@ -36,16 +36,16 @@ message Marker
     /// marker. A marker will be created if the provided id does not match
     /// an exisiting marker, otherwise the marker with the provided id will
     /// be modified.
-    ADD_MODIFY = 0;
+    ADD_MODIFY     = 0;
 
     /// \brief Use this action to delete an existing marking.
     /// Nothing will happend if the provided id does not match an exisiting
     /// marker.
-    DELETE     = 1;
+    DELETE_MARKER  = 1;
 
     /// \brief Delete all the markers. If a namespace is provided,
     /// then only the markers in the provided namespace are deleted.
-    DELETE_ALL = 2;
+    DELETE_ALL     = 2;
   }
 
   /// \brief The action to take
@@ -55,13 +55,13 @@ message Marker
 
   /// \brief Namespace of the marker. A namespace groups id's together.
   ///
-  /// Relevant Action: ADD_MODIFY, DELETE, DELETE_ALL
+  /// Relevant Action: ADD_MODIFY, DELETE_MARKER, DELETE_ALL
   optional string ns         = 2; 
 
   /// \brief The id within the namespace of the visual. Each marker has a
   /// unique id. It's up to the user to select id values.
   ///
-  /// Relevant Action: ADD_MODIFY, DELETE
+  /// Relevant Action: ADD_MODIFY, DELETE_MARKER
   ///
   /// Relevant Type: all
   optional uint64 id         = 3; 
