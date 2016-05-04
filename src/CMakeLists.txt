@@ -26,6 +26,4 @@ endif()
 
 link_directories(${IGNITION-MATH_LIBRARY_DIRS}) 
 ign_build_tests(${gtest_sources})
-# ign_add_library(${PROJECT_NAME_LOWER} ${sources})
-# ign_install_library(${PROJECT_NAME_LOWER})
 add_subdirectory(cmd)

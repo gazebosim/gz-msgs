@@ -258,6 +258,10 @@ if(NOT MSVC)
   target_compile_options(${PROJECT_LIBRARY_TARGET_NAME} PUBLIC "-std=c++11")
 endif()
 
+target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
+  PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR_FULL}>)
+
 message(STATUS "Installing Ruby messages to ${RUBY_INSTALL_DIR}/ignition/msgs")
 install(FILES ${PROTO_RB} DESTINATION ${RUBY_INSTALL_DIR}/ignition/msgs)
 

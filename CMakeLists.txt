@@ -100,8 +100,10 @@ endif()
 
 
 set (INCLUDE_INSTALL_DIR "${CMAKE_INSTALL_INCLUDEDIR}")
-set (INCLUDE_INSTALL_DIR_POSTFIX "ignition/${IGN_PROJECT_NAME}${PROJECT_MAJOR_VERSION}")
-set (INCLUDE_INSTALL_DIR_FULL    "${INCLUDE_INSTALL_DIR}/${INCLUDE_INSTALL_DIR_POSTFIX}")
+set (INCLUDE_INSTALL_DIR_POSTFIX 
+  "ignition/${IGN_PROJECT_NAME}${PROJECT_MAJOR_VERSION}")
+set (INCLUDE_INSTALL_DIR_FULL
+  "${INCLUDE_INSTALL_DIR}/${INCLUDE_INSTALL_DIR_POSTFIX}")
 set (LIB_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR})
 set (BIN_INSTALL_DIR ${CMAKE_INSTALL_BINDIR})
 
@@ -285,7 +287,6 @@ else (build_errors)
   ########################################
   # Make the cmake config files
   set(PKG_NAME ${PROJECT_NAME_NO_VERSION_UPPER})
-  set(PKG_LIBRARIES ${PROJECT_NAME_LOWER})
   set(cmake_conf_file "${PROJECT_NAME_LOWER}-config.cmake")
   set(cmake_conf_version_file "${PROJECT_NAME_LOWER}-config-version.cmake")
   set(cmake_targets_file      "${PROJECT_NAME_LOWER}-targets.cmake")
@@ -295,7 +296,8 @@ else (build_errors)
   if(WIN32 AND NOT CYGWIN)
     set(CMAKE_CONFIG_INSTALL_DIR CMake)
   else()
-    set(CMAKE_CONFIG_INSTALL_DIR ${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME_LOWER}/)
+    set(CMAKE_CONFIG_INSTALL_DIR
+      ${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME_LOWER}/)
   endif()
 
   configure_package_config_file(
@@ -330,7 +332,6 @@ else (build_errors)
   install(EXPORT ${PROJECT_EXPORT_NAME}
           DESTINATION ${CMAKE_CONFIG_INSTALL_DIR}
           FILE ${cmake_targets_file})
-          
 
   ########################################
   # If present, load platform-specific build hooks.  This system is used,
