@@ -11,11 +11,11 @@ import "ignition/msgs/vector3d.proto";
 message Axis
 {
   optional Vector3d xyz                = 1;
-  optional double limit_lower          = 2;
-  optional double limit_upper          = 3;
-  optional double limit_effort         = 4;
-  optional double limit_velocity       = 5;
-  optional double damping              = 6;
-  optional double friction             = 7;
-  optional bool use_parent_model_frame = 8;
+  optional double limit_lower          = 2 [default = 0];
+  optional double limit_upper          = 3 [default = 0];
+  optional double limit_effort         = 4 [default = 0];
+  optional double limit_velocity       = 5 [default = 0];
+  optional double damping              = 6 [default = 0];
+  optional double friction             = 7 [default = 0];
+  optional bool use_parent_model_frame = 8 [default = false];
 }

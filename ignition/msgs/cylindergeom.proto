@@ -8,6 +8,6 @@ option java_outer_classname = "CylinderGeomProtos";
 
 message CylinderGeom
 {
-  optional double radius  = 1;
-  optional double length  = 2;
+  optional double radius  = 1 [default = 0];
+  optional double length  = 2 [default = 0];
 }

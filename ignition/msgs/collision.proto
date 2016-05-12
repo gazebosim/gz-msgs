@@ -13,8 +13,8 @@ import "ignition/msgs/visual.proto";
 
 message Collision
 {
-  optional uint32 id            = 1;
-  optional string name          = 2;
+  optional uint32 id            = 1 [default = 0];
+  optional string name          = 2 [default = ""];
   optional double laser_retro   = 3;
   optional double max_contacts  = 4;
   optional Pose pose            = 5;

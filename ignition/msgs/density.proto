@@ -8,5 +8,5 @@ option java_outer_classname = "DensityProtos";
 
 message Density
 {
-  optional double density          = 1;
+  optional double density = 1 [default = 0];
 }
