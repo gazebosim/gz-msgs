@@ -9,5 +9,5 @@ option java_outer_classname = "Int32Protos";
 message Int32
 {
   /// \brief Integer data
-  required int32 data = 1;
+  optional int32 data = 1;
 }

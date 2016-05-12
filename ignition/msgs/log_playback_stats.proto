@@ -11,8 +11,8 @@ import "ignition/msgs/time.proto";
 message LogPlaybackStatistics
 {
   /// \brief Log start time
-  required Time start_time = 1;
+  optional Time start_time = 1;
 
   /// \brief Log end time
-  required Time end_time   = 2;
+  optional Time end_time   = 2;
 }

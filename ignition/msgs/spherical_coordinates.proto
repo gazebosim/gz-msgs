@@ -13,9 +13,9 @@ message SphericalCoordinates
     EARTH_WGS84 = 1;
   }
 
-  required SurfaceModel surface_model   = 1;
-  required double latitude_deg          = 2;
-  required double longitude_deg         = 3;
-  required double elevation             = 4;
-  required double heading_deg           = 5;
+  optional SurfaceModel surface_model   = 1;
+  optional double latitude_deg          = 2;
+  optional double longitude_deg         = 3;
+  optional double elevation             = 4;
+  optional double heading_deg           = 5;
 }

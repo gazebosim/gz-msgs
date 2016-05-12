@@ -22,7 +22,7 @@ message SensorNoise
   }
 
   /// \brief The type of noise
-  required Type type          = 1;
+  optional Type type          = 1;
 
   /// \brief Noise mean
   /// Used by GAUSSIAN, and GAUSSIAN_QUANTIZED

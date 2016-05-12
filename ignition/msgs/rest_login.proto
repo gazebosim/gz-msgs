@@ -12,7 +12,7 @@ message RestLogin
   optional uint32 id       = 1;
 
   /// \brief Rest service URL
-  required string url      = 2;
+  optional string url      = 2;
 
   /// \brief Login user name
   optional string username = 3;

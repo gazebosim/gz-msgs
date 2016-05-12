@@ -9,5 +9,5 @@ option java_outer_classname = "Int64Protos";
 message Int64
 {
   /// \brief Integer data
-  required int64 data = 1;
+  optional int64 data = 1;
 }

@@ -12,6 +12,6 @@ import "ignition/msgs/laserscan.proto";
 message LaserScanStamped
 {
   // Time when the data was captured
-  required Time time          = 1;
-  required LaserScan scan     = 2;
+  optional Time time          = 1;
+  optional LaserScan scan     = 2;
 }

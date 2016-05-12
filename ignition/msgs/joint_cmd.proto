@@ -10,7 +10,7 @@ import "ignition/msgs/pid.proto";
 
 message JointCmd
 {
-  required string name     = 1;
+  optional string name     = 1;
   optional int32 axis      = 2 [default=0];
   optional double force    = 3;
 

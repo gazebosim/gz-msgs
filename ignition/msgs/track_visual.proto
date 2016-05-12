@@ -11,7 +11,7 @@ import "ignition/msgs/vector3d.proto";
 message TrackVisual
 {
   /// \brief Name of the visual to track
-  required string name              = 1;
+  optional string name              = 1;
 
   /// \brief Id of the visual to track
   optional uint32 id                = 2;

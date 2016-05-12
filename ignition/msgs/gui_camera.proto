@@ -11,7 +11,7 @@ import "ignition/msgs/track_visual.proto";
 
 message GUICamera
 {
-  required string name                  = 1;
+  optional string name                  = 1;
   optional string view_controller       = 2;
   optional Pose pose                    = 3;
   optional TrackVisual track            = 4;

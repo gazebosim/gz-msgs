@@ -9,10 +9,8 @@ option java_outer_classname = "ColorProtos";
 
 message Color
 {
-  required float r = 2;
-  required float g = 3;
-  required float b = 4;
+  optional float r = 2 [default = 0.0];
+  optional float g = 3 [default = 0.0];
+  optional float b = 4 [default = 0.0];
   optional float a = 5 [default = 1.0];
 }
-
-

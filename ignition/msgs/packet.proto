@@ -10,7 +10,7 @@ import "ignition/msgs/time.proto";
 
 message Packet
 {
-  required Time stamp            = 1;
-  required string type           = 2;
-  required bytes serialized_data = 3;
+  optional Time stamp            = 1;
+  optional string type           = 2;
+  optional bytes serialized_data = 3;
 }

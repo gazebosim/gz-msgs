@@ -15,15 +15,15 @@ message LogicalCameraImage
   message Model
   {
     /// \brief Name of the detected model
-    required string name = 1;
+    optional string name = 1;
 
     /// \brief Pose of the detected model. The pose is relative to the
     /// logical camera's pose.
-    required Pose pose   = 2;
+    optional Pose pose   = 2;
   }
 
   /// \brief Pose of the logical camera.
-  required Pose pose   = 1;
+  optional Pose pose   = 1;
 
   /// \brief All the models seen by the LogicalCamera
   repeated Model model = 2;

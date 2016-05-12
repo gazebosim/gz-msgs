@@ -10,6 +10,6 @@ import "ignition/msgs/vector2d.proto";
 
 message Polyline
 {
-  required double height  = 1;
+  optional double height  = 1;
   repeated Vector2d point = 2;  
 }
