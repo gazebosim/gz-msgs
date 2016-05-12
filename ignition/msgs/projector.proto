@@ -10,7 +10,7 @@ import "ignition/msgs/pose.proto";
 
 message Projector
 {
-  required string name          = 1;
+  optional string name          = 1;
   optional string texture       = 2;
   optional Pose pose            = 3;
   optional double fov           = 4[default=0.785];

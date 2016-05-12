@@ -16,16 +16,16 @@ message Joint
   message Gearbox
   {
     /// \brief Gearbox joint reference body link
-    required string gearbox_reference_body = 1;
+    optional string gearbox_reference_body = 1;
 
     /// \brief Gearbox ratio.
-    required double gearbox_ratio = 2;
+    optional double gearbox_ratio = 2;
   }
 
   message Screw
   {
     /// \brief Screw joint thread pitch.
-    required double thread_pitch = 1;
+    optional double thread_pitch = 1;
   }
 
   enum Type
@@ -40,7 +40,7 @@ message Joint
     FIXED     = 8;
   }
 
-  required string name           = 1;
+  optional string name           = 1;
   optional uint32 id             = 2;
   repeated double angle          = 3;
   optional Type type             = 4;

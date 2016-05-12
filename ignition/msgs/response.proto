@@ -8,9 +8,9 @@ option java_outer_classname = "ResponseProtos";
 
 message Response
 {
-  required int32 id              = 1;
-  required string request        = 2;
-  required string response       = 3;
+  optional int32 id              = 1;
+  optional string request        = 2;
+  optional string response       = 3;
   optional string type           = 4;
   optional bytes serialized_data = 5;
 }

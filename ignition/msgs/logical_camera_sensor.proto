@@ -9,14 +9,14 @@ option java_outer_classname = "LogicalCameraSensorProtos";
 message LogicalCameraSensor
 {
   /// \brief Near clipping plane of the view frustum in meters.
-  required double near_clip       = 1;
+  optional double near_clip       = 1;
 
   /// \brief Far clipping plane of the view frustum in meters.
-  required double far_clip        = 2;
+  optional double far_clip        = 2;
 
   /// \brief Horizontal field of view in radians.
-  required double horizontal_fov  = 3;
+  optional double horizontal_fov  = 3;
 
   /// \brief Near and far clipping plane aspect ratio (width/height).
-  required double aspect_ratio    = 4;
+  optional double aspect_ratio    = 4;
 }

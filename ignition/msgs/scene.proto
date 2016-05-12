@@ -15,7 +15,7 @@ import "ignition/msgs/model.proto";
 
 message Scene
 {
-  required string name         = 1;
+  optional string name         = 1;
   optional Color ambient       = 2;
   optional Color background    = 3;
   optional Sky sky             = 4;

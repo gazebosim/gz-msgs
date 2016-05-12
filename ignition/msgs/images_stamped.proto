@@ -12,6 +12,6 @@ import "ignition/msgs/image.proto";
 message ImagesStamped
 {
   // Time when all the images were captured
-  required Time time          = 1;
+  optional Time time          = 1;
   repeated Image image        = 2;
 }

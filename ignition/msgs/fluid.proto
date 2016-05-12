@@ -11,7 +11,7 @@ import "ignition/msgs/vector3d.proto";
 message Fluid
 {
   // Name of the fluid
-  required string name = 1;
+  optional string name = 1;
   
   // Position of each particle in the fluid.
   repeated Vector3d position  = 2;

@@ -51,7 +51,7 @@ message Marker
   /// \brief The action to take
   ///
   /// Relevant Type: all
-  required Action action     = 1;
+  optional Action action     = 1;
 
   /// \brief Namespace of the marker. A namespace groups id's together.
   ///

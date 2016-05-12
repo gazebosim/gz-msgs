@@ -10,14 +10,14 @@ import "ignition/msgs/pose.proto";
 
 message LaserScan
 {
-  required string frame               = 1;
-  required Pose world_pose            = 2;
-  required double angle_min           = 3;
-  required double angle_max           = 4;
-  required double angle_step          = 5;
-  required double range_min           = 6;
-  required double range_max           = 7;
-  required uint32 count               = 8;
+  optional string frame               = 1;
+  optional Pose world_pose            = 2;
+  optional double angle_min           = 3;
+  optional double angle_max           = 4;
+  optional double angle_step          = 5;
+  optional double range_min           = 6;
+  optional double range_max           = 7;
+  optional uint32 count               = 8;
   optional double vertical_angle_min  = 9;
   optional double vertical_angle_max  = 10;
   optional double vertical_angle_step = 11;

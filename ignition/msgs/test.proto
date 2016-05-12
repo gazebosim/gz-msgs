@@ -10,5 +10,5 @@ import "ignition/msgs/header.proto";
 
 message Test
 {
-  required Header header = 1;
+  optional Header header = 1;
 }

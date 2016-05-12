@@ -8,8 +8,8 @@ option java_outer_classname = "QuaternionProtos";
 
 message Quaternion
 {
-  required double x = 2;
-  required double y = 3;
-  required double z = 4;
-  required double w = 5;
+  optional double x = 2;
+  optional double y = 3;
+  optional double z = 4;
+  optional double w = 5;
 }

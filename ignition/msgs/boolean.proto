@@ -9,5 +9,5 @@ option java_outer_classname = "BoolProtos";
 message Boolean
 {
   /// \brief Boolean data
-  required bool data = 1;
+  optional bool data = 1 [default = false];
 }

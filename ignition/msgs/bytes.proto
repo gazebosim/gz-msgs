@@ -9,5 +9,5 @@ option java_outer_classname = "BytesProtos";
 message Bytes
 {
   /// \brief Bytes data
-  required bytes data = 1;
+  optional bytes data = 1;
 }

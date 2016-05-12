@@ -8,7 +8,7 @@ option java_outer_classname = "WirelessNodeProtos";
 
 message WirelessNode
 {
-  required string essid        = 1;
-  required double frequency    = 2;
-  required double signal_level = 3;
+  optional string essid        = 1;
+  optional double frequency    = 2;
+  optional double signal_level = 3;
 }

@@ -12,6 +12,6 @@ import "ignition/msgs/sonar.proto";
 message SonarStamped
 {
   // Time when the data was captured
-  required Time time       = 1;
-  required Sonar sonar     = 2;
+  optional Time time       = 1;
+  optional Sonar sonar     = 2;
 }

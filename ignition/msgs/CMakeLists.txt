@@ -3,6 +3,7 @@ include_directories(${PROTOBUF_INCLUDE_DIRS})
 set (msgs
 altimeter.proto
 any.proto
+atmosphere.proto
 axis.proto
 battery.proto
 boolean.proto
@@ -27,6 +28,7 @@ double.proto
 double_v.proto
 duration.proto
 empty.proto
+entity_factory.proto
 float.proto
 float_v.proto
 fluid.proto
@@ -75,7 +77,6 @@ material.proto
 meshgeom.proto
 model_configuration.proto
 model.proto
-model_factory.proto
 model_v.proto
 packet.proto
 param.proto
@@ -138,6 +139,7 @@ vector2d.proto
 vector3d.proto
 visual.proto
 web_request.proto
+wind.proto
 wireless_node.proto
 wireless_nodes.proto
 world_control.proto

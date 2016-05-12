@@ -10,11 +10,11 @@ import "ignition/msgs/time.proto";
 
 message GPS
 {
-  required Time time                    = 1;
-  required string link_name             = 2;
-  required double latitude_deg          = 3;
-  required double longitude_deg         = 4;
-  required double altitude              = 5;
+  optional Time time                    = 1;
+  optional string link_name             = 2;
+  optional double latitude_deg          = 3;
+  optional double longitude_deg         = 4;
+  optional double altitude              = 5;
   optional double velocity_east         = 6;
   optional double velocity_north        = 7;
   optional double velocity_up           = 8;

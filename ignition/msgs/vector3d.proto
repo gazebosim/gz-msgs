@@ -8,7 +8,7 @@ option java_outer_classname = "Vector3dProtos";
 
 message Vector3d
 {
-  required double x = 1;
-  required double y = 2;
-  required double z = 3;
+  optional double x = 1;
+  optional double y = 2;
+  optional double z = 3;
 }
