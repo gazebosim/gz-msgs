@@ -87,6 +87,55 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     msgs::PlaneGeom Convert(const ignition::math::Planed &_p);
 
+/// \todo Add these only when they can all be added at once
+//    /// \brief Convert a double to a ignition::msgs::Any
+//    /// \param[in] _v The double to convert.
+//    /// \return A ignition::msgs::Any object.
+//    IGNITION_MSGS_VISIBLE
+//    ignition::msgs::Any ConvertAny(const double _v);
+//
+//    /// \brief Convert an int to a ignition::msgs::Any
+//    /// \param[in] _i The int to convert.
+//    /// \return A ignition::msgs::Any object.
+//    IGNITION_MSGS_VISIBLE
+//    ignition::msgs::Any ConvertAny(const int _i);
+//
+//    /// \brief Convert a std::string to a ignition::msgs::Any
+//    /// \param[in] _s The string to convert.
+//    /// \return A ignition::msgs::Any object.
+//    IGNITION_MSGS_VISIBLE
+//    ignition::msgs::Any ConvertAny(const std::string &_s);
+//
+//    /// \brief Convert a string literal to a ignition::msgs::Any
+//    /// \param[in] _s The string to convert.
+//    /// \return A ignition::msgs::Any object.
+//    IGNITION_MSGS_VISIBLE
+//    ignition::msgs::Any ConvertAny(const char *_s);
+//
+//    /// \brief Convert a bool to a ignition::msgs::Any
+//    /// \param[in] _b The bool to convert.
+//    /// \return A ignition::msgs::Any object.
+//    IGNITION_MSGS_VISIBLE
+//    ignition::msgs::Any ConvertAny(const bool _b);
+//
+//    /// \brief Convert an ignition::math::Vector3d to a ignition::msgs::Any
+//    /// \param[in] _v The vector to convert.
+//    /// \return A ignition::msgs::Any object.
+//    IGNITION_MSGS_VISIBLE
+//    ignition::msgs::Any ConvertAny(const ignition::math::Vector3d &_v);
+//
+//    /// \brief Convert an ignition::math::Pose3d to a ignition::msgs::Any
+//    /// \param[in] _p The pose to convert.
+//    /// \return A ignition::msgs::Any object.
+//    IGNITION_MSGS_VISIBLE
+//    ignition::msgs::Any ConvertAny(const ignition::math::Pose3d &_p);
+//
+//    /// \brief Convert an ignition::math::Quaternion to a ignition::msgs::Any
+//    /// \param[in] _q The quaternion to convert.
+//    /// \return A ignition::msgs::Any object.
+//    IGNITION_MSGS_VISIBLE
+//    ignition::msgs::Any ConvertAny(const ignition::math::Quaterniond &_q);
+
     /// \brief Set a msgs::Vector3d from an ignition::math::Vector3d
     /// \param[out] _pt A msgs::Vector3d pointer
     /// \param[in] _v An ignition::math::Vector3d reference

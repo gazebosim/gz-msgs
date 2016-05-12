@@ -1,0 +1,16 @@
+package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "EmptyProtos";
+
+/// \ingroup ignition.msgs
+/// \interface Param
+/// \brief Param message.
+
+import "ignition/msgs/any.proto";
+
+message Param
+{
+  required string name     = 1;
+  optional Any    value    = 2;
+  repeated Param  children = 3;
+}

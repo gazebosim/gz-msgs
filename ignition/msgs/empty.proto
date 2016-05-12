@@ -8,4 +8,5 @@ option java_outer_classname = "EmptyProtos";
 
 message Empty
 {
+  optional bool unused = 1;
 }

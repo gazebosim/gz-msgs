@@ -2,6 +2,7 @@ include_directories(${PROTOBUF_INCLUDE_DIRS})
 
 set (msgs
 altimeter.proto
+any.proto
 axis.proto
 battery.proto
 boolean.proto
@@ -77,6 +78,8 @@ model.proto
 model_factory.proto
 model_v.proto
 packet.proto
+param.proto
+param_v.proto
 physics.proto
 pid.proto
 planegeom.proto
@@ -251,9 +254,9 @@ ign_install_includes(
   "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_PROJECT_NAME}"
   ${CMAKE_CURRENT_BINARY_DIR}/MessageTypes.hh)
 
-# When the minimum CMake required version will be >= 3.1 
-# we could use the target_compile_features() command 
-# to enable C++11 support in a platform-independent way. 
+# When the minimum CMake required version will be >= 3.1
+# we could use the target_compile_features() command
+# to enable C++11 support in a platform-independent way.
 if(NOT MSVC)
   target_compile_options(${PROJECT_LIBRARY_TARGET_NAME} PUBLIC "-std=c++11")
 endif()
