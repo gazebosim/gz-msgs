@@ -10,5 +10,6 @@ import "ignition/msgs/param.proto";
 
 message Param_V
 {
+  /// \brief Repeated params.
   repeated Param param = 1;
 }

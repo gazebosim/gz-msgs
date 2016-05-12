@@ -4,9 +4,10 @@ option java_outer_classname = "EmptyProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Empty
-/// \brief An empty message
+/// \brief An empty message.
 
 message Empty
 {
+  /// \brief Unused field.
   optional bool unused = 1;
 }
