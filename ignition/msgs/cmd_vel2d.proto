@@ -8,6 +8,6 @@ option java_outer_classname = "CmdVel2DProtos";
 
 message CmdVel2D
 {
-  required double velocity  = 1;
-  required double theta     = 2;
+  optional double velocity  = 1;
+  optional double theta     = 2;
 }

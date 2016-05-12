@@ -8,7 +8,7 @@ option java_outer_classname = "SelectionProtos";
 
 message Selection
 {
-  required uint32 id     = 1;
-  required string name   = 2;
+  optional uint32 id     = 1;
+  optional string name   = 2;
   optional bool selected = 3 [default = false];
 }

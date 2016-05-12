@@ -13,8 +13,8 @@ message RestPost
   optional uint32 id    = 1;
 
   /// \brief Route to post to.
-  required string route = 2;
+  optional string route = 2;
 
   /// \brief Data to post in JSON format
-  required string json  = 3;
+  optional string json  = 3;
 }

@@ -9,5 +9,5 @@ option java_outer_classname = "SphereGeomProtos";
 message SphereGeom
 {
   /// \brief Radius of the sphere.
-  required double radius  = 1;
+  optional double radius  = 1;
 }

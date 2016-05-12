@@ -10,5 +10,5 @@ import "ignition/msgs/vector3d.proto";
 
 message BoxGeom
 {
-  required Vector3d size  = 1;
+  optional Vector3d size  = 1;
 }

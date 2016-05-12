@@ -13,13 +13,13 @@ message SimEvent
   optional uint32 id                        = 1;
 
   /// \brief Type of sim event
-  required string type                      = 2;
+  optional string type                      = 2;
 
   /// \brief Name of sim event
-  required string name                      = 3;
+  optional string name                      = 3;
 
   /// \brief Statistics of the world
-  required WorldStatistics world_statistics = 4;
+  optional WorldStatistics world_statistics = 4;
 
   /// \brief Data describing the sim event
   optional string data                      = 5;

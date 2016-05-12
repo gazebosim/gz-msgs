@@ -13,6 +13,6 @@ import "ignition/msgs/time.proto";
 message ForceTorque
 {
   repeated JointWrench wrench = 1;
-  required Time time          = 2;
+  optional Time time          = 2;
 }
 

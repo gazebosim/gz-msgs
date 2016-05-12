@@ -13,7 +13,7 @@ message CameraLens
   ///        "equisolid_angle", "stereographic", "custom".
   ///        If you set this value to "custom" you need to specify at least one
   ///        of the `c1`, `c2`, `c3`, `f` or `fun`.
-  required string type = 1;
+  optional string type = 1;
 
   /// \brief Linear image scaling factor
   optional double c1 = 2;

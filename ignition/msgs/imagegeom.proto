@@ -8,7 +8,7 @@ option java_outer_classname = "ImageGeomProtos";
 
 message ImageGeom
 {
-  required string uri         = 1;
+  optional string uri         = 1;
   optional double scale       = 2;
   optional int32 threshold    = 3 [default = 255];
   optional double height      = 4;

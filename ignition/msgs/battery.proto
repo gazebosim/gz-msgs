@@ -9,8 +9,8 @@ option java_outer_classname = "BatteryProtos";
 message Battery
 {
   /// \brief Name of the battery
-  required string name    = 1;
+  optional string name    = 1;
 
   /// \brief Real voltage in volts.
-  required double voltage = 2;
+  optional double voltage = 2;
 }

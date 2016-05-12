@@ -9,7 +9,7 @@ option java_outer_classname = "UndoRedoProtos";
 message UndoRedo
 {
   /// \brief True to undo, false to redo.
-  required bool undo = 1;
+  optional bool undo = 1;
 
   /// \brief Unique id of the user command. If this is provided, all commands
   /// leading to that will be undone / redone.

@@ -17,19 +17,19 @@ import "ignition/msgs/imu_sensor.proto";
 message Sensor
 {
   /// \brief Name of the sensor
-  required string name            = 1;
+  optional string name            = 1;
 
   /// \brief Id of the sensor
   optional uint32 id              = 2;
 
   /// \brief Name of the parent, usually a link or joint.
-  required string parent          = 3;
+  optional string parent          = 3;
 
   /// \brief Id of the parent, usually a link or joint.
   optional uint32 parent_id       = 4;
 
   /// \brief Sensor type
-  required string type            = 5;
+  optional string type            = 5;
 
   /// \brief True indicates that the sensor should always
   /// produce data, instead of producing data only when

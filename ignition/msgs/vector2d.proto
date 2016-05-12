@@ -8,6 +8,6 @@ option java_outer_classname = "Vector2dProtos";
 
 message Vector2d
 {
-  required double x = 1;
-  required double y = 2;
+  optional double x = 1;
+  optional double y = 2;
 }

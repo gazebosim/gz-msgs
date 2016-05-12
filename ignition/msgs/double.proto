@@ -9,5 +9,5 @@ option java_outer_classname = "DoubleProtos";
 message Double
 {
   /// \brief Double data
-  required double data = 1;
+  optional double data = 1;
 }

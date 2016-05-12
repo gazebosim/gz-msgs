@@ -9,5 +9,5 @@ option java_outer_classname = "FloatProtos";
 message Float
 {
   /// \brief Float data
-  required float data = 1;
+  optional float data = 1;
 }

@@ -12,14 +12,14 @@ import "ignition/msgs/time.proto";
 message Altimeter
 {
   /// \brief Timestamp of the altimeter data
-  required Time time                 = 1;
+  optional Time time                 = 1;
 
   /// \brief Vertical position data, in meters.
-  required double vertical_position  = 2;
+  optional double vertical_position  = 2;
 
   /// \brief Vertical velocity data, in meters/second.
-  required double vertical_velocity  = 3;
+  optional double vertical_velocity  = 3;
 
   /// \brief Vertical reference.
-  required double vertical_reference = 4;
+  optional double vertical_reference = 4;
 }

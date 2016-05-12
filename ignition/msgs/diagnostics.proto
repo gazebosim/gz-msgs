@@ -13,13 +13,13 @@ message Diagnostics
 {
   message DiagTime
   {
-    required string name = 1;
-    required Time elapsed = 2;
-    required Time wall = 3;
+    optional string name = 1;
+    optional Time elapsed = 2;
+    optional Time wall = 3;
   }
 
   repeated DiagTime time = 1;
-  required Time real_time = 2;
-  required Time sim_time = 3;
-  required double real_time_factor = 4;
+  optional Time real_time = 2;
+  optional Time sim_time = 3;
+  optional double real_time_factor = 4;
 }

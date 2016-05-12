@@ -11,6 +11,6 @@ import "ignition/msgs/pose.proto";
 
 message PoseStamped
 {
-  required Time time          = 1; // Time when the data was captured
-  required Pose pose          = 2;
+  optional Time time          = 1; // Time when the data was captured
+  optional Pose pose          = 2;
 }
