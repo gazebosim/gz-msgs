@@ -11,8 +11,8 @@ import "ignition/msgs/material.proto";
 
 message Road
 {
-  required string name          = 1;
-  required double width         = 2;
+  optional string name          = 1;
+  optional double width         = 2;
   repeated Vector3d point       = 3;
   optional Material material    = 4;
 }

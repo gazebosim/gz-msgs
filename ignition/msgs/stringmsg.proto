@@ -8,5 +8,5 @@ option java_outer_classname = "StringMsgProtos";
 
 message StringMsg
 {
-  required string data = 1;
+  optional string data = 1;
 }

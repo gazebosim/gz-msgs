@@ -9,5 +9,5 @@ option java_outer_classname = "UInt32Protos";
 message UInt32
 {
   /// \brief Integer data
-  required uint32 data = 1;
+  optional uint32 data = 1;
 }

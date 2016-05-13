@@ -11,12 +11,12 @@ import "ignition/msgs/vector3d.proto";
 
 message Sonar
 {
-  required string frame     = 1;
-  required Pose world_pose  = 2;
-  required double range_min = 3;
-  required double range_max = 4;
-  required double radius    = 5;
-  required double range     = 6;
+  optional string frame     = 1;
+  optional Pose world_pose  = 2;
+  optional double range_min = 3;
+  optional double range_max = 4;
+  optional double radius    = 5;
+  optional double range     = 6;
 
   /// Location of the contact in the world frame.
   optional Vector3d contact  = 7;

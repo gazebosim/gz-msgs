@@ -8,8 +8,8 @@ option java_outer_classname = "WebRequestProtos";
 
 message WebRequest
 {
-  required string operation      = 1;
-  required string topic          = 2;
+  optional string operation      = 1;
+  optional string topic          = 2;
   optional string msg_type       = 3;
   optional string compression    = 4;
   optional double hz             = 5;

@@ -12,6 +12,6 @@ import "ignition/msgs/wrench.proto";
 message WrenchStamped
 {
   // Time when the data was captured
-  required Time time       = 1;
-  required Wrench wrench   = 2;
+  optional Time time       = 1;
+  optional Wrench wrench   = 2;
 }

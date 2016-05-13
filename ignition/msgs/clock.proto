@@ -10,7 +10,7 @@ import "ignition/msgs/time.proto";
 
 message Clock
 {
-  required Time system = 1;
-  required Time real   = 2;
+  optional Time system = 1;
+  optional Time real   = 2;
   optional Time sim    = 3;
 }

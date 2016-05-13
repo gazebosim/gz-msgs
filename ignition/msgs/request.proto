@@ -8,8 +8,8 @@ option java_outer_classname = "RequestProtos";
 
 message Request
 {
-  required int32 id         = 1;
-  required string request   = 2;
+  optional int32 id         = 1;
+  optional string request   = 2;
   optional string data      = 3;
   optional double dbl_data  = 4;
 }

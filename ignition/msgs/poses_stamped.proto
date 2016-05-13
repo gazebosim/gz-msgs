@@ -11,6 +11,6 @@ import "ignition/msgs/pose.proto";
 
 message PosesStamped
 {
-  required Time time = 1;
+  optional Time time = 1;
   repeated Pose pose = 2;
 }

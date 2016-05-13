@@ -12,7 +12,7 @@ import "ignition/msgs/color.proto";
 
 message Light
 {
-  required string name                   = 1;
+  optional string name                   = 1;
   enum LightType
   {
     POINT       = 1;

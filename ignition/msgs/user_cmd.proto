@@ -33,10 +33,10 @@ message UserCmd
   optional uint32 id = 1;
 
   /// \brief Description for the command.
-  required string description = 2;
+  optional string description = 2;
 
   /// \brief Type of command.
-  required Type type = 3;
+  optional Type type = 3;
 
   /// \brief For model modify commands.
   repeated Model model = 4;
