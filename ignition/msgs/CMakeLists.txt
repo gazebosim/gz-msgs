@@ -77,6 +77,7 @@ meshgeom.proto
 model_configuration.proto
 model.proto
 model_v.proto
+operation.proto
 packet.proto
 physics.proto
 pid.proto
