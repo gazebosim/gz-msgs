@@ -1,0 +1,21 @@
+package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "EmptyProtos";
+
+/// \ingroup ignition.msgs
+/// \interface Param
+/// \brief A generic message holding a name-value pair. It can be nested.
+
+import "ignition/msgs/any.proto";
+
+message Param
+{
+  /// \brief Param name.
+  required string name     = 1;
+
+  /// \brief Param value.
+  optional Any    value    = 2;
+
+  /// \brief Params nested within this one.
+  repeated Param  children = 3;
+}

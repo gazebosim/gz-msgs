@@ -3,7 +3,7 @@ option java_package = "com.ignition.msgs";
 option java_outer_classname = "PoseProtos";
 
 /// \ingroup ignition.msgs
-/// \interface Pose 
+/// \interface Pose
 /// \brief Message for a pose
 
 import "ignition/msgs/vector3d.proto";

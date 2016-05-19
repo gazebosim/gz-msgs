@@ -2,6 +2,7 @@ include_directories(${PROTOBUF_INCLUDE_DIRS})
 
 set (msgs
 altimeter.proto
+any.proto
 atmosphere.proto
 axis.proto
 battery.proto
@@ -78,6 +79,8 @@ model_configuration.proto
 model.proto
 model_v.proto
 packet.proto
+param.proto
+param_v.proto
 physics.proto
 pid.proto
 planegeom.proto
