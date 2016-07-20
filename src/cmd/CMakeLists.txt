@@ -4,9 +4,9 @@ include (${project_cmake_dir}/Utils.cmake)
 # Note that the major version of the library is included in the name.
 # Ex: cmdmsgs0.rb
 if (APPLE)
-  set(IGN_LIBRARY_NAME lib${PROJECT_NAME_LOWER}.dylib)
+  set(IGN_LIBRARY_NAME lib${PROJECT_NAME_WITH_VERSION_LOWER}.dylib)
 else()
-  set(IGN_LIBRARY_NAME lib${PROJECT_NAME_LOWER}.so)
+  set(IGN_LIBRARY_NAME lib${PROJECT_NAME_WITH_VERSION_LOWER}.so)
 endif()
 configure_file(
   "cmdmsgs.rb.in"

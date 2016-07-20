@@ -2,11 +2,11 @@
 #
 # For finding and loading @PKG_NAME@ from your project, type:
 #
-# find_package(@PROJECT_NAME_LOWER@)
+# find_package(@PROJECT_NAME_WITH_VERSION_LOWER@)
 #
 # It defines the following variables:
 #
-#  @PROJECT_NAME_LOWER@_FOUND       - System has @PKG_NAME@.
+#  @PROJECT_NAME_WITH_VERSION_LOWER@_FOUND       - System has @PKG_NAME@.
 #  @PKG_NAME@_INCLUDE_DIRS - include directories for @PKG_NAME@ and its dependencies.
 #  @PKG_NAME@_LIBRARY_DIRS - Paths in which the linker should search for libraries.
 #  @PKG_NAME@_LIBRARIES    - Libraries to link against.
