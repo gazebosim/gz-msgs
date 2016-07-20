@@ -3,8 +3,8 @@ option java_package = "com.ignition.msgs";
 option java_outer_classname = "ModelVProtos";
 
 /// \ingroup ignition.msgs
-/// \interface Model_V 
-/// \brief Information about all entities in a world
+/// \interface Model_V
+/// \brief An array of models.
 
 import "ignition/msgs/model.proto";
 

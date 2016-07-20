@@ -1,0 +1,15 @@
+package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "PluginVProtos";
+
+/// \ingroup ignition.msgs
+/// \interface Plugin_V
+/// \brief An array of plugins.
+
+import "ignition/msgs/plugin.proto";
+
+message Plugin_V
+{
+  /// \brief Plgin messages.
+  repeated Plugin plugins  = 1;
+}

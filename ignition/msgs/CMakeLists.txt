@@ -85,6 +85,7 @@ physics.proto
 pid.proto
 planegeom.proto
 plugin.proto
+plugin_v.proto
 pointcloud.proto
 polylinegeom.proto
 pose_animation.proto
