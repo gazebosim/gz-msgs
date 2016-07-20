@@ -10,6 +10,6 @@ import "ignition/msgs/plugin.proto";
 
 message Plugin_V
 {
-  /// \brief Plgin messages.
+  /// \brief Plugin messages.
   repeated Plugin plugins  = 1;
 }
