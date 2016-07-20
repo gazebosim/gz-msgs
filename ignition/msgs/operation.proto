@@ -3,6 +3,7 @@ option java_package = "com.ignition.msgs";
 option java_outer_classname = "OperationProtos";
 
 import "ignition/msgs/entity_factory.proto";
+import "ignition/msgs/op_delete.proto";
 
 /// \ingroup ignition.msgs
 /// \interface Operation
@@ -25,13 +26,10 @@ message Operation
   enum Type
   {
     /// \brief Deleting an entity.
-    DELETE_ENTITY = 1;
+    DELETE = 1;
 
     /// \brief Inserting an entity.
-    INSERT_ENTITY = 2;
-
-    /// \brief Inserting a light.
-    INSERT_LIGHT = 3;
+    INSERT = 2;
   }
 
   /// \brief Type of operation.
@@ -46,10 +44,12 @@ message Operation
   /// \brief Optional message about operation.
   optional string msg = 4;
 
+  /// \todo Use protobuf oneof feature when we support protobuf 2.6
+
   /// \brief Entity URI in string format, for delete operations for example.
-  optional string uri = 5;
+  optional OpDelete op_delete = 5;
 
   /// \brief Entity factory message, for insert operations.
-  optional EntityFactory factory = 6;
+  optional EntityFactory op_insert = 6;
 }
 

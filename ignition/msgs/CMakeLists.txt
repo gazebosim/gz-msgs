@@ -77,6 +77,7 @@ meshgeom.proto
 model_configuration.proto
 model.proto
 model_v.proto
+op_delete.proto
 operation.proto
 packet.proto
 physics.proto
@@ -126,6 +127,7 @@ test.proto
 time.proto
 topic_info.proto
 track_visual.proto
+types.proto
 uint32.proto
 uint32_v.proto
 uint64.proto

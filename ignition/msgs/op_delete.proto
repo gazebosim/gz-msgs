@@ -1,0 +1,16 @@
+package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "OpDeleteProtos";
+
+import "ignition/msgs/types.proto";
+
+/// \ingroup ignition.msgs
+/// \interface Operation
+/// \brief Deletion operation.
+
+message OpDelete
+{
+  /// \brief Entity URI in string format.
+  required string uri = 1;
+}
+

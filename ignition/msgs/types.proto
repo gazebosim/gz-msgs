@@ -1,0 +1,33 @@
+package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "TypesProtos";
+
+/// \ingroup ignition.msgs
+/// \interface Types
+/// \brief
+
+message Types
+{
+  /// \brief Types of operations.
+  enum Entity
+  {
+    /// \brief
+    NONE = 0;
+
+    /// \brief
+    MODEL = 1;
+
+    /// \brief
+    LIGHT = 2;
+
+    /// \brief
+    LINK = 3;
+
+    /// \brief
+    COLLISION = 4;
+
+    /// \brief
+    VISUAL = 5;
+  }
+}
+
