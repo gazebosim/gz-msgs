@@ -111,7 +111,7 @@ class Cmd
     end
 
     # Read the library version.
-    Importer.extern 'char* ignitionMSgsVersion()'
+    Importer.extern 'char* ignitionMsgsVersion()'
     begin
       plugin_version = Importer.ignitionMsgsVersion.to_s
     rescue DLError

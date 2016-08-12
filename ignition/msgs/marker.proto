@@ -71,7 +71,7 @@ message Marker
   /// Relevant Action: ADD_MODIFY
   ///
   /// Relevant Type: all
-  optional string layer      = 4[default="default"];
+  optional int32 layer      = 4[default=0];
 
   /// \brief The type of geometry.
   ///
