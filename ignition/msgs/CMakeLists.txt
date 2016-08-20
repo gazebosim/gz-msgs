@@ -86,6 +86,8 @@ pid.proto
 planegeom.proto
 plugin.proto
 plugin_v.proto
+sensor_v.proto
+visual_v.proto
 pointcloud.proto
 polylinegeom.proto
 pose_animation.proto
