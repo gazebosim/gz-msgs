@@ -4,7 +4,7 @@ option java_outer_classname = "VisualVProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Visual_V
-/// \brief An array of visual.
+/// \brief An array of visuals.
 
 import "ignition/msgs/visual.proto";
 
