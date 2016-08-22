@@ -1,0 +1,15 @@
+package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "VisualVProtos";
+
+/// \ingroup ignition.msgs
+/// \interface Visual_V
+/// \brief An array of visual.
+
+import "ignition/msgs/visual.proto";
+
+message Visual_V
+{
+  /// \brief Visual messages.
+  repeated Visual visuals  = 1;
+}
