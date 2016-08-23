@@ -112,6 +112,7 @@ scene.proto
 selection.proto
 sensor_noise.proto
 sensor.proto
+sensor_v.proto
 server_control.proto
 shadows.proto
 sim_event.proto
@@ -139,6 +140,7 @@ user_cmd_stats.proto
 vector2d.proto
 vector3d.proto
 visual.proto
+visual_v.proto
 web_request.proto
 wind.proto
 wireless_node.proto
