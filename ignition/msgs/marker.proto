@@ -29,6 +29,17 @@ message Marker
     TRIANGLE_STRIP = 10;
   }
 
+  /// \brief Visilibity defines what cameras render the marker.
+  enum Visibility
+  {
+    /// \brief Only cameras for user interaction render the visual. Other
+    /// cameras, such as camera sensors, will not render the visual
+    GUI = 0;
+
+    /// \brief All cameras render the visual.
+    ALL = 1;
+  }
+
   /// \brief How to interpret the data. 
   enum Action
   {
@@ -130,4 +141,11 @@ message Marker
   ///
   /// Relevant Type: all
   optional string parent     = 12;
+
+  /// \brief Defines what cameras render the marker.
+  ///
+  /// Relevant Action: ADD_MODIFY
+  ///
+  /// Relevant Type: all
+  optional Visibility visibility  = 13;
 }
