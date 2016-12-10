@@ -32,7 +32,7 @@ class Generator : public CodeGenerator
 {
   /// \brief Constructor
   /// \param[in] _name Name value (currently unused)
-  public: Generator(const std::string &_name);
+  public: explicit Generator(const std::string &_name);
 
   /// \brief Destructor
   public: virtual ~Generator();
