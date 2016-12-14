@@ -37,4 +37,7 @@ message HeightmapGeom
 
   // The image filename
   optional string filename         = 10;
+
+  // Sample level
+  optional uint32 sampling        = 11;
 }
