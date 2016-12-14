@@ -1,6 +1,6 @@
 # Ignition Messages
 
-** Igntioin Message protobuf messages and functions for robot applications.**
+** Ignition Message protobuf messages and functions for robot applications.**
 
 Ignition Messages is a component in the ignition framework, a set
 of libraries designed to rapidly develop robot applications.
