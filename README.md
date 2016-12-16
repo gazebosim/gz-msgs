@@ -11,7 +11,7 @@ of libraries designed to rapidly develop robot applications.
 
 Install required dependencies as follows:
 
-    sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev
+    sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev libignition-math2-dev
 
 ## Installation
 
