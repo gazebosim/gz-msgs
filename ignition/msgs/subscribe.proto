@@ -6,11 +6,16 @@ option java_outer_classname = "SubscribeProtos";
 /// \interface Subscribe
 /// \brief A message for subscription data
 
+import "ignition/msgs/header.proto";
+
 message Subscribe
 {
-  optional string topic    = 1;
-  optional string host     = 2;
-  optional uint32 port     = 3;
-  optional string msg_type = 4;
-  optional bool latching   = 5 [default=false];
+  /// \brief Optional header data
+  optional Header header   = 1;
+
+  optional string topic    = 2;
+  optional string host     = 3;
+  optional uint32 port     = 4;
+  optional string msg_type = 5;
+  optional bool latching   = 6 [default=false];
 }

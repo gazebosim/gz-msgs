@@ -7,10 +7,14 @@ option java_outer_classname = "ClockProtos";
 /// \brief A message with clock information
 
 import "ignition/msgs/time.proto";
+import "ignition/msgs/header.proto";
 
 message Clock
 {
-  optional Time system = 1;
-  optional Time real   = 2;
-  optional Time sim    = 3;
+  /// \brief Optional header data
+  optional Header header = 1;
+
+  optional Time system = 2;
+  optional Time real   = 3;
+  optional Time sim    = 4;
 }

@@ -6,7 +6,12 @@ option java_outer_classname = "CameraCmdProtos";
 /// \interface CameraCmd
 /// \brief Message for camera command
 
+import "ignition/msgs/header.proto";
+
 message CameraCmd
 {
-  optional string follow_model   = 1;
+  /// \brief Optional header data
+  optional Header header         = 1;
+
+  optional string follow_model   = 2;
 }

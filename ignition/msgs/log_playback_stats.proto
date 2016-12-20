@@ -7,12 +7,16 @@ option java_outer_classname = "LogPlaybackStatisticsProtos";
 /// \brief A message with statistics about a log during playback.
 
 import "ignition/msgs/time.proto";
+import "ignition/msgs/header.proto";
 
 message LogPlaybackStatistics
 {
+  /// \brief Optional header data
+  optional Header header = 1;
+
   /// \brief Log start time
-  optional Time start_time = 1;
+  optional Time start_time = 2;
 
   /// \brief Log end time
-  optional Time end_time   = 2;
+  optional Time end_time   = 3;
 }

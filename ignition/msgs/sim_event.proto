@@ -2,25 +2,29 @@ package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "SimEventProtos";
 
-import "ignition/msgs/world_stats.proto";
-
 /// \ingroup ignition.msgs
 /// \interface SimEvent
 
+import "ignition/msgs/world_stats.proto";
+import "ignition/msgs/header.proto";
+
 message SimEvent
 {
+  /// \brief Optional header data
+  optional Header header                    = 1;
+
   /// \brief ID of this event message
-  optional uint32 id                        = 1;
+  optional uint32 id                        = 2;
 
   /// \brief Type of sim event
-  optional string type                      = 2;
+  optional string type                      = 3;
 
   /// \brief Name of sim event
-  optional string name                      = 3;
+  optional string name                      = 4;
 
   /// \brief Statistics of the world
-  optional WorldStatistics world_statistics = 4;
+  optional WorldStatistics world_statistics = 5;
 
   /// \brief Data describing the sim event
-  optional string data                      = 5;
+  optional string data                      = 6;
 }

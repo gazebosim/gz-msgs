@@ -6,6 +6,7 @@ option java_outer_classname = "GeometryProtos";
 /// \interface Geometry
 /// \brief Information about a geometry element
 
+import "ignition/msgs/header.proto";
 import "ignition/msgs/boxgeom.proto";
 import "ignition/msgs/cylindergeom.proto";
 import "ignition/msgs/spheregeom.proto";
@@ -33,15 +34,18 @@ message Geometry
     EMPTY        = 11;
   }
 
-  optional Type type                = 1;
-  optional BoxGeom box              = 2;
-  optional CylinderGeom cylinder    = 3;
-  optional PlaneGeom plane          = 4;
-  optional SphereGeom sphere        = 5;
-  optional ImageGeom image          = 6;
-  optional HeightmapGeom heightmap  = 7;
-  optional MeshGeom      mesh       = 8;
+  /// \brief Optional header data
+  optional Header header             = 1;
 
-  repeated Vector3d points          = 9;
-  repeated Polyline polyline        = 10;
+  optional Type type                = 2;
+  optional BoxGeom box              = 3;
+  optional CylinderGeom cylinder    = 4;
+  optional PlaneGeom plane          = 5;
+  optional SphereGeom sphere        = 6;
+  optional ImageGeom image          = 7;
+  optional HeightmapGeom heightmap  = 8;
+  optional MeshGeom      mesh       = 9;
+
+  repeated Vector3d points          = 10;
+  repeated Polyline polyline        = 11;
 }

@@ -6,6 +6,8 @@ option java_outer_classname = "Protos";
 /// \interface SensorNoise
 /// \brief Information about a sensor noise
 
+import "ignition/msgs/header.proto";
+
 message SensorNoise
 {
   /// \brief Noise types
@@ -21,26 +23,29 @@ message SensorNoise
     GAUSSIAN_QUANTIZED = 3;
   }
 
+  /// \brief Optional header data
+  optional Header header      = 1;
+
   /// \brief The type of noise
-  optional Type type          = 1;
+  optional Type type          = 2;
 
   /// \brief Noise mean
   /// Used by GAUSSIAN, and GAUSSIAN_QUANTIZED
-  optional double mean        = 2;
+  optional double mean        = 3;
 
   /// \brief Noise standard deviation
   /// Used by GAUSSIAN, and GAUSSIAN_QUANTIZED
-  optional double stddev      = 3;
+  optional double stddev      = 4;
 
   /// \brief Noise mean bias
   /// Used by GAUSSIAN, and GAUSSIAN_QUANTIZED
-  optional double bias_mean   = 4;
+  optional double bias_mean   = 5;
 
   /// \brief Noise standard deviation bias
   /// Used by GAUSSIAN, and GAUSSIAN_QUANTIZED
-  optional double bias_stddev = 5;
+  optional double bias_stddev = 6;
 
   /// \brief Noise  precision.
   /// Used by GAUSSIAN_QUANTIZED
-  optional double precision   = 6;
+  optional double precision   = 7;
 }

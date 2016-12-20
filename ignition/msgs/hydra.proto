@@ -7,6 +7,7 @@ option java_outer_classname = "HydraProtos";
 /// \brief Message that contains information about a Hydra Razer controller
 
 import "ignition/msgs/pose.proto";
+import "ignition/msgs/header.proto";
 
 message Hydra
 {
@@ -46,9 +47,12 @@ message Hydra
     optional double trigger     = 11;
   }
 
+  /// \brief Optional header data
+  optional Header header = 1;
+
   // Info for the right paddle
-  optional Paddle right = 1;
+  optional Paddle right = 2;
 
   // Info for the left paddle
-  optional Paddle left  = 2;
+  optional Paddle left  = 3;
 }

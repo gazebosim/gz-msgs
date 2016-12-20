@@ -6,9 +6,14 @@ option java_outer_classname = "PropagationParticleProtos";
 /// \interface PropagationParticle
 /// \brief Wireless strength signal in a point
 
+import "ignition/msgs/header.proto";
+
 message PropagationParticle
 {
-  optional double x = 1;
-  optional double y = 2;
-  optional double signal_level = 3;
+  /// \brief Optional header data
+  optional Header header = 1;
+
+  optional double x = 2;
+  optional double y = 3;
+  optional double signal_level = 4;
 }

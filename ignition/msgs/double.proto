@@ -6,8 +6,13 @@ option java_outer_classname = "DoubleProtos";
 /// \interface Double
 /// \brief A message for double data
 
+import "ignition/msgs/header.proto";
+
 message Double
 {
+  /// \brief Optional header data
+  optional Header header = 1;
+
   /// \brief Double data
-  optional double data = 1 [default = 0.0];
+  optional double data = 2 [default = 0.0];
 }

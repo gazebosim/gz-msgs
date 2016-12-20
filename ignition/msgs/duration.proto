@@ -6,11 +6,16 @@ option java_outer_classname = "DurationProtos";
 /// \interface Duration
 /// \brief A message for duration data
 
+import "ignition/msgs/header.proto";
+
 message Duration
 {
+  /// \brief Optional header data
+  optional Header header = 1;
+
   /// \brief Seconds
-  optional int64 sec = 1 [default = 0];
+  optional int64 sec = 2 [default = 0];
 
   /// \brief Nanoseconds
-  optional int32 nsec = 2 [default = 0];
+  optional int32 nsec = 3 [default = 0];
 }

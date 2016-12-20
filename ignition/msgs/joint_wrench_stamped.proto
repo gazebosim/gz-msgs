@@ -6,13 +6,16 @@ option java_outer_classname = "Protos";
 /// \interface ForceTorque
 /// \brief ForceTorque from constraint solving
 
-
+import "ignition/msgs/header.proto";
 import "ignition/msgs/joint_wrench.proto";
 import "ignition/msgs/time.proto";
 
 message ForceTorque
 {
-  repeated JointWrench wrench = 1;
-  optional Time time          = 2;
+  /// \brief Optional header data
+  optional Header header      = 1;
+
+  repeated JointWrench wrench = 2;
+  optional Time time          = 3;
 }
 

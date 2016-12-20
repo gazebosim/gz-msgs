@@ -7,14 +7,19 @@ option java_outer_classname = "RestPostProtos";
 /// \brief A message to POST data on a REST service. The route (ex /news) and
 /// the content of the message in JSON format are specified.
 
+import "ignition/msgs/header.proto";
+
 message RestPost
 {
+  /// \brief Optional header data
+  optional Header header = 1;
+
   /// \brief ID of this request message
-  optional uint32 id    = 1;
+  optional uint32 id    = 2;
 
   /// \brief Route to post to.
-  optional string route = 2;
+  optional string route = 3;
 
   /// \brief Data to post in JSON format
-  optional string json  = 3;
+  optional string json  = 4;
 }

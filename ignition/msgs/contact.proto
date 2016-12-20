@@ -9,17 +9,21 @@ option java_outer_classname = "ContactProtos";
 import "ignition/msgs/vector3d.proto";
 import "ignition/msgs/time.proto";
 import "ignition/msgs/joint_wrench.proto";
+import "ignition/msgs/header.proto";
 
 message Contact
 {
-  optional string collision1 = 1 [default = ""];
-  optional string collision2 = 2 [default = ""];
+  /// \brief Optional header data
+  optional Header header     = 1;
 
-  repeated Vector3d position  = 3;
-  repeated Vector3d normal    = 4;
-  repeated double depth       = 5;
-  repeated JointWrench wrench = 6;
+  optional string collision1 = 2 [default = ""];
+  optional string collision2 = 3 [default = ""];
 
-  optional Time time         = 7;
-  optional string world      = 8 [default = "default"];
+  repeated Vector3d position  = 4;
+  repeated Vector3d normal    = 5;
+  repeated double depth       = 6;
+  repeated JointWrench wrench = 7;
+
+  optional Time time         = 8;
+  optional string world      = 9 [default = "default"];
 }

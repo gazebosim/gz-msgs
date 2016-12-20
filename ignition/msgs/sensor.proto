@@ -6,6 +6,7 @@ option java_outer_classname = "SEnsorProtos";
 /// \interface Sensor 
 /// \brief Information about a sensor element
 
+import "ignition/msgs/header.proto";
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/camerasensor.proto";
 import "ignition/msgs/raysensor.proto";
@@ -16,54 +17,57 @@ import "ignition/msgs/imu_sensor.proto";
 
 message Sensor
 {
+  /// \brief Optional header data
+  optional Header header          = 1;
+
   /// \brief Name of the sensor
-  optional string name            = 1;
+  optional string name            = 2;
 
   /// \brief Id of the sensor
-  optional uint32 id              = 2;
+  optional uint32 id              = 3;
 
   /// \brief Name of the parent, usually a link or joint.
-  optional string parent          = 3;
+  optional string parent          = 4;
 
   /// \brief Id of the parent, usually a link or joint.
-  optional uint32 parent_id       = 4;
+  optional uint32 parent_id       = 5;
 
   /// \brief Sensor type
-  optional string type            = 5;
+  optional string type            = 6;
 
   /// \brief True indicates that the sensor should always
   /// produce data, instead of producing data only when
   /// a consumer is connected to the data topic
-  optional bool always_on         = 6;
+  optional bool always_on         = 7;
 
   /// \brief Refresh rate
-  optional double update_rate     = 7;
+  optional double update_rate     = 8;
 
   /// \brief Sensor pose
-  optional Pose pose              = 8;
+  optional Pose pose              = 9;
 
   /// \brief Description of a camera sensor
-  optional CameraSensor camera    = 9;
+  optional CameraSensor camera    = 10;
 
   /// \brief Description of a ray (laser) sensor
-  optional RaySensor ray          = 10;
+  optional RaySensor ray          = 11;
 
   /// \brief Description of a contact sensor
-  optional ContactSensor contact  = 11;
+  optional ContactSensor contact  = 12;
 
   /// \brief True value indicates that sensor data should be
   /// visualized in the GUI
-  optional bool visualize         = 12;
+  optional bool visualize         = 13;
 
   /// \brief Topic on which sensor data is published
-  optional string topic           = 13;
+  optional string topic           = 14;
 
   /// \brief Description of a logical camera sensor
-  optional LogicalCameraSensor logical_camera = 14;
+  optional LogicalCameraSensor logical_camera = 15;
 
   /// \brief Description of a gps sensor
-  optional GPSSensor gps          = 15;
+  optional GPSSensor gps          = 16;
 
   /// \brief Description of an IMU sensor
-  optional IMUSensor imu          = 16;
+  optional IMUSensor imu          = 17;
 }

@@ -8,10 +8,14 @@ option java_outer_classname = "SonarStampedProtos";
 
 import "ignition/msgs/time.proto";
 import "ignition/msgs/sonar.proto";
+import "ignition/msgs/header.proto";
 
 message SonarStamped
 {
+  /// \brief Optional header data
+  optional Header header   = 1;
+
   // Time when the data was captured
-  optional Time time       = 1;
-  optional Sonar sonar     = 2;
+  optional Time time       = 2;
+  optional Sonar sonar     = 3;
 }

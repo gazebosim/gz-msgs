@@ -14,24 +14,28 @@ import "ignition/msgs/projector.proto";
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/battery.proto";
 import "ignition/msgs/density.proto";
+import "ignition/msgs/header.proto";
 
 message Link
 {
-  optional uint32 id            = 1;
-  optional string name          = 2;
-  optional bool self_collide    = 3;
-  optional bool gravity         = 4;
-  optional bool kinematic       = 5;
-  optional bool enabled         = 6;
-  optional Density density      = 7;
-  optional Inertial inertial    = 8;
-  optional Pose pose            = 9;
-  repeated Visual visual        = 10;
-  repeated Collision collision  = 11;
-  repeated Sensor sensor        = 12;
-  repeated Projector projector  = 13;
-  optional bool canonical       = 14;
+  /// \brief Optional header data
+  optional Header header        = 1;
+
+  optional uint32 id            = 2;
+  optional string name          = 3;
+  optional bool self_collide    = 4;
+  optional bool gravity         = 5;
+  optional bool kinematic       = 6;
+  optional bool enabled         = 7;
+  optional Density density      = 8;
+  optional Inertial inertial    = 9;
+  optional Pose pose            = 10;
+  repeated Visual visual        = 11;
+  repeated Collision collision  = 12;
+  repeated Sensor sensor        = 13;
+  repeated Projector projector  = 14;
+  optional bool canonical       = 15;
 
   /// \brief An optional vector of batteries that are attached to this link.
-  repeated Battery battery      = 15;
+  repeated Battery battery      = 16;
 }

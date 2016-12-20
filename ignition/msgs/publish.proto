@@ -6,10 +6,15 @@ option java_outer_classname = "PublishProtos";
 /// \interface Publish
 /// \brief Message that contains information about a publisher of data
 
+import "ignition/msgs/header.proto";
+
 message Publish
 {
-  optional string topic    = 1;
-  optional string msg_type = 2;
-  optional string host     = 3;
-  optional uint32 port     = 4;
+  /// \brief Optional header data
+  optional Header header   = 1;
+
+  optional string topic    = 2;
+  optional string msg_type = 3;
+  optional string host     = 4;
+  optional uint32 port     = 5;
 }

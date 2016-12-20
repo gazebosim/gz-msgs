@@ -8,14 +8,18 @@ option java_outer_classname = "GUICameraProtos";
 
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/track_visual.proto";
+import "ignition/msgs/header.proto";
 
 message GUICamera
 {
-  optional string name                  = 1;
-  optional string view_controller       = 2;
-  optional Pose pose                    = 3;
-  optional TrackVisual track            = 4;
+  /// \brief Optional header data
+  optional Header header                = 1;
+
+  optional string name                  = 2;
+  optional string view_controller       = 3;
+  optional Pose pose                    = 4;
+  optional TrackVisual track            = 5;
 
   /// \brief Type of projection: "perspective" or "orthographic".
-  optional string projection_type       = 5;
+  optional string projection_type       = 6;
 }

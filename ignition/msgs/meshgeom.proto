@@ -7,11 +7,15 @@ option java_outer_classname = "MeshGeomProtos";
 /// \brief Message for a mesh geometry
 
 import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/header.proto";
 
 message MeshGeom
 {
-  optional string filename = 1;
-  optional Vector3d scale  = 2;
-  optional string submesh  = 3;
-  optional bool center_submesh = 4;
+  /// \brief Optional header data
+  optional Header header   = 1;
+
+  optional string filename = 2;
+  optional Vector3d scale  = 3;
+  optional string submesh  = 4;
+  optional bool center_submesh = 5;
 }

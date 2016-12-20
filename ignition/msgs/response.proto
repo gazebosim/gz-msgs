@@ -6,11 +6,16 @@ option java_outer_classname = "ResponseProtos";
 /// \interface Response 
 /// \brief Message that encapsulates a respons message with a type description
 
+import "ignition/msgs/header.proto";
+
 message Response
 {
-  optional int32 id              = 1;
-  optional string request        = 2;
-  optional string response       = 3;
-  optional string type           = 4;
-  optional bytes serialized_data = 5;
+  /// \brief Optional header data
+  optional Header header         = 1;
+
+  optional int32 id              = 2;
+  optional string request        = 3;
+  optional string response       = 4;
+  optional string type           = 5;
+  optional bytes serialized_data = 6;
 }

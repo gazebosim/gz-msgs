@@ -7,15 +7,19 @@ option java_outer_classname = "EmptyProtos";
 /// \brief A generic message holding a name-value pair. It can be nested.
 
 import "ignition/msgs/any.proto";
+import "ignition/msgs/header.proto";
 
 message Param
 {
+  /// \brief Optional header data
+  optional Header header   = 1;
+
   /// \brief Param name.
-  required string name     = 1;
+  required string name     = 2;
 
   /// \brief Param value.
-  optional Any    value    = 2;
+  optional Any    value    = 3;
 
   /// \brief Params nested within this one.
-  repeated Param  children = 3;
+  repeated Param  children = 4;
 }

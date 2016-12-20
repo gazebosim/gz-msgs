@@ -6,8 +6,13 @@ option java_outer_classname = "Int64VProtos";
 /// \interface Int64_V
 /// \brief A message for a vector of int data
 
+import "ignition/msgs/header.proto";
+
 message Int64_V
 {
+  /// \brief Optional header data
+  optional Header header = 1;
+
   /// \brief Vector of int data
-  repeated int64 data = 1;
+  repeated int64 data = 2;
 }
