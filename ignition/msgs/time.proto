@@ -9,8 +9,8 @@ option java_outer_classname = "TimeProtos";
 message Time
 {
   /// \brief Seconds
-  optional int64 sec = 2;
+  optional int64 sec = 1;
 
   /// \brief Nanoseconds
-  optional int32 nsec = 3;
+  optional int32 nsec = 2;
 }
