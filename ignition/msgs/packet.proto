@@ -3,7 +3,7 @@ option java_package = "com.ignition.msgs";
 option java_outer_classname = "PacketProtos";
 
 /// \ingroup ignition.msgs
-/// \interface StringMsg_V
+/// \interface Packet
 /// \brief A message for a vector of string data
 
 import "ignition/msgs/altimeter.proto";
