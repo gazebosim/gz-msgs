@@ -6,12 +6,17 @@ option java_outer_classname = "UndoRedoProtos";
 /// \interface UndoRedo
 /// \brief A message requesting to undo or redo user commands.
 
+import "ignition/msgs/header.proto";
+
 message UndoRedo
 {
+  /// \brief Optional header data
+  optional Header header = 1;
+
   /// \brief True to undo, false to redo.
-  optional bool undo = 1;
+  optional bool undo = 2;
 
   /// \brief Unique id of the user command. If this is provided, all commands
   /// leading to that will be undone / redone.
-  optional uint32 id = 2;
+  optional uint32 id = 3;
 }

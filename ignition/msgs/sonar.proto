@@ -8,16 +8,20 @@ option java_outer_classname = "SonarProtos";
 
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/header.proto";
 
 message Sonar
 {
-  optional string frame     = 1;
-  optional Pose world_pose  = 2;
-  optional double range_min = 3;
-  optional double range_max = 4;
-  optional double radius    = 5;
-  optional double range     = 6;
+  /// \brief Optional header data
+  optional Header header    = 1;
+
+  optional string frame     = 2;
+  optional Pose world_pose  = 3;
+  optional double range_min = 4;
+  optional double range_max = 5;
+  optional double radius    = 6;
+  optional double range     = 7;
 
   /// Location of the contact in the world frame.
-  optional Vector3d contact  = 7;
+  optional Vector3d contact  = 8;
 }

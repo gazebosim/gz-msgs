@@ -7,9 +7,13 @@ option java_outer_classname = "MarkerVProtos";
 /// \brief A list of marker visuals
 
 import "ignition/msgs/marker.proto";
+import "ignition/msgs/header.proto";
 
 message Marker_V
 {
+  /// \brief Optional header data
+  optional Header header = 1;
+
   /// \brief List of marker messages.
-  repeated Marker marker = 1;
+  repeated Marker marker = 2;
 }

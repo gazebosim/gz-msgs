@@ -6,9 +6,14 @@ option java_outer_classname = "PluginProtos";
 /// \interface Plugin
 /// \brief A message containing visual information for gazebo::Plugin
 
+import "ignition/msgs/header.proto";
+
 message Plugin
 {
-  optional string name         = 1;
-  optional string filename     = 2;
-  optional string innerxml     = 3 [default = ""];
+  /// \brief Optional header data
+  optional Header header       = 1;
+
+  optional string name         = 2;
+  optional string filename     = 3;
+  optional string innerxml     = 4 [default = ""];
 }

@@ -7,15 +7,19 @@ option java_outer_classname = "InertialProtos";
 /// \brief Information about inertia
 
 import "ignition/msgs/pose.proto";
+import "ignition/msgs/header.proto";
 
 message Inertial
 {
-  optional double mass             = 1;
-  optional Pose pose               = 2;
-  optional double ixx              = 3;
-  optional double ixy              = 4;
-  optional double ixz              = 5;
-  optional double iyy              = 6;
-  optional double iyz              = 7;
-  optional double izz              = 8;
+  /// \brief Optional header data
+  optional Header header           = 1;
+
+  optional double mass             = 2;
+  optional Pose pose               = 3;
+  optional double ixx              = 4;
+  optional double ixy              = 5;
+  optional double ixz              = 6;
+  optional double iyy              = 7;
+  optional double iyz              = 8;
+  optional double izz              = 9;
 }

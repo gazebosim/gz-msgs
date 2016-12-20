@@ -6,9 +6,13 @@ option java_outer_classname = "ColorProtos";
 /// \interface Color 
 /// \brief Color message
 
+import "ignition/msgs/header.proto";
 
 message Color
 {
+  /// \brief Optional header data
+  optional Header header = 1;
+
   optional float r = 2 [default = 0.0];
   optional float g = 3 [default = 0.0];
   optional float b = 4 [default = 0.0];

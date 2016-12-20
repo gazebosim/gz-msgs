@@ -7,6 +7,7 @@ option java_outer_classname = "LogicalCameraImageProtos";
 /// \brief Information about models seen by a LogicalCameraSensor
 
 import "ignition/msgs/pose.proto";
+import "ignition/msgs/header.proto";
 
 message LogicalCameraImage
 {
@@ -22,9 +23,12 @@ message LogicalCameraImage
     optional Pose pose   = 2;
   }
 
+  /// \brief Optional header data
+  optional Header header = 1;
+
   /// \brief Pose of the logical camera.
-  optional Pose pose   = 1;
+  optional Pose pose   = 2;
 
   /// \brief All the models seen by the LogicalCamera
-  repeated Model model = 2;
+  repeated Model model = 3;
 }

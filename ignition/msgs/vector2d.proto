@@ -6,8 +6,13 @@ option java_outer_classname = "Vector2dProtos";
 /// \interface Vector2d 
 /// \brief Message for a vector2 double
 
+import "ignition/msgs/header.proto";
+
 message Vector2d
 {
-  optional double x = 1;
-  optional double y = 2;
+  /// \brief Optional header data
+  optional Header header = 1;
+
+  optional double x = 2;
+  optional double y = 3;
 }

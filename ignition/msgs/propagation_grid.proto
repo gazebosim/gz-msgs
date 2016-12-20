@@ -7,8 +7,12 @@ option java_outer_classname = "PropagationGridProtos";
 /// \brief Wireless propagation grid
 
 import "ignition/msgs/propagation_particle.proto";
+import "ignition/msgs/header.proto";
 
 message PropagationGrid
 {
-  repeated PropagationParticle particle = 1;
+  /// \brief Optional header data
+  optional Header header                = 1;
+
+  repeated PropagationParticle particle = 2;
 }

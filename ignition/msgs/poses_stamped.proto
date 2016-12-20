@@ -8,9 +8,13 @@ option java_outer_classname = "PosesStampedProtos";
 
 import "ignition/msgs/time.proto";
 import "ignition/msgs/pose.proto";
+import "ignition/msgs/header.proto";
 
 message PosesStamped
 {
-  optional Time time = 1;
-  repeated Pose pose = 2;
+  /// \brief Optional header data
+  optional Header header = 1;
+
+  optional Time time = 2;
+  repeated Pose pose = 3;
 }

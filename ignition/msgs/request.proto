@@ -6,10 +6,15 @@ option java_outer_classname = "RequestProtos";
 /// \interface Request
 /// \brief A message containing a string request
 
+import "ignition/msgs/header.proto";
+
 message Request
 {
-  optional int32 id         = 1;
-  optional string request   = 2;
-  optional string data      = 3;
-  optional double dbl_data  = 4;
+  /// \brief Optional header data
+  optional Header header    = 1;
+
+  optional int32 id         = 2;
+  optional string request   = 3;
+  optional string data      = 4;
+  optional double dbl_data  = 5;
 }

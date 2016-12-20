@@ -8,11 +8,15 @@ option java_outer_classname = "PoseProtos";
 
 import "ignition/msgs/vector3d.proto";
 import "ignition/msgs/quaternion.proto";
+import "ignition/msgs/header.proto";
 
 message Pose
 {
-  optional string name            = 1;
-  optional uint32 id              = 2;
-  optional Vector3d position      = 3;
-  optional Quaternion orientation = 4;
+  /// \brief Optional header data
+  optional Header header          = 1;
+
+  optional string name            = 2;
+  optional uint32 id              = 3;
+  optional Vector3d position      = 4;
+  optional Quaternion orientation = 5;
 }

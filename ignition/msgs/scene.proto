@@ -12,21 +12,25 @@ import "ignition/msgs/sky.proto";
 import "ignition/msgs/light.proto";
 import "ignition/msgs/joint.proto";
 import "ignition/msgs/model.proto";
+import "ignition/msgs/header.proto";
 
 message Scene
 {
-  optional string name         = 1;
-  optional Color ambient       = 2;
-  optional Color background    = 3;
-  optional Sky sky             = 4;
-  optional bool shadows        = 5 [default = true];
-  optional Fog fog             = 6;
-  optional bool grid           = 7;
+  /// \brief Optional header data
+  optional Header header       = 1;
 
-  repeated Model model         = 8;
-  repeated Light light         = 9;
-  repeated Joint joint         = 10;
+  optional string name         = 2;
+  optional Color ambient       = 3;
+  optional Color background    = 4;
+  optional Sky sky             = 5;
+  optional bool shadows        = 6 [default = true];
+  optional Fog fog             = 7;
+  optional bool grid           = 8;
+
+  repeated Model model         = 9;
+  repeated Light light         = 10;
+  repeated Joint joint         = 11;
 
   /// \brief Show/hide world origin indicator.
-  optional bool origin_visual  = 11;
+  optional bool origin_visual  = 12;
 }

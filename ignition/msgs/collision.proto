@@ -10,17 +10,21 @@ import "ignition/msgs/pose.proto";
 import "ignition/msgs/geometry.proto";
 import "ignition/msgs/surface.proto";
 import "ignition/msgs/visual.proto";
+import "ignition/msgs/header.proto";
 
 message Collision
 {
-  optional uint32 id            = 1 [default = 0];
-  optional string name          = 2 [default = ""];
-  optional double laser_retro   = 3;
-  optional double max_contacts  = 4;
-  optional Pose pose            = 5;
-  optional Geometry geometry    = 6;
-  optional Surface surface      = 7;
+  /// \brief Optional header data
+  optional Header header        = 1;
 
-  repeated Visual visual        = 8;
+  optional uint32 id            = 2 [default = 0];
+  optional string name          = 3 [default = ""];
+  optional double laser_retro   = 4;
+  optional double max_contacts  = 5;
+  optional Pose pose            = 6;
+  optional Geometry geometry    = 7;
+  optional Surface surface      = 8;
+
+  repeated Visual visual        = 9;
 }
 

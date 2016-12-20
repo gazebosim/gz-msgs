@@ -10,6 +10,8 @@ import "ignition/msgs/header.proto";
 
 message StringMsg_V
 {
+  /// \brief Optional header data
   optional Header header = 1;
+
   repeated string data = 2;
 }

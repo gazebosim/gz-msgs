@@ -6,9 +6,13 @@ option java_outer_classname = "BoxGeomProtos";
 /// \interface BoxGeom 
 /// \brief Information about a box geometry
 
+import "ignition/msgs/header.proto";
 import "ignition/msgs/vector3d.proto";
 
 message BoxGeom
 {
-  optional Vector3d size  = 1;
+  /// \brief Optional header data
+  optional Header header  = 1;
+
+  optional Vector3d size  = 2;
 }

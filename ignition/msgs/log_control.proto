@@ -6,11 +6,16 @@ option java_outer_classname = "LogControlProtos";
 /// \interface LogControl
 /// \brief A message that allows for control of logging functions
 
+import "ignition/msgs/header.proto";
+
 message LogControl
 {
-  optional bool start           = 1;
-  optional bool stop            = 2;
-  optional bool paused          = 3;
-  optional string base_path     = 4;
-  optional string encoding      = 5;
+  /// \brief Optional header data
+  optional Header header        = 1;
+
+  optional bool start           = 2;
+  optional bool stop            = 3;
+  optional bool paused          = 4;
+  optional string base_path     = 5;
+  optional string encoding      = 6;
 }

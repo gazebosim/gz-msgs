@@ -8,10 +8,14 @@ option java_outer_classname = "PlaneGeomProtos";
 
 import "ignition/msgs/vector3d.proto";
 import "ignition/msgs/vector2d.proto";
+import "ignition/msgs/header.proto";
 
 message PlaneGeom
 {
-  optional Vector3d normal  = 1;
-  optional Vector2d size    = 2;
-  optional double d         = 3 [default = 0];
+  /// \brief Optional header data
+  optional Header header    = 1;
+
+  optional Vector3d normal  = 2;
+  optional Vector2d size    = 3;
+  optional double d         = 4 [default = 0];
 }

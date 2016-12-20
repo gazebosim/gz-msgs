@@ -7,7 +7,8 @@ option java_outer_classname = "FogProtos";
 /// \brief Message for fog data
 
 import "ignition/msgs/color.proto";
-
+import "ignition/msgs/header.proto";
+ 
 message Fog
 {
   enum FogType
@@ -17,9 +18,13 @@ message Fog
     EXPONENTIAL  = 3;
     EXPONENTIAL2 = 4;
   }
-  optional FogType type = 1;
-  optional Color color = 2;
-  optional float density = 3;
-  optional float start = 4;
-  optional float end = 5;
+
+  /// \brief Optional header data
+  optional Header header = 1;
+
+  optional FogType type = 2;
+  optional Color color = 3;
+  optional float density = 4;
+  optional float start = 5;
+  optional float end = 6;
 }

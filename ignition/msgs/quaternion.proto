@@ -6,8 +6,13 @@ option java_outer_classname = "QuaternionProtos";
 /// \interface Quaternion
 /// \brief A message for a quaternion
 
+import "ignition/msgs/header.proto";
+
 message Quaternion
 {
+  /// \brief Optional header data
+  optional Header header = 1;
+
   optional double x = 2;
   optional double y = 3;
   optional double z = 4;

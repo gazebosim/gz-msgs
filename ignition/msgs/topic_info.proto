@@ -8,10 +8,14 @@ option java_outer_classname = "TopicInfoProtos";
 
 import "ignition/msgs/publish.proto";
 import "ignition/msgs/subscribe.proto";
+import "ignition/msgs/header.proto";
 
 message TopicInfo
 {
-  optional string msg_type       = 1;
-  repeated Publish publisher    = 2;
-  repeated Subscribe subscriber = 3;
+  /// \brief Optional header data
+  optional Header header        = 1;
+
+  optional string msg_type      = 2;
+  repeated Publish publisher    = 3;
+  repeated Subscribe subscriber = 4;
 }

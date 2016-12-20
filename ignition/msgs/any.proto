@@ -6,6 +6,7 @@ option java_outer_classname = "EmptyProtos";
 /// \interface Any
 /// \brief A message that is capable of containing a wide variety of data types.
 
+import "ignition/msgs/header.proto";
 import "ignition/msgs/color.proto";
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/quaternion.proto";
@@ -50,33 +51,36 @@ message Any
 
   /// \todo: Use protobuf oneof feature when we support protobuf 2.6
 
+  /// \brief Optional header data
+  optional Header header               = 1;
+
   /// \brief Type of value that is contained in this message.
-  required ValueType type              = 1 [default = NONE];
+  optional ValueType type              = 2 [default = NONE];
 
   /// \brief A double value
-  optional double double_value         = 2;
+  optional double double_value         = 3;
 
   /// \brief An int32 value
-  optional int32 int_value             = 3;
+  optional int32 int_value             = 4;
 
   /// \brief A string value
-  optional string string_value         = 4;
+  optional string string_value         = 5;
 
   /// \brief A boolean value
-  optional bool bool_value             = 5;
+  optional bool bool_value             = 6;
 
   /// \brief A Vector3d value
-  optional Vector3d vector3d_value     = 6;
+  optional Vector3d vector3d_value     = 7;
 
   /// \brief A Color value
-  optional Color color_value           = 7;
+  optional Color color_value           = 8;
 
   /// \brief A Pose value
-  optional Pose pose3d_value           = 8;
+  optional Pose pose3d_value           = 9;
 
   /// \brief A Quaternion value
-  optional Quaternion quaternion_value = 9;
+  optional Quaternion quaternion_value = 10;
 
   /// \brief A Time value
-  optional Time time_value             = 10;
+  optional Time time_value             = 11;
 }

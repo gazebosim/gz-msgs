@@ -6,10 +6,14 @@ option java_outer_classname = "VisualVProtos";
 /// \interface Visual_V
 /// \brief An array of visuals.
 
+import "ignition/msgs/header.proto";
 import "ignition/msgs/visual.proto";
 
 message Visual_V
 {
+  /// \brief Optional header data
+  optional Header header   = 1;
+
   /// \brief Visual messages.
-  repeated Visual visuals  = 1;
+  repeated Visual visuals  = 2;
 }

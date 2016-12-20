@@ -6,9 +6,13 @@ option java_outer_classname = "ModelVProtos";
 /// \interface Model_V
 /// \brief An array of models.
 
+import "ignition/msgs/header.proto";
 import "ignition/msgs/model.proto";
 
 message Model_V
 {
+  /// \brief Optional header data
+  optional Header header = 1;
+
   repeated Model models  = 2;
 }

@@ -8,6 +8,7 @@ option java_outer_classname = "DiagnosticsProtos";
 /// Gazebo must have been compiled with the ENABLE_DIAGNOSTICS flag.
 
 import "ignition/msgs/time.proto";
+import "ignition/msgs/header.proto";
 
 message Diagnostics
 {
@@ -18,8 +19,11 @@ message Diagnostics
     optional Time wall = 3;
   }
 
-  repeated DiagTime time = 1;
-  optional Time real_time = 2;
-  optional Time sim_time = 3;
-  optional double real_time_factor = 4 [default = 0.0];
+  /// \brief Optional header data
+  optional Header header = 1;
+
+  repeated DiagTime time = 2;
+  optional Time real_time = 3;
+  optional Time sim_time = 4;
+  optional double real_time_factor = 5 [default = 0.0];
 }

@@ -7,6 +7,7 @@ option java_outer_classname = "LogStatusProtos";
 /// \brief A message that contains information about data logging
 
 import "ignition/msgs/time.proto";
+import "ignition/msgs/header.proto";
 
 message LogStatus
 {
@@ -27,6 +28,9 @@ message LogStatus
     optional Units size_units  = 5;
   }
 
-  optional Time sim_time     = 1;
-  optional LogFile log_file  = 2;
+  /// \brief Optional header data
+  optional Header header     = 1;
+
+  optional Time sim_time     = 2;
+  optional LogFile log_file  = 3;
 }

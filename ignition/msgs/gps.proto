@@ -7,15 +7,19 @@ option java_outer_classname = "GPSProtos";
 /// \brief Data from a GPS sensor
 
 import "ignition/msgs/time.proto";
+import "ignition/msgs/header.proto";
 
 message GPS
 {
-  optional Time time                    = 1;
-  optional string link_name             = 2;
-  optional double latitude_deg          = 3;
-  optional double longitude_deg         = 4;
-  optional double altitude              = 5;
-  optional double velocity_east         = 6;
-  optional double velocity_north        = 7;
-  optional double velocity_up           = 8;
+  /// \brief Optional header data
+  optional Header header                = 1;
+
+  optional Time time                    = 2;
+  optional string link_name             = 3;
+  optional double latitude_deg          = 4;
+  optional double longitude_deg         = 5;
+  optional double altitude              = 6;
+  optional double velocity_east         = 7;
+  optional double velocity_north        = 8;
+  optional double velocity_up           = 9;
 }

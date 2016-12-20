@@ -7,6 +7,7 @@ option java_outer_classname = "PhysicsProtos";
 /// \brief A message containing a description of the global physics properties
 
 import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/header.proto";
 
 message Physics
 {
@@ -17,25 +18,28 @@ message Physics
     SIMBODY = 3;
     DART = 4;
   }
-  optional Type type                         = 1[default=ODE];
+  /// \brief Optional header data
+  optional Header header                     = 1;
 
-  optional string solver_type                = 2;
-  optional double min_step_size              = 3;
-  optional int32 precon_iters                = 4;
-  optional int32 iters                       = 5;
-  optional double sor                        = 6;
-  optional double cfm                        = 7;
-  optional double erp                        = 8;
-  optional double contact_max_correcting_vel = 9;
-  optional double contact_surface_layer      = 10;
-  optional Vector3d gravity                  = 11;
-  optional bool enable_physics               = 12;
-  optional double real_time_factor           = 13;
-  optional double real_time_update_rate      = 14;
-  optional double max_step_size              = 15;
+  optional Type type                         = 2[default=ODE];
+
+  optional string solver_type                = 3;
+  optional double min_step_size              = 4;
+  optional int32 precon_iters                = 5;
+  optional int32 iters                       = 6;
+  optional double sor                        = 7;
+  optional double cfm                        = 8;
+  optional double erp                        = 9;
+  optional double contact_max_correcting_vel = 10;
+  optional double contact_surface_layer      = 11;
+  optional Vector3d gravity                  = 12;
+  optional bool enable_physics               = 13;
+  optional double real_time_factor           = 14;
+  optional double real_time_update_rate      = 15;
+  optional double max_step_size              = 16;
   // The name of this physics profile (not to be confused with type)
-  optional string profile_name               = 16;
+  optional string profile_name               = 17;
 
   /// \brief Magnetic field
-  optional Vector3d magnetic_field           = 17;
+  optional Vector3d magnetic_field           = 18;
 }

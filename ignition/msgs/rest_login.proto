@@ -6,17 +6,22 @@ option java_outer_classname = "RestLoginProtos";
 /// \interface RestLogin
 /// \brief A message to login to a REST service
 
+import "ignition/msgs/header.proto";
+
 message RestLogin
 {
+  /// \brief Optional header data
+  optional Header header   = 1;
+
   /// \brief ID of this request message
-  optional uint32 id       = 1;
+  optional uint32 id       = 2;
 
   /// \brief Rest service URL
-  optional string url      = 2;
+  optional string url      = 3;
 
   /// \brief Login user name
-  optional string username = 3;
+  optional string username = 4;
 
   /// \brief Login password
-  optional string password = 4;
+  optional string password = 5;
 }

@@ -6,11 +6,16 @@ option java_outer_classname = "RestLogoutProtos";
 /// \interface RestLogout
 /// \brief Message for login out of a REST service.
 
+import "ignition/msgs/header.proto";
+
 message RestLogout
 {
+  /// \brief Optional header data
+  optional Header header   = 1;
+
   /// \brief ID of this request message
-  optional uint32 id       = 1;
+  optional uint32 id       = 2;
 
   /// \brief the web service url
-  optional string url      = 2;
+  optional string url      = 3;
 }

@@ -8,17 +8,21 @@ option java_outer_classname = "ModelConfigurationProtos";
 
 import "ignition/msgs/time.proto";
 import "ignition/msgs/pose.proto";
+import "ignition/msgs/header.proto";
 
 message ModelConfiguration
 {
+  /// \brief Optional header data
+  optional Header header                    = 1;
+
   // Time when the pose should be enforced
-  optional Time time                        = 1;
-  repeated string joint_names               = 2;
-  repeated double joint_positions           = 3;
+  optional Time time                        = 2;
+  repeated string joint_names               = 3;
+  repeated double joint_positions           = 4;
 
   // Specify model pose
-  optional Pose pose                        = 4;
+  optional Pose pose                        = 5;
 
   // Option to set model pose by specifying pose of link
-  optional string link_name                 = 5;
+  optional string link_name                 = 6;
 }

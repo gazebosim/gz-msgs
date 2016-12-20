@@ -6,11 +6,16 @@ option java_outer_classname = "BatteryProtos";
 /// \interface Battery
 /// \brief Message for a battery
 
+import "ignition/msgs/header.proto";
+
 message Battery
 {
+  /// \brief Optional header data
+  optional Header header  = 1;
+
   /// \brief Name of the battery
-  optional string name    = 1 [default = ""];
+  optional string name    = 2 [default = ""];
 
   /// \brief Real voltage in volts.
-  optional double voltage = 2 [default = 0];
+  optional double voltage = 3 [default = 0];
 }

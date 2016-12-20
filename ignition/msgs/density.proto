@@ -6,7 +6,12 @@ option java_outer_classname = "DensityProtos";
 /// \interface Density
 /// \brief Information about density
 
+import "ignition/msgs/header.proto";
+
 message Density
 {
-  optional double density = 1 [default = 0];
+  /// \brief Optional header data
+  optional Header header  = 1;
+
+  optional double density = 2 [default = 0];
 }

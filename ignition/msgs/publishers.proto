@@ -7,8 +7,12 @@ option java_outer_classname = "PublishersProtos";
 /// \brief A list of publishers 
 
 import "ignition/msgs/publish.proto";
+import "ignition/msgs/header.proto";
 
 message Publishers
 {
-  repeated Publish publisher = 1;
+  /// \brief Optional header data
+  optional Header header     = 1;
+
+  repeated Publish publisher = 2;
 }

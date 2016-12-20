@@ -6,6 +6,7 @@ option java_outer_classname = "JointProtos";
 /// \interface Joint
 /// \brief Message for creating joint
 
+import "ignition/msgs/header.proto";
 import "ignition/msgs/axis.proto";
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/sensor.proto";
@@ -40,29 +41,32 @@ message Joint
     FIXED     = 8;
   }
 
-  optional string name           = 1;
-  optional uint32 id             = 2;
-  repeated double angle          = 3;
-  optional Type type             = 4;
-  optional string parent         = 5;
-  optional uint32 parent_id      = 6;
-  optional string child          = 7;
-  optional uint32 child_id       = 8;
-  optional Pose pose             = 9;
-  optional Axis axis1            = 10;
-  optional Axis axis2            = 11;
+  /// \brief Optional header data
+  optional Header header         = 1;
 
-  optional double cfm            = 12;
-  optional double bounce         = 13;
-  optional double velocity       = 14;
-  optional double fudge_factor   = 15;
-  optional double limit_cfm      = 16;
-  optional double limit_erp      = 17;
-  optional double suspension_cfm = 18;
-  optional double suspension_erp = 19;
+  optional string name           = 2;
+  optional uint32 id             = 3;
+  repeated double angle          = 4;
+  optional Type type             = 5;
+  optional string parent         = 6;
+  optional uint32 parent_id      = 7;
+  optional string child          = 8;
+  optional uint32 child_id       = 9;
+  optional Pose pose             = 10;
+  optional Axis axis1            = 11;
+  optional Axis axis2            = 12;
 
-  optional Gearbox gearbox       = 20;
-  optional Screw screw           = 21;
+  optional double cfm            = 13;
+  optional double bounce         = 14;
+  optional double velocity       = 15;
+  optional double fudge_factor   = 16;
+  optional double limit_cfm      = 17;
+  optional double limit_erp      = 18;
+  optional double suspension_cfm = 19;
+  optional double suspension_erp = 20;
 
-  repeated Sensor sensor         = 22;
+  optional Gearbox gearbox       = 21;
+  optional Screw screw           = 22;
+
+  repeated Sensor sensor         = 23;
 }

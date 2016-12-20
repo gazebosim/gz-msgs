@@ -7,14 +7,18 @@ option java_outer_classname = "ProjectorProtos";
 /// \brief Information about a projector
 
 import "ignition/msgs/pose.proto";
+import "ignition/msgs/header.proto";
 
 message Projector
 {
-  optional string name          = 1;
-  optional string texture       = 2;
-  optional Pose pose            = 3;
-  optional double fov           = 4[default=0.785];
-  optional double near_clip     = 5[default=0.1];
-  optional double far_clip      = 6[default=10.0];
-  optional bool enabled         = 7[default=true];
+  /// \brief Optional header data
+  optional Header header        = 1;
+
+  optional string name          = 2;
+  optional string texture       = 3;
+  optional Pose pose            = 4;
+  optional double fov           = 5[default=0.785];
+  optional double near_clip     = 6[default=0.1];
+  optional double far_clip      = 7[default=10.0];
+  optional bool enabled         = 8[default=true];
 }

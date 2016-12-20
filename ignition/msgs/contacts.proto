@@ -6,12 +6,15 @@ option java_outer_classname = "ContactsProtos";
 /// \interface Contacts
 /// \brief Contacts from collision detection
 
-
+import "ignition/msgs/header.proto";
 import "ignition/msgs/contact.proto";
 import "ignition/msgs/time.proto";
 
 message Contacts
 {
-  repeated Contact contact   = 1;
-  optional Time time         = 2;
+  /// \brief Optional header data
+  optional Header header     = 1;
+
+  repeated Contact contact   = 2;
+  optional Time time         = 3;
 }

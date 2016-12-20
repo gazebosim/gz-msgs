@@ -7,8 +7,12 @@ option java_outer_classname = "PointCloudProtos";
 /// \brief A point cloud
 
 import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/header.proto";
 
 message PointCloud
 {
-  repeated Vector3d points = 1;
+  /// \brief Optional header data
+  optional Header header   = 1;
+
+  repeated Vector3d points = 2;
 }

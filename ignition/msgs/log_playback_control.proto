@@ -7,25 +7,29 @@ option java_outer_classname = "LogPlaybackControlProtos";
 /// \brief A message that allows for control of log playback functions.
 
 import "ignition/msgs/time.proto";
+import "ignition/msgs/header.proto";
 
 message LogPlaybackControl
 {
+  /// \brief Optional header data
+  optional Header header     = 1;
+
   /// \brief Pause/play the log file.
-  optional bool pause        = 1;
+  optional bool pause        = 2;
 
   /// \brief Make a relative jump. The value indicates the number of
   ///        iterations that will be executed at once. If a negative
   ///        value is specified, the playback will jump backwards.
-  optional sint32 multi_step = 2;
+  optional sint32 multi_step = 3;
 
   /// \brief Jump to the beginning of the log file.
-  optional bool rewind       = 3;
+  optional bool rewind       = 4;
 
   /// \brief Jump to the end of the log file.
-  optional bool forward      = 4;
+  optional bool forward      = 5;
 
   /// \brief Jump to a specific simulation time in the log file. The
   ///        playback service will load the frame with the closest
   ///        simulation time bigger than the "seek" value.
-  optional Time seek         = 5;
+  optional Time seek         = 6;
 }
