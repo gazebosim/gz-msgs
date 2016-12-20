@@ -6,7 +6,10 @@ option java_outer_classname = "StringMsgVProtos";
 /// \interface StringMsg_V
 /// \brief A message for a vector of string data
 
+import "ignition/msgs/header.proto";
+
 message StringMsg_V
 {
-  repeated string data = 1;
+  optional Header header = 1;
+  repeated string data = 2;
 }
