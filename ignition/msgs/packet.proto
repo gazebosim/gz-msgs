@@ -5,31 +5,11 @@ option java_outer_classname = "PacketProtos";
 /// \ingroup ignition.msgs
 /// \interface Packet
 /// \brief A message for a vector of string data
-import "ignition/msgs/any.proto";
-import "ignition/msgs/atmosphere.proto";
-import "ignition/msgs/axis.proto";
-import "ignition/msgs/battery.proto";
-import "ignition/msgs/boolean.proto";
-import "ignition/msgs/boxgeom.proto";
-import "ignition/msgs/bytes.proto";
-import "ignition/msgs/camera_cmd.proto";
-import "ignition/msgs/camera_lens.proto";
-import "ignition/msgs/camerasensor.proto";
-import "ignition/msgs/cessna.proto";
-import "ignition/msgs/clock.proto";
-import "ignition/msgs/cmd_vel2d.proto";
-import "ignition/msgs/collision.proto";
-import "ignition/msgs/color.proto";
-import "ignition/msgs/contact.proto";
-import "ignition/msgs/contactsensor.proto";
-import "ignition/msgs/contacts.proto";
-import "ignition/msgs/cylindergeom.proto";
-import "ignition/msgs/density.proto";
-
+import "ignition/msgs/pose.proto";
 import "ignition/msgs/image_stamped.proto";
 import "ignition/msgs/stringmsg_v.proto";
 import "ignition/msgs/web_request.proto";
-import "ignition/msgs/pose.proto";
+import "ignition/msgs/cmd_vel2d.proto";
 message Packet
 {
   optional string topic = 1;
