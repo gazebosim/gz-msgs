@@ -51,14 +51,12 @@ endmacro()
 ########################################
 # Find ignition math in unix platforms
 # In Windows we expect a call from configure.bat script with the paths
-if (NOT WIN32)
-  find_package(ignition-math2 QUIET)
-  if (NOT ignition-math2_FOUND)
-    message(STATUS "Looking for ignition-math2-config.cmake - not found")
-    BUILD_ERROR ("Missing: Ignition math2 library.")
-  else()
-    message(STATUS "Looking for ignition-math2-config.cmake - found")
-  endif()
+find_package(ignition-math3 REQUIRED QUIET)
+if (NOT ignition-math3_FOUND)
+  message(STATUS "Looking for ignition-math3-config.cmake - not found")
+  BUILD_ERROR ("Missing: Ignition math3 library.")
+else()
+  message(STATUS "Looking for ignition-math3-config.cmake - found")
 endif()
 
 #################################################
