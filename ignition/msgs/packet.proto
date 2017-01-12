@@ -10,6 +10,7 @@ import "ignition/msgs/image_stamped.proto";
 import "ignition/msgs/stringmsg_v.proto";
 import "ignition/msgs/web_request.proto";
 import "ignition/msgs/cmd_vel2d.proto";
+import "ignition/msgs/any.proto";
 message Packet
 {
   optional string topic = 1;
@@ -22,5 +23,6 @@ message Packet
     StringMsg_V string_msg_v = 5;
     WebRequest web_request = 6;
     Pose pose = 7;
+    Any key = 8;
   }
 }
