@@ -12,6 +12,7 @@ import "ignition/msgs/web_request.proto";
 import "ignition/msgs/cmd_vel2d.proto";
 import "ignition/msgs/double_v.proto";
 import "ignition/msgs/any.proto";
+import "ignition/msgs/int32.proto";
 message Packet
 {
   optional string topic = 1;
@@ -26,5 +27,6 @@ message Packet
     Pose pose = 7;
     Double_V doublev = 8;
     Any key = 9;
+    Int32 gear = 10;
   }
 }
