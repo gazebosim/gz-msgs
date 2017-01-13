@@ -7,6 +7,7 @@ option java_outer_classname = "IMUSensorProtos";
 /// \brief Information about an imu sensor 
 
 import "ignition/msgs/sensor_noise.proto";
+import "ignition/msgs/header.proto";
 
 message IMUSensor
 {
@@ -36,9 +37,12 @@ message IMUSensor
     optional SensorNoise z_noise = 3;
   }
 
+  /// \brief Optional header data
+  optional Header header                    = 1;
+
   /// \brief Angular velocity information
-  optional AngularVelocity angular_velocity = 1;
+  optional AngularVelocity angular_velocity = 2;
 
   /// \brief Linear acceleration information
-  optional LinearAcceleration linear_acceleration = 2;
+  optional LinearAcceleration linear_acceleration = 3;
 }

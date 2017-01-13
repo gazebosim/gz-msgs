@@ -49,14 +49,16 @@ macro (check_gcc_visibility)
 endmacro()
 
 ########################################
-# Find ignition math in unix platforms
-# In Windows we expect a call from configure.bat script with the paths
-find_package(ignition-math3 REQUIRED QUIET)
-if (NOT ignition-math3_FOUND)
-  message(STATUS "Looking for ignition-math3-config.cmake - not found")
-  BUILD_ERROR ("Missing: Ignition math3 library.")
-else()
-  message(STATUS "Looking for ignition-math3-config.cmake - found")
+# Find ignition math
+set(IGNITION-MATH_REQUIRED_MAJOR_VERSION 2)
+if (NOT DEFINED IGNITION-MATH_LIBRARY_DIRS AND NOT DEFINED IGNITION-MATH_INCLUDE_DIRS AND NOT DEFINED IGNITION-MATH_LIBRARIES)
+  find_package(ignition-math${IGNITION-MATH_REQUIRED_MAJOR_VERSION} QUIET)
+  if (NOT ignition-math${IGNITION-MATH_REQUIRED_MAJOR_VERSION}_FOUND)
+    message(STATUS "Looking for ignition-math${IGNITION-MATH_REQUIRED_MAJOR_VERSION}-config.cmake - not found")
+    BUILD_ERROR ("Missing: Ignition math${IGNITION-MATH_REQUIRED_MAJOR_VERSION} library.")
+  else()
+    message(STATUS "Looking for ignition-math${IGNITION-MATH_REQUIRED_MAJOR_VERSION}-config.cmake - found")
+  endif()
 endif()
 
 #################################################

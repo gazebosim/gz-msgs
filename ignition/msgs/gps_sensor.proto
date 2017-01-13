@@ -7,6 +7,7 @@ option java_outer_classname = "Protos";
 /// \brief Information about a GPS sensor element
 
 import "ignition/msgs/sensor_noise.proto";
+import "ignition/msgs/header.proto";
 
 message GPSSensor
 {
@@ -20,11 +21,14 @@ message GPSSensor
     optional SensorNoise vertical_noise   = 2;
   }
 
+  /// \brief Optional header data
+  optional Header header    = 1;
+
   /// \brief Position sensing. Consists of horizontal and vertical noise
   /// properties
-  optional Sensing position = 1;
+  optional Sensing position = 2;
 
   /// \brief Velocity sensing. Consists of horizontal and vertical noise
   /// properties
-  optional Sensing velocity = 2;
+  optional Sensing velocity = 3;
 }

@@ -6,17 +6,22 @@ option java_outer_classname = "LogicalCameraSensorProtos";
 /// \interface LogicalCameraSensor
 /// \brief Information about a logical camera sensor element
 
+import "ignition/msgs/header.proto";
+
 message LogicalCameraSensor
 {
+  /// \brief Optional header data
+  optional Header header          = 1;
+
   /// \brief Near clipping plane of the view frustum in meters.
-  optional double near_clip       = 1;
+  optional double near_clip       = 2;
 
   /// \brief Far clipping plane of the view frustum in meters.
-  optional double far_clip        = 2;
+  optional double far_clip        = 3;
 
   /// \brief Horizontal field of view in radians.
-  optional double horizontal_fov  = 3;
+  optional double horizontal_fov  = 4;
 
   /// \brief Near and far clipping plane aspect ratio (width/height).
-  optional double aspect_ratio    = 4;
+  optional double aspect_ratio    = 5;
 }

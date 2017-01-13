@@ -10,6 +10,7 @@ import "ignition/msgs/time.proto";
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/vector3d.proto";
 import "ignition/msgs/material.proto";
+import "ignition/msgs/header.proto";
 
 message Marker
 {
@@ -27,6 +28,17 @@ message Marker
     TRIANGLE_FAN   = 8;
     TRIANGLE_LIST  = 9;
     TRIANGLE_STRIP = 10;
+  }
+
+  /// \brief Visilibity defines what cameras render the marker.
+  enum Visibility
+  {
+    /// \brief Only cameras for user interaction render the visual. Other
+    /// cameras, such as camera sensors, will not render the visual
+    GUI = 0;
+
+    /// \brief All cameras render the visual.
+    ALL = 1;
   }
 
   /// \brief How to interpret the data. 
@@ -48,15 +60,18 @@ message Marker
     DELETE_ALL     = 2;
   }
 
+  /// \brief Optional header data
+  optional Header header     = 1;
+
   /// \brief The action to take
   ///
   /// Relevant Type: all
-  optional Action action     = 1;
+  optional Action action     = 2;
 
   /// \brief Namespace of the marker. A namespace groups id's together.
   ///
   /// Relevant Action: ADD_MODIFY, DELETE_MARKER, DELETE_ALL
-  optional string ns         = 2; 
+  optional string ns         = 3; 
 
   /// \brief The id within the namespace of the visual. Each marker has a
   /// unique id. It's up to the user to select id values.
@@ -64,19 +79,19 @@ message Marker
   /// Relevant Action: ADD_MODIFY, DELETE_MARKER
   ///
   /// Relevant Type: all
-  optional uint64 id         = 3; 
+  optional uint64 id         = 4; 
 
   /// \brief The layer the visual belongs to.
   ///
   /// Relevant Action: ADD_MODIFY
   ///
   /// Relevant Type: all
-  optional int32 layer      = 4[default=0];
+  optional int32 layer      = 5[default=0];
 
   /// \brief The type of geometry.
   ///
   /// Relevant Action: ADD_MODIFY
-  optional Type type         = 5;
+  optional Type type         = 6;
 
   /// \brief How long to keep the visual alive before deletion. A value of 
   /// zero indicates forever. The lifetime is based on simulation-time, not
@@ -85,28 +100,28 @@ message Marker
   /// Relevant Action: ADD_MODIFY
   ///
   /// Relevant Type: all
-  optional Time lifetime     = 6;
+  optional Time lifetime     = 7;
 
   /// \brief Pose of the marker
   ///
   /// Relevant Action: ADD_MODIFY
   ///
   /// Relevant Type: all
-  optional Pose pose         = 7;
+  optional Pose pose         = 8;
 
   /// \brief Scale of the marker.
   ///
   /// Relevant Action: ADD_MODIFY
   ///
   /// Relevant Type: all
-  optional Vector3d scale    = 8;
+  optional Vector3d scale    = 9;
 
   /// \brief Marker color
   ///
   /// Relevant Action: ADD_MODIFY
   ///
   /// Relevant Type: all
-  optional Material material = 9;
+  optional Material material = 10;
 
   /// \brief Used to specify geometry for a LINE_STRIP, LINE_LIST, POINTS,
   /// TRIANGLE_LIST, TRIANGLE_FAN, TRIANGLE_STRIP
@@ -115,19 +130,26 @@ message Marker
   ///
   /// Relevant Type: LINE_STRIP, LINE_LIST, POINTS, TRIANGLE_FAN, TRIANGLE_LIST,
   /// TRIANGLE_STRIP
-  repeated Vector3d point    = 10;
+  repeated Vector3d point    = 11;
 
   /// \brief String to display. Only used for TEXT marker.
   ///
   /// Relevant Action: ADD_MODIFY
   ///
   /// Relevant Type: TEXT
-  optional string text       = 11;
+  optional string text       = 12;
 
   /// \brief Attach this marker to a "parent" visual.
   ///
   /// Relevant Action: ADD_MODIFY
   ///
   /// Relevant Type: all
-  optional string parent     = 12;
+  optional string parent     = 13;
+
+  /// \brief Defines what cameras render the marker.
+  ///
+  /// Relevant Action: ADD_MODIFY
+  ///
+  /// Relevant Type: all
+  optional Visibility visibility  = 14;
 }

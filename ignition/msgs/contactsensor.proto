@@ -6,7 +6,12 @@ option java_outer_classname = "ContactSensorProtos";
 /// \interface ContactSensor 
 /// \brief Information about a contact sensor element
 
+import "ignition/msgs/header.proto";
+
 message ContactSensor
 {
-  optional string collision_name = 1;
+  /// \brief Optional header data
+  optional Header header = 1;
+
+  optional string collision_name = 2;
 }

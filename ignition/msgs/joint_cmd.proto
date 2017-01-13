@@ -7,14 +7,18 @@ option java_outer_classname = "JointCmdProtos";
 /// \brief Message for joint command, used by physics::JointControlWidget
 
 import "ignition/msgs/pid.proto";
+import "ignition/msgs/header.proto";
 
 message JointCmd
 {
-  optional string name     = 1;
-  optional int32 axis      = 2 [default=0];
-  optional double force    = 3;
+  /// \brief Optional header data
+  optional Header header   = 1;
 
-  optional PID position    = 4;
-  optional PID velocity    = 5;
-  optional bool reset      = 6;
+  optional string name     = 2;
+  optional int32 axis      = 3 [default=0];
+  optional double force    = 4;
+
+  optional PID position    = 5;
+  optional PID velocity    = 6;
+  optional bool reset      = 7;
 }

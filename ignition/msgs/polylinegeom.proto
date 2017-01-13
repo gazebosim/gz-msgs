@@ -7,9 +7,13 @@ option java_outer_classname = "Protos";
 /// \brief Information about Polyline geometry
 
 import "ignition/msgs/vector2d.proto";
+import "ignition/msgs/header.proto";
 
 message Polyline
 {
-  optional double height  = 1;
-  repeated Vector2d point = 2;  
+  /// \brief Optional header data
+  optional Header header  = 1;
+
+  optional double height  = 2;
+  repeated Vector2d point = 3;  
 }

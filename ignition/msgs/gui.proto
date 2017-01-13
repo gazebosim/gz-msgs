@@ -8,10 +8,14 @@ option java_outer_classname = "GUIProtos";
 
 import "ignition/msgs/gui_camera.proto";
 import "ignition/msgs/plugin.proto";
+import "ignition/msgs/header.proto";
 
 message GUI
 {
-  optional bool fullscreen  = 1;
-  optional GUICamera camera = 2;
-  repeated Plugin plugin    = 3;
+  /// \brief Optional header data
+  optional Header header    = 1;
+
+  optional bool fullscreen  = 2;
+  optional GUICamera camera = 3;
+  repeated Plugin plugin    = 4;
 }

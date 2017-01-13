@@ -7,6 +7,7 @@ option java_outer_classname = "ShadowsProtos";
 /// \brief A message for shadow data
 
 import "ignition/msgs/color.proto";
+import "ignition/msgs/header.proto";
 
 message Shadows
 {
@@ -17,6 +18,10 @@ message Shadows
     TEXTURE_ADDITIVE   = 3;
     TEXTURE_MODULATIVE = 4;
   }
-  optional ShadowType type = 5;
-  optional Color color = 6;
+
+  /// \brief Optional header data
+  optional Header header   = 1;
+
+  optional ShadowType type = 2;
+  optional Color color = 3;
 }

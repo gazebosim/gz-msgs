@@ -8,10 +8,14 @@ option java_outer_classname = "WrenchStampedProtos";
 
 import "ignition/msgs/time.proto";
 import "ignition/msgs/wrench.proto";
+import "ignition/msgs/header.proto";
 
 message WrenchStamped
 {
+  /// \brief Optional header data
+  optional Header header   = 1;
+
   // Time when the data was captured
-  optional Time time       = 1;
-  optional Wrench wrench   = 2;
+  optional Time time       = 2;
+  optional Wrench wrench   = 3;
 }

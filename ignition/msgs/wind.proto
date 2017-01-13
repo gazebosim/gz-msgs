@@ -7,9 +7,13 @@ option java_outer_classname = "WindProtos";
 /// \brief A message containing a description of the global wind properties
 
 import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/header.proto";
 
 message Wind
 {
-  optional Vector3d linear_velocity = 1;
-  optional bool enable_wind = 2;
+  /// \brief Optional header data
+  optional Header header            = 1;
+
+  optional Vector3d linear_velocity = 2;
+  optional bool enable_wind         = 3;
 }

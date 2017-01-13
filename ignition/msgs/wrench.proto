@@ -7,10 +7,14 @@ option java_outer_classname = "WrenchProtos";
 /// \brief Message for a wrench value
 
 import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/header.proto";
 
 message Wrench
 {
-  optional Vector3d force        = 1;
-  optional Vector3d torque       = 2;
-  optional Vector3d force_offset = 3;
+  /// \brief Optional header data
+  optional Header header         = 1;
+
+  optional Vector3d force        = 2;
+  optional Vector3d torque       = 3;
+  optional Vector3d force_offset = 4;
 }

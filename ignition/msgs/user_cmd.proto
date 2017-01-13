@@ -6,6 +6,7 @@ import "ignition/msgs/light.proto";
 import "ignition/msgs/model.proto";
 import "ignition/msgs/world_control.proto";
 import "ignition/msgs/wrench.proto";
+import "ignition/msgs/header.proto";
 
 /// \ingroup ignition.msgs
 /// \interface UserCmd
@@ -29,27 +30,30 @@ message UserCmd
     SCALING = 4;
   }
 
+  /// \brief Optional header data
+  optional Header header = 1;
+
   /// \brief Unique id for user command.
-  optional uint32 id = 1;
+  optional uint32 id = 2;
 
   /// \brief Description for the command.
-  optional string description = 2;
+  optional string description = 3;
 
   /// \brief Type of command.
-  optional Type type = 3;
+  optional Type type = 4;
 
   /// \brief For model modify commands.
-  repeated Model model = 4;
+  repeated Model model = 5;
 
   /// \brief For light modify commands.
-  repeated Light light = 5;
+  repeated Light light = 6;
 
   /// \brief Name of entity targeted by command
-  optional string entity_name = 6;
+  optional string entity_name = 7;
 
   /// \brief For World Control commands.
-  optional WorldControl world_control = 7;
+  optional WorldControl world_control = 8;
 
   /// \brief Wrench for apply wrench commands.
-  optional Wrench wrench = 8;
+  optional Wrench wrench = 9;
 }

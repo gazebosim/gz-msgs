@@ -6,8 +6,13 @@ option java_outer_classname = "CmdVel2DProtos";
 /// \interface CmdVel2D
 /// \brief A planar velocity and orientation.
 
+import "ignition/msgs/header.proto";
+
 message CmdVel2D
 {
-  optional double velocity  = 1 [default = 0];
-  optional double theta     = 2 [default = 0];
+  /// \brief Optional header data
+  optional Header header    = 1;
+
+  optional double velocity  = 2 [default = 0];
+  optional double theta     = 3 [default = 0];
 }

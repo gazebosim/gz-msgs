@@ -41,8 +41,14 @@ namespace ignition
     /////////////////////////////////////////////
     ignition::math::Pose3d Convert(const msgs::Pose &_p)
     {
-      return ignition::math::Pose3d(Convert(_p.position()),
-          Convert(_p.orientation()));
+      ignition::math::Pose3d result;
+
+      if (_p.has_position())
+       result.Pos() = Convert(_p.position());
+      if (_p.has_orientation())
+       result.Rot() = Convert(_p.orientation());
+
+      return result;
     }
 
     /////////////////////////////////////////////

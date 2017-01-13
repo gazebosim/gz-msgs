@@ -10,7 +10,11 @@ import "ignition/msgs/time.proto";
 
 message Header
 {
-  optional string str_id = 1;
-  optional Time stamp    = 2;
-  optional int32 index   = 3;
+  message Map {
+    optional string key = 1;
+    repeated string value = 2;
+  }
+
+  optional Time stamp           = 1;
+  repeated Map data             = 3;
 } 

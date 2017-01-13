@@ -3,14 +3,26 @@ option java_package = "com.ignition.msgs";
 option java_outer_classname = "PacketProtos";
 
 /// \ingroup ignition.msgs
-/// \interface Packet 
-/// \brief Message that encapsulates another message with a type description
-
-import "ignition/msgs/time.proto";
-
+/// \interface Packet
+/// \brief A message for a vector of string data
+import "ignition/msgs/pose.proto";
+import "ignition/msgs/image_stamped.proto";
+import "ignition/msgs/stringmsg_v.proto";
+import "ignition/msgs/web_request.proto";
+import "ignition/msgs/cmd_vel2d.proto";
+import "ignition/msgs/double_v.proto";
 message Packet
 {
-  optional Time stamp            = 1;
-  optional string type           = 2;
-  optional bytes serialized_data = 3;
+  optional string topic = 1;
+  optional string type  = 2;
+
+  oneof content
+  {
+    CmdVel2D cmd_vel2d = 3;
+    ImageStamped image_stamped = 4;
+    StringMsg_V string_msg_v = 5;
+    WebRequest web_request = 6;
+    Pose pose = 7;
+    Double_V doublev = 8;
+  }
 }

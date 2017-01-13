@@ -8,15 +8,19 @@ option java_outer_classname = "HeightmapGeomProtos";
 
 import "ignition/msgs/image.proto";
 import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/header.proto";
 
 message HeightmapGeom
 {
-  optional Image  image            = 1; // The height data
-  optional Vector3d size           = 2; // Size in meters
-  optional Vector3d origin         = 3; // Origin in world coordinate frame
-  repeated float heights           = 4;
-  optional int32 width             = 5;
-  optional int32 height            = 6;
+  /// \brief Optional header data
+  optional Header header           = 1;
+
+  optional Image  image            = 2; // The height data
+  optional Vector3d size           = 3; // Size in meters
+  optional Vector3d origin         = 4; // Origin in world coordinate frame
+  repeated float heights           = 5;
+  optional int32 width             = 6;
+  optional int32 height            = 7;
 
   message Texture
   {
@@ -31,10 +35,13 @@ message HeightmapGeom
     optional double fade_dist      = 2;
   }
 
-  repeated Texture texture         = 7; // List of textures
-  repeated Blend blend             = 8; // How to blend the textures
-  optional bool use_terrain_paging = 9; // Enable terrain paging in rendering
+  repeated Texture texture         = 8; // List of textures
+  repeated Blend blend             = 9; // How to blend the textures
+  optional bool use_terrain_paging = 10; // Enable terrain paging in rendering
 
   // The image filename
-  optional string filename         = 10;
+  optional string filename         = 11;
+
+  // Sample level
+  optional uint32 sampling         = 12;
 }

@@ -8,10 +8,14 @@ option java_outer_classname = "ImagesStampedProtos";
 
 import "ignition/msgs/time.proto";
 import "ignition/msgs/image.proto";
+import "ignition/msgs/header.proto";
 
 message ImagesStamped
 {
+  /// \brief Optional header data
+  optional Header header      = 1;
+
   // Time when all the images were captured
-  optional Time time          = 1;
-  repeated Image image        = 2;
+  optional Time time          = 2;
+  repeated Image image        = 3;
 }

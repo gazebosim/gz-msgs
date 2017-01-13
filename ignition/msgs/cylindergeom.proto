@@ -6,8 +6,13 @@ option java_outer_classname = "CylinderGeomProtos";
 /// \interface CylinderGeom 
 /// \brief Information about a cylinder geometry
 
+import "ignition/msgs/header.proto";
+
 message CylinderGeom
 {
-  optional double radius  = 1 [default = 0];
-  optional double length  = 2 [default = 0];
+  /// \brief Optional header data
+  optional Header header  = 1;
+
+  optional double radius  = 2 [default = 0];
+  optional double length  = 3 [default = 0];
 }

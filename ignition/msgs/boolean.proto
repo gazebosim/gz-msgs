@@ -6,8 +6,13 @@ option java_outer_classname = "BoolProtos";
 /// \interface Bool 
 /// \brief Boolean message
 
+import "ignition/msgs/header.proto";
+
 message Boolean
 {
+  /// \brief Optional header data
+  optional Header header = 1;
+
   /// \brief Boolean data
-  optional bool data = 1 [default = false];
+  optional bool data     = 2 [default = false];
 }

@@ -6,6 +6,8 @@ option java_outer_classname = "SphericalCoordinatesProtos";
 /// \interface SphericalCoordinates
 /// \brief Spherical coordinates information 
 
+import "ignition/msgs/header.proto";
+
 message SphericalCoordinates
 {
   enum SurfaceModel
@@ -13,9 +15,12 @@ message SphericalCoordinates
     EARTH_WGS84 = 1;
   }
 
-  optional SurfaceModel surface_model   = 1;
-  optional double latitude_deg          = 2;
-  optional double longitude_deg         = 3;
-  optional double elevation             = 4;
-  optional double heading_deg           = 5;
+  /// \brief Optional header data
+  optional Header header                = 1;
+
+  optional SurfaceModel surface_model   = 2;
+  optional double latitude_deg          = 3;
+  optional double longitude_deg         = 4;
+  optional double elevation             = 5;
+  optional double heading_deg           = 6;
 }

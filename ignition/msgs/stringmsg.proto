@@ -6,7 +6,12 @@ option java_outer_classname = "StringMsgProtos";
 /// \interface StringMsg
 /// \brief A message for string data
 
+import "ignition/msgs/header.proto";
+
 message StringMsg
 {
-  optional string data = 1;
+  /// \brief Optional header data
+  optional Header header = 1;
+
+  optional string data = 2;
 }

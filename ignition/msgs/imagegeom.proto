@@ -6,11 +6,16 @@ option java_outer_classname = "ImageGeomProtos";
 /// \interface ImageGeom 
 /// \brief Message for a image geometry
 
+import "ignition/msgs/header.proto";
+
 message ImageGeom
 {
-  optional string uri         = 1;
-  optional double scale       = 2;
-  optional int32 threshold    = 3 [default = 255];
-  optional double height      = 4;
-  optional int32 granularity  = 5;
+  /// \brief Optional header data
+  optional Header header      = 1;
+
+  optional string uri         = 2;
+  optional double scale       = 3;
+  optional int32 threshold    = 4 [default = 255];
+  optional double height      = 5;
+  optional int32 granularity  = 6;
 }

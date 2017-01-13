@@ -6,11 +6,16 @@ option java_outer_classname = "WebRequestProtos";
 /// \interface WebRequest 
 /// \brief Message for making request from the web.
 
+import "ignition/msgs/header.proto";
+
 message WebRequest
 {
-  optional string operation      = 1;
-  optional string topic          = 2;
-  optional string msg_type       = 3;
-  optional string compression    = 4;
-  optional double hz             = 5;
+  /// \brief Optional header data
+  optional Header header         = 1;
+
+  optional string operation      = 2;
+  optional string topic          = 3;
+  optional string msg_type       = 4;
+  optional string compression    = 5;
+  optional double hz             = 6;
 }

@@ -6,13 +6,18 @@ option java_outer_classname = "PIDProtos";
 /// \interface PID 
 /// \brief Message for simple PID controllers
 
+import "ignition/msgs/header.proto";
+
 message PID
 {
-  optional double target = 1[default=0.0];
-  optional double p_gain = 2[default=0.0];
-  optional double i_gain = 3[default=0.0];
-  optional double d_gain = 4[default=0.0];
-  optional double i_max  = 5[default=0.0];
-  optional double i_min  = 6[default=0.0];
-  optional double limit  = 7[default=0.0];
+  /// \brief Optional header data
+  optional Header header = 1;
+
+  optional double target = 2[default=0.0];
+  optional double p_gain = 3[default=0.0];
+  optional double i_gain = 4[default=0.0];
+  optional double d_gain = 5[default=0.0];
+  optional double i_max  = 6[default=0.0];
+  optional double i_min  = 7[default=0.0];
+  optional double limit  = 8[default=0.0];
 }

@@ -6,8 +6,13 @@ option java_outer_classname = "FloatProtos";
 /// \interface Float
 /// \brief A message for float data
 
+import "ignition/msgs/header.proto";
+
 message Float
 {
+  /// \brief Optional header data
+  optional Header header = 1;
+
   /// \brief Float data
-  optional float data = 1;
+  optional float data = 2;
 }
