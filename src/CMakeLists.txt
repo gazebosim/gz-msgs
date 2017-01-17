@@ -8,7 +8,8 @@ set (gtest_sources
   Utility_TEST.cc
 )
 
-include_directories (${PROTOBUF_INCLUDE_DIR})
+include_directories (${PROTOBUF_INCLUDE_DIR}
+                     ${IGNITION-MATH_INCLUDE_DIRS})
 add_executable(ign_msgs_gen Generator.cc generator_main.cc)
 target_link_libraries(ign_msgs_gen
   ${PROTOBUF_LIBRARY} ${PROTOBUF_PROTOC_LIBRARY})
