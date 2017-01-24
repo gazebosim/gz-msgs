@@ -13,6 +13,7 @@ import "ignition/msgs/cmd_vel2d.proto";
 import "ignition/msgs/double_v.proto";
 import "ignition/msgs/any.proto";
 import "ignition/msgs/int32.proto";
+import "ignition/msgs/int64.proto";
 message Packet
 {
   optional string topic = 1;
@@ -28,5 +29,6 @@ message Packet
     Double_V doublev = 8;
     Any key = 9;
     Int32 gear = 10;
+    Int64 time_remaining = 11;
   }
 }
