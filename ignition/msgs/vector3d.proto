@@ -3,7 +3,7 @@ option java_package = "com.ignition.msgs";
 option java_outer_classname = "Vector3dProtos";
 
 /// \ingroup ignition.msgs
-/// \interface Vector3d 
+/// \interface Vector3d
 /// \brief Message for a vector3 double
 
 import "ignition/msgs/header.proto";
