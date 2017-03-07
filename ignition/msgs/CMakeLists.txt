@@ -157,12 +157,6 @@ set(PROTO_SRCS)
 set(PROTO_HDRS)
 set(PROTO_RB)
 
-# Need to add .exe to executable in windows
-if (WIN32)
-  set(ignmsgs_out_binary "ign_msgs_gen.exe")
-else()
-  set(ignmsgs_out_binary "ign_msgs_gen")
-endif()
 
 foreach(FIL ${msgs})
   get_filename_component(ABS_FIL ${FIL} ABSOLUTE)
@@ -181,7 +175,7 @@ foreach(FIL ${msgs})
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.cc"
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.h"
       COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
-      ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary}
+      ARGS --plugin=protoc-gen-ignmsgs=$<TARGET_FILE:ign_msgs_gen>
            --cpp_out=dllexport_decl=IGNITION_MSGS_VISIBLE:${CMAKE_CURRENT_BINARY_DIR}
            --java_out ${CMAKE_CURRENT_BINARY_DIR}
            --ignmsgs_out ${CMAKE_CURRENT_BINARY_DIR}
@@ -200,7 +194,7 @@ foreach(FIL ${msgs})
         "${CMAKE_CURRENT_BINARY_DIR}/ignition/msgs/${FIL_WE}.pb.rb"
 
       COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
-      ARGS --plugin=protoc-gen-ignmsgs=${CMAKE_BINARY_DIR}/src/${ignmsgs_out_binary}
+      ARGS --plugin=protoc-gen-ignmsgs=$<TARGET_FILE:ign_msgs_gen>
            --cpp_out=dllexport_decl=IGNITION_MSGS_VISIBLE:${CMAKE_CURRENT_BINARY_DIR}
            --java_out=${CMAKE_CURRENT_BINARY_DIR}
            --ruby_out=${CMAKE_CURRENT_BINARY_DIR}
