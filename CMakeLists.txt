@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
-project (ignition-msgs0)
+project (ignition-msgs1)
 
 string (SUBSTRING ${PROJECT_NAME} 9 4 IGN_PROJECT_NAME)
 
