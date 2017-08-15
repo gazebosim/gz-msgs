@@ -5,6 +5,6 @@ includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@/ignition/@IGN_PROJECT_NAME@@PROJ
 Name: Ignition Msgs
 Description: A set of msgs classes for robot applications
 Version: @PROJECT_VERSION_FULL@
-Requires: ignition-math3
+Requires: ignition-math4
 Libs: "-L${libdir}" -lignition-msgs@PROJECT_MAJOR_VERSION@
-CFlags: "-I${includedir}" -std=c++11
+CFlags: "-I${includedir}" -std=c++14
