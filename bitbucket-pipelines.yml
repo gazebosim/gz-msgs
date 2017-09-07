@@ -5,7 +5,16 @@ pipelines:
     - step:
         script:
           - apt-get update
-          - apt-get -y install cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev libignition-math3-dev
+          - apt-get -y install cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev
+          # Ignition math
+          - hg clone http://bitbucket.org/ignitionrobotics/ign-math -b ign-math3
+          - cd ign-math
+          - mkdir build
+          - cd build
+          - cmake .. -DENABLE_TESTS_COMPILATION=false
+          - make install
+          - cd ../..
+          # Ignition msgs
           - mkdir build
           - cd build
           - cmake .. -DCMAKE_BUILD_TYPE=coverage
