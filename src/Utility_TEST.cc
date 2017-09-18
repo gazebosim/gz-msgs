@@ -41,6 +41,23 @@ TEST(UtilityTest, ConvertMsgsVector3dToMath)
 }
 
 /////////////////////////////////////////////////
+TEST(UtilityTest, CovertMathVector2ToMsgs)
+{
+  msgs::Vector2d msg = msgs::Convert(math::Vector2d(1, 2));
+  EXPECT_DOUBLE_EQ(1, msg.x());
+  EXPECT_DOUBLE_EQ(2, msg.y());
+}
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, ConvertMsgsVector2dToMath)
+{
+  msgs::Vector2d msg = msgs::Convert(math::Vector2d(1, 2));
+  math::Vector2d v = msgs::Convert(msg);
+  EXPECT_DOUBLE_EQ(1, v.X());
+  EXPECT_DOUBLE_EQ(2, v.Y());
+}
+
+/////////////////////////////////////////////////
 TEST(UtilityTest, ConvertMathQuaterionToMsgs)
 {
   msgs::Quaternion msg =
@@ -101,6 +118,29 @@ TEST(UtilityTest, ConvertMsgPoseToMath)
 }
 
 /////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMathColorToMsgs)
+{
+  msgs::Color msg = msgs::Convert(math::Color(.1, .2, .3, 1.0));
+
+  EXPECT_FLOAT_EQ(0.1f, msg.r());
+  EXPECT_FLOAT_EQ(0.2f, msg.g());
+  EXPECT_FLOAT_EQ(0.3f, msg.b());
+  EXPECT_FLOAT_EQ(1.0f, msg.a());
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMsgsColorToMath)
+{
+  msgs::Color msg = msgs::Convert(math::Color(.1, .2, .3, 1.0));
+  math::Color v = msgs::Convert(msg);
+
+  EXPECT_FLOAT_EQ(0.1f, v.R());
+  EXPECT_FLOAT_EQ(0.2f, v.G());
+  EXPECT_FLOAT_EQ(0.3f, v.B());
+  EXPECT_FLOAT_EQ(1.0f, v.A());
+}
+
+/////////////////////////////////////////////////
 TEST(UtilityTest, ConvertMathPlaneToMsgs)
 {
   msgs::PlaneGeom msg = msgs::Convert(
@@ -131,6 +171,66 @@ TEST(UtilityTest, ConvertMsgsPlaneToMath)
   EXPECT_DOUBLE_EQ(456, v.Size().Y());
 
   EXPECT_TRUE(math::equal(1.0, v.Offset()));
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMathInertialToMsgs)
+{
+  const auto pose = ignition::math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
+  msgs::Inertial msg = msgs::Convert(
+      ignition::math::Inertiald(
+        ignition::math::MassMatrix3d(12.0,
+          ignition::math::Vector3d(2, 3, 4),
+          ignition::math::Vector3d(0.1, 0.2, 0.3)),
+        pose));
+
+  EXPECT_DOUBLE_EQ(12.0, msg.mass());
+  EXPECT_DOUBLE_EQ(2.0, msg.ixx());
+  EXPECT_DOUBLE_EQ(3.0, msg.iyy());
+  EXPECT_DOUBLE_EQ(4.0, msg.izz());
+  EXPECT_DOUBLE_EQ(0.1, msg.ixy());
+  EXPECT_DOUBLE_EQ(0.2, msg.ixz());
+  EXPECT_DOUBLE_EQ(0.3, msg.iyz());
+  EXPECT_EQ(pose, msgs::Convert(msg.pose()));
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMsgsInertialToMath)
+{
+  const auto pose = ignition::math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
+  msgs::Inertial msg = msgs::Convert(
+      ignition::math::Inertiald(
+        ignition::math::MassMatrix3d(12.0,
+          ignition::math::Vector3d(2, 3, 4),
+          ignition::math::Vector3d(0.1, 0.2, 0.3)),
+        pose));
+  auto inertial = msgs::Convert(msg);
+
+  EXPECT_DOUBLE_EQ(12.0, inertial.MassMatrix().Mass());
+  EXPECT_DOUBLE_EQ(2.0, inertial.MassMatrix().IXX());
+  EXPECT_DOUBLE_EQ(3.0, inertial.MassMatrix().IYY());
+  EXPECT_DOUBLE_EQ(4.0, inertial.MassMatrix().IZZ());
+  EXPECT_DOUBLE_EQ(0.1, inertial.MassMatrix().IXY());
+  EXPECT_DOUBLE_EQ(0.2, inertial.MassMatrix().IXZ());
+  EXPECT_DOUBLE_EQ(0.3, inertial.MassMatrix().IYZ());
+  EXPECT_EQ(pose, inertial.Pose());
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMathMassMatrix3ToMsgs)
+{
+  msgs::Inertial msg = msgs::Convert(
+      ignition::math::MassMatrix3d(12.0,
+        ignition::math::Vector3d(2, 3, 4),
+        ignition::math::Vector3d(0.1, 0.2, 0.3)));
+
+  EXPECT_DOUBLE_EQ(12.0, msg.mass());
+  EXPECT_DOUBLE_EQ(2.0, msg.ixx());
+  EXPECT_DOUBLE_EQ(3.0, msg.iyy());
+  EXPECT_DOUBLE_EQ(4.0, msg.izz());
+  EXPECT_DOUBLE_EQ(0.1, msg.ixy());
+  EXPECT_DOUBLE_EQ(0.2, msg.ixz());
+  EXPECT_DOUBLE_EQ(0.3, msg.iyz());
 }
 
 /////////////////////////////////////////////////
@@ -181,6 +281,17 @@ TEST(UtilityTest, SetPose)
 }
 
 /////////////////////////////////////////////////
+TEST(MsgsTest, SetColor)
+{
+  msgs::Color msg;
+  msgs::Set(&msg, math::Color(.1, .2, .3, 1.0));
+  EXPECT_FLOAT_EQ(0.1f, msg.r());
+  EXPECT_FLOAT_EQ(0.2f, msg.g());
+  EXPECT_FLOAT_EQ(0.3f, msg.b());
+  EXPECT_FLOAT_EQ(1.0f, msg.a());
+}
+
+/////////////////////////////////////////////////
 TEST(UtilityTest, SetPlane)
 {
   msgs::PlaneGeom msg;
@@ -196,6 +307,46 @@ TEST(UtilityTest, SetPlane)
   EXPECT_DOUBLE_EQ(456, msg.size().y());
 
   EXPECT_TRUE(math::equal(1.0, msg.d()));
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetInertial)
+{
+  const auto pose = ignition::math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
+  msgs::Inertial msg;
+  msgs::Set(&msg, ignition::math::Inertiald(
+      ignition::math::MassMatrix3d(
+        12.0,
+        ignition::math::Vector3d(2, 3, 4),
+        ignition::math::Vector3d(0.1, 0.2, 0.3)),
+      pose));
+
+  EXPECT_DOUBLE_EQ(12.0, msg.mass());
+  EXPECT_DOUBLE_EQ(2.0, msg.ixx());
+  EXPECT_DOUBLE_EQ(3.0, msg.iyy());
+  EXPECT_DOUBLE_EQ(4.0, msg.izz());
+  EXPECT_DOUBLE_EQ(0.1, msg.ixy());
+  EXPECT_DOUBLE_EQ(0.2, msg.ixz());
+  EXPECT_DOUBLE_EQ(0.3, msg.iyz());
+  EXPECT_EQ(pose, msgs::Convert(msg.pose()));
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetMassMatrix3)
+{
+  msgs::Inertial msg;
+  msgs::Set(&msg, ignition::math::MassMatrix3d(
+        12.0,
+        ignition::math::Vector3d(2, 3, 4),
+        ignition::math::Vector3d(0.1, 0.2, 0.3)));
+
+  EXPECT_DOUBLE_EQ(12.0, msg.mass());
+  EXPECT_DOUBLE_EQ(2.0, msg.ixx());
+  EXPECT_DOUBLE_EQ(3.0, msg.iyy());
+  EXPECT_DOUBLE_EQ(4.0, msg.izz());
+  EXPECT_DOUBLE_EQ(0.1, msg.ixy());
+  EXPECT_DOUBLE_EQ(0.2, msg.ixz());
+  EXPECT_DOUBLE_EQ(0.3, msg.iyz());
 }
 
 /////////////////////////////////////////////////
