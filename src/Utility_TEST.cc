@@ -391,6 +391,7 @@ TEST(MsgsTest, ConvertMsgsJointTypeToString)
   CompareMsgsJointTypeToString(msgs::Joint::FIXED);
 
   EXPECT_EQ(msgs::ConvertJointType("bad type"), msgs::Joint::REVOLUTE);
+  EXPECT_EQ(msgs::ConvertJointType(msgs::Joint::Type(100)), "unknown");
 }
 
 //////////////////////////////////////////////////
@@ -412,6 +413,7 @@ TEST(MsgsTest, ConvertMsgsGeometryTypeToString)
   CompareMsgsGeometryTypeToString(msgs::Geometry::POLYLINE);
 
   EXPECT_EQ(msgs::ConvertGeometryType("bad type"), msgs::Geometry::BOX);
+  EXPECT_EQ(msgs::ConvertGeometryType(msgs::Geometry::Type(100)), "unknown");
 }
 
 //////////////////////////////////////////////////
@@ -429,5 +431,6 @@ TEST(MsgsTest, ConvertMsgsShaderTypeToString)
   CompareMsgsShaderTypeToString(msgs::Material::VERTEX);
 
   EXPECT_EQ(msgs::ConvertShaderType("bad type"), msgs::Material::VERTEX);
+  EXPECT_EQ(msgs::ConvertShaderType(msgs::Material::ShaderType(100)), "unknown");
 }
 
