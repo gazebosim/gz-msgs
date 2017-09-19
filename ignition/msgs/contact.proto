@@ -24,7 +24,6 @@ option java_outer_classname = "ContactProtos";
 /// \brief Contact message for passing info between two entities
 
 import "ignition/msgs/vector3d.proto";
-import "ignition/msgs/time.proto";
 import "ignition/msgs/joint_wrench.proto";
 import "ignition/msgs/header.proto";
 
@@ -41,6 +40,5 @@ message Contact
   repeated double depth       = 6;
   repeated JointWrench wrench = 7;
 
-  optional Time time         = 8;
-  optional string world      = 9 [default = "default"];
+  optional string world       = 8 [default = "default"];
 }

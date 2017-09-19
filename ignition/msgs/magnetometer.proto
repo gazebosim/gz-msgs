@@ -24,7 +24,6 @@ option java_outer_classname = "MagnetometerProtos";
 /// \brief Data from a magnetic field strength sensor
 
 import "ignition/msgs/header.proto";
-import "ignition/msgs/time.proto";
 import "ignition/msgs/vector3d.proto";
 
 /// \brief Message that encapsulates sensor data from a magnetometer.
@@ -33,9 +32,6 @@ message Magnetometer
   /// \brief Optional header data
   optional Header header             = 1;
 
-  /// \brief Global time at which the magnetic field strength was sampled
-  optional Time time                 = 2;
-  
   /// \brief Magnetic field strength (in Tesla) along body-frame axis
-  optional Vector3d field_tesla      = 3;
+  optional Vector3d field_tesla      = 2;
 }

@@ -23,7 +23,6 @@ option java_outer_classname = "TactileProtos";
 /// \interface Tactile
 /// \brief Message for a tactile data
 
-import "ignition/msgs/time.proto";
 import "ignition/msgs/header.proto";
 
 message Tactile
@@ -34,5 +33,4 @@ message Tactile
   repeated string collision_name = 2;
   repeated uint32 collision_id   = 3;
   repeated double pressure       = 4;
-  optional Time time             = 5;
 }
