@@ -231,6 +231,7 @@ TEST(MsgsTest, ConvertMathMassMatrix3ToMsgs)
   EXPECT_DOUBLE_EQ(0.1, msg.ixy());
   EXPECT_DOUBLE_EQ(0.2, msg.ixz());
   EXPECT_DOUBLE_EQ(0.3, msg.iyz());
+  EXPECT_EQ(ignition::math::Pose3d::Zero, msgs::Convert(msg.pose()));
 }
 
 /////////////////////////////////////////////////
@@ -347,6 +348,7 @@ TEST(MsgsTest, SetMassMatrix3)
   EXPECT_DOUBLE_EQ(0.1, msg.ixy());
   EXPECT_DOUBLE_EQ(0.2, msg.ixz());
   EXPECT_DOUBLE_EQ(0.3, msg.iyz());
+  EXPECT_EQ(ignition::math::Pose3d::Zero, msgs::Convert(msg.pose()));
 }
 
 /////////////////////////////////////////////////
