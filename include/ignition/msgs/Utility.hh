@@ -17,6 +17,8 @@
 #ifndef IGNITION_MSGS_UTILITY_HH_
 #define IGNITION_MSGS_UTILITY_HH_
 
+#include <string>
+
 #include <ignition/math/Color.hh>
 #include <ignition/math/Inertial.hh>
 #include <ignition/math/Pose3.hh>

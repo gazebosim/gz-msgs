@@ -431,6 +431,7 @@ TEST(MsgsTest, ConvertMsgsShaderTypeToString)
   CompareMsgsShaderTypeToString(msgs::Material::VERTEX);
 
   EXPECT_EQ(msgs::ConvertShaderType("bad type"), msgs::Material::VERTEX);
-  EXPECT_EQ(msgs::ConvertShaderType(msgs::Material::ShaderType(100)), "unknown");
+  EXPECT_EQ(msgs::ConvertShaderType(msgs::Material::ShaderType(100)),
+      "unknown");
 }
 
