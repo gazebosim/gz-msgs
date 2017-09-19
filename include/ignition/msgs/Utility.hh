@@ -17,11 +17,14 @@
 #ifndef IGNITION_MSGS_UTILITY_HH_
 #define IGNITION_MSGS_UTILITY_HH_
 
-#include <ignition/math/Vector3.hh>
+#include <ignition/math/Color.hh>
+#include <ignition/math/Inertial.hh>
 #include <ignition/math/Pose3.hh>
 #include <ignition/math/Plane.hh>
-#include <ignition/msgs/MessageTypes.hh>
-#include <ignition/msgs/System.hh>
+#include <ignition/math/Vector3.hh>
+
+#include "ignition/msgs/MessageTypes.hh"
+#include "ignition/msgs/System.hh"
 
 namespace ignition
 {
@@ -51,11 +54,23 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     ignition::math::Pose3d Convert(const msgs::Pose &_p);
 
+    /// \brief Convert a msgs::Color to a math::Color
+    /// \param[in] _c The color to convert
+    /// \return A math::Color object
+    IGNITION_MSGS_VISIBLE
+    math::Color Convert(const msgs::Color &_c);
+
     /// \brief Convert a msgs::PlaneGeom to an ignition::math::Planed
     /// \param[in] _p The plane to convert
     /// \return An ignition::math::Planed object
     IGNITION_MSGS_VISIBLE
     ignition::math::Planed Convert(const msgs::PlaneGeom &_p);
+
+    /// \brief Convert a msgs::Inertial to an ignition::math::Inertiald
+    /// \param[in] _i The inertial to convert
+    /// \return An ignition::math::Inertiald object
+    IGNITION_MSGS_VISIBLE
+    math::Inertiald Convert(const msgs::Inertial &_i);
 
     /// \brief Convert a ignition::math::Vector3d to a msgs::Vector3d
     /// \param[in] _v The vector to convert
@@ -80,6 +95,24 @@ namespace ignition
     /// \return A msgs::Pose object
     IGNITION_MSGS_VISIBLE
     msgs::Pose Convert(const ignition::math::Pose3d &_p);
+
+    /// \brief Convert a math::Color to a msgs::Color
+    /// \param[in] _c The color to convert
+    /// \return A msgs::Color object
+    IGNITION_MSGS_VISIBLE
+    msgs::Color Convert(const math::Color &_c);
+
+    /// \brief Convert an math::Inertiald to a msgs::Inertial
+    /// \param[in] _i The Inertiald to convert
+    /// \return A msgs::Inertial object
+    IGNITION_MSGS_VISIBLE
+    msgs::Inertial Convert(const math::Inertiald &_i);
+
+    /// \brief Convert an math::MassMatrix3d to a msgs::Inertial
+    /// \param[in] _m The MassMatrix3d to convert
+    /// \return A msgs::Inertial object
+    IGNITION_MSGS_VISIBLE
+    msgs::Inertial Convert(const math::MassMatrix3d &_m);
 
     /// \brief Convert a ignition::math::Planed to a msgs::PlaneGeom
     /// \param[in] _p The plane to convert
@@ -110,6 +143,24 @@ namespace ignition
     /// \param[in] _v An ignition::math::Pose3d reference
     IGNITION_MSGS_VISIBLE
     void Set(msgs::Pose *_p, const ignition::math::Pose3d &_v);
+
+    /// \brief Set a msgs::Color from a math::Color
+    /// \param[out] _p A msgs::Color pointer
+    /// \param[in] _v A math::Color reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::Color *_c, const math::Color &_v);
+
+    /// \brief Set a msgs::Inertial from an math::Inertiald
+    /// \param[out] _i A msgs::Inertial pointer
+    /// \param[in] _m An math::Inertiald reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::Inertial *_i, const math::Inertiald &_m);
+
+    /// \brief Set a msgs::Inertial from an math::MassMatrix3d
+    /// \param[out] _i A msgs::Inertial pointer
+    /// \param[in] _m An math::MassMatrix3d reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::Inertial *_i, const math::MassMatrix3d &_m);
 
     /// \brief Set a msgs::Plane from an ignition::math::Planed
     /// \param[out] _p A msgs::Plane pointer

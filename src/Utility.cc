@@ -52,6 +52,24 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
+    math::Inertiald Convert(const msgs::Inertial &_i)
+    {
+      auto pose = msgs::Convert(_i.pose());
+      return math::Inertiald(
+        math::MassMatrix3d(
+          _i.mass(),
+          math::Vector3d(_i.ixx(), _i.iyy(), _i.izz()),
+          math::Vector3d(_i.ixy(), _i.ixz(), _i.iyz())),
+        pose);
+    }
+
+    /////////////////////////////////////////////
+    math::Color Convert(const msgs::Color &_c)
+    {
+      return math::Color(_c.r(), _c.g(), _c.b(), _c.a());
+    }
+
+    /////////////////////////////////////////////
     ignition::math::Planed Convert(const msgs::PlaneGeom &_p)
     {
       return ignition::math::Planed(Convert(_p.normal()),
@@ -95,6 +113,33 @@ namespace ignition
       msgs::Pose result;
       result.mutable_position()->CopyFrom(Convert(_p.Pos()));
       result.mutable_orientation()->CopyFrom(Convert(_p.Rot()));
+      return result;
+    }
+
+    /////////////////////////////////////////////
+    msgs::Color Convert(const math::Color &_c)
+    {
+      msgs::Color result;
+      result.set_r(_c.R());
+      result.set_g(_c.G());
+      result.set_b(_c.B());
+      result.set_a(_c.A());
+      return result;
+    }
+
+    /////////////////////////////////////////////
+    msgs::Inertial Convert(const math::Inertiald &_i)
+    {
+      msgs::Inertial result;
+      msgs::Set(&result, _i);
+      return result;
+    }
+
+    /////////////////////////////////////////////
+    msgs::Inertial Convert(const math::MassMatrix3d &_m)
+    {
+      msgs::Inertial result;
+      msgs::Set(&result, _m);
       return result;
     }
 
@@ -147,6 +192,34 @@ namespace ignition
       _p->mutable_size()->set_x(_v.Size().X());
       _p->mutable_size()->set_y(_v.Size().Y());
       _p->set_d(_v.Offset());
+    }
+
+    /////////////////////////////////////////////
+    void Set(msgs::Color *_c, const math::Color &_v)
+    {
+      _c->set_r(_v.R());
+      _c->set_g(_v.G());
+      _c->set_b(_v.B());
+      _c->set_a(_v.A());
+    }
+
+    /////////////////////////////////////////////////
+    void Set(msgs::Inertial *_i, const math::MassMatrix3d &_m)
+    {
+      _i->set_mass(_m.Mass());
+      _i->set_ixx(_m.IXX());
+      _i->set_iyy(_m.IYY());
+      _i->set_izz(_m.IZZ());
+      _i->set_ixy(_m.IXY());
+      _i->set_ixz(_m.IXZ());
+      _i->set_iyz(_m.IYZ());
+    }
+
+    /////////////////////////////////////////////////
+    void Set(msgs::Inertial *_i, const math::Inertiald &_m)
+    {
+      msgs::Set(_i, _m.MassMatrix());
+      msgs::Set(_i->mutable_pose(), _m.Pose());
     }
   }
 }
