@@ -221,5 +221,285 @@ namespace ignition
       msgs::Set(_i, _m.MassMatrix());
       msgs::Set(_i->mutable_pose(), _m.Pose());
     }
+
+    /////////////////////////////////////////////
+    msgs::Joint::Type ConvertJointType(const std::string &_str)
+    {
+      msgs::Joint::Type result = msgs::Joint::REVOLUTE;
+      if (_str == "revolute")
+      {
+        result = msgs::Joint::REVOLUTE;
+      }
+      else if (_str == "revolute2")
+      {
+        result = msgs::Joint::REVOLUTE2;
+      }
+      else if (_str == "prismatic")
+      {
+        result = msgs::Joint::PRISMATIC;
+      }
+      else if (_str == "universal")
+      {
+        result = msgs::Joint::UNIVERSAL;
+      }
+      else if (_str == "ball")
+      {
+        result = msgs::Joint::BALL;
+      }
+      else if (_str == "screw")
+      {
+        result = msgs::Joint::SCREW;
+      }
+      else if (_str == "gearbox")
+      {
+        result = msgs::Joint::GEARBOX;
+      }
+      else if (_str == "fixed")
+      {
+        result = msgs::Joint::FIXED;
+      }
+      else
+      {
+        std::cerr << "Unrecognized JointType ["
+                  << _str
+                  << "], returning msgs::Joint::REVOLUTE"
+                  << std::endl;
+      }
+      return result;
+    }
+
+    /////////////////////////////////////////////
+    std::string ConvertJointType(const msgs::Joint::Type &_type)
+    {
+      std::string result;
+      switch (_type)
+      {
+        case msgs::Joint::REVOLUTE:
+        {
+          result = "revolute";
+          break;
+        }
+        case msgs::Joint::REVOLUTE2:
+        {
+          result = "revolute2";
+          break;
+        }
+        case msgs::Joint::PRISMATIC:
+        {
+          result = "prismatic";
+          break;
+        }
+        case msgs::Joint::UNIVERSAL:
+        {
+          result = "universal";
+          break;
+        }
+        case msgs::Joint::BALL:
+        {
+          result = "ball";
+          break;
+        }
+        case msgs::Joint::SCREW:
+        {
+          result = "screw";
+          break;
+        }
+        case msgs::Joint::GEARBOX:
+        {
+          result = "gearbox";
+          break;
+        }
+        case msgs::Joint::FIXED:
+        {
+          result = "fixed";
+          break;
+        }
+        default:
+        {
+          result = "unknown";
+          std::cerr << "Unrecognized JointType ["
+                    << _type
+                    << "], returning 'unknown'"
+                    << std::endl;
+          break;
+        }
+      }
+      return result;
+    }
+
+    /////////////////////////////////////////////////
+    msgs::Geometry::Type ConvertGeometryType(const std::string &_str)
+    {
+      msgs::Geometry::Type result = msgs::Geometry::BOX;
+      if (_str == "box")
+      {
+        result = msgs::Geometry::BOX;
+      }
+      else if (_str == "cylinder")
+      {
+        result = msgs::Geometry::CYLINDER;
+      }
+      else if (_str == "sphere")
+      {
+        result = msgs::Geometry::SPHERE;
+      }
+      else if (_str == "plane")
+      {
+        result = msgs::Geometry::PLANE;
+      }
+      else if (_str == "image")
+      {
+        result = msgs::Geometry::IMAGE;
+      }
+      else if (_str == "heightmap")
+      {
+        result = msgs::Geometry::HEIGHTMAP;
+      }
+      else if (_str == "mesh")
+      {
+        result = msgs::Geometry::MESH;
+      }
+      else if (_str == "polyline")
+      {
+        result = msgs::Geometry::POLYLINE;
+      }
+      else
+      {
+        std::cerr << "Unrecognized Geometry::Type ["
+                  << _str
+                  << "], returning msgs::Geometry::BOX"
+                  << std::endl;
+      }
+
+      return result;
+    }
+
+    /////////////////////////////////////////////////
+    std::string ConvertGeometryType(const msgs::Geometry::Type _type)
+    {
+      std::string result;
+      switch (_type)
+      {
+        case msgs::Geometry::BOX:
+        {
+          result = "box";
+          break;
+        }
+        case msgs::Geometry::CYLINDER:
+        {
+          result = "cylinder";
+          break;
+        }
+        case msgs::Geometry::SPHERE:
+        {
+          result = "sphere";
+          break;
+        }
+        case msgs::Geometry::PLANE:
+        {
+          result = "plane";
+          break;
+        }
+        case msgs::Geometry::IMAGE:
+        {
+          result = "image";
+          break;
+        }
+        case msgs::Geometry::HEIGHTMAP:
+        {
+          result = "heightmap";
+          break;
+        }
+        case msgs::Geometry::MESH:
+        {
+          result = "mesh";
+          break;
+        }
+        case msgs::Geometry::POLYLINE:
+        {
+          result = "polyline";
+          break;
+        }
+        default:
+        {
+          result = "unknown";
+          std::cerr << "Unrecognized Geometry::Type ["
+                    << _type
+                    << "], returning 'unknown'"
+                    << std::endl;
+          break;
+        }
+      }
+      return result;
+    }
+
+    /////////////////////////////////////////////////
+    msgs::Material::ShaderType ConvertShaderType(const std::string &_str)
+    {
+      auto result = msgs::Material::VERTEX;
+      if (_str == "vertex")
+      {
+        result = msgs::Material::VERTEX;
+      }
+      else if (_str == "pixel")
+      {
+        result = msgs::Material::PIXEL;
+      }
+      else if (_str == "normal_map_object_space")
+      {
+        result = msgs::Material::NORMAL_MAP_OBJECT_SPACE;
+      }
+      else if (_str == "normal_map_tangent_space")
+      {
+        result = msgs::Material::NORMAL_MAP_TANGENT_SPACE;
+      }
+      else
+      {
+        std::cerr << "Unrecognized Material::ShaderType ["
+                  << _str
+                  << "], returning msgs::Material::VERTEX"
+                  << std::endl;
+      }
+      return result;
+    }
+
+    /////////////////////////////////////////////////
+    std::string ConvertShaderType(const msgs::Material::ShaderType &_type)
+    {
+      std::string result;
+      switch (_type)
+      {
+        case msgs::Material::VERTEX:
+        {
+          result = "vertex";
+          break;
+        }
+        case msgs::Material::PIXEL:
+        {
+          result = "pixel";
+          break;
+        }
+        case msgs::Material::NORMAL_MAP_OBJECT_SPACE:
+        {
+          result = "normal_map_object_space";
+          break;
+        }
+        case msgs::Material::NORMAL_MAP_TANGENT_SPACE:
+        {
+          result = "normal_map_tangent_space";
+          break;
+        }
+        default:
+        {
+          result = "unknown";
+          std::cerr << "Unrecognized Material::ShaderType ["
+                    << _type
+                    << "], returning 'unknown'"
+                    << std::endl;
+          break;
+        }
+      }
+      return result;
+    }
   }
 }

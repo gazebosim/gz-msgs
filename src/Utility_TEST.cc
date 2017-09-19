@@ -371,3 +371,63 @@ TEST(UtilityTest, Initialization)
     EXPECT_DOUBLE_EQ(0, msg.torque().z());
   }
 }
+
+//////////////////////////////////////////////////
+void CompareMsgsJointTypeToString(const msgs::Joint::Type _type)
+{
+  EXPECT_EQ(_type, msgs::ConvertJointType(msgs::ConvertJointType(_type)));
+}
+
+//////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMsgsJointTypeToString)
+{
+  CompareMsgsJointTypeToString(msgs::Joint::REVOLUTE);
+  CompareMsgsJointTypeToString(msgs::Joint::REVOLUTE2);
+  CompareMsgsJointTypeToString(msgs::Joint::PRISMATIC);
+  CompareMsgsJointTypeToString(msgs::Joint::UNIVERSAL);
+  CompareMsgsJointTypeToString(msgs::Joint::BALL);
+  CompareMsgsJointTypeToString(msgs::Joint::SCREW);
+  CompareMsgsJointTypeToString(msgs::Joint::GEARBOX);
+  CompareMsgsJointTypeToString(msgs::Joint::FIXED);
+
+  EXPECT_EQ(msgs::ConvertJointType("bad type"), msgs::Joint::REVOLUTE);
+}
+
+//////////////////////////////////////////////////
+void CompareMsgsGeometryTypeToString(const msgs::Geometry::Type _type)
+{
+  EXPECT_EQ(_type, msgs::ConvertGeometryType(msgs::ConvertGeometryType(_type)));
+}
+
+//////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMsgsGeometryTypeToString)
+{
+  CompareMsgsGeometryTypeToString(msgs::Geometry::BOX);
+  CompareMsgsGeometryTypeToString(msgs::Geometry::SPHERE);
+  CompareMsgsGeometryTypeToString(msgs::Geometry::CYLINDER);
+  CompareMsgsGeometryTypeToString(msgs::Geometry::PLANE);
+  CompareMsgsGeometryTypeToString(msgs::Geometry::IMAGE);
+  CompareMsgsGeometryTypeToString(msgs::Geometry::HEIGHTMAP);
+  CompareMsgsGeometryTypeToString(msgs::Geometry::MESH);
+  CompareMsgsGeometryTypeToString(msgs::Geometry::POLYLINE);
+
+  EXPECT_EQ(msgs::ConvertGeometryType("bad type"), msgs::Geometry::BOX);
+}
+
+//////////////////////////////////////////////////
+void CompareMsgsShaderTypeToString(const msgs::Material::ShaderType _type)
+{
+  EXPECT_EQ(_type, msgs::ConvertShaderType(msgs::ConvertShaderType(_type)));
+}
+
+//////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMsgsShaderTypeToString)
+{
+  CompareMsgsShaderTypeToString(msgs::Material::NORMAL_MAP_OBJECT_SPACE);
+  CompareMsgsShaderTypeToString(msgs::Material::NORMAL_MAP_TANGENT_SPACE);
+  CompareMsgsShaderTypeToString(msgs::Material::PIXEL);
+  CompareMsgsShaderTypeToString(msgs::Material::VERTEX);
+
+  EXPECT_EQ(msgs::ConvertShaderType("bad type"), msgs::Material::VERTEX);
+}
+
