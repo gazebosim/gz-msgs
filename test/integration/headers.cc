@@ -50,5 +50,5 @@ TEST(Messages, NestedHeaders)
   // The contact's embedded wrench message should be the same size as the
   // standalone wrench message.
   contact.wrench(0).SerializeToString(&contactSerialized);
-  EXPECT_EQ(wrenchSerailized.size(), contactSerialized.size());
+  EXPECT_EQ(wrenchSerialized.size(), contactSerialized.size());
 }
