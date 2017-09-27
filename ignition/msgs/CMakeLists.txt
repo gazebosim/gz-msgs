@@ -44,8 +44,6 @@ heightmapgeom.proto
 hydra.proto
 imagegeom.proto
 image.proto
-images_stamped.proto
-image_stamped.proto
 imu.proto
 imu_sensor.proto
 inertial.proto
@@ -57,10 +55,8 @@ joint_animation.proto
 joint_cmd.proto
 joint.proto
 joint_wrench.proto
-joint_wrench_stamped.proto
 joystick.proto
 laserscan.proto
-laserscan_stamped.proto
 light.proto
 link_data.proto
 link.proto
@@ -90,8 +86,6 @@ pointcloud.proto
 polylinegeom.proto
 pose_animation.proto
 pose.proto
-poses_stamped.proto
-pose_stamped.proto
 pose_trajectory.proto
 pose_v.proto
 projector.proto
@@ -118,7 +112,6 @@ shadows.proto
 sim_event.proto
 sky.proto
 sonar.proto
-sonar_stamped.proto
 spheregeom.proto
 spherical_coordinates.proto
 stringmsg.proto
@@ -150,7 +143,6 @@ world_modify.proto
 world_reset.proto
 world_stats.proto
 wrench.proto
-wrench_stamped.proto
 )
 
 set(PROTO_SRCS)

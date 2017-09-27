@@ -23,7 +23,6 @@ option java_outer_classname = "AltimeterProtos";
 /// \interface Altimeter
 /// \brief Data from an altimeter sensor
 
-import "ignition/msgs/time.proto";
 import "ignition/msgs/header.proto";
 
 /// \brief Altimeter sensor data
@@ -32,15 +31,12 @@ message Altimeter
   /// \brief Optional header data
   optional Header header             = 1;
 
-  /// \brief Timestamp of the altimeter data
-  optional Time time                 = 2;
-
   /// \brief Vertical position data, in meters.
-  optional double vertical_position  = 3 [default = 0];
+  optional double vertical_position  = 2 [default = 0];
 
   /// \brief Vertical velocity data, in meters/second.
-  optional double vertical_velocity  = 4 [default = 0];
+  optional double vertical_velocity  = 3 [default = 0];
 
   /// \brief Vertical reference.
-  optional double vertical_reference = 5 [default = 0];
+  optional double vertical_reference = 4 [default = 0];
 }
