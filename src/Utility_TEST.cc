@@ -248,7 +248,7 @@ TEST(UtilityTest, ConvertStringMsg)
 /////////////////////////////////////////////////
 TEST(UtilityTest, ConvertBoolean)
 {
-  msgs::Boolean msg = msgs::Convert(bool(true));
+  msgs::Boolean msg = msgs::Convert(static_cast<bool>(true));
   EXPECT_EQ(true, msg.data());
 
   bool s = msgs::Convert(msg);
@@ -258,7 +258,7 @@ TEST(UtilityTest, ConvertBoolean)
 /////////////////////////////////////////////////
 TEST(UtilityTest, ConvertInt32)
 {
-  msgs::Int32 msg = msgs::Convert(int(-543));
+  msgs::Int32 msg = msgs::Convert(static_cast<int32_t>(-543));
   EXPECT_EQ(-543, msg.data());
 
   int s = msgs::Convert(msg);
@@ -298,7 +298,7 @@ TEST(UtilityTest, ConvertUInt64)
 /////////////////////////////////////////////////
 TEST(UtilityTest, ConvertDouble)
 {
-  msgs::Double msg = msgs::Convert(double(-33.888));
+  msgs::Double msg = msgs::Convert(static_cast<double>(-33.888));
   EXPECT_DOUBLE_EQ(-33.888, msg.data());
 
   double s = msgs::Convert(msg);
