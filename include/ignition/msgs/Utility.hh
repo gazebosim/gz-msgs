@@ -86,17 +86,29 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     bool Convert(const msgs::Boolean &_m);
 
-    /// \brief Convert a msgs::Int32 to an int
+    /// \brief Convert a msgs::Int32 to an int32_t
     /// \param[in] _m The message to convert
-    /// \return An int object
+    /// \return An int32_t object
     IGNITION_MSGS_VISIBLE
-    int Convert(const msgs::Int32 &_m);
+    int32_t Convert(const msgs::Int32 &_m);
 
-    /// \brief Convert a msgs::UInt32 to an unsigned int
+    /// \brief Convert a msgs::UInt32 to an uint32_t
     /// \param[in] _m The message to convert
-    /// \return An unsigned int object
+    /// \return An uint32_t object
     IGNITION_MSGS_VISIBLE
-    unsigned int Convert(const msgs::UInt32 &_m);
+    uint32_t Convert(const msgs::UInt32 &_m);
+
+    /// \brief Convert a msgs::Int64 to an int64_t
+    /// \param[in] _m The message to convert
+    /// \return An int64_t object
+    IGNITION_MSGS_VISIBLE
+    int64_t Convert(const msgs::Int64 &_m);
+
+    /// \brief Convert a msgs::UInt64 to an uint64_t
+    /// \param[in] _m The message to convert
+    /// \return An uint64_t object
+    IGNITION_MSGS_VISIBLE
+    uint64_t Convert(const msgs::UInt64 &_m);
 
     /// \brief Convert a msgs::Double to an double
     /// \param[in] _m The message to convert
@@ -170,17 +182,29 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     msgs::Boolean Convert(const bool &_b);
 
-    /// \brief Convert an int to a msgs::Int32
-    /// \param[in] _i The int to convert
+    /// \brief Convert an int32_t to a msgs::Int32
+    /// \param[in] _i The int32_t to convert
     /// \return A msgs::Int32 object
     IGNITION_MSGS_VISIBLE
-    msgs::Int32 Convert(const int &_i);
+    msgs::Int32 Convert(const int32_t &_i);
 
-    /// \brief Convert an unsigned int to a msgs::UInt32
-    /// \param[in] _u The unsigned int to convert
+    /// \brief Convert an uint32_t to a msgs::UInt32
+    /// \param[in] _u The uint32_t to convert
     /// \return A msgs::UInt32 object
     IGNITION_MSGS_VISIBLE
-    msgs::UInt32 Convert(const unsigned int &_u);
+    msgs::UInt32 Convert(const uint32_t &_u);
+
+    /// \brief Convert an int64_t to a msgs::Int64
+    /// \param[in] _i The int64_t to convert
+    /// \return A msgs::Int64 object
+    IGNITION_MSGS_VISIBLE
+    msgs::Int64 Convert(const int64_t &_i);
+
+    /// \brief Convert an uint64_t to a msgs::UInt64
+    /// \param[in] _u The uint64_t to convert
+    /// \return A msgs::UInt64 object
+    IGNITION_MSGS_VISIBLE
+    msgs::UInt64 Convert(const uint64_t &_u);
 
     /// \brief Convert a double to a msgs::Double
     /// \param[in] _d The double to convert
@@ -294,17 +318,29 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     void Set(msgs::Boolean *_p, const bool &_v);
 
-    /// \brief Set a msgs::Int32 from an int
+    /// \brief Set a msgs::Int32 from an int32_t
     /// \param[out] _p A msgs::Int32 pointer
-    /// \param[in] _v An int reference
+    /// \param[in] _v An int32_t reference
     IGNITION_MSGS_VISIBLE
-    void Set(msgs::Int32 *_p, const int &_v);
+    void Set(msgs::Int32 *_p, const int32_t &_v);
 
-    /// \brief Set a msgs::UInt32 from an unsigned int
+    /// \brief Set a msgs::UInt32 from an uint32_t
     /// \param[out] _p A msgs::UInt32 pointer
-    /// \param[in] _v An unsigned int reference
+    /// \param[in] _v An uint32_t reference
     IGNITION_MSGS_VISIBLE
-    void Set(msgs::UInt32 *_p, const unsigned int &_v);
+    void Set(msgs::UInt32 *_p, const uint32_t &_v);
+
+    /// \brief Set a msgs::Int64 from an int64_t
+    /// \param[out] _p A msgs::Int64 pointer
+    /// \param[in] _v An int64_t reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::Int64 *_p, const int64_t &_v);
+
+    /// \brief Set a msgs::UInt64 from an uint32_t
+    /// \param[out] _p A msgs::UInt64 pointer
+    /// \param[in] _v An uint64_t reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::UInt64 *_p, const uint64_t &_v);
 
     /// \brief Set a msgs::Double from an double
     /// \param[out] _p A msgs::Double pointer

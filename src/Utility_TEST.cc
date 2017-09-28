@@ -16,6 +16,7 @@
 */
 
 #include <gtest/gtest.h>
+#include <limits>
 #include "ignition/msgs/MessageTypes.hh"
 #include "ignition/msgs/Utility.hh"
 
@@ -270,8 +271,28 @@ TEST(UtilityTest, ConvertUInt32)
   msgs::UInt32 msg = msgs::Convert(123456u);
   EXPECT_EQ(123456u, msg.data());
 
-  unsigned int s = msgs::Convert(msg);
+  uint32_t s = msgs::Convert(msg);
   EXPECT_EQ(s, 123456u);
+}
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, ConvertInt64)
+{
+  msgs::Int64 msg = msgs::Convert(std::numeric_limits<int64_t>::min());
+  EXPECT_EQ(std::numeric_limits<int64_t>::min(), msg.data());
+
+  int64_t s = msgs::Convert(msg);
+  EXPECT_EQ(s, std::numeric_limits<int64_t>::min());
+}
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, ConvertUInt64)
+{
+  msgs::UInt64 msg = msgs::Convert(std::numeric_limits<uint64_t>::max());
+  EXPECT_EQ(std::numeric_limits<uint64_t>::max(), msg.data());
+
+  uint64_t s = msgs::Convert(msg);
+  EXPECT_EQ(s, std::numeric_limits<uint64_t>::max());
 }
 
 /////////////////////////////////////////////////
@@ -445,6 +466,24 @@ TEST(MsgsTest, SetUInt32)
   msgs::Set(&msg, 0u);
 
   EXPECT_EQ(0u, msg.data());
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetInt64)
+{
+  msgs::Int64 msg;
+  msgs::Set(&msg, std::numeric_limits<int64_t>::max());
+
+  EXPECT_EQ(std::numeric_limits<int64_t>::max(), msg.data());
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetUInt64)
+{
+  msgs::UInt64 msg;
+  msgs::Set(&msg, std::numeric_limits<uint64_t>::min());
+
+  EXPECT_EQ(std::numeric_limits<uint64_t>::min(), msg.data());
 }
 
 /////////////////////////////////////////////////

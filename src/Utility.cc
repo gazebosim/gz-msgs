@@ -90,13 +90,25 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    int Convert(const msgs::Int32 &_m)
+    int32_t Convert(const msgs::Int32 &_m)
     {
       return _m.data();
     }
 
     /////////////////////////////////////////////
-    unsigned int Convert(const msgs::UInt32 &_m)
+    uint32_t Convert(const msgs::UInt32 &_m)
+    {
+      return _m.data();
+    }
+
+    /////////////////////////////////////////////
+    int64_t Convert(const msgs::Int64 &_m)
+    {
+      return _m.data();
+    }
+
+    /////////////////////////////////////////////
+    uint64_t Convert(const msgs::UInt64 &_m)
     {
       return _m.data();
     }
@@ -207,7 +219,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    msgs::Int32 Convert(const int &_i)
+    msgs::Int32 Convert(const int32_t &_i)
     {
       msgs::Int32 result;
       result.set_data(_i);
@@ -215,12 +227,29 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    msgs::UInt32 Convert(const unsigned int &_u)
+    msgs::UInt32 Convert(const uint32_t &_u)
     {
       msgs::UInt32 result;
       result.set_data(_u);
       return result;
     }
+
+    /////////////////////////////////////////////
+    msgs::Int64 Convert(const int64_t &_i)
+    {
+      msgs::Int64 result;
+      result.set_data(_i);
+      return result;
+    }
+
+    /////////////////////////////////////////////
+    msgs::UInt64 Convert(const uint64_t &_u)
+    {
+      msgs::UInt64 result;
+      result.set_data(_u);
+      return result;
+    }
+
 
     /////////////////////////////////////////////
     msgs::Double Convert(const double &_d)
@@ -319,13 +348,25 @@ namespace ignition
     }
 
     /////////////////////////////////////////////////
-    void Set(msgs::Int32 *_p, const int &_v)
+    void Set(msgs::Int32 *_p, const int32_t &_v)
     {
       _p->set_data(_v);
     }
 
     /////////////////////////////////////////////////
-    void Set(msgs::UInt32 *_p, const unsigned int &_v)
+    void Set(msgs::UInt32 *_p, const uint32_t &_v)
+    {
+      _p->set_data(_v);
+    }
+
+    /////////////////////////////////////////////////
+    void Set(msgs::Int64 *_p, const int64_t &_v)
+    {
+      _p->set_data(_v);
+    }
+
+    /////////////////////////////////////////////////
+    void Set(msgs::UInt64 *_p, const uint64_t &_v)
     {
       _p->set_data(_v);
     }
