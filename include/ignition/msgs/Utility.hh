@@ -17,11 +17,16 @@
 #ifndef IGNITION_MSGS_UTILITY_HH_
 #define IGNITION_MSGS_UTILITY_HH_
 
-#include <ignition/math/Vector3.hh>
+#include <string>
+
+#include <ignition/math/Color.hh>
+#include <ignition/math/Inertial.hh>
 #include <ignition/math/Pose3.hh>
 #include <ignition/math/Plane.hh>
-#include <ignition/msgs/MessageTypes.hh>
-#include <ignition/msgs/System.hh>
+#include <ignition/math/Vector3.hh>
+
+#include "ignition/msgs/MessageTypes.hh"
+#include "ignition/msgs/System.hh"
 
 namespace ignition
 {
@@ -51,11 +56,23 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     ignition::math::Pose3d Convert(const msgs::Pose &_p);
 
+    /// \brief Convert a msgs::Color to a math::Color
+    /// \param[in] _c The color to convert
+    /// \return A math::Color object
+    IGNITION_MSGS_VISIBLE
+    math::Color Convert(const msgs::Color &_c);
+
     /// \brief Convert a msgs::PlaneGeom to an ignition::math::Planed
     /// \param[in] _p The plane to convert
     /// \return An ignition::math::Planed object
     IGNITION_MSGS_VISIBLE
     ignition::math::Planed Convert(const msgs::PlaneGeom &_p);
+
+    /// \brief Convert a msgs::Inertial to an ignition::math::Inertiald
+    /// \param[in] _i The inertial to convert
+    /// \return An ignition::math::Inertiald object
+    IGNITION_MSGS_VISIBLE
+    math::Inertiald Convert(const msgs::Inertial &_i);
 
     /// \brief Convert a ignition::math::Vector3d to a msgs::Vector3d
     /// \param[in] _v The vector to convert
@@ -81,11 +98,69 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     msgs::Pose Convert(const ignition::math::Pose3d &_p);
 
+    /// \brief Convert a math::Color to a msgs::Color
+    /// \param[in] _c The color to convert
+    /// \return A msgs::Color object
+    IGNITION_MSGS_VISIBLE
+    msgs::Color Convert(const math::Color &_c);
+
+    /// \brief Convert an math::Inertiald to a msgs::Inertial
+    /// \param[in] _i The Inertiald to convert
+    /// \return A msgs::Inertial object
+    IGNITION_MSGS_VISIBLE
+    msgs::Inertial Convert(const math::Inertiald &_i);
+
+    /// \brief Convert an math::MassMatrix3d to a msgs::Inertial
+    /// \param[in] _m The MassMatrix3d to convert
+    /// \return A msgs::Inertial object
+    IGNITION_MSGS_VISIBLE
+    msgs::Inertial Convert(const math::MassMatrix3d &_m);
+
     /// \brief Convert a ignition::math::Planed to a msgs::PlaneGeom
     /// \param[in] _p The plane to convert
     /// \return A msgs::PlaneGeom object
     IGNITION_MSGS_VISIBLE
     msgs::PlaneGeom Convert(const ignition::math::Planed &_p);
+
+    /// \brief Convert a string to a msgs::Joint::Type enum.
+    /// \param[in] _str Joint type string.
+    /// \return A msgs::Joint::Type enum. Defaults to REVOLUTE
+    /// if _str is unrecognized.
+    IGNITION_MSGS_VISIBLE
+    msgs::Joint::Type ConvertJointType(const std::string &_str);
+
+    /// \brief Convert a msgs::Joint::Type to a string.
+    /// \param[in] _type A msgs::Joint::Type enum.
+    /// \return Joint type string. Returns "unknown" if
+    /// _type is unrecognized.
+    IGNITION_MSGS_VISIBLE
+    std::string ConvertJointType(const msgs::Joint::Type &_type);
+
+    /// \brief Convert a string to a msgs::Geometry::Type enum.
+    /// \param[in] _str Geometry type string.
+    /// \return A msgs::Geometry::Type enum.
+    IGNITION_MSGS_VISIBLE
+    msgs::Geometry::Type ConvertGeometryType(const std::string &_str);
+
+    /// \brief Convert a msgs::Geometry::Type to a string.
+    /// \param[in] _type A msgs::Geometry::Type enum.
+    /// \return Geometry type string.
+    IGNITION_MSGS_VISIBLE
+    std::string ConvertGeometryType(const msgs::Geometry::Type _type);
+
+    /// \brief Convert a string to a msgs::Material::ShaderType enum.
+    /// \param[in] _str Shader type string.
+    /// \return A msgs::Material::ShaderType enum. Defaults to VERTEX
+    /// if _str is unrecognized.
+    IGNITION_MSGS_VISIBLE
+    msgs::Material::ShaderType ConvertShaderType(const std::string &_str);
+
+    /// \brief Convert a msgs::ShaderType to a string.
+    /// \param[in] _type A msgs::ShaderType enum.
+    /// \return Shader type string. Returns "unknown" if
+    /// _type is unrecognized.
+    IGNITION_MSGS_VISIBLE
+    std::string ConvertShaderType(const msgs::Material::ShaderType &_type);
 
     /// \brief Set a msgs::Vector3d from an ignition::math::Vector3d
     /// \param[out] _pt A msgs::Vector3d pointer
@@ -110,6 +185,24 @@ namespace ignition
     /// \param[in] _v An ignition::math::Pose3d reference
     IGNITION_MSGS_VISIBLE
     void Set(msgs::Pose *_p, const ignition::math::Pose3d &_v);
+
+    /// \brief Set a msgs::Color from a math::Color
+    /// \param[out] _p A msgs::Color pointer
+    /// \param[in] _v A math::Color reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::Color *_c, const math::Color &_v);
+
+    /// \brief Set a msgs::Inertial from an math::Inertiald
+    /// \param[out] _i A msgs::Inertial pointer
+    /// \param[in] _m An math::Inertiald reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::Inertial *_i, const math::Inertiald &_m);
+
+    /// \brief Set a msgs::Inertial from an math::MassMatrix3d
+    /// \param[out] _i A msgs::Inertial pointer
+    /// \param[in] _m An math::MassMatrix3d reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::Inertial *_i, const math::MassMatrix3d &_m);
 
     /// \brief Set a msgs::Plane from an ignition::math::Planed
     /// \param[out] _p A msgs::Plane pointer

@@ -12,6 +12,7 @@
 #  @PKG_NAME@_LIBRARIES    - Libraries to link against.
 #  @PKG_NAME@_CXX_FLAGS    - Compiler flags for compiling C++ sources.
 #  @PKG_NAME@_LDFLAGS      - Linker flags.
+#  @PKG_NAME@_PROTO_PATH   - The path containing the .proto messages.
 
 if (@PKG_NAME@_CONFIG_INCLUDED)
   return()
@@ -40,6 +41,7 @@ set(@PKG_NAME@_LIBRARIES @PROJECT_LIBRARY_TARGET_NAME@)
 set(@PKG_NAME@_INCLUDE_DIRS "@PACKAGE_INCLUDE_INSTALL_DIR_FULL@")
 set(@PKG_NAME@_LIBRARY_DIRS "@PACKAGE_LIB_INSTALL_DIR@")
 set(@PKG_NAME@_LDFLAGS      "-L@PACKAGE_LIB_INSTALL_DIR@")
+set(@PKG_NAME@_PROTO_PATH "@PACKAGE_INCLUDE_INSTALL_DIR_FULL@")
 
 find_package(ignition-math4 REQUIRED)
 check_required_components(ignition-math4)

@@ -25,7 +25,6 @@ option java_outer_classname = "ContactsProtos";
 
 import "ignition/msgs/header.proto";
 import "ignition/msgs/contact.proto";
-import "ignition/msgs/time.proto";
 
 message Contacts
 {
@@ -33,5 +32,4 @@ message Contacts
   optional Header header     = 1;
 
   repeated Contact contact   = 2;
-  optional Time time         = 3;
 }
