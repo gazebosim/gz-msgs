@@ -74,6 +74,42 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     math::Inertiald Convert(const msgs::Inertial &_i);
 
+    /// \brief Convert a msgs::StringMsg to an std::string
+    /// \param[in] _m The message to convert
+    /// \return An std::string object
+    IGNITION_MSGS_VISIBLE
+    std::string Convert(const msgs::StringMsg &_m);
+
+    /// \brief Convert a msgs::Boolean to an bool
+    /// \param[in] _m The message to convert
+    /// \return An bool object
+    IGNITION_MSGS_VISIBLE
+    bool Convert(const msgs::Boolean &_m);
+
+    /// \brief Convert a msgs::Int32 to an int
+    /// \param[in] _m The message to convert
+    /// \return An int object
+    IGNITION_MSGS_VISIBLE
+    int Convert(const msgs::Int32 &_m);
+
+    /// \brief Convert a msgs::UInt32 to an unsigned int
+    /// \param[in] _m The message to convert
+    /// \return An unsigned int object
+    IGNITION_MSGS_VISIBLE
+    unsigned int Convert(const msgs::UInt32 &_m);
+
+    /// \brief Convert a msgs::Double to an double
+    /// \param[in] _m The message to convert
+    /// \return An double object
+    IGNITION_MSGS_VISIBLE
+    double Convert(const msgs::Double &_m);
+
+    /// \brief Convert a msgs::Float to an float
+    /// \param[in] _m The message to convert
+    /// \return An float object
+    IGNITION_MSGS_VISIBLE
+    float Convert(const msgs::Float &_m);
+
     /// \brief Convert a ignition::math::Vector3d to a msgs::Vector3d
     /// \param[in] _v The vector to convert
     /// \return A msgs::Vector3d object
@@ -121,6 +157,42 @@ namespace ignition
     /// \return A msgs::PlaneGeom object
     IGNITION_MSGS_VISIBLE
     msgs::PlaneGeom Convert(const ignition::math::Planed &_p);
+
+    /// \brief Convert a std::string to a msgs::StringMsg
+    /// \param[in] _s The string to convert
+    /// \return A msgs::StringMsg object
+    IGNITION_MSGS_VISIBLE
+    msgs::StringMsg Convert(const std::string &_s);
+
+    /// \brief Convert a bool to a msgs::Boolean
+    /// \param[in] _b The bool to convert
+    /// \return A msgs::Boolean object
+    IGNITION_MSGS_VISIBLE
+    msgs::Boolean Convert(const bool &_b);
+
+    /// \brief Convert an int to a msgs::Int32
+    /// \param[in] _i The int to convert
+    /// \return A msgs::Int32 object
+    IGNITION_MSGS_VISIBLE
+    msgs::Int32 Convert(const int &_i);
+
+    /// \brief Convert an unsigned int to a msgs::UInt32
+    /// \param[in] _u The unsigned int to convert
+    /// \return A msgs::UInt32 object
+    IGNITION_MSGS_VISIBLE
+    msgs::UInt32 Convert(const unsigned int &_u);
+
+    /// \brief Convert a double to a msgs::Double
+    /// \param[in] _d The double to convert
+    /// \return A msgs::Double object
+    IGNITION_MSGS_VISIBLE
+    msgs::Double Convert(const double &_d);
+
+    /// \brief Convert a float to a msgs::Float
+    /// \param[in] _f The float to convert
+    /// \return A msgs::Float object
+    IGNITION_MSGS_VISIBLE
+    msgs::Float Convert(const float &_f);
 
     /// \brief Convert a string to a msgs::Joint::Type enum.
     /// \param[in] _str Joint type string.
@@ -209,6 +281,42 @@ namespace ignition
     /// \param[in] _v An ignition::math::Planed reference
     IGNITION_MSGS_VISIBLE
     void Set(msgs::PlaneGeom *_p, const ignition::math::Planed &_v);
+
+    /// \brief Set a msgs::StringMsg from an std::string
+    /// \param[out] _p A msgs::StringMsg pointer
+    /// \param[in] _v An std::string reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::StringMsg *_p, const std::string &_v);
+
+    /// \brief Set a msgs::Boolean from an bool
+    /// \param[out] _p A msgs::Boolean pointer
+    /// \param[in] _v An bool reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::Boolean *_p, const bool &_v);
+
+    /// \brief Set a msgs::Int32 from an int
+    /// \param[out] _p A msgs::Int32 pointer
+    /// \param[in] _v An int reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::Int32 *_p, const int &_v);
+
+    /// \brief Set a msgs::UInt32 from an unsigned int
+    /// \param[out] _p A msgs::UInt32 pointer
+    /// \param[in] _v An unsigned int reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::UInt32 *_p, const unsigned int &_v);
+
+    /// \brief Set a msgs::Double from an double
+    /// \param[out] _p A msgs::Double pointer
+    /// \param[in] _v An double reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::Double *_p, const double &_v);
+
+    /// \brief Set a msgs::Float from an float
+    /// \param[out] _p A msgs::Float pointer
+    /// \param[in] _v An float reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::Float *_p, const float &_v);
   }
 }
 #endif

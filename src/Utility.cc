@@ -77,6 +77,42 @@ namespace ignition
           _p.d());
     }
 
+    /////////////////////////////////////////////
+    std::string Convert(const msgs::StringMsg &_m)
+    {
+      return _m.data();
+    }
+
+    /////////////////////////////////////////////
+    bool Convert(const msgs::Boolean &_m)
+    {
+      return _m.data();
+    }
+
+    /////////////////////////////////////////////
+    int Convert(const msgs::Int32 &_m)
+    {
+      return _m.data();
+    }
+
+    /////////////////////////////////////////////
+    unsigned int Convert(const msgs::UInt32 &_m)
+    {
+      return _m.data();
+    }
+
+    /////////////////////////////////////////////
+    double Convert(const msgs::Double &_m)
+    {
+      return _m.data();
+    }
+
+    /////////////////////////////////////////////
+    float Convert(const msgs::Float &_m)
+    {
+      return _m.data();
+    }
+
     /////////////////////////////////////////////////
     msgs::Vector3d Convert(const ignition::math::Vector3d &_v)
     {
@@ -155,6 +191,54 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
+    msgs::StringMsg Convert(const std::string &_s)
+    {
+      msgs::StringMsg result;
+      result.set_data(_s);
+      return result;
+    }
+
+    /////////////////////////////////////////////
+    msgs::Boolean Convert(const bool &_b)
+    {
+      msgs::Boolean result;
+      result.set_data(_b);
+      return result;
+    }
+
+    /////////////////////////////////////////////
+    msgs::Int32 Convert(const int &_i)
+    {
+      msgs::Int32 result;
+      result.set_data(_i);
+      return result;
+    }
+
+    /////////////////////////////////////////////
+    msgs::UInt32 Convert(const unsigned int &_u)
+    {
+      msgs::UInt32 result;
+      result.set_data(_u);
+      return result;
+    }
+
+    /////////////////////////////////////////////
+    msgs::Double Convert(const double &_d)
+    {
+      msgs::Double result;
+      result.set_data(_d);
+      return result;
+    }
+
+    /////////////////////////////////////////////
+    msgs::Float Convert(const float &_f)
+    {
+      msgs::Float result;
+      result.set_data(_f);
+      return result;
+    }
+
+    /////////////////////////////////////////////
     void Set(msgs::Vector3d *_pt, const ignition::math::Vector3d &_v)
     {
       _pt->set_x(_v.X());
@@ -220,6 +304,42 @@ namespace ignition
     {
       msgs::Set(_i, _m.MassMatrix());
       msgs::Set(_i->mutable_pose(), _m.Pose());
+    }
+
+    /////////////////////////////////////////////////
+    void Set(msgs::StringMsg *_p, const std::string &_v)
+    {
+      _p->set_data(_v);
+    }
+
+    /////////////////////////////////////////////////
+    void Set(msgs::Boolean *_p, const bool &_v)
+    {
+      _p->set_data(_v);
+    }
+
+    /////////////////////////////////////////////////
+    void Set(msgs::Int32 *_p, const int &_v)
+    {
+      _p->set_data(_v);
+    }
+
+    /////////////////////////////////////////////////
+    void Set(msgs::UInt32 *_p, const unsigned int &_v)
+    {
+      _p->set_data(_v);
+    }
+
+    /////////////////////////////////////////////////
+    void Set(msgs::Double *_p, const double &_v)
+    {
+      _p->set_data(_v);
+    }
+
+    /////////////////////////////////////////////////
+    void Set(msgs::Float *_p, const float &_v)
+    {
+      _p->set_data(_v);
     }
 
     /////////////////////////////////////////////
