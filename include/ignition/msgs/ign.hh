@@ -19,7 +19,7 @@
 #define IGNITION_MSGS_IGN_HH_
 
 #include <cstring>
-#include "ignition/msgs/System.hh"
+#include "ignition/msgs/Export.hh"
 
 /// \brief External hook to execute 'ign msg -i' from the command line.
 /// \param[in] _msg Message type name.

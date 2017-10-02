@@ -1,5 +1,3 @@
-include (${project_cmake_dir}/Utils.cmake)
-
 set(ign_library_path "${CMAKE_BINARY_DIR}/src/cmd/cmdmsgs${PROJECT_MAJOR_VERSION}")
 
 # Generate a configuration file for internal testing.

@@ -232,17 +232,17 @@ add_dependencies(${PROJECT_LIBRARY_TARGET_NAME} ign_msgs_gen)
 
 set (ign_msgs_headers "" CACHE INTERNAL "Include dirs description")
 
-foreach (hdr ${PROTO_HDRS})
-  string (REPLACE "${CMAKE_CURRENT_BINARY_DIR}/" "" hdr ${hdr})
-  APPEND_TO_CACHED_STRING(ign_msgs_headers
-    "Ignition messages" "#include <${hdr}>\n")
-endforeach()
-
+#foreach (hdr ${PROTO_HDRS})
+#  string (REPLACE "${CMAKE_CURRENT_BINARY_DIR}/" "" hdr ${hdr})
+#  APPEND_TO_CACHED_STRING(ign_msgs_headers
+#    "Ignition messages" "#include <${hdr}>\n")
+#endforeach()
+#
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/ign_auto_headers.hh.in
   ${CMAKE_CURRENT_BINARY_DIR}/MessageTypes.hh)
 
 ign_install_includes(
-  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_PROJECT_NAME}"
+  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}"
   ${CMAKE_CURRENT_BINARY_DIR}/MessageTypes.hh)
 
 # When the minimum CMake required version will be >= 3.1
@@ -260,7 +260,8 @@ message(STATUS "Installing Ruby messages to ${RUBY_INSTALL_DIR}/ignition/msgs")
 install(FILES ${PROTO_RB} DESTINATION ${RUBY_INSTALL_DIR}/ignition/msgs)
 
 ign_install_includes(
-  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_PROJECT_NAME}" ${PROTO_HDRS})
-ign_install_library(${PROJECT_LIBRARY_TARGET_NAME} ${PROJECT_EXPORT_NAME})
+  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}" ${PROTO_HDRS})
+#ign_install_library(${PROJECT_LIBRARY_TARGET_NAME} ${PROJECT_EXPORT_NAME})
+ign_install_library()
 ign_install_includes(
-  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_PROJECT_NAME}" ${msgs})
+  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}" ${msgs})

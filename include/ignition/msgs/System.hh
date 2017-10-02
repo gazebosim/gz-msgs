@@ -17,41 +17,6 @@
 #ifndef IGNITION_MSGS_SYSTEM_HH_
 #define IGNITION_MSGS_SYSTEM_HH_
 
-/** \def IGNITION_MSGS_VISIBLE
- * Use to represent "symbol visible" if supported
- */
-
-/** \def IGNITION_MSGS_HIDDEN
- * Use to represent "symbol hidden" if supported
- */
-
-#ifndef IGNITION_MSGS_VISIBLE
-#if defined _WIN32 || defined __CYGWIN__
-  #ifdef IGN_MSGS_BUILDING_DLL
-    #ifdef __GNUC__
-      #define IGNITION_MSGS_VISIBLE __attribute__ ((dllexport))
-    #else
-      #define IGNITION_MSGS_VISIBLE __declspec(dllexport)
-    #endif
-  #else
-    #ifdef __GNUC__
-      #define IGNITION_MSGS_VISIBLE __attribute__ ((dllimport))
-    #else
-      #define IGNITION_MSGS_VISIBLE __declspec(dllimport)
-    #endif
-  #endif
-  #define IGNITION_HIDDEN
-#else
-  #if __GNUC__ >= 4
-    #define IGNITION_MSGS_VISIBLE __attribute__ ((visibility ("default")))
-    #define IGNITION_MSGS_HIDDEN  __attribute__ ((visibility ("hidden")))
-  #else
-    #define IGNITION_MSGS_VISIBLE
-    #define IGNITION_MSGS_HIDDEN
-  #endif
-#endif
-#endif
-
 // Use safer functions on Windows
 #ifdef _MSC_VER
   #define ign_strdup _strdup
