@@ -16,6 +16,7 @@
 */
 
 #include <gtest/gtest.h>
+#include <limits>
 #include "ignition/msgs/MessageTypes.hh"
 #include "ignition/msgs/Utility.hh"
 
@@ -235,6 +236,86 @@ TEST(MsgsTest, ConvertMathMassMatrix3ToMsgs)
 }
 
 /////////////////////////////////////////////////
+TEST(UtilityTest, ConvertStringMsg)
+{
+  msgs::StringMsg msg = msgs::Convert(std::string("a string msg"));
+  EXPECT_EQ("a string msg", msg.data());
+
+  std::string s = msgs::Convert(msg);
+  EXPECT_EQ(s, "a string msg");
+}
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, ConvertBoolean)
+{
+  msgs::Boolean msg = msgs::Convert(static_cast<bool>(true));
+  EXPECT_EQ(true, msg.data());
+
+  bool s = msgs::Convert(msg);
+  EXPECT_EQ(s, true);
+}
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, ConvertInt32)
+{
+  msgs::Int32 msg = msgs::Convert(static_cast<int32_t>(-543));
+  EXPECT_EQ(-543, msg.data());
+
+  int s = msgs::Convert(msg);
+  EXPECT_EQ(s, -543);
+}
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, ConvertUInt32)
+{
+  msgs::UInt32 msg = msgs::Convert(123456u);
+  EXPECT_EQ(123456u, msg.data());
+
+  uint32_t s = msgs::Convert(msg);
+  EXPECT_EQ(s, 123456u);
+}
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, ConvertInt64)
+{
+  msgs::Int64 msg = msgs::Convert(std::numeric_limits<int64_t>::min());
+  EXPECT_EQ(std::numeric_limits<int64_t>::min(), msg.data());
+
+  int64_t s = msgs::Convert(msg);
+  EXPECT_EQ(s, std::numeric_limits<int64_t>::min());
+}
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, ConvertUInt64)
+{
+  msgs::UInt64 msg = msgs::Convert(std::numeric_limits<uint64_t>::max());
+  EXPECT_EQ(std::numeric_limits<uint64_t>::max(), msg.data());
+
+  uint64_t s = msgs::Convert(msg);
+  EXPECT_EQ(s, std::numeric_limits<uint64_t>::max());
+}
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, ConvertDouble)
+{
+  msgs::Double msg = msgs::Convert(static_cast<double>(-33.888));
+  EXPECT_DOUBLE_EQ(-33.888, msg.data());
+
+  double s = msgs::Convert(msg);
+  EXPECT_DOUBLE_EQ(s, -33.888);
+}
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, ConvertFloat)
+{
+  msgs::Float msg = msgs::Convert(0.999f);
+  EXPECT_DOUBLE_EQ(0.999f, msg.data());
+
+  float s = msgs::Convert(msg);
+  EXPECT_DOUBLE_EQ(s, 0.999f);
+}
+
+/////////////////////////////////////////////////
 TEST(UtilityTest, SetVector3)
 {
   msgs::Vector3d msg;
@@ -349,6 +430,78 @@ TEST(MsgsTest, SetMassMatrix3)
   EXPECT_DOUBLE_EQ(0.2, msg.ixz());
   EXPECT_DOUBLE_EQ(0.3, msg.iyz());
   EXPECT_EQ(ignition::math::Pose3d::Zero, msgs::Convert(msg.pose()));
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetStringMsg)
+{
+  msgs::StringMsg msg;
+  msgs::Set(&msg, "a string msg");
+
+  EXPECT_EQ("a string msg", msg.data());
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetBoolean)
+{
+  msgs::Boolean msg;
+  msgs::Set(&msg, false);
+
+  EXPECT_FALSE(msg.data());
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetInt32)
+{
+  msgs::Int32 msg;
+  msgs::Set(&msg, 9976);
+
+  EXPECT_EQ(9976, msg.data());
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetUInt32)
+{
+  msgs::UInt32 msg;
+  msgs::Set(&msg, 0u);
+
+  EXPECT_EQ(0u, msg.data());
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetInt64)
+{
+  msgs::Int64 msg;
+  msgs::Set(&msg, std::numeric_limits<int64_t>::max());
+
+  EXPECT_EQ(std::numeric_limits<int64_t>::max(), msg.data());
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetUInt64)
+{
+  msgs::UInt64 msg;
+  msgs::Set(&msg, std::numeric_limits<uint64_t>::min());
+
+  EXPECT_EQ(std::numeric_limits<uint64_t>::min(), msg.data());
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetDouble)
+{
+  msgs::Double msg;
+  msgs::Set(&msg, 0.123);
+
+  EXPECT_DOUBLE_EQ(0.123, msg.data());
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetFloat)
+{
+  msgs::Float msg;
+  msgs::Set(&msg, -367.0f);
+
+  EXPECT_DOUBLE_EQ(-367.0f, msg.data());
 }
 
 /////////////////////////////////////////////////
