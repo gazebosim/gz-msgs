@@ -18,16 +18,10 @@ include_directories (${PROTOBUF_INCLUDE_DIR}
 ign_add_executable(ign_msgs_gen Generator.cc generator_main.cc)
 target_link_libraries(ign_msgs_gen
   ${PROTOBUF_LIBRARY} ${PROTOBUF_PROTOC_LIBRARY})
+target_compile_features(ign_msgs_gen PRIVATE cxx_variadic_macros)
 
 if (UNIX)
   target_link_libraries(ign_msgs_gen pthread)
-endif()
-
-# When the minimum CMake required version will be >= 3.1
-# we could use the target_compile_features() command
-# to enable C++11 support in a platform-independent way.
-if(NOT MSVC)
-  target_compile_options(ign_msgs_gen PUBLIC "-std=c++11")
 endif()
 
 # Build the unit tests.
