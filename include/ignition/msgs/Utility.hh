@@ -26,7 +26,7 @@
 #include <ignition/math/Vector3.hh>
 
 #include "ignition/msgs/Export.hh"
-#include "ignition/msgs/MessageTypes.hh"
+#include "ignition/msgs.hh"
 
 namespace ignition
 {

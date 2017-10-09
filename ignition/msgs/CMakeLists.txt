@@ -238,12 +238,6 @@ set (ign_msgs_headers "" CACHE INTERNAL "Include dirs description")
 #    "Ignition messages" "#include <${hdr}>\n")
 #endforeach()
 #
-configure_file (${CMAKE_CURRENT_SOURCE_DIR}/ign_auto_headers.hh.in
-  ${CMAKE_CURRENT_BINARY_DIR}/MessageTypes.hh)
-
-ign_install_includes(
-  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}"
-  ${CMAKE_CURRENT_BINARY_DIR}/MessageTypes.hh)
 
 # When the minimum CMake required version will be >= 3.1
 # we could use the target_compile_features() command
