@@ -31,9 +31,7 @@ ign_find_package(Protobuf
 
 #--------------------------------------
 # Find ignition-msgs
-set(IGN_MATH_VER 3)
-ign_find_package(ignition-math${IGN_MATH_VER}
-                 REQUIRED)
+ign_find_package(ignition-math4 REQUIRED)
 
 #--------------------------------------
 # Find ignition-tools
