@@ -13,7 +13,7 @@ pipelines:
           - mkdir build
           - cd build
           - cmake ..
-          - cmake --build . --target INSTALL
+          - make install
           - cd ../..
           # Ignition math
           - hg clone http://bitbucket.org/ignitionrobotics/ign-math -b ign-math3
