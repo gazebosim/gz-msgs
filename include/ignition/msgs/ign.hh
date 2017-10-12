@@ -30,6 +30,6 @@ extern "C" IGNITION_MSGS_VISIBLE void cmdMsgList();
 
 /// \brief External hook to read the library version.
 /// \return C-string representing the version. Ex.: 0.1.2
-extern "C" IGNITION_MSGS_VISIBLE char *ignitionMsgsVersion();
+extern "C" IGNITION_MSGS_VISIBLE const char *ignitionMsgsVersion();
 
 #endif

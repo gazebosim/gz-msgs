@@ -59,13 +59,7 @@ void cmdMsgList()
 }
 
 //////////////////////////////////////////////////
-char *ignitionMsgsVersion()
+const char *ignitionMsgsVersion()
 {
-  int majorVersion = IGNITION_MSGS_MAJOR_VERSION;
-  int minorVersion = IGNITION_MSGS_MINOR_VERSION;
-  int patchVersion = IGNITION_MSGS_PATCH_VERSION;
-
-  return ign_strdup((std::to_string(majorVersion) + "." +
-                     std::to_string(minorVersion) + "." +
-                     std::to_string(patchVersion)).c_str());
+  return IGNITION_MSGS_VERSION_FULL;
 }
