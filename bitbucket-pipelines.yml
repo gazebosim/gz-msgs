@@ -10,7 +10,7 @@ pipelines:
           - hg summary
           - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake -b include_generated_headers
           - cd ign-cmake
-          - md build
+          - mkdir build
           - cd build
           - cmake ..
           - cmake --build . --target INSTALL
