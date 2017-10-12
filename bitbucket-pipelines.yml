@@ -6,6 +6,15 @@ pipelines:
         script:
           - apt-get update
           - apt-get -y install cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev
+          # Ignition cmake
+          - hg summary
+          - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake -b include_generated_headers
+          - cd ign-cmake
+          - md build
+          - cd build
+          - cmake ..
+          - cmake --build . --target INSTALL
+          - cd ../..
           # Ignition math
           - hg clone http://bitbucket.org/ignitionrobotics/ign-math -b ign-math3
           - cd ign-math
