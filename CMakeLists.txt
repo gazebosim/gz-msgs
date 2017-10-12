@@ -30,7 +30,7 @@ ign_find_package(Protobuf
                  REQUIRED)
 
 #--------------------------------------
-# Find ignition-msgs
+# Find ignition-math
 ign_find_package(ignition-math4 REQUIRED)
 
 #--------------------------------------
