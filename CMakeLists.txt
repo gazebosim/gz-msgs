@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
-cmake_policy(CMP0048 NEW)
+cmake_policy(SET CMP0048 NEW)
 
 #============================================================================
 # Find ignition-cmake
