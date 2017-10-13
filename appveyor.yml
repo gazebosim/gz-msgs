@@ -11,6 +11,7 @@ environment:
 
 install:
   - vcpkg install protobuf
+  - appveyor PushArtifact c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake
   - hg summary
   # ign-cmake
   - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake
