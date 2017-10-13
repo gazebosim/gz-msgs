@@ -35,6 +35,7 @@ build_script:
   - md build
   - cd build
   - cmake ..
+      --debug-output
       -DCMAKE_CXX_FLAGS="-WX"
       -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake
   - cmake --build . --config %CONFIGURATION%
