@@ -166,11 +166,10 @@ target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR})
 
-# TODO link against ignition-math4_LIBRARIES when available
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
     ${PROTOBUF_LIBRARY}
-    ${IGNITION-MATH_LIBRARIES})
+    ${ignition-math4_LIBRARIES})
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
