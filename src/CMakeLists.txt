@@ -4,7 +4,7 @@ ign_add_executable(ign_msgs_gen Generator.cc generator_main.cc)
 target_link_libraries(ign_msgs_gen
   ${PROTOBUF_LIBRARY} ${PROTOBUF_PROTOC_LIBRARY})
 target_include_directories(ign_msgs_gen PRIVATE ${PROTOBUF_INCLUDE_DIR})
-target_compile_features(ign_msgs_gen PRIVATE cxx_variadic_macros)
+target_compile_features(ign_msgs_gen PRIVATE ${IGN_CXX_11_FEATURES})
 
 if (UNIX)
   target_link_libraries(ign_msgs_gen pthread)
@@ -110,7 +110,7 @@ foreach(proto_file ${proto_files})
     PROTO_PACKAGE
       .ignition.msgs
     GENERATE_CPP
-      ${gen_ruby}
+    ${gen_ruby}
     INPUT_PROTO
       ${proto_file}
     PROTOC_EXEC
@@ -132,11 +132,12 @@ endforeach()
 set_source_files_properties(${gen_headers} ${gen_sources} ${gen_ruby_scripts}
   PROPERTIES GENERATED TRUE)
 
-message(STATUS "Installing Ruby messages to ${RUBY_INSTALL_DIR}/ignition/msgs")
-install(FILES ${proto_ruby_scripts} DESTINATION ${RUBY_INSTALL_DIR}/ignition/msgs)
+message(STATUS "Installing Ruby messages to ${RUBY_INSTALL_DIR}/ignition/${IGN_DESIGNATION}")
+install(FILES ${proto_ruby_scripts} DESTINATION ${RUBY_INSTALL_DIR}/ignition/${IGN_DESIGNATION})
 
 ign_install_includes(
-  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/msgs" ${gen_headers})
+  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}"
+  ${gen_headers})
 
 
 ##################################################
@@ -150,8 +151,8 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/MessageTypes.hh.in
   ${PROJECT_BINARY_DIR}/include/ignition/msgs/MessageTypes.hh)
 
 ign_install_includes(
-  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/msgs"
-  ${PROJECT_BINARY_DIR}/include/ignition/msgs/MessageTypes.hh)
+  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}"
+  "${PROJECT_BINARY_DIR}/include/ignition/${IGN_DESIGNATION}/MessageTypes.hh")
 
 
 ##################################################
@@ -166,11 +167,10 @@ target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR})
 
-# TODO link against ignition-math4_LIBRARIES when available
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
     ${PROTOBUF_LIBRARY}
-    ${IGNITION-MATH_LIBRARIES})
+    ${ignition-math4_LIBRARIES})
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
