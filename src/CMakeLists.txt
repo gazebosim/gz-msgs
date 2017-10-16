@@ -136,7 +136,8 @@ message(STATUS "Installing Ruby messages to ${RUBY_INSTALL_DIR}/ignition/msgs")
 install(FILES ${proto_ruby_scripts} DESTINATION ${RUBY_INSTALL_DIR}/ignition/msgs)
 
 ign_install_includes(
-  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/msgs" ${gen_headers})
+  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}"
+  ${gen_headers})
 
 
 ##################################################
@@ -150,8 +151,8 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/MessageTypes.hh.in
   ${PROJECT_BINARY_DIR}/include/ignition/msgs/MessageTypes.hh)
 
 ign_install_includes(
-  "${INCLUDE_INSTALL_DIR_POSTFIX}/ignition/msgs"
-  ${PROJECT_BINARY_DIR}/include/ignition/msgs/MessageTypes.hh)
+  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}"
+  "${PROJECT_BINARY_DIR}/include/ignition/msgs/MessageTypes.hh")
 
 
 ##################################################
