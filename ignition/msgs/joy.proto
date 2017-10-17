@@ -14,23 +14,25 @@
  * limitations under the License.
  *
 */
-
 syntax = "proto2";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "PublishersProtos";
+option java_outer_classname = "JoyProtos";
 
 /// \ingroup ignition.msgs
-/// \interface Publishers
-/// \brief A list of publishers 
+/// \interface Joy
+/// \brief Message for generic joystick data in the form of axes and buttons.
 
-import "ignition/msgs/publish.proto";
 import "ignition/msgs/header.proto";
 
-message Publishers
+message Joy
 {
   /// \brief Optional header data
-  optional Header header     = 1;
+  optional Header header        = 1;
+ 
+  // Axis data from a joystick. 
+  repeated float axes           = 2;
 
-  repeated Publish publisher = 2;
+  // Button data from a joystick
+  repeated int32 buttons        = 3;
 }

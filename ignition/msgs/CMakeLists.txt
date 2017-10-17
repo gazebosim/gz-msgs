@@ -55,6 +55,7 @@ joint_animation.proto
 joint_cmd.proto
 joint.proto
 joint_wrench.proto
+joy.proto
 joystick.proto
 laserscan.proto
 light.proto
