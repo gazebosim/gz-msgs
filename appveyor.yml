@@ -35,10 +35,11 @@ build_script:
   - cd build
   - cmake ..
       -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake
+      #-DCMAKE_CXX_FLAGS="-WX"
   - cmake --build . --config %CONFIGURATION%
 
 after_build:
   - cmake --build . --config %CONFIGURATION% --target INSTALL
   
-test_script:
-  - cmake --build . --config %CONFIGURATION% --target RUN_TESTS
+#test_script:
+#  - cmake --build . --config %CONFIGURATION% --target RUN_TESTS
