@@ -7,7 +7,7 @@ pipelines:
           - apt-get update
           - apt-get -y install cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev
           # Ignition math
-          - hg clone http://bitbucket.org/ignitionrobotics/ign-math -b ign-math3
+          - hg clone http://bitbucket.org/ignitionrobotics/ign-math -b ign-math4
           - cd ign-math
           - mkdir build
           - cd build
