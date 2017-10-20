@@ -172,6 +172,11 @@ target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
     ${PROTOBUF_LIBRARY}
     ${ignition-math4_LIBRARIES})
 
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  # Disable warning in generated *.pb.cc code
+  target_compile_options(${PROJECT_LIBRARY_TARGET_NAME} PRIVATE -Wextended-offsetof)
+endif()
+
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
     $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include>
