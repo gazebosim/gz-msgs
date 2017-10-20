@@ -163,6 +163,8 @@ ign_add_library(${PROJECT_LIBRARY_TARGET_NAME}
   ${PROJECT_SOURCE_DIR}/src/ign.cc
   ${PROJECT_SOURCE_DIR}/src/Utility.cc)
 
+target_compile_features(${PROJECT_LIBRARY_TARGET_NAME} PRIVATE ${IGN_CXX_11_FEATURES})
+
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR})
