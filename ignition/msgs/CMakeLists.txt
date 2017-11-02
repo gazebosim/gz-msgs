@@ -75,6 +75,7 @@ meshgeom.proto
 model_configuration.proto
 model.proto
 model_v.proto
+motion_constraint.proto
 packet.proto
 param.proto
 param_v.proto

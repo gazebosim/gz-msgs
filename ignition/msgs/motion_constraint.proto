@@ -1,0 +1,88 @@
+/*
+ * Copyright (C) 2017 Open Source Robotics Foundation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+*/
+
+syntax = "proto2";
+package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "MotionTrackProtos";
+
+/// \ingroup ignition.msgs
+/// \interface MotionTrack
+/// \brief Define motion constraints for an entity, such as a camera.
+
+import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/header.proto";
+
+message MotionConstraint
+{
+  /// \brief Constrain the entity to track a target. The entity changes its
+  /// orientation in-place in order to keep the target point within its front
+  /// axis.
+  /// For example, if the entity is a camera, the target will be in the center
+  /// of its image.
+  /// The tracked point corresponds to the target's origin by defaut.
+  /// It's possible to specify an offset in the target's reference frame so
+  /// that the camera tracks that point instead.
+  message Track
+  {
+    /// \brief Name of target entity.
+    required string target = 1;
+
+    /// \brief Offset in target's local reference frame.
+    optional Vector3d offset = 2;
+
+    /// \brief Proportional gain which determines how fast the camera moves to
+    /// track the target. Valid range: [0, 1]
+    optional double p_gain = 3;
+  }
+
+  /// \brief Constrain the entity to follow a target. The entity changes its
+  /// position in order to keep a fixed distance from the target on every
+  /// dimension.
+  /// The distance (offset) can be defined either on the target's local frame
+  /// or the world frame.
+  message Follow
+  {
+    /// \brief Name of target entity.
+    required string target = 1;
+
+    /// \brief Offset distance to keep from the target's origin. It may be
+    /// expressed either in the target's local reference frame or in the world
+    /// frame, according to the value of `world_frame`.
+    optional Vector3d offset = 2;
+
+    /// \brief Proportional gain which determines how fast the camera moves to
+    /// track the target. Valid range: [0, 1]
+    optional double p_gain = 3;
+
+    /// \brief Set to true if the offset should be expressed in the world frame,
+    /// false for the target's local frame.
+    optional bool world_frame = 4;
+  }
+
+  /// \brief Optional header data
+  optional Header header = 1;
+
+  /// \brief Name of entity which is constrained
+  required string entity = 2;
+
+  /// \brief Optional tracking constraints
+  optional Track track = 3;
+
+  /// \brief Optional following constraints
+  optional Follow follow = 4;
+}
