@@ -129,10 +129,14 @@ foreach(proto_file ${proto_files})
       "${PROJECT_SOURCE_DIR}")
 endforeach()
 
-# -Wno-switch-default flags is required for suppressing a warning in some of
-# the generated protobuf files.
+if(NOT MSVC)
+  # -Wno-switch-default flags is required for suppressing a warning in some of
+  # the generated protobuf files.
+  set_source_files_properties(${gen_sources} COMPILE_FLAGS -Wno-switch-default)
+endif()
+
 set_source_files_properties(${gen_headers} ${gen_sources} ${gen_ruby_scripts}
-  PROPERTIES GENERATED TRUE COMPILE_FLAGS -Wno-switch-default)
+  PROPERTIES GENERATED TRUE)
 
 message(STATUS "Installing Ruby messages to ${RUBY_INSTALL_DIR}/ignition/${IGN_DESIGNATION}")
 install(FILES ${proto_ruby_scripts} DESTINATION ${RUBY_INSTALL_DIR}/ignition/${IGN_DESIGNATION})
