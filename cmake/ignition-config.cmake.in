@@ -48,3 +48,9 @@ check_required_components(ignition-math@IGNITION-MATH_REQUIRED_MAJOR_VERSION@)
 list(APPEND @PKG_NAME@_INCLUDE_DIRS ${IGNITION-MATH_INCLUDE_DIRS})
 list(APPEND @PKG_NAME@_LIBRARY_DIRS ${IGNITION-MATH_LIBRARY_DIRS})
 list(APPEND @PKG_NAME@_LIBRARIES ${IGNITION-MATH_LIBRARIES})
+
+# Specify the doxygen tag file
+set(@PKG_NAME@_DOXYGEN_TAGFILE "@CMAKE_INSTALL_PREFIX@/share/ignition/@PROJECT_NAME_LOWER@_@PROJECT_MINOR_VERSION@/@PROJECT_NAME_LOWER@.tag.xml")
+
+# Specify the API url. This is where the doxygen tag file will resolve URLS to.
+set(@PKG_NAME@_API_URL "https://ignitionrobotics.org/api/@IGN_PROJECT_NAME@/@PROJECT_MAJOR_VERSION@.@PROJECT_MINOR_VERSION@")
