@@ -136,6 +136,15 @@ if(NOT MSVC)
   set_source_files_properties(${gen_sources} COMPILE_FLAGS -Wno-switch-default)
 endif()
 
+if(MSVC)
+  # Warning #4251 is the "dll-interface" warning that tells you when types used
+  # by a class are not being exported. These generated source files have private
+  # members that don't get exported, so they trigger this warning. However, the
+  # warning is not important since those members do not need to be interfaced
+  # with.
+  set_source_files_properties(${gen_sources} COMPILE_FLAGS /wd4251)
+endif()
+
 set_source_files_properties(${gen_headers} ${gen_sources} ${gen_ruby_scripts}
   PROPERTIES GENERATED TRUE)
 
