@@ -2,7 +2,8 @@
 # Build a custom protoc plugin
 ign_add_executable(ign_msgs_gen Generator.cc generator_main.cc)
 target_link_libraries(ign_msgs_gen
-  ${PROTOBUF_LIBRARY} ${PROTOBUF_PROTOC_LIBRARY})
+  protobuf::libprotobuf 
+  protobuf::libprotoc)
 target_include_directories(ign_msgs_gen PRIVATE ${PROTOBUF_INCLUDE_DIR})
 target_compile_features(ign_msgs_gen PRIVATE ${IGN_CXX_11_FEATURES})
 
@@ -114,7 +115,7 @@ foreach(proto_file ${proto_files})
     INPUT_PROTO
       ${proto_file}
     PROTOC_EXEC
-      ${PROTOBUF_PROTOC_EXECUTABLE}
+      protobuf::protoc
     OUTPUT_CPP_DIR
       "${PROJECT_BINARY_DIR}/include"
     OUTPUT_RUBY_DIR
@@ -177,7 +178,7 @@ target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
 
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
-    ${PROTOBUF_LIBRARY}
+    protobuf::libprotobuf
     ${ignition-math4_LIBRARIES})
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
