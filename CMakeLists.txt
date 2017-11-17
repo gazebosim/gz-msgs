@@ -37,6 +37,7 @@ ign_find_package(IgnProtobuf
                  VERSION ${REQ_PROTOBUF_VER}
                  PKGCONFIG_VER_COMPARISON >=
                  REQUIRED
+                 PRETTY Protobuf
                  PURPOSE ${PROTOBUF_PURPOSE})
 
 #--------------------------------------
