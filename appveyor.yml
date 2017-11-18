@@ -24,7 +24,7 @@ install:
   # ign-math
   - hg clone https://bitbucket.org/ignitionrobotics/ign-math
   - cd ign-math
-  - hg up default
+  - hg up ign-math4
   - md build
   - cd build
   - cmake ..
