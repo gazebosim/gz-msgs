@@ -24,10 +24,21 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
 
 #--------------------------------------
 # Find Protobuf
-ign_find_package(Protobuf
-                 VERSION 2.3.0
+if(MSVC)
+  # On Windows we require version 3+ in order to have proper support for
+  # shared libraries.
+  set(REQ_PROTOBUF_VER 3)
+  set(PROTOBUF_PURPOSE "Windows requires version 3+ to ensure proper support for DLLs")
+else()
+  set(REQ_PROTOBUF_VER 2.3.0)
+  set(PROTOBUF_PURPOSE)
+endif()
+ign_find_package(IgnProtobuf
+                 VERSION ${REQ_PROTOBUF_VER}
                  PKGCONFIG_VER_COMPARISON >=
-                 REQUIRED)
+                 REQUIRED
+                 PRETTY Protobuf
+                 PURPOSE ${PROTOBUF_PURPOSE})
 
 #--------------------------------------
 # Find ignition-math

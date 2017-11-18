@@ -2,7 +2,8 @@
 # Build a custom protoc plugin
 ign_add_executable(ign_msgs_gen Generator.cc generator_main.cc)
 target_link_libraries(ign_msgs_gen
-  ${PROTOBUF_LIBRARY} ${PROTOBUF_PROTOC_LIBRARY})
+  protobuf::libprotobuf 
+  protobuf::libprotoc)
 target_include_directories(ign_msgs_gen PRIVATE ${PROTOBUF_INCLUDE_DIR})
 target_compile_features(ign_msgs_gen PRIVATE ${IGN_CXX_11_FEATURES})
 
@@ -114,7 +115,7 @@ foreach(proto_file ${proto_files})
     INPUT_PROTO
       ${proto_file}
     PROTOC_EXEC
-      ${PROTOBUF_PROTOC_EXECUTABLE}
+      protobuf::protoc
     OUTPUT_CPP_DIR
       "${PROJECT_BINARY_DIR}/include"
     OUTPUT_RUBY_DIR
@@ -133,6 +134,15 @@ if(NOT MSVC)
   # -Wno-switch-default flags is required for suppressing a warning in some of
   # the generated protobuf files.
   set_source_files_properties(${gen_sources} COMPILE_FLAGS -Wno-switch-default)
+endif()
+
+if(MSVC)
+  # Warning #4251 is the "dll-interface" warning that tells you when types used
+  # by a class are not being exported. These generated source files have private
+  # members that don't get exported, so they trigger this warning. However, the
+  # warning is not important since those members do not need to be interfaced
+  # with.
+  set_source_files_properties(${gen_sources} COMPILE_FLAGS /wd4251)
 endif()
 
 set_source_files_properties(${gen_headers} ${gen_sources} ${gen_ruby_scripts}
@@ -177,7 +187,7 @@ target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
 
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
-    ${PROTOBUF_LIBRARY}
+    protobuf::libprotobuf
     ${ignition-math4_LIBRARIES})
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
