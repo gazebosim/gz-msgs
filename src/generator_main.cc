@@ -14,7 +14,18 @@
  * limitations under the License.
  *
 */
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 #include <google/protobuf/compiler/plugin.h>
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #include "ignition/msgs/Generator.hh"
 
 int main(int _argc, char *_argv[])

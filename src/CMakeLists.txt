@@ -142,7 +142,7 @@ if(MSVC)
   # members that don't get exported, so they trigger this warning. However, the
   # warning is not important since those members do not need to be interfaced
   # with.
-  set_source_files_properties(${gen_sources} COMPILE_FLAGS /wd4251)
+  set_source_files_properties(${gen_sources} COMPILE_FLAGS "/wd4251 /wd4146")
 endif()
 
 set_source_files_properties(${gen_headers} ${gen_sources} ${gen_ruby_scripts}
@@ -190,6 +190,9 @@ target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
     protobuf::libprotobuf
     ${ignition-math4_LIBRARIES})
 
+target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
+  SYSTEM PUBLIC $<TARGET_PROPERTY:protobuf::libprotobuf,INTERFACE_INCLUDE_DIRECTORIES>)
+
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   # Disable warning in generated *.pb.cc code
   target_compile_options(${PROJECT_LIBRARY_TARGET_NAME} PRIVATE -Wno-extended-offsetof)
@@ -198,9 +201,7 @@ endif()
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
     $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include>
-    $<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR_FULL}>
-    $<BUILD_INTERFACE:${PROTOBUF_INCLUDE_DIR}>
-    $<INSTALL_INTERFACE:${PROTOBUF_INCLUDE_DIR}>)
+    $<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR_FULL}>)
 
 ign_install_library()
 

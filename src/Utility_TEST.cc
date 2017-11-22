@@ -122,7 +122,7 @@ TEST(UtilityTest, ConvertMsgPoseToMath)
 /////////////////////////////////////////////////
 TEST(MsgsTest, ConvertMathColorToMsgs)
 {
-  msgs::Color msg = msgs::Convert(math::Color(.1, .2, .3, 1.0));
+  msgs::Color msg = msgs::Convert(math::Color(.1f, .2f, .3f, 1.0f));
 
   EXPECT_FLOAT_EQ(0.1f, msg.r());
   EXPECT_FLOAT_EQ(0.2f, msg.g());
@@ -133,7 +133,7 @@ TEST(MsgsTest, ConvertMathColorToMsgs)
 /////////////////////////////////////////////////
 TEST(MsgsTest, ConvertMsgsColorToMath)
 {
-  msgs::Color msg = msgs::Convert(math::Color(.1, .2, .3, 1.0));
+  msgs::Color msg = msgs::Convert(math::Color(.1f, .2f, .3f, 1.0f));
   math::Color v = msgs::Convert(msg);
 
   EXPECT_FLOAT_EQ(0.1f, v.R());
@@ -367,7 +367,7 @@ TEST(UtilityTest, SetPose)
 TEST(MsgsTest, SetColor)
 {
   msgs::Color msg;
-  msgs::Set(&msg, math::Color(.1, .2, .3, 1.0));
+  msgs::Set(&msg, math::Color(.1f, .2f, .3f, 1.0f));
   EXPECT_FLOAT_EQ(0.1f, msg.r());
   EXPECT_FLOAT_EQ(0.2f, msg.g());
   EXPECT_FLOAT_EQ(0.3f, msg.b());
