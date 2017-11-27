@@ -13,7 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 #include <google/protobuf/descriptor.h>
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #include <iostream>
 #include "ignition/msgs/msgs.hh"
 

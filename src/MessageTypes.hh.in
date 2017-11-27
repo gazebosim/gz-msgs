@@ -14,7 +14,25 @@
  * limitations under the License.
  *
 */
+
+/* This file was automatically generated via CMake.
+ * Do not edit this directly, instead see:
+ *      ign-msgs/src/MessageTypes.hh.in
+ */
+
 #ifndef IGNITION_MSGS_MESSAGE_TYPES_HH_
 #define IGNITION_MSGS_MESSAGE_TYPES_HH_
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4100 4512 4127 4068 4244 4267 4251 4146)
+#endif
+
 @ign_msgs_headers@
+
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #endif
