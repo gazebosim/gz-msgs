@@ -9,7 +9,8 @@ find_package(ignition-cmake0 REQUIRED)
 #============================================================================
 # Set up the project
 #============================================================================
-ign_configure_project(msgs 1.0.0)
+project(ignition-msgs1 VERSION 1.0.0)
+ign_configure_project()
 
 #============================================================================
 # Set project-specific options

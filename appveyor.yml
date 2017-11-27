@@ -15,7 +15,7 @@ install:
   # ign-cmake
   - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake
   - cd ign-cmake
-  - hg up FixSettingsForWindows
+  - hg up LiteralProject
   - md build
   - cd build
   - cmake ..
@@ -24,7 +24,7 @@ install:
   # ign-math
   - hg clone https://bitbucket.org/ignitionrobotics/ign-math
   - cd ign-math
-  - hg up ign-math4
+  - hg up CMakeRefactor_LiteralProject
   - md build
   - cd build
   - cmake ..
