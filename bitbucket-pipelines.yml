@@ -8,7 +8,7 @@ pipelines:
           - apt-get -y install cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev
           # Ignition cmake
           - hg summary
-          - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake -b FixSettingsForWindows
+          - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake -b default
           - cd ign-cmake
           - mkdir build
           - cd build
