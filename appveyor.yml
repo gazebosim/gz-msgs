@@ -40,6 +40,6 @@ build_script:
 
 after_build:
   - cmake --build . --config %CONFIGURATION% --target INSTALL
-  
+
 #test_script:
 #  - cmake --build . --config %CONFIGURATION% --target RUN_TESTS

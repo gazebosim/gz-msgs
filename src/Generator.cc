@@ -80,7 +80,7 @@ bool Generator::Generate(const FileDescriptor *_file,
   pos = sourceFilename.rfind(delim);
   sourceFilename.replace(pos, delim.size(), ".pb.cc");
 
-  // Inject code in the auto-generated header immediately following 
+  // Inject code in the auto-generated header immediately following
   // the #include <google/protobuf/*.h> calls
   {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
