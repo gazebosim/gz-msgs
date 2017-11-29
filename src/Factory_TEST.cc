@@ -48,7 +48,7 @@ TEST(FactoryTest, New)
   auto msgFilled = msgs::Factory::New<msgs::Vector3d>(
       "ign_msgs.Vector3d", "x: 1.0, y: 2.0, z: 3.0");
 
-  EXPECT_EQ(msg->x(), msgFilled->x());
-  EXPECT_EQ(msg->y(), msgFilled->y());
-  EXPECT_EQ(msg->z(), msgFilled->z());
+  EXPECT_DOUBLE_EQ(msg->x(), msgFilled->x());
+  EXPECT_DOUBLE_EQ(msg->y(), msgFilled->y());
+  EXPECT_DOUBLE_EQ(msg->z(), msgFilled->z());
 }

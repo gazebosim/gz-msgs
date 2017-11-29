@@ -15,8 +15,9 @@
  *
 */
 
-#ifdef _WIN32
-#pragma warning(disable : 4244 4267)
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4100 4512 4127 4068 4244 4267 4251 4146)
 #endif
 
 #include <google/protobuf/descriptor.h>
@@ -24,6 +25,10 @@
 #include <google/protobuf/io/printer.h>
 #include <google/protobuf/io/zero_copy_stream.h>
 #include <google/protobuf/descriptor.pb.h>
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 #include <algorithm>
 #include <iostream>
@@ -75,31 +80,46 @@ bool Generator::Generate(const FileDescriptor *_file,
   pos = sourceFilename.rfind(delim);
   sourceFilename.replace(pos, delim.size(), ".pb.cc");
 
-  // Add shared point include
+  // Inject code in the auto-generated header immediately following
+  // the #include <google/protobuf/*.h> calls
   {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
         _generatorContext->OpenForInsert(headerFilename, "includes"));
     io::Printer printer(output.get(), '$');
 
-    printer.Print("#ifndef _WIN32\n", "name", "includes");
+    // Suppress expected warnings
+    printer.Print("#ifndef _MSC_VER\n", "name", "includes");
     printer.Print("#pragma GCC system_header\n", "name", "includes");
     printer.Print("#else\n", "name", "includes");
+    printer.Print("#pragma warning(push)\n", "name", "includes");
     printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512",
         "name", "includes");
     printer.Print(" 4127 4068 4275 4251)\n", "name", "includes");
     printer.Print("#endif\n", "name", "includes");
+
+    // Add the <memory> header so that we can define std::unique_ptr
+    // and std::shared_ptr types for our message later on
+    printer.Print("#include <memory>\n", "name", "includes");
+
+    // Add the Export header so that we can apply visibility macros
+    // to the messages
+    printer.Print("#include <ignition/msgs/Export.hh>\n", "name",
+      "includes");
   }
 
-  // Add shared point include
+  // Inject code in the auto-generated source files immediately following
+  // the #include <google/protobuf*.h> calls.
   {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
         _generatorContext->OpenForInsert(sourceFilename, "includes"));
     io::Printer printer(output.get(), '$');
 
+    // Add the ign-msgs Factory header
     printer.Print("#include \"ignition/msgs/Factory.hh\"\n", "name",
                   "includes");
 
-    printer.Print("#ifndef _WIN32\n", "name", "includes");
+    // Suppress warnings
+    printer.Print("#ifndef _MSC_VER\n", "name", "includes");
     printer.Print("#pragma GCC diagnostic ignored \"-Wshadow\"\n", "name",
                   "includes");
     printer.Print("#else\n", "name", "includes");
@@ -108,71 +128,54 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print(" 4127 4068)\n", "name", "includes");
     printer.Print("#endif\n", "name", "includes");
 
+    // Call the IGN_REGISTER_STATIC_MSG macro
     std::string factory = "IGN_REGISTER_STATIC_MSG(\"ign_msgs.";
     factory += _file->message_type(0)->name() + "\", " +
       _file->message_type(0)->name() +")";
     printer.Print(factory.c_str(), "name", "includes");
   }
 
-
-  {
-    std::unique_ptr<io::ZeroCopyOutputStream> output(
-        _generatorContext->OpenForInsert(headerFilename, "includes"));
-    io::Printer printer(output.get(), '$');
-
-    printer.Print("#include <memory>\n", "name", "includes");
-    printer.Print("#include <ignition/msgs/System.hh>\n", "name",
-                  "includes");
-  }
-
-  // Add unique pointer typedef
+  // Inject code in the auto-generated header files immediately before closing
+  // the namespace that the messages are in
   {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
         _generatorContext->OpenForInsert(headerFilename, "namespace_scope"));
     io::Printer printer(output.get(), '$');
 
-    std::string package = _file->package();
-    replaceAll(package, ".", "::");
-
-
-    std::string ptrType = "typedef std::unique_ptr<" + package
-      + "::" + _file->message_type(0)->name() + "> "
+    // Define std::unique_ptr types for our messages
+    std::string ptrTypes = "typedef std::unique_ptr<"
+      + _file->message_type(0)->name() + "> "
       + _file->message_type(0)->name() + "UniquePtr;\n";
 
-    printer.Print(ptrType.c_str(), "name", "namespace_scope");
-  }
+    // Define const std::unique_ptr types for our messages
+    ptrTypes += "typedef std::unique_ptr<const "
+      + _file->message_type(0)->name() + "> Const"
+      + _file->message_type(0)->name() + "UniquePtr;\n";
 
-  // Add shared pointer typedef
-  {
-    std::unique_ptr<io::ZeroCopyOutputStream> output(
-        _generatorContext->OpenForInsert(headerFilename, "namespace_scope"));
-    io::Printer printer(output.get(), '$');
-
-    std::string package = _file->package();
-    replaceAll(package, ".", "::");
-
-
-    std::string ptrType = "typedef std::shared_ptr<" + package
-      + "::" + _file->message_type(0)->name() + "> "
+    // Define std::shared_ptr types for our messages
+    ptrTypes += "typedef std::shared_ptr<"
+      + _file->message_type(0)->name() + "> "
       + _file->message_type(0)->name() + "SharedPtr;\n";
 
-    printer.Print(ptrType.c_str(), "name", "namespace_scope");
+    // Define const std::shared_ptr types for our messages
+    ptrTypes += "typedef std::shared_ptr<const "
+      + _file->message_type(0)->name() + "> Const"
+      + _file->message_type(0)->name() + "SharedPtr;\n";
+
+    printer.Print(ptrTypes.c_str(), "name", "namespace_scope");
   }
 
-  // Add const shared pointer typedef
+  // Pop the warning suppression stack for MSVC
   {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
-        _generatorContext->OpenForInsert(headerFilename, "global_scope"));
+      _generatorContext->OpenForInsert(headerFilename, "global_scope"));
     io::Printer printer(output.get(), '$');
 
-    std::string package = _file->package();
-    replaceAll(package, ".", "::");
+    std::string warningPop = "#ifdef _MSC_VER\n";
+    warningPop += "#pragma warning(pop)\n";
+    warningPop += "#endif";
 
-    std::string constType = "typedef const std::shared_ptr<" + package
-      + "::" + _file->message_type(0)->name() + " const> Const"
-      + _file->message_type(0)->name() + "SharedPtr;";
-
-    printer.Print(constType.c_str(), "name", "global_scope");
+    printer.Print(warningPop.c_str(), "name", "global_scope");
   }
 
   return true;

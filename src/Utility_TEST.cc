@@ -17,6 +17,7 @@
 
 #include <gtest/gtest.h>
 #include <limits>
+#include <ignition/math/Helpers.hh>
 #include "ignition/msgs/MessageTypes.hh"
 #include "ignition/msgs/Utility.hh"
 
@@ -62,7 +63,7 @@ TEST(UtilityTest, ConvertMsgsVector2dToMath)
 TEST(UtilityTest, ConvertMathQuaterionToMsgs)
 {
   msgs::Quaternion msg =
-    msgs::Convert(math::Quaterniond(M_PI * 0.25, M_PI * 0.5, M_PI));
+    msgs::Convert(math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI));
 
   EXPECT_TRUE(math::equal(msg.x(), -0.65328148243818818));
   EXPECT_TRUE(math::equal(msg.y(), 0.27059805007309856));
@@ -74,7 +75,7 @@ TEST(UtilityTest, ConvertMathQuaterionToMsgs)
 TEST(UtilityTest, ConvertMsgsQuaterionToMath)
 {
   msgs::Quaternion msg =
-    msgs::Convert(math::Quaterniond(M_PI * 0.25, M_PI * 0.5, M_PI));
+    msgs::Convert(math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI));
   math::Quaterniond v = msgs::Convert(msg);
 
   // TODO: to real unit test move math::equal to EXPECT_DOUBLE_EQ
@@ -89,7 +90,7 @@ TEST(UtilityTest, ConvertPoseMathToMsgs)
 {
   msgs::Pose msg = msgs::Convert(math::Pose3d(
         math::Vector3d(1, 2, 3),
-        math::Quaterniond(M_PI * 0.25, M_PI * 0.5, M_PI)));
+        math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI)));
 
   EXPECT_DOUBLE_EQ(1, msg.position().x());
   EXPECT_DOUBLE_EQ(2, msg.position().y());
@@ -106,7 +107,7 @@ TEST(UtilityTest, ConvertMsgPoseToMath)
 {
   msgs::Pose msg = msgs::Convert(
       math::Pose3d(math::Vector3d(1, 2, 3),
-        math::Quaterniond(M_PI * 0.25, M_PI * 0.5, M_PI)));
+        math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI)));
   math::Pose3d v = msgs::Convert(msg);
 
   EXPECT_DOUBLE_EQ(1, v.Pos().X());
@@ -121,7 +122,7 @@ TEST(UtilityTest, ConvertMsgPoseToMath)
 /////////////////////////////////////////////////
 TEST(MsgsTest, ConvertMathColorToMsgs)
 {
-  msgs::Color msg = msgs::Convert(math::Color(.1, .2, .3, 1.0));
+  msgs::Color msg = msgs::Convert(math::Color(.1f, .2f, .3f, 1.0f));
 
   EXPECT_FLOAT_EQ(0.1f, msg.r());
   EXPECT_FLOAT_EQ(0.2f, msg.g());
@@ -132,7 +133,7 @@ TEST(MsgsTest, ConvertMathColorToMsgs)
 /////////////////////////////////////////////////
 TEST(MsgsTest, ConvertMsgsColorToMath)
 {
-  msgs::Color msg = msgs::Convert(math::Color(.1, .2, .3, 1.0));
+  msgs::Color msg = msgs::Convert(math::Color(.1f, .2f, .3f, 1.0f));
   math::Color v = msgs::Convert(msg);
 
   EXPECT_FLOAT_EQ(0.1f, v.R());
@@ -338,7 +339,7 @@ TEST(UtilityTest, SetVector2d)
 TEST(UtilityTest, SetQuaternion)
 {
   msgs::Quaternion msg;
-  msgs::Set(&msg, math::Quaterniond(M_PI * 0.25, M_PI * 0.5, M_PI));
+  msgs::Set(&msg, math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI));
   EXPECT_TRUE(math::equal(msg.x(), -0.65328148243818818));
   EXPECT_TRUE(math::equal(msg.y(), 0.27059805007309856));
   EXPECT_TRUE(math::equal(msg.z(), 0.65328148243818829));
@@ -350,7 +351,7 @@ TEST(UtilityTest, SetPose)
 {
   msgs::Pose msg;
   msgs::Set(&msg, math::Pose3d(math::Vector3d(1, 2, 3),
-        math::Quaterniond(M_PI * 0.25, M_PI * 0.5, M_PI)));
+        math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI)));
 
   EXPECT_DOUBLE_EQ(1, msg.position().x());
   EXPECT_DOUBLE_EQ(2, msg.position().y());
@@ -366,7 +367,7 @@ TEST(UtilityTest, SetPose)
 TEST(MsgsTest, SetColor)
 {
   msgs::Color msg;
-  msgs::Set(&msg, math::Color(.1, .2, .3, 1.0));
+  msgs::Set(&msg, math::Color(.1f, .2f, .3f, 1.0f));
   EXPECT_FLOAT_EQ(0.1f, msg.r());
   EXPECT_FLOAT_EQ(0.2f, msg.g());
   EXPECT_FLOAT_EQ(0.3f, msg.b());

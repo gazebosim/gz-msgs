@@ -1,9 +1,10 @@
 set(TEST_TYPE "INTEGRATION")
 
 set(tests
-  headers.cc
 )
 
-link_directories(${PROJECT_BINARY_DIR}/test)
+if (NOT MSVC)
+  list(APPEND tests headers.cc)
+endif()
 
-ign_build_tests(${tests})
+ign_build_tests(TYPE INTEGRATION SOURCE ${tests})

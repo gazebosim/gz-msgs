@@ -13,7 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 #include <google/protobuf/descriptor.h>
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #include <iostream>
 #include "ignition/msgs/msgs.hh"
 
@@ -59,13 +70,7 @@ void cmdMsgList()
 }
 
 //////////////////////////////////////////////////
-char *ignitionMsgsVersion()
+const char *ignitionMsgsVersion()
 {
-  int majorVersion = IGNITION_MSGS_MAJOR_VERSION;
-  int minorVersion = IGNITION_MSGS_MINOR_VERSION;
-  int patchVersion = IGNITION_MSGS_PATCH_VERSION;
-
-  return ign_strdup((std::to_string(majorVersion) + "." +
-                     std::to_string(minorVersion) + "." +
-                     std::to_string(patchVersion)).c_str());
+  return IGNITION_MSGS_VERSION_FULL;
 }
