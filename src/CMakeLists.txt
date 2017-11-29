@@ -102,7 +102,7 @@ set(proto_ruby_scripts)
 file (GLOB proto_files ${PROJECT_SOURCE_DIR}/ignition/msgs/*.proto)
 
 set(gen_ruby GENERATE_RUBY)
-if(WIN32 OR NOT RUBY_PROTOBUF_FOUND)
+if(WIN32 OR RUBY_PROTOBUF-NOTFOUND)
   set(gen_ruby)
 endif()
 
@@ -218,3 +218,56 @@ ign_build_tests(TYPE UNIT
 ##################################################
 # ign msgs command
 add_subdirectory(cmd)
+
+ign_set_project_public_cxx_standard(${c++standard})
+
+#################################################
+# Setup swig
+if (SWIG_FOUND)
+  include(${SWIG_USE_FILE})
+  set(CMAKE_SWIG_FLAGS "")
+
+  include_directories(${PROJECT_SOURCE_DIR}/include
+                      ${ignition-math4_INCLUDE_DIRS})
+
+  set(swig_files
+    ruby
+    Utility)
+endif()
+
+#################################################
+# Create and install Ruby interfaces
+# Example usage
+# $ export RUBYLIB=/usr/local/lib/ruby
+# $ ruby -e "require 'ignition/msgs'; a = Ignition::Msgs::Utility.new(20);"
+if (RUBY_FOUND)
+  include_directories(${RUBY_INCLUDE_DIRS})
+
+  foreach (swig_file ${swig_files})
+    # Assuming that each swig file has a test
+    list(APPEND ruby_tests ${swig_file}_TEST)
+
+    # Generate the list if .i files
+    list(APPEND swig_i_files ${swig_file}.i)
+
+    # Removing warning from auto-generated files.
+    set_source_files_properties(${swig_file}RUBY_wrap.cxx
+      PROPERTIES COMPILE_FLAGS "-w")
+  endforeach()
+
+  # Turn on c++
+  set_source_files_properties(${swig_i_files} PROPERTIES CPLUSPLUS ON)
+
+  # Create the ruby library
+  SWIG_ADD_MODULE(msgs ruby ruby.i ${swig_i_files} ${sources})
+  SWIG_LINK_LIBRARIES(msgs ${RUBY_LIBRARY})
+  target_compile_features(msgs PUBLIC ${IGN_CXX_${c++standard}_FEATURES})
+  install(TARGETS msgs DESTINATION ${IGN_LIB_INSTALL_DIR}/ruby/ignition)
+
+  # Add the ruby tests
+  foreach (test ${ruby_tests})
+    add_test(NAME ${test}.rb COMMAND
+      ruby -I${CMAKE_BINARY_DIR}/src ${CMAKE_SOURCE_DIR}/src/${test}.rb
+   	  --gtest_output=xml:${CMAKE_BINARY_DIR}/test_results/${test}rb.xml)
+  endforeach()
+endif()

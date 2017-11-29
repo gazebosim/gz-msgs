@@ -20,6 +20,8 @@ ign_configure_project(msgs 1.0.0)
 #============================================================================
 # Search for project-specific dependencies
 #============================================================================
+set (c++standard 14)
+
 message(STATUS "\n\n-- ====== Finding Dependencies ======")
 
 #--------------------------------------
@@ -42,6 +44,14 @@ ign_find_package(IgnProtobuf
                  PURPOSE ${PROTOBUF_PURPOSE})
 
 #--------------------------------------
+# Find the protobuf ruby compiler.
+find_program(RUBY_PROTOBUF protoc-gen-ruby)
+set(RUBY_INSTALL_DIR lib/ruby)
+if (RUBY_PROTOBUF-NOTFOUND)
+  IGN_BUILD_WARNING ("Missing: protobuf ruby bindings (sudo gem install protobuf)")
+endif()
+
+#--------------------------------------
 # Find ignition-math
 ign_find_package(ignition-math4 REQUIRED)
 
@@ -50,6 +60,29 @@ ign_find_package(ignition-math4 REQUIRED)
 ign_find_package(ignition-tools
                  QUIET)
 
+#--------------------------------------
+# Include swig
+find_package(SWIG QUIET)
+if (NOT SWIG_FOUND)
+  IGN_BUILD_WARNING("Swig is missing: Language interfaces are disabled.")
+  message (STATUS "Searching for swig - not found.")
+else()
+  message (STATUS "Searching for swig - found.")
+endif()
+
+# Include other languages if swig was found
+if (SWIG_FOUND)
+  ########################################
+  # Include ruby
+  find_package(Ruby 1.9 QUIET)
+  if (NOT RUBY_FOUND)
+    IGN_BUILD_WARNING("Ruby is missing: Install ruby-dev to enable ruby interface to ignition math.")
+    message (STATUS "Searching for Ruby - not found.")
+  else()
+    message (STATUS "Searching for Ruby - found.")
+  endif()
+endif()
+                              
 #============================================================================
 # Configure the build
 #============================================================================
