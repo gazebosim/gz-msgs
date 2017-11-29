@@ -1,4 +1,4 @@
-file(GLOB proto_files "*.proto")
+file(GLOB proto_files "ignition/msgs/*.proto")
 
 install(
   FILES ${proto_files}
