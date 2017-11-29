@@ -5,7 +5,8 @@ pipelines:
     - step:
         script:
           - apt-get update
-          - apt-get -y install cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev
+          - apt-get -y install cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev ruby-full
+          - gem install protobuf
           # Ignition cmake
           - hg summary
           - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake -b default

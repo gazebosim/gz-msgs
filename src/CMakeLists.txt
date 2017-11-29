@@ -101,11 +101,6 @@ set(proto_ruby_scripts)
 
 file (GLOB proto_files ${PROJECT_SOURCE_DIR}/ignition/msgs/*.proto)
 
-set(gen_ruby GENERATE_RUBY)
-if(RUBY_PROTOBUF-NOTFOUND)
-  set(gen_ruby)
-endif()
-
 foreach(proto_file ${proto_files})
   ign_msgs_protoc(
     PROTO_PACKAGE
