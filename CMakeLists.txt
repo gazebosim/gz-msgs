@@ -67,7 +67,7 @@ add_subdirectory(conf)
 # whenever a proto subdirectory exists. This could be used alongside
 # ign_msgs_protoc to get uniform support for proto messages across all ignition
 # projects.
-add_subdirectory(proto/ignition/msgs)
+add_subdirectory(proto)
 
 #============================================================================
 # Create package information
