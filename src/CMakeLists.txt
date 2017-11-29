@@ -102,7 +102,7 @@ set(proto_ruby_scripts)
 file (GLOB proto_files ${PROJECT_SOURCE_DIR}/ignition/msgs/*.proto)
 
 set(gen_ruby GENERATE_RUBY)
-if(WIN32 OR NOT RUBY_PROTOBUF_FOUND)
+if(RUBY_PROTOBUF-NOTFOUND)
   set(gen_ruby)
 endif()
 
