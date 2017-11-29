@@ -14,7 +14,18 @@
  * limitations under the License.
  *
 */
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 #include <google/protobuf/text_format.h>
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #include "ignition/msgs/Factory.hh"
 
 using namespace ignition;

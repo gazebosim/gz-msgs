@@ -7,6 +7,4 @@ if (NOT MSVC)
   list(APPEND tests headers.cc)
 endif()
 
-link_directories(${PROJECT_BINARY_DIR}/test)
-
-ign_build_tests(${tests})
+ign_build_tests(TYPE INTEGRATION SOURCE ${tests})
