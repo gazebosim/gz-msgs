@@ -99,7 +99,7 @@ set(proto_headers)
 set(proto_sources)
 set(proto_ruby_scripts)
 
-file (GLOB proto_files ${PROJECT_SOURCE_DIR}/ignition/msgs/*.proto)
+file (GLOB proto_files ${PROJECT_SOURCE_DIR}/proto/ignition/msgs/*.proto)
 
 set(gen_ruby GENERATE_RUBY)
 if(WIN32 OR NOT RUBY_PROTOBUF_FOUND)
@@ -111,7 +111,7 @@ foreach(proto_file ${proto_files})
     PROTO_PACKAGE
       .ignition.msgs
     GENERATE_CPP
-    ${gen_ruby}
+      ${gen_ruby}
     INPUT_PROTO
       ${proto_file}
     PROTOC_EXEC
@@ -127,7 +127,7 @@ foreach(proto_file ${proto_files})
     OUTPUT_RUBY_VAR
       gen_ruby_scripts
     PROTO_PATH
-      "${PROJECT_SOURCE_DIR}")
+      "${PROJECT_SOURCE_DIR}/proto")
 endforeach()
 
 if(NOT MSVC)

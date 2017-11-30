@@ -61,6 +61,15 @@ ign_configure_build(QUIT_IF_BUILD_ERRORS)
 add_subdirectory(conf)
 
 #============================================================================
+# Install proto files
+#============================================================================
+# TODO: Consider tweaking ign_configure_build() to call add_subdirectory(proto)
+# whenever a proto subdirectory exists. This could be used alongside
+# ign_msgs_protoc to get uniform support for proto messages across all ignition
+# projects.
+add_subdirectory(proto)
+
+#============================================================================
 # Create package information
 #============================================================================
 ign_create_packages()
