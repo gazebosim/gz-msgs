@@ -14,7 +14,7 @@ find_package(ignition-cmake0 REQUIRED)
 #============================================================================
 # Configure the project
 #============================================================================
-ign_configure_project()
+ign_configure_project(VERSION_SUFFIX pre3)
 
 #============================================================================
 # Set project-specific options
@@ -40,6 +40,7 @@ else()
 endif()
 ign_find_package(IgnProtobuf
                  VERSION ${REQ_PROTOBUF_VER}
+                 PKGCONFIG Protobuf
                  PKGCONFIG_VER_COMPARISON >=
                  REQUIRED
                  PRETTY Protobuf
@@ -63,6 +64,15 @@ ign_configure_build(QUIT_IF_BUILD_ERRORS)
 # ign command line support
 #============================================================================
 add_subdirectory(conf)
+
+#============================================================================
+# Install proto files
+#============================================================================
+# TODO: Consider tweaking ign_configure_build() to call add_subdirectory(proto)
+# whenever a proto subdirectory exists. This could be used alongside
+# ign_msgs_protoc to get uniform support for proto messages across all ignition
+# projects.
+add_subdirectory(proto)
 
 #============================================================================
 # Create package information

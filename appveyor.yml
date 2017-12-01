@@ -15,7 +15,7 @@ install:
   # ign-cmake
   - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake
   - cd ign-cmake
-  - hg up LiteralProject
+  - hg up default
   - md build
   - cd build
   - cmake ..
@@ -24,7 +24,7 @@ install:
   # ign-math
   - hg clone https://bitbucket.org/ignitionrobotics/ign-math
   - cd ign-math
-  - hg up CMakeRefactor_LiteralProject
+  - hg up ign-math4
   - md build
   - cd build
   - cmake ..
@@ -40,6 +40,6 @@ build_script:
 
 after_build:
   - cmake --build . --config %CONFIGURATION% --target INSTALL
-  
+
 #test_script:
 #  - cmake --build . --config %CONFIGURATION% --target RUN_TESTS
