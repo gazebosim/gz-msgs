@@ -40,7 +40,7 @@ else()
 endif()
 ign_find_package(IgnProtobuf
                  VERSION ${REQ_PROTOBUF_VER}
-                 PKGCONFIG Protobuf
+                 PKGCONFIG protobuf
                  PKGCONFIG_VER_COMPARISON >=
                  REQUIRED
                  PRETTY Protobuf
