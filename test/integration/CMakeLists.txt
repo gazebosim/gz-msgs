@@ -1,4 +1,3 @@
-set(TEST_TYPE "INTEGRATION")
 
 ign_get_sources(tests)
 
