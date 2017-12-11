@@ -1,6 +1,4 @@
-set(TEST_TYPE "REGRESSION")
 
-set(tests
-)
+ign_get_sources(tests)
 
-ign_build_tests(TYPE REGRESION SOURCE ${tests})
+ign_build_tests(TYPE REGRESION SOURCES ${tests})
