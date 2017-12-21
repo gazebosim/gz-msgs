@@ -25,18 +25,18 @@ TEST(Messages, NestedHeaders)
   ignition::msgs::Contact contact;
   std::string contactSerialized;
   contact.SerializeToString(&contactSerialized);
-  EXPECT_EQ(0, contactSerialized.size());
+  EXPECT_EQ(0u, contactSerialized.size());
 
   // Empty wrench
   ignition::msgs::JointWrench wrench;
   std::string wrenchSerialized;
   wrench.SerializeToString(&wrenchSerialized);
-  EXPECT_EQ(0, wrenchSerialized.size());
+  EXPECT_EQ(0u, wrenchSerialized.size());
 
   // Add header data to the wrench message
   wrench.mutable_header()->mutable_stamp()->set_sec(123);
   wrench.SerializeToString(&wrenchSerialized);
-  EXPECT_EQ(6, wrenchSerialized.size());
+  EXPECT_EQ(6u, wrenchSerialized.size());
 
   // Set the same header data on contact's embedded wrench message
   contact.add_wrench()->mutable_header()->mutable_stamp()->set_sec(123);
@@ -45,7 +45,7 @@ TEST(Messages, NestedHeaders)
   // The contact message should be a bit larger than the standalone wrench
   // message since the contact message needs to contain information about the
   // existence of its embedded wrench message.
-  EXPECT_EQ(8, contactSerialized.size());
+  EXPECT_EQ(8u, contactSerialized.size());
 
   // The contact's embedded wrench message should be the same size as the
   // standalone wrench message.
