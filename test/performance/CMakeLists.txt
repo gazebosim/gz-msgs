@@ -1,6 +1,4 @@
-set(TEST_TYPE "PERFORMANCE")
 
-set(tests
-)
+ign_get_sources(tests)
 
-ign_build_tests(TYPE PERFORMANCE SOURCE ${tests})
+ign_build_tests(TYPE PERFORMANCE SOURCES ${tests})

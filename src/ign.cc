@@ -26,7 +26,8 @@
 #endif
 
 #include <iostream>
-#include "ignition/msgs/msgs.hh"
+#include <ignition/msgs/config.hh>
+#include <ignition/msgs/Factory.hh>
 
 #ifdef _MSC_VER
 # pragma warning(disable: 4503)
