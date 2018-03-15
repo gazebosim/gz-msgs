@@ -15,7 +15,7 @@ install:
   # ign-cmake
   - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake
   - cd ign-cmake
-  - hg up default
+  - hg up ign-cmake0
   - md build
   - cd build
   - cmake ..
