@@ -9,7 +9,7 @@ project(ignition-msgs2 VERSION 2.0.0)
 # Find ignition-cmake
 #============================================================================
 # If you get an error at this line, you need to install ignition-cmake
-find_package(ignition-cmake0 0.3.0 REQUIRED)
+find_package(ignition-cmake1 REQUIRED)
 
 #============================================================================
 # Configure the project
