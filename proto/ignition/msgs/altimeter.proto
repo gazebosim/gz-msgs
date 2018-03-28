@@ -20,10 +20,6 @@ package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "AltimeterProtos";
 
-/// \ingroup ignition.msgs
-/// \interface Altimeter
-/// \brief Data from an altimeter sensor
-
 import "ignition/msgs/header.proto";
 
 /// \brief Altimeter sensor data

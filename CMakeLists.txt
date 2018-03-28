@@ -48,7 +48,7 @@ ign_find_package(IgnProtobuf
 
 #--------------------------------------
 # Find ignition-math
-ign_find_package(ignition-math4 REQUIRED)
+ign_find_package(ignition-math5 REQUIRED)
 
 #--------------------------------------
 # Find ignition-tools
