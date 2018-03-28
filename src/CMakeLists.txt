@@ -173,17 +173,15 @@ ign_install_includes(
 
 ##################################################
 # Build the main library
-ign_add_library(${PROJECT_LIBRARY_TARGET_NAME}
+ign_create_core_library(SOURCES
   ${gen_sources}
   ${PROJECT_SOURCE_DIR}/src/Factory.cc
   ${PROJECT_SOURCE_DIR}/src/ign.cc
-  ${PROJECT_SOURCE_DIR}/src/Utility.cc)
-
-target_compile_features(${PROJECT_LIBRARY_TARGET_NAME} PRIVATE ${IGN_CXX_11_FEATURES})
+  ${PROJECT_SOURCE_DIR}/src/Utility.cc
+  CXX_STANDARD 11)
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
-  PRIVATE
-    ${CMAKE_CURRENT_BINARY_DIR})
+  PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
@@ -202,9 +200,6 @@ target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
     $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include>
     $<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR_FULL}>)
-
-ign_install_library()
-
 
 ##################################################
 # Build unit tests
