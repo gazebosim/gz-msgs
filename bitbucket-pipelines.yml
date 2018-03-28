@@ -11,7 +11,7 @@ pipelines:
           - apt-get -y install
             cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev
             libignition-cmake1-dev
-            libignition-math4-dev
+            libignition-math5-dev
           # Ignition msgs
           - mkdir build
           - cd build
