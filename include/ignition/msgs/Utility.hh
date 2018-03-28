@@ -19,8 +19,8 @@
 
 #include <string>
 
-#include <ignition/math/Inertial.hh>
 #include <ignition/math/Color.hh>
+#include <ignition/math/Inertial.hh>
 #include <ignition/math/Pose3.hh>
 #include <ignition/math/Plane.hh>
 #include <ignition/math/Vector3.hh>

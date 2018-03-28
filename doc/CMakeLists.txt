@@ -2,8 +2,6 @@ find_package(Doxygen)
 
 set(IGNITION_DOXYGEN_TAGFILES
   "\"${IGNITION-MATH_DOXYGEN_TAGFILE} = ${IGNITION-MATH_API_URL}\"")
-set(IGNITION_DOXYGEN_INPUT "${CMAKE_SOURCE_DIR}/proto/ignition/msgs")
-set(IGNITION_DOXYGEN_FILE_PATTERNS "*.proto")
 
 if (DOXYGEN_FOUND)
   configure_file(${IGNITION_CMAKE_DOXYGEN_DIR}/api.in
