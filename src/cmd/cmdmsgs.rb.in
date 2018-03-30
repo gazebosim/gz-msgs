@@ -38,7 +38,8 @@ COMMANDS = {  'msg' =>
                   "Print information about ignition messages.\n\n" +
                   "  ign msg [options]\n\n" +
                   "Options:\n\n" +
-                  "  -i [ --info ] arg     Get info about a message.\n" +
+                  "  -i [ --info ] arg     " +
+                  "Get info about the specified message type.\n" +
                   "  -l [ --list ]         List all topics.\n" +
                   COMMON_OPTIONS
 }
