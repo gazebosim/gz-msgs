@@ -40,4 +40,5 @@ message WorldStatistics
   optional uint64 iterations                        = 6;
   optional int32 model_count                        = 7;
   optional LogPlaybackStatistics log_playback_stats = 8;
+  optional bool stepping                            = 9;
 }
