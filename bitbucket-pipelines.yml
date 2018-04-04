@@ -14,8 +14,8 @@ pipelines:
             libignition-tools-dev
             ignition-tools
             mlocate
-          - locatedb
-          - locate ign | grep "bin/ign"
+          - ls /usr/bin
+          - ls /usr/local/bin
           # Ignition msgs
           - mkdir build
           - cd build
