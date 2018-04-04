@@ -13,8 +13,8 @@ pipelines:
             libignition-math4-dev
             libignition-tools-dev
             ignition-tools
-            locatedb
-            locate ign | grep "bin/ign"
+          - locatedb
+          - locate ign | grep "bin/ign"
           # Ignition msgs
           - mkdir build
           - cd build
