@@ -13,6 +13,7 @@ pipelines:
             libignition-math4-dev
             libignition-tools-dev
             ignition-tools
+            mlocate
           - locatedb
           - locate ign | grep "bin/ign"
           # Ignition msgs
