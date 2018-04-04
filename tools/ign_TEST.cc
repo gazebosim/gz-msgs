@@ -47,6 +47,8 @@ std::string custom_exec_str(std::string _cmd)
 /////////////////////////////////////////////////
 TEST(CmdLine, Versions)
 {
+  auto outputDebug = custom_exec_str("ign");
+  std::cout << outputDebug << std::endl;
   auto output = custom_exec_str("ign msg --versions");
   EXPECT_NE(std::string::npos, output.find(g_version));
 }
@@ -71,6 +73,7 @@ TEST(CmdLine, MsgList)
   auto output = custom_exec_str("ign msg --list --force-version " +
     g_version);
   EXPECT_NE(std::string::npos, output.find("ign_msgs.WorldControl"));
+  std::cout << output << std::endl;
 }
 
 /////////////////////////////////////////////////
@@ -88,6 +91,16 @@ int main(int argc, char **argv)
   // Set IGN_CONFIG_PATH to the directory where the .yaml configuration files
   // is located.
   setenv("IGN_CONFIG_PATH", IGN_CONFIG_PATH, 1);
+
+  // Make sure that we load the library recently built and not the one installed
+  // in your system.
+#ifndef _WIN32
+  // Save the current value of LD_LIBRARY_PATH.
+  std::string value = std::getenv("LD_LIBRARY_PATH");
+  // Add the directory where ignition msgs has been built.
+  value = std::string(IGN_TEST_LIBRARY_PATH) + ":" + value;
+  setenv("LD_LIBRARY_PATH", value.c_str(), 1);
+#endif
 
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
