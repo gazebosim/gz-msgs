@@ -18,6 +18,7 @@
 #include <string>
 #include <gtest/gtest.h>
 #include <ignition/msgs/config.hh>
+#include "ignition/msgs/test_config.h"
 
 static const std::string g_version(std::string(IGNITION_MSGS_VERSION_FULL));
 
@@ -78,4 +79,16 @@ TEST(CmdLine, MsgInfo)
   auto output = custom_exec_str("ign msg --info ign_msgs.WorldControl "
     "--force-version " + g_version);
   EXPECT_NE(std::string::npos, output.find("message WorldControl {"));
+}
+
+/////////////////////////////////////////////////
+/// Main
+int main(int argc, char **argv)
+{
+  // Set IGN_CONFIG_PATH to the directory where the .yaml configuration files
+  // is located.
+  setenv("IGN_CONFIG_PATH", IGN_CONFIG_PATH, 1);
+
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }
