@@ -17,7 +17,7 @@ pipelines:
           - cd build
           - cmake .. -DCMAKE_BUILD_TYPE=coverage
           - make
-          - make test
+          - make test ARGS="-V" CTEST_OUTPUT_ON_FAILURE=1
           - make coverage
           - bash <(curl -s https://codecov.io/bash)
           # code_check
