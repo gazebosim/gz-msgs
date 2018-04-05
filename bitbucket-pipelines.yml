@@ -25,7 +25,7 @@ pipelines:
           # Ignition msgs
           - mkdir build
           - cd build
-          - cmake .. -DCMAKE_BUILD_TYPE=coverage
+          - cmake .. -DCMAKE_BUILD_TYPE=coverage -DCMAKE_INSTALL_PREFIX=/usr
           - make -j4 install
           - make test ARGS="-V" CTEST_OUTPUT_ON_FAILURE=1
           - make coverage
