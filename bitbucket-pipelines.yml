@@ -11,9 +11,14 @@ pipelines:
             cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev
             libignition-cmake-dev
             libignition-math4-dev
-            libignition-tools-dev
-            ignition-tools
-            mlocate
+          # Ignition tools
+          - hg clone http://bitbucket.org/ignitionrobotics/ign-tools -b default
+          - cd ign-tools
+          - mkdir build
+          - cd build
+          - cmake ..
+          - make -j4 install
+          - cd ../..
           - ls /usr/bin
           - ls /usr/local/bin
           - ls /usr/share/ignition
