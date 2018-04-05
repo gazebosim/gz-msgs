@@ -22,8 +22,6 @@ pipelines:
           - cd ../..
           - ls /usr/bin
           - ls /usr/local/bin
-          - ls /usr/share/ignition
-          - cat /usr/share/ignition/msgs1.yaml
           # Ignition msgs
           - mkdir build
           - cd build
