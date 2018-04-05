@@ -95,10 +95,12 @@ int main(int argc, char **argv)
   // Make sure that we load the library recently built and not the one installed
   // in your system.
 #ifndef _WIN32
-  // Save the current value of LD_LIBRARY_PATH.
-  std::string value = std::string(std::getenv("LD_LIBRARY_PATH"));
   // Add the directory where ignition msgs has been built.
-  value = std::string(IGN_TEST_LIBRARY_PATH) + ":" + value;
+  std::string value = std::string(IGN_TEST_LIBRARY_PATH);
+  // Save the current value of LD_LIBRARY_PATH.
+  auto cvalue = std::getenv("LD_LIBRARY_PATH");
+  if (cvalue)
+    value += ":" + std::string(cvalue);
   setenv("LD_LIBRARY_PATH", value.c_str(), 1);
 #endif
 

@@ -21,8 +21,6 @@ pipelines:
           - cmake .. -DCMAKE_INSTALL_PREFIX=/usr
           - make -j4 install
           - cd ../..
-          - ls /usr/bin
-          - ls /usr/local/bin
           # Ignition msgs
           - mkdir build
           - cd build
