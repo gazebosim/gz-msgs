@@ -92,15 +92,15 @@ int main(int argc, char **argv)
   // is located.
   setenv("IGN_CONFIG_PATH", IGN_CONFIG_PATH, 1);
 
-//  // Make sure that we load the library recently built and not the one installed
-//  // in your system.
-//#ifndef _WIN32
-//  // Save the current value of LD_LIBRARY_PATH.
-//  std::string value = std::getenv("LD_LIBRARY_PATH");
-//  // Add the directory where ignition msgs has been built.
-//  value = std::string(IGN_TEST_LIBRARY_PATH) + ":" + value;
-//  setenv("LD_LIBRARY_PATH", value.c_str(), 1);
-//#endif
+  // Make sure that we load the library recently built and not the one installed
+  // in your system.
+#ifndef _WIN32
+  // Save the current value of LD_LIBRARY_PATH.
+  std::string value = std::string(std::getenv("LD_LIBRARY_PATH"));
+  // Add the directory where ignition msgs has been built.
+  value = std::string(IGN_TEST_LIBRARY_PATH) + ":" + value;
+  setenv("LD_LIBRARY_PATH", value.c_str(), 1);
+#endif
 
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

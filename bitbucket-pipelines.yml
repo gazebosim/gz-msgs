@@ -12,6 +12,7 @@ pipelines:
             libignition-cmake-dev
             libignition-math4-dev
             ruby
+            cppcheck
           # Ignition tools
           - hg clone http://bitbucket.org/ignitionrobotics/ign-tools -b default
           - cd ign-tools
@@ -26,7 +27,7 @@ pipelines:
           - mkdir build
           - cd build
           - cmake .. -DCMAKE_BUILD_TYPE=coverage -DCMAKE_INSTALL_PREFIX=/usr
-          - make -j4 install
+          - make -j4
           - make test ARGS="-V" CTEST_OUTPUT_ON_FAILURE=1
           - make coverage
           - bash <(curl -s https://codecov.io/bash)
