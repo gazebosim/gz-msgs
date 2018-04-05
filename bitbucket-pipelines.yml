@@ -17,7 +17,7 @@ pipelines:
           - cd ign-tools
           - mkdir build
           - cd build
-          - cmake ..
+          - cmake .. -DCMAKE_INSTALL_PREFIX=/usr
           - make -j4 install
           - cd ../..
           - ls /usr/bin
