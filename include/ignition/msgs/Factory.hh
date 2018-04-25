@@ -41,7 +41,7 @@ namespace ignition
     // Inline bracket to help doxygen filtering.
     inline namespace IGNITION_MSGS_VERSION_NAMESPACE {
     //
-    /// \def FactoryFn
+    /// \typedef FactoryFn
     /// \brief Prototype for message factory generation
     typedef std::unique_ptr<google::protobuf::Message> (*FactoryFn) ();
 
