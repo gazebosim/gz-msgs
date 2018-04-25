@@ -67,6 +67,11 @@ ign_configure_build(QUIT_IF_BUILD_ERRORS)
 add_subdirectory(conf)
 
 #============================================================================
+# Test the command line commands
+#============================================================================
+add_subdirectory(tools)
+
+#============================================================================
 # Install proto files
 #============================================================================
 # TODO: Consider tweaking ign_configure_build() to call add_subdirectory(proto)
