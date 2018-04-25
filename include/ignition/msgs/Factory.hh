@@ -31,12 +31,16 @@
 #include <memory>
 #include <vector>
 
+#include "ignition/msgs/config.hh"
 #include "ignition/msgs/Export.hh"
 
 namespace ignition
 {
   namespace msgs
   {
+    // Inline bracket to help doxygen filtering.
+    inline namespace IGNITION_MSGS_VERSION_NAMESPACE {
+    //
     /// \def FactoryFn
     /// \brief Prototype for message factory generation
     typedef std::unique_ptr<google::protobuf::Message> (*FactoryFn) ();
@@ -119,6 +123,7 @@ namespace ignition
       } \
     }; \
     static IgnMsg##_classname IgnitionMessagesInitializer;
+    }
   }
 }
 #endif
