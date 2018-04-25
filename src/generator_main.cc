@@ -26,7 +26,7 @@
 #pragma warning(pop)
 #endif
 
-#include "ignition/msgs/GeneratorPrivate.hh"
+#include "Generator.hh"
 
 int main(int _argc, char *_argv[])
 {

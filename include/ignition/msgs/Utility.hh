@@ -29,6 +29,10 @@
 #include "ignition/msgs/Export.hh"
 #include "ignition/msgs/MessageTypes.hh"
 
+/// \file Utility.hh
+/// \brief Utility functions that support conversion between message type
+/// and ignition math types.
+
 namespace ignition
 {
   namespace msgs

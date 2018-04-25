@@ -15,9 +15,6 @@
  *
 */
 
-// This file is hase the Private suffix to prevent doxygen documentation
-// generation. This file is not installed.
-
 #ifndef IGNITION_MSGS_GENERATOR_HH_
 #define IGNITION_MSGS_GENERATOR_HH_
 
