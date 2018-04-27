@@ -2,7 +2,7 @@
 # Build a custom protoc plugin
 ign_add_executable(ign_msgs_gen Generator.cc generator_main.cc)
 target_link_libraries(ign_msgs_gen
-  protobuf::libprotobuf 
+  protobuf::libprotobuf
   protobuf::libprotoc)
 target_include_directories(ign_msgs_gen PRIVATE ${PROTOBUF_INCLUDE_DIR})
 target_compile_features(ign_msgs_gen PRIVATE ${IGN_CXX_11_FEATURES})
