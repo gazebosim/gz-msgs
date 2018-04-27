@@ -8,7 +8,7 @@ else()
 endif()
 configure_file(
   "cmdmsgs.rb.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/cmdmsgs${PROJECT_VERSION_MAJOR}.rb" @ONLY)
+    "${CMAKE_CURRENT_BINARY_DIR}/cmdmsgs${PROJECT_MAJOR_VERSION}.rb" @ONLY)
 
 # Install the ruby command line library in an unversioned location.
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmdmsgs${PROJECT_VERSION_MAJOR}.rb DESTINATION lib/ruby/ignition)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmdmsgs${PROJECT_MAJOR_VERSION}.rb DESTINATION lib/ruby/ignition)

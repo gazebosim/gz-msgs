@@ -29,8 +29,8 @@ import "ignition/msgs/header.proto";
 /// \brief Altimeter sensor data
 message Altimeter
 {
-  /// \brief Optional header data
-  optional Header header             = 1;
+  // Other Optional header data
+  optional Header header             = 1; /// Optional header data
 
   /// \brief Vertical position data, in meters.
   optional double vertical_position  = 2 [default = 0];

@@ -1,8 +1,8 @@
 ##################################################
 # Build a custom protoc plugin
-ign_add_executable(ign_msgs_gen Generator.cc generator_main.cc)
+ign_add_executable(ign_msgs_gen GeneratorPrivate.cc generator_main.cc)
 target_link_libraries(ign_msgs_gen
-  protobuf::libprotobuf
+  protobuf::libprotobuf 
   protobuf::libprotoc)
 target_include_directories(ign_msgs_gen PRIVATE ${PROTOBUF_INCLUDE_DIR})
 target_compile_features(ign_msgs_gen PRIVATE ${IGN_CXX_11_FEATURES})
@@ -11,6 +11,20 @@ if (UNIX)
   target_link_libraries(ign_msgs_gen pthread)
 endif()
 
+##################################################
+# Build a custom proto document generator 
+ign_add_executable(ign_msgs_doc DocGenerator.cc)
+target_link_libraries(ign_msgs_doc
+  ignition-common${IGN_COMMON_VER}::ignition-common${IGN_COMMON_VER}
+  protobuf::libprotobuf 
+  protobuf::libprotoc
+  gflags)
+target_include_directories(ign_msgs_doc PRIVATE ${PROTOBUF_INCLUDE_DIR})
+target_compile_features(ign_msgs_doc PRIVATE ${IGN_CXX_11_FEATURES})
+
+if (UNIX)
+  target_link_libraries(ign_msgs_doc pthread)
+endif()
 
 ##################################################
 # A function that calls protoc on a protobuf file

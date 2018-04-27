@@ -56,6 +56,24 @@ set(IGN_MATH_VER ${ignition-math5_VERSION_MAJOR})
 ign_find_package(ignition-tools
                  QUIET)
 
+#--------------------------------------
+# Find gflags
+find_library(gflags_LIBRARIES NAMES gflags)
+find_path(gflags_INCLUDE_DIRS gflags/gflags.h ENV CPATH)
+if (NOT gflags_LIBRARIES OR NOT gflags_INCLUDE_DIRS)
+  BUILD_ERROR("Missing: GFlags (libgflags-dev)")
+else()
+  message (STATUS "Found GFlags")
+  include_directories(${gflags_INCLUDE_DIRS})
+  link_directories(${gflags_LIBRARY_DIRS})
+endif()
+
+#--------------------------------------
+# Find ignition-common
+set(IGN_COMMON_VER 1)
+ign_find_package(ignition-common${IGN_COMMON_VER} REQUIRED)
+
+
 #============================================================================
 # Configure the build
 #============================================================================
@@ -65,11 +83,6 @@ ign_configure_build(QUIT_IF_BUILD_ERRORS)
 # ign command line support
 #============================================================================
 add_subdirectory(conf)
-
-#============================================================================
-# Test the command line commands
-#============================================================================
-add_subdirectory(tools)
 
 #============================================================================
 # Install proto files
