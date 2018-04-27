@@ -15,11 +15,17 @@
  *
 */
 
+#include <fstream>
+#include <iostream>
+
 #ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable: 4251)
 #endif
 
+#include <google/protobuf/descriptor.pb.h>
+#include <google/protobuf/dynamic_message.h>
+#include <google/protobuf/compiler/importer.h>
 #include <google/protobuf/text_format.h>
 
 #ifdef _MSC_VER
@@ -32,6 +38,17 @@ using namespace ignition;
 using namespace msgs;
 
 std::map<std::string, FactoryFn> *Factory::msgMap = NULL;
+
+class IgnMultiFileErrorCollector
+  : public google::protobuf::compiler::MultiFileErrorCollector
+{
+  void AddError(const std::string& filename, int line, int column,
+               const std::string& message)
+  {
+    std::cerr << "[" << filename << "] (" << line << ":" << column << "): "
+              << message << std::endl;
+  }
+};
 
 /////////////////////////////////////////////////
 void Factory::Register(const std::string &_msgType,
@@ -73,6 +90,82 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
   // type
   if (msgMap->find(type) != msgMap->end())
     msg = ((*msgMap)[type]) ();
+
+  // caguero - Testing.
+  const char *ignProtoPath = std::getenv("IGN_PROTO_PATH");
+  const char *ignDescPath = std::getenv("IGN_DESCRIPTOR_PATH");
+  if (ignProtoPath)
+  {
+
+    // std::cout << "IGN_PROTO_PATH [" << ignProtoPath << "]" << std::endl;
+
+    // Option A - Using .proto
+    static google::protobuf::compiler::DiskSourceTree sourceTree;
+    sourceTree.MapPath("", ignProtoPath);
+    static IgnMultiFileErrorCollector errorMist;
+    static google::protobuf::compiler::Importer importer(
+      &sourceTree, &errorMist);
+
+    importer.Import("stringmsg.proto");
+
+    const google::protobuf::DescriptorPool* pool = importer.pool();
+    static google::protobuf::DynamicMessageFactory dmf;
+    const google::protobuf::Descriptor* desc =
+      pool->FindMessageTypeByName(_msgType);
+    const google::protobuf::Message* msgProto = dmf.GetPrototype(desc);
+    msg.reset(msgProto->New());
+  }
+  else if (ignDescPath)
+  {
+
+    // std::cout << "IGN_DESCRIPTOR_PATH [" << ignDescPath << "]" << std::endl;
+
+    // Option B - Using .desc.
+    std::ifstream ifs(ignDescPath);
+    google::protobuf::FileDescriptorSet fileDescriptorSet;
+    fileDescriptorSet.ParseFromIstream(&ifs);
+
+    const google::protobuf::DescriptorPool *compiledPool =
+      google::protobuf::DescriptorPool::generated_pool();
+    if (!compiledPool)
+    {
+      std::cerr  << "compiled pool is nullptr" << std::endl;
+      return nullptr;
+    }
+
+    const google::protobuf::Descriptor *desc =
+      compiledPool->FindMessageTypeByName(_msgType);
+
+    if (desc)
+    {
+      msg.reset(google::protobuf::MessageFactory::generated_factory()->
+        GetPrototype(desc)->New());
+    }
+
+    static google::protobuf::DescriptorPool pool(compiledPool);
+    static google::protobuf::DynamicMessageFactory dynamicMessageFactory(&pool);
+
+    for (const auto &fileDescriptorProto : fileDescriptorSet.file())
+    {
+      const google::protobuf::FileDescriptor *fileDescriptor =
+        pool.BuildFile(fileDescriptorProto);
+      if (fileDescriptor == nullptr)
+        continue;
+
+      const google::protobuf::Descriptor *descriptor =
+        pool.FindMessageTypeByName(_msgType);
+
+      if (descriptor == nullptr)
+      {
+        std::cerr << "Descriptor is NULL" << std::endl;
+        continue;
+      }
+
+      msg.reset(dynamicMessageFactory.GetPrototype(descriptor)->New());
+      break;
+    }
+  }
+  // end caguero - Testing.
 
   return msg;
 }
