@@ -117,8 +117,8 @@ int main(int _argc, char **_argv)
   }
 
   google::protobuf::compiler::DiskSourceTree sourceTree;
-  sourceTree.MapPath("", "/data/ignition/ign-msgs/proto/ignition/msgs");
-  sourceTree.MapPath("ignition/msgs", "/data/ignition/ign-msgs/proto/ignition/msgs");
+  sourceTree.MapPath("", "/home/nkoenig/work/ignition/ign-msgs/proto/ignition/msgs");
+  sourceTree.MapPath("ignition/msgs", "/home/nkoenig/work/ignition/ign-msgs/proto/ignition/msgs");
 
   ErrorCollector errorCollector;
 
@@ -186,7 +186,8 @@ int main(int _argc, char **_argv)
 
       descriptor->CopyTo(&(doc.messages[descriptor->name()]));
       doc.messagesLoc[descriptor->name()] = baseName;
-      doc.messagesPath[descriptor->name()] = baseName + ".4." + msgType;
+      doc.messagesPath[descriptor->name()] = baseName + ".4." +
+        std::to_string(msgType);
     }
   }
 
