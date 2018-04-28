@@ -14,6 +14,7 @@
  * limitations under the License.
  *
 */
+
 #ifndef IGNITION_MSGS_GENERATOR_HH_
 #define IGNITION_MSGS_GENERATOR_HH_
 
@@ -26,7 +27,7 @@ namespace compiler {
 namespace cpp {
 class GeneratorContext;
 
-/// \internal
+/// \cond
 /// \brief Google protobuf message generator for igntion::msgs
 class Generator : public CodeGenerator
 {
@@ -49,6 +50,7 @@ class Generator : public CodeGenerator
 
   // private: GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Generator);
 };
+/// \endcond
 
 }
 }

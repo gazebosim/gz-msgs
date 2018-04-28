@@ -12,3 +12,7 @@ release will remove the deprecated code.
 
 ### Deprecations
 
+### Removals
+
+1. The `Generator.hh` file is no longer installed. This file served only to
+   make an internal protc plugin that customized the protobuf compiler output.
