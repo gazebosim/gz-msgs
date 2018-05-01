@@ -11,16 +11,9 @@ pipelines:
             cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev
             libignition-cmake-dev
             libignition-math4-dev
+            libignition-tools-dev
             ruby
             cppcheck
-          # Ignition tools
-          - hg clone http://bitbucket.org/ignitionrobotics/ign-tools -b default
-          - cd ign-tools
-          - mkdir build
-          - cd build
-          - cmake .. -DCMAKE_INSTALL_PREFIX=/usr
-          - make -j4 install
-          - cd ../..
           # Ignition msgs
           - mkdir build
           - cd build
