@@ -22,27 +22,4 @@
 #define IGN_CONFIG_PATH "@CMAKE_BINARY_DIR@/test/conf"
 #define IGN_TEST_LIBRARY_PATH "${PROJECT_BINARY_DIR}/src"
 
-/*
- * setenv/unstenv are not present in Windows. Define them to make the code
- * portable
- */
-#if (_MSC_VER >= 1400) // Visual Studio 2005
-#include <sstream>
-
-int setenv(const char * name, const char * value, int /*rewrite*/)
-{
-  std::stringstream sstr;
-  sstr << *name << '=' << value;
-  return _putenv(sstr.str().c_str());
-}
-
-void unsetenv(const char * name)
-{
-  std::stringstream sstr;
-  sstr << *name << '=';
-  _putenv(sstr.str().c_str());
-  return;
-}
-#endif
-
 #endif

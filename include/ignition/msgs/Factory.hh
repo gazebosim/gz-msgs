@@ -95,6 +95,13 @@ namespace ignition
       /// \param[out] _types Vector of strings of the message types.
       public: static void Types(std::vector<std::string> &_types);
 
+      /// \brief Load a collection of descriptor .desc files.
+      /// \param[in] _paths A set of directories containing .desc decriptor
+      /// files. Each directory should be separated by ":".
+      /// If an empty directory is passed, this function  will try to load all
+      /// descriptors specified in the IGN_DESCRIPTOR_DIR environment variable.
+      public: static void LoadDescriptors(const std::string &_paths = "");
+
       /// \brief A list of registered message types
       private: static std::map<std::string, FactoryFn> *msgMap;
     };

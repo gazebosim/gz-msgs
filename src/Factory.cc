@@ -45,11 +45,6 @@ using namespace msgs;
 /// \brief An abbreviated unique pointer to a protobuf message type.
 using ProtoUniquePtr = std::unique_ptr<google::protobuf::Message>;
 
-std::map<std::string, FactoryFn> *Factory::msgMap = NULL;
-
-/// \brief Initialize the descriptor pool.
-static google::protobuf::DescriptorPool pool;
-
 //////////////////////////////////////////////////
 /// \brief split at a one character delimiter to get a vector of something
 /// \param[in] _orig The string to split
@@ -72,104 +67,137 @@ std::vector<std::string> split(const std::string &_orig, char _delim)
 
 /////////////////////////////////////////////////
 /// \brief A factory class to generate protobuf messages at runtime based on
-/// their message descriptions. The location of the .desc files is expected
-/// via the IGN_DESCRIPTOR_DIR environment variable. This environment variable
-/// expects paths to directories containing .desc files. Any file without the
-/// .desc extension will be ignored.
+/// their message descriptors. The location of the .desc files is expected
+/// via the IGN_DESCRIPTOR_DIR environment variable. This environment
+/// variable expects paths to directories containing .desc files.
+/// Any file without the .desc extension will be ignored.
 class DynamicFactory
 {
-  /////////////////////////////////////////////////
   /// \brief Constructor.
-  public: DynamicFactory()
-  {
-    const char *ignDescPath = std::getenv("IGN_DESCRIPTOR_DIR");
-    if (!ignDescPath)
-      return;
+  public: DynamicFactory();
 
-    // Split all the directories containing .desc files.
-    auto descDirs = split(ignDescPath, ':');
+  /// \brief Load descriptors into the descriptor pool.
+  /// \param[in] _paths A set of directories containing .desc decriptor files.
+  /// Each directory should be separated by ":".
+  /// If an empty directory is passed, this function  will try to load all
+  /// descriptors specified in the IGN_DESCRIPTOR_DIR environment variable.
+  public: void LoadDescriptors(const std::string &_paths = "");
 
-    for (const auto descDir : descDirs)
-    {
-      for (DirIter dirIter(descDir); dirIter != DirIter(); ++dirIter)
-      {
-        // Ignore files without the .desc extension.
-        if ((*dirIter).rfind(".desc") == std::string::npos)
-          continue;
-
-        // Parse the .desc file.
-        std::ifstream ifs(*dirIter);
-        if (!ifs.is_open())
-        {
-          std::cerr << "DynamicFactory(): Unable to open [" << *dirIter << "]"
-                    << std::endl;
-          continue;
-        }
-
-        google::protobuf::FileDescriptorSet fileDescriptorSet;
-        if (!fileDescriptorSet.ParseFromIstream(&ifs))
-        {
-          std::cerr << "DynamicFactory(): Unable to parse descriptor set from ["
-                    << *dirIter << "]" << std::endl;
-          continue;
-        }
-
-        // Place the real descriptors in the descriptor pool.
-        for (const auto &fileDescriptorProto : fileDescriptorSet.file())
-        {
-          if (!pool.BuildFile(fileDescriptorProto))
-          {
-            std::cerr << "DynamicFactory(). Unable to place descriptors from ["
-                      << *dirIter << "] in the descriptor pool" << std::endl;
-          }
-        }
-      }
-    }
-  }
-
-  /////////////////////////////////////////////////
   /// \brief Create a new instance of a message.
   /// \param[in] _msgType Type of message to create.
   /// \return Pointer to a google protobuf message. Null if the message
   /// type could not be handled.
-  public: static ProtoUniquePtr New(const std::string &_msgType)
-  {
-    // Shortcut if the type has been already registered.
-    auto msgF = msgMap.find(_msgType);
-    if (msgF != msgMap.end())
-      return msgF->second();
-
-    static google::protobuf::DynamicMessageFactory dynamicMessageFactory;
-
-    // Nothing to do if we don't know about this type in the descriptor map.
-    auto descriptor = pool.FindMessageTypeByName(_msgType);
-    if (!descriptor)
-      return nullptr;
-
-    auto msgPtr(dynamicMessageFactory.GetPrototype(descriptor)->New());
-
-    // Create the lambda for registration purposes.
-    std::function<ProtoUniquePtr()> f = [msgPtr]() -> ProtoUniquePtr
-    {
-      ProtoUniquePtr ptr(msgPtr->New());
-      return ptr;
-    };
-
-    // Register the new type for the future.
-    msgMap[_msgType] = f;
-
-    return f();
-  }
+  public: static ProtoUniquePtr New(const std::string &_msgType);
 
   /// \brief A list of registered message types built at runtime.
   /// The key is the message type. The value is a function that returns a
-  /// std::unique_ptr to a new empty instance of the message or nullptr if the
-  /// message is not registered.
-  public: static std::map<std::string, std::function<ProtoUniquePtr()>> msgMap;
+  /// std::unique_ptr to a new empty instance of the message or nullptr if
+  /// the message is not registered.
+  private: static std::map<std::string,
+                          std::function<ProtoUniquePtr()>> msgMap;
+
+  /// \brief We store the descriptors here.
+  private: static google::protobuf::DescriptorPool pool;
 };
 
-/// \brief Initialize the map inside the DynamicFactory class.
+// Initialization of static members,
 std::map<std::string, std::function<ProtoUniquePtr()>> DynamicFactory::msgMap;
+google::protobuf::DescriptorPool DynamicFactory::pool;
+DynamicFactory dynamicFactory;
+std::map<std::string, FactoryFn> *Factory::msgMap = NULL;
+
+/////////////////////////////////////////////////
+DynamicFactory::DynamicFactory()
+{
+  // Try to load all the descriptors found in the paths set with
+  // IGN_DESCRIPTOR_PATH.
+  this->LoadDescriptors();
+}
+
+/////////////////////////////////////////////////
+void DynamicFactory::LoadDescriptors(const std::string &_paths)
+{
+  std::string descPaths = _paths;
+  if (descPaths.empty())
+  {
+    // Try to get the list of paths from an environment variable.
+    const char *ignDescPaths = std::getenv("IGN_DESCRIPTOR_DIR");
+    if (!ignDescPaths)
+      return;
+
+    descPaths = ignDescPaths;
+  }
+
+  // Split all the directories containing .desc files.
+  auto descDirs = split(descPaths, ':');
+
+  for (const auto descDir : descDirs)
+  {
+    for (DirIter dirIter(descDir); dirIter != DirIter(); ++dirIter)
+    {
+      // Ignore files without the .desc extension.
+      if ((*dirIter).rfind(".desc") == std::string::npos)
+        continue;
+
+      // Parse the .desc file.
+      std::ifstream ifs(*dirIter);
+      if (!ifs.is_open())
+      {
+        std::cerr << "DynamicFactory(): Unable to open [" << *dirIter << "]"
+                  << std::endl;
+        continue;
+      }
+
+      google::protobuf::FileDescriptorSet fileDescriptorSet;
+      if (!fileDescriptorSet.ParseFromIstream(&ifs))
+      {
+        std::cerr << "DynamicFactory(): Unable to parse descriptor set from ["
+                  << *dirIter << "]" << std::endl;
+        continue;
+      }
+
+      // Place the real descriptors in the descriptor pool.
+      for (const auto &fileDescriptorProto : fileDescriptorSet.file())
+      {
+        if (!pool.BuildFile(fileDescriptorProto))
+        {
+          std::cerr << "DynamicFactory(). Unable to place descriptors from ["
+                    << *dirIter << "] in the descriptor pool" << std::endl;
+        }
+      }
+    }
+  }
+}
+
+/////////////////////////////////////////////////
+ProtoUniquePtr DynamicFactory::New(const std::string &_msgType)
+{
+  // Shortcut if the type has been already registered.
+  auto msgF = msgMap.find(_msgType);
+  if (msgF != msgMap.end())
+    return msgF->second();
+
+  static google::protobuf::DynamicMessageFactory dynamicMessageFactory;
+
+  // Nothing to do if we don't know about this type in the descriptor map.
+  auto descriptor = pool.FindMessageTypeByName(_msgType);
+  if (!descriptor)
+    return nullptr;
+
+  auto msgPtr(dynamicMessageFactory.GetPrototype(descriptor)->New());
+
+  // Create the lambda for registration purposes.
+  std::function<ProtoUniquePtr()> f = [msgPtr]() -> ProtoUniquePtr
+  {
+    ProtoUniquePtr ptr(msgPtr->New());
+    return ptr;
+  };
+
+  // Register the new type for the future.
+  msgMap[_msgType] = f;
+
+  return f();
+}
 
 /////////////////////////////////////////////////
 void Factory::Register(const std::string &_msgType,
@@ -211,9 +239,6 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
   if (msgMap->find(type) != msgMap->end())
     return ((*msgMap)[type]) ();
 
-  /// \brief Initialize the Protobuf factory for runtime messages.
-  static DynamicFactory dynamicFactory;
-
   // Check if we have the message descriptor.
   msg = dynamicFactory.New(_msgType);
 
@@ -244,4 +269,10 @@ void Factory::Types(std::vector<std::string> &_types)
   {
     _types.push_back(iter->first);
   }
+}
+
+/////////////////////////////////////////////////
+void Factory::LoadDescriptors(const std::string &_paths)
+{
+  dynamicFactory.LoadDescriptors(_paths);
 }
