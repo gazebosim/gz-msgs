@@ -16,8 +16,10 @@
 */
 
 #include <gtest/gtest.h>
-#include <cstddef>
 #include <algorithm>
+#include <cstddef>
+
+#include "ignition/msgs/test_config.h"
 #include "ignition/msgs/MessageTypes.hh"
 #include "ignition/msgs/Factory.hh"
 
@@ -51,4 +53,14 @@ TEST(FactoryTest, New)
   EXPECT_DOUBLE_EQ(msg->x(), msgFilled->x());
   EXPECT_DOUBLE_EQ(msg->y(), msgFilled->y());
   EXPECT_DOUBLE_EQ(msg->z(), msgFilled->z());
+}
+
+/////////////////////////////////////////////////
+TEST(FactoryTest, NewDynamicFactory)
+{
+  // Point IGN_DESCRIPTOR_DIR to the directory with the .desc file.
+  setenv("IGN_DESCRIPTOR_DIR", PROJECT_SOURCE_PATH "/test/desc", 1);
+
+  auto msg = msgs::Factory::New("ignition.msgs.SimpleCarState");
+  ASSERT_TRUE(msg.get() != nullptr);
 }

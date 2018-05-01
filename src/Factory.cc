@@ -168,9 +168,6 @@ class DynamicFactory
   public: static std::map<std::string, std::function<ProtoUniquePtr()>> msgMap;
 };
 
-/// \brief Initialize the Protobuf factory for runtime messages.
-static DynamicFactory dynamicFactory;
-
 /// \brief Initialize the map inside the DynamicFactory class.
 std::map<std::string, std::function<ProtoUniquePtr()>> DynamicFactory::msgMap;
 
@@ -213,6 +210,9 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
   // Create a new message if a FactoryFn has been assigned to the message type
   if (msgMap->find(type) != msgMap->end())
     return ((*msgMap)[type]) ();
+
+  /// \brief Initialize the Protobuf factory for runtime messages.
+  static DynamicFactory dynamicFactory;
 
   // Check if we have the message descriptor.
   msg = dynamicFactory.New(_msgType);
