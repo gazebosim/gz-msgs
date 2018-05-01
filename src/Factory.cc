@@ -30,6 +30,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <vector>
 
 #ifdef _MSC_VER
 #pragma warning(pop)
@@ -73,6 +74,7 @@ std::vector<std::string> split(const std::string &_orig, char _delim)
 /// Any file without the .desc extension will be ignored.
 class DynamicFactory
 {
+  //////////////////////////////////////////////////
   /// \brief Constructor.
   public: DynamicFactory()
   {
@@ -81,6 +83,7 @@ class DynamicFactory
     this->LoadDescriptors();
   }
 
+  //////////////////////////////////////////////////
   /// \brief Load descriptors into the descriptor pool.
   /// \param[in] _paths A set of directories containing .desc decriptor files.
   /// Each directory should be separated by ":".
@@ -140,6 +143,7 @@ class DynamicFactory
     }
   }
 
+  //////////////////////////////////////////////////
   /// \brief Create a new instance of a message.
   /// \param[in] _msgType Type of message to create.
   /// \return Pointer to a google protobuf message. Null if the message
