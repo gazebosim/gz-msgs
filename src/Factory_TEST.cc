@@ -61,6 +61,6 @@ TEST(FactoryTest, NewDynamicFactory)
   // Point IGN_DESCRIPTOR_DIR to the directory with the .desc file.
   setenv("IGN_DESCRIPTOR_DIR", PROJECT_SOURCE_PATH "/test/desc", 1);
 
-  auto msg = msgs::Factory::New("ignition.msgs.SimpleCarState");
+  auto msg = msgs::Factory::New("example.msgs.StringMsg");
   ASSERT_TRUE(msg.get() != nullptr);
 }
