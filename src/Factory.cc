@@ -151,8 +151,6 @@ class DynamicFactory
     if (msgF != msgMap.end())
       return msgF->second();
 
-    static google::protobuf::DynamicMessageFactory dynamicMessageFactory;
-
     // Nothing to do if we don't know about this type in the descriptor map.
     auto descriptor = pool.FindMessageTypeByName(_msgType);
     if (!descriptor)
@@ -182,11 +180,15 @@ class DynamicFactory
 
   /// \brief We store the descriptors here.
   private: static google::protobuf::DescriptorPool pool;
+
+  /// \brief Used to create a message from a descriptor.
+  private: static google::protobuf::DynamicMessageFactory dynamicMessageFactory;
 };
 
 // Initialization of static members,
 std::map<std::string, std::function<ProtoUniquePtr()>> DynamicFactory::msgMap;
 google::protobuf::DescriptorPool DynamicFactory::pool;
+google::protobuf::DynamicMessageFactory DynamicFactory::dynamicMessageFactory;
 DynamicFactory dynamicFactory;
 std::map<std::string, FactoryFn> *Factory::msgMap = NULL;
 
