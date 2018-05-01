@@ -58,9 +58,16 @@ TEST(FactoryTest, New)
 /////////////////////////////////////////////////
 TEST(FactoryTest, NewDynamicFactory)
 {
+  auto msg = msgs::Factory::New("example.msgs.StringMsg");
+  ASSERT_TRUE(msg.get() != nullptr);
+}
+
+//////////////////////////////////////////////////
+int main(int argc, char **argv)
+{
   // Point IGN_DESCRIPTOR_DIR to the directory with the .desc file.
   setenv("IGN_DESCRIPTOR_DIR", PROJECT_SOURCE_PATH "/test/desc", 1);
 
-  auto msg = msgs::Factory::New("example.msgs.StringMsg");
-  ASSERT_TRUE(msg.get() != nullptr);
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }
