@@ -26,6 +26,10 @@ DEFINE_string(d, "", "Directory that contains protobuf files.");
 
 using namespace ignition;
 
+const char *customCss = R"customCss(
+
+)customCss";
+
 class ErrorCollector :
   public google::protobuf::compiler::MultiFileErrorCollector
 {
@@ -39,34 +43,91 @@ class ErrorCollector :
 
 class Doc
 {
+  public: std::string TypeName(const int _typeId) const
+  {
+    switch (_typeId)
+    {
+      case google::protobuf::FieldDescriptor::TYPE_DOUBLE:
+        return "double";
+      case google::protobuf::FieldDescriptor::TYPE_FLOAT:
+        return "float";
+      case google::protobuf::FieldDescriptor::TYPE_INT64:
+        return "int64";
+      case google::protobuf::FieldDescriptor::TYPE_UINT64:
+        return "uint64";
+      case google::protobuf::FieldDescriptor::TYPE_INT32:
+        return "int32";
+      case google::protobuf::FieldDescriptor::TYPE_FIXED64:
+        return "fixed64";
+      case google::protobuf::FieldDescriptor::TYPE_FIXED32:
+        return "fixed32";
+      case google::protobuf::FieldDescriptor::TYPE_BOOL:
+        return "bool";
+      case google::protobuf::FieldDescriptor::TYPE_STRING:
+        return "string";
+      case google::protobuf::FieldDescriptor::TYPE_GROUP:
+        return "group";
+      case google::protobuf::FieldDescriptor::TYPE_MESSAGE:
+        return "message";
+      case google::protobuf::FieldDescriptor::TYPE_BYTES:
+        return "bytes";
+      case google::protobuf::FieldDescriptor::TYPE_UINT32:
+        return "uint32";
+      case google::protobuf::FieldDescriptor::TYPE_ENUM:
+        return "enum";
+      case google::protobuf::FieldDescriptor::TYPE_SFIXED32:
+        return "sfixed32";
+      case google::protobuf::FieldDescriptor::TYPE_SFIXED64:
+        return "sfixed64";
+      case google::protobuf::FieldDescriptor::TYPE_SINT32:
+        return "sint32";
+      case google::protobuf::FieldDescriptor::TYPE_SINT64:
+        return "sint64";
+      default:
+        return "unknown";
+    };
+  }
+
   public: void Write()
   {
     std::ofstream out("/tmp/p.html");
     out << "<html>\n";
+    out << "<head>\n";
+    out << "<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>";
+    out << "<link rel='stylesheet' href='https://code.getmdl.io/1.3.0/material.indigo-pink.min.css'>";
+    out << "<script defer src='https://code.getmdl.io/1.3.0/material.min.js'></script>";
+    out << customCss;
+    out << "</head>\n";
+
+    out << "<body>\n";
+    out << "<main class='mdl-layout__content'>\n";
 
     for (const std::pair<std::string,
          google::protobuf::DescriptorProto> &msg : this->messages)
     {
-      out << "<h3>" << msg.second.name() << " in "
-        << messagesLoc[msg.first] << "</h3>\n";
+      out << "<h2>" << msg.second.name() << " in "
+        << messagesLoc[msg.first] << "</h2>\n";
 
-      out << "<table>";
+      out << "<h4>Fields</h4>";
+      out << "<table class='mdl-data-table mdl-js-data-table mdl-shadow--2dp'>";
       out << "<thead><tr>"
-          << "<th>Name</th>"
-          << "<th>Type</th>"
-          << "<th>Label</th>"
-          << "<th>Description</th>"
-          << "<th>Number</th>"
-          << "</tr></thead>";
+          << "<th class='mdl-data-table__cell--non-numeric'>Name</th>"
+          << "<th class='mdl-data-table__cell--non-numeric'>Type</th>"
+          << "<th class='mdl-data-table__cell--non-numeric'>Label</th>"
+          << "<th class='mdl-data-table__cell--non-numeric'>Description</th>"
+          << "<th class='mdl-data-table__cell--non-numeric'>Number</th>"
+          << "</tr></thead><tbody>";
       for (int fieldI = 0; fieldI < msg.second.field_size(); ++fieldI)
       {
         out << "<tr>";
         const google::protobuf::FieldDescriptorProto &field =
           msg.second.field(fieldI);
-        out << "<td>" << field.name() << "</td>"
-            << "<td>" << field.type() << "</td>";
+        out << "<td class='mdl-data-table__cell--non-numeric'>"
+            << field.name() << "</td>"
+            << "<td class='mdl-data-table__cell--non-numeric'>"
+            << this->TypeName(field.type()) << "</td>";
 
-        out << "<td>";
+        out << "<td class='mdl-data-table__cell--non-numeric'>";
         if (field.has_label())
         {
           switch (field.label())
@@ -85,12 +146,17 @@ class Doc
         }
         out << "</td>";
 
-        out << "<td>" << this->messagesLoc[msg.first] << ".4." << fieldI << "</td>"
-            << "<td>" << field.number() << "</td>";
+        out << "<td class='mdl-data-table__cell--non-numeric'>"
+          << this->messagesLoc[msg.first] << ".4." << fieldI << "</td>"
+          << "<td class='mdl-data-table__cell--non-numeric'>"
+          << field.number() << "</td>";
         out << "</tr>";
       }
-      out << "</table>\n";
+      out << "</tbody></table>\n";
     }
+    out << "</main>\n";
+
+    out << "</body>\n";
     out << "</html>\n";
   }
 
@@ -117,8 +183,8 @@ int main(int _argc, char **_argv)
   }
 
   google::protobuf::compiler::DiskSourceTree sourceTree;
-  sourceTree.MapPath("", "/home/nkoenig/work/ignition/ign-msgs/proto/ignition/msgs");
-  sourceTree.MapPath("ignition/msgs", "/home/nkoenig/work/ignition/ign-msgs/proto/ignition/msgs");
+  sourceTree.MapPath("", "/home/nkoenig/work/ignition/ign-msgs/test/proto");
+  sourceTree.MapPath("ignition/msgs", "/home/nkoenig/work/ignition/ign-msgs/test/proto");
 
   ErrorCollector errorCollector;
 
@@ -126,28 +192,41 @@ int main(int _argc, char **_argv)
 
   std::map<std::string, std::string> allComments;
   std::vector<std::string> protoFilenames;
+
+  // For each proto file in the directory.
   for (common::DirIter dirIter(FLAGS_d);
        dirIter != common::DirIter(); ++dirIter)
   {
+    // Make sure the file has the proto extension.
     if ((*dirIter).find(".proto") != (*dirIter).size() - 6)
       continue;
 
+    // Setup the protobuf compiler importer.
     google::protobuf::compiler::Importer importer(&sourceTree,
         &errorCollector);
 
+    // Get the base name of the protobuf file.
     std::string baseName = common::basename(*dirIter);
     protoFilenames.push_back(baseName);
 
+    std::cout << "Basename[" << baseName << "]\n";
+
+    // Get a file descriptor to the protobuf file.
     const google::protobuf::FileDescriptor *fileDescriptor =
       importer.Import(baseName);
 
+    //
     google::protobuf::FileDescriptorProto fileDescriptorProto;
     fileDescriptor->CopySourceCodeInfoTo(&fileDescriptorProto);
-    const google::protobuf::SourceCodeInfo &sci = fileDescriptorProto.source_code_info();
+    const google::protobuf::SourceCodeInfo &sci =
+      fileDescriptorProto.source_code_info();
+
     std::cout << baseName << " Size[" << sci.location_size() << "]\n";
     for (int locI = 0; locI < sci.location_size(); ++locI)
     {
-      const google::protobuf::SourceCodeInfo_Location &scil  = sci.location(locI);
+      const google::protobuf::SourceCodeInfo_Location &scil =
+        sci.location(locI);
+
       if (!scil.leading_comments().empty() || !scil.trailing_comments().empty())
       {
         std::string path = baseName;
