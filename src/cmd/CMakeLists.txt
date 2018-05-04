@@ -6,7 +6,7 @@ else()
 endif()
 
 # Used only for internal testing.
-set(IGN_LIBRARY_NAME ../../../../src/${IGN_LIB_BASENAME})
+set(IGN_LIBRARY_NAME ../../../../lib/${IGN_LIB_BASENAME})
 
 # Generate the ruby script for internal testing.
 # Note that the major version of the library is included in the name.
