@@ -37,7 +37,7 @@
 #include <utility>
 #include <vector>
 
-#include "ignition/msgs/Generator.hh"
+#include "Generator.hh"
 
 namespace google {
 namespace protobuf {

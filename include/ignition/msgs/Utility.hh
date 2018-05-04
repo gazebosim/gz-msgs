@@ -25,13 +25,21 @@
 #include <ignition/math/Plane.hh>
 #include <ignition/math/Vector3.hh>
 
+#include "ignition/msgs/config.hh"
 #include "ignition/msgs/Export.hh"
 #include "ignition/msgs/MessageTypes.hh"
+
+/// \file Utility.hh
+/// \brief Utility functions that support conversion between message type
+/// and ignition math types.
 
 namespace ignition
 {
   namespace msgs
   {
+    // Inline bracket to help doxygen filtering.
+    inline namespace IGNITION_MSGS_VERSION_NAMESPACE {
+    //
     /// \brief Convert a msgs::Vector3d to an ignition::math::Vector
     /// \param[in] _v The vector to convert
     /// \return An ignition::math::Vector3d object
@@ -353,6 +361,7 @@ namespace ignition
     /// \param[in] _v An float reference
     IGNITION_MSGS_VISIBLE
     void Set(msgs::Float *_p, const float &_v);
+    }
   }
 }
 #endif

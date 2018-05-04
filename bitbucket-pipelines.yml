@@ -5,21 +5,26 @@ pipelines:
     - step:
         script:
           - echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable xenial main" > /etc/apt/sources.list.d/gazebo-stable.list
+          - echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-prerelease xenial main" > /etc/apt/sources.list.d/gazebo-prerelease.list
           - apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys D2486D2DD83DB69272AFE98867170598AF249743
           - apt-get update
           - apt-get -y install
             cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev ruby-full
-            libignition-cmake-dev
-            libignition-math4-dev
+            libignition-cmake1-dev
+            libignition-math5-dev
+            libignition-tools-dev
+            ruby
+            cppcheck
           - gem install protobuf
           # Ignition msgs
           - mkdir build
           - cd build
-          - cmake .. -DCMAKE_BUILD_TYPE=coverage
-          - make
-          - make test
+          - cmake .. -DCMAKE_BUILD_TYPE=coverage -DCMAKE_INSTALL_PREFIX=/usr
+          - make -j4
+          - make test ARGS="-V" CTEST_OUTPUT_ON_FAILURE=1
           - make coverage
           - bash <(curl -s https://codecov.io/bash)
+          - make install
           # code_check
           - cd ..
           - sh tools/code_check.sh

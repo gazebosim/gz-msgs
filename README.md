@@ -1,6 +1,6 @@
 # Ignition Messages
 
-** Ignition Message protobuf messages and functions for robot applications.**
+**Protobuf messages and functions for robot applications.**
 
 Ignition Messages is a component in the ignition framework, a set
 of libraries designed to rapidly develop robot applications.
@@ -40,9 +40,9 @@ Run tests as follows:
 
     make test
 
-> Tests are automatically built. To disable them, run `cmake` as follows:
+Tests are automatically built. To disable them, run `cmake` as follows:
 
-      cmake .. -DENABLE_TESTS_COMPILATION=false
+    cmake .. -DENABLE_TESTS_COMPILATION=false
 
 ### Test coverage
 

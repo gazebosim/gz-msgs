@@ -2,7 +2,7 @@
 # Build a custom protoc plugin
 ign_add_executable(ign_msgs_gen Generator.cc generator_main.cc)
 target_link_libraries(ign_msgs_gen
-  protobuf::libprotobuf 
+  protobuf::libprotobuf
   protobuf::libprotoc)
 target_include_directories(ign_msgs_gen PRIVATE ${PROTOBUF_INCLUDE_DIR})
 target_compile_features(ign_msgs_gen PRIVATE ${IGN_CXX_11_FEATURES})
@@ -168,22 +168,20 @@ ign_install_includes(
 
 ##################################################
 # Build the main library
-ign_add_library(${PROJECT_LIBRARY_TARGET_NAME}
+ign_create_core_library(SOURCES
   ${gen_sources}
   ${PROJECT_SOURCE_DIR}/src/Factory.cc
   ${PROJECT_SOURCE_DIR}/src/ign.cc
-  ${PROJECT_SOURCE_DIR}/src/Utility.cc)
-
-target_compile_features(${PROJECT_LIBRARY_TARGET_NAME} PRIVATE ${IGN_CXX_11_FEATURES})
+  ${PROJECT_SOURCE_DIR}/src/Utility.cc
+  CXX_STANDARD 11)
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
-  PRIVATE
-    ${CMAKE_CURRENT_BINARY_DIR})
+  PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
     protobuf::libprotobuf
-    ${ignition-math4_LIBRARIES})
+    ${ignition-math${IGN_MATH_VER}_LIBRARIES})
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   SYSTEM PUBLIC $<TARGET_PROPERTY:protobuf::libprotobuf,INTERFACE_INCLUDE_DIRECTORIES>)
@@ -197,9 +195,6 @@ target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
     $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include>
     $<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR_FULL}>)
-
-ign_install_library()
-
 
 ##################################################
 # Build unit tests
