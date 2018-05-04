@@ -99,9 +99,9 @@ class DynamicFactory
       return;
 
     // Split all the directories containing .desc files.
-    auto descDirs = split(_paths, ':');
+    std::vector<std::string> descDirs = split(_paths, ':');
 
-    for (const auto descDir : descDirs)
+    for (const std::string &descDir : descDirs)
     {
       for (DirIter dirIter(descDir); dirIter != DirIter(); ++dirIter)
       {
@@ -127,7 +127,8 @@ class DynamicFactory
         }
 
         // Place the real descriptors in the descriptor pool.
-        for (const auto &fileDescriptorProto : fileDescriptorSet.file())
+        for (const google::protobuf::FileDescriptorProto &fileDescriptorProto :
+             fileDescriptorSet.file())
         {
           if (!pool.BuildFile(fileDescriptorProto))
           {
@@ -147,16 +148,20 @@ class DynamicFactory
   public: static ProtoUniquePtr New(const std::string &_msgType)
   {
     // Shortcut if the type has been already registered.
-    auto msgF = msgMap.find(_msgType);
-    if (msgF != msgMap.end())
+    std::map<std::string, std::function<ProtoUniquePtr()>>::iterator msgF =
+      dynamicMsgMap.find(_msgType);
+
+    if (msgF != dynamicMsgMap.end())
       return msgF->second();
 
     // Nothing to do if we don't know about this type in the descriptor map.
-    auto descriptor = pool.FindMessageTypeByName(_msgType);
+    const google::protobuf::Descriptor *descriptor =
+      pool.FindMessageTypeByName(_msgType);
     if (!descriptor)
       return nullptr;
 
-    auto msgPtr(dynamicMessageFactory.GetPrototype(descriptor)->New());
+    google::protobuf::Message *msgPtr(
+        dynamicMessageFactory.GetPrototype(descriptor)->New());
 
     // Create the lambda for registration purposes.
     std::function<ProtoUniquePtr()> f = [msgPtr]() -> ProtoUniquePtr
@@ -166,7 +171,7 @@ class DynamicFactory
     };
 
     // Register the new type for the future.
-    msgMap[_msgType] = f;
+    dynamicMsgMap[_msgType] = f;
 
     return f();
   }
@@ -176,7 +181,7 @@ class DynamicFactory
   /// std::unique_ptr to a new empty instance of the message or nullptr if
   /// the message is not registered.
   private: static std::map<std::string,
-                           std::function<ProtoUniquePtr()>> msgMap;
+                           std::function<ProtoUniquePtr()>> dynamicMsgMap;
 
   /// \brief We store the descriptors here.
   private: static google::protobuf::DescriptorPool pool;
@@ -186,7 +191,8 @@ class DynamicFactory
 };
 
 // Initialization of static members,
-std::map<std::string, std::function<ProtoUniquePtr()>> DynamicFactory::msgMap;
+std::map<std::string, std::function<ProtoUniquePtr()>>
+DynamicFactory::dynamicMsgMap;
 google::protobuf::DescriptorPool DynamicFactory::pool;
 google::protobuf::DynamicMessageFactory DynamicFactory::dynamicMessageFactory;
 DynamicFactory dynamicFactory;
@@ -242,7 +248,7 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
 std::unique_ptr<google::protobuf::Message> Factory::New(
     const std::string &_msgType, const std::string &_args)
 {
-  auto msg = New(_msgType);
+  std::unique_ptr<google::protobuf::Message> msg = New(_msgType);
   if (msg)
   {
     google::protobuf::TextFormat::ParseFromString(_args, msg.get());
