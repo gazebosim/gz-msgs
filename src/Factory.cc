@@ -76,34 +76,30 @@ class DynamicFactory
 {
   //////////////////////////////////////////////////
   /// \brief Constructor.
+  /// The constructor will try to load all descriptors specified in the
+  /// IGN_DESCRIPTOR_DIR environment variable.
   public: DynamicFactory()
   {
-    // Try to load all the descriptors found in the paths set with
-    // IGN_DESCRIPTOR_PATH.
-    this->LoadDescriptors();
+    // Try to get the list of paths from an environment variable.
+    const char *ignDescPaths = std::getenv("IGN_DESCRIPTOR_DIR");
+    if (!ignDescPaths)
+      return;
+
+    // Load all the descriptors found in the paths set with IGN_DESCRIPTOR_PATH.
+    this->LoadDescriptors(ignDescPaths);
   }
 
   //////////////////////////////////////////////////
   /// \brief Load descriptors into the descriptor pool.
   /// \param[in] _paths A set of directories containing .desc decriptor files.
   /// Each directory should be separated by ":".
-  /// If an empty directory is passed, this function  will try to load all
-  /// descriptors specified in the IGN_DESCRIPTOR_DIR environment variable.
-  public: void LoadDescriptors(const std::string &_paths = "")
+  public: void LoadDescriptors(const std::string &_paths)
   {
-    std::string descPaths = _paths;
-    if (descPaths.empty())
-    {
-      // Try to get the list of paths from an environment variable.
-      const char *ignDescPaths = std::getenv("IGN_DESCRIPTOR_DIR");
-      if (!ignDescPaths)
-        return;
-
-      descPaths = ignDescPaths;
-    }
+    if (_paths.empty())
+      return;
 
     // Split all the directories containing .desc files.
-    auto descDirs = split(descPaths, ':');
+    auto descDirs = split(_paths, ':');
 
     for (const auto descDir : descDirs)
     {

@@ -42,8 +42,9 @@ namespace ignition
     typedef std::unique_ptr<google::protobuf::Message> (*FactoryFn) ();
 
     /// \class Factory Factory.hh ignition/msgs.hh
-    /// \brief A factory that generates protobuf message based on a string
-    /// type.
+    /// \brief A factory that generates protobuf message based on a string type.
+    /// This function  will also try to load all Protobuf descriptors specified
+    /// in the IGN_DESCRIPTOR_DIR environment variable.
     class IGNITION_MSGS_VISIBLE Factory
     {
       /// \brief Register a message.
@@ -98,9 +99,7 @@ namespace ignition
       /// \brief Load a collection of descriptor .desc files.
       /// \param[in] _paths A set of directories containing .desc decriptor
       /// files. Each directory should be separated by ":".
-      /// If an empty directory is passed, this function  will try to load all
-      /// descriptors specified in the IGN_DESCRIPTOR_DIR environment variable.
-      public: static void LoadDescriptors(const std::string &_paths = "");
+      public: static void LoadDescriptors(const std::string &_paths);
 
       /// \brief A list of registered message types
       private: static std::map<std::string, FactoryFn> *msgMap;
