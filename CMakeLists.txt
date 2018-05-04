@@ -14,7 +14,7 @@ find_package(ignition-cmake1 REQUIRED)
 #============================================================================
 # Configure the project
 #============================================================================
-ign_configure_project(VERSION_SUFFIX pre1)
+ign_configure_project(VERSION_SUFFIX pre2)
 
 #============================================================================
 # Set project-specific options
@@ -84,3 +84,11 @@ add_subdirectory(proto)
 # Create package information
 #============================================================================
 ign_create_packages()
+
+#============================================================================
+# Create documentation
+#============================================================================
+ign_create_docs(
+  TAGFILES
+    "${IGNITION-MATH_DOXYGEN_TAGFILE} = ${IGNITION-MATH_API_URL}"
+  )
