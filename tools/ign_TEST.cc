@@ -71,7 +71,8 @@ TEST(CmdLine, MsgList)
 {
   auto output = custom_exec_str("ign msg --list --force-version " +
     g_version);
-  EXPECT_NE(std::string::npos, output.find("ign_msgs.WorldControl"));
+  EXPECT_NE(std::string::npos, output.find("ign_msgs.WorldControl"))
+    << output;
 }
 
 /////////////////////////////////////////////////
@@ -79,7 +80,8 @@ TEST(CmdLine, MsgInfo)
 {
   auto output = custom_exec_str("ign msg --info ign_msgs.WorldControl "
     "--force-version " + g_version);
-  EXPECT_NE(std::string::npos, output.find("message WorldControl {"));
+  EXPECT_NE(std::string::npos, output.find("message WorldControl {"))
+    << output;
 }
 
 /////////////////////////////////////////////////
