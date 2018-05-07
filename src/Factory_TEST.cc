@@ -58,7 +58,15 @@ TEST(FactoryTest, New)
 /////////////////////////////////////////////////
 TEST(FactoryTest, NewDynamicFactory)
 {
-  msgs::Factory::LoadDescriptors(PROJECT_SOURCE_PATH "/test/desc");
+  std::string paths;
+
   auto msg = msgs::Factory::New("example.msgs.StringMsg");
-  ASSERT_TRUE(msg.get() != nullptr);
+  EXPECT_TRUE(msg.get() == nullptr);
+
+  paths =
+      PROJECT_SOURCE_PATH "/test/desc:"
+      PROJECT_SOURCE_PATH "/test";
+  msgs::Factory::LoadDescriptors(paths);
+  msg = msgs::Factory::New("example.msgs.StringMsg");
+  EXPECT_TRUE(msg.get() != nullptr);
 }
