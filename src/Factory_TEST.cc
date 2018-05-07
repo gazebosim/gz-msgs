@@ -41,7 +41,7 @@ TEST(FactoryTest, New)
 {
   auto msg = msgs::Factory::New<msgs::Vector3d>("ign_msgs.Vector3d");
 
-  EXPECT_TRUE(msg.get() != nullptr);
+  ASSERT_TRUE(msg.get() != nullptr);
 
   msg->set_x(1.0);
   msg->set_y(2.0);
@@ -49,10 +49,19 @@ TEST(FactoryTest, New)
 
   auto msgFilled = msgs::Factory::New<msgs::Vector3d>(
       "ign_msgs.Vector3d", "x: 1.0, y: 2.0, z: 3.0");
+  ASSERT_TRUE(msgFilled.get() != nullptr);
 
   EXPECT_DOUBLE_EQ(msg->x(), msgFilled->x());
   EXPECT_DOUBLE_EQ(msg->y(), msgFilled->y());
   EXPECT_DOUBLE_EQ(msg->z(), msgFilled->z());
+
+  msg = nullptr;
+  msg = msgs::Factory::New<msgs::Vector3d>("ignition.msgs.Vector3d");
+  EXPECT_TRUE(msg.get() != nullptr);
+
+  msg = nullptr;
+  msg = msgs::Factory::New<msgs::Vector3d>(".ignition.msgs.Vector3d");
+  EXPECT_TRUE(msg.get() != nullptr);
 }
 
 /////////////////////////////////////////////////
@@ -67,6 +76,7 @@ TEST(FactoryTest, NewDynamicFactory)
       PROJECT_SOURCE_PATH "/test/desc:"
       PROJECT_SOURCE_PATH "/test";
   msgs::Factory::LoadDescriptors(paths);
+
   msg = msgs::Factory::New("example.msgs.StringMsg");
   EXPECT_TRUE(msg.get() != nullptr);
 }
