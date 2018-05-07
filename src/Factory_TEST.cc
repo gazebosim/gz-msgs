@@ -55,11 +55,9 @@ TEST(FactoryTest, New)
   EXPECT_DOUBLE_EQ(msg->y(), msgFilled->y());
   EXPECT_DOUBLE_EQ(msg->z(), msgFilled->z());
 
-  msg = nullptr;
   msg = msgs::Factory::New<msgs::Vector3d>("ignition.msgs.Vector3d");
   EXPECT_TRUE(msg.get() != nullptr);
 
-  msg = nullptr;
   msg = msgs::Factory::New<msgs::Vector3d>(".ignition.msgs.Vector3d");
   EXPECT_TRUE(msg.get() != nullptr);
 }
