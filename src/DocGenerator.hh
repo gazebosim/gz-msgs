@@ -15,28 +15,15 @@
  *
 */
 
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4251)
-#endif
+#include <google/protobuf/compiler/importer.h>
 
-#include <google/protobuf/compiler/plugin.h>
-
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
-
-#include "ignition/msgs/Generator.hh"
-
-int main(int _argc, char *_argv[])
+int main()
 {
-#ifdef _MSC_VER
-  // Don't print a silly message or stick a modal dialog box in my face,
-  // please.
-  _set_abort_behavior(0, ~0);
-#endif  // !_MSC_VER
+  /*
+  for (int msgType = 0; msgType < _file->message_type_count(); ++msgType)
+  {
+    const Descriptor *descriptor = _file->message_type(msgType);
+    std::cerr << descriptor->name() << std::endl;
 
-  google::protobuf::compiler::cpp::Generator
-    generator("ignition-msgs-plugin");
-  return google::protobuf::compiler::PluginMain(_argc, _argv, &generator);
+  }*/
 }

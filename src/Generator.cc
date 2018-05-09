@@ -37,7 +37,7 @@
 #include <utility>
 #include <vector>
 
-#include "ignition/msgs/GeneratorPrivate.hh"
+#include "ignition/msgs/Generator.hh"
 
 namespace google {
 namespace protobuf {
@@ -67,9 +67,9 @@ Generator::~Generator()
 
 /////////////////////////////////////////////////
 bool Generator::Generate(const FileDescriptor *_file,
-                         const string &/*_parameter*/,
-                         OutputDirectory *_generatorContext,
-                         std::string * /*_error*/) const
+                               const string &/*_parameter*/,
+                               OutputDirectory *_generatorContext,
+                               std::string * /*_error*/) const
 {
   std::string headerFilename = _file->name();
   std::string delim = ".proto";
