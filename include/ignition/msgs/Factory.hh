@@ -44,7 +44,7 @@ namespace ignition
     /// \class Factory Factory.hh ignition/msgs.hh
     /// \brief A factory that generates protobuf message based on a string type.
     /// This class  will also try to load all Protobuf descriptors specified
-    /// in the IGN_DESCRIPTOR_DIR environment variable on program start.
+    /// in the IGN_DESCRIPTOR_PATH environment variable on program start.
     class IGNITION_MSGS_VISIBLE Factory
     {
       /// \brief Register a message.
