@@ -69,7 +69,7 @@ std::vector<std::string> split(const std::string &_orig, char _delim)
 /////////////////////////////////////////////////
 /// \brief A factory class to generate protobuf messages at runtime based on
 /// their message descriptors. The location of the .desc files is expected
-/// via the IGN_DESCRIPTOR_DIR environment variable. This environment
+/// via the IGN_DESCRIPTOR_PATH environment variable. This environment
 /// variable expects paths to directories containing .desc files.
 /// Any file without the .desc extension will be ignored.
 class DynamicFactory
@@ -77,11 +77,11 @@ class DynamicFactory
   //////////////////////////////////////////////////
   /// \brief Constructor.
   /// The constructor will try to load all descriptors specified in the
-  /// IGN_DESCRIPTOR_DIR environment variable.
+  /// IGN_DESCRIPTOR_PATH environment variable.
   public: DynamicFactory()
   {
     // Try to get the list of paths from an environment variable.
-    const char *ignDescPaths = std::getenv("IGN_DESCRIPTOR_DIR");
+    const char *ignDescPaths = std::getenv("IGN_DESCRIPTOR_PATH");
     if (!ignDescPaths)
       return;
 
