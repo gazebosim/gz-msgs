@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "QuaternionProtos";
@@ -29,10 +29,10 @@ import "ignition/msgs/header.proto";
 message Quaternion
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
-  optional double x = 2;
-  optional double y = 3;
-  optional double z = 4;
-  optional double w = 5;
+  double x = 2;
+  double y = 3;
+  double z = 4;
+  double w = 5;
 }

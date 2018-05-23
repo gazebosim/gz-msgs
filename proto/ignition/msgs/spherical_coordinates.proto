@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "SphericalCoordinatesProtos";
@@ -30,15 +30,15 @@ message SphericalCoordinates
 {
   enum SurfaceModel
   {
-    EARTH_WGS84 = 1;
+    EARTH_WGS84 = 0;
   }
 
   /// \brief Optional header data
-  optional Header header                = 1;
+  Header header                = 1;
 
-  optional SurfaceModel surface_model   = 2;
-  optional double latitude_deg          = 3;
-  optional double longitude_deg         = 4;
-  optional double elevation             = 5;
-  optional double heading_deg           = 6;
+  SurfaceModel surface_model   = 2;
+  double latitude_deg          = 3;
+  double longitude_deg         = 4;
+  double elevation             = 5;
+  double heading_deg           = 6;
 }

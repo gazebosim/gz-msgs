@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "LogicalCameraSensorProtos";
@@ -29,17 +29,17 @@ import "ignition/msgs/header.proto";
 message LogicalCameraSensor
 {
   /// \brief Optional header data
-  optional Header header          = 1;
+  Header header          = 1;
 
   /// \brief Near clipping plane of the view frustum in meters.
-  optional double near_clip       = 2;
+  double near_clip       = 2;
 
   /// \brief Far clipping plane of the view frustum in meters.
-  optional double far_clip        = 3;
+  double far_clip        = 3;
 
   /// \brief Horizontal field of view in radians.
-  optional double horizontal_fov  = 4;
+  double horizontal_fov  = 4;
 
   /// \brief Near and far clipping plane aspect ratio (width/height).
-  optional double aspect_ratio    = 5;
+  double aspect_ratio    = 5;
 }

@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "AltimeterProtos";
@@ -30,14 +30,14 @@ import "ignition/msgs/header.proto";
 message Altimeter
 {
   // Other Optional header data
-  optional Header header             = 1; /// Optional header data
+  Header header             = 1; /// Optional header data
 
   /// \brief Vertical position data, in meters.
-  optional double vertical_position  = 2 [default = 0];
+  double vertical_position  = 2;
 
   /// \brief Vertical velocity data, in meters/second.
-  optional double vertical_velocity  = 3 [default = 0];
+  double vertical_velocity  = 3;
 
   /// \brief Vertical reference.
-  optional double vertical_reference = 4 [default = 0];
+  double vertical_reference = 4;
 }

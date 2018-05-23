@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "InertialProtos";
@@ -30,14 +30,14 @@ import "ignition/msgs/header.proto";
 message Inertial
 {
   /// \brief Optional header data
-  optional Header header           = 1;
+  Header header           = 1;
 
-  optional double mass             = 2;
-  optional Pose pose               = 3;
-  optional double ixx              = 4;
-  optional double ixy              = 5;
-  optional double ixz              = 6;
-  optional double iyy              = 7;
-  optional double iyz              = 8;
-  optional double izz              = 9;
+  double mass             = 2;
+  Pose pose               = 3;
+  double ixx              = 4;
+  double ixy              = 5;
+  double ixz              = 6;
+  double iyy              = 7;
+  double iyz              = 8;
+  double izz              = 9;
 }

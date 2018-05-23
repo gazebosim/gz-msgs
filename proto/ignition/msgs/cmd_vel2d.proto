@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "CmdVel2DProtos";
@@ -29,8 +29,8 @@ import "ignition/msgs/header.proto";
 message CmdVel2D
 {
   /// \brief Optional header data
-  optional Header header    = 1;
+  Header header    = 1;
 
-  optional double velocity  = 2 [default = 0];
-  optional double theta     = 3 [default = 0];
+  double velocity  = 2;
+  double theta     = 3;
 }

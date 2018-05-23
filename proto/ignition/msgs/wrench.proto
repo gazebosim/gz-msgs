@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "WrenchProtos";
@@ -30,9 +30,9 @@ import "ignition/msgs/header.proto";
 message Wrench
 {
   /// \brief Optional header data
-  optional Header header         = 1;
+  Header header         = 1;
 
-  optional Vector3d force        = 2;
-  optional Vector3d torque       = 3;
-  optional Vector3d force_offset = 4;
+  Vector3d force        = 2;
+  Vector3d torque       = 3;
+  Vector3d force_offset = 4;
 }

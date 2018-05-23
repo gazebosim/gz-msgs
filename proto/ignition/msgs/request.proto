@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "RequestProtos";
@@ -29,10 +29,10 @@ import "ignition/msgs/header.proto";
 message Request
 {
   /// \brief Optional header data
-  optional Header header    = 1;
+  Header header    = 1;
 
-  optional int32 id         = 2;
-  optional string request   = 3;
-  optional string data      = 4;
-  optional double dbl_data  = 5;
+  int32 id         = 2;
+  string request   = 3;
+  string data      = 4;
+  double dbl_data  = 5;
 }

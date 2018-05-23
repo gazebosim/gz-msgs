@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "UndoRedoProtos";
@@ -29,12 +29,12 @@ import "ignition/msgs/header.proto";
 message UndoRedo
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
   /// \brief True to undo, false to redo.
-  optional bool undo = 2;
+  bool undo = 2;
 
   /// \brief Unique id of the user command. If this is provided, all commands
   /// leading to that will be undone / redone.
-  optional uint32 id = 3;
+  uint32 id = 3;
 }

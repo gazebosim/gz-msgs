@@ -16,7 +16,7 @@
 */
 
 // A
-syntax = "proto2";
+syntax = "proto3";
 // B
 package ignition.msgs;
 // C
@@ -35,10 +35,10 @@ import "ignition/msgs/header.proto";
 message SphereGeom
 {
   // G
-  optional Header header  = 1;
+  Header header  = 1;
 
   // H
-  optional double radius  = 2;
+  double radius  = 2;
 }
 
 // I
@@ -48,25 +48,25 @@ message OtherMessage
   message AgainMessage
   {
     // K
-    optional Header header  = 1;
+    Header header  = 1;
   
     // L
-    optional double radius  = 2;
+    double radius  = 2;
   }
 
   // M
   message AgainMessages
   {
     // N
-    optional Header header  = 1;
+    Header header  = 1;
   
     // O
-    optional double radius  = 2;
+    double radius  = 2;
   }
 
   // P
-  optional Header header  = 1;
+  Header header  = 1;
 
   // Q
-  optional double radius  = 2;
+  double radius  = 2;
 }

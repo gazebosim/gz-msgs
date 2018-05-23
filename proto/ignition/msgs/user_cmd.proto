@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "UserCmdProtos";
@@ -36,29 +36,29 @@ message UserCmd
   enum Type
   {
     /// \brief Moving an entity.
-    MOVING = 1;
+    MOVING = 0;
 
     /// \brief Controlling the world.
-    WORLD_CONTROL = 2;
+    WORLD_CONTROL = 1;
 
     /// \brief Applying wrench.
-    WRENCH = 3;
+    WRENCH = 2;
 
     /// \brief Scaling an entity.
-    SCALING = 4;
+    SCALING = 3;
   }
 
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
   /// \brief Unique id for user command.
-  optional uint32 id = 2;
+  uint32 id = 2;
 
   /// \brief Description for the command.
-  optional string description = 3;
+  string description = 3;
 
   /// \brief Type of command.
-  optional Type type = 4;
+  Type type = 4;
 
   /// \brief For model modify commands.
   repeated Model model = 5;
@@ -67,11 +67,11 @@ message UserCmd
   repeated Light light = 6;
 
   /// \brief Name of entity targeted by command
-  optional string entity_name = 7;
+  string entity_name = 7;
 
   /// \brief For World Control commands.
-  optional WorldControl world_control = 8;
+  WorldControl world_control = 8;
 
   /// \brief Wrench for apply wrench commands.
-  optional Wrench wrench = 9;
+  Wrench wrench = 9;
 }

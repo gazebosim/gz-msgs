@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "ImageGeomProtos";
@@ -29,11 +29,11 @@ import "ignition/msgs/header.proto";
 message ImageGeom
 {
   /// \brief Optional header data
-  optional Header header      = 1;
+  Header header      = 1;
 
-  optional string uri         = 2;
-  optional double scale       = 3;
-  optional int32 threshold    = 4 [default = 255];
-  optional double height      = 5;
-  optional int32 granularity  = 6;
+  string uri         = 2;
+  double scale       = 3;
+  int32 threshold    = 4;
+  double height      = 5;
+  int32 granularity  = 6;
 }

@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "ContactProtos";
@@ -31,15 +31,15 @@ import "ignition/msgs/header.proto";
 message Contact
 {
   /// \brief Optional header data
-  optional Header header     = 1;
+  Header header     = 1;
 
-  optional string collision1 = 2 [default = ""];
-  optional string collision2 = 3 [default = ""];
+  string collision1 = 2;
+  string collision2 = 3;
 
   repeated Vector3d position  = 4;
   repeated Vector3d normal    = 5;
   repeated double depth       = 6;
   repeated JointWrench wrench = 7;
 
-  optional string world       = 8 [default = "default"];
+  string world       = 8;
 }

@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "LogPlaybackStatisticsProtos";
@@ -30,11 +30,11 @@ import "ignition/msgs/header.proto";
 message LogPlaybackStatistics
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
   /// \brief Log start time
-  optional Time start_time = 2;
+  Time start_time = 2;
 
   /// \brief Log end time
-  optional Time end_time   = 3;
+  Time end_time   = 3;
 }
