@@ -14,7 +14,7 @@ find_package(ignition-cmake1 REQUIRED)
 #============================================================================
 # Configure the project
 #============================================================================
-ign_configure_project()
+ign_configure_project(VERSION_SUFFIX pre2)
 
 #============================================================================
 # Set project-specific options
@@ -61,7 +61,7 @@ ign_find_package(ignition-tools
 find_library(gflags_LIBRARIES NAMES gflags)
 find_path(gflags_INCLUDE_DIRS gflags/gflags.h ENV CPATH)
 if (NOT gflags_LIBRARIES OR NOT gflags_INCLUDE_DIRS)
-  BUILD_ERROR("Missing: GFlags (libgflags-dev)")
+  IGN_BUILD_ERROR("Missing: GFlags (libgflags-dev)")
 else()
   message (STATUS "Found GFlags")
   include_directories(${gflags_INCLUDE_DIRS})
@@ -97,3 +97,11 @@ add_subdirectory(proto)
 # Create package information
 #============================================================================
 ign_create_packages()
+
+#============================================================================
+# Create documentation
+#============================================================================
+ign_create_docs(
+  TAGFILES
+    "${IGNITION-MATH_DOXYGEN_TAGFILE} = ${IGNITION-MATH_API_URL}"
+  )
