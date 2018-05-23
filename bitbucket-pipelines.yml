@@ -4,8 +4,8 @@ pipelines:
   default:
     - step:
         script:
-          - apt-get -y install
-            cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev g++-8 ruby cppcheck
+          - apt-get update
+          - apt-get -y install cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev g++-8 ruby cppcheck
           - update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
           - gcc -v
           - g++ -v
