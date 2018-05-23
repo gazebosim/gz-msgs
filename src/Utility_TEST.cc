@@ -78,7 +78,7 @@ TEST(UtilityTest, ConvertMsgsQuaterionToMath)
     msgs::Convert(math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI));
   math::Quaterniond v = msgs::Convert(msg);
 
-  // TODO: to real unit test move math::equal to EXPECT_DOUBLE_EQ
+  // TODO(anyone): to real unit test move math::equal to EXPECT_DOUBLE_EQ
   EXPECT_TRUE(math::equal(v.X(), -0.65328148243818818));
   EXPECT_TRUE(math::equal(v.Y(), 0.27059805007309856));
   EXPECT_TRUE(math::equal(v.Z(), 0.65328148243818829));
