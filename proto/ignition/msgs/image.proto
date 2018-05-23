@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "ImageProtos";
@@ -29,12 +29,12 @@ import "ignition/msgs/header.proto";
 message Image
 {
   /// \brief Optional header data
-  optional Header header        = 1;
+  Header header        = 1;
 
-  optional uint32 width         = 2; // Image width (number of columns)
-  optional uint32 height        = 3; // Image height (number of rows)
-  optional uint32 pixel_format  = 4; // Corresponds to Image::PixelFormat enum
-  optional uint32 step          = 5; // Full row length in bytes
+  uint32 width         = 2; // Image width (number of columns)
+  uint32 height        = 3; // Image height (number of rows)
+  uint32 pixel_format  = 4; // Corresponds to Image::PixelFormat enum
+  uint32 step          = 5; // Full row length in bytes
   // repeated uint32 data          = 5; // Actual data, size if (step * rows)
-  optional bytes data          = 6; // Actual data, size if (step * rows)
+  bytes data          = 6; // Actual data, size if (step * rows)
 }

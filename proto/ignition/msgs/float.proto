@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "FloatProtos";
@@ -29,8 +29,8 @@ import "ignition/msgs/header.proto";
 message Float
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
   /// \brief Float data
-  optional float data = 2;
+  float data = 2;
 }

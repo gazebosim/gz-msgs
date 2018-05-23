@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "SelectionProtos";
@@ -29,9 +29,9 @@ import "ignition/msgs/header.proto";
 message Selection
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
-  optional uint32 id     = 2;
-  optional string name   = 3;
-  optional bool selected = 4 [default = false];
+  uint32 id     = 2;
+  string name   = 3;
+  bool selected = 4;
 }

@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "RoadProtos";
@@ -31,10 +31,10 @@ import "ignition/msgs/header.proto";
 message Road
 {
   /// \brief Optional header data
-  optional Header header        = 1;
+  Header header        = 1;
 
-  optional string name          = 2;
-  optional double width         = 3;
+  string name          = 2;
+  double width         = 3;
   repeated Vector3d point       = 4;
-  optional Material material    = 5;
+  Material material    = 5;
 }

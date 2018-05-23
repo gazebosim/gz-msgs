@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "GUICameraProtos";
@@ -31,13 +31,13 @@ import "ignition/msgs/header.proto";
 message GUICamera
 {
   /// \brief Optional header data
-  optional Header header                = 1;
+  Header header                = 1;
 
-  optional string name                  = 2;
-  optional string view_controller       = 3;
-  optional Pose pose                    = 4;
-  optional TrackVisual track            = 5;
+  string name                  = 2;
+  string view_controller       = 3;
+  Pose pose                    = 4;
+  TrackVisual track            = 5;
 
   /// \brief Type of projection: "perspective" or "orthographic".
-  optional string projection_type       = 6;
+  string projection_type       = 6;
 }

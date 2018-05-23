@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "CessnaProtos";
@@ -29,47 +29,47 @@ import "ignition/msgs/header.proto";
 message Cessna
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
   /// \brief Current RPM of the propeller.
-  optional float propeller_speed = 2;
+  float propeller_speed = 2;
 
   /// \brief Current left aileron angle in rads.
-  optional float left_aileron = 3;
+  float left_aileron = 3;
 
   /// \brief Current left flap angle in rads.
-  optional float left_flap = 4;
+  float left_flap = 4;
 
   /// \brief Current right aileron angle in rads.
-  optional float right_aileron = 5;
+  float right_aileron = 5;
 
   /// \brief Current right flap angle in rads.
-  optional float right_flap = 6;
+  float right_flap = 6;
 
   /// \brief Current elevators angle in rads.
-  optional float elevators = 7;
+  float elevators = 7;
 
   /// \brief Current ruddle angle in rads.
-  optional float rudder = 8;
+  float rudder = 8;
 
   /// \brief Target RPM of the propeller.
-  optional float cmd_propeller_speed = 9;
+  float cmd_propeller_speed = 9;
 
   /// \brief Target left aileron angle in rads.
-  optional float cmd_left_aileron = 10;
+  float cmd_left_aileron = 10;
 
   /// \brief Target left flap angle in rads.
-  optional float cmd_left_flap = 11;
+  float cmd_left_flap = 11;
 
   /// \brief Target right aileron angle in rads.
-  optional float cmd_right_aileron = 12;
+  float cmd_right_aileron = 12;
 
   /// \brief Target right flap angle in rads.
-  optional float cmd_right_flap = 13;
+  float cmd_right_flap = 13;
 
   /// \brief Target elevators angle in rads.
-  optional float cmd_elevators = 14;
+  float cmd_elevators = 14;
 
   /// \brief Target ruddle angle in rads.
-  optional float cmd_rudder = 15;
+  float cmd_rudder = 15;
 }

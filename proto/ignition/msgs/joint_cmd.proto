@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "JointCmdProtos";
@@ -30,13 +30,13 @@ import "ignition/msgs/header.proto";
 message JointCmd
 {
   /// \brief Optional header data
-  optional Header header   = 1;
+  Header header   = 1;
 
-  optional string name     = 2;
-  optional int32 axis      = 3 [default=0];
-  optional double force    = 4;
+  string name     = 2;
+  int32 axis      = 3;
+  double force    = 4;
 
-  optional PID position    = 5;
-  optional PID velocity    = 6;
-  optional bool reset      = 7;
+  PID position    = 5;
+  PID velocity    = 6;
+  bool reset      = 7;
 }

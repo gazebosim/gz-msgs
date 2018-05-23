@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "GeometryProtos";
@@ -39,30 +39,30 @@ message Geometry
 {
   enum Type
   {
-    BOX          = 1;
-    CYLINDER     = 2;
-    SPHERE       = 3;
-    PLANE        = 4;
-    IMAGE        = 5;
-    HEIGHTMAP    = 6;
-    MESH         = 7;
-    TRIANGLE_FAN = 8;
-    LINE_STRIP   = 9;
-    POLYLINE     = 10;
-    EMPTY        = 11;
+    BOX          = 0;
+    CYLINDER     = 1;
+    SPHERE       = 2;
+    PLANE        = 3;
+    IMAGE        = 4;
+    HEIGHTMAP    = 5;
+    MESH         = 6;
+    TRIANGLE_FAN = 7;
+    LINE_STRIP   = 8;
+    POLYLINE     = 9;
+    EMPTY        = 10;
   }
 
   /// \brief Optional header data
-  optional Header header             = 1;
+  Header header             = 1;
 
-  optional Type type                = 2;
-  optional BoxGeom box              = 3;
-  optional CylinderGeom cylinder    = 4;
-  optional PlaneGeom plane          = 5;
-  optional SphereGeom sphere        = 6;
-  optional ImageGeom image          = 7;
-  optional HeightmapGeom heightmap  = 8;
-  optional MeshGeom      mesh       = 9;
+  Type type                = 2;
+  BoxGeom box              = 3;
+  CylinderGeom cylinder    = 4;
+  PlaneGeom plane          = 5;
+  SphereGeom sphere        = 6;
+  ImageGeom image          = 7;
+  HeightmapGeom heightmap  = 8;
+  MeshGeom      mesh       = 9;
 
   repeated Vector3d points          = 10;
   repeated Polyline polyline        = 11;

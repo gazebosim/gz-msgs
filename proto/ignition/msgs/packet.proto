@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "PacketProtos";
@@ -31,8 +31,8 @@ import "ignition/msgs/cmd_vel2d.proto";
 import "ignition/msgs/double_v.proto";
 message Packet
 {
-  optional string topic = 1;
-  optional string type  = 2;
+  string topic = 1;
+  string type  = 2;
 
   oneof content
   {

@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "TimeProtos";
@@ -27,8 +27,8 @@ option java_outer_classname = "TimeProtos";
 message Time
 {
   /// \brief Seconds
-  optional int64 sec = 1;
+  int64 sec = 1;
 
   /// \brief Nanoseconds
-  optional int32 nsec = 2;
+  int32 nsec = 2;
 }

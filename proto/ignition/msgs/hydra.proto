@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "HydraProtos";
@@ -32,45 +32,45 @@ message Hydra
   message Paddle
   {
     // Pose of the paddle
-    optional Pose pose          = 1;
+    Pose pose          = 1;
 
     // The button labeled LB
-    optional bool button_bumper = 2;
+    bool button_bumper = 2;
 
     // Button 1
-    optional bool button_1      = 3;
+    bool button_1      = 3;
 
     // Button 2
-    optional bool button_2      = 4;
+    bool button_2      = 4;
 
     // Button 3
-    optional bool button_3      = 5;
+    bool button_3      = 5;
 
     // Button 4
-    optional bool button_4      = 6;
+    bool button_4      = 6;
 
     // Button that is activated by pressing down on the joystick.
-    optional bool button_joy    = 7;
+    bool button_joy    = 7;
 
     // The button located between button 1 and 2.
-    optional bool button_center = 8;
+    bool button_center = 8;
 
     // Range(-1, 1) where -1 == back, and +1 == forward.
-    optional double joy_x       = 9;
+    double joy_x       = 9;
 
     // Range(-1, 1) where -1 == left, and +1 == right.
-    optional double joy_y       = 10;
+    double joy_y       = 10;
 
     // Range(0, 1) where 0 is no press, and 1 is full press.
-    optional double trigger     = 11;
+    double trigger     = 11;
   }
 
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
   // Info for the right paddle
-  optional Paddle right = 2;
+  Paddle right = 2;
 
   // Info for the left paddle
-  optional Paddle left  = 3;
+  Paddle left  = 3;
 }

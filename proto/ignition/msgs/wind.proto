@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "WindProtos";
@@ -30,8 +30,8 @@ import "ignition/msgs/header.proto";
 message Wind
 {
   /// \brief Optional header data
-  optional Header header            = 1;
+  Header header            = 1;
 
-  optional Vector3d linear_velocity = 2;
-  optional bool enable_wind         = 3;
+  Vector3d linear_velocity = 2;
+  bool enable_wind         = 3;
 }

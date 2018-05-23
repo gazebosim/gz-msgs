@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "ClockProtos";
@@ -30,9 +30,9 @@ import "ignition/msgs/header.proto";
 message Clock
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
-  optional Time system = 2;
-  optional Time real   = 3;
-  optional Time sim    = 4;
+  Time system = 2;
+  Time real   = 3;
+  Time sim    = 4;
 }

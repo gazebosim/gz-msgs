@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "CylinderGeomProtos";
@@ -29,8 +29,8 @@ import "ignition/msgs/header.proto";
 message CylinderGeom
 {
   /// \brief Optional header data
-  optional Header header  = 1;
+  Header header  = 1;
 
-  optional double radius  = 2 [default = 0];
-  optional double length  = 3 [default = 0];
+  double radius  = 2;
+  double length  = 3;
 }

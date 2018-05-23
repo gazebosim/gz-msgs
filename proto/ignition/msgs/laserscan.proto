@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "LaserScanProtos";
@@ -30,20 +30,20 @@ import "ignition/msgs/header.proto";
 message LaserScan
 {
   /// \brief Optional header data
-  optional Header header              = 1;
+  Header header              = 1;
 
-  optional string frame               = 2;
-  optional Pose world_pose            = 3;
-  optional double angle_min           = 4;
-  optional double angle_max           = 5;
-  optional double angle_step          = 6;
-  optional double range_min           = 7;
-  optional double range_max           = 8;
-  optional uint32 count               = 9;
-  optional double vertical_angle_min  = 10;
-  optional double vertical_angle_max  = 11;
-  optional double vertical_angle_step = 12;
-  optional uint32 vertical_count      = 13;
+  string frame               = 2;
+  Pose world_pose            = 3;
+  double angle_min           = 4;
+  double angle_max           = 5;
+  double angle_step          = 6;
+  double range_min           = 7;
+  double range_max           = 8;
+  uint32 count               = 9;
+  double vertical_angle_min  = 10;
+  double vertical_angle_max  = 11;
+  double vertical_angle_step = 12;
+  uint32 vertical_count      = 13;
 
   repeated double ranges              = 14;
   repeated double intensities         = 15;

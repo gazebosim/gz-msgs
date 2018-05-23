@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "WorldStatsProtos";
@@ -31,18 +31,13 @@ import "ignition/msgs/header.proto";
 message WorldStatistics
 {
   /// \brief Optional header data
-  optional Header header                            = 1;
+  Header header                            = 1;
 
-  optional Time  sim_time                           = 2;
-  optional Time  pause_time                         = 3;
-  optional Time  real_time                          = 4;
-  optional bool  paused                             = 5;
-  optional uint64 iterations                        = 6;
-  optional int32 model_count                        = 7;
-  optional LogPlaybackStatistics log_playback_stats = 8;
-
-  /// \brief This factor expresses how much real time elapses with each step
-  /// of simulation time.
-  /// E.g.: 0.5 means that 1 second in real time takes 2 seconds in simulation.
-  optional double real_time_factor                  = 9;
+  Time  sim_time                           = 2;
+  Time  pause_time                         = 3;
+  Time  real_time                          = 4;
+  bool  paused                             = 5;
+  uint64 iterations                        = 6;
+  int32 model_count                        = 7;
+  LogPlaybackStatistics log_playback_stats = 8;
 }

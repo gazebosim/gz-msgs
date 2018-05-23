@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "DistortionProtos";
@@ -30,12 +30,12 @@ import "ignition/msgs/header.proto";
 message Distortion
 {
   /// \brief Optional header data
-  optional Header header    = 1;
+  Header header    = 1;
 
-  optional Vector2d center  = 2;
-  optional double k1        = 3;
-  optional double k2        = 4;
-  optional double k3        = 5;
-  optional double p1        = 6;
-  optional double p2        = 7;
+  Vector2d center  = 2;
+  double k1        = 3;
+  double k2        = 4;
+  double k3        = 5;
+  double p1        = 6;
+  double p2        = 7;
 }

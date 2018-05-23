@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "SkyProtos";
@@ -30,15 +30,15 @@ import "ignition/msgs/header.proto";
 message Sky
 {
   /// \brief Optional header data
-  optional Header header         = 1;
+  Header header         = 1;
 
-  optional double time           = 2;
-  optional double sunrise        = 3;
-  optional double sunset         = 4;
+  double time           = 2;
+  double sunrise        = 3;
+  double sunset         = 4;
 
-  optional double wind_speed     = 5;
-  optional double wind_direction = 6;
-  optional Color cloud_ambient   = 7;
-  optional double humidity       = 8;
-  optional double mean_cloud_size = 9;
+  double wind_speed     = 5;
+  double wind_direction = 6;
+  Color cloud_ambient   = 7;
+  double humidity       = 8;
+  double mean_cloud_size = 9;
 }

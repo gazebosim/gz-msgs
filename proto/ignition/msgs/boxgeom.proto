@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "BoxGeomProtos";
@@ -30,7 +30,7 @@ import "ignition/msgs/vector3d.proto";
 message BoxGeom
 {
   /// \brief Optional header data
-  optional Header header  = 1;
+  Header header  = 1;
 
-  optional Vector3d size  = 2;
+  Vector3d size  = 2;
 }

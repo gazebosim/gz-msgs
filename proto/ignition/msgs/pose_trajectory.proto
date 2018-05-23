@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "PoseTrajectoryProtos";
@@ -28,7 +28,7 @@ import "ignition/msgs/pose.proto";
 
 message PoseTrajectory
 {
-  optional string name              = 1;
-  optional uint32 id                = 2;
+  string name              = 1;
+  uint32 id                = 2;
   repeated Pose pose                = 3;
 }

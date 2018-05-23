@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "PluginProtos";
@@ -29,9 +29,9 @@ import "ignition/msgs/header.proto";
 message Plugin
 {
   /// \brief Optional header data
-  optional Header header       = 1;
+  Header header       = 1;
 
-  optional string name         = 2;
-  optional string filename     = 3;
-  optional string innerxml     = 4 [default = ""];
+  string name         = 2;
+  string filename     = 3;
+  string innerxml     = 4;
 }

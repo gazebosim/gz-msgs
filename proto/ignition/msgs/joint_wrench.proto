@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "JointWrenchProtos";
@@ -30,13 +30,13 @@ import "ignition/msgs/header.proto";
 message JointWrench
 {
   /// \brief Optional header data
-  optional Header header      = 1;
+  Header header      = 1;
 
-  optional string body_1_name = 2;
-  optional uint32 body_1_id   = 3;
-  optional string body_2_name = 4;
-  optional uint32 body_2_id   = 5;
+  string body_1_name = 2;
+  uint32 body_1_id   = 3;
+  string body_2_name = 4;
+  uint32 body_2_id   = 5;
 
-  optional Wrench body_1_wrench = 6;
-  optional Wrench body_2_wrench = 7;
+  Wrench body_1_wrench = 6;
+  Wrench body_2_wrench = 7;
 }

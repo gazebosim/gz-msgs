@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "ShadowsProtos";
@@ -31,15 +31,15 @@ message Shadows
 {
   enum ShadowType
   {
-    STENCIL_ADDITIVE   = 1;
-    STENCIL_MODULATIVE = 2;
-    TEXTURE_ADDITIVE   = 3;
-    TEXTURE_MODULATIVE = 4;
+    STENCIL_ADDITIVE   = 0;
+    STENCIL_MODULATIVE = 1;
+    TEXTURE_ADDITIVE   = 2;
+    TEXTURE_MODULATIVE = 3;
   }
 
   /// \brief Optional header data
-  optional Header header   = 1;
+  Header header   = 1;
 
-  optional ShadowType type = 2;
-  optional Color color = 3;
+  ShadowType type = 2;
+  Color color = 3;
 }

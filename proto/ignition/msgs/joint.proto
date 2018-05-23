@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "JointProtos";
@@ -35,56 +35,56 @@ message Joint
   message Gearbox
   {
     /// \brief Gearbox joint reference body link
-    optional string gearbox_reference_body = 1;
+    string gearbox_reference_body = 1;
 
     /// \brief Gearbox ratio.
-    optional double gearbox_ratio = 2;
+    double gearbox_ratio = 2;
   }
 
   message Screw
   {
     /// \brief Screw joint thread pitch.
-    optional double thread_pitch = 1;
+    double thread_pitch = 1;
   }
 
   enum Type
   {
-    REVOLUTE  = 1;
-    REVOLUTE2 = 2;
-    PRISMATIC = 3;
-    UNIVERSAL = 4;
-    BALL      = 5;
-    SCREW     = 6;
-    GEARBOX   = 7;
-    FIXED     = 8;
+    REVOLUTE  = 0;
+    REVOLUTE2 = 1;
+    PRISMATIC = 2;
+    UNIVERSAL = 3;
+    BALL      = 4;
+    SCREW     = 5;
+    GEARBOX   = 6;
+    FIXED     = 7;
   }
 
   /// \brief Optional header data
-  optional Header header         = 1;
+  Header header         = 1;
 
-  optional string name           = 2;
-  optional uint32 id             = 3;
+  string name           = 2;
+  uint32 id             = 3;
   repeated double angle          = 4;
-  optional Type type             = 5;
-  optional string parent         = 6;
-  optional uint32 parent_id      = 7;
-  optional string child          = 8;
-  optional uint32 child_id       = 9;
-  optional Pose pose             = 10;
-  optional Axis axis1            = 11;
-  optional Axis axis2            = 12;
+  Type type             = 5;
+  string parent         = 6;
+  uint32 parent_id      = 7;
+  string child          = 8;
+  uint32 child_id       = 9;
+  Pose pose             = 10;
+  Axis axis1            = 11;
+  Axis axis2            = 12;
 
-  optional double cfm            = 13;
-  optional double bounce         = 14;
-  optional double velocity       = 15;
-  optional double fudge_factor   = 16;
-  optional double limit_cfm      = 17;
-  optional double limit_erp      = 18;
-  optional double suspension_cfm = 19;
-  optional double suspension_erp = 20;
+  double cfm            = 13;
+  double bounce         = 14;
+  double velocity       = 15;
+  double fudge_factor   = 16;
+  double limit_cfm      = 17;
+  double limit_erp      = 18;
+  double suspension_cfm = 19;
+  double suspension_erp = 20;
 
-  optional Gearbox gearbox       = 21;
-  optional Screw screw           = 22;
+  Gearbox gearbox       = 21;
+  Screw screw           = 22;
 
   repeated Sensor sensor         = 23;
 }
