@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(ignition-msgs2 VERSION 2.0.0)
+project(ignition-msgs3 VERSION 3.0.0)
 
 #============================================================================
 # Find ignition-cmake
