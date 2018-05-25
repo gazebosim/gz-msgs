@@ -106,7 +106,7 @@ foreach(proto_file ${proto_files})
     PROTO_PACKAGE
       .ignition.msgs
     GENERATE_CPP
-      ${gen_ruby}
+    GENERATE_RUBY
     INPUT_PROTO
       ${proto_file}
     PROTOC_EXEC

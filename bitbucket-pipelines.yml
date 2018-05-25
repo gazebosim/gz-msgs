@@ -9,7 +9,6 @@ pipelines:
           - update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
           - gcc -v
           - g++ -v
-          - gem install protobuf
           # Ignition cmake
           - hg clone http://bitbucket.org/ignitionrobotics/ign-cmake -b gz11
           - cd ign-cmake

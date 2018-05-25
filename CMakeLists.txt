@@ -38,15 +38,6 @@ ign_find_package(IgnProtobuf
                  PRETTY Protobuf)
 
 #--------------------------------------
-# Find the protobuf ruby compiler.
-find_program(RUBY_PROTOBUF protoc-gen-ruby)
-if(NOT RUBY_PROTOBUF)
-  set(gen_ruby)
-  IGN_BUILD_WARNING("Missing: protobuf ruby bindings (sudo gem install protobuf)")
-else()
-  set(gen_ruby GENERATE_RUBY)
-endif()
-#--------------------------------------
 # Find ignition-math
 ign_find_package(ignition-math5 REQUIRED)
 set(IGN_MATH_VER ${ignition-math5_VERSION_MAJOR})
