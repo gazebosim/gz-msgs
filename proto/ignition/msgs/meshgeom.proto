@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "MeshGeomProtos";
@@ -30,10 +30,10 @@ import "ignition/msgs/header.proto";
 message MeshGeom
 {
   /// \brief Optional header data
-  optional Header header   = 1;
+  Header header   = 1;
 
-  optional string filename = 2;
-  optional Vector3d scale  = 3;
-  optional string submesh  = 4;
-  optional bool center_submesh = 5;
+  string filename = 2;
+  Vector3d scale  = 3;
+  string submesh  = 4;
+  bool center_submesh = 5;
 }

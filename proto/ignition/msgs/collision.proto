@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "CollisionProtos";
@@ -33,15 +33,15 @@ import "ignition/msgs/header.proto";
 message Collision
 {
   /// \brief Optional header data
-  optional Header header        = 1;
+  Header header        = 1;
 
-  optional uint32 id            = 2 [default = 0];
-  optional string name          = 3 [default = ""];
-  optional double laser_retro   = 4;
-  optional double max_contacts  = 5;
-  optional Pose pose            = 6;
-  optional Geometry geometry    = 7;
-  optional Surface surface      = 8;
+  uint32 id            = 2;
+  string name          = 3;
+  double laser_retro   = 4;
+  double max_contacts  = 5;
+  Pose pose            = 6;
+  Geometry geometry    = 7;
+  Surface surface      = 8;
 
   repeated Visual visual        = 9;
 }

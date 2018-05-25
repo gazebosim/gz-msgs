@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "DurationProtos";
@@ -29,11 +29,11 @@ import "ignition/msgs/header.proto";
 message Duration
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
   /// \brief Seconds
-  optional int64 sec = 2 [default = 0];
+  int64 sec = 2;
 
   /// \brief Nanoseconds
-  optional int32 nsec = 3 [default = 0];
+  int32 nsec = 3;
 }

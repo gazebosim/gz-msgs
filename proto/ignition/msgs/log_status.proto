@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "LogStatusProtos";
@@ -33,22 +33,22 @@ message LogStatus
   {
     enum Units
     {
-      BYTES = 1;
-      K_BYTES = 2;
-      M_BYTES = 3;
-      G_BYTES = 4;
+      BYTES = 0;
+      K_BYTES = 1;
+      M_BYTES = 2;
+      G_BYTES = 3;
     }
 
-    optional string uri        = 1;
-    optional string base_path  = 2;
-    optional string full_path  = 3;
-    optional float size        = 4;
-    optional Units size_units  = 5;
+    string uri        = 1;
+    string base_path  = 2;
+    string full_path  = 3;
+    float size        = 4;
+    Units size_units  = 5;
   }
 
   /// \brief Optional header data
-  optional Header header     = 1;
+  Header header     = 1;
 
-  optional Time sim_time     = 2;
-  optional LogFile log_file  = 3;
+  Time sim_time     = 2;
+  LogFile log_file  = 3;
 }

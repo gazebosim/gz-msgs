@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "PublishProtos";
@@ -29,10 +29,10 @@ import "ignition/msgs/header.proto";
 message Publish
 {
   /// \brief Optional header data
-  optional Header header   = 1;
+  Header header   = 1;
 
-  optional string topic    = 2;
-  optional string msg_type = 3;
-  optional string host     = 4;
-  optional uint32 port     = 5;
+  string topic    = 2;
+  string msg_type = 3;
+  string host     = 4;
+  uint32 port     = 5;
 }

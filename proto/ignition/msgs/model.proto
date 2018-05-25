@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "ModelProtos";
@@ -34,18 +34,18 @@ import "ignition/msgs/header.proto";
 message Model
 {
   /// \brief Optional header data
-  optional Header header       = 1;
+  Header header       = 1;
 
-  optional string name         = 2;
-  optional uint32 id           = 3;
-  optional bool is_static      = 4;
-  optional Pose pose           = 5;
+  string name         = 2;
+  uint32 id           = 3;
+  bool is_static      = 4;
+  Pose pose           = 5;
   repeated Joint joint         = 6;
   repeated Link link           = 7;
-  optional bool deleted        = 8;
+  bool deleted        = 8;
   repeated Visual visual       = 9;
-  optional Vector3d scale      = 10;
-  optional bool self_collide   = 11;
+  Vector3d scale      = 10;
+  bool self_collide   = 11;
 
   /// \brief An array of nested models.
   repeated Model model         = 12;

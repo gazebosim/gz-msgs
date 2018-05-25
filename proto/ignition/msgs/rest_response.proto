@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "RestResponseProtos";
@@ -31,27 +31,27 @@ message RestResponse
   enum Type
   {
     /// \brief Rest service call was successfull
-    SUCCESS = 1;
+    SUCCESS = 0;
 
     /// \brief Error calling rest service
-    ERR    = 2;
+    ERR    = 1;
 
     /// \brief Response to a login request
-    LOGIN    = 3;
+    LOGIN    = 2;
 
     /// \brief Response to a logout request
-    LOGOUT   = 4;
+    LOGOUT   = 3;
   }
 
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
   /// \brief ID of the response message
-  optional uint32 id   = 2;
+  uint32 id   = 2;
 
   /// \brief Type of response
-  optional Type type   = 3;
+  Type type   = 3;
 
   /// \brief Message describing the response
-  optional string msg  = 4;
+  string msg  = 4;
 }

@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "DiagnosticsProtos";
@@ -32,16 +32,16 @@ message Diagnostics
 {
   message DiagTime
   {
-    optional string name = 1 [default = ""];
-    optional Time elapsed = 2;
-    optional Time wall = 3;
+    string name = 1;
+    Time elapsed = 2;
+    Time wall = 3;
   }
 
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
   repeated DiagTime time = 2;
-  optional Time real_time = 3;
-  optional Time sim_time = 4;
-  optional double real_time_factor = 5 [default = 0.0];
+  Time real_time = 3;
+  Time sim_time = 4;
+  double real_time_factor = 5;
 }

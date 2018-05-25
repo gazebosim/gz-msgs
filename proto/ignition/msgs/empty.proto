@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "EmptyProtos";
@@ -27,5 +27,5 @@ option java_outer_classname = "EmptyProtos";
 message Empty
 {
   /// \brief Unused field.
-  optional bool unused = 1;
+  bool unused = 1;
 }

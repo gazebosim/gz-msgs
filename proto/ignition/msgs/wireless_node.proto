@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "WirelessNodeProtos";
@@ -29,9 +29,9 @@ import "ignition/msgs/header.proto";
 message WirelessNode
 {
   /// \brief Optional header data
-  optional Header header       = 1;
+  Header header       = 1;
 
-  optional string essid        = 2;
-  optional double frequency    = 3;
-  optional double signal_level = 4;
+  string essid        = 2;
+  double frequency    = 3;
+  double signal_level = 4;
 }

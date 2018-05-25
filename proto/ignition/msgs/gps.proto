@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "GPSProtos";
@@ -29,13 +29,13 @@ import "ignition/msgs/header.proto";
 message GPS
 {
   /// \brief Optional header data
-  optional Header header                = 1;
+  Header header                = 1;
 
-  optional string link_name             = 2;
-  optional double latitude_deg          = 3;
-  optional double longitude_deg         = 4;
-  optional double altitude              = 5;
-  optional double velocity_east         = 6;
-  optional double velocity_north        = 7;
-  optional double velocity_up           = 8;
+  string link_name             = 2;
+  double latitude_deg          = 3;
+  double longitude_deg         = 4;
+  double altitude              = 5;
+  double velocity_east         = 6;
+  double velocity_north        = 7;
+  double velocity_up           = 8;
 }

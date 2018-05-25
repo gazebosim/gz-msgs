@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "SubscribeProtos";
@@ -29,11 +29,11 @@ import "ignition/msgs/header.proto";
 message Subscribe
 {
   /// \brief Optional header data
-  optional Header header   = 1;
+  Header header   = 1;
 
-  optional string topic    = 2;
-  optional string host     = 3;
-  optional uint32 port     = 4;
-  optional string msg_type = 5;
-  optional bool latching   = 6 [default=false];
+  string topic    = 2;
+  string host     = 3;
+  uint32 port     = 4;
+  string msg_type = 5;
+  bool latching   = 6;
 }

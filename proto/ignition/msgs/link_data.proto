@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "LinkDataProtos";
@@ -30,9 +30,9 @@ import "ignition/msgs/header.proto";
 message LinkData
 {
   /// \brief Optional header data
-  optional Header header         = 1;
+  Header header         = 1;
 
-  optional string name           = 2;
-  optional Vector3d linear_velocity  = 3;
-  optional Vector3d angular_velocity = 4;
+  string name           = 2;
+  Vector3d linear_velocity  = 3;
+  Vector3d angular_velocity = 4;
 }

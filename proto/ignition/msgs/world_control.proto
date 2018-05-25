@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "WorldControlProtos";
@@ -30,11 +30,11 @@ import "ignition/msgs/header.proto";
 message WorldControl
 {
   /// \brief Optional header data
-  optional Header header        = 1;
+  Header header        = 1;
 
-  optional bool pause           = 2;
-  optional bool step            = 3;
-  optional uint32 multi_step    = 4;
-  optional WorldReset reset     = 5;
-  optional uint32 seed          = 6;
+  bool pause           = 2;
+  bool step            = 3;
+  uint32 multi_step    = 4;
+  WorldReset reset     = 5;
+  uint32 seed          = 6;
 }

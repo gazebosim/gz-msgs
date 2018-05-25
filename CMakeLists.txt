@@ -14,7 +14,7 @@ find_package(ignition-cmake1 REQUIRED)
 #============================================================================
 # Configure the project
 #============================================================================
-ign_configure_project(VERSION_SUFFIX pre1)
+ign_configure_project(VERSION_SUFFIX pre2)
 
 #============================================================================
 # Set project-specific options
@@ -27,24 +27,14 @@ ign_configure_project(VERSION_SUFFIX pre1)
 #============================================================================
 message(STATUS "\n\n-- ====== Finding Dependencies ======")
 
-#--------------------------------------
-# Find Protobuf
-if(MSVC)
-  # On Windows we require version 3+ in order to have proper support for
-  # shared libraries.
-  set(REQ_PROTOBUF_VER 3)
-  set(PROTOBUF_PURPOSE "Windows requires version 3+ to ensure proper support for DLLs")
-else()
-  set(REQ_PROTOBUF_VER 2.3.0)
-  set(PROTOBUF_PURPOSE)
-endif()
+#-------------------------------------- # Find Protobuf
+set(REQ_PROTOBUF_VER 3)
 ign_find_package(IgnProtobuf
                  VERSION ${REQ_PROTOBUF_VER}
                  PKGCONFIG protobuf
                  PKGCONFIG_VER_COMPARISON >=
                  REQUIRED
-                 PRETTY Protobuf
-                 PURPOSE ${PROTOBUF_PURPOSE})
+                 PRETTY Protobuf)
 
 #--------------------------------------
 # Find the protobuf ruby compiler.
@@ -93,3 +83,11 @@ add_subdirectory(proto)
 # Create package information
 #============================================================================
 ign_create_packages()
+
+#============================================================================
+# Create documentation
+#============================================================================
+ign_create_docs(
+  TAGFILES
+    "${IGNITION-MATH_DOXYGEN_TAGFILE} = ${IGNITION-MATH_API_URL}"
+  )

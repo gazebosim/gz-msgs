@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "RestPostProtos";
@@ -30,14 +30,14 @@ import "ignition/msgs/header.proto";
 message RestPost
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
   /// \brief ID of this request message
-  optional uint32 id    = 2;
+  uint32 id    = 2;
 
   /// \brief Route to post to.
-  optional string route = 3;
+  string route = 3;
 
   /// \brief Data to post in JSON format
-  optional string json  = 4;
+  string json  = 4;
 }

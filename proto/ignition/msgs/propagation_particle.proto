@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "PropagationParticleProtos";
@@ -29,9 +29,9 @@ import "ignition/msgs/header.proto";
 message PropagationParticle
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
-  optional double x = 2;
-  optional double y = 3;
-  optional double signal_level = 4;
+  double x = 2;
+  double y = 3;
+  double signal_level = 4;
 }
