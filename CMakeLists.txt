@@ -27,7 +27,8 @@ ign_configure_project(VERSION_SUFFIX pre2)
 #============================================================================
 message(STATUS "\n\n-- ====== Finding Dependencies ======")
 
-#-------------------------------------- # Find Protobuf
+#--------------------------------------
+# Find Protobuf
 set(REQ_PROTOBUF_VER 3)
 ign_find_package(IgnProtobuf
                  VERSION ${REQ_PROTOBUF_VER}
