@@ -26,7 +26,7 @@ pipelines:
           - make -j4 install
           - cd ../..
           # Ignition math
-          - hg clone http://bitbucket.org/ignitionrobotics/ign-math -b gz11
+          - hg clone http://bitbucket.org/ignitionrobotics/ign-math -b gcc8_c++17
           - cd ign-math
           - mkdir build
           - cd build
