@@ -32,9 +32,9 @@ message Fog
   enum FogType
   {
     NONE         = 0;
-    LINEAR       = 2;
-    EXPONENTIAL  = 3;
-    EXPONENTIAL2 = 4;
+    LINEAR       = 1;
+    EXPONENTIAL  = 2;
+    EXPONENTIAL2 = 3;
   }
 
   /// \brief Optional header data
