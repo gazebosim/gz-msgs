@@ -67,8 +67,6 @@ message Any
     TIME        = 9;
   }
 
-  /// \todo: Use protobuf oneof feature when we support protobuf 2.6
-
   /// \brief Optional header data
   Header header               = 1;
 
