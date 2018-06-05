@@ -40,4 +40,9 @@ message WorldStatistics
   uint64 iterations                        = 6;
   int32 model_count                        = 7;
   LogPlaybackStatistics log_playback_stats = 8;
+
+  /// \brief This factor expresses how much real time elapses with each step
+  /// of simulation time.
+  /// E.g.: 0.5 means that 1 second in real time takes 2 seconds in simulation.
+  double real_time_factor                  = 9;
 }

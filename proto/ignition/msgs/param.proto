@@ -32,12 +32,9 @@ message Param
   /// \brief Optional header data
   Header header   = 1;
 
-  /// \brief Param name.
-  string name     = 2;
-
-  /// \brief Param value.
-  Any    value    = 3;
+  /// \brief A set of name, value pairs.
+  map<string, Any> params = 2;
 
   /// \brief Params nested within this one.
-  repeated Param  children = 4;
+  repeated Param children = 3;
 }

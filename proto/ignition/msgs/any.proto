@@ -75,30 +75,32 @@ message Any
   /// \brief Type of value that is contained in this message.
   ValueType type              = 2;
 
-  /// \brief A double value
-  double double_value         = 3;
+  oneof value {
+    /// \brief A double value
+    double double_value         = 3;
 
-  /// \brief An int32 value
-  int32 int_value             = 4;
+    /// \brief An int32 value
+    int32 int_value             = 4;
 
-  /// \brief A string value
-  string string_value         = 5;
+    /// \brief A string value
+    string string_value         = 5;
 
-  /// \brief A boolean value
-  bool bool_value             = 6;
+    /// \brief A boolean value
+    bool bool_value             = 6;
 
-  /// \brief A Vector3d value
-  Vector3d vector3d_value     = 7;
+    /// \brief A Vector3d value
+    Vector3d vector3d_value     = 7;
 
-  /// \brief A Color value
-  Color color_value           = 8;
+    /// \brief A Color value
+    Color color_value           = 8;
 
-  /// \brief A Pose value
-  Pose pose3d_value           = 9;
+    /// \brief A Pose value
+    Pose pose3d_value           = 9;
 
-  /// \brief A Quaternion value
-  Quaternion quaternion_value = 10;
+    /// \brief A Quaternion value
+    Quaternion quaternion_value = 10;
 
-  /// \brief A Time value
-  Time time_value             = 11;
+    /// \brief A Time value
+    Time time_value             = 11;
+  }
 }
