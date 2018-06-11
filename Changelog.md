@@ -1,3 +1,10 @@
+## Ignition Msgs 3.x
+
+### Ignition Msgs 3.x.x
+
+1. Upgrade to protobuf3
+    * [Pull request 69](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/69)
+
 ## Ignition Msgs 2.x
 
 ### Ignition Msgs 2.x.x

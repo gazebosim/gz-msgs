@@ -5,6 +5,7 @@
 
 :: Install dependencies
 call %win_lib% :download_unzip_install protobuf-3.4.1-vc15-x64-dll-MD.zip
+call %win_lib% :install_ign_project ign-cmake gz11
 call %win_lib% :install_ign_project ign-math default
 
 :: Set configuration variables

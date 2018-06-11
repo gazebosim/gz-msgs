@@ -15,58 +15,22 @@
  *
 */
 
-// A
 syntax = "proto3";
-// B
 package ignition.msgs;
-// C
 option java_package = "com.ignition.msgs";
-// D
 option java_outer_classname = "SphereGeomProtos";
 
 /// \ingroup ignition.msgs
 /// \interface SphereGeom 
 /// \brief Information about a sphere geometry
 
-// E
 import "ignition/msgs/header.proto";
 
-// F
 message SphereGeom
 {
-  // G
+  /// \brief Optional header data
   Header header  = 1;
 
-  // H
-  double radius  = 2;
-}
-
-// I
-message OtherMessage
-{
-  // J
-  message AgainMessage
-  {
-    // K
-    Header header  = 1;
-  
-    // L
-    double radius  = 2;
-  }
-
-  // M
-  message AgainMessages
-  {
-    // N
-    Header header  = 1;
-  
-    // O
-    double radius  = 2;
-  }
-
-  // P
-  Header header  = 1;
-
-  // Q
+  /// \brief Radius of the sphere.
   double radius  = 2;
 }
