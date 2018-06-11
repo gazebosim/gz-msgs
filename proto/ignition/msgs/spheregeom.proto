@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "SphereGeomProtos";
@@ -29,8 +29,8 @@ import "ignition/msgs/header.proto";
 message SphereGeom
 {
   /// \brief Optional header data
-  optional Header header  = 1;
+  Header header  = 1;
 
   /// \brief Radius of the sphere.
-  optional double radius  = 2;
+  double radius  = 2;
 }

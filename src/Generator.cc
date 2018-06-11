@@ -122,6 +122,10 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print("#ifndef _MSC_VER\n", "name", "includes");
     printer.Print("#pragma GCC diagnostic ignored \"-Wshadow\"\n", "name",
                   "includes");
+    printer.Print("#pragma GCC diagnostic ignored \"-Wfloat-equal\"\n", "name",
+                  "includes");
+    printer.Print("#pragma GCC diagnostic ignored \"-Wunused-parameter\"\n",
+        "name", "includes");
     printer.Print("#else\n", "name", "includes");
     printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512",
                   "name", "includes");

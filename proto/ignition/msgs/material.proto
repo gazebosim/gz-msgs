@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "MaterialProtos";
@@ -31,27 +31,27 @@ message Material
 {
   enum ShaderType
   {
-    VERTEX                  = 1;
-    PIXEL                   = 2;
-    NORMAL_MAP_OBJECT_SPACE = 3;
-    NORMAL_MAP_TANGENT_SPACE = 4;
+    VERTEX                  = 0;
+    PIXEL                   = 1;
+    NORMAL_MAP_OBJECT_SPACE = 2;
+    NORMAL_MAP_TANGENT_SPACE = 3;
   }
 
   message Script
   {
     repeated string uri = 1;
-    optional string name = 2;
+    string name = 2;
   }
 
   /// \brief Optional header data
-  optional Header header          = 1;
+  Header header          = 1;
 
-  optional Script script          = 2;
-  optional ShaderType shader_type = 3;
-  optional string normal_map      = 4;
-  optional Color ambient          = 5;
-  optional Color diffuse          = 6;
-  optional Color specular         = 7;
-  optional Color emissive         = 8;
-  optional bool lighting          = 9;
+  Script script          = 2;
+  ShaderType shader_type = 3;
+  string normal_map      = 4;
+  Color ambient          = 5;
+  Color diffuse          = 6;
+  Color specular         = 7;
+  Color emissive         = 8;
+  bool lighting          = 9;
 }

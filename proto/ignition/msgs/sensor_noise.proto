@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "Protos";
@@ -32,7 +32,7 @@ message SensorNoise
   enum Type
   {
     /// \brief No noise
-    NONE               = 1;
+    NONE               = 0;
 
     /// \brief Gaussian noise
     GAUSSIAN           = 2;
@@ -42,28 +42,28 @@ message SensorNoise
   }
 
   /// \brief Optional header data
-  optional Header header      = 1;
+  Header header      = 1;
 
   /// \brief The type of noise
-  optional Type type          = 2;
+  Type type          = 2;
 
   /// \brief Noise mean
   /// Used by GAUSSIAN, and GAUSSIAN_QUANTIZED
-  optional double mean        = 3;
+  double mean        = 3;
 
   /// \brief Noise standard deviation
   /// Used by GAUSSIAN, and GAUSSIAN_QUANTIZED
-  optional double stddev      = 4;
+  double stddev      = 4;
 
   /// \brief Noise mean bias
   /// Used by GAUSSIAN, and GAUSSIAN_QUANTIZED
-  optional double bias_mean   = 5;
+  double bias_mean   = 5;
 
   /// \brief Noise standard deviation bias
   /// Used by GAUSSIAN, and GAUSSIAN_QUANTIZED
-  optional double bias_stddev = 6;
+  double bias_stddev = 6;
 
   /// \brief Noise  precision.
   /// Used by GAUSSIAN_QUANTIZED
-  optional double precision   = 7;
+  double precision   = 7;
 }

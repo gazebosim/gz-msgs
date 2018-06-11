@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "ColorProtos";
@@ -29,10 +29,10 @@ import "ignition/msgs/header.proto";
 message Color
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
-  optional float r = 2 [default = 0.0];
-  optional float g = 3 [default = 0.0];
-  optional float b = 4 [default = 0.0];
-  optional float a = 5 [default = 1.0];
+  float r = 2;
+  float g = 3;
+  float b = 4;
+  float a = 5;
 }

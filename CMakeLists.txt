@@ -1,20 +1,20 @@
-cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 
 #============================================================================
 # Initialize the project
 #============================================================================
-project(ignition-msgs2 VERSION 2.0.0)
+project(ignition-msgs3 VERSION 3.0.0)
 
 #============================================================================
 # Find ignition-cmake
 #============================================================================
 # If you get an error at this line, you need to install ignition-cmake
-find_package(ignition-cmake1 REQUIRED)
+find_package(ignition-cmake2 REQUIRED)
 
 #============================================================================
 # Configure the project
 #============================================================================
-ign_configure_project(VERSION_SUFFIX pre2)
+ign_configure_project(VERSION_SUFFIX pre1)
 
 #============================================================================
 # Set project-specific options
@@ -29,27 +29,18 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
 
 #--------------------------------------
 # Find Protobuf
-if(MSVC)
-  # On Windows we require version 3+ in order to have proper support for
-  # shared libraries.
-  set(REQ_PROTOBUF_VER 3)
-  set(PROTOBUF_PURPOSE "Windows requires version 3+ to ensure proper support for DLLs")
-else()
-  set(REQ_PROTOBUF_VER 2.3.0)
-  set(PROTOBUF_PURPOSE)
-endif()
+set(REQ_PROTOBUF_VER 3)
 ign_find_package(IgnProtobuf
                  VERSION ${REQ_PROTOBUF_VER}
                  PKGCONFIG protobuf
                  PKGCONFIG_VER_COMPARISON >=
                  REQUIRED
-                 PRETTY Protobuf
-                 PURPOSE ${PROTOBUF_PURPOSE})
+                 PRETTY Protobuf)
 
 #--------------------------------------
 # Find ignition-math
-ign_find_package(ignition-math5 REQUIRED)
-set(IGN_MATH_VER ${ignition-math5_VERSION_MAJOR})
+ign_find_package(ignition-math6 REQUIRED)
+set(IGN_MATH_VER ${ignition-math6_VERSION_MAJOR})
 
 #--------------------------------------
 # Find ignition-tools

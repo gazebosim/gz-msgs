@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "WorldResetProtos";
@@ -29,9 +29,9 @@ import "ignition/msgs/header.proto";
 message WorldReset
 {
   /// \brief Optional header data
-  optional Header header     = 1;
+  Header header     = 1;
 
-  optional bool all          = 2[default = true];
-  optional bool time_only    = 3[default = false];
-  optional bool model_only   = 4[default = false];
+  bool all          = 2;
+  bool time_only    = 3;
+  bool model_only   = 4;
 }

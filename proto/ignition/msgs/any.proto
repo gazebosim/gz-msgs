@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "EmptyProtos";
@@ -37,68 +37,68 @@ message Any
   enum ValueType
   {
     /// \brief Indicates that the message is empty
-    NONE        = 1;
+    NONE        = 0;
 
     /// \brief Indicates that the message contains a double
-    DOUBLE      = 2;
+    DOUBLE      = 1;
 
     /// \brief Indicates that the message contains an int32
-    INT32       = 3;
+    INT32       = 2;
 
     /// \brief Indicates that the message contains a string
-    STRING      = 4;
+    STRING      = 3;
 
     /// \brief Indicates that the message contains a Boolean
-    BOOLEAN     = 5;
+    BOOLEAN     = 4;
 
     /// \brief Indicates that the message contains a Vector3d
-    VECTOR3D    = 6;
+    VECTOR3D    = 5;
 
     /// \brief Indicates that the message contains a Color
-    COLOR       = 7;
+    COLOR       = 6;
 
     /// \brief Indicates that the message contains a Pose
-    POSE3D      = 8;
+    POSE3D      = 7;
 
     /// \brief Indicates that the message contains a Quaternion
-    QUATERNIOND = 9;
+    QUATERNIOND = 8;
 
     /// \brief Indicates that the message contains a Time
-    TIME        = 10;
+    TIME        = 9;
   }
 
-  /// \todo: Use protobuf oneof feature when we support protobuf 2.6
-
   /// \brief Optional header data
-  optional Header header               = 1;
+  Header header               = 1;
 
   /// \brief Type of value that is contained in this message.
-  optional ValueType type              = 2 [default = NONE];
+  ValueType type              = 2;
 
-  /// \brief A double value
-  optional double double_value         = 3;
+  oneof value {
+    /// \brief A double value
+    double double_value         = 3;
 
-  /// \brief An int32 value
-  optional int32 int_value             = 4;
+    /// \brief An int32 value
+    int32 int_value             = 4;
 
-  /// \brief A string value
-  optional string string_value         = 5;
+    /// \brief A string value
+    string string_value         = 5;
 
-  /// \brief A boolean value
-  optional bool bool_value             = 6;
+    /// \brief A boolean value
+    bool bool_value             = 6;
 
-  /// \brief A Vector3d value
-  optional Vector3d vector3d_value     = 7;
+    /// \brief A Vector3d value
+    Vector3d vector3d_value     = 7;
 
-  /// \brief A Color value
-  optional Color color_value           = 8;
+    /// \brief A Color value
+    Color color_value           = 8;
 
-  /// \brief A Pose value
-  optional Pose pose3d_value           = 9;
+    /// \brief A Pose value
+    Pose pose3d_value           = 9;
 
-  /// \brief A Quaternion value
-  optional Quaternion quaternion_value = 10;
+    /// \brief A Quaternion value
+    Quaternion quaternion_value = 10;
 
-  /// \brief A Time value
-  optional Time time_value             = 11;
+    /// \brief A Time value
+    Time time_value             = 11;
+  }
 }

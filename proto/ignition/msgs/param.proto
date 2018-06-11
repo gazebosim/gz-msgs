@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "EmptyProtos";
@@ -30,14 +30,11 @@ import "ignition/msgs/header.proto";
 message Param
 {
   /// \brief Optional header data
-  optional Header header   = 1;
+  Header header   = 1;
 
-  /// \brief Param name.
-  required string name     = 2;
-
-  /// \brief Param value.
-  optional Any    value    = 3;
+  /// \brief A set of name, value pairs.
+  map<string, Any> params = 2;
 
   /// \brief Params nested within this one.
-  repeated Param  children = 4;
+  repeated Param children = 3;
 }

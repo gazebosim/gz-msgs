@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "RestLoginProtos";
@@ -29,17 +29,17 @@ import "ignition/msgs/header.proto";
 message RestLogin
 {
   /// \brief Optional header data
-  optional Header header   = 1;
+  Header header   = 1;
 
   /// \brief ID of this request message
-  optional uint32 id       = 2;
+  uint32 id       = 2;
 
   /// \brief Rest service URL
-  optional string url      = 3;
+  string url      = 3;
 
   /// \brief Login user name
-  optional string username = 4;
+  string username = 4;
 
   /// \brief Login password
-  optional string password = 5;
+  string password = 5;
 }

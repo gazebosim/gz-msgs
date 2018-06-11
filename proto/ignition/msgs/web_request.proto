@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "WebRequestProtos";
@@ -29,11 +29,11 @@ import "ignition/msgs/header.proto";
 message WebRequest
 {
   /// \brief Optional header data
-  optional Header header         = 1;
+  Header header         = 1;
 
-  optional string operation      = 2;
-  optional string topic          = 3;
-  optional string msg_type       = 4;
-  optional string compression    = 5;
-  optional double hz             = 6;
+  string operation      = 2;
+  string topic          = 3;
+  string msg_type       = 4;
+  string compression    = 5;
+  double hz             = 6;
 }

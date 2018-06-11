@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "SEnsorProtos";
@@ -36,56 +36,56 @@ import "ignition/msgs/imu_sensor.proto";
 message Sensor
 {
   /// \brief Optional header data
-  optional Header header          = 1;
+  Header header          = 1;
 
   /// \brief Name of the sensor
-  optional string name            = 2;
+  string name            = 2;
 
   /// \brief Id of the sensor
-  optional uint32 id              = 3;
+  uint32 id              = 3;
 
   /// \brief Name of the parent, usually a link or joint.
-  optional string parent          = 4;
+  string parent          = 4;
 
   /// \brief Id of the parent, usually a link or joint.
-  optional uint32 parent_id       = 5;
+  uint32 parent_id       = 5;
 
   /// \brief Sensor type
-  optional string type            = 6;
+  string type            = 6;
 
   /// \brief True indicates that the sensor should always
   /// produce data, instead of producing data only when
   /// a consumer is connected to the data topic
-  optional bool always_on         = 7;
+  bool always_on         = 7;
 
   /// \brief Refresh rate
-  optional double update_rate     = 8;
+  double update_rate     = 8;
 
   /// \brief Sensor pose
-  optional Pose pose              = 9;
+  Pose pose              = 9;
 
   /// \brief Description of a camera sensor
-  optional CameraSensor camera    = 10;
+  CameraSensor camera    = 10;
 
   /// \brief Description of a ray (laser) sensor
-  optional RaySensor ray          = 11;
+  RaySensor ray          = 11;
 
   /// \brief Description of a contact sensor
-  optional ContactSensor contact  = 12;
+  ContactSensor contact  = 12;
 
   /// \brief True value indicates that sensor data should be
   /// visualized in the GUI
-  optional bool visualize         = 13;
+  bool visualize         = 13;
 
   /// \brief Topic on which sensor data is published
-  optional string topic           = 14;
+  string topic           = 14;
 
   /// \brief Description of a logical camera sensor
-  optional LogicalCameraSensor logical_camera = 15;
+  LogicalCameraSensor logical_camera = 15;
 
   /// \brief Description of a gps sensor
-  optional GPSSensor gps          = 16;
+  GPSSensor gps          = 16;
 
   /// \brief Description of an IMU sensor
-  optional IMUSensor imu          = 17;
+  IMUSensor imu          = 17;
 }

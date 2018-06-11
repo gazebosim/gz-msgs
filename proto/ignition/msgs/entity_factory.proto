@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "EntityFactoryProtos";
@@ -44,27 +44,27 @@ import "ignition/msgs/header.proto";
 message EntityFactory
 {
   /// \brief Optional header data
-  optional Header header                    = 1;
+  Header header                    = 1;
 
   /// \brief SDF description in string format.
-  optional string sdf                       = 2;
+  string sdf                       = 2;
 
   /// \brief Full path to SDF file.
-  optional string sdf_filename              = 3;
+  string sdf_filename              = 3;
 
   /// \brief Pose where the entity will be spawned.
-  optional Pose pose                        = 4;
+  Pose pose                        = 4;
 
   /// \brief Name of the entity which will be updated.
-  optional string edit_name                 = 5;
+  string edit_name                 = 5;
 
   /// \brief Name of model to clone.
-  optional string clone_model_name          = 6;
+  string clone_model_name          = 6;
 
   /// \brief Whether the server is allowed to rename the model in case of
   /// overlap with existing models.
-  optional bool allow_renaming              = 7;
+  bool allow_renaming              = 7;
 
   /// \brief For inserting lights.
-  optional Light light                      = 8;
+  Light light                      = 8;
 }

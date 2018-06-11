@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "TestProtos";
@@ -29,5 +29,5 @@ import "ignition/msgs/header.proto";
 message Test
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 }

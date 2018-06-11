@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "UInt64Protos";
@@ -29,8 +29,8 @@ import "ignition/msgs/header.proto";
 message UInt64
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
   /// \brief Integer data
-  optional uint64 data = 2;
+  uint64 data = 2;
 }

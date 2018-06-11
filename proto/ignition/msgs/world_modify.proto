@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "WorldModifyProtos";
@@ -29,11 +29,11 @@ import "ignition/msgs/header.proto";
 message WorldModify
 {
   /// \brief Optional header data
-  optional Header header     = 1;
+  Header header     = 1;
 
-  optional string world_name = 2;
-  optional bool remove       = 3;
-  optional bool create       = 4;
-  optional bool cloned       = 5;
-  optional string cloned_uri = 6;
+  string world_name = 2;
+  bool remove       = 3;
+  bool create       = 4;
+  bool cloned       = 5;
+  string cloned_uri = 6;
 }

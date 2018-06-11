@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "PIDProtos";
@@ -29,13 +29,13 @@ import "ignition/msgs/header.proto";
 message PID
 {
   /// \brief Optional header data
-  optional Header header = 1;
+  Header header = 1;
 
-  optional double target = 2[default=0.0];
-  optional double p_gain = 3[default=0.0];
-  optional double i_gain = 4[default=0.0];
-  optional double d_gain = 5[default=0.0];
-  optional double i_max  = 6[default=0.0];
-  optional double i_min  = 7[default=0.0];
-  optional double limit  = 8[default=0.0];
+  double target = 2;
+  double p_gain = 3;
+  double i_gain = 4;
+  double d_gain = 5;
+  double i_max  = 6;
+  double i_min  = 7;
+  double limit  = 8;
 }

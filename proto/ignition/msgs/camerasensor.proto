@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "CameraSensorProtos";
@@ -31,14 +31,14 @@ import "ignition/msgs/header.proto";
 message CameraSensor
 {
   /// \brief Optional header data
-  optional Header header         = 1;
+  Header header         = 1;
 
-  optional double horizontal_fov = 2;
-  optional Vector2d image_size   = 3;
-  optional string image_format   = 4;
-  optional double near_clip      = 5;
-  optional double far_clip       = 6;
-  optional bool save_enabled     = 7;
-  optional string save_path      = 8;
-  optional Distortion distortion = 9;
+  double horizontal_fov = 2;
+  Vector2d image_size   = 3;
+  string image_format   = 4;
+  double near_clip      = 5;
+  double far_clip       = 6;
+  bool save_enabled     = 7;
+  string save_path      = 8;
+  Distortion distortion = 9;
 }
