@@ -5,12 +5,12 @@
 1. Upgrade to protobuf3
     * [Pull request 69](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/69)
 
+1. Fix ruby message generation.
+    * [Pull request 47](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/47)
+
 ## Ignition Msgs 2.x
 
 ### Ignition Msgs 2.x.x
-
-1. Fix ruby message generation.
-    * [Pull request 47](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/47)
 
 1. Added inline versioned namespace. Generator.hh is no longer installed
     * [Pull request 59](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/59)
