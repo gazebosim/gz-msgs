@@ -11,10 +11,16 @@ pipelines:
           - apt-get -y install
             cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev
             libignition-cmake1-dev
-            libignition-math5-dev
             libignition-tools-dev
             ruby
             cppcheck
+          # Ignition math
+          - hg clone https://bitbucket.org/ignitionrobotics/ign-math -b default
+          - cd ign-math
+          - mkdir build && cd build
+          - cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+          - make -j4 install
+          - cd ../..
           # Ignition msgs
           - mkdir build
           - cd build
