@@ -65,7 +65,8 @@ function(ign_msgs_protoc)
   endif()
 
   if(ign_msgs_protoc_GENERATE_RUBY)
-    set(output_ruby "${ign_msgs_protoc_OUTPUT_RUBY_DIR}${proto_package_dir}/${FIL_WE}.pb.rb")
+    file(MAKE_DIRECTORY ${ign_msgs_protoc_OUTPUT_RUBY_DIR})
+    set(output_ruby "${ign_msgs_protoc_OUTPUT_RUBY_DIR}${proto_package_dir}/${FIL_WE}_pb.rb")
     list(APPEND ${ign_msgs_protoc_OUTPUT_RUBY_VAR} ${output_ruby})
     list(APPEND output_files ${output_ruby})
     list(APPEND protoc_args "--ruby_out=${ign_msgs_protoc_OUTPUT_RUBY_DIR}")
@@ -95,10 +96,6 @@ endfunction()
 
 ##################################################
 # do the code generation
-set(proto_headers)
-set(proto_sources)
-set(proto_ruby_scripts)
-
 file (GLOB proto_files ${PROJECT_SOURCE_DIR}/proto/ignition/msgs/*.proto)
 
 foreach(proto_file ${proto_files})
@@ -114,7 +111,7 @@ foreach(proto_file ${proto_files})
     OUTPUT_CPP_DIR
       "${PROJECT_BINARY_DIR}/include"
     OUTPUT_RUBY_DIR
-      "${CMAKE_CURRENT_BINARY_DIR}"
+      "${PROJECT_BINARY_DIR}/ruby"
     OUTPUT_CPP_HH_VAR
       gen_headers
     OUTPUT_CPP_CC_VAR
@@ -143,8 +140,8 @@ endif()
 set_source_files_properties(${gen_headers} ${gen_sources} ${gen_ruby_scripts}
   PROPERTIES GENERATED TRUE)
 
-message(STATUS "Installing Ruby messages to ${RUBY_INSTALL_DIR}/ignition/${IGN_DESIGNATION}")
-install(FILES ${proto_ruby_scripts} DESTINATION ${RUBY_INSTALL_DIR}/ignition/${IGN_DESIGNATION})
+message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${IGN_DESIGNATION}")
+install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${IGN_DESIGNATION})
 
 ign_install_includes(
   "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}"
