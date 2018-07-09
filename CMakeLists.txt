@@ -32,9 +32,8 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
 set(REQ_PROTOBUF_VER 3)
 ign_find_package(IgnProtobuf
                  VERSION ${REQ_PROTOBUF_VER}
-                 PKGCONFIG protobuf
-                 PKGCONFIG_VER_COMPARISON >=
                  REQUIRED
+                 COMPONENTS all
                  PRETTY Protobuf)
 
 #--------------------------------------
