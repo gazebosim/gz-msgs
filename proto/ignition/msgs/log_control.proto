@@ -36,4 +36,5 @@ message LogControl
   optional bool paused             = 4;
   optional string base_path        = 5;
   optional string encoding         = 6;
+  optional string record_resources = 7;
 }
