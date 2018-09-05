@@ -29,11 +29,12 @@ import "ignition/msgs/header.proto";
 message LogControl
 {
   /// \brief Optional header data
-  optional Header header        = 1;
+  optional Header header           = 1;
 
-  optional bool start           = 2;
-  optional bool stop            = 3;
-  optional bool paused          = 4;
-  optional string base_path     = 5;
-  optional string encoding      = 6;
+  optional bool start              = 2;
+  optional bool stop               = 3;
+  optional bool paused             = 4;
+  optional string base_path        = 5;
+  optional string encoding         = 6;
+  optional string record_resources = 7;
 }
