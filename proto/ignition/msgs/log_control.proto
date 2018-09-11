@@ -31,9 +31,10 @@ message LogControl
   /// \brief Optional header data
   Header header        = 1;
 
-  bool start           = 2;
-  bool stop            = 3;
-  bool paused          = 4;
-  string base_path     = 5;
-  string encoding      = 6;
+  bool start              = 2;
+  bool stop               = 3;
+  bool paused             = 4;
+  string base_path        = 5;
+  string encoding         = 6;
+  string record_resources = 7;
 }

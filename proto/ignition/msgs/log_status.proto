@@ -33,7 +33,7 @@ message LogStatus
   {
     enum Units
     {
-      BYTES = 0;
+      BYTES   = 0;
       K_BYTES = 1;
       M_BYTES = 2;
       G_BYTES = 3;
@@ -44,6 +44,7 @@ message LogStatus
     string full_path  = 3;
     float size        = 4;
     Units size_units  = 5;
+    bool record_resources = 6;
   }
 
   /// \brief Optional header data
