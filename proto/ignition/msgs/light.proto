@@ -21,7 +21,7 @@ option java_package = "com.ignition.msgs";
 option java_outer_classname = "LightProtos";
 
 /// \ingroup ignition.msgs
-/// \interface Light 
+/// \interface Light
 /// \brief Message for a light
 
 import "ignition/msgs/header.proto";
@@ -55,4 +55,10 @@ message Light
   float spot_inner_angle        = 13;
   float spot_outer_angle        = 14;
   float spot_falloff            = 15;
+
+  /// \brief Unique id of the light
+  uint32 id                     = 16;
+
+  /// \brief Unique id of light's parent
+  uint32 parent_id              = 17;
 }
