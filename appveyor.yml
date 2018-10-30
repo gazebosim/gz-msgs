@@ -17,7 +17,7 @@ install:
   - cd ign-cmake
   - md build
   - cd build
-  - cmake ..
+  - cmake .. -DBUILD_TESTING=Off
   - cmake --build . --target INSTALL
   - cd ../..
   # ign-math
@@ -25,7 +25,7 @@ install:
   - cd ign-math
   - md build
   - cd build
-  - cmake ..
+  - cmake .. -DBUILD_TESTING=Off
   - cmake --build . --target INSTALL
   - cd ../..
 build_script:
