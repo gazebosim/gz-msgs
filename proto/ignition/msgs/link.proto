@@ -27,6 +27,7 @@ option java_outer_classname = "LinkProtos";
 import "ignition/msgs/inertial.proto";
 import "ignition/msgs/collision.proto";
 import "ignition/msgs/visual.proto";
+import "ignition/msgs/light.proto";
 import "ignition/msgs/sensor.proto";
 import "ignition/msgs/projector.proto";
 import "ignition/msgs/pose.proto";
@@ -54,6 +55,9 @@ message Link
   repeated Projector projector  = 14;
   bool canonical       = 15;
 
-  /// \brief An vector of batteries that are attached to this link.
+  /// \brief A vector of batteries attached to this link.
   repeated Battery battery      = 16;
+
+  /// \brief A vector of lights attached to this link
+  repeated Light light          = 17;
 }
