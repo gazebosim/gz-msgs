@@ -39,7 +39,8 @@ message Sonar
   optional double range_max = 5;
   optional double radius    = 6;
   optional double range     = 7;
+  optional string mesh      = 8;
 
   /// Location of the contact in the world frame.
-  optional Vector3d contact  = 8;
+  optional Vector3d contact  = 9;
 }
