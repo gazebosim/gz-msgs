@@ -22,7 +22,7 @@ option java_outer_classname = "TwistProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Twist
-/// \brief Message for linear ans angular velocities.
+/// \brief Message with linear and angular velocities.
 
 import "ignition/msgs/vector3d.proto";
 import "ignition/msgs/header.proto";
