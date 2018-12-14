@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 3.x.x
 
+1. Add twist message
+    * [Pull request 83](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/83)
+
 1. Update light msgs fields
     * [Pull request 78](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/78)
 
