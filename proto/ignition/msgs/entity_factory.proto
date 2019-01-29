@@ -27,7 +27,7 @@ option java_outer_classname = "EntityFactoryProtos";
 ///
 /// 1. From an SDF string (sdf)
 /// 2. From an SDF file (sdf_filename)
-/// 2. From a message (model / light)
+/// 3. From a message (model / light)
 /// 4. Cloning an existing entity (clone_name)
 ///
 /// If more than one way is specified, the first field will be parsed and the
