@@ -29,9 +29,6 @@ option java_outer_classname = "EntityFactoryProtos";
 /// 2. From an SDF file (sdf_filename)
 /// 3. From a message (model / light)
 /// 4. Cloning an existing entity (clone_name)
-///
-/// If more than one way is specified, the first field will be parsed and the
-/// following ignored.
 
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/light.proto";
