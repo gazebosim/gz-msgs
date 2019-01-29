@@ -43,24 +43,24 @@ message EntityFactory
   /// \brief Optional header data
   Header header                    = 1;
 
-  /// \brief SDF description in string format.
-  string sdf                       = 2;
-
-  /// \brief Full path to SDF file.
-  string sdf_filename              = 3;
-
-  /// \brief Insert from a message
-  oneof from_msg
+  /// \brief Only one method is supported at a time
+  oneof from
   {
+    /// \brief SDF description in string format.
+    string sdf                     = 2;
+
+    /// \brief Full path to SDF file.
+    string sdf_filename            = 3;
+
     /// \brief Description of model to be inserted.
     Model model                    = 4;
 
     /// \brief Description of light to be inserted.
     Light light                    = 5;
-  }
 
-  /// \brief Name of entity to clone.
-  string clone_name                = 6;
+    /// \brief Name of entity to clone.
+    string clone_name              = 6;
+  }
 
   /// \brief Pose where the entity will be spawned in the world.
   Pose pose                        = 7;
