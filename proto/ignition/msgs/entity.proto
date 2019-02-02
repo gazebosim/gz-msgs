@@ -55,10 +55,10 @@ message Entity
 
   /// \brief Entity unique identifier accross all types. Defaults to null
   /// entity (0).
-  int64 id = 3;
+  int64 id = 2;
 
   /// \brief Entity name, which is not guaranteed to be unique.
-  string name = 2;
+  string name = 3;
 
   /// \brief Entity type.
   Type type = 4;
