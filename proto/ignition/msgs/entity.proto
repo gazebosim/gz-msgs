@@ -34,20 +34,23 @@ message Entity
     /// \brief No type specified
     NONE = 0;
 
+    /// \brief Light
+    LIGHT = 1;
+
     /// \brief Model
-    MODEL = 1;
+    MODEL = 2;
 
     /// \brief Link
-    LINK = 2;
+    LINK = 3;
 
     /// \brief Visual
-    VISUAL = 3;
+    VISUAL = 4;
 
     /// \brief Collision
-    COLLISION = 4;
+    COLLISION = 5;
 
     /// \brief Sensor
-    SENSOR = 5;
+    SENSOR = 6;
   }
 
   /// \brief Optional header data
