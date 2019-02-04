@@ -23,6 +23,17 @@ option java_outer_classname = "EntityProtos";
 /// \ingroup ignition.msgs
 /// \interface Entity
 /// \brief A message for identifying an entity.
+///
+/// Whenever a single entity should be identified by this message,
+/// it is expected that the message is used as follows:
+///
+///     if id not null
+///       use id
+///     else if name not null and type not null
+///       use name + type
+///     else
+///       error
+///     end
 
 import "ignition/msgs/header.proto";
 
