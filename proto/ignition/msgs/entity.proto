@@ -51,6 +51,9 @@ message Entity
 
     /// \brief Sensor
     SENSOR = 6;
+
+    /// \brief Joint
+    JOINT = 7;
   }
 
   /// \brief Optional header data
