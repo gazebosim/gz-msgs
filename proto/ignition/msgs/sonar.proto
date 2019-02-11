@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "SonarProtos";
@@ -31,21 +31,21 @@ import "ignition/msgs/header.proto";
 message Sonar
 {
   /// \brief Optional header data
-  optional Header header    = 1;
+  Header header    = 1;
 
-  optional string frame     = 2;
-  optional Pose world_pose  = 3;
-  optional double range_min = 4;
-  optional double range_max = 5;
-  optional double radius    = 6;
-  optional double range     = 7;
+  string frame     = 2;
+  Pose world_pose  = 3;
+  double range_min = 4;
+  double range_max = 5;
+  double radius    = 6;
+  double range     = 7;
 
   /// \brief The sonar collision shape.
   ///        possible values are "cone", "sphere".
   ///        If you set this value to "cone" you need to specify
   ///        the `radius`.
-  optional string geometry  = 8;
+  string geometry  = 8;
 
   /// Location of the contact in the world frame.
-  optional Vector3d contact  = 9;
+  Vector3d contact  = 9;
 }

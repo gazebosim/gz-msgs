@@ -15,13 +15,13 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "LightProtos";
 
 /// \ingroup ignition.msgs
-/// \interface Light 
+/// \interface Light
 /// \brief Message for a light
 
 import "ignition/msgs/header.proto";
@@ -32,27 +32,33 @@ import "ignition/msgs/color.proto";
 message Light
 {
   /// \brief Optional header data
-  optional Header header                 = 1;
+  Header header                 = 1;
 
-  optional string name                   = 2;
+  string name                   = 2;
   enum LightType
   {
-    POINT       = 1;
-    SPOT        = 2;
-    DIRECTIONAL = 3;
+    POINT       = 0;
+    SPOT        = 1;
+    DIRECTIONAL = 2;
   }
-  optional LightType type                = 3;
+  LightType type                = 3;
 
-  optional Pose pose                     = 4;
-  optional Color diffuse                 = 5;
-  optional Color specular                = 6;
-  optional float attenuation_constant    = 7;
-  optional float attenuation_linear      = 8;
-  optional float attenuation_quadratic   = 9;
-  optional Vector3d direction            = 10;
-  optional float range                   = 11;
-  optional bool cast_shadows             = 12;
-  optional float spot_inner_angle        = 13;
-  optional float spot_outer_angle        = 14;
-  optional float spot_falloff            = 15;
+  Pose pose                     = 4;
+  Color diffuse                 = 5;
+  Color specular                = 6;
+  float attenuation_constant    = 7;
+  float attenuation_linear      = 8;
+  float attenuation_quadratic   = 9;
+  Vector3d direction            = 10;
+  float range                   = 11;
+  bool cast_shadows             = 12;
+  float spot_inner_angle        = 13;
+  float spot_outer_angle        = 14;
+  float spot_falloff            = 15;
+
+  /// \brief Unique id of the light
+  uint32 id                     = 16;
+
+  /// \brief Unique id of light's parent
+  uint32 parent_id              = 17;
 }

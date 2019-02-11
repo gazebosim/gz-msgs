@@ -20,8 +20,8 @@ namespace ignition
 {
   namespace msgs
   {
-    inline namespace IGNITION_MSGS_VERSION_NAMESPACE
-    {
+    // Inline bracket to help doxygen filtering.
+    inline namespace IGNITION_MSGS_VERSION_NAMESPACE {
     /////////////////////////////////////////////
     ignition::math::Vector3d Convert(const msgs::Vector3d &_v)
     {
@@ -664,6 +664,6 @@ namespace ignition
       }
       return result;
     }
-    }
   }
+}
 }

@@ -1,6 +1,5 @@
 os:
   - Visual Studio 2017
-  - Visual Studio 2015
 
 configuration:
   - Debug
@@ -13,21 +12,19 @@ install:
   - vcpkg install protobuf
   - hg summary
   # ign-cmake
-  - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake
+  - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake -b ign-cmake2
   - cd ign-cmake
-  - hg up ign-cmake1
   - md build
   - cd build
-  - cmake ..
+  - cmake .. -DBUILD_TESTING=Off
   - cmake --build . --target INSTALL
   - cd ../..
   # ign-math
-  - hg clone https://bitbucket.org/ignitionrobotics/ign-math
+  - hg clone https://bitbucket.org/ignitionrobotics/ign-math -b ign-math6
   - cd ign-math
-  - hg up ign-math5
   - md build
   - cd build
-  - cmake ..
+  - cmake .. -DBUILD_TESTING=Off
   - cmake --build . --target INSTALL
   - cd ../..
 build_script:

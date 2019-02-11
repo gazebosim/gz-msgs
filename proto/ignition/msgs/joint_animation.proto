@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "JointAnimationProtos";
@@ -37,9 +37,9 @@ message JointAnimation
   }
 
   /// \brief Optional header data
-  optional Header header       = 1;
+  Header header       = 1;
 
-  optional string model_name   = 2;
+  string model_name   = 2;
   repeated Joint joint         = 3;
   repeated Time  time          = 4;
 }

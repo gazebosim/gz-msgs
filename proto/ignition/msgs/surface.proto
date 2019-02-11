@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "SurfaceProtos";
@@ -30,19 +30,19 @@ import "ignition/msgs/friction.proto";
 message Surface
 {
   /// \brief Optional header data
-  optional Header header                    = 1;
+  Header header                    = 1;
 
-  optional Friction friction                = 2;
-  optional double restitution_coefficient   = 3;
-  optional double bounce_threshold          = 4;
-  optional double soft_cfm                  = 5;
-  optional double soft_erp                  = 6;
-  optional double kp                        = 7;
-  optional double kd                        = 8;
-  optional double max_vel                   = 9;
-  optional double min_depth                 = 10;
-  optional bool collide_without_contact     = 11;
-  optional uint32 collide_without_contact_bitmask = 12;
-  optional uint32 collide_bitmask           = 13;
-  optional double elastic_modulus           = 14;
+  Friction friction                = 2;
+  double restitution_coefficient   = 3;
+  double bounce_threshold          = 4;
+  double soft_cfm                  = 5;
+  double soft_erp                  = 6;
+  double kp                        = 7;
+  double kd                        = 8;
+  double max_vel                   = 9;
+  double min_depth                 = 10;
+  bool collide_without_contact     = 11;
+  uint32 collide_without_contact_bitmask = 12;
+  uint32 collide_bitmask           = 13;
+  double elastic_modulus           = 14;
 }

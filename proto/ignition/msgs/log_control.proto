@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "LogControlProtos";
@@ -29,12 +29,12 @@ import "ignition/msgs/header.proto";
 message LogControl
 {
   /// \brief Optional header data
-  optional Header header           = 1;
+  Header header        = 1;
 
-  optional bool start              = 2;
-  optional bool stop               = 3;
-  optional bool paused             = 4;
-  optional string base_path        = 5;
-  optional string encoding         = 6;
-  optional string record_resources = 7;
+  bool start              = 2;
+  bool stop               = 3;
+  bool paused             = 4;
+  string base_path        = 5;
+  string encoding         = 6;
+  string record_resources = 7;
 }

@@ -1,19 +1,27 @@
-image: ubuntu:xenial
+image: ubuntu:bionic
 
 pipelines:
   default:
     - step:
         script:
-          - echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable xenial main" > /etc/apt/sources.list.d/gazebo-stable.list
-          - apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys D2486D2DD83DB69272AFE98867170598AF249743
+          - apt update
+          - apt -y install wget lsb-release gnupg
+          - sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+          - wget http://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
           - apt-get update
+          - apt-get -y install cmake build-essential curl git mercurial libprotobuf-dev protobuf-compiler libprotoc-dev g++-8 ruby cppcheck
+          - update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8 --slave /usr/bin/gcov gcov /usr/bin/gcov-8
+          - gcc -v
+          - g++ -v
+          - gcov -v
+          # lcov
+          - git clone https://github.com/linux-test-project/lcov.git
+          - cd lcov
+          - make install
+          - cd ..
+          # Dependency: Ignition packages
           - apt-get -y install
-            cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev
-            libignition-cmake1-dev
-            libignition-math5-dev
-            libignition-tools-dev
-            ruby
-            cppcheck
+            libignition-cmake2-dev libignition-tools-dev libignition-math6-dev
           # Ignition msgs
           - mkdir build
           - cd build
@@ -21,8 +29,7 @@ pipelines:
           - make -j4
           - make test ARGS="-V" CTEST_OUTPUT_ON_FAILURE=1
           - make coverage
-          - bash <(curl -s https://codecov.io/bash)
+          # Use a special version of codecov for handling gcc8 output.
+          - bash <(curl -s https://raw.githubusercontent.com/codecov/codecov-bash/4678d212cce2078bbaaf5027af0c0dafaad6a095/codecov) -X gcovout -X gcov 2>/dev/null
+          - make codecheck
           - make install
-          # code_check
-          - cd ..
-          - sh tools/code_check.sh

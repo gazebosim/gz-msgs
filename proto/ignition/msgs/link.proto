@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "LinkProtos";
@@ -27,6 +27,7 @@ option java_outer_classname = "LinkProtos";
 import "ignition/msgs/inertial.proto";
 import "ignition/msgs/collision.proto";
 import "ignition/msgs/visual.proto";
+import "ignition/msgs/light.proto";
 import "ignition/msgs/sensor.proto";
 import "ignition/msgs/projector.proto";
 import "ignition/msgs/pose.proto";
@@ -37,23 +38,26 @@ import "ignition/msgs/header.proto";
 message Link
 {
   /// \brief Optional header data
-  optional Header header        = 1;
+  Header header        = 1;
 
-  optional uint32 id            = 2;
-  optional string name          = 3;
-  optional bool self_collide    = 4;
-  optional bool gravity         = 5;
-  optional bool kinematic       = 6;
-  optional bool enabled         = 7;
-  optional Density density      = 8;
-  optional Inertial inertial    = 9;
-  optional Pose pose            = 10;
+  uint32 id            = 2;
+  string name          = 3;
+  bool self_collide    = 4;
+  bool gravity         = 5;
+  bool kinematic       = 6;
+  bool enabled         = 7;
+  Density density      = 8;
+  Inertial inertial    = 9;
+  Pose pose            = 10;
   repeated Visual visual        = 11;
   repeated Collision collision  = 12;
   repeated Sensor sensor        = 13;
   repeated Projector projector  = 14;
-  optional bool canonical       = 15;
+  bool canonical       = 15;
 
-  /// \brief An optional vector of batteries that are attached to this link.
+  /// \brief A vector of batteries attached to this link.
   repeated Battery battery      = 16;
+
+  /// \brief A vector of lights attached to this link
+  repeated Light light          = 17;
 }

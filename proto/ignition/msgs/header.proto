@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "HeaderProtos";
@@ -29,10 +29,10 @@ import "ignition/msgs/time.proto";
 message Header
 {
   message Map {
-    optional string key = 1;
+    string key = 1;
     repeated string value = 2;
   }
 
-  optional Time stamp           = 1;
+  Time stamp           = 1;
   repeated Map data             = 2;
 } 

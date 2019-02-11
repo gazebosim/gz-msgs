@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "AxisProtos";
@@ -30,14 +30,14 @@ import "ignition/msgs/header.proto";
 message Axis
 {
   /// \brief Optional header data
-  optional Header header               = 1;
+  Header header               = 1;
 
-  optional Vector3d xyz                = 2;
-  optional double limit_lower          = 3 [default = 0];
-  optional double limit_upper          = 4 [default = 0];
-  optional double limit_effort         = 5 [default = 0];
-  optional double limit_velocity       = 6 [default = 0];
-  optional double damping              = 7 [default = 0];
-  optional double friction             = 8 [default = 0];
-  optional bool use_parent_model_frame = 9 [default = false];
+  Vector3d xyz                = 2;
+  double limit_lower          = 3;
+  double limit_upper          = 4;
+  double limit_effort         = 5;
+  double limit_velocity       = 6;
+  double damping              = 7;
+  double friction             = 8;
+  bool use_parent_model_frame = 9;
 }

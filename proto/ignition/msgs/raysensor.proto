@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "RaySensorProtos";
@@ -29,20 +29,20 @@ import "ignition/msgs/header.proto";
 message RaySensor
 {
   /// \brief Optional header data
-  optional Header header                = 1;
+  Header header                = 1;
 
-  optional bool display_scan            = 2;
-  optional int32 horizontal_samples     = 3;
-  optional double horizontal_resolution = 4;
-  optional double horizontal_min_angle  = 5;
-  optional double horizontal_max_angle  = 6;
+  bool display_scan            = 2;
+  int32 horizontal_samples     = 3;
+  double horizontal_resolution = 4;
+  double horizontal_min_angle  = 5;
+  double horizontal_max_angle  = 6;
 
-  optional int32 vertical_samples       = 7;
-  optional double vertical_resolution   = 8;
-  optional double vertical_min_angle    = 9;
-  optional double vertical_max_angle    = 10;
+  int32 vertical_samples       = 7;
+  double vertical_resolution   = 8;
+  double vertical_min_angle    = 9;
+  double vertical_max_angle    = 10;
 
-  optional double range_min             = 11;
-  optional double range_max             = 12; 
-  optional double range_resolution      = 13;
+  double range_min             = 11;
+  double range_max             = 12; 
+  double range_resolution      = 13;
 }

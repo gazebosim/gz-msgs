@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "VisualProtos";
@@ -41,7 +41,7 @@ message Visual
     /// \brief The layer in which this visual is displayed. The layer number
     /// is useful for programs, such as Gazebo, that put visuals in different
     /// layers for enhanced visualization.
-    optional int32 layer       = 1;
+    int32 layer       = 1;
   }
 
   enum Type
@@ -65,28 +65,28 @@ message Visual
   }
 
   /// \brief Optional header data
-  optional Header header       = 1;
+  Header header       = 1;
 
-  optional string name         = 2;
-  optional uint32 id           = 3;
-  optional string parent_name  = 4;
-  optional uint32 parent_id    = 5;
-  optional bool cast_shadows   = 6;
-  optional double transparency = 7;
-  optional double laser_retro  = 8;
-  optional Pose pose           = 9;
-  optional Geometry geometry   = 10;
-  optional Material material   = 11;
+  string name         = 2;
+  uint32 id           = 3;
+  string parent_name  = 4;
+  uint32 parent_id    = 5;
+  bool cast_shadows   = 6;
+  double transparency = 7;
+  double laser_retro  = 8;
+  Pose pose           = 9;
+  Geometry geometry   = 10;
+  Material material   = 11;
 
-  optional bool visible        = 12;
-  optional bool delete_me      = 13;
-  optional bool is_static      = 14;
+  bool visible        = 12;
+  bool delete_me      = 13;
+  bool is_static      = 14;
   repeated Plugin plugin       = 15;
-  optional Vector3d scale      = 16;
+  Vector3d scale      = 16;
 
   /// \brief Option meta information associated with this visual.
-  optional Meta meta           = 17;
+  Meta meta           = 17;
 
   /// \brief Type of visual.
-  optional Type type           = 18;
+  Type type           = 18;
 }

@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "PlaneGeomProtos";
@@ -31,9 +31,9 @@ import "ignition/msgs/header.proto";
 message PlaneGeom
 {
   /// \brief Optional header data
-  optional Header header    = 1;
+  Header header    = 1;
 
-  optional Vector3d normal  = 2;
-  optional Vector2d size    = 3;
-  optional double d         = 4 [default = 0];
+  Vector3d normal  = 2;
+  Vector2d size    = 3;
+  double d         = 4;
 }

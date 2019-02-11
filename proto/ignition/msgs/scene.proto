@@ -15,7 +15,7 @@
  *
 */
 
-syntax = "proto2";
+syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "SceneProtos";
@@ -35,20 +35,20 @@ import "ignition/msgs/header.proto";
 message Scene
 {
   /// \brief Optional header data
-  optional Header header       = 1;
+  Header header       = 1;
 
-  optional string name         = 2;
-  optional Color ambient       = 3;
-  optional Color background    = 4;
-  optional Sky sky             = 5;
-  optional bool shadows        = 6 [default = true];
-  optional Fog fog             = 7;
-  optional bool grid           = 8;
+  string name         = 2;
+  Color ambient       = 3;
+  Color background    = 4;
+  Sky sky             = 5;
+  bool shadows        = 6;
+  Fog fog             = 7;
+  bool grid           = 8;
 
   repeated Model model         = 9;
   repeated Light light         = 10;
   repeated Joint joint         = 11;
 
   /// \brief Show/hide world origin indicator.
-  optional bool origin_visual  = 12;
+  bool origin_visual  = 12;
 }
