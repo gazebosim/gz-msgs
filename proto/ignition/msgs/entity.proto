@@ -72,7 +72,7 @@ message Entity
 
   /// \brief Entity unique identifier accross all types. Defaults to null
   /// entity (0).
-  int64 id = 2;
+  uint64 id = 2;
 
   /// \brief Entity name, which is not guaranteed to be unique.
   string name = 3;
