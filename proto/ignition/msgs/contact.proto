@@ -42,5 +42,5 @@ message Contact
   repeated double depth       = 6;
   repeated JointWrench wrench = 7;
 
-  string world       = 8;
+  Entity world       = 8;
 }
