@@ -19,6 +19,7 @@
 
 #include <string>
 
+#include <ignition/math/AxisAlignedBox.hh>
 #include <ignition/math/Color.hh>
 #include <ignition/math/Inertial.hh>
 #include <ignition/math/Pose3.hh>
@@ -81,6 +82,13 @@ namespace ignition
     /// \return An ignition::math::Inertiald object
     IGNITION_MSGS_VISIBLE
     math::Inertiald Convert(const msgs::Inertial &_i);
+
+    /// \brief Convert a msgs::AxisAlignedBox to an
+    /// ignition::math::AxisAlignedBox
+    /// \param[in] _b The axis aligned box to convert
+    /// \return An ignition::math::AxisAlignedBox object
+    IGNITION_MSGS_VISIBLE
+    math::AxisAlignedBox Convert(const msgs::AxisAlignedBox &_b);
 
     /// \brief Convert a msgs::StringMsg to an std::string
     /// \param[in] _m The message to convert

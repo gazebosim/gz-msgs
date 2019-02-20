@@ -66,6 +66,13 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
+    math::AxisAlignedBox Convert(const msgs::AxisAlignedBox &_b)
+    {
+      return math::AxisAlignedBox(msgs::Convert(_b.min_corner()),
+                                  msgs::Convert(_b.max_corner()));
+    }
+
+    /////////////////////////////////////////////
     math::Color Convert(const msgs::Color &_c)
     {
       return math::Color(_c.r(), _c.g(), _c.b(), _c.a());
