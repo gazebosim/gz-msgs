@@ -90,6 +90,13 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     math::AxisAlignedBox Convert(const msgs::AxisAlignedBox &_b);
 
+    /// \brief Convert ignition::math::AxisAlignedBox to
+    /// msgs::AxisAlignedBox.
+    /// \param[in] _b The axis aligned box to convert
+    /// \return An ignition::math::AxisAlignedBox object
+    IGNITION_MSGS_VISIBLE
+    msgs::AxisAlignedBox Convert(const math::AxisAlignedBox &_b);
+
     /// \brief Convert a msgs::StringMsg to an std::string
     /// \param[in] _m The message to convert
     /// \return An std::string object
@@ -369,6 +376,12 @@ namespace ignition
     /// \param[in] _v An float reference
     IGNITION_MSGS_VISIBLE
     void Set(msgs::Float *_p, const float &_v);
+
+    /// \brief Set a msgs::AxisAlignedBox from a math::AxisAlignedBox
+    /// \param[out] _b A msgs::AxisAlignedBox pointer
+    /// \param[in] _v An math::AxisAlignedBox reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::AxisAlignedBox *_b, const math::AxisAlignedBox &_v);
     }
   }
 }
