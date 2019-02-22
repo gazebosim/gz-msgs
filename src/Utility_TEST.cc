@@ -24,6 +24,39 @@
 using namespace ignition;
 
 /////////////////////////////////////////////////
+TEST(UtilityTest, CovertMathAxisAlignedBox)
+{
+  msgs::AxisAlignedBox msg = msgs::Convert(
+      math::AxisAlignedBox(-1, -2, -3, 12, 15, 20));
+  EXPECT_DOUBLE_EQ(-1, msg.min_corner().x());
+  EXPECT_DOUBLE_EQ(-2, msg.min_corner().y());
+  EXPECT_DOUBLE_EQ(-3, msg.min_corner().z());
+
+  EXPECT_DOUBLE_EQ(12, msg.max_corner().x());
+  EXPECT_DOUBLE_EQ(15, msg.max_corner().y());
+  EXPECT_DOUBLE_EQ(20, msg.max_corner().z());
+
+  math::AxisAlignedBox aab = msgs::Convert(msg);
+  EXPECT_DOUBLE_EQ(-1, aab.Min().X());
+  EXPECT_DOUBLE_EQ(-2, aab.Min().Y());
+  EXPECT_DOUBLE_EQ(-3, aab.Min().Z());
+
+  EXPECT_DOUBLE_EQ(12, aab.Max().X());
+  EXPECT_DOUBLE_EQ(15, aab.Max().Y());
+  EXPECT_DOUBLE_EQ(20, aab.Max().Z());
+
+  msgs::AxisAlignedBox msg2;
+  msgs::Set(&msg2, aab);
+  EXPECT_DOUBLE_EQ(-1, msg2.min_corner().x());
+  EXPECT_DOUBLE_EQ(-2, msg2.min_corner().y());
+  EXPECT_DOUBLE_EQ(-3, msg2.min_corner().z());
+
+  EXPECT_DOUBLE_EQ(12, msg2.max_corner().x());
+  EXPECT_DOUBLE_EQ(15, msg2.max_corner().y());
+  EXPECT_DOUBLE_EQ(20, msg2.max_corner().z());
+}
+
+/////////////////////////////////////////////////
 TEST(UtilityTest, CovertMathVector3ToMsgs)
 {
   msgs::Vector3d msg = msgs::Convert(math::Vector3d(1, 2, 3));

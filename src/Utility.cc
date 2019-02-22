@@ -78,6 +78,7 @@ namespace ignition
       msgs::AxisAlignedBox result;
       msgs::Set(result.mutable_min_corner(), _b.Min());
       msgs::Set(result.mutable_max_corner(), _b.Max());
+      return result;
     }
 
     /////////////////////////////////////////////
