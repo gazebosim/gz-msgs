@@ -52,6 +52,6 @@ message Model
   repeated Model model         = 12;
 
   /// \brief Axis aligned bounding box for the model. The center of the 
-  /// bounding box should coindice with the model's pose.
+  /// bounding box should coincide with the model's pose.
   AxisAlignedBox bounding_box   = 13;
 }
