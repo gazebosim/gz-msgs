@@ -8,11 +8,30 @@ release will remove the deprecated code.
 
 ## Ignition Msgs 1.X to 2.X
 
+### Additions
+
+1. **Factory.hh**
+    + Support creation of a Protobuf message at runtime based on its message descriptor.
+
+1. **log\_control.proto**, **log\_status.proto**
+    + Add `record_resources` bool to match osrf/gazebo PR 3008
+
+1. **sonar.proto**
+    + Add `geometry` field
+
+1. **world\_statistics.proto**
+    + Add `real_time_factor` field
+
 ### Modifications
+
+1. Use ignition-cmake1 and ignition-math5.
+
+1. Use inline versioned namespace.
 
 ### Deprecations
 
 ### Removals
 
-1. The `Generator.hh` file is no longer installed. This file served only to
-   make an internal protc plugin that customized the protobuf compiler output.
+1. **Generator.hh**
+    + This file is no longer installed. It served only to make an internal
+      protc plugin that customized the protobuf compiler output.
