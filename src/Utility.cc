@@ -66,6 +66,29 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
+    math::AxisAlignedBox Convert(const msgs::AxisAlignedBox &_b)
+    {
+      return math::AxisAlignedBox(msgs::Convert(_b.min_corner()),
+                                  msgs::Convert(_b.max_corner()));
+    }
+
+    /////////////////////////////////////////////
+    msgs::AxisAlignedBox Convert(const math::AxisAlignedBox &_b)
+    {
+      msgs::AxisAlignedBox result;
+      msgs::Set(result.mutable_min_corner(), _b.Min());
+      msgs::Set(result.mutable_max_corner(), _b.Max());
+      return result;
+    }
+
+    /////////////////////////////////////////////
+    void Set(msgs::AxisAlignedBox *_b, const math::AxisAlignedBox &_v)
+    {
+      msgs::Set(_b->mutable_min_corner(), _v.Min());
+      msgs::Set(_b->mutable_max_corner(), _v.Max());
+    }
+
+    /////////////////////////////////////////////
     math::Color Convert(const msgs::Color &_c)
     {
       return math::Color(_c.r(), _c.g(), _c.b(), _c.a());

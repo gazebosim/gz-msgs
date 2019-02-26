@@ -24,6 +24,7 @@ option java_outer_classname = "ModelProtos";
 /// \interface Model
 /// \brief Information about a model
 
+import "ignition/msgs/axis_aligned_box.proto";
 import "ignition/msgs/joint.proto";
 import "ignition/msgs/link.proto";
 import "ignition/msgs/pose.proto";
@@ -49,4 +50,8 @@ message Model
 
   /// \brief An array of nested models.
   repeated Model model         = 12;
+
+  /// \brief Axis aligned bounding box for the model. The center of the 
+  /// bounding box should coincide with the model's pose.
+  AxisAlignedBox bounding_box   = 13;
 }
