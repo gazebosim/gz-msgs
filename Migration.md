@@ -10,17 +10,17 @@ release will remove the deprecated code.
 
 ### Additions
 
-1. **Factory.hh**
-    + Support creation of a Protobuf message at runtime based on its message descriptor.
+1. **log\_control.proto**
+    + Add `record_resources` bool to match osrf/gazebo PR 3008.
 
-1. **log\_control.proto**, **log\_status.proto**
-    + Add `record_resources` bool to match osrf/gazebo PR 3008
+1. **log\_status.proto**
+    + Add `record_resources` bool to match osrf/gazebo PR 3008.
 
 1. **sonar.proto**
-    + Add `geometry` field
+    + Add `geometry` field.
 
 1. **world\_statistics.proto**
-    + Add `real_time_factor` field
+    + Add `real_time_factor` field.
 
 ### Modifications
 
