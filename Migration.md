@@ -6,6 +6,50 @@ notification to users that their code should be upgraded. The next major
 release will remove the deprecated code.
 
 
+## Ignition Msgs 2.X to 3.X
+
+### Additions
+
+1. **axis\_aligned\_box.proto**
+    + New message for axis-aligned bounding boxes.
+
+1. **entity.proto**
+    + New message to uniquely identify an entity.
+
+1. **entity\_factory.proto**
+    + Add `Model` field to allow model insertion.
+
+1. **light.proto**
+    + Add `id`, `parent_id` fields.
+
+1. **link.proto**
+    + Add repeated `light` field.
+
+1. **twist.proto**
+    + New message for storing linear and angular velocity.
+
+1. **Utility.hh**
+    + Conversion functions for `axis_aligned_box.proto`.
+
+### Modifications
+
+1. Use ignition-cmake2 and ignition-math6.
+
+1. Use protobuf3 for all messages.
+
+1. **contacts.proto**
+    + Use `Entity` instead of string to specify entities in contact.
+
+1. **entity\_factory.proto**
+    + Rename `clone_model_name` field to `clone_name`.
+    + Remove `edit_name` field.
+    + Use `oneof` to indicate only one method can be used at a time.
+
+### Deprecations
+
+### Removals
+
+
 ## Ignition Msgs 1.X to 2.X
 
 ### Additions
