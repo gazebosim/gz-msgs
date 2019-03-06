@@ -6,7 +6,7 @@ Previous Tutorial: \ref install
 
 This tutorial describes how to get started using Ignition Msgs with C++.
 
-We will run through a simple example that populates a message and print it.
+We will run through a simple example that populates a message and prints it.
 Start by creating a bare-bones main file using the editor of your choice.
 
 ```{.cpp}
@@ -32,7 +32,7 @@ int main()
 ```
 
 Now let's create a message to store three points with arbitrary values.
-We will use the ignition::msgs::Vector3 class to store these points and the
+We will use the `ignition::msgs::Vector3` class to store these points and the
 function `DebugString()` to print the content on the terminal.
 
 
