@@ -22,12 +22,13 @@
 TEST(Image, PixelFormat)
 {
   // Check that pixel format enum is properly set
-  // even though the field type is just uint32
   ignition::msgs::Image msg;
-  EXPECT_EQ(ignition::msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT,
-    msg.pixel_format());
+  EXPECT_EQ(
+    static_cast<int>(ignition::msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT),
+    static_cast<int>(msg.pixel_format()));
 
   msg.set_pixel_format(ignition::msgs::PixelFormatType::RGB_INT8);
-  EXPECT_EQ(ignition::msgs::PixelFormatType::RGB_INT8,
-    msg.pixel_format());
+  EXPECT_EQ(
+    static_cast<int>(ignition::msgs::PixelFormatType::RGB_INT8),
+    static_cast<int>(msg.pixel_format()));
 }
