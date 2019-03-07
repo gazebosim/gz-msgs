@@ -26,15 +26,48 @@ option java_outer_classname = "ImageProtos";
 
 import "ignition/msgs/header.proto";
 
+/// \brief Possible pixel formats.
+/// This list should match ignition::common::Image::PixelFormatType
+enum PixelFormatType
+{
+  UNKNOWN_PIXEL_FORMAT = 0;
+  L_INT8 = 1;
+  L_INT16 = 2;
+  RGB_INT8 = 3;
+  RGBA_INT8 = 4;
+  BGRA_INT8 = 5;
+  RGB_INT16 = 6;
+  RGB_INT32 = 7;
+  BGR_INT8 = 8;
+  BGR_INT16 = 9;
+  BGR_INT32 = 10;
+  R_FLOAT16 = 11;
+  RGB_FLOAT16 = 12;
+  R_FLOAT32 = 13;
+  RGB_FLOAT32 = 14;
+  BAYER_RGGB8 = 15;
+  BAYER_RGGR8 = 16;
+  BAYER_GBRG8 = 17;
+  BAYER_GRBG8 = 18;
+}
+
 message Image
 {
   /// \brief Optional header data
   Header header        = 1;
 
-  uint32 width         = 2; // Image width (number of columns)
-  uint32 height        = 3; // Image height (number of rows)
-  uint32 pixel_format  = 4; // Corresponds to Image::PixelFormat enum
-  uint32 step          = 5; // Full row length in bytes
-  // repeated uint32 data          = 5; // Actual data, size if (step * rows)
-  bytes data          = 6; // Actual data, size if (step * rows)
+  /// \brief Image wisth (number of columns)
+  uint32 width         = 2;
+
+  /// \brief Image height (number of rows)
+  uint32 height        = 3;
+
+  /// \brief Corresponds to Image::PixelFormat enum
+  uint32 pixel_format  = 4;
+
+  /// \brief Full row length in bytes
+  uint32 step          = 5;
+
+  /// \brief Actual data, size if (step * rows)
+  bytes data          = 6;
 }
