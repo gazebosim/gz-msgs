@@ -16,7 +16,7 @@
 */
 #include <gtest/gtest.h>
 
-#include "ignition/msgs/image.pb.h"
+#include "ignition/msgs/MessageTypes.hh"
 
 /////////////////////////////////////////////////
 TEST(Image, PixelFormat)
