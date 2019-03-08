@@ -10,6 +10,8 @@ release will remove the deprecated code.
 
 ### Modifications
 
+1. **image.proto**
+    + `pixel_format` field type changed from `uint32` to enum `PixelFormatType`.
 
 ## Ignition Msgs 2.X to 3.X
 
