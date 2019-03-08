@@ -7,6 +7,9 @@
 
 ### Ignition Msgs 3.x.x
 
+1. image.proto: add `PixelFormatType` enum, copied from `ignition::common::Image::PixelFormatType`
+    * [Pull request 97](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/97)
+
 
 ### Ignition Msgs 3.0.0
 
