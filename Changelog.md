@@ -2,6 +2,12 @@
 
 ### Ignition Msgs 3.x.x
 
+
+### Ignition Msgs 3.1.0
+
+1. Added serialized messages: SerializedState, SerializedEntity, SerializedComponent
+    * [Pull request 99](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/99)
+
 1. image.proto: add `PixelFormatType` enum, copied from `ignition::common::Image::PixelFormatType`
     * [Pull request 97](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/97)
 
