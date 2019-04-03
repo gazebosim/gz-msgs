@@ -20,6 +20,11 @@
 #include <ignition/msgs/config.hh>
 #include "ignition/msgs/test_config.h"
 
+#ifdef _MSC_VER
+#    define popen _popen
+#    define pclose _pclose
+#endif
+
 static const std::string g_version(std::string(IGNITION_MSGS_VERSION_FULL));
 
 /////////////////////////////////////////////////
