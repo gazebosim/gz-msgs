@@ -13,6 +13,9 @@ release will remove the deprecated code.
 1. **image.proto**
     + `pixel_format` field type changed from `uint32` to enum `PixelFormatType`.
 
+1. **serialized.proto**
+    + `SerializedComponent`'s `component` field type changed from `string` to `bytes`.
+
 ## Ignition Msgs 2.X to 3.X
 
 ### Additions
