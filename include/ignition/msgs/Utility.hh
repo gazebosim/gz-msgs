@@ -60,7 +60,7 @@ namespace ignition
     ignition::math::Quaterniond Convert(const msgs::Quaternion &_q);
 
     /// \brief Convert a msgs::Pose to an ignition::math::Pose3d
-    /// \param[in] _q The pose to convert
+    /// \param[in] _p The pose to convert
     /// \return An ignition::math::Pose3d object
     IGNITION_MSGS_VISIBLE
     ignition::math::Pose3d Convert(const msgs::Pose &_p);
@@ -306,7 +306,7 @@ namespace ignition
     void Set(msgs::Pose *_p, const ignition::math::Pose3d &_v);
 
     /// \brief Set a msgs::Color from a math::Color
-    /// \param[out] _p A msgs::Color pointer
+    /// \param[out] _c A msgs::Color pointer
     /// \param[in] _v A math::Color reference
     IGNITION_MSGS_VISIBLE
     void Set(msgs::Color *_c, const math::Color &_v);

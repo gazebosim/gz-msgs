@@ -1,7 +1,5 @@
 \page cppgetstarted C++ Get Started
 
-Previous Tutorial: \ref install
-
 ## Overview
 
 This tutorial describes how to get started using Ignition Msgs with C++.
