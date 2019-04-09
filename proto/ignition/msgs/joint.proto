@@ -64,7 +64,11 @@ message Joint
 
   string name           = 2;
   uint32 id             = 3;
-  repeated double angle          = 4;
+
+  /// \brief Angle of each axis. 
+  /// \deprecated Use "position" instead.
+  repeated double angle = 4 [deprecated=true];
+
   Type type             = 5;
   string parent         = 6;
   uint32 parent_id      = 7;
@@ -76,7 +80,6 @@ message Joint
 
   double cfm            = 13;
   double bounce         = 14;
-  double velocity       = 15;
   double fudge_factor   = 16;
   double limit_cfm      = 17;
   double limit_erp      = 18;
@@ -87,4 +90,13 @@ message Joint
   Screw screw           = 22;
 
   repeated Sensor sensor         = 23;
+
+  /// \brief Position of each degree of freedom
+  repeated double position       = 24;
+
+  /// \brief Velocity of each degree of freedom
+  repeated double velocity       = 25;
+
+  /// \brief Force applied to each degree of freedom
+  repeated double force          = 26;
 }
