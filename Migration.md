@@ -10,6 +10,9 @@ release will remove the deprecated code.
 
 ### Modifications
 
+1. **image.proto**
+    + `pixel_format` field type changed from `uint32` to enum `PixelFormatType`.
+
 1. **joint.proto**
     + The `velocity` field has been converted from a double to a repeated
     double.
