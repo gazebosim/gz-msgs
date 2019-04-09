@@ -6,6 +6,23 @@ notification to users that their code should be upgraded. The next major
 release will remove the deprecated code.
 
 
+## Ignition Msgs 3.X to 4.X
+
+### Modifications
+
+1. **joint.proto**
+    + The `velocity` field has been converted from a double to a repeated
+    double.
+
+### Deprecations
+
+1. **joint.proto**
+    + The `angle` field is deprecated, use `position` instead.
+
+### Removals
+
+1.  **include/ignition/msgs/ign.hh** is no longer installed.
+
 ## Ignition Msgs 2.X to 3.X
 
 ### Additions
