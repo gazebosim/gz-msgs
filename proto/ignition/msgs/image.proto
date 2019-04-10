@@ -63,7 +63,7 @@ message Image
   uint32 height        = 3;
 
   /// \brief Corresponds to Image::PixelFormat enum
-  PixelFormatType pixel_format  = 4;
+  uint32 pixel_format  = 4;
 
   /// \brief Full row length in bytes
   uint32 step          = 5;
