@@ -28,8 +28,8 @@ message SerializedComponent
   /// \brief Unique ID that represents a component's type.
   uint64 type = 1;
 
-  /// \brief Component's serialized data in string format.
-  string component = 2;
+  /// \brief Component's serialized data.
+  bytes component = 2;
 
   /// \brief Whether the component should be removed at the current state.
   bool remove = 3;
