@@ -2,6 +2,11 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Install ruby files into versioned folder
+    * [Pull request 109](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/109)
+    * [Issue 24](https://bitbucket.org/ignitionrobotics/ign-msgs/issues/24)
+    * [Issue 27](https://bitbucket.org/ignitionrobotics/ign-msgs/issues/27)
+
 
 ## Ignition Msgs 3.x
 
