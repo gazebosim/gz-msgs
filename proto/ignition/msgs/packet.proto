@@ -23,15 +23,20 @@ option java_outer_classname = "PacketProtos";
 /// \ingroup ignition.msgs
 /// \interface Packet
 /// \brief A message for a vector of string data
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/image.proto";
-import "ignition/msgs/stringmsg_v.proto";
-import "ignition/msgs/web_request.proto";
-import "ignition/msgs/cmd_vel2d.proto";
 import "ignition/msgs/double_v.proto";
+import "ignition/msgs/clock.proto";
+import "ignition/msgs/cmd_vel2d.proto";
+import "ignition/msgs/image.proto";
+import "ignition/msgs/pose.proto";
+import "ignition/msgs/pose_v.proto";
+import "ignition/msgs/stringmsg_v.proto";
+import "ignition/msgs/time.proto";
+import "ignition/msgs/web_request.proto";
+
 message Packet
 {
   string topic = 1;
+
   string type  = 2;
 
   oneof content
@@ -42,5 +47,8 @@ message Packet
     WebRequest web_request = 6;
     Pose pose = 7;
     Double_V doublev = 8;
+    Pose_V pose_v = 9;
+    Time time = 10;
+    Clock clock = 11;
   }
 }
