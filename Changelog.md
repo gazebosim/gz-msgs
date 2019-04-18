@@ -2,6 +2,10 @@
 
 ### Ignition Msgs 3.x.x
 
+### Ignition Msgs 3.2.0
+
+1. Added Pose_V, Time, and Clock fields to packet.proto
+    * [Pull request 108](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/108)
 
 ### Ignition Msgs 3.1.0
 
