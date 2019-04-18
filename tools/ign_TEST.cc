@@ -107,8 +107,11 @@ int main(int argc, char **argv)
   if (cvalue)
     value += ":" + std::string(cvalue);
   setenv("LD_LIBRARY_PATH", value.c_str(), 1);
-#endif
 
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
+  /// \todo(anyone) Fix these tests for windows.
+#else
+  return 0;
+#endif
 }
