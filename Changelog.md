@@ -1,16 +1,25 @@
 ## Ignition Msgs 4.x
 
-### Ignition Msgs 4.0.x
+### Ignition Msgs 4.x.x
 
 1. Updated `model.proto` with more documentation. Field in `joint.proto` have
    changed, see the Migration guide. The `ign.hh` header file is no longer
    installed.
     * [Pull request 104](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/104)
 
+1. Install ruby files into versioned folder
+    * [Pull request 109](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/109)
+    * [Issue 24](https://bitbucket.org/ignitionrobotics/ign-msgs/issues/24)
+    * [Issue 27](https://bitbucket.org/ignitionrobotics/ign-msgs/issues/27)
+
 ## Ignition Msgs 3.x
 
 ### Ignition Msgs 3.x.x
 
+### Ignition Msgs 3.2.0
+
+1. Added Pose_V, Time, and Clock fields to packet.proto
+    * [Pull request 108](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/108)
 
 ### Ignition Msgs 3.1.0
 

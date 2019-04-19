@@ -23,6 +23,9 @@ release will remove the deprecated code.
 
 1.  **include/ignition/msgs/ign.hh** is no longer installed.
 
+1. **serialized.proto**
+    + `SerializedComponent`'s `component` field type changed from `string` to `bytes`.
+
 ## Ignition Msgs 2.X to 3.X
 
 ### Additions
