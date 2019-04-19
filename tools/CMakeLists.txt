@@ -9,7 +9,7 @@ set (test_sources
 # Skip command line tests for Windows, see
 # https://bitbucket.org/ignitionrobotics/ign-msgs/issues/28
 if (MSVC)
-  list(REMOVE_ITEM gtest_sources ign_TEST.cc)
+  list(REMOVE_ITEM test_sources ign_TEST.cc)
 endif()
 
 if (IGNITION-TOOLS_BINARY_DIRS)
