@@ -14,6 +14,12 @@ release will remove the deprecated code.
     + The `velocity` field has been converted from a double to a repeated
     double.
 
+1. **serialized.proto**
+    + `SerializedComponent`'s `component` field type changed from `string` to `bytes`.
+
+1. **image.proto**
+    + `pixel_format` field type changed from `uint32` to enum `PixelFormatType`
+
 ### Deprecations
 
 1. **joint.proto**
@@ -22,9 +28,6 @@ release will remove the deprecated code.
 ### Removals
 
 1.  **include/ignition/msgs/ign.hh** is no longer installed.
-
-1. **serialized.proto**
-    + `SerializedComponent`'s `component` field type changed from `string` to `bytes`.
 
 ## Ignition Msgs 2.X to 3.X
 
