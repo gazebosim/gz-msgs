@@ -81,7 +81,8 @@ message Joint
   double cfm            = 13;
   double bounce         = 14;
 
-  /// \brief Deprecated. Use the velocity value in the axis1 or axis2
+  /// \brief Velocity of the joint in SI units (meter/second).
+  /// \deprecated Use the velocity value in the axis1 or axis2
   /// message.
   double velocity       = 15[deprecated=true];
 
