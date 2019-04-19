@@ -66,7 +66,7 @@ message Joint
   uint32 id             = 3;
 
   /// \brief Angle of each axis. 
-  /// \deprecated Use "position" instead.
+  /// \deprecated Use the position field in the axis1 or axis2 message.
   repeated double angle = 4 [deprecated=true];
 
   Type type             = 5;
@@ -80,6 +80,11 @@ message Joint
 
   double cfm            = 13;
   double bounce         = 14;
+
+  /// \brief Deprecated. Use the velocity value in the axis1 or axis2
+  /// message.
+  double velocity       = 15[deprecated=true];
+
   double fudge_factor   = 16;
   double limit_cfm      = 17;
   double limit_erp      = 18;
@@ -90,13 +95,4 @@ message Joint
   Screw screw           = 22;
 
   repeated Sensor sensor         = 23;
-
-  /// \brief Position of each degree of freedom
-  repeated double position       = 24;
-
-  /// \brief Velocity of each degree of freedom
-  repeated double velocity       = 25;
-
-  /// \brief Force applied to each degree of freedom
-  repeated double force          = 26;
 }

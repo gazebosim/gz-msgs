@@ -40,4 +40,18 @@ message Axis
   double damping              = 7;
   double friction             = 8;
   bool use_parent_model_frame = 9;
+
+  /// \brief Position of the joint. For angular joints, such as revolute 
+  /// joints, the units are radians. For linear joints, such as prismatic
+  /// joints, the units are meters.
+  double position             = 10;
+
+  /// \brief Velocity of the joint in SI units (meter/second).
+  double velocity             = 11;
+
+  /// \brief Force applied to the joint in SI units (Newton).
+  double force                = 12;
+
+  /// \brief Acceleration of the joint is SI units (meter/second^2).
+  double acceleration         = 13;
 }
