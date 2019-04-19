@@ -17,9 +17,6 @@ release will remove the deprecated code.
 1. **serialized.proto**
     + `SerializedComponent`'s `component` field type changed from `string` to `bytes`.
 
-1. **image.proto**
-    + `pixel_format` field type changed from `uint32` to enum `PixelFormatType`
-
 ### Deprecations
 
 1. **joint.proto**
@@ -27,6 +24,9 @@ release will remove the deprecated code.
     message instead.
     + The `velocity` field is deprecated, use `velocity` in the axis.proto
     message instead.
+
+1. **image.proto**
+    + `pixel_format` field is deprecated, use `pixel_format_type` with enum `PixelFormatType` instead.
 
 ### Removals
 
