@@ -11,8 +11,8 @@ release will remove the deprecated code.
 ### Modifications
 
 1. **joint.proto**
-    + The `velocity` field has been converted from a double to a repeated
-    double.
+    + The `axis.proto` message contains joint position, velocity, force, and
+    acceleration information.
 
 1. **serialized.proto**
     + `SerializedComponent`'s `component` field type changed from `string` to `bytes`.
@@ -23,7 +23,10 @@ release will remove the deprecated code.
 ### Deprecations
 
 1. **joint.proto**
-    + The `angle` field is deprecated, use `position` instead.
+    + The `angle` field is deprecated, use `position` in the axis.proto
+    message instead.
+    + The `velocity` field is deprecated, use `velocity` in the axis.proto
+    message instead.
 
 ### Removals
 

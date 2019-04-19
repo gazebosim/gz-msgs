@@ -2,8 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
-1. Updated `model.proto` with more documentation. Field in `joint.proto` have
-   changed, see the Migration guide. The `ign.hh` header file is no longer
+1. Updated `model.proto` with more documentation. Position, velocity, force,
+   and acceleration information for joint have been moved to the `axis.proto` 
+   message, see the Migration guide. The `ign.hh` header file is no longer
    installed.
     * [Pull request 104](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/104)
 
