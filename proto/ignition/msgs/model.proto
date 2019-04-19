@@ -64,7 +64,7 @@ message Model
   /// \brief Scaling factor applied to the model
   Vector3d scale      = 10;
 
-  /// \brief True if self collided is enable.d
+  /// \brief True if self collide is enabled.
   bool self_collide   = 11;
 
   /// \brief An array of nested models.
