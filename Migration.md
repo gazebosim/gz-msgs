@@ -10,11 +10,27 @@ release will remove the deprecated code.
 
 ### Modifications
 
-1. **image.proto**
-    + `pixel_format` field type changed from `uint32` to enum `PixelFormatType`.
+1. **joint.proto**
+    + The `axis.proto` message contains joint position, velocity, force, and
+    acceleration information.
 
 1. **serialized.proto**
     + `SerializedComponent`'s `component` field type changed from `string` to `bytes`.
+
+### Deprecations
+
+1. **joint.proto**
+    + The `angle` field is deprecated, use `position` in the axis.proto
+    message instead.
+    + The `velocity` field is deprecated, use `velocity` in the axis.proto
+    message instead.
+
+1. **image.proto**
+    + `pixel_format` field is deprecated, use `pixel_format_type` with enum `PixelFormatType` instead.
+
+### Removals
+
+1.  **include/ignition/msgs/ign.hh** is no longer installed.
 
 ## Ignition Msgs 2.X to 3.X
 
