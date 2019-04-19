@@ -99,7 +99,6 @@ int main(int argc, char **argv)
 
   // Make sure that we load the library recently built and not the one installed
   // in your system.
-#ifndef _WIN32
   // Add the directory where ignition msgs has been built.
   std::string value = std::string(IGN_TEST_LIBRARY_PATH);
   // Save the current value of LD_LIBRARY_PATH.
@@ -110,8 +109,4 @@ int main(int argc, char **argv)
 
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
-  /// \todo(anyone) Fix these tests for windows.
-#else
-  return 0;
-#endif
 }
