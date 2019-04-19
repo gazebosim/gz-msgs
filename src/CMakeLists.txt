@@ -140,8 +140,8 @@ endif()
 set_source_files_properties(${gen_headers} ${gen_sources} ${gen_ruby_scripts}
   PROPERTIES GENERATED TRUE)
 
-message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${IGN_DESIGNATION}")
-install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${IGN_DESIGNATION})
+message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR}")
+install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR})
 
 ign_install_includes(
   "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}"
