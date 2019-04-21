@@ -20,6 +20,11 @@
 #include <ignition/msgs/config.hh>
 #include "ignition/msgs/test_config.h"
 
+#ifdef _MSC_VER
+#    define popen _popen
+#    define pclose _pclose
+#endif
+
 static const std::string g_version(std::string(IGNITION_MSGS_VERSION_FULL));
 
 /////////////////////////////////////////////////
@@ -94,7 +99,6 @@ int main(int argc, char **argv)
 
   // Make sure that we load the library recently built and not the one installed
   // in your system.
-#ifndef _WIN32
   // Add the directory where ignition msgs has been built.
   std::string value = std::string(IGN_TEST_LIBRARY_PATH);
   // Save the current value of LD_LIBRARY_PATH.
@@ -102,7 +106,6 @@ int main(int argc, char **argv)
   if (cvalue)
     value += ":" + std::string(cvalue);
   setenv("LD_LIBRARY_PATH", value.c_str(), 1);
-#endif
 
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
