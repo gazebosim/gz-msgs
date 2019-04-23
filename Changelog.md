@@ -2,6 +2,10 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Added a `magnetometer_sensor.proto` message that encapsulates information
+   about  a magnetometer sensor.
+    * [Pull request 114](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/114)
+
 1. Updated `model.proto` with more documentation. Position, velocity, force,
    and acceleration information for joint have been moved to the `axis.proto` 
    message, see the Migration guide. The `ign.hh` header file is no longer
