@@ -4,7 +4,11 @@
 
 1. Added an `altimeter_sensor.proto` message that encapsulates information
    about an altimeter sensor.
-    * [Pull request 105](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/105)
+    * [Pull request 115](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/115)
+
+1. Added a `magnetometer_sensor.proto` message that encapsulates information
+   about  a magnetometer sensor.
+    * [Pull request 114](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/114)
 
 1. Updated `model.proto` with more documentation. Position, velocity, force,
    and acceleration information for joint have been moved to the `axis.proto` 
