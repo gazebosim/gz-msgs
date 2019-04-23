@@ -2,9 +2,8 @@
 
 ### Ignition Msgs 4.x.x
 
-1. Added `pressure` and `pressure_variance` to `altimeter.proto` message.
-   This will allow an altimeter sensor to output measure pressure.
-    * [Pull request 116](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/116)
+1. Added `fluid_pressure.proto` and `fluid_pressure_sensor.proto`.
+    * [Pull request 117](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/117)
 
 1. Added an `altimeter_sensor.proto` message that encapsulates information
    about an altimeter sensor.
