@@ -40,4 +40,10 @@ message Altimeter
 
   /// \brief Vertical reference.
   double vertical_reference = 4;
+
+  /// \brief Pressure reading in Pascals
+  double pressure = 5;
+
+  /// \brief Pressure variance. 0 is interpreted as variance unknown. 
+  double pressure_variance = 6;
 }
