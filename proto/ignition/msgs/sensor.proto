@@ -25,13 +25,14 @@ option java_outer_classname = "SEnsorProtos";
 /// \brief Information about a sensor element
 
 import "ignition/msgs/header.proto";
-import "ignition/msgs/pose.proto";
 import "ignition/msgs/camerasensor.proto";
-import "ignition/msgs/raysensor.proto";
 import "ignition/msgs/contactsensor.proto";
-import "ignition/msgs/logical_camera_sensor.proto";
 import "ignition/msgs/gps_sensor.proto";
 import "ignition/msgs/imu_sensor.proto";
+import "ignition/msgs/logical_camera_sensor.proto";
+import "ignition/msgs/magnetometer_sensor.proto";
+import "ignition/msgs/pose.proto";
+import "ignition/msgs/raysensor.proto";
 
 message Sensor
 {
@@ -88,4 +89,7 @@ message Sensor
 
   /// \brief Description of an IMU sensor
   IMUSensor imu          = 17;
+
+  /// \brief Description of a Magnetometer sensor
+  MagnetometerSensor magnetometer   = 18;
 }
