@@ -2,6 +2,10 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Added an `altimeter_sensor.proto` message that encapsulates information
+   about an altimeter sensor.
+    * [Pull request 105](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/105)
+
 1. Updated `model.proto` with more documentation. Position, velocity, force,
    and acceleration information for joint have been moved to the `axis.proto` 
    message, see the Migration guide. The `ign.hh` header file is no longer
