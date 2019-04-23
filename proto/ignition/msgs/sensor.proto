@@ -24,6 +24,7 @@ option java_outer_classname = "SEnsorProtos";
 /// \interface Sensor 
 /// \brief Information about a sensor element
 
+import "ignition/msgs/altimeter_sensor.proto";
 import "ignition/msgs/header.proto";
 import "ignition/msgs/camerasensor.proto";
 import "ignition/msgs/contactsensor.proto";
@@ -92,4 +93,7 @@ message Sensor
 
   /// \brief Description of a Magnetometer sensor
   MagnetometerSensor magnetometer   = 18;
+
+  /// \brief Description of an Altimeter sensor.
+  AltimeterSensor altimeter   = 19;
 }
