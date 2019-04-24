@@ -18,24 +18,27 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "FluidPressureSensorProtos";
+option java_outer_classname = "AirPressureSensorProtos";
 
 /// \ingroup ignition.msgs
-/// \interface FluidPressureSensor
-/// \brief Definition of a fluid pressure sensor
+/// \interface AirPressureSensor
+/// \brief Definition of an air pressure sensor
 
 import "ignition/msgs/header.proto";
 import "ignition/msgs/sensor_noise.proto";
 
-/// \brief Message that describes a fluid pressure sensor.
-message FluidPressureSensor
+/// \brief Message that describes an air pressure sensor.
+message AirPressureSensor
 {
   /// \brief Optional header data
-  Header header              = 1;
+  Header header               = 1; 
 
-  /// \brief Reference altitude in meters. 
-  double reference_altitude = 2;
+  /// \brief Reference altitude in meters. This value
+  /// can be used by a sensor implementation to augment the altitude of a
+  /// model. For example, a user may want to simulate a quadcopter on the
+  /// top of a mountain while using flat ground plane.
+  double reference_altitude   = 2;
 
-  /// \brief Sensor noise.
-  SensorNoise noise         = 3;
+  /// \brief Sensor pressure noise.
+  SensorNoise pressure_noise  = 3;
 }

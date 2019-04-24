@@ -27,7 +27,7 @@ option java_outer_classname = "SEnsorProtos";
 import "ignition/msgs/altimeter_sensor.proto";
 import "ignition/msgs/camerasensor.proto";
 import "ignition/msgs/contactsensor.proto";
-import "ignition/msgs/fluid_pressure_sensor.proto";
+import "ignition/msgs/air_pressure_sensor.proto";
 import "ignition/msgs/gps_sensor.proto";
 import "ignition/msgs/header.proto";
 import "ignition/msgs/imu_sensor.proto";
@@ -98,6 +98,6 @@ message Sensor
   /// \brief Description of an Altimeter sensor.
   AltimeterSensor altimeter            = 19;
 
-  /// \brief Description of a Fluid Pressure sensor.
-  FluidPressureSensor fluid_pressure   = 20;
+  /// \brief Description of an Air Pressure sensor.
+  AirPressureSensor air_pressure       = 20;
 }
