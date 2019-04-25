@@ -33,10 +33,11 @@ message AirPressureSensor
   /// \brief Optional header data
   Header header               = 1; 
 
-  /// \brief Reference altitude in meters. This value
-  /// can be used by a sensor implementation to augment the altitude of a
-  /// model. For example, a user may want to simulate a quadcopter on the
-  /// top of a mountain while using flat ground plane.
+  /// \brief Reference altitude in meters. This value can be used by a sensor
+  /// implementation to augment the altitude of the sensor. For example, if
+  /// you are using simulation, instead of creating a 1000 m mountain model on
+  /// which to place your sensor, you could instead set this value to 1000 and
+  /// place your model on a ground plane with a Z height of zero.
   double reference_altitude   = 2;
 
   /// \brief Sensor pressure noise.
