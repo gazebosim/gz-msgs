@@ -18,24 +18,28 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "AltimeterSensorProtos";
+option java_outer_classname = "AirPressureSensorProtos";
 
 /// \ingroup ignition.msgs
-/// \interface AltimeterSensor
-/// \brief Definition of an altimeter sensor
+/// \interface AirPressureSensor
+/// \brief Definition of an air pressure sensor
 
 import "ignition/msgs/header.proto";
 import "ignition/msgs/sensor_noise.proto";
 
-/// \brief Message that describes an altimeter sensor.
-message AltimeterSensor
+/// \brief Message that describes an air pressure sensor.
+message AirPressureSensor
 {
   /// \brief Optional header data
-  Header header             = 1;
+  Header header               = 1; 
 
-  /// \brief Noise parameters for the vertical position.
-  SensorNoise vertical_position_noise = 2;
+  /// \brief Reference altitude in meters. This value can be used by a sensor
+  /// implementation to augment the altitude of the sensor. For example, if
+  /// you are using simulation, instead of creating a 1000 m mountain model on
+  /// which to place your sensor, you could instead set this value to 1000 and
+  /// place your model on a ground plane with a Z height of zero.
+  double reference_altitude   = 2;
 
-  /// \brief Noise parameters for the vertical velocity.
-  SensorNoise vertical_velocity_noise = 3;
+  /// \brief Sensor pressure noise.
+  SensorNoise pressure_noise  = 3;
 }

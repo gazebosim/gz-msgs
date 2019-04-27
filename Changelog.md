@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Added `fluid_pressure.proto` and `air_pressure_sensor.proto`.
+    * [Pull request 116](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/116)
+
 1. Added an `altimeter_sensor.proto` message that encapsulates information
    about an altimeter sensor.
     * [Pull request 114](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/114)
