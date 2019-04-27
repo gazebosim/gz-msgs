@@ -66,4 +66,12 @@ message SensorNoise
   /// \brief Noise  precision.
   /// Used by GAUSSIAN_QUANTIZED
   double precision   = 7;
+
+  /// \brief TODO
+  double dynamic_bias_stddev           = 8;
+
+  /// \brief TODO
+  double dynamic_bias_correlation_time = 9;
+
+
 }
