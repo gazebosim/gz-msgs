@@ -46,7 +46,7 @@ enum PixelFormatType
   R_FLOAT32 = 13;
   RGB_FLOAT32 = 14;
   BAYER_RGGB8 = 15;
-  BAYER_RGGR8 = 16;
+  BAYER_BGGR8 = 16;
   BAYER_GBRG8 = 17;
   BAYER_GRBG8 = 18;
 }
