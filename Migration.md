@@ -10,6 +10,9 @@ release will remove the deprecated code.
 
 ### Modifications
 
+1. **image.proto**
+    + Corrected `BAYER_RGGR8` to `BAYER_BGGR8` in `PixelFormatType`.
+
 1. **joint.proto**
     + The `axis.proto` message contains joint position, velocity, force, and
     acceleration information.

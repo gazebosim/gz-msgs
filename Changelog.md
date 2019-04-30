@@ -2,6 +2,10 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Corrected `BAYER_RGGR8` to `BAYER_BGGR8` in `PixelFormatType` located in
+`proto/ignition/msgs/image.proto`.
+    * [Pull request 118](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/118)
+
 1. Added `fluid_pressure.proto` and `air_pressure_sensor.proto`.
     * [Pull request 116](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/116)
 
