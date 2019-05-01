@@ -60,5 +60,5 @@ message WorldStatistics
   double real_time_factor = 9;
 
   /// \brief Iteration step size. It's zero when paused.
-  double step_size = 10;
+  Time step_size = 10;
 }
