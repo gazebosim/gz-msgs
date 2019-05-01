@@ -43,26 +43,56 @@ message Material
     string name = 2;
   }
 
+  /// \brief Physically Based Rendering (PBR) material properties.
   message PBR
   {
+    /// \brief Type of PBR workflow
     enum WorkflowType
     {
+      /// \brief No workflow
       NONE                  = 0;
+
+      /// \brief Metallic/Roughness workflow
       METAL                 = 1;
+
+      /// \brief Specular/Glossiness workflow
       SPECULAR              = 2;
     }
 
+    /// \brief Type of PBR workflow
     WorkflowType type            = 1;
+
+    /// \brief Filename of the albedo map
     string albedo_map            = 2;
+
+    /// \brief Filename of the normal map
     string normal_map            = 3;
+
+    /// \brief Metalness value (metal workflow)
     double metalness             = 4;
+
+    /// \brief Filename of the metalness map (metal workflow)
     string metalness_map         = 5;
+
+    /// \brief Roughness value (metal workflow)
     double roughness             = 6;
+
+    /// \brief Filename of the roughness map (metal workflow)
     string roughness_map         = 7;
+
+    /// \brief Glossiness value (specular workflow)
     double glossiness            = 8;
+
+    /// \brief Filename of the glossiness map (specular workflow)
     string glossiness_map        = 9;
+
+    /// \brief Filename of the specular map (specular workflow)
     string specular_map          = 10;
+
+    /// \brief Filename of the environment map
     string environment_map       = 11;
+
+    /// \brief Filename of the ambient occlusion map
     string ambient_occlusion_map = 12;
   }
 
@@ -78,5 +108,7 @@ message Material
   Color specular         = 7;
   Color emissive         = 8;
   bool lighting          = 9;
+
+  /// \brief Physically Based Rendering (PBR) material properties
   PBR pbr                = 10;
 }
