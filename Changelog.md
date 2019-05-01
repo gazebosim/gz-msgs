@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Added Physically Based Rendering (PBR) message to `material.proto`
+    * [Pull request 120](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/120)
+
 1. Corrected `BAYER_RGGR8` to `BAYER_BGGR8` in `PixelFormatType` located in
 `proto/ignition/msgs/image.proto`.
     * [Pull request 118](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/118)
