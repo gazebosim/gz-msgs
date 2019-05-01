@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Added orientation reference frame information to `imu_sensor.proto`.
+    * [Pull request 120](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/120)
+
 1. Corrected `BAYER_RGGR8` to `BAYER_BGGR8` in `PixelFormatType` located in
 `proto/ignition/msgs/image.proto`.
     * [Pull request 118](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/118)
