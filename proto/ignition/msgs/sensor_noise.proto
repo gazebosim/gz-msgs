@@ -67,11 +67,11 @@ message SensorNoise
   /// Used by GAUSSIAN_QUANTIZED
   double precision   = 7;
 
-  /// \brief TODO
+  /// \brief For type "gaussian*", the standard deviation of the noise used to
+  /// drive a process to model slow variations in a sensor bias.
   double dynamic_bias_stddev           = 8;
 
-  /// \brief TODO
+  /// \brief For type "gaussian*", the correlation time of the noise used to
+  /// drive a process to model slow variations in a sensor bias.
   double dynamic_bias_correlation_time = 9;
-
-
 }
