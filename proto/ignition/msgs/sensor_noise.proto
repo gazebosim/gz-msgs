@@ -71,7 +71,9 @@ message SensorNoise
   /// drive a process to model slow variations in a sensor bias.
   double dynamic_bias_stddev           = 8;
 
-  /// \brief For type "gaussian*", the correlation time of the noise used to
-  /// drive a process to model slow variations in a sensor bias.
+  /// \brief For type "gaussian*", the correlation time in seconds of the
+  /// noise used to drive a process to model slow variations in a sensor bias.
+  /// A typical value, when used, would be on the order of
+  /// 3600 seconds (1 hour).
   double dynamic_bias_correlation_time = 9;
 }
