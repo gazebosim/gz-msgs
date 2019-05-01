@@ -31,18 +31,34 @@ import "ignition/msgs/header.proto";
 message WorldStatistics
 {
   /// \brief Optional header data
-  Header header                            = 1;
+  Header header = 1;
 
-  Time  sim_time                           = 2;
-  Time  pause_time                         = 3;
-  Time  real_time                          = 4;
-  bool  paused                             = 5;
-  uint64 iterations                        = 6;
-  int32 model_count                        = 7;
+  /// \brief Current simulation time
+  Time  sim_time = 2;
+
+  /// \brief Total time spent paused
+  Time  pause_time = 3;
+
+  /// \brief Current real time
+  Time  real_time = 4;
+
+  /// \brief Whether currently paused
+  bool  paused = 5;
+
+  /// \brief Current iteration count
+  uint64 iterations = 6;
+
+  /// \brief Total number of models in the world
+  int32 model_count = 7;
+
+  /// \brief Statistics for log playback
   LogPlaybackStatistics log_playback_stats = 8;
 
   /// \brief This factor expresses how much real time elapses with each step
   /// of simulation time.
   /// E.g.: 0.5 means that 1 second in real time takes 2 seconds in simulation.
-  double real_time_factor                  = 9;
+  double real_time_factor = 9;
+
+  /// \brief Iteration step size. It's zero when paused.
+  double step_size = 10;
 }
