@@ -5,6 +5,13 @@
 1. Added Physically Based Rendering (PBR) message to `material.proto`
     * [Pull request 120](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/120)
 
+1. Corrected `BAYER_RGGR8` to `BAYER_BGGR8` in `PixelFormatType` located in
+`proto/ignition/msgs/image.proto`.
+    * [Pull request 118](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/118)
+
+1. Added `fluid_pressure.proto` and `air_pressure_sensor.proto`.
+    * [Pull request 116](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/116)
+
 1. Added an `altimeter_sensor.proto` message that encapsulates information
    about an altimeter sensor.
     * [Pull request 114](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/114)
