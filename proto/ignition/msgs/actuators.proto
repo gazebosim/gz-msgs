@@ -35,7 +35,7 @@ message Actuators
   /// \brief Angle of the actuators in [rad].
   repeated double angle            = 2;
 
-  /// \brief Angular velocities of the actuator in [rad/s].
+  /// \brief Angular velocities of the actuators in [rad/s].
   repeated double angular_velocity = 3;
 
   /// \brief Everything that does not fit the above,
