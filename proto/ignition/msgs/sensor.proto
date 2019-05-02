@@ -31,6 +31,7 @@ import "ignition/msgs/air_pressure_sensor.proto";
 import "ignition/msgs/gps_sensor.proto";
 import "ignition/msgs/header.proto";
 import "ignition/msgs/imu_sensor.proto";
+import "ignition/msgs/lidar_sensor.proto";
 import "ignition/msgs/logical_camera_sensor.proto";
 import "ignition/msgs/magnetometer_sensor.proto";
 import "ignition/msgs/pose.proto";
@@ -71,7 +72,8 @@ message Sensor
   CameraSensor camera    = 10;
 
   /// \brief Description of a ray (laser) sensor
-  RaySensor ray          = 11;
+  /// \deprecated Use LidarSensor lidar.
+  RaySensor ray          = 11[deprecated=true];
 
   /// \brief Description of a contact sensor
   ContactSensor contact  = 12;
@@ -100,4 +102,7 @@ message Sensor
 
   /// \brief Description of an Air Pressure sensor.
   AirPressureSensor air_pressure       = 20;
+
+  /// \brief Description of a lidar sensor
+  LidarSensor lidar                    = 21;
 }
