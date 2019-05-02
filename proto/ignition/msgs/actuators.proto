@@ -32,7 +32,7 @@ message Actuators
   // Optional header data.
   Header header                    = 1;
 
-  /// \brief Angle of the actuator in [rad].
+  /// \brief Angle of the actuators in [rad].
   repeated double angle            = 2;
 
   /// \brief Angular velocities of the actuator in [rad/s].
