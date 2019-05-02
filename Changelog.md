@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Added orientation reference frame information to `imu_sensor.proto`.
+    * [Pull request 121](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/121)
+
 1. New actuators `actuators.proto` message.
     * [Pull request 123](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/123)
 
