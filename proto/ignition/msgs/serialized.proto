@@ -21,6 +21,7 @@ package ignition.msgs;
 option java_package = "com.ignition.msgs";
 
 import "ignition/msgs/header.proto";
+import "ignition/msgs/world_stats.proto";
 
 /// \brief Holds all the information needed to reconstruct a component.
 message SerializedComponent
@@ -61,4 +62,15 @@ message SerializedState
 
   /// \brief All the entities currently in the simulation.
   repeated SerializedEntity entities = 2;
+};
+
+/// \brief All the data needed to step an ECS system, such as current
+/// simulation time and entity states.
+message SerializedStep
+{
+  /// \brief Iteration information, such as sim time and paused state.
+  WorldStatistics stats = 1;
+
+  /// \brief State of entities and components.
+  SerializedState state = 2;
 };
