@@ -20,6 +20,9 @@ release will remove the deprecated code.
 1. **serialized.proto**
     + `SerializedComponent`'s `component` field type changed from `string` to `bytes`.
 
+1. **sensor.proto**
+    + Deprecating `RaySensor`, and replacing with `LidarSensor`.
+ 
 ### Deprecations
 
 1. **joint.proto**

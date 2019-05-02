@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Deprecating `raysensor.proto`, and replacing with `lidar_sensor.proto`.
+    * [Pull request 124](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/124)
+
 1. Added orientation reference frame information to `imu_sensor.proto`.
     * [Pull request 121](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/121)
 
