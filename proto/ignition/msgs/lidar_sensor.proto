@@ -25,6 +25,7 @@ option java_outer_classname = "LidarSensorProtos";
 /// \brief Information about a lidar sensor element
 
 import "ignition/msgs/header.proto";
+import "ignition/msgs/sensor_noise.proto";
 
 message LidarSensor
 {
@@ -45,4 +46,6 @@ message LidarSensor
   double range_min             = 11;
   double range_max             = 12; 
   double range_resolution      = 13;
+
+  SensorNoise noise            = 14;
 }
