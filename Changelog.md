@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
+1. New actuators `actuators.proto` message.
+    * [Pull request 123](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/123)
+
 1. Added Physically Based Rendering (PBR) message to `material.proto`
     * [Pull request 120](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/120)
 
@@ -21,7 +24,7 @@
     * [Pull request 113](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/113)
 
 1. Updated `model.proto` with more documentation. Position, velocity, force,
-   and acceleration information for joint have been moved to the `axis.proto` 
+   and acceleration information for joint have been moved to the `axis.proto`
    message, see the Migration guide. The `ign.hh` header file is no longer
    installed.
     * [Pull request 104](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/104)
