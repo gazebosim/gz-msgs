@@ -205,4 +205,6 @@ ign_build_tests(TYPE UNIT
 
 ##################################################
 # ign msgs command
-add_subdirectory(cmd)
+if(NOT WIN32)
+  add_subdirectory(cmd)
+endif()
