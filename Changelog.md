@@ -47,6 +47,11 @@
 
 ### Ignition Msgs 3.x.x
 
+1. Install ruby files into versioned folder
+    * [Pull request 111](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/111)
+    * [Issue 24](https://bitbucket.org/ignitionrobotics/ign-msgs/issues/24)
+    * [Issue 27](https://bitbucket.org/ignitionrobotics/ign-msgs/issues/27)
+
 ### Ignition Msgs 3.2.0
 
 1. Added Pose_V, Time, and Clock fields to packet.proto
