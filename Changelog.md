@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Add world stats to packet message.
+    * [Pull request 125](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/125)
+
 1. Deprecating `raysensor.proto`, and replacing with `lidar_sensor.proto`.
     * [Pull request 124](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/124)
 
@@ -18,6 +21,9 @@
 `proto/ignition/msgs/image.proto`.
     * [Pull request 118](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/118)
 
+1. Adding `dynamic_bias_stddev` and `dynamic_bias_correlation_time` sensor noise parameters.
+    * [Pull request 117](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/117)
+
 1. Added `fluid_pressure.proto` and `air_pressure_sensor.proto`.
     * [Pull request 116](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/116)
 
@@ -32,11 +38,18 @@
    about  a magnetometer sensor.
     * [Pull request 113](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/113)
 
+1. image: `pixel_format` field is deprecated, use `pixel_format_type` with enum `PixelFormatType` instead.
+    * [Pull request 106](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/106)
+    * [Pull request 95](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/95)
+
 1. Updated `model.proto` with more documentation. Position, velocity, force,
    and acceleration information for joint have been moved to the `axis.proto`
    message, see the Migration guide. The `ign.hh` header file is no longer
    installed.
     * [Pull request 104](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/104)
+
+1. Change serialized field from string to bytes.
+    * [Pull request 102](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/102)
 
 1. Install ruby files into versioned folder
     * [Pull request 109](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/109)
