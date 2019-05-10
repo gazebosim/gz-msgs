@@ -32,11 +32,11 @@ message Actuators
   // Optional header data.
   Header header                    = 1;
 
-  /// \brief Angles of the actuators in [rad].
-  repeated double angle            = 2;
+  /// \brief Position of the actuators in [rad] for angular actuators and [m] for linear actuators.
+  repeated double position         = 2;
 
-  /// \brief Angular velocities of the actuators in [rad/s].
-  repeated double angular_velocity = 3;
+  /// \brief Velocities of the actuators in [rad/s] for angular actuators and [m/s] for linear actuators.
+  repeated double velocity         = 3;
 
   /// \brief Everything that does not fit the above,
   /// normalized between [-1 ... 1].
