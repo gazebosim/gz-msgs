@@ -13,6 +13,7 @@
 
 1. New actuators `actuators.proto` message.
     * [Pull request 123](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/123)
+    * [Pull request 129](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/129)
 
 1. Added Physically Based Rendering (PBR) message to `material.proto`
     * [Pull request 120](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/120)
