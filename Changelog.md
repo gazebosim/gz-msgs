@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Added camera info message.
+    * [Pull request 132](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/132)
+
 1. Add world stats to packet message.
     * [Pull request 125](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/125)
 
