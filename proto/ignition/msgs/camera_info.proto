@@ -41,13 +41,22 @@ message CameraInfo
     }
 
     /// \brief The distortion model used.
-    DistortionModelType distortion_model = 0;
+    DistortionModelType distortion_model = 1;
 
-    double distortion_k1 = 1;
-    double distortion_k2 = 2;
-    double distortion_k3 = 3;
-    double distortion_t1 = 4;
-    double distortion_t2 = 5;
+    /// \brief The radial distortion coefficient k1.
+    double k1 = 2;
+
+    /// \brief The radial distortion coefficient k2.
+    double k2 = 3;
+
+    /// \brief The radial distortion coefficient k3.
+    double k3 = 4;
+
+    /// \brief The tangential distortion coefficient t1.
+    double t1 = 5;
+
+    /// \brief The tangential distortion coefficient t2.
+    double t2 = 6;
   };
 
   /// \brief Intrinsic camera matrix for the raw (distorted) images can be
@@ -62,16 +71,16 @@ message CameraInfo
   message Intrinsics
   {
     /// \brief X Focal length
-    double fx = 0;
+    double fx = 1;
 
     /// \brief Y Focal length
-    double fy = 1;
+    double fy = 2;
 
     /// \brief X principal point
-    double cx = 2;
+    double cx = 3;
 
     /// \brief y principal point
-    double cy = 3;
+    double cy = 4;
   };
 
   /// \brief The projection/camera matrix can be generated using the values in
@@ -104,26 +113,26 @@ message CameraInfo
   message Projection
   {
     /// \brief X Focal length
-    double fx = 0;
+    double fx = 1;
 
     /// \brief Y Focal length
-    double fy = 1;
+    double fy = 2;
 
     /// \brief X principal point
-    double cx = 2;
+    double cx = 3;
 
     /// \brief y principal point
-    double cy = 3;
+    double cy = 4;
 
     /// \brief X position of the second camera in this camera's frame.
     /// This value is only relevant for stereo camera, and should be zero for
     /// monocular cameras.
-    double tx = 3;
+    double tx = 5;
 
     /// \brief Y position of the second camera in this camera's frame
     /// This value is only relevant for stereo camera, and should be zero for
     /// monocular cameras.
-    double ty = 4;
+    double ty = 6;
   };
 
   /// \brief Header data. The header timestamp is the time of image
@@ -132,10 +141,10 @@ message CameraInfo
   Header header = 1;
 
   /// \brief Width of the image produced by a camera in pixels.
-  uint32 image_width = 2;
+  uint32 width = 2;
 
   /// \brief Height of the image produced by a camera in pixels.
-  uint32 image_height = 3;
+  uint32 height = 3;
 
   /// \brief Distortion information for the camera images.
   Distortion distortion = 4;
