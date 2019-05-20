@@ -26,8 +26,15 @@ option java_outer_classname = "CameraInfoProtos";
 
 import "ignition/msgs/header.proto";
 
+/// \brief Meta information about a camera and the images produced by the
+/// camera. This data is typically published along side a camera image stream 
+/// on a topic called "camera_info".
+///
+/// Format of this message as heavily borrowed from:
+/// http://docs.ros.org/melodic/api/sensor_msgs/html/msg/CameraInfo.html
 message CameraInfo
 {
+  /// The distortion model used by the camera.
   message Distortion
   {
     /// \brief Types of atmosphere models.
