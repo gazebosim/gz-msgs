@@ -2,7 +2,7 @@
 
 ### Ignition Msgs 4.x.x
 
-1. Added camera info message.
+1. Added camera info message, and a pointcloud2 message that contains color data.
     * [Pull request 132](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/132)
 
 ### Ignition Msgs 4.0.0 (2019-05-20)
