@@ -32,5 +32,11 @@ message PointCloud
   /// \brief Optional header data
   Header header   = 1;
 
+  /// \brief 3D point data
   repeated Vector3d points = 2;
+
+  /// \brief Color data for the points. The length of this field should
+  /// match the length of the points field, or the field should be empty
+  /// if color information is not available.
+  repeated Color color = 3;
 }
