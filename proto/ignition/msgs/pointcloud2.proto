@@ -24,6 +24,7 @@ option java_outer_classname = "PointCloud2Protos";
 /// \interface PointCloud2
 /// \brief A point cloud with color data
 
+import "ignition/msgs/color.proto";
 import "ignition/msgs/vector3d.proto";
 import "ignition/msgs/header.proto";
 
