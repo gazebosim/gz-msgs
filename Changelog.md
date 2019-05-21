@@ -1,3 +1,11 @@
+## Ignition Msgs 5.x
+
+### Ignition Msgs 5.x.x
+
+1. Added color data to the PointCloud message. Deprecated PointCloud2
+   message.
+    * [Pull request 133](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/133)
+
 ## Ignition Msgs 4.x
 
 ### Ignition Msgs 4.x.x
