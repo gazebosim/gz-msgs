@@ -22,12 +22,12 @@ option java_outer_classname = "CameraInfoProtos";
 
 /// \ingroup ignition.msgs
 /// \interface CameraInfo
-/// \brief Information about a camera 
+/// \brief Information about a camera
 
 import "ignition/msgs/header.proto";
 
 /// \brief Meta information about a camera and the images produced by the
-/// camera. This data is typically published along side a camera image stream 
+/// camera. This data is typically published alongside a camera image stream
 /// on a topic called "camera_info".
 ///
 /// Format of this message as heavily borrowed from:
@@ -45,25 +45,29 @@ message CameraInfo
 
       /// \brief Rational polynomial distortion model.
       RATIONAL_POLYNOMIAL = 1;
+
+      /// \brief Equidistant distortion model.
+      EQUIDISTANT = 2;
     }
 
     /// \brief The distortion model used.
     DistortionModelType distortion_model = 1;
 
-    /// \brief The radial distortion coefficient k1.
-    double k1 = 2;
-
-    /// \brief The radial distortion coefficient k2.
-    double k2 = 3;
-
-    /// \brief The radial distortion coefficient k3.
-    double k3 = 4;
-
-    /// \brief The tangential distortion coefficient t1.
-    double t1 = 5;
-
-    /// \brief The tangential distortion coefficient t2.
-    double t2 = 6;
+    /// \brief Distortion coefficients. The meaning of the coefficients changes
+    /// according to the distortion model:
+    ///
+    /// PLUMP_BOB: 5 parameters, in this order:
+    ///   * k1: radial distortion coefficient k1
+    ///   * k2: radial distortion coefficient k2
+    ///   * t1: tangential distortion coefficient t1
+    ///   * t2: tangential distortion coefficient t2
+    ///   * k3: radial distortion coefficient k3
+    ///
+    /// RATIONAL_POLYNOMIAL: 8 parameters
+    ///
+    /// EQUIDISTANT: 4 parameters, described in this paper:
+    /// http://www.ee.oulu.fi/~jkannala/publications/tpami2006.pdf
+    repeated double k = 2;
   };
 
   /// \brief Intrinsic camera matrix for the raw (distorted) images can be
@@ -77,25 +81,24 @@ message CameraInfo
   /// (cx, cy).
   message Intrinsics
   {
-    /// \brief X Focal length
-    double fx = 1;
-
-    /// \brief Y Focal length
-    double fy = 2;
-
-    /// \brief X principal point
-    double cx = 3;
-
-    /// \brief y principal point
-    double cy = 4;
+    /// \brief 3x3 row-major matrix
+    repeated double k = 1;
   };
 
   /// \brief The projection/camera matrix can be generated using the values in
   /// this message. For example, the projection matrix P would be:
   ///
-  ///     [fx   0 cx Tx]
-  /// P = [ 0  fy cy Ty]
+  ///     [fx   0 cx tx]
+  /// P = [ 0  fy cy ty]
   ///     [ 0   0  1  0]
+  ///
+  /// Where:
+  /// * fx is the X Focal length
+  /// * fy is the Y Focal length
+  /// * cx is the X principal point
+  /// * cy is the X principal point
+  /// * tx is the X position of the second camera in this camera's frame.
+  /// * ty is the Y position of the second camera in this camera's frame.
   ///
   /// By convention, this matrix specifies the intrinsic (camera) matrix
   ///  of the processed (rectified) image. That is, the left 3x3 portion
@@ -119,31 +122,12 @@ message CameraInfo
   ///  This holds for both images of a stereo pair.
   message Projection
   {
-    /// \brief X Focal length
-    double fx = 1;
-
-    /// \brief Y Focal length
-    double fy = 2;
-
-    /// \brief X principal point
-    double cx = 3;
-
-    /// \brief y principal point
-    double cy = 4;
-
-    /// \brief X position of the second camera in this camera's frame.
-    /// This value is only relevant for stereo camera, and should be zero for
-    /// monocular cameras.
-    double tx = 5;
-
-    /// \brief Y position of the second camera in this camera's frame
-    /// This value is only relevant for stereo camera, and should be zero for
-    /// monocular cameras.
-    double ty = 6;
+    /// \brief 3x4 row-major matrix
+    repeated double k = 1;
   };
 
   /// \brief Header data. The header timestamp is the time of image
-  /// acquisition. The header data map should have a 'frame_id' key with a 
+  /// acquisition. The header data map should have a 'frame_id' key with a
   /// value that is the camera coordinate frame ID.
   Header header = 1;
 

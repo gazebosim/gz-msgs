@@ -18,10 +18,10 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "PointCloud2Protos";
+option java_outer_classname = "PointCloudColorProtos";
 
 /// \ingroup ignition.msgs
-/// \interface PointCloud2
+/// \interface PointCloudColor
 /// \brief A point cloud with color data
 
 import "ignition/msgs/color.proto";
@@ -32,7 +32,7 @@ import "ignition/msgs/header.proto";
 ///
 /// This point cloud will be deprecated in ign-msgs5. It is here as a means to
 /// add color data while maintaining ABI compatibility in ign-msgs4.
-message PointCloud2
+message PointCloudColor
 {
   /// \brief Optional header data
   Header header   = 1;

@@ -21,7 +21,7 @@ option java_package = "com.ignition.msgs";
 option java_outer_classname = "HeaderProtos";
 
 /// \ingroup ignition.msgs
-/// \interface Header 
+/// \interface Header
 /// \brief General information included by many messages
 
 import "ignition/msgs/time.proto";
@@ -35,4 +35,4 @@ message Header
 
   Time stamp           = 1;
   repeated Map data             = 2;
-} 
+}
