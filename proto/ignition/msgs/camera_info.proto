@@ -51,7 +51,7 @@ message CameraInfo
     }
 
     /// \brief The distortion model used.
-    DistortionModelType distortion_model = 1;
+    DistortionModelType model = 1;
 
     /// \brief Distortion coefficients. The meaning of the coefficients changes
     /// according to the distortion model:
