@@ -123,7 +123,7 @@ message CameraInfo
   message Projection
   {
     /// \brief 3x4 row-major matrix
-    repeated double k = 1;
+    repeated double p = 1;
   };
 
   /// \brief Header data. The header timestamp is the time of image
