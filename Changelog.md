@@ -6,7 +6,7 @@
     * [Pull request 136](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/136)
 
 
-+### Ignition Msgs 4.0.0 (2019-05-20)
+### Ignition Msgs 4.0.0 (2019-05-20)
 
 1. Add world stats to packet message.
     * [Pull request 125](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/125)
