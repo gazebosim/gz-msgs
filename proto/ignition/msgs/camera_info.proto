@@ -37,7 +37,7 @@ message CameraInfo
   /// The distortion model used by the camera.
   message Distortion
   {
-    /// \brief Types of atmosphere models.
+    /// \brief Types of distortion models.
     enum DistortionModelType
     {
       /// \brief Plumb bob distortion model.
@@ -73,7 +73,7 @@ message CameraInfo
   /// \brief Intrinsic camera matrix for the raw (distorted) images can be
   /// generated using the fx, fy, cx, and cy parameters contained in this
   /// message. For example the intrinsic camera matrix K would be:
-  ///     [fx  0 cx]
+  ///     [fx  s cx]
   /// K = [ 0 fy cy]
   ///     [ 0  0  1]
   /// Projects 3D points in the camera coordinate frame to 2D pixel
@@ -88,7 +88,7 @@ message CameraInfo
   /// \brief The projection/camera matrix can be generated using the values in
   /// this message. For example, the projection matrix P would be:
   ///
-  ///     [fx   0 cx tx]
+  ///     [fx   s cx tx]
   /// P = [ 0  fy cy ty]
   ///     [ 0   0  1  0]
   ///
@@ -96,9 +96,10 @@ message CameraInfo
   /// * fx is the X Focal length
   /// * fy is the Y Focal length
   /// * cx is the X principal point
-  /// * cy is the X principal point
+  /// * cy is the Y principal point
   /// * tx is the X position of the second camera in this camera's frame.
   /// * ty is the Y position of the second camera in this camera's frame.
+  /// * s is the axis skew.
   ///
   /// By convention, this matrix specifies the intrinsic (camera) matrix
   ///  of the processed (rectified) image. That is, the left 3x3 portion
