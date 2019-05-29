@@ -1,6 +1,12 @@
 ## Ignition Msgs 4.x
 
-### Ignition Msgs 4.x.x
+### Ignition Msgs 4.1.0
+
+1. Added camera info message
+    * [Pull request 136](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/136)
+
+
+### Ignition Msgs 4.0.0 (2019-05-20)
 
 1. Add world stats to packet message.
     * [Pull request 125](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/125)
