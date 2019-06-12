@@ -6,7 +6,7 @@
 :: Install dependencies
 call %win_lib% :download_unzip_install protobuf-3.4.1-vc15-x64-dll-MD.zip
 call %win_lib% :install_ign_project ign-math ign-math6
-call %win_lib% :install_ign_project ign-math ign-cmake1
+call %win_lib% :install_ign_project ign-cmake ign-cmake1
 
 :: Set configuration variables
 @set build_type=Release
