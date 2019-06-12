@@ -1,4 +1,4 @@
-image: ubuntu:xenial
+image: ubuntu:bionic
 
 pipelines:
   default:
@@ -10,7 +10,7 @@ pipelines:
           - apt-get -y install
             cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev
             libignition-cmake1-dev
-            libignition-math5-dev
+            libignition-math6-dev
             libignition-tools-dev
             ruby
             cppcheck
