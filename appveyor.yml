@@ -21,6 +21,9 @@ install:
   - cmake .. -DBUILD_TESTING=OFF
   - cmake --build . --target INSTALL
   # also build ign-cmake2
+  - cd ..
+  - md build2
+  - cd build2
   - hg up ign-cmake2
   - cmake .. -DBUILD_TESTING=OFF
   - cmake --build . --target INSTALL
