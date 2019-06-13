@@ -18,16 +18,20 @@ install:
   - hg up ign-cmake1
   - md build
   - cd build
-  - cmake ..
+  - cmake .. -DBUILD_TESTING=OFF
+  - cmake --build . --target INSTALL
+  # also build ign-cmake2
+  - hg up ign-cmake2
+  - cmake .. -DBUILD_TESTING=OFF
   - cmake --build . --target INSTALL
   - cd ../..
   # ign-math
   - hg clone https://bitbucket.org/ignitionrobotics/ign-math
   - cd ign-math
-  - hg up ign-math5
+  - hg up ign-math6
   - md build
   - cd build
-  - cmake ..
+  - cmake .. -DBUILD_TESTING=OFF
   - cmake --build . --target INSTALL
   - cd ../..
 build_script:
