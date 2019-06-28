@@ -27,7 +27,7 @@ import "ignition/msgs/header.proto";
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/twist.proto";
 
-message Pose
+message Odometry
 {
   /// \brief Optional header data
   Header header  = 1;
