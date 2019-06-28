@@ -1,10 +1,14 @@
 ## Ignition Msgs 4.x
 
+### Ignition Msgs 4.x.x
+
+1. Added odometry message
+    * [Pull request 137](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/137)
+
 ### Ignition Msgs 4.1.0
 
 1. Added camera info message
     * [Pull request 136](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/136)
-
 
 ### Ignition Msgs 4.0.0 (2019-05-20)
 
