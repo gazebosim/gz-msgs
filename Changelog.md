@@ -1,6 +1,6 @@
 ## Ignition Msgs 4.x
 
-### Ignition Msgs 4.x.x
+### Ignition Msgs 4.2.0
 
 1. Added odometry message
     * [Pull request 137](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/137)
