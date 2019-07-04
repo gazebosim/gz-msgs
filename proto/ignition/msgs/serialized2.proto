@@ -56,7 +56,7 @@ message SerializedState2
 /// simulation time and entity states.
 message SerializedStep2
 {
-  // \brief Iteration information, such as sim time and paused state.
+  /// \brief Iteration information, such as sim time and paused state.
   WorldStatistics stats = 1;
 
   /// \brief State of entities and components.
