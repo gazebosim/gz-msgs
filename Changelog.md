@@ -1,5 +1,11 @@
 ## Ignition Msgs 4.x
 
+### Ignition Msgs 4.3.0
+
+1. Added SerializedEntityMap, SerializedStateMap, and SerializedStepMap
+   messages which match SerializedEntity, SerializedState, and SerializedStep messages except that the former uses `map` data structures.
+    * [Pull request 143](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/143)
+
 ### Ignition Msgs 4.2.0
 
 1. Added odometry message
