@@ -26,7 +26,7 @@ import "ignition/msgs/serialized.proto";
 
 /// \brief Holds all the information needed to reconstruct an entity and its
 /// components.
-message SerializedEntity2
+message SerializedEntityMap
 {
   /// \brief The entity is uniquely identified by its ID.
   uint64 id = 1;
@@ -43,22 +43,22 @@ message SerializedEntity2
 /// entity-component-system (ECS) architecture at a given time.
 /// An ECS's state consists of several entities, each with an arbitrary number
 /// of components tied to them.
-message SerializedState2
+message SerializedStateMap
 {
   /// \brief Header data, which contains the simulation time.
   ignition.msgs.Header header = 1;
 
   /// \brief All the entities currently in the simulation.
-  map<uint64, SerializedEntity2> entities = 2;
+  map<uint64, SerializedEntityMap> entities = 2;
 };
 
 /// \brief All the data needed to step an ECS system, such as current
 /// simulation time and entity states.
-message SerializedStep2
+message SerializedStepMap
 {
   /// \brief Iteration information, such as sim time and paused state.
   WorldStatistics stats = 1;
 
   /// \brief State of entities and components.
-  SerializedState2 state = 2;
+  SerializedStateMap state = 2;
 };
