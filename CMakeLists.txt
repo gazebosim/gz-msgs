@@ -48,8 +48,11 @@ ign_find_package(IgnProtobuf
 #--------------------------------------
 # Find ignition-math
 ign_find_package(ignition-math6 QUIET)
-set(IGN_MATH_VER ${ignition-math6_VERSION_MAJOR})
-if (NOT ignition-math6_FOUND)
+if (ignition-math6_FOUND)
+  # need to find with REQUIRED or it doesn't get exported properly
+  ign_find_package(ignition-math6 REQUIRED)
+  set(IGN_MATH_VER ${ignition-math6_VERSION_MAJOR})
+else()
   # Support math5 for backwards compatibility
   ign_find_package(ignition-math5 REQUIRED)
   set(IGN_MATH_VER ${ignition-math5_VERSION_MAJOR})
