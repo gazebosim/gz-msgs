@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(ignition-msgs2 VERSION 2.0.0)
+project(ignition-msgs2 VERSION 2.1.0)
 
 #============================================================================
 # Find ignition-cmake
@@ -14,7 +14,7 @@ find_package(ignition-cmake1 REQUIRED)
 #============================================================================
 # Configure the project
 #============================================================================
-ign_configure_project()
+ign_configure_project(VERSION_SUFFIX pre1)
 
 #============================================================================
 # Set project-specific options
@@ -47,8 +47,16 @@ ign_find_package(IgnProtobuf
 
 #--------------------------------------
 # Find ignition-math
-ign_find_package(ignition-math5 REQUIRED)
-set(IGN_MATH_VER ${ignition-math5_VERSION_MAJOR})
+ign_find_package(ignition-math6 QUIET)
+if (ignition-math6_FOUND)
+  # need to find with REQUIRED or it doesn't get exported properly
+  ign_find_package(ignition-math6 REQUIRED)
+  set(IGN_MATH_VER ${ignition-math6_VERSION_MAJOR})
+else()
+  # Support math5 for backwards compatibility
+  ign_find_package(ignition-math5 REQUIRED)
+  set(IGN_MATH_VER ${ignition-math5_VERSION_MAJOR})
+endif()
 
 #--------------------------------------
 # Find ignition-tools
