@@ -72,6 +72,7 @@ message PointCloudPacked
   /// acquisition, and the coordinate frame ID (for 3D points).
   Header header   = 1;
 
+  /// \brief Information that describes the data contained in the `data` field.
   repeated Field field = 2;
 
   /// \brief Height of a 2D structured point cloud, or 1 if the point cloud is
