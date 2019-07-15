@@ -18,7 +18,7 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "PointCloudProtos";
+option java_outer_classname = "PointCloudPackedProtos";
 
 /// \ingroup ignition.msgs
 /// \interface PointCloudPacked
@@ -39,6 +39,7 @@ import "ignition/msgs/header.proto";
 /// camera depth sensors such as stereo or time-of-flight.
 message PointCloudPacked
 {
+  /// \brief A field that describes the format of the data field.
   message Field
   {
     // Datatype for the point field.
