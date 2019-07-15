@@ -699,12 +699,11 @@ namespace ignition
       uint32_t offset = 0;
 
       // Helper function that will set a single field.
-      std::function<void (const std::string &,
+      std::function<void(const std::string &,
         msgs::PointCloudPacked::Field::DataType)> initPointCloudPackedHelper =
         [&](const std::string &_name,
            msgs::PointCloudPacked::Field::DataType _type) -> void
         {
-
           msgs::PointCloudPacked::Field *newField = _msg.add_field();
           newField->set_name(_name);
           newField->set_count(1);

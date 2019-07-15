@@ -696,5 +696,4 @@ TEST(UtilityTest, InitPointCloudPacked)
   EXPECT_EQ(12u, pc.field(3).offset());
   EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(3).datatype());
   EXPECT_EQ(1u, pc.field(3).count());
-
 }

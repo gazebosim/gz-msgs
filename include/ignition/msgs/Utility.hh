@@ -18,6 +18,8 @@
 #define IGNITION_MSGS_UTILITY_HH_
 
 #include <string>
+#include <utility>
+#include <vector>
 
 #include <ignition/math/AxisAlignedBox.hh>
 #include <ignition/math/Color.hh>
