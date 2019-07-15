@@ -713,7 +713,7 @@ namespace ignition
           {
             case msgs::PointCloudPacked::Field::INT8:
             case msgs::PointCloudPacked::Field::UINT8:
-              offset += 2;
+              offset += 1;
               break;
             case msgs::PointCloudPacked::Field::INT16:
             case msgs::PointCloudPacked::Field::UINT16:
