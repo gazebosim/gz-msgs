@@ -384,7 +384,8 @@ namespace ignition
     void Set(msgs::AxisAlignedBox *_b, const math::AxisAlignedBox &_v);
 
     /// \brief This function will set the header and field members of
-    /// a PointCloudPacked message.
+    /// a PointCloudPacked message. This will clear existing values in the
+    /// PointCloudPacked field.
     /// \param[out] _msg The message to initialize.
     /// \param[in] _frameId Name of the "frame_id". This will be stored as
     /// key = "frame_id", value = _frameId in the message header.

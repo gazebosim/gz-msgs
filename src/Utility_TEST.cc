@@ -637,3 +637,64 @@ TEST(UtilityTest, CovertMathAxisAlignedBox)
   EXPECT_DOUBLE_EQ(92.1, msg2.max_corner().y());
   EXPECT_DOUBLE_EQ(-723.2, msg2.max_corner().z());
 }
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, InitPointCloudPacked)
+{
+  msgs::PointCloudPacked pc;
+
+  msgs::InitPointCloudPacked(pc, "my_frame", true,
+      {{"xyz", msgs::PointCloudPacked::Field::FLOAT32},
+      {"rgb", msgs::PointCloudPacked::Field::FLOAT32}});
+
+  EXPECT_EQ(4, pc.field_size());
+  EXPECT_EQ(24u, pc.point_step());
+
+  EXPECT_EQ("x", pc.field(0).name());
+  EXPECT_EQ(0u, pc.field(0).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(0).datatype());
+  EXPECT_EQ(1u, pc.field(0).count());
+
+  EXPECT_EQ("y", pc.field(1).name());
+  EXPECT_EQ(4u, pc.field(1).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(1).datatype());
+  EXPECT_EQ(1u, pc.field(1).count());
+
+  EXPECT_EQ("z", pc.field(2).name());
+  EXPECT_EQ(8u, pc.field(2).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(2).datatype());
+  EXPECT_EQ(1u, pc.field(2).count());
+
+  EXPECT_EQ("rgb", pc.field(3).name());
+  EXPECT_EQ(16u, pc.field(3).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(3).datatype());
+  EXPECT_EQ(1u, pc.field(3).count());
+
+  // Don't align to word boundaries
+  msgs::InitPointCloudPacked(pc, "my_frame", false,
+      {{"xyz", msgs::PointCloudPacked::Field::FLOAT32},
+      {"rgb", msgs::PointCloudPacked::Field::FLOAT32}});
+  EXPECT_EQ(4, pc.field_size());
+  EXPECT_EQ(16u, pc.point_step());
+
+  EXPECT_EQ("x", pc.field(0).name());
+  EXPECT_EQ(0u, pc.field(0).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(0).datatype());
+  EXPECT_EQ(1u, pc.field(0).count());
+
+  EXPECT_EQ("y", pc.field(1).name());
+  EXPECT_EQ(4u, pc.field(1).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(1).datatype());
+  EXPECT_EQ(1u, pc.field(1).count());
+
+  EXPECT_EQ("z", pc.field(2).name());
+  EXPECT_EQ(8u, pc.field(2).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(2).datatype());
+  EXPECT_EQ(1u, pc.field(2).count());
+
+  EXPECT_EQ("rgb", pc.field(3).name());
+  EXPECT_EQ(12u, pc.field(3).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(3).datatype());
+  EXPECT_EQ(1u, pc.field(3).count());
+
+}

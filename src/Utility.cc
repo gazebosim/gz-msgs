@@ -740,6 +740,7 @@ namespace ignition
       frame->set_key("frame_id");
       frame->add_value(_frameId);
 
+      _msg.clear_field();
       // Setup the point cloud message.
       for (const std::pair<std::string,
            msgs::PointCloudPacked::Field::DataType> &field : _fields)
