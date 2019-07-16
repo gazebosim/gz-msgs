@@ -735,6 +735,7 @@ namespace ignition
         };
 
       // Set the frame
+      _msg.mutable_header()->clear_data();
       msgs::Header::Map *frame = _msg.mutable_header()->add_data();
       frame->set_key("frame_id");
       frame->add_value(_frameId);

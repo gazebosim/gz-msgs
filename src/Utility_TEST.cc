@@ -696,4 +696,28 @@ TEST(UtilityTest, InitPointCloudPacked)
   EXPECT_EQ(12u, pc.field(3).offset());
   EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(3).datatype());
   EXPECT_EQ(1u, pc.field(3).count());
+  EXPECT_EQ("my_frame", pc.header().data(0).value(0));
+  EXPECT_EQ("frame_id", pc.header().data(0).key());
+
+  // Test data types
+  msgs::InitPointCloudPacked(pc, "my_new_frame", false,
+      {{"x", msgs::PointCloudPacked::Field::INT8},
+       {"y", msgs::PointCloudPacked::Field::UINT8},
+       {"z", msgs::PointCloudPacked::Field::INT16},
+       {"r", msgs::PointCloudPacked::Field::UINT16},
+       {"s", msgs::PointCloudPacked::Field::INT32},
+       {"t", msgs::PointCloudPacked::Field::UINT32},
+       {"u", msgs::PointCloudPacked::Field::FLOAT64}});
+
+  EXPECT_EQ("frame_id", pc.header().data(0).key());
+  EXPECT_EQ("my_new_frame", pc.header().data(0).value(0));
+
+  EXPECT_EQ(0u, pc.field(0).offset());
+  EXPECT_EQ(1u, pc.field(1).offset());
+  EXPECT_EQ(2u, pc.field(2).offset());
+  EXPECT_EQ(4u, pc.field(3).offset());
+  EXPECT_EQ(6u, pc.field(4).offset());
+  EXPECT_EQ(10u, pc.field(5).offset());
+  EXPECT_EQ(14u, pc.field(6).offset());
+  EXPECT_EQ(22u, pc.point_step());
 }
