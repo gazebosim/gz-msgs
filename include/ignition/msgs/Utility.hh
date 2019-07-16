@@ -18,6 +18,8 @@
 #define IGNITION_MSGS_UTILITY_HH_
 
 #include <string>
+#include <utility>
+#include <vector>
 
 #include <ignition/math/AxisAlignedBox.hh>
 #include <ignition/math/Color.hh>
@@ -382,6 +384,27 @@ namespace ignition
     /// \param[in] _v An math::AxisAlignedBox reference
     IGNITION_MSGS_VISIBLE
     void Set(msgs::AxisAlignedBox *_b, const math::AxisAlignedBox &_v);
+
+    /// \brief This function will set the header and field members of
+    /// a PointCloudPacked message. This will clear existing values in the
+    /// PointCloudPacked field and header.
+    /// \param[out] _msg The message to initialize.
+    /// \param[in] _frameId Name of the "frame_id". This will be stored as
+    /// key = "frame_id", value = _frameId in the message header.
+    /// \param[in] _memoryAligned If true, then each pair in the _fields
+    /// vector will be aligned at word (sizeof(size_t)) boundaries.
+    /// Additionally, the `point_step` of the _msg will be set to the
+    /// nearest word boundary.
+    /// \param[in] _fields The fields to add to the message. The following
+    /// strings are reserved, and will generate a set of fields
+    /// automatically.
+    ///
+    ///   * "xyz" : This will add the "x", "y", and "z" fields.
+    IGNITION_MSGS_VISIBLE
+    void InitPointCloudPacked(msgs::PointCloudPacked &_msg,
+        const std::string &_frameId, bool _memoryAligned,
+        const std::vector<std::pair<std::string,
+        msgs::PointCloudPacked::Field::DataType>> &_fields);
     }
   }
 }

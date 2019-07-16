@@ -14,6 +14,8 @@
  * limitations under the License.
  *
 */
+#include <functional>
+#include <ignition/math/Helpers.hh>
 #include "ignition/msgs/Utility.hh"
 
 namespace ignition
@@ -686,6 +688,84 @@ namespace ignition
         }
       }
       return result;
+    }
+
+    /////////////////////////////////////////////////
+    void InitPointCloudPacked(msgs::PointCloudPacked &_msg,
+        const std::string &_frameId, bool _memoryAligned,
+        const std::vector<std::pair<std::string,
+        msgs::PointCloudPacked::Field::DataType>> &_fields)
+    {
+      uint32_t offset = 0;
+
+      // Helper function that will set a single field.
+      std::function<void(const std::string &,
+        msgs::PointCloudPacked::Field::DataType)> initPointCloudPackedHelper =
+        [&](const std::string &_name,
+           msgs::PointCloudPacked::Field::DataType _type) -> void
+        {
+          msgs::PointCloudPacked::Field *newField = _msg.add_field();
+          newField->set_name(_name);
+          newField->set_count(1);
+          newField->set_datatype(_type);
+          newField->set_offset(offset);
+          switch (_type)
+          {
+            case msgs::PointCloudPacked::Field::INT8:
+            case msgs::PointCloudPacked::Field::UINT8:
+              offset += 1;
+              break;
+            case msgs::PointCloudPacked::Field::INT16:
+            case msgs::PointCloudPacked::Field::UINT16:
+              offset += 2;
+              break;
+            case msgs::PointCloudPacked::Field::INT32:
+            case msgs::PointCloudPacked::Field::UINT32:
+            case msgs::PointCloudPacked::Field::FLOAT32:
+              offset += 4;
+              break;
+            case msgs::PointCloudPacked::Field::FLOAT64:
+              offset += 8;
+              break;
+            default:
+              std::cerr << "PointCloudPacked field datatype of ["
+                << _type << "] is invalid.\n";
+              break;
+          }
+        };
+
+      // Set the frame
+      _msg.mutable_header()->clear_data();
+      msgs::Header::Map *frame = _msg.mutable_header()->add_data();
+      frame->set_key("frame_id");
+      frame->add_value(_frameId);
+
+      _msg.clear_field();
+      // Setup the point cloud message.
+      for (const std::pair<std::string,
+           msgs::PointCloudPacked::Field::DataType> &field : _fields)
+      {
+        if (field.first == "xyz")
+        {
+          initPointCloudPackedHelper("x", field.second);
+          initPointCloudPackedHelper("y", field.second);
+          initPointCloudPackedHelper("z", field.second);
+        }
+        else
+        {
+          initPointCloudPackedHelper(field.first, field.second);
+        }
+
+        // Memory align the field.
+        if (_memoryAligned)
+          offset = math::roundUpMultiple(offset, sizeof(size_t));
+      }
+
+      // Set the point_step
+      if (_memoryAligned)
+        _msg.set_point_step(math::roundUpMultiple(offset, sizeof(size_t)));
+      else
+        _msg.set_point_step(offset);
     }
   }
 }
