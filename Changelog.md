@@ -1,5 +1,10 @@
 ## Ignition Msgs 4.x
 
+### Ignition Msgs 4.x.x
+
+1. Add battery state message
+    * [Pull request 145](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/145)
+
 ### Ignition Msgs 4.3.0
 
 1. Added SerializedEntityMap, SerializedStateMap, and SerializedStepMap
