@@ -2,7 +2,7 @@
 
 ### Ignition Msgs 4.x.x
 
-1. Add battery soc message
+1. Add battery state message
     * [Pull request 145](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/145)
 
 ### Ignition Msgs 4.3.0
