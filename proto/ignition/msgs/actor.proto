@@ -65,8 +65,8 @@ message Actor
   Trajectory trajectories   = 12;
 
   /// \brief Unique id of the actor
-  uint32 id                 = 16;
+  uint32 id                 = 13;
 
   /// \brief Unique id of actor's parent
-  uint32 parent_id          = 17;
+  uint32 parent_id          = 14;
 }
