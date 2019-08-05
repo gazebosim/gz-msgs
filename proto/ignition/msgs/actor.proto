@@ -48,25 +48,25 @@ message Actor
     uint32 id           = 1;
     string type         = 2;
     float tension       = 3;
-    Waypoint waypoints  = 4;
+    repeated Waypoint waypoints  = 4;
   }
 
   /// \brief Optional header data
-  Header header             =  1;
-  string name               =  2;
-  Pose pose                 =  4;
-  bool is_static            =  5;
-  string skin_filename      =  6;
-  Animation animations      =  7;
-  float skin_scale          =  8;
-  bool script_loop          =  9;
-  float script_delay_start  = 10;
-  bool script_auto_start    = 11;
-  Trajectory trajectories   = 12;
+  Header header         =  1;
+  string name           =  2;
+  Pose pose             =  4;
+  bool is_static        =  5;
+  string skin_filename  =  6;
+  float skin_scale      =  7;
+  repeated Animation animations  =  8;
+  bool script_loop               =  9;
+  float script_delay_start       = 10;
+  bool script_auto_start         = 11;
+  repeated Trajectory trajectories = 12;
 
   /// \brief Unique id of the actor
-  uint32 id                 = 13;
+  uint32 id  = 13;
 
   /// \brief Unique id of actor's parent
-  uint32 parent_id          = 14;
+  uint32 parent_id  = 14;
 }
