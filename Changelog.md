@@ -2,6 +2,11 @@
 
 ### Ignition Msgs 4.x.x
 
+### Ignition Msgs 4.6.0 (2019-08-16)
+
+1. Add Actor message
+    * [Pull request 147](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/147)
+
 ### Ignition Msgs 4.5.0 (2019-07-19)
 
 1. Add battery state message
