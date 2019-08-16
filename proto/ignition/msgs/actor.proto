@@ -42,7 +42,7 @@ message Actor
     float scale           = 3;
      
     /// \brief Set to true so the animation is interpolated on X
-    bool is_interpolate_x = 4;
+    bool interpolate_x = 4;
   }
 
   message Waypoint
@@ -102,5 +102,5 @@ message Actor
   repeated Trajectory trajectories = 10;
 
   /// \brief Unique id of actor's parent
-  Entity parent_entity  = 11;
+  Entity parent  = 11;
 }
