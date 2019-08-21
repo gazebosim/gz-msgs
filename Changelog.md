@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Add video record message
+    * [Pull request 149](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/149)
+
 ### Ignition Msgs 4.5.0 (2019-07-19)
 
 1. Add battery state message
