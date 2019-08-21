@@ -31,13 +31,13 @@ message VideoRecord
   /// \brief Optional header data
   Header header           = 1;
 
-  // \brief True to start video recording
+  /// \brief True to start video recording
   bool start              = 2;
 
-  // \brief True to stop video recording
+  /// \brief True to stop video recording
   bool stop               = 3;
 
-  // \brief Video encoding format, e.g. "mp4", "ogv"
+  /// \brief Video encoding format, e.g. "mp4", "ogv"
   string format           = 4;
 
   /// \brief filename of the recorded video
