@@ -2,6 +2,8 @@
 
 ### Ignition Msgs 4.x.x
 
+### Ignition Msgs 4.7.0 (2019-08-22)
+
 1. Add video record message
     * [Pull request 149](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/149)
 
