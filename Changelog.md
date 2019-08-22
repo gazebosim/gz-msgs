@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Add video record message
+    * [Pull request 149](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/149)
+
 ### Ignition Msgs 4.6.0 (2019-08-16)
 
 1. Add Actor message
