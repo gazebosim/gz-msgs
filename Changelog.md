@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 2.x.x
 
+1. Fix linking order of Protocol Buffers static libraries on GCC
+    * [Pull request 151](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/151)
+
 ### Ignition Msgs 2.1.0
 
 1. Upgrade to ign-math6
