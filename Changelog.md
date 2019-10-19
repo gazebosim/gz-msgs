@@ -8,6 +8,40 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Fix linking order of Protocol Buffers static libraries on GCC
+    * [Pull request 151](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/151)
+
+### Ignition Msgs 4.7.0 (2019-08-22)
+
+1. Add video record message
+    * [Pull request 149](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/149)
+
+### Ignition Msgs 4.6.0 (2019-08-16)
+
+1. Add Actor message
+    * [Pull request 147](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/147)
+
+### Ignition Msgs 4.5.0 (2019-07-19)
+
+1. Add battery state message
+    * [Pull request 145](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/145)
+
+### Ignition Msgs 4.4.0 (2019-07-16)
+
+1. Added SerializedEntityMap, SerializedStateMap, and SerializedStepMap
+   messages which match SerializedEntity, SerializedState, and SerializedStep messages except that the former uses `map` data structures.
+    * [Pull request 143](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/143)
+
+### Ignition Msgs 4.2.0
+
+1. Added odometry message
+    * [Pull request 137](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/137)
+
+### Ignition Msgs 4.1.0
+
+1. Added camera info message
+    * [Pull request 136](https://bitbucket.org/ignitionrobotics/ign-common/pull-requests/136)
+
 ### Ignition Msgs 4.0.0 (2019-05-20)
 
 1. Add world stats to packet message.
@@ -74,6 +108,9 @@
     * [Issue 24](https://bitbucket.org/ignitionrobotics/ign-msgs/issues/24)
     * [Issue 27](https://bitbucket.org/ignitionrobotics/ign-msgs/issues/27)
 
+1. Fix linking order of Protocol Buffers static libraries on GCC
+    * [Pull request 151](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/151)
+
 ### Ignition Msgs 3.2.0
 
 1. Added Pose_V, Time, and Clock fields to packet.proto
@@ -128,6 +165,14 @@
 ## Ignition Msgs 2.x
 
 ### Ignition Msgs 2.x.x
+
+1. Fix linking order of Protocol Buffers static libraries on GCC
+    * [Pull request 151](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/151)
+
+### Ignition Msgs 2.1.0
+
+1. Upgrade to ign-math6
+    * [Pull request 138](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/138)
 
 
 ### Ignition Msgs 2.0.0
