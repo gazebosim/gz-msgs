@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Fix linking order of Protocol Buffers static libraries on GCC
+    * [Pull request 151](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/151)
+
 ### Ignition Msgs 4.7.0 (2019-08-22)
 
 1. Add video record message
@@ -99,6 +102,9 @@
     * [Issue 24](https://bitbucket.org/ignitionrobotics/ign-msgs/issues/24)
     * [Issue 27](https://bitbucket.org/ignitionrobotics/ign-msgs/issues/27)
 
+1. Fix linking order of Protocol Buffers static libraries on GCC
+    * [Pull request 151](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/151)
+
 ### Ignition Msgs 3.2.0
 
 1. Added Pose_V, Time, and Clock fields to packet.proto
@@ -153,6 +159,14 @@
 ## Ignition Msgs 2.x
 
 ### Ignition Msgs 2.x.x
+
+1. Fix linking order of Protocol Buffers static libraries on GCC
+    * [Pull request 151](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/151)
+
+### Ignition Msgs 2.1.0
+
+1. Upgrade to ign-math6
+    * [Pull request 138](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/138)
 
 
 ### Ignition Msgs 2.0.0
