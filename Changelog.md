@@ -5,6 +5,9 @@
 1. Add emissive_map field to material.proto
     * [Pull request 155](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/155)
 
+1. Fix linking order of Protocol Buffers static libraries on GCC
+    * [Pull request 151](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/151)
+
 ### Ignition Msgs 4.7.0 (2019-08-22)
 
 1. Add video record message
