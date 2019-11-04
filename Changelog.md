@@ -1,9 +1,13 @@
-## Ignition Msgs 4.x
+## Ignition Msgs 5.x
 
-### Ignition Msgs 4.x.x
+### Ignition Msgs 5.x.x
 
 1. Add emissive_map field to material.proto
     * [Pull request 155](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/155)
+
+## Ignition Msgs 4.x
+
+### Ignition Msgs 4.x.x
 
 1. Fix linking order of Protocol Buffers static libraries on GCC
     * [Pull request 151](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/151)
