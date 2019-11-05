@@ -4,6 +4,9 @@
 
 ### Ignition Msgs 5.0.0
 
+1. Add emissive_map field to material.proto
+    * [Pull request 155](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/155)
+
 ## Ignition Msgs 4.x
 
 ### Ignition Msgs 4.x.x
