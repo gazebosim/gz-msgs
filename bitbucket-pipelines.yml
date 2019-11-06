@@ -21,7 +21,15 @@ pipelines:
           - cd ..
           # Dependency: Ignition packages
           - apt-get -y install
-            libignition-cmake2-dev libignition-tools-dev libignition-math6-dev
+            libignition-cmake2-dev libignition-math6-dev
+          # Ignition tools
+          - hg clone http://bitbucket.org/ignitionrobotics/ign-tools -b launch_part1
+          - cd ign-tools
+          - mkdir build
+          - cd build
+          - cmake .. -DCMAKE_BUILD_TYPE=coverage -DCMAKE_INSTALL_PREFIX=/usr
+          - make -j4 install
+          - cd ../..
           # Ignition msgs
           - mkdir build
           - cd build
