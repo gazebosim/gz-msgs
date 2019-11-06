@@ -43,7 +43,7 @@ set(IGN_MATH_VER ${ignition-math6_VERSION_MAJOR})
 
 #--------------------------------------
 # Find ignition-tools
-ign_find_package(ignition-tools
+ign_find_package(ignition-tools1
                  QUIET)
 
 #============================================================================
