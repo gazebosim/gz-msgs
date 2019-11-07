@@ -118,6 +118,10 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print("#include \"ignition/msgs/Factory.hh\"\n", "name",
                   "includes");
 
+    // Include sys/sysmacros.h to prevent warnings about "major" and "minor"
+    // defines. Major and minor are used int he version.proto file.
+    printer.Print("#include <sys/sysmacros.h>\n", "name", "include");
+
     // Suppress warnings
     printer.Print("#ifndef _MSC_VER\n", "name", "includes");
     printer.Print("#pragma GCC diagnostic ignored \"-Wshadow\"\n", "name",
@@ -131,6 +135,7 @@ bool Generator::Generate(const FileDescriptor *_file,
                   "name", "includes");
     printer.Print(" 4127 4068)\n", "name", "includes");
     printer.Print("#endif\n", "name", "includes");
+
 
     // Call the IGN_REGISTER_STATIC_MSG macro
     std::string factory = "IGN_REGISTER_STATIC_MSG(\"ign_msgs.";
