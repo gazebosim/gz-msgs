@@ -79,8 +79,8 @@ message FuelMetadata
   /// \brief Description of the resource.
   string description       = 4;
 
-  /// \brief Version information.
-  Version version          = 5;
+  /// \brief Version number of the resource.
+  int32 version            = 5;
 
   /// \brief Authors of this resource.
   repeated Contact author  = 6;
