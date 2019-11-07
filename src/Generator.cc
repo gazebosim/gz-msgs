@@ -119,7 +119,7 @@ bool Generator::Generate(const FileDescriptor *_file,
                   "includes");
 
     // Include sys/sysmacros.h to prevent warnings about "major" and "minor"
-    // defines. Major and minor are used int he version.proto file.
+    // defines. Major and minor are used in the version.proto file.
     printer.Print("#ifdef __linux__\n", "name", "includes");
     printer.Print("#include <sys/sysmacros.h>\n", "name", "include");
     printer.Print("#endif\n", "name", "includes");
@@ -137,7 +137,6 @@ bool Generator::Generate(const FileDescriptor *_file,
                   "name", "includes");
     printer.Print(" 4127 4068)\n", "name", "includes");
     printer.Print("#endif\n", "name", "includes");
-
 
     // Call the IGN_REGISTER_STATIC_MSG macro
     std::string factory = "IGN_REGISTER_STATIC_MSG(\"ign_msgs.";
