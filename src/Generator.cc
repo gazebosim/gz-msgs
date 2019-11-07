@@ -120,7 +120,9 @@ bool Generator::Generate(const FileDescriptor *_file,
 
     // Include sys/sysmacros.h to prevent warnings about "major" and "minor"
     // defines. Major and minor are used int he version.proto file.
+    printer.Print("#ifdef __linux__\n", "name", "includes");
     printer.Print("#include <sys/sysmacros.h>\n", "name", "include");
+    printer.Print("#endif\n", "name", "includes");
 
     // Suppress warnings
     printer.Print("#ifndef _MSC_VER\n", "name", "includes");
