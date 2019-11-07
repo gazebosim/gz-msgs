@@ -22,12 +22,11 @@ option java_outer_classname = "Version";
 
 /// \ingroup ignition.msgs
 /// \interface Version.
-/// \brief Version information that contains an associated name.
+/// \brief Version information that contains an associated name. This message
+/// can be used to represent a versioned library, such as "SDF 1.2.3".
 
 import "ignition/msgs/version.proto";
 
-/// \brief Version information that contains an associated name. This message
-/// can be used to represent a versioned library, such as "SDF 1.2.3".
 message VersionedName
 {
   /// \brief Version information.

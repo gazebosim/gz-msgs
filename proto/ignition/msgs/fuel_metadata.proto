@@ -22,11 +22,10 @@ option java_outer_classname = "FuelMetadata";
 
 /// \ingroup ignition.msgs
 /// \interface FuelMetadata
-/// \brief Message that contains metadata for a Fuel resource
+/// \brief Meta data for an Ignition Fuel resource, such as a model or world.
 
 import "ignition/msgs/versioned_name.proto";
 
-/// \brief Meta data for an Ignition Fuel resource, such as a model or world.
 message FuelMetadata
 {
   /// \brief Contact information.

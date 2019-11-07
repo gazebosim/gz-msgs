@@ -24,7 +24,6 @@ option java_outer_classname = "Version";
 /// \interface Version.
 /// \brief Message that contains major, minor, and patch numbers.
 
-/// \brief Version information.
 message Version
 {
   /// \brief Major version.
