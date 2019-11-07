@@ -22,7 +22,7 @@ option java_outer_classname = "Version";
 
 /// \ingroup ignition.msgs
 /// \interface Version.
-/// \brief Message that contains major, minor, and patch numbers.
+/// \brief Version information that contains an associated name.
 
 import "ignition/msgs/version.proto";
 
