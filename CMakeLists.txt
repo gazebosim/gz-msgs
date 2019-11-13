@@ -46,6 +46,10 @@ set(IGN_MATH_VER ${ignition-math6_VERSION_MAJOR})
 ign_find_package(ignition-tools
                  QUIET)
 
+#--------------------------------------
+# Find Tinyxml2
+ign_find_package(TINYXML2 REQUIRED PRIVATE PRETTY tinyxml2)
+
 #============================================================================
 # Configure the build
 #============================================================================

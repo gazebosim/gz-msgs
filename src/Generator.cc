@@ -97,6 +97,12 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print(" 4127 4068 4275 4251)\n", "name", "includes");
     printer.Print("#endif\n", "name", "includes");
 
+    // Include sys/sysmacros.h to prevent warnings about "major" and "minor"
+    // defines. Major and minor are used in the version.proto file.
+    printer.Print("#ifdef __linux__\n", "name", "includes");
+    printer.Print("#include <sys/sysmacros.h>\n", "name", "include");
+    printer.Print("#endif\n", "name", "includes");
+
     // Add the <memory> header so that we can define std::unique_ptr
     // and std::shared_ptr types for our message later on
     printer.Print("#include <memory>\n", "name", "includes");
@@ -118,13 +124,7 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print("#include \"ignition/msgs/Factory.hh\"\n", "name",
                   "includes");
 
-    // Include sys/sysmacros.h to prevent warnings about "major" and "minor"
-    // defines. Major and minor are used in the version.proto file.
-    printer.Print("#ifdef __linux__\n", "name", "includes");
-    printer.Print("#include <sys/sysmacros.h>\n", "name", "include");
-    printer.Print("#endif\n", "name", "includes");
-
-    // Suppress warnings
+   // Suppress warnings
     printer.Print("#ifndef _MSC_VER\n", "name", "includes");
     printer.Print("#pragma GCC diagnostic ignored \"-Wshadow\"\n", "name",
                   "includes");

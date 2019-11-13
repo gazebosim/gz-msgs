@@ -405,6 +405,14 @@ namespace ignition
         const std::string &_frameId, bool _memoryAligned,
         const std::vector<std::pair<std::string,
         msgs::PointCloudPacked::Field::DataType>> &_fields);
+
+    IGNITION_MSGS_VISIBLE
+    bool ConvertFuelMetadata(const std::string &_modelConfigStr,
+                             msgs::FuelMetadata &_meta);
+
+    IGNITION_MSGS_VISIBLE
+    bool ConvertFuelMetadata(const msgs::FuelMetadata &_meta,
+                             std::string &_modelConfigStr);
     }
   }
 }
