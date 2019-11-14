@@ -62,10 +62,6 @@ message Image
   /// \brief Image height (number of rows)
   uint32 height        = 3;
 
-  /// \brief Corresponds to Image::PixelFormat enum
-  /// \deprecated Use `pixel_format_type`
-  uint32 pixel_format  = 4[deprecated = true];
-
   /// \brief Full row length in bytes
   uint32 step          = 5;
 

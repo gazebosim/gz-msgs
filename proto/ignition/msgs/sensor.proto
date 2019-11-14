@@ -71,10 +71,6 @@ message Sensor
   /// \brief Description of a camera sensor
   CameraSensor camera    = 10;
 
-  /// \brief Description of a ray (laser) sensor
-  /// \deprecated Use LidarSensor lidar.
-  RaySensor ray          = 11[deprecated=true];
-
   /// \brief Description of a contact sensor
   ContactSensor contact  = 12;
 

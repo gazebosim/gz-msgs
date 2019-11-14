@@ -65,10 +65,6 @@ message Joint
   string name           = 2;
   uint32 id             = 3;
 
-  /// \brief Angle of each axis. 
-  /// \deprecated Use the position field in the axis1 or axis2 message.
-  repeated double angle = 4 [deprecated=true];
-
   Type type             = 5;
   string parent         = 6;
   uint32 parent_id      = 7;
@@ -80,11 +76,6 @@ message Joint
 
   double cfm            = 13;
   double bounce         = 14;
-
-  /// \brief Velocity of the joint in SI units (meter/second).
-  /// \deprecated Use the velocity value in the axis1 or axis2
-  /// message.
-  double velocity       = 15[deprecated=true];
 
   double fudge_factor   = 16;
   double limit_cfm      = 17;
