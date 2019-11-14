@@ -77,14 +77,14 @@ message Joint
   double cfm            = 13;
   double bounce         = 14;
 
-  double fudge_factor   = 16;
-  double limit_cfm      = 17;
-  double limit_erp      = 18;
-  double suspension_cfm = 19;
-  double suspension_erp = 20;
+  double fudge_factor   = 15;
+  double limit_cfm      = 16;
+  double limit_erp      = 17;
+  double suspension_cfm = 18;
+  double suspension_erp = 19;
 
-  Gearbox gearbox       = 21;
-  Screw screw           = 22;
+  Gearbox gearbox       = 20;
+  Screw screw           = 21;
 
-  repeated Sensor sensor         = 23;
+  repeated Sensor sensor         = 22;
 }

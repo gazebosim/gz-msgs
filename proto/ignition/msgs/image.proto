@@ -63,11 +63,11 @@ message Image
   uint32 height        = 3;
 
   /// \brief Full row length in bytes
-  uint32 step          = 5;
+  uint32 step          = 4;
 
   /// \brief Actual data, size if (step * rows)
-  bytes data          = 6;
+  bytes data           = 5;
 
   /// \brief Pixel format type.
-  PixelFormatType pixel_format_type = 7;
+  PixelFormatType pixel_format_type = 6;
 }
