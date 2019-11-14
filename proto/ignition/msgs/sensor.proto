@@ -18,10 +18,10 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "SEnsorProtos";
+option java_outer_classname = "SensorProtos";
 
 /// \ingroup ignition.msgs
-/// \interface Sensor 
+/// \interface Sensor
 /// \brief Information about a sensor element
 
 import "ignition/msgs/altimeter_sensor.proto";
@@ -35,7 +35,6 @@ import "ignition/msgs/lidar_sensor.proto";
 import "ignition/msgs/logical_camera_sensor.proto";
 import "ignition/msgs/magnetometer_sensor.proto";
 import "ignition/msgs/pose.proto";
-import "ignition/msgs/raysensor.proto";
 
 message Sensor
 {
