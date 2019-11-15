@@ -25,10 +25,10 @@ TEST(Image, PixelFormat)
   ignition::msgs::Image msg;
   EXPECT_EQ(
     static_cast<int>(ignition::msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT),
-    static_cast<int>(msg.pixel_format()));
+    static_cast<int>(msg.pixel_format_type()));
 
-  msg.set_pixel_format(ignition::msgs::PixelFormatType::RGB_INT8);
+  msg.set_pixel_format_type(ignition::msgs::PixelFormatType::RGB_INT8);
   EXPECT_EQ(
     static_cast<int>(ignition::msgs::PixelFormatType::RGB_INT8),
-    static_cast<int>(msg.pixel_format()));
+    static_cast<int>(msg.pixel_format_type()));
 }
