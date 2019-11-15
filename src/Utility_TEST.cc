@@ -721,3 +721,33 @@ TEST(UtilityTest, InitPointCloudPacked)
   EXPECT_EQ(14u, pc.field(6).offset());
   EXPECT_EQ(22u, pc.point_step());
 }
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, DiscoveryTypeString)
+{
+  EXPECT_EQ("UNINITIALIZED",
+      msgs::ToString(msgs::Discovery::UNINITIALIZED));
+  EXPECT_EQ("ADVERTISE",
+      msgs::ToString(msgs::Discovery::ADVERTISE));
+  EXPECT_EQ("SUBSCRIBE",
+      msgs::ToString(msgs::Discovery::SUBSCRIBE));
+  EXPECT_EQ("UNADVERTISE",
+      msgs::ToString(msgs::Discovery::UNADVERTISE));
+  EXPECT_EQ("HEARTBEAT",
+      msgs::ToString(msgs::Discovery::HEARTBEAT));
+  EXPECT_EQ("BYE",
+      msgs::ToString(msgs::Discovery::BYE));
+  EXPECT_EQ("NEW_CONNECTION",
+      msgs::ToString(msgs::Discovery::NEW_CONNECTION));
+  EXPECT_EQ("END_CONNECTION",
+      msgs::ToString(msgs::Discovery::END_CONNECTION));
+
+  // If any of the following fail, then make sure you have added then new
+  // enum values to std::string ToString(const msgs::Discovery::Type &_t).
+  // Then update the following tests to match the new enum values.
+  EXPECT_EQ(msgs::Discovery::UNINITIALIZED,
+      msgs::Discovery::Type_MIN);
+  EXPECT_EQ(msgs::Discovery::END_CONNECTION,
+      msgs::Discovery::Type_MAX);
+  EXPECT_EQ(8, msgs::Discovery::Type_ARRAYSIZE);
+}

@@ -405,6 +405,12 @@ namespace ignition
         const std::string &_frameId, bool _memoryAligned,
         const std::vector<std::pair<std::string,
         msgs::PointCloudPacked::Field::DataType>> &_fields);
+
+    /// \brief Convert a Discovery::Type to a string. This can be used for
+    /// debugging purposes.
+    /// \return String version of Discovery::Type.
+    IGNITION_MSGS_VISIBLE
+    std::string ToString(const msgs::Discovery::Type &_t);
     }
   }
 }
