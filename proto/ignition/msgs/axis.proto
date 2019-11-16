@@ -39,7 +39,7 @@ message Axis
   double limit_velocity       = 6;
   double damping              = 7;
   double friction             = 8;
-  bool use_parent_model_frame = 9;
+  string xyz_expressed_in     = 9;
 
   /// \brief Position of the joint. For angular joints, such as revolute 
   /// joints, the units are radians. For linear joints, such as prismatic
