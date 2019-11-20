@@ -36,7 +36,7 @@ namespace ignition
 
     /// \brief Left and right trim a string. This was copied from ignition
     /// common, ign-common/Util.hh, to avoid adding another dependency.
-    /// Remove this function if ign-common every becomes a dependency.
+    /// Remove this function if ign-common ever becomes a dependency.
     /// \param[in] _s String to trim
     /// \return Trimmed string
     std::string trimmed(std::string _s)

@@ -31,10 +31,10 @@ message FuelMetadata
   /// \brief Contact information.
   message Contact
   {
-    /// \bried Contact name.
+    /// \brief Contact name.
     string name  = 1;
 
-    /// \bried Contact email.
+    /// \brief Contact email.
     string email = 2;
   } 
 
