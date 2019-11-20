@@ -2,6 +2,10 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Added Fuelmetadata.proto message file and conversion function to/from
+   the model.config format.
+    * [Pull request 157](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/157)
+
 1. Fix linking order of Protocol Buffers static libraries on GCC
     * [Pull request 151](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/151)
 
