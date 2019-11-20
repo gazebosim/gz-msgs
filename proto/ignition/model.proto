@@ -1,0 +1,217 @@
+syntax = "proto3";
+
+package robotics.model;
+
+import "math.proto";
+
+// ===========================================================================
+// A reference to a different object that this object depends on.
+// For now, reference by unique name should be sufficient.
+message ObjectRef {
+  string name = 1;
+}
+
+message Contact {
+  string name = 1;  // Person or organization.
+  string email = 2;
+}
+
+// Listing of all files that are used by this representation, including the
+// main file.  Each file is listed by path relative to the model root.
+// e.g. ["model.sdf", "meshes/model.obj", "materials/model.mtl"]
+message Manifest {
+  repeated string files = 1;
+}
+
+// ===========================================================================
+message Version {
+  message Ints {
+    repeated int64 parts = 1;
+  }
+
+  oneof version_type {
+    // A version string that can contain any information in any format.
+    // Versions represented as strings are not useful for ordering.
+    string version = 1;
+
+    // Represents a subversion as a floating point value, e.g. 2.1
+    // This does not work with sub-versions above 9 (2.11 < 2.9, 2.10 == 2.1).
+    double number = 2;
+
+    // Specify a version with subversions, e.g. 1.1.3 or 3.10
+    // They are compared lexicographically (1.2.10 < 1.3.1)
+    // These are comparable with double version numbers.
+    //   1.1 < 1.1.x < 1.2
+    //   1.9 < 1.10.x < 2
+    Ints subversion = 3;
+  }
+}
+
+// ===========================================================================
+// ObjectMetadata represents all of the metadata for a single object.  An object
+// may have multiple models that represent different levels of detail or model
+// formats.  Metadata should be valid across all models of the object that are
+// grouped within the same unique object identifier.
+message ObjectMetadata {
+  // =========================================================================
+  // model.config fields
+  message Config {
+    string name = 1;  // Unique string identifier of the object.
+    Contact author = 2;
+    string description = 3;
+    Version version = 4;  // Version of the object, including all models.
+  }
+  Config config = 1;
+
+  message LicenseData {
+    string copyright = 1; // e.g. "Copyright 1974, John Doe"
+    string license = 2; // Ideally spdx.org identifier, e.g. "Apache-2.0"
+  }
+  LicenseData license_data = 2;
+
+  // =========================================================================
+  // A description of each model of the object.  This list can include levels of
+  // detail, model formats, and separate versions for different tools.
+  repeated ModelData models = 3;
+
+  // =========================================================================
+  // Metadata fields
+  //
+  // These fields describe properties of the object that are common to all
+  // models.  Physical properties that can vary between levels of detail, such
+  // as bounding box and volume, are calculated from the highest level of
+  // detail.
+
+  message Physical {
+    // Axially aligned bounding box in meters, inteded to give an estiamte of
+    // the size of the object for the purpose of search filtering. The
+    // bounding should contain the union of the model's collision and visual
+    // geometries. If the object has dependencies, its bounding box should
+    // contain the geometry of those dependencies.  Additionally, if the
+    // object in question has joints, the bounding box should be determined
+    // with each joint in its initial position.
+    Box3d bounding_box_meters = 1;
+
+    // Volume in liters.  (1 cubic meter = 1000 liters)
+    double volume_l = 2;
+
+    // Mass in kilograms.
+    double mass_kg = 3;
+
+    Vector3d center_of_mass = 4;
+  }
+  Physical physical = 4;
+
+  // Other objects that can be included in this one.
+  repeated ObjectRef dependencies = 5;
+
+  // Keywords that can be used in search.  These tags apply to all
+  // models of the object.
+  repeated string tags = 6;
+
+  // A list of key-value pairs that can contain arbitrary user data.
+  Annotations annotations = 7;
+}
+
+// Geometric complexity of a model is represented by the number of primitives.
+// These can be facets in a mesh or primitive collision bodies, like spheres.
+message GeometricComplexity {
+  int32 level_of_detail = 1;  // Unitless value where larger is more complex.
+  int32 visual_primitives = 2;
+  int32 collision_primitives = 3;
+}
+
+// ===========================================================================
+// The ModelMetadata contains all properties of the model that can
+// be used as search keys and are not required to load the model.
+message ModelMetadata {
+  // Version of this model representation.
+  Version version = 1;
+
+  // A message containing a tool name and a version or range of versions, e.g.
+  //   tools { name: "bullet" version_range { range { min: 3 } } } }
+  //   tools { name: "mujoco" }
+  //   tools { name: "unity" version { number: 2018.1 } }
+  message Compatibility {
+    // Name of the tool.
+    string name = 1;
+
+    // Represents a range of compatible versions, e.g. [1.4, 1.6]
+    // Values of zero for either end of the range are ignored and the interval
+    // is considered to be unbounded in that direction.
+    //   { min: 3 } => [3, infinity)
+    message VersionRange {
+      Version min = 1;
+      Version max = 2;
+    }
+
+    // If version is omitted, it is assumed that the model is compatible with
+    // all versions of the tool.
+    oneof version_type {
+      // Exact version that the model is compatible with.
+      Version version = 2;
+      // If the
+      VersionRange version_range = 3;
+    }
+  }
+
+  // List of tools with version numbers that are compatible with this model,
+  repeated Compatibility tools = 2;
+
+  GeometricComplexity complexity = 3;
+
+  message Properties {
+    bool has_visual = 1;
+    bool has_collision = 2;
+    bool has_physics = 3;
+    bool has_lighting = 4;
+  }
+  Properties properties = 4;
+
+  // Keywords that are intended to be used in search.
+  repeated string tags = 5;
+
+  // A list of key-value pairs that can contain arbitrary user data.
+  Annotations annotations = 6;
+}
+
+// ===========================================================================
+// A model representation is a single description of the object with a
+// specific format and level of detail.
+message ModelData {
+  // Main file, e.g. "model.sdf".  Other files may be included by the main model
+  // file.  Every file that is transitively included from the main file should
+  // be listed in the manifest.
+  string model_file = 1;
+
+  // A message containing a string name and a version. e.g.
+  //   { name: "sdf" version: "1.5" }
+  message VersionedName {
+    string name = 1;
+    Version version = 2;
+  }
+  // Format with version of this model, e.g.
+  //   { name: "sdf" version { version_number: 1.5 } }
+  VersionedName format = 2;
+
+  // Pose from model frame to the world coordinate frame with x-forward, y-left,
+  // z-up
+  Pose3d orientation = 3;
+
+  Manifest manifest = 4;
+
+  ModelMetadata data = 5;
+}
+
+// ===========================================================================
+// Key-Value Annotations
+message KeyValue {
+  string key = 1;
+  string value = 2;
+}
+
+// A list of <key, value> pairs.
+// Keys may be repeated.
+message Annotations {
+  repeated KeyValue notes = 1;
+}
