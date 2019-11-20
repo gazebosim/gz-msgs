@@ -18,10 +18,10 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "SEnsorProtos";
+option java_outer_classname = "SensorProtos";
 
 /// \ingroup ignition.msgs
-/// \interface Sensor 
+/// \interface Sensor
 /// \brief Information about a sensor element
 
 import "ignition/msgs/altimeter_sensor.proto";
@@ -35,7 +35,6 @@ import "ignition/msgs/lidar_sensor.proto";
 import "ignition/msgs/logical_camera_sensor.proto";
 import "ignition/msgs/magnetometer_sensor.proto";
 import "ignition/msgs/pose.proto";
-import "ignition/msgs/raysensor.proto";
 
 message Sensor
 {
@@ -71,38 +70,34 @@ message Sensor
   /// \brief Description of a camera sensor
   CameraSensor camera    = 10;
 
-  /// \brief Description of a ray (laser) sensor
-  /// \deprecated Use LidarSensor lidar.
-  RaySensor ray          = 11[deprecated=true];
-
   /// \brief Description of a contact sensor
-  ContactSensor contact  = 12;
+  ContactSensor contact  = 11;
 
   /// \brief True value indicates that sensor data should be
   /// visualized in the GUI
-  bool visualize         = 13;
+  bool visualize         = 12;
 
   /// \brief Topic on which sensor data is published
-  string topic           = 14;
+  string topic           = 13;
 
   /// \brief Description of a logical camera sensor
-  LogicalCameraSensor logical_camera = 15;
+  LogicalCameraSensor logical_camera = 14;
 
   /// \brief Description of a gps sensor
-  GPSSensor gps          = 16;
+  GPSSensor gps          = 15;
 
   /// \brief Description of an IMU sensor
-  IMUSensor imu          = 17;
+  IMUSensor imu          = 16;
 
   /// \brief Description of a Magnetometer sensor
-  MagnetometerSensor magnetometer      = 18;
+  MagnetometerSensor magnetometer      = 17;
 
   /// \brief Description of an Altimeter sensor.
-  AltimeterSensor altimeter            = 19;
+  AltimeterSensor altimeter            = 18;
 
   /// \brief Description of an Air Pressure sensor.
-  AirPressureSensor air_pressure       = 20;
+  AirPressureSensor air_pressure       = 19;
 
   /// \brief Description of a lidar sensor
-  LidarSensor lidar                    = 21;
+  LidarSensor lidar                    = 20;
 }

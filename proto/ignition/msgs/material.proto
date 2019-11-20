@@ -94,6 +94,9 @@ message Material
 
     /// \brief Filename of the ambient occlusion map
     string ambient_occlusion_map = 12;
+
+    /// \brief Filename of the emissive map
+    string emissive_map          = 13;
   }
 
 
