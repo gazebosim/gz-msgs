@@ -14,9 +14,9 @@
  * limitations under the License.
  *
 */
+#include <tinyxml2.h>
 #include <functional>
 #include <sstream>
-#include <tinyxml2.h>
 #include <ignition/math/Helpers.hh>
 #include "ignition/msgs/Utility.hh"
 
@@ -33,7 +33,6 @@ namespace ignition
   {
     // Inline bracket to help doxygen filtering.
     inline namespace IGNITION_MSGS_VERSION_NAMESPACE {
-
     /// \brief Left and right trim a string. This was copied from ignition
     /// common, ign-common/Util.hh, to avoid adding another dependency.
     /// Remove this function if ign-common ever becomes a dependency.
@@ -855,7 +854,6 @@ namespace ignition
       meta.set_name(trimmed(elem->GetText()));
 
       // Read the description, if present.
-      std::string description;
       elem = modelElement->FirstChildElement("description");
       if (elem)
         meta.set_description(trimmed(elem->GetText()));
@@ -866,7 +864,6 @@ namespace ignition
       {
         ignition::msgs::FuelMetadata::Contact *author = meta.add_author();
         // Get the author name and email
-        std::string authorName, authorEmail;
         if (elem->FirstChildElement("name"))
         {
           author->set_name(trimmed(elem->FirstChildElement("name")->GetText()));

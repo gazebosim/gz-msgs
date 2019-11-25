@@ -124,7 +124,7 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print("#include \"ignition/msgs/Factory.hh\"\n", "name",
                   "includes");
 
-   // Suppress warnings
+    // Suppress warnings
     printer.Print("#ifndef _MSC_VER\n", "name", "includes");
     printer.Print("#pragma GCC diagnostic ignored \"-Wshadow\"\n", "name",
                   "includes");

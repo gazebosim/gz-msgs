@@ -24,6 +24,8 @@ option java_outer_classname = "FuelMetadata";
 /// \interface FuelMetadata
 /// \brief Meta data for an Ignition Fuel resource, such as a model or world.
 
+import "ignition/msgs/version.proto";
+import "ignition/msgs/version_range.proto";
 import "ignition/msgs/versioned_name.proto";
 
 message FuelMetadata
@@ -75,6 +77,27 @@ message FuelMetadata
     string uri = 1; 
   }
 
+  /// \brief A message containing a tool name and a version or range of
+  /// versions, e.g.
+  ///   tools { name: "bullet" version_range { min: {major: 3 } } } }
+  ///   tools { name: "gazebo" version { major: 11 } }
+  message Compatibility
+  {
+    /// \brief Name of the tool/library.
+    string name = 1;
+
+    /// \brief If version is omitted, it is assumed that the model is
+    /// compatible with all versions of the tool.
+    oneof version_type
+    {
+      /// \brief Exact version that the model is compatible with.
+      Version version            = 2;
+
+      /// \brief A range of compatible versions.
+      VersionRange version_range = 3;
+    }
+  }
+
   /// \brief A Fuel resource has to be one of the following.
   oneof resource_type
   {
@@ -106,4 +129,8 @@ message FuelMetadata
   /// \brief Resources that this resource depends on.
   /// \todo(nkoenig) This field is currently not used.
   repeated Dependency dependencies    = 10;
+
+  /// \brief List of tools/libraries with version numbers that are compatible
+  /// with this resource.
+  repeated Compatibility compatibility = 11;
 }
