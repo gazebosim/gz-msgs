@@ -792,7 +792,6 @@ namespace ignition
           return "END_CONNECTION";
       };
     }
-
   }
 }
 }
