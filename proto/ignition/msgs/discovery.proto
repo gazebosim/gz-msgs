@@ -32,22 +32,22 @@ message Discovery
   enum Type
   {
     /// \brief Type not initialized.
-    UNINITIALIZED = 0;
+    UNINITIALIZED  = 0;
 
     /// \brief Advertise message.
-    ADVERTISE     = 1;
+    ADVERTISE      = 1;
 
     /// \brief Subscribe message.
-    SUBSCRIBE     = 2;
+    SUBSCRIBE      = 2;
 
     /// \brief Unadvertise message.
-    UNADVERTISE   = 3;
+    UNADVERTISE    = 3;
 
     /// \brief Hearbeat message.
-    HEARTBEAT     = 4;
+    HEARTBEAT      = 4;
 
     /// \brief Bye message.
-    BYE           = 5;
+    BYE            = 5;
 
     /// \brief New connection message.
     NEW_CONNECTION = 6;
@@ -106,10 +106,10 @@ message Discovery
     message ServicePublisher
     {
       /// \brief ZeroMQ socket ID used by this publisher.
-      string socket_id = 1;
+      string socket_id     = 1;
 
       /// \brief The name of the request's protobuf message advertised.
-      string request_type = 2;
+      string request_type  = 2;
 
       /// \brief The name of the response's protobuf message advertised.
       string response_type = 3;
