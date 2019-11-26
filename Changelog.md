@@ -7,6 +7,9 @@
 1. Add emissive_map field to material.proto
     * [Pull request 155](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/155)
 
+1. Add discovery message
+    * [Pull request 159](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/159)
+
 ## Ignition Msgs 4.x
 
 ### Ignition Msgs 4.x.x
