@@ -79,8 +79,15 @@ message Discovery
     /// \brief Defines the different options for the scope of a topic/service.
     enum Scope
     {
+      /// \brief Topic/service only available to subscribers in the same
+      /// process as the publisher.
       PROCESS = 0;
+
+      /// \brief Topic/service only available to subscribers in the same
+      /// machine as the publisher.
       HOST    = 1;
+
+      /// \brief Topic/service available to any subscriber.
       ALL     = 2;
     }
 
