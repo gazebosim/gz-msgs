@@ -22,7 +22,7 @@ option java_outer_classname = "DiscoveryProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Discovery
-/// \brief Message that contains Discovery information
+/// \brief Message that contains Discovery information.
 
 import "ignition/msgs/header.proto";
 
@@ -73,7 +73,7 @@ message Discovery
     string topic = 1;
   }
 
-  /// \brief Information about a publisher
+  /// \brief Information about a publisher.
   message Publisher
   {
     /// \brief Defines the different options for the scope of a topic/service.
@@ -84,7 +84,7 @@ message Discovery
       ALL     = 2;
     }
 
-    /// \brief Information about a message publisher
+    /// \brief Information about a message publisher.
     message MessagePublisher
     {
       /// \brief ZeroMQ control address of the publisher.
@@ -94,7 +94,6 @@ message Discovery
 
       /// \brief Message type advertised by this publisher.
       string msg_type     = 2;
-
 
       /// \brief Whether the publication has been throttled.
       bool throttled      = 3;
@@ -122,13 +121,13 @@ message Discovery
     /// \brief ZeroMQ address of the publisher.
     string address      = 2;
 
-    /// \brief Process UUID of the publisher
+    /// \brief Process UUID of the publisher.
     string process_uuid = 3;
 
-    /// \brief Node UUID of the publisher
+    /// \brief Node UUID of the publisher.
     string node_uuid    = 4;
 
-    /// \brief The scope of this publisher
+    /// \brief The scope of this publisher.
     Scope scope         = 5;
 
     /// \brief Information about a message or service publisher.
@@ -142,7 +141,7 @@ message Discovery
     }
   }
 
-  /// \brief Optional header data
+  /// \brief Optional header data.
   Header header       = 1;
 
   /// \brief Version of the discovery protocol.

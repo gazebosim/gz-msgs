@@ -408,6 +408,7 @@ namespace ignition
 
     /// \brief Convert a Discovery::Type to a string. This can be used for
     /// debugging purposes.
+    // \param[in] _t Type of the discovery message.
     /// \return String version of Discovery::Type.
     IGNITION_MSGS_VISIBLE
     std::string ToString(const msgs::Discovery::Type &_t);
