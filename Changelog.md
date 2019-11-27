@@ -10,6 +10,12 @@
 1. Add discovery message
     * [Pull request 159](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/159)
 
+1. Deprecate all double fields in joint_cmd and pid, replace with Double
+    * [Pull request 162](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/162)
+
+1. Factory relative to
+    * [Pull request 163](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/163)
+
 ## Ignition Msgs 4.x
 
 ### Ignition Msgs 4.x.x
