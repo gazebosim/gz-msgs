@@ -24,6 +24,7 @@ option java_outer_classname = "PIDProtos";
 /// \interface PID 
 /// \brief Message for simple PID controllers
 
+import "ignition/msgs/double.proto";
 import "ignition/msgs/header.proto";
 
 message PID
@@ -31,11 +32,18 @@ message PID
   /// \brief Optional header data
   Header header = 1;
 
-  double target = 2;
-  double p_gain = 3;
-  double i_gain = 4;
-  double d_gain = 5;
-  double i_max  = 6;
-  double i_min  = 7;
-  double limit  = 8;
+  double target = 2[deprecated = true];
+  double p_gain = 3[deprecated = true];
+  double i_gain = 4[deprecated = true];
+  double d_gain = 5[deprecated = true];
+  double i_max  = 6[deprecated = true];
+  double i_min  = 7[deprecated = true];
+  double limit  = 8[deprecated = true];
+  Double target_optional = 9;
+  Double p_gain_optional = 10;
+  Double i_gain_optional = 11;
+  Double d_gain_optional = 12;
+  Double i_max_optional  = 13;
+  Double i_min_optional  = 14;
+  Double limit_optional  = 15;
 }
