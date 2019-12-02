@@ -406,6 +406,13 @@ namespace ignition
         const std::vector<std::pair<std::string,
         msgs::PointCloudPacked::Field::DataType>> &_fields);
 
+    /// \brief Convert a Discovery::Type to a string. This can be used for
+    /// debugging purposes.
+    // \param[in] _t Type of the discovery message.
+    /// \return String version of Discovery::Type.
+    IGNITION_MSGS_VISIBLE
+    std::string ToString(const msgs::Discovery::Type &_t);
+
     /// \brief Convert the contents of a model.config file, in the form of
     /// an XML string, to a FuelMetadata message.
     /// \param[in] _modelConfigStr A string containing XML data that matches

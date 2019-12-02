@@ -24,6 +24,7 @@ option java_outer_classname = "JointCmdProtos";
 /// \interface JointCmd
 /// \brief Message for joint command, used by physics::JointControlWidget
 
+import "ignition/msgs/double.proto";
 import "ignition/msgs/pid.proto";
 import "ignition/msgs/header.proto";
 
@@ -34,9 +35,10 @@ message JointCmd
 
   string name     = 2;
   int32 axis      = 3;
-  double force    = 4;
+  double force    = 4[deprecated = true];
 
   PID position    = 5;
   PID velocity    = 6;
   bool reset      = 7;
+  Double force_optional = 8;
 }

@@ -820,6 +820,31 @@ namespace ignition
         _msg.set_point_step(offset);
     }
 
+    /////////////////////////////////////////////
+    std::string ToString(const msgs::Discovery::Type &_t)
+    {
+      switch (_t)
+      {
+        default:
+        case msgs::Discovery::UNINITIALIZED:
+          return "UNINITIALIZED";
+        case msgs::Discovery::ADVERTISE:
+          return "ADVERTISE";
+        case msgs::Discovery::SUBSCRIBE:
+          return "SUBSCRIBE";
+        case msgs::Discovery::UNADVERTISE:
+          return "UNADVERTISE";
+        case msgs::Discovery::HEARTBEAT:
+          return "HEARTBEAT";
+        case msgs::Discovery::BYE:
+          return "BYE";
+        case msgs::Discovery::NEW_CONNECTION:
+          return "NEW_CONNECTION";
+        case msgs::Discovery::END_CONNECTION:
+          return "END_CONNECTION";
+      };
+    }
+
     /////////////////////////////////////////////////
     bool ConvertFuelMetadata(const std::string &_modelConfigStr,
                              msgs::FuelMetadata &_meta)
