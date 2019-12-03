@@ -23,9 +23,8 @@ option java_outer_classname = "VersionRange";
 /// \ingroup ignition.msgs
 /// \interface VersionRange.
 /// \brief Message that represents a range of versions, e.g. [1.4, 1.6].
-/// Values of zero for either end of the range are ignored and the interval
-/// is considered to be unbounded in that direction,
-/// e.g. { min: 3 } => [3, infinity)
+/// If a min or max value is not present, then the interval is considered to
+/// be unbounded in that direction.
 
 import "ignition/msgs/version.proto";
 
