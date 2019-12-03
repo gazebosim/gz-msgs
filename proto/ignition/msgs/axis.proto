@@ -63,22 +63,22 @@ message Axis
   /// \deprecated Use `xyz_expressed_in` instead.
   bool use_parent_model_frame = 9[deprecated = true];
 
-  /// \brief Set the name of the coordinate frame in which this joint axis's
-  /// unit vector is expressed. An empty value implies the parent (joint)
-  /// frame.
-  string xyz_expressed_in     = 10;
-
   /// \brief Position of the joint. For angular joints, such as revolute
   /// joints, the units are radians. For linear joints, such as prismatic
   /// joints, the units are meters.
-  double position             = 11;
+  double position             = 10;
 
   /// \brief Velocity of the joint in SI units (meter/second).
-  double velocity             = 12;
+  double velocity             = 11;
 
   /// \brief Force applied to the joint in SI units (Newton).
-  double force                = 13;
+  double force                = 12;
 
   /// \brief Acceleration of the joint is SI units (meter/second^2).
-  double acceleration         = 14;
+  double acceleration         = 13;
+
+  /// \brief Set the name of the coordinate frame in which this joint axis's
+  /// unit vector is expressed. An empty value implies the parent (joint)
+  /// frame.
+  string xyz_expressed_in     = 14;
 }
