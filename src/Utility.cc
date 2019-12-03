@@ -887,7 +887,7 @@ namespace ignition
       elem = modelElement->FirstChildElement("author");
       while (elem)
       {
-        ignition::msgs::FuelMetadata::Contact *author = meta.add_author();
+        ignition::msgs::FuelMetadata::Contact *author = meta.add_authors();
         // Get the author name and email
         if (elem->FirstChildElement("name"))
         {
@@ -972,11 +972,11 @@ namespace ignition
         << "    <description>" << _meta.description() << "</description>\n";
 
       // Output author information.
-      for (int i = 0; i < _meta.author_size(); ++i)
+      for (int i = 0; i < _meta.authors_size(); ++i)
       {
         out << "    <author>\n"
-        << "      <name>" << _meta.author(i).name() << "</name>\n"
-        << "      <email>" << _meta.author(i).email() << "</email>\n"
+        << "      <name>" << _meta.authors(i).name() << "</name>\n"
+        << "      <email>" << _meta.authors(i).email() << "</email>\n"
         << "    </author>\n";
       }
 
