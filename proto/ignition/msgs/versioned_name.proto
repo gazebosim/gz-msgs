@@ -18,12 +18,13 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Version";
+option java_outer_classname = "VersionedName";
 
 /// \ingroup ignition.msgs
 /// \interface Version.
 /// \brief Version information that contains an associated name. This message
-/// can be used to represent a versioned library, such as "SDF 1.2.3".
+/// can be used to represent a versioned library, such as
+/// "<library_name> 1.2.3".
 
 import "ignition/msgs/version.proto";
 
