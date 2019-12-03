@@ -115,7 +115,7 @@ message FuelMetadata
   int32 version            = 5;
 
   /// \brief Authors of this resource.
-  repeated Contact author  = 6;
+  repeated Contact authors  = 6;
 
   /// \brief Legal information, such as copyright and license specificiations.
   Legal legal              = 7;
