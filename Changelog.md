@@ -16,13 +16,12 @@
 1. Factory relative to
     * [Pull request 163](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/163)
 
+1. Added `fuel_metadata.proto`, `version.proto`, `version_range.proto`, and `versioned_name.proto` message files. Added conversion functions to/from the model.config/metadata.pbtxt formats.
+    * [Pull request 157](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/157)
+
 ## Ignition Msgs 4.x
 
 ### Ignition Msgs 4.x.x
-
-1. Added Fuelmetadata.proto message file and conversion function to/from
-   the model.config format.
-    * [Pull request 157](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/157)
 
 1. Fix linking order of Protocol Buffers static libraries on GCC
     * [Pull request 151](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/151)
