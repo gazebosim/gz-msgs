@@ -909,7 +909,7 @@ namespace ignition
       while (elem)
       {
         std::string verStr = elem->Attribute("version");
-        math::SemanticVersion ver(std::stof(trimmed(verStr)));
+        math::SemanticVersion ver(trimmed(verStr));
         if (ver > maxVer)
         {
           meta.mutable_model()->mutable_file_format()->set_name("sdf");
