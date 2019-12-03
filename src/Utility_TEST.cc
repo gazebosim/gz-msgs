@@ -751,3 +751,9 @@ TEST(UtilityTest, DiscoveryTypeString)
       msgs::Discovery::Type_MAX);
   EXPECT_EQ(8, msgs::Discovery::Type_ARRAYSIZE);
 }
+
+TEST(UtilityTest, MetadataConversion)
+{
+  /// \todo(nkoenig) Add tests for Utility::ConvertFuelMetadata and
+  /// Utility::ConvertFuelMetadata
+}
