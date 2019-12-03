@@ -132,5 +132,5 @@ message FuelMetadata
 
   /// \brief List of tools/libraries with version numbers that are compatible
   /// with this resource.
-  repeated Compatibility compatibility = 11;
+  repeated Compatibility compatibilities = 11;
 }
