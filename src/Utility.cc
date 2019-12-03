@@ -856,7 +856,7 @@ namespace ignition
       if (modelConfigDoc.Parse(_modelConfigStr.c_str()) !=
           tinyxml2::XML_SUCCESS)
       {
-        std::cerr << "Unable to parse model confg XML string.\n";
+        std::cerr << "Unable to parse model config XML string.\n";
         return false;
       }
 

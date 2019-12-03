@@ -38,7 +38,7 @@ message FuelMetadata
 
     /// \brief Contact email.
     string email = 2;
-  } 
+  }
 
   /// \brief Legal information, including copyright and license specifications.
   message Legal
@@ -57,7 +57,7 @@ message FuelMetadata
     string file = 1;
 
     /// \brief Name and version of the file format used by the file.
-    VersionedName file_format  = 2;
+    VersionedName file_format = 2;
   }
 
   /// \brief Information about a world resource.
@@ -67,14 +67,14 @@ message FuelMetadata
     string file = 1;
 
     /// \brief Name and version of the file format used by the file.
-    VersionedName file_format  = 2;
+    VersionedName file_format = 2;
   }
 
   /// \brief Definition of a dependency
   message Dependency
   {
     /// \brief Dependency uri.
-    string uri = 1; 
+    string uri = 1;
   }
 
   /// \brief A message containing a tool name and a version or range of
@@ -91,7 +91,7 @@ message FuelMetadata
     oneof version_type
     {
       /// \brief Exact version that the model is compatible with.
-      Version version            = 2;
+      Version version = 2;
 
       /// \brief A range of compatible versions.
       VersionRange version_range = 3;
@@ -115,20 +115,20 @@ message FuelMetadata
   int32 version            = 5;
 
   /// \brief Authors of this resource.
-  repeated Contact authors  = 6;
+  repeated Contact authors = 6;
 
   /// \brief Legal information, such as copyright and license specificiations.
   Legal legal              = 7;
 
   /// \brief Tags for a resource.
-  repeated string tags            = 8;
+  repeated string tags     = 8;
 
   // A list of key-value pairs that can contain arbitrary user data.
   map<string, string> annotations = 9;
 
   /// \brief Resources that this resource depends on.
   /// \todo(nkoenig) This field is currently not used.
-  repeated Dependency dependencies    = 10;
+  repeated Dependency dependencies = 10;
 
   /// \brief List of tools/libraries with version numbers that are compatible
   /// with this resource.
