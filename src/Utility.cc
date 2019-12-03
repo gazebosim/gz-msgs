@@ -18,6 +18,7 @@
 #include <functional>
 #include <sstream>
 #include <ignition/math/Helpers.hh>
+#include <ignition/math/SemanticVersion.hh>
 #include "ignition/msgs/Utility.hh"
 
 #ifdef _WIN32
@@ -904,20 +905,22 @@ namespace ignition
 
       // Get the most recent SDF file
       elem = modelElement->FirstChildElement("sdf");
-      float maxVer = 0.0;
+      math::SemanticVersion maxVer;
       while (elem)
       {
         std::string verStr = elem->Attribute("version");
-        float ver = std::stof(trimmed(verStr));
+        math::SemanticVersion ver(std::stof(trimmed(verStr)));
         if (ver > maxVer)
         {
           meta.mutable_model()->mutable_file_format()->set_name("sdf");
           ignition::msgs::Version *verMsg =
             meta.mutable_model()->mutable_file_format()->mutable_version();
 
-          std::vector<std::string> parts = split(verStr, ".");
-          verMsg->set_major(std::stoi(parts[0]));
-          verMsg->set_minor(std::stoi(parts[1]));
+          verMsg->set_major(ver.Major());
+          verMsg->set_minor(ver.Minor());
+          verMsg->set_patch(ver.Patch());
+          verMsg->set_prerelease(ver.Prerelease());
+          verMsg->set_build(ver.Build());
 
           meta.mutable_model()->set_file(trimmed(elem->GetText()));
         }
