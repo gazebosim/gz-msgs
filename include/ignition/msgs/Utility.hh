@@ -415,6 +415,7 @@ namespace ignition
 
     /// \brief Convert the contents of a model.config file, in the form of
     /// an XML string, to a FuelMetadata message.
+    /// Only the latest versioned model is added to the meta data message.
     /// \param[in] _modelConfigStr A string containing XML data that matches
     /// the model.config format.
     /// \param[out] _meta The message that receives the converted data.
@@ -425,6 +426,11 @@ namespace ignition
 
     /// \brief Convert a FuelMetadata message to a string containing XML
     /// data that matches the model.config format.
+    ///
+    /// The model.config format contains only a subset of the information in
+    /// a metadata message. The extra information in the metadata message is
+    /// discarded.
+    ///
     /// \param[in] _meta The FuelMetadata message to convert.
     /// \param[out] _modelConfigStr XML string containing the converted
     /// message data.

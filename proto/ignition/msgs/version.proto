@@ -22,7 +22,8 @@ option java_outer_classname = "Version";
 
 /// \ingroup ignition.msgs
 /// \interface Version.
-/// \brief Message that contains major, minor, and patch numbers.
+/// \brief Message that contains major, minor, and patch numbers. Prelease and
+/// build information can also be included.
 
 message Version
 {
@@ -34,4 +35,10 @@ message Version
 
   /// \brief Patch version.
   int32 patch = 3;
+
+  /// \brief Pre-release version.
+  string prerelease = 4;
+
+  /// \brief Build version.
+  string build = 5;
 }
