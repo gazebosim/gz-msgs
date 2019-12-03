@@ -68,4 +68,8 @@ message EntityFactory
   /// \brief Whether the server is allowed to rename the entity in case of
   /// overlap with existing entities.
   bool allow_renaming              = 9;
+
+  /// \brief The pose will be defined relative to this frame. If left empty,
+  /// the "world" frame will be used.
+  string relative_to               = 10;
 }
