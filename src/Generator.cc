@@ -132,6 +132,11 @@ bool Generator::Generate(const FileDescriptor *_file,
                   "includes");
     printer.Print("#pragma GCC diagnostic ignored \"-Wunused-parameter\"\n",
         "name", "includes");
+    printer.Print("#pragma GCC diagnostic ignored \"-Wunused-parameter\"\n",
+        "name", "includes");
+    printer.Print(
+        "#pragma GCC diagnostic ignored \"-Wdeprecated-declarations\"\n",
+        "name", "includes");
     printer.Print("#else\n", "name", "includes");
     printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512",
                   "name", "includes");
