@@ -5,6 +5,15 @@ Deprecated code produces compile-time warnings. These warning serve as
 notification to users that their code should be upgraded. The next major
 release will remove the deprecated code.
 
+## Ignition Msgs 4.X to 5.X
+
+### Modifications
+
+
+### Deprecations
+
+1. **axis.proto**
+    + The `use_parent_model_frame` field is deprecated, use `xyz_expressed_in` instead. Setting `xyz_expressed_in = "__model__"` is equivalent to`use_parent_model_frame = true` and leaving `xyz_expressed_in` empty is equivalent to `use_parent_model_frame = false`
 
 ## Ignition Msgs 3.X to 4.X
 
@@ -22,7 +31,7 @@ release will remove the deprecated code.
 
 1. **sensor.proto**
     + Deprecating `RaySensor`, and replacing with `LidarSensor`.
- 
+
 ### Deprecations
 
 1. **joint.proto**
