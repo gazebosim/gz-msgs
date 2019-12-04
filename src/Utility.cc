@@ -14,9 +14,19 @@
  * limitations under the License.
  *
 */
+#include <tinyxml2.h>
 #include <functional>
+#include <sstream>
 #include <ignition/math/Helpers.hh>
+#include <ignition/math/SemanticVersion.hh>
 #include "ignition/msgs/Utility.hh"
+
+#ifdef _WIN32
+  const auto &ignstrtok = strtok_s;
+#else
+  const auto &ignstrtok = strtok_r;
+#endif
+
 
 namespace ignition
 {
@@ -24,6 +34,49 @@ namespace ignition
   {
     // Inline bracket to help doxygen filtering.
     inline namespace IGNITION_MSGS_VERSION_NAMESPACE {
+    /// \brief Left and right trim a string. This was copied from ignition
+    /// common, ign-common/Util.hh, to avoid adding another dependency.
+    /// Remove this function if ign-common ever becomes a dependency.
+    /// \param[in] _s String to trim
+    /// \return Trimmed string
+    std::string trimmed(std::string _s)
+    {
+      // Left trim
+      _s.erase(_s.begin(), std::find_if(_s.begin(), _s.end(),
+            [](int c) {return !std::isspace(c);}));
+
+      // Right trim
+      _s.erase(std::find_if(_s.rbegin(), _s.rend(),
+            [](int c) {return !std::isspace(c);}).base(), _s.end());
+
+      return _s;
+    }
+
+    /// \brief Splits a string into tokens. This was copied from ignition
+    /// common, ign-common/Util.hh, to avoid adding another dependency.
+    /// Remove this function if ign-common every becomes a dependency.
+    /// \param[in] _str Input string.
+    /// \param[in] _delim Token delimiter.
+    /// \return Vector of tokens.
+    std::vector<std::string> split(const std::string &_str,
+        const std::string &_delim)
+    {
+      std::vector<std::string> tokens;
+      char *saveptr;
+      char *str = strdup(_str.c_str());
+
+      auto token = ignstrtok(str, _delim.c_str(), &saveptr);
+
+      while (token)
+      {
+        tokens.push_back(token);
+        token = ignstrtok(NULL, _delim.c_str(), &saveptr);
+      }
+
+      free(str);
+      return tokens;
+    }
+
     /////////////////////////////////////////////
     ignition::math::Vector3d Convert(const msgs::Vector3d &_v)
     {
@@ -791,6 +844,153 @@ namespace ignition
         case msgs::Discovery::END_CONNECTION:
           return "END_CONNECTION";
       };
+    }
+
+    /////////////////////////////////////////////////
+    bool ConvertFuelMetadata(const std::string &_modelConfigStr,
+                             msgs::FuelMetadata &_meta)
+    {
+      ignition::msgs::FuelMetadata meta;
+
+      // Load the model config into tinyxml
+      tinyxml2::XMLDocument modelConfigDoc;
+      if (modelConfigDoc.Parse(_modelConfigStr.c_str()) !=
+          tinyxml2::XML_SUCCESS)
+      {
+        std::cerr << "Unable to parse model config XML string.\n";
+        return false;
+      }
+
+      // Get the top level <model> element.
+      tinyxml2::XMLElement *modelElement = modelConfigDoc.FirstChildElement(
+          "model");
+      if (!modelElement)
+      {
+        std::cerr << "Model config string does not contain a <model> element\n";
+        return false;
+      }
+
+      // Read the name, which is a mandatory element.
+      tinyxml2::XMLElement *elem = modelElement->FirstChildElement("name");
+      if (!elem)
+      {
+        std::cerr << "Model config string does not contain a <name> element\n";
+        return false;
+      }
+      meta.set_name(trimmed(elem->GetText()));
+
+      // Read the description, if present.
+      elem = modelElement->FirstChildElement("description");
+      if (elem)
+        meta.set_description(trimmed(elem->GetText()));
+
+      // Read the authors, if any.
+      elem = modelElement->FirstChildElement("author");
+      while (elem)
+      {
+        ignition::msgs::FuelMetadata::Contact *author = meta.add_authors();
+        // Get the author name and email
+        if (elem->FirstChildElement("name"))
+        {
+          author->set_name(trimmed(elem->FirstChildElement("name")->GetText()));
+        }
+        if (elem->FirstChildElement("email"))
+        {
+          author->set_email(
+              trimmed(elem->FirstChildElement("email")->GetText()));
+        }
+
+        elem = elem->NextSiblingElement("author");
+      }
+
+      // Get the most recent SDF file
+      elem = modelElement->FirstChildElement("sdf");
+      math::SemanticVersion maxVer;
+      while (elem)
+      {
+        std::string verStr = elem->Attribute("version");
+        math::SemanticVersion ver(trimmed(verStr));
+        if (ver > maxVer)
+        {
+          meta.mutable_model()->mutable_file_format()->set_name("sdf");
+          ignition::msgs::Version *verMsg =
+            meta.mutable_model()->mutable_file_format()->mutable_version();
+
+          verMsg->set_major(ver.Major());
+          verMsg->set_minor(ver.Minor());
+          verMsg->set_patch(ver.Patch());
+          verMsg->set_prerelease(ver.Prerelease());
+          verMsg->set_build(ver.Build());
+
+          meta.mutable_model()->set_file(trimmed(elem->GetText()));
+        }
+
+        elem = elem->NextSiblingElement("sdf");
+      }
+      if (meta.model().file().empty())
+      {
+        std::cerr << "Model config string does not contain an <sdf> element\n";
+        return false;
+      }
+
+      _meta.CopyFrom(meta);
+      return true;
+    }
+
+    /////////////////////////////////////////////////
+    bool ConvertFuelMetadata(const msgs::FuelMetadata &_meta,
+                             std::string &_modelConfigStr)
+    {
+      std::ostringstream out;
+
+      // Output opening tag.
+      if (_meta.has_model())
+      {
+        if (_meta.model().file_format().name() != "sdf")
+        {
+          std::cerr << "Model _metadata does not contain an SDF file.\n";
+          return false;
+        }
+
+        out << "<?xml version='1.0'?>\n"
+            << "  <model>\n";
+      }
+      else
+      {
+        if (_meta.world().file_format().name() != "sdf")
+        {
+          std::cerr << "World _metadata does not contain an SDF file.\n";
+          return false;
+        }
+
+        out << "<?xml version='1.0'?>\n"
+            << "  <world>\n";
+      }
+
+      out << "    <name>" << _meta.name() << "</name>\n"
+        << "    <version>" << _meta.version() << "</version>\n"
+        << "    <sdf version='" << _meta.model().file_format().version().major()
+        << "." << _meta.model().file_format().version().minor() << "'>"
+        << _meta.model().file() << "</sdf>\n"
+        << "    <description>" << _meta.description() << "</description>\n";
+
+      // Output author information.
+      for (int i = 0; i < _meta.authors_size(); ++i)
+      {
+        out << "    <author>\n"
+        << "      <name>" << _meta.authors(i).name() << "</name>\n"
+        << "      <email>" << _meta.authors(i).email() << "</email>\n"
+        << "    </author>\n";
+      }
+
+      // Output closing tag.
+      if (_meta.has_model())
+        out << "  </model>\n";
+      else
+        out << "  </world>\n";
+
+      _modelConfigStr = out.str();
+      return true;
     }
   }
 }

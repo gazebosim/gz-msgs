@@ -412,6 +412,36 @@ namespace ignition
     /// \return String version of Discovery::Type.
     IGNITION_MSGS_VISIBLE
     std::string ToString(const msgs::Discovery::Type &_t);
+
+    /// \brief Convert the contents of a model.config file, in the form of
+    /// an XML string, to a FuelMetadata message.
+    ///
+    /// Only the latest versioned model is added to the meta data message.
+    ///
+    /// The `<depend>` and `<version>` tags are ignored.
+    ///
+    /// \param[in] _modelConfigStr A string containing XML data that matches
+    /// the model.config format.
+    /// \param[out] _meta The message that receives the converted data.
+    /// \return True if the conversion was successful.
+    IGNITION_MSGS_VISIBLE
+    bool ConvertFuelMetadata(const std::string &_modelConfigStr,
+                             msgs::FuelMetadata &_meta);
+
+    /// \brief Convert a FuelMetadata message to a string containing XML
+    /// data that matches the model.config format.
+    ///
+    /// The model.config format contains only a subset of the information in
+    /// a metadata message. The extra information in the metadata message is
+    /// discarded.
+    ///
+    /// \param[in] _meta The FuelMetadata message to convert.
+    /// \param[out] _modelConfigStr XML string containing the converted
+    /// message data.
+    /// \return True if the conversion was successful.
+    IGNITION_MSGS_VISIBLE
+    bool ConvertFuelMetadata(const msgs::FuelMetadata &_meta,
+                             std::string &_modelConfigStr);
     }
   }
 }

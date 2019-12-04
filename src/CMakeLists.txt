@@ -179,7 +179,10 @@ target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
     protobuf::libprotobuf
-    ${ignition-math${IGN_MATH_VER}_LIBRARIES})
+    ${ignition-math${IGN_MATH_VER}_LIBRARIES}
+  PRIVATE
+    TINYXML2::TINYXML2
+)
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   SYSTEM PUBLIC $<TARGET_PROPERTY:protobuf::libprotobuf,INTERFACE_INCLUDE_DIRECTORIES>)
@@ -201,7 +204,10 @@ ign_get_libsources_and_unittests(sources gtest_sources)
 # Build the unit tests.
 ign_build_tests(TYPE UNIT
   SOURCES
-    ${gtest_sources})
+    ${gtest_sources}
+  LIB_DEPS
+      TINYXML2::TINYXML2
+)
 
 ##################################################
 # ign msgs command
