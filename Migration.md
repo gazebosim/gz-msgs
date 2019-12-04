@@ -13,7 +13,7 @@ release will remove the deprecated code.
 ### Deprecations
 
 1. **axis.proto**
-    + The `use_parent_model_frame` field is deprecated, use `xyz_expressed_in` instead.
+    + The `use_parent_model_frame` field is deprecated, use `xyz_expressed_in` instead. Setting `xyz_expressed_in = "__model__"` is equivalent to`use_parent_model_frame = true` and leaving `xyz_expressed_in` empty is equivalent to `use_parent_model_frame = false`
 
 ## Ignition Msgs 3.X to 4.X
 
