@@ -2,7 +2,7 @@
 
 ### Ignition Msgs 5.x.x
 
-### Ignition Msgs 5.0.0
+### Ignition Msgs 5.0.0 (2019-12-09)
 
 1. Add support for sdformat frame semantics
     * [Pull request 160](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/160)
