@@ -589,6 +589,44 @@ TEST(MsgsTest, ConvertMsgsShaderTypeToString)
       "unknown");
 }
 
+//////////////////////////////////////////////////
+void CompareMsgsPixelFormatTypeToString(const msgs::PixelFormatType _type)
+{
+  EXPECT_EQ(_type,
+      msgs::ConvertPixelFormatType(msgs::ConvertPixelFormatType(_type)))
+      << msgs::ConvertPixelFormatType(_type);
+}
+
+//////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMsgsPixelFormatTypeToString)
+{
+  CompareMsgsPixelFormatTypeToString(
+      msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::L_INT8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::L_INT16);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::RGB_INT8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::RGBA_INT8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BGRA_INT8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::RGB_INT16);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::RGB_INT32);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BGR_INT8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BGR_INT16);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BGR_INT32);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::R_FLOAT16);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::RGB_FLOAT16);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::R_FLOAT32);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::RGB_FLOAT32);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BAYER_RGGB8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BAYER_BGGR8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BAYER_GBRG8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BAYER_GRBG8);
+
+  EXPECT_EQ(msgs::ConvertPixelFormatType("bad type"),
+      msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT);
+  EXPECT_EQ(msgs::ConvertPixelFormatType(msgs::PixelFormatType(100)),
+      "UNKNOWN_PIXEL_FORMAT");
+}
+
 /////////////////////////////////////////////////
 TEST(UtilityTest, CovertMathAxisAlignedBox)
 {
