@@ -849,11 +849,7 @@ namespace ignition
     /////////////////////////////////////////////
     msgs::PixelFormatType ConvertPixelFormatType(const std::string &_str)
     {
-      if (_str == "UNKNOWN_PIXEL_FORMAT")
-      {
-        return msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT;
-      }
-      else if (_str == "L_INT8")
+      if (_str == "L_INT8")
       {
         return msgs::PixelFormatType::L_INT8;
       }
