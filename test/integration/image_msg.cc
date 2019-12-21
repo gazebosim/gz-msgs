@@ -23,6 +23,10 @@ TEST(Image, PixelFormat)
 {
   // Check that pixel format enum is properly set
   ignition::msgs::Image msg;
+#ifndef _WIN32
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   EXPECT_EQ(
     static_cast<int>(ignition::msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT),
     static_cast<int>(msg.pixel_format()));
@@ -31,4 +35,16 @@ TEST(Image, PixelFormat)
   EXPECT_EQ(
     static_cast<int>(ignition::msgs::PixelFormatType::RGB_INT8),
     static_cast<int>(msg.pixel_format()));
+#ifndef _WIN32
+# pragma GCC diagnostic pop
+#endif
+
+  EXPECT_EQ(
+    static_cast<int>(ignition::msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT),
+    static_cast<int>(msg.pixel_format_type()));
+
+  msg.set_pixel_format_type(ignition::msgs::PixelFormatType::RGB_INT8);
+  EXPECT_EQ(
+    static_cast<int>(ignition::msgs::PixelFormatType::RGB_INT8),
+    static_cast<int>(msg.pixel_format_type()));
 }
