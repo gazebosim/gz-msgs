@@ -97,6 +97,12 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print(" 4127 4068 4275 4251)\n", "name", "includes");
     printer.Print("#endif\n", "name", "includes");
 
+    // Include sys/sysmacros.h to prevent warnings about "major" and "minor"
+    // defines. Major and minor are used in the version.proto file.
+    printer.Print("#ifdef __linux__\n", "name", "includes");
+    printer.Print("#include <sys/sysmacros.h>\n", "name", "include");
+    printer.Print("#endif\n", "name", "includes");
+
     // Add the <memory> header so that we can define std::unique_ptr
     // and std::shared_ptr types for our message later on
     printer.Print("#include <memory>\n", "name", "includes");
@@ -125,6 +131,9 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print("#pragma GCC diagnostic ignored \"-Wfloat-equal\"\n", "name",
                   "includes");
     printer.Print("#pragma GCC diagnostic ignored \"-Wunused-parameter\"\n",
+        "name", "includes");
+    printer.Print(
+        "#pragma GCC diagnostic ignored \"-Wdeprecated-declarations\"\n",
         "name", "includes");
     printer.Print("#else\n", "name", "includes");
     printer.Print("#pragma warning(disable: 4244 4267 4100 4244 4512",
