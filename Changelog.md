@@ -2,6 +2,11 @@
 
 ### Ignition Msgs 5.x.x
 
+### Ignition Msgs 5.1.0
+
+1. Add ConvertPixelFormatType functions to Utility.hh
+    * [Pull request 169](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-requests/169)
+
 ### Ignition Msgs 5.0.0 (2019-12-09)
 
 1. Add support for sdformat frame semantics

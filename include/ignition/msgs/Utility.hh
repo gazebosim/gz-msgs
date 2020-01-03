@@ -269,6 +269,19 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     std::string ConvertGeometryType(const msgs::Geometry::Type _type);
 
+    /// \brief Convert a string to a msgs::PixelFormatType enum.
+    /// \param[in] _str PixelFormatType string.
+    /// \return A msgs::PixelFormatType enum.
+    IGNITION_MSGS_VISIBLE
+    msgs::PixelFormatType ConvertPixelFormatType(const std::string &_str);
+
+    /// \brief Convert a PixelFormatType to a string. This can be used for
+    /// debugging purposes.
+    // \param[in] _t PixelFormatType enum value.
+    /// \return String version of PixelFormatType.
+    IGNITION_MSGS_VISIBLE
+    std::string ConvertPixelFormatType(const msgs::PixelFormatType &_t);
+
     /// \brief Convert a string to a msgs::Material::ShaderType enum.
     /// \param[in] _str Shader type string.
     /// \return A msgs::Material::ShaderType enum. Defaults to VERTEX
