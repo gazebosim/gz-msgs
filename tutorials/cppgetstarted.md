@@ -61,7 +61,7 @@ To compile the code create a `CMakeLists.txt`:
 ```
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
-# Find the Ignition Fuel Tools library
+# Find the Ignition msgs library
 find_package(ignition-msgs5 QUIET REQUIRED)
 
 add_executable(ignition-msgs-example main.cc)
