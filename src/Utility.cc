@@ -872,7 +872,7 @@ namespace ignition
 
       // Read the name, which is a mandatory element.
       tinyxml2::XMLElement *elem = modelElement->FirstChildElement("name");
-      if (!elem)
+      if (!elem || !elem->GetText())
       {
         std::cerr << "Model config string does not contain a <name> element\n";
         return false;
@@ -881,7 +881,7 @@ namespace ignition
 
       // Read the description, if present.
       elem = modelElement->FirstChildElement("description");
-      if (elem)
+      if (elem && elem->GetText())
         meta.set_description(trimmed(elem->GetText()));
 
       // Read the authors, if any.
@@ -890,11 +890,13 @@ namespace ignition
       {
         ignition::msgs::FuelMetadata::Contact *author = meta.add_authors();
         // Get the author name and email
-        if (elem->FirstChildElement("name"))
+        if (elem->FirstChildElement("name") &&
+            elem->FirstChildElement("name")->GetText())
         {
           author->set_name(trimmed(elem->FirstChildElement("name")->GetText()));
         }
-        if (elem->FirstChildElement("email"))
+        if (elem->FirstChildElement("email") &&
+            elem->FirstChildElement("email")->GetText())
         {
           author->set_email(
               trimmed(elem->FirstChildElement("email")->GetText()));
@@ -908,21 +910,24 @@ namespace ignition
       math::SemanticVersion maxVer;
       while (elem)
       {
-        std::string verStr = elem->Attribute("version");
-        math::SemanticVersion ver(trimmed(verStr));
-        if (ver > maxVer)
+        if (elem->GetText() && elem->Attribute("version"))
         {
-          meta.mutable_model()->mutable_file_format()->set_name("sdf");
-          ignition::msgs::Version *verMsg =
-            meta.mutable_model()->mutable_file_format()->mutable_version();
+          std::string verStr = elem->Attribute("version");
+          math::SemanticVersion ver(trimmed(verStr));
+          if (ver > maxVer)
+          {
+            meta.mutable_model()->mutable_file_format()->set_name("sdf");
+            ignition::msgs::Version *verMsg =
+              meta.mutable_model()->mutable_file_format()->mutable_version();
 
-          verMsg->set_major(ver.Major());
-          verMsg->set_minor(ver.Minor());
-          verMsg->set_patch(ver.Patch());
-          verMsg->set_prerelease(ver.Prerelease());
-          verMsg->set_build(ver.Build());
+            verMsg->set_major(ver.Major());
+            verMsg->set_minor(ver.Minor());
+            verMsg->set_patch(ver.Patch());
+            verMsg->set_prerelease(ver.Prerelease());
+            verMsg->set_build(ver.Build());
 
-          meta.mutable_model()->set_file(trimmed(elem->GetText()));
+            meta.mutable_model()->set_file(trimmed(elem->GetText()));
+          }
         }
 
         elem = elem->NextSiblingElement("sdf");
