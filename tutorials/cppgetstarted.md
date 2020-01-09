@@ -55,3 +55,37 @@ int main()
   return 0;
 }
 ```
+
+To compile the code create a `CMakeLists.txt`:
+
+```
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+
+# Find the Ignition msgs library
+find_package(ignition-msgs5 QUIET REQUIRED)
+
+add_executable(ignition-msgs-example main.cc)
+target_link_libraries(ignition-msgs-example ${IGNITION-MSGS_LIBRARIES})
+```
+
+Let's start by compiling the examples:
+
+```
+mkdir build && cd build
+cmake ..
+make
+```
+
+Run the example, you should see something like:
+
+```{.sh}
+Point1:
+x: 1
+y: 3
+z: 5
+
+Point2:
+x: 2
+y: 4
+z: 6
+```
