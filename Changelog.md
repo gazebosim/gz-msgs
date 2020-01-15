@@ -1,3 +1,9 @@
+## Ignition Msgs 6.x
+
+### Ignition Msgs 6.x.x
+
+### Ignition Msgs 6.0.0
+
 ## Ignition Msgs 5.x
 
 ### Ignition Msgs 5.x.x
