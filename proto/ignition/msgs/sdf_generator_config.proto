@@ -21,12 +21,16 @@ package ignition.msgs;
 option java_package = "com.ignition.msgs";
 option java_outer_classname = "SdfGeneratorConfigProtos";
 
+/// \ingroup ignition.msgs
+/// \interface SdfGeneratorConfig
+/// \brief Message containing configuration options for generating SDFormat from
+/// currently loaded worlds
+
 import "ignition/msgs/boolean.proto";
 import "ignition/msgs/header.proto";
 
 message SdfGeneratorConfig
 {
-
   /// \brief Configuration for SDFormat generation of models
   message ModelGeneratorConfig
   {
@@ -36,7 +40,8 @@ message SdfGeneratorConfig
     ignition.msgs.Boolean save_fuel_model_version = 2;
     /// \brief Use absolute paths for resources such as meshes (Not Implemented)
     ignition.msgs.Boolean resources_use_absolute_paths = 3;
-    /// \brief Copy model resources, such as meshes, and create a self contained model. (Not Implemented)
+    /// \brief Copy model resources, such as meshes, and create a self contained
+    /// model. (Not Implemented)
     ignition.msgs.Boolean copy_model_resources = 4;
   };
 
@@ -46,7 +51,8 @@ message SdfGeneratorConfig
   /// \brief Global setting for SDFormat generation of models
   ModelGeneratorConfig global_model_gen_config = 2;
 
-  /// \brief Per-model override of global settings for SDFormat generation of models
+  /// \brief Per-model override of global settings for SDFormat generation of
+  /// models. The key is the scoped name of a model.
   map<string, ModelGeneratorConfig> override_model_gen_configs = 3;
 };
 
