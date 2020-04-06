@@ -98,6 +98,20 @@ message FuelMetadata
     }
   }
 
+  /// \brief Categories associated with this resource. The set of
+  /// Fuel categories are available at
+  /// https://fuel.ignitionrobotics.org/1.0/categories.
+  ///
+  /// A limited number of categories can be assigned to a Fuel resource.
+  message Categories
+  {
+    /// \brief First category.
+    string first = 1;
+
+    /// \brief Second category.
+    string second = 2;
+  }
+
   /// \brief A Fuel resource has to be one of the following.
   oneof resource_type
   {
@@ -133,4 +147,7 @@ message FuelMetadata
   /// \brief List of tools/libraries with version numbers that are compatible
   /// with this resource.
   repeated Compatibility compatibilities = 11;
+
+  /// \brief Categories associated with this resource.
+  Categories categories = 12;
 }
