@@ -31,28 +31,28 @@ import "ignition/msgs/header.proto";
 
 message SdfGeneratorConfig
 {
-  /// \brief Configuration for SDFormat generation of models
-  message ModelGeneratorConfig
+  /// \brief Configuration for SDFormat generation of entities (eg. models, actors, lights)
+  message EntityGeneratorConfig
   {
-    /// \brief Expand and inline included models
+    /// \brief Expand and inline included entities
     ignition.msgs.Boolean expand_include_tags = 1;
-    /// \brief Use the Fuel version in the URI generated for the model
-    ignition.msgs.Boolean save_fuel_model_version = 2;
-    /// \brief Use absolute paths for resources such as meshes (Not Implemented)
+    /// \brief Use the Fuel version in generated URIs of Fuel resources
+    ignition.msgs.Boolean save_fuel_version = 2;
+    /// \brief Use absolute paths for resources such as meshes
     ignition.msgs.Boolean resources_use_absolute_paths = 3;
     /// \brief Copy model resources, such as meshes, and create a self contained
-    /// model. (Not Implemented)
+    /// model.
     ignition.msgs.Boolean copy_model_resources = 4;
   };
 
   /// \brief Optional header data
   ignition.msgs.Header header = 1;
 
-  /// \brief Global setting for SDFormat generation of models
-  ModelGeneratorConfig global_model_gen_config = 2;
+  /// \brief Global setting for SDFormat generation of entities
+  EntityGeneratorConfig global_entity_gen_config = 2;
 
-  /// \brief Per-model override of global settings for SDFormat generation of
-  /// models. The key is the scoped name of a model.
-  map<string, ModelGeneratorConfig> override_model_gen_configs = 3;
+  /// \brief Per-entity override of global settings for SDFormat generation.
+  /// The key is the scoped name of an entity.
+  map<string, EntityGeneratorConfig> override_entity_gen_configs = 3;
 };
 
