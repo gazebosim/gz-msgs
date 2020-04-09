@@ -2,6 +2,9 @@
 
 ### Ignition Msgs 4.x.x
 
+1. Add SdfGeneratorConfig message containing configuration options for generating SDFormat from currently loaded worlds
+    * [Pull request 173](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/173)
+
 1. Fix linking order of Protocol Buffers static libraries on GCC
     * [Pull request 151](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/151)
 
