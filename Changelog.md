@@ -2,7 +2,7 @@
 
 ### Ignition Msgs 4.x.x (202X-XX-XX)
 
-### Ignition Msgs 4.8.0 (2020-09-04)
+### Ignition Msgs 4.8.0 (2020-04-09)
 
 1. Add SdfGeneratorConfig message containing configuration options for generating SDFormat from currently loaded worlds
     * [Pull request 173](https://bitbucket.org/ignitionrobotics/ign-msgs/pull-request/173)
