@@ -10,11 +10,10 @@ environment:
 
 install:
   - vcpkg install protobuf
-  - hg summary
   # ign-cmake
-  - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake
+  - git clone https://github.com/ignitionrobotics/ign-cmake
   - cd ign-cmake
-  - hg up ign-cmake1
+  - git checkout ign-cmake1
   - md build
   - cd build
   - cmake .. -DBUILD_TESTING=OFF
@@ -23,14 +22,14 @@ install:
   - cd ..
   - md build2
   - cd build2
-  - hg up ign-cmake2
+  - git checkout ign-cmake2
   - cmake .. -DBUILD_TESTING=OFF
   - cmake --build . --target INSTALL
   - cd ../..
   # ign-math
-  - hg clone https://bitbucket.org/ignitionrobotics/ign-math
+  - git clone https://github.com/ignitionrobotics/ign-math
   - cd ign-math
-  - hg up ign-math6
+  - git checkout ign-math6
   - md build
   - cd build
   - cmake .. -DBUILD_TESTING=OFF
