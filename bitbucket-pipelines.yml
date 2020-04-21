@@ -11,7 +11,7 @@ pipelines:
           - apt-key adv --keyserver keyserver.ubuntu.com --recv-keys D2486D2DD83DB69272AFE98867170598AF249743
           - apt-get update
           - apt-get -y install
-            cmake build-essential lcov curl mercurial libprotobuf-dev protobuf-compiler libprotoc-dev
+            cmake build-essential lcov curl git libprotobuf-dev protobuf-compiler libprotoc-dev
             libignition-cmake1-dev
             libignition-math6-dev
             libignition-tools-dev
