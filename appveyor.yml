@@ -11,9 +11,8 @@ environment:
 install:
   - vcpkg install protobuf
   - vcpkg install tinyxml2
-  - hg summary
   # ign-cmake
-  - hg clone https://bitbucket.org/ignitionrobotics/ign-cmake -b ign-cmake2
+  - git clone https://github.com/ignitionrobotics/ign-cmake -b ign-cmake2
   - cd ign-cmake
   - md build
   - cd build
@@ -21,7 +20,7 @@ install:
   - cmake --build . --target INSTALL
   - cd ../..
   # ign-math
-  - hg clone https://bitbucket.org/ignitionrobotics/ign-math -b ign-math6
+  - git clone https://github.com/ignitionrobotics/ign-math -b ign-math6
   - cd ign-math
   - md build
   - cd build
