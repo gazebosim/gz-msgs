@@ -29,10 +29,19 @@
 
 ## Ignition Msgs 4.x
 
-### Ignition Msgs 4.x.x
+### Ignition Msgs 4.x.x (202X-XX-XX)
+
+### Ignition Msgs 4.8.0 (2020-04-09)
+
+1. Add SdfGeneratorConfig message containing configuration options for generating SDFormat from currently loaded worlds
+    * [BitBucket pull request 174](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/174)
+
 
 1. Fix linking order of Protocol Buffers static libraries on GCC
     * [BitBucket pull request 151](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/151)
+
+1. Ignore deprecation warnings on generated code
+    * [BitBucket pull request 170](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/170)
 
 ### Ignition Msgs 4.7.0 (2019-08-22)
 
