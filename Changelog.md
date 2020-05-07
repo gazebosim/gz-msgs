@@ -28,7 +28,9 @@
     * [BitBucket pull request 157](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/157)
 
 
-### Ignition Msgs 4.x.x (202X-XX-XX)
+## Ignition Msgs 4.x
+
+### Ignition Msgs 4.x.x
 
 ### Ignition Msgs 4.8.0 (2020-04-09)
 
