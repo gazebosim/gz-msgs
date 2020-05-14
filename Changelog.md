@@ -2,6 +2,22 @@
 
 ### Ignition Msgs 5.x.x
 
+### Ignition Msgs 5.2.0 (2020-05-14)
+
+1. Handle empty xml elements
+    * [BitBucket pull request 172](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/172)
+
+1. Ignore deprecation warnings on generated code
+    * [BitBucket pull request 170](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/170)
+
+1. Add SdfGeneratorConfig message containing configuration options for generating SDFormat from currently loaded worlds
+    * [BitBucket pull request 174](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/174)
+
+1. BitBucket to GitHub migration
+    * [Pull request](https://github.com/ignitionrobotics/ign-msgs/pull/39)
+    * [Pull request](https://github.com/ignitionrobotics/ign-msgs/pull/40)
+    * [Pull request](https://github.com/ignitionrobotics/ign-msgs/pull/43)
+
 ### Ignition Msgs 5.1.0
 
 1. Add ConvertPixelFormatType functions to Utility.hh
