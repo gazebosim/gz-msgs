@@ -1,6 +1,9 @@
 ## Ignition Msgs 5.x
 
-### Ignition Msgs 5.x.x
+### Ignition Msgs 5.3.0 (2020-05-20)
+
+1. Added the `EntityFactory_V` message.
+    * [Pull request 58](https://github.com/ignitionrobotics/ign-msgs/pull/58)
 
 ### Ignition Msgs 5.2.0 (2020-05-14)
 
@@ -46,7 +49,10 @@
 
 ## Ignition Msgs 4.x
 
-### Ignition Msgs 4.x.x
+### Ignition Msgs 4.9.0 (2020-05-20)
+
+1. Added the `EntityFactory_V` message.
+    * [Pull request 58](https://github.com/ignitionrobotics/ign-msgs/pull/58)
 
 ### Ignition Msgs 4.8.0 (2020-04-09)
 
