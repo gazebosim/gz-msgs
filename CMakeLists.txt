@@ -20,7 +20,18 @@ ign_configure_project()
 # Set project-specific options
 #============================================================================
 
-# ignition-msgs currently has no options that are unique to it
+option(
+  INSTALL_IGN_MSGS_GEN_EXECUTABLE
+  "Install the ign_msgs_gen executable."
+  OFF)
+mark_as_advanced(INSTALL_IGN_MSGS_GEN_EXECUTABLE)
+
+set(
+  IGN_MSGS_GEN_EXECUTABLE
+  "$<TARGET_FILE:ign_msgs_gen>"
+  CACHE STRING
+  "ign_msgs_gen executable used in the ign_msgs_protoc CMake function.")
+mark_as_advanced(IGN_MSGS_GEN_EXECUTABLE)
 
 #============================================================================
 # Search for project-specific dependencies
