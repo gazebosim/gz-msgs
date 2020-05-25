@@ -46,6 +46,7 @@ message Marker
     TRIANGLE_FAN   = 8;
     TRIANGLE_LIST  = 9;
     TRIANGLE_STRIP = 10;
+    CONE           = 11;
   }
 
   /// \brief Visilibity defines what cameras render the marker.
