@@ -47,6 +47,8 @@ message Marker
     TRIANGLE_LIST  = 9;
     TRIANGLE_STRIP = 10;
     CONE           = 11;
+    ARROW          = 12;
+    AXIS           = 13;
   }
 
   /// \brief Visilibity defines what cameras render the marker.

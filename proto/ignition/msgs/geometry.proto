@@ -52,6 +52,8 @@ message Geometry
     POLYLINE     = 9;
     CONE         = 10;
     EMPTY        = 11;
+    ARROW        = 12;
+    AXIS         = 13;
   }
 
   /// \brief Optional header data
