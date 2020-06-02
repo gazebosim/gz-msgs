@@ -19,7 +19,7 @@
 #include <algorithm>
 #include <cstddef>
 
-#include "ignition/msgs/test_config.h"
+#include "test_config.h"
 #include "ignition/msgs/MessageTypes.hh"
 #include "ignition/msgs/Factory.hh"
 

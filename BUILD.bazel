@@ -1,0 +1,323 @@
+load(
+    "//ign_bazel:cmake_configure_file.bzl",
+    "cmake_configure_file",
+)
+load(
+    "//ign_bazel:generate_include_header.bzl",
+    "generate_include_header",
+)
+load(
+    "//ign_bazel:generate_file.bzl",
+    "generate_file",
+)
+
+package(default_visibility = ["//visibility:public"])
+
+PROJECT_NAME = "ignition-msgs"
+PROJECT_MAJOR = 4
+PROJECT_MINOR = 0
+PROJECT_PATCH = 0
+
+cc_proto_library(
+    name = "msgs_cc_proto",
+    deps = [":msgs_proto"],
+)
+
+proto_library(
+    name = "msgs_proto",
+    srcs = glob([
+          "**/*.proto"
+    ]),
+    deps = ["@com_google_protobuf//:empty_proto"],
+    strip_import_prefix = "proto",
+)
+
+# Generates config.hh based on the version numbers in CMake code.
+cmake_configure_file(
+    name = "config",
+    src = "include/ignition/msgs/config.hh.in",
+    out = "include/ignition/msgs/config.hh",
+    cmakelists = ["CMakeLists.txt"],
+    defines = [
+        "PROJECT_VERSION_MAJOR=%d" % (PROJECT_MAJOR),
+        "PROJECT_VERSION_MINOR=%d" % (PROJECT_MINOR),
+        "PROJECT_VERSION_PATCH=%d" % (PROJECT_PATCH),
+        "PROJECT_MAJOR_VERSION=%d" % (PROJECT_MAJOR),
+        "PROJECT_MINOR_VERSION=%d" % (PROJECT_MINOR),
+        "PROJECT_PATCH_VERSION=%d" % (PROJECT_PATCH),
+        "PROJECT_VERSION=%d.%d" % (PROJECT_MAJOR, PROJECT_MINOR),
+        "PROJECT_VERSION_FULL=%d.%d.%d" % (PROJECT_MAJOR, PROJECT_MINOR, PROJECT_PATCH),  # noqa
+        "PROJECT_NAME_NO_VERSION=%s" % (PROJECT_NAME),
+    ],
+    visibility = ["//visibility:public"],
+)
+
+generate_file(
+    name = "include/ignition/msgs/Export.hh",
+    content = """
+#pragma once
+// IGN_DEPRECATED is defined by all ignition libraries, but the version below
+// is a simplified version.  When mixing the regular ignition libraries and
+// the drake compiled ignition libraries, the compiler throws a warning about
+// the macro being multiply defined.  We undefine it before redefining it here
+// to work around that issue.  Note that the IGNITION_MATH_VISIBLE macro
+// shouldn't be defined multiple times, but we undefine it just in case.
+#ifdef IGNITION_MSGS_VISIBLE
+#undef IGNITION_MSGS_VISIBLE
+#endif
+#define IGNITION_MSGS_VISIBLE __attribute__ ((visibility("default")))
+#ifdef IGN_DEPRECATED
+#undef IGN_DEPRECATED
+#endif
+#define IGN_DEPRECATED(version) __attribute__ ((__deprecated__))
+    """,
+    visibility = ["//visibility:private"],
+)
+
+public_headers_no_gen = [
+    "include/ignition/msgs/Factory.hh",
+    "include/ignition/msgs/Filesystem.hh",
+    "include/ignition/msgs/SuppressWarning.hh",
+    "include/ignition/msgs/Utility.hh",
+    "include/ignition/msgs/detail/SuppressWarning.hh",
+]
+
+private_headers = [
+    "src/Generator.hh",
+]
+
+generate_include_header(
+    name = "messagetypeshh_genrule",
+    out = "include/ignition/msgs/MessageTypes.hh",
+    hdrs = [
+      "ignition/msgs/actor.pb.h",
+      "ignition/msgs/actuators.pb.h",
+      "ignition/msgs/air_pressure_sensor.pb.h",
+      "ignition/msgs/altimeter.pb.h",
+      "ignition/msgs/altimeter_sensor.pb.h",
+      "ignition/msgs/any.pb.h",
+      "ignition/msgs/atmosphere.pb.h",
+      "ignition/msgs/axis_aligned_box.pb.h",
+      "ignition/msgs/axis.pb.h",
+      "ignition/msgs/battery.pb.h",
+      "ignition/msgs/battery_state.pb.h",
+      "ignition/msgs/boolean.pb.h",
+      "ignition/msgs/boxgeom.pb.h",
+      "ignition/msgs/bytes.pb.h",
+      "ignition/msgs/camera_cmd.pb.h",
+      "ignition/msgs/camera_info.pb.h",
+      "ignition/msgs/camera_lens.pb.h",
+      "ignition/msgs/camerasensor.pb.h",
+      "ignition/msgs/cessna.pb.h",
+      "ignition/msgs/clock.pb.h",
+      "ignition/msgs/cmd_vel2d.pb.h",
+      "ignition/msgs/collision.pb.h",
+      "ignition/msgs/color.pb.h",
+      "ignition/msgs/conegeom.pb.h",
+      "ignition/msgs/contact.pb.h",
+      "ignition/msgs/contactsensor.pb.h",
+      "ignition/msgs/contacts.pb.h",
+      "ignition/msgs/cylindergeom.pb.h",
+      "ignition/msgs/density.pb.h",
+      "ignition/msgs/diagnostics.pb.h",
+      "ignition/msgs/discovery.pb.h",
+      "ignition/msgs/distortion.pb.h",
+      "ignition/msgs/double.pb.h",
+      "ignition/msgs/double_v.pb.h",
+      "ignition/msgs/duration.pb.h",
+      "ignition/msgs/empty.pb.h",
+      "ignition/msgs/entity_factory.pb.h",
+      "ignition/msgs/entity.pb.h",
+      "ignition/msgs/float.pb.h",
+      "ignition/msgs/float_v.pb.h",
+      "ignition/msgs/fluid_pressure.pb.h",
+      "ignition/msgs/fluid.pb.h",
+      "ignition/msgs/fog.pb.h",
+      "ignition/msgs/friction.pb.h",
+      "ignition/msgs/fuel_metadata.pb.h",
+      "ignition/msgs/geometry.pb.h",
+      "ignition/msgs/gps.pb.h",
+      "ignition/msgs/gps_sensor.pb.h",
+      "ignition/msgs/gui_camera.pb.h",
+      "ignition/msgs/gui.pb.h",
+      "ignition/msgs/header.pb.h",
+      "ignition/msgs/heightmapgeom.pb.h",
+      "ignition/msgs/hydra.pb.h",
+      "ignition/msgs/imagegeom.pb.h",
+      "ignition/msgs/image.pb.h",
+      "ignition/msgs/imu.pb.h",
+      "ignition/msgs/imu_sensor.pb.h",
+      "ignition/msgs/inertial.pb.h",
+      "ignition/msgs/int32.pb.h",
+      "ignition/msgs/int32_v.pb.h",
+      "ignition/msgs/int64.pb.h",
+      "ignition/msgs/int64_v.pb.h",
+      "ignition/msgs/joint_animation.pb.h",
+      "ignition/msgs/joint_cmd.pb.h",
+      "ignition/msgs/joint.pb.h",
+      "ignition/msgs/joint_wrench.pb.h",
+      "ignition/msgs/joy.pb.h",
+      "ignition/msgs/joystick.pb.h",
+      "ignition/msgs/laserscan.pb.h",
+      "ignition/msgs/lidar_sensor.pb.h",
+      "ignition/msgs/light.pb.h",
+      "ignition/msgs/link_data.pb.h",
+      "ignition/msgs/link.pb.h",
+      "ignition/msgs/log_control.pb.h",
+      "ignition/msgs/logical_camera_image.pb.h",
+      "ignition/msgs/logical_camera_sensor.pb.h",
+      "ignition/msgs/log_playback_control.pb.h",
+      "ignition/msgs/log_playback_stats.pb.h",
+      "ignition/msgs/log_status.pb.h",
+      "ignition/msgs/magnetometer.pb.h",
+      "ignition/msgs/magnetometer_sensor.pb.h",
+      "ignition/msgs/marker.pb.h",
+      "ignition/msgs/marker_v.pb.h",
+      "ignition/msgs/material.pb.h",
+      "ignition/msgs/meshgeom.pb.h",
+      "ignition/msgs/model_configuration.pb.h",
+      "ignition/msgs/model.pb.h",
+      "ignition/msgs/model_v.pb.h",
+      "ignition/msgs/odometry.pb.h",
+      "ignition/msgs/packet.pb.h",
+      "ignition/msgs/param.pb.h",
+      "ignition/msgs/param_v.pb.h",
+      "ignition/msgs/physics.pb.h",
+      "ignition/msgs/pid.pb.h",
+      "ignition/msgs/planegeom.pb.h",
+      "ignition/msgs/plugin.pb.h",
+      "ignition/msgs/plugin_v.pb.h",
+      "ignition/msgs/pointcloud_packed.pb.h",
+      "ignition/msgs/pointcloud.pb.h",
+      "ignition/msgs/polylinegeom.pb.h",
+      "ignition/msgs/pose_animation.pb.h",
+      "ignition/msgs/pose.pb.h",
+      "ignition/msgs/pose_trajectory.pb.h",
+      "ignition/msgs/pose_v.pb.h",
+      "ignition/msgs/projector.pb.h",
+      "ignition/msgs/propagation_grid.pb.h",
+      "ignition/msgs/propagation_particle.pb.h",
+      "ignition/msgs/publishers.pb.h",
+      "ignition/msgs/publish.pb.h",
+      "ignition/msgs/quaternion.pb.h",
+      "ignition/msgs/raysensor.pb.h",
+      "ignition/msgs/request.pb.h",
+      "ignition/msgs/response.pb.h",
+      "ignition/msgs/rest_login.pb.h",
+      "ignition/msgs/rest_logout.pb.h",
+      "ignition/msgs/rest_post.pb.h",
+      "ignition/msgs/rest_response.pb.h",
+      "ignition/msgs/road.pb.h",
+      "ignition/msgs/scene.pb.h",
+      "ignition/msgs/selection.pb.h",
+      "ignition/msgs/sensor_noise.pb.h",
+      "ignition/msgs/sensor.pb.h",
+      "ignition/msgs/sensor_v.pb.h",
+      "ignition/msgs/serialized_map.pb.h",
+      "ignition/msgs/serialized.pb.h",
+      "ignition/msgs/server_control.pb.h",
+      "ignition/msgs/shadows.pb.h",
+      "ignition/msgs/sim_event.pb.h",
+      "ignition/msgs/sky.pb.h",
+      "ignition/msgs/sonar.pb.h",
+      "ignition/msgs/spheregeom.pb.h",
+      "ignition/msgs/spherical_coordinates.pb.h",
+      "ignition/msgs/stringmsg.pb.h",
+      "ignition/msgs/stringmsg_v.pb.h",
+      "ignition/msgs/subscribe.pb.h",
+      "ignition/msgs/surface.pb.h",
+      "ignition/msgs/tactile.pb.h",
+      "ignition/msgs/test.pb.h",
+      "ignition/msgs/time.pb.h",
+      "ignition/msgs/topic_info.pb.h",
+      "ignition/msgs/track_visual.pb.h",
+      "ignition/msgs/twist.pb.h",
+      "ignition/msgs/uint32.pb.h",
+      "ignition/msgs/uint32_v.pb.h",
+      "ignition/msgs/uint64.pb.h",
+      "ignition/msgs/uint64_v.pb.h",
+      "ignition/msgs/undo_redo.pb.h",
+      "ignition/msgs/user_cmd.pb.h",
+      "ignition/msgs/user_cmd_stats.pb.h",
+      "ignition/msgs/vector2d.pb.h",
+      "ignition/msgs/vector3d.pb.h",
+      "ignition/msgs/versioned_name.pb.h",
+      "ignition/msgs/version.pb.h",
+      "ignition/msgs/version_range.pb.h",
+      "ignition/msgs/video_record.pb.h",
+      "ignition/msgs/visual.pb.h",
+      "ignition/msgs/visual_v.pb.h",
+      "ignition/msgs/web_request.pb.h",
+      "ignition/msgs/wind.pb.h",
+      "ignition/msgs/wireless_node.pb.h",
+      "ignition/msgs/wireless_nodes.pb.h",
+      "ignition/msgs/world_control.pb.h",
+      "ignition/msgs/world_modify.pb.h",
+      "ignition/msgs/world_reset.pb.h",
+      "ignition/msgs/world_stats.pb.h",
+      "ignition/msgs/wrench.pb.h",
+    ]
+)
+
+generate_include_header(
+    name = "msghh_genrule",
+    out = "include/ignition/msgs.hh",
+    hdrs = public_headers_no_gen + [
+        "include/ignition/msgs/config.hh",
+        "include/ignition/msgs/Export.hh",
+        "include/ignition/msgs/MessageTypes.hh",
+    ],
+)
+
+public_headers = public_headers_no_gen + [
+    "include/ignition/msgs/config.hh",
+    "include/ignition/msgs/Export.hh",
+    "include/ignition/msgs/MessageTypes.hh",
+    "include/ignition/msgs.hh",
+]
+
+cc_binary(
+    name = "libign_msgs.so",
+    srcs = [
+        "src/Factory.cc",
+        "src/Filesystem.cc",
+        "src/Generator.cc",
+        "src/Utility.cc",
+    ] + private_headers + public_headers,
+    includes = ["include"],
+    linkopts = ["-Wl,-soname,libign_msgs.so", "-ltinyxml2", "-lprotobuf"],
+    linkshared =  True,
+    visibility = [],
+    deps = [
+        ":msgs_cc_proto",
+        "//ign_math:ign_math"
+    ]
+)
+
+cc_library(
+    name = "ign_msgs",
+    srcs = ["libign_msgs.so"],
+    hdrs = public_headers,
+    includes = ["include"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":msgs_cc_proto",
+        "//ign_math:ign_math"
+    ]
+)
+
+[cc_test(
+    name = src.replace("/", "_").replace(".cc", "").replace("src_", ""),
+    srcs = [src],
+    deps = [
+        ":msgs_cc_proto",
+        ":ign_msgs",
+        "//ign_msgs/test:test_utils",
+        "@gtest//:gtest",
+        "@gtest//:gtest_main",
+    ],
+) for src in glob(
+    [
+        "src/*_TEST.cc",
+    ],
+)]
