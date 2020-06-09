@@ -28,7 +28,9 @@ proto_library(
     srcs = glob([
           "**/*.proto"
     ]),
-    deps = ["@com_google_protobuf//:empty_proto"],
+    deps = [
+        "@com_google_protobuf//:empty_proto",
+    ],
     strip_import_prefix = "proto",
 )
 
@@ -82,9 +84,7 @@ public_headers_no_gen = [
     "include/ignition/msgs/detail/SuppressWarning.hh",
 ]
 
-private_headers = [
-    "src/Generator.hh",
-]
+private_headers = []
 
 generate_include_header(
     name = "messagetypeshh_genrule",
@@ -277,20 +277,34 @@ public_headers = public_headers_no_gen + [
 ]
 
 cc_binary(
+    name = "generator_main",
+    srcs = [
+        "src/Generator.cc",
+        "src/Generator.hh",
+        "src/generator_main.cc"
+    ],
+    deps = [
+        "@com_google_protobuf//:protoc_lib",
+        "@com_google_protobuf//:protobuf",
+    ],
+)
+
+cc_binary(
     name = "libign_msgs.so",
     srcs = [
         "src/Factory.cc",
         "src/Filesystem.cc",
-        "src/Generator.cc",
         "src/Utility.cc",
     ] + private_headers + public_headers,
     includes = ["include"],
-    linkopts = ["-Wl,-soname,libign_msgs.so", "-ltinyxml2", "-lprotobuf"],
-    linkshared =  True,
+    linkopts = ["-Wl,-soname,libign_msgs.so", "-ltinyxml2"],
+    linkshared = True,
+    linkstatic = True,
     visibility = [],
     deps = [
         ":msgs_cc_proto",
-        "//ign_math:ign_math"
+        "//ign_math:ign_math",
+        "@com_google_protobuf//:protobuf",
     ]
 )
 
@@ -302,7 +316,9 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         ":msgs_cc_proto",
-        "//ign_math:ign_math"
+        "//ign_math:ign_math",
+        "@com_google_protobuf//:protoc_lib",
+        "@com_google_protobuf//:protobuf",
     ]
 )
 
