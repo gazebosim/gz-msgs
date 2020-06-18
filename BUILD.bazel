@@ -126,7 +126,7 @@ ign_msg_gen(
 )
 
 cc_binary(
-    name = "libign_msgs.so",
+    name = "libigntion-msgs6.so",
     srcs = [
         ":ignmsgs_proto_cc",
         "src/Factory.cc",
@@ -134,7 +134,7 @@ cc_binary(
         "src/Utility.cc",
     ] + private_headers + public_headers,
     includes = ["include"],
-    linkopts = ["-Wl,-soname,libign_msgs.so", "-ltinyxml2"],
+    linkopts = ["-Wl,-soname,libigntion-msgs6.so", "-ltinyxml2"],
     linkshared = True,
     linkstatic = True,
     visibility = [],
@@ -147,14 +147,13 @@ cc_binary(
 
 cc_library(
     name = "ign_msgs",
-    srcs = ["libign_msgs.so"],
+    srcs = ["libigntion-msgs6.so"],
     hdrs = public_headers + [":ignmsgs_proto_cc"],
     includes = ["include"],
     visibility = ["//visibility:public"],
     deps = [
         ":ignmsgs_proto_cc",
         "//ign_math:ign_math",
-        "@com_google_protobuf//:protoc_lib",
         "@com_google_protobuf//:protobuf",
     ]
 )
