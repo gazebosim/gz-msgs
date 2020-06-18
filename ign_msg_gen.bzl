@@ -65,3 +65,14 @@ ign_msg_gen = rule(
     output_to_genfiles = True,
     implementation = ign_msg_gen_impl,
 )
+
+def get_proto_headers(protos):
+    out = []
+    for proto in protos:
+        split = proto.split('/')[1:]
+        split[2] = split[2].replace('.proto', '.pb.h')
+        out.append('/'.join(split))
+    return out
+
+
+
