@@ -3,8 +3,8 @@ load(
     "cmake_configure_file",
 )
 
-BINARY_DIR = "/tmp"
-SOURCE_DIR = "/tmp"
+BINARY_DIR = "./ign_msgs/"
+SOURCE_DIR = "./ign_msgs/"
 
 # Generates config.hh based on the version numbers in CMake code.
 cmake_configure_file(
@@ -26,4 +26,6 @@ cc_library(
     includes = ["."],
     visibility = ["//visibility:public"],
 )
+
+exports_files(["desc/stringmsg.desc"])
 
