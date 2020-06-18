@@ -10,6 +10,10 @@ load(
     "//ign_bazel:generate_file.bzl",
     "generate_file",
 )
+load(
+    "//ign_bazel:generate_yaml.bzl",
+    "generate_yaml",
+)
 
 load(
     "@bazelruby_rules_ruby//ruby:defs.bzl",
@@ -20,18 +24,27 @@ load(
 )
 
 CMAKE_INSTALL_PREFIX = "/USR"
-library_location = "/usr"
+library_location = "libign_msgs.so"
 package(default_visibility = ["//visibility:public"])
 
 PROJECT_NAME = "ignition-msgs"
 PROJECT_MAJOR = 4
 PROJECT_MINOR = 0
 PROJECT_PATCH = 0
-IGN_LIBRARY_PATH = "/usr"
+library_name = "libign_msgs.so"
+cmds = "    - msg   : Print information about messages."
 
 cc_proto_library(
     name = "msgs_cc_proto",
     deps = [":msgs_proto"],
+)
+
+generate_yaml(
+    name = "msgs",
+    library_name = "ignition-msgs",
+    library_version = "%d.%d.%d" % (PROJECT_MAJOR, PROJECT_MINOR, PROJECT_PATCH),
+    commands = cmds,
+    ruby_target = "//ign_msgs:cmdmsgs.rb",
 )
 
 proto_library(
@@ -41,19 +54,6 @@ proto_library(
     ]),
     deps = ["@com_google_protobuf//:empty_proto"],
     strip_import_prefix = "proto",
-)
-
-cmake_configure_file(
-    name = "yaml",
-    src = "conf/msgs.yaml.in",
-    out = "conf/msgs.yaml",
-    cmakelists = ["CMakeLists.txt"],
-    defines = [
-        "PROJECT_VERSION_FULL=%d.%d.%d" % (PROJECT_MAJOR, PROJECT_MINOR, PROJECT_PATCH),  # noqa
-        "PROJECT_NAME_NO_VERSION_LOWER=%s" % (PROJECT_NAME),
-        "ign_library_path=%s" % (IGN_LIBRARY_PATH),
-    ],
-    visibility = ["//visibility:public"],
 )
 
 # Generates config.hh based on the version numbers in CMake code.
@@ -78,25 +78,24 @@ cmake_configure_file(
 
 # Generates config.hh based on the version numbers in CMake code.
 cmake_configure_file(
-    name = "ruby",
+    name = "cmdmsgs.rb",
     src = "src/cmd/cmdmsgs.rb.in",
-    out = "src/cmd/cmdmsgs.rb",
+    out = "cmdmsgs.rb",
     cmakelists = ["CMakeLists.txt"],
     defines = [
-        "library_location=%s" % [library_location],
+        "library_location=%s" % (library_location),
         "PROJECT_VERSION_FULL=%d.%d.%d" % (PROJECT_MAJOR, PROJECT_MINOR, PROJECT_PATCH),  # noqa
     ],
     visibility = ["//visibility:public"],
-)   
-
-ruby_binary(
-    name = "msgs",
-    srcs = ["src/cmd/cmdmsgs.rb"],
-    includes = ["src/cmd"],
-    main = "src/cmd/cmdmsgs.rb",
-    visibility = ["//visibility:public"],
 )
 
+ruby_binary(
+    name = "msgs-ruby",
+    srcs = ["cmdmsgs.rb"],
+    includes = ["src/cmd"],
+    main = "cmdmsgs.rb",
+    visibility = ["//visibility:public"],
+)
 
 generate_file(
     name = "include/ignition/msgs/Export.hh",
