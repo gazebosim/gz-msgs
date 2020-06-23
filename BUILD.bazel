@@ -134,7 +134,7 @@ cc_binary(
         "src/Utility.cc",
     ] + private_headers + public_headers,
     includes = ["include"],
-    linkopts = ["-Wl,-soname,libignition_msgs6.so", "-ltinyxml2"],
+    linkopts = ["-Wl,-soname,libignition-msgs6.so", "-ltinyxml2"],
     linkshared = True,
     linkstatic = True,
     visibility = [],
@@ -147,7 +147,7 @@ cc_binary(
 
 cc_library(
     name = "ign_msgs",
-    srcs = ["libignition_msgs6.so"],
+    srcs = ["libignition-msgs6.so"],
     hdrs = public_headers + [":ignmsgs_proto_cc"],
     includes = ["include"],
     visibility = ["//visibility:public"],
