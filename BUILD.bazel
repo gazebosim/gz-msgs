@@ -18,7 +18,7 @@ load(
 package(default_visibility = ["//visibility:public"])
 
 PROJECT_NAME = "ignition-msgs"
-PROJECT_MAJOR = 4
+PROJECT_MAJOR = 6
 PROJECT_MINOR = 0
 PROJECT_PATCH = 0
 
@@ -174,3 +174,5 @@ cc_library(
         "src/*_TEST.cc",
     ],
 )]
+
+exports_files(["src/cmd/cmdmsgs.rb.in"])
