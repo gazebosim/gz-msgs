@@ -7,8 +7,8 @@ load(
     "generate_include_header",
 )
 load(
-    "//ign_bazel:generate_file.bzl",
-    "generate_file",
+    "//ign_bazel:ign_export_header.bzl",
+    "ign_export_header",
 )
 load(
     ":ign_msg_gen.bzl",
@@ -42,25 +42,10 @@ cmake_configure_file(
     visibility = ["//visibility:public"],
 )
 
-generate_file(
+ign_export_header(
     name = "include/ignition/msgs/Export.hh",
-    content = """
-#pragma once
-// IGN_DEPRECATED is defined by all ignition libraries, but the version below
-// is a simplified version.  When mixing the regular ignition libraries and
-// the drake compiled ignition libraries, the compiler throws a warning about
-// the macro being multiply defined.  We undefine it before redefining it here
-// to work around that issue.  Note that the IGNITION_MATH_VISIBLE macro
-// shouldn't be defined multiple times, but we undefine it just in case.
-#ifdef IGNITION_MSGS_VISIBLE
-#undef IGNITION_MSGS_VISIBLE
-#endif
-#define IGNITION_MSGS_VISIBLE __attribute__ ((visibility("default")))
-#ifdef IGN_DEPRECATED
-#undef IGN_DEPRECATED
-#endif
-#define IGN_DEPRECATED(version) __attribute__ ((__deprecated__))
-    """,
+    lib_name = "ignition-msgs",
+    export_base = "IGNITION_MSGS",
     visibility = ["//visibility:private"],
 )
 
@@ -72,7 +57,6 @@ public_headers_no_gen = [
     "include/ignition/msgs/detail/SuppressWarning.hh",
 ]
 
-private_headers = []
 protos = glob(["proto/ignition/msgs/*.proto"])
 
 generate_include_header(
@@ -132,7 +116,7 @@ cc_binary(
         "src/Factory.cc",
         "src/Filesystem.cc",
         "src/Utility.cc",
-    ] + private_headers + public_headers,
+    ] + public_headers,
     includes = ["include"],
     linkopts = ["-Wl,-soname,libignition-msgs6.so", "-ltinyxml2"],
     linkshared = True,
