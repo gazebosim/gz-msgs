@@ -29,3 +29,16 @@ cc_library(
 
 exports_files(["desc/stringmsg.desc"])
 
+[
+    cc_test(
+        name = "INTEGRATION_" + test.split('/')[1].replace('.cc', ''),
+        srcs = [ test ],
+        deps = [
+          ":test_utils",
+          "//ign_msgs",
+          "@gtest//:gtest",
+          "@gtest//:gtest_main",
+        ],
+        includes = [".", "integration"],
+    ) for test in glob(["integration/*.cc"])
+]
