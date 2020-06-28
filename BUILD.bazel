@@ -103,6 +103,13 @@ proto_library(
     strip_import_prefix = "proto",
 )
 
+# Create a library of our protobuf message files
+proto_library(
+    name = "ignmsgs_proto_public",
+    srcs = protos,
+    strip_import_prefix = "proto",
+)
+
 # Generate our custom CC files from the protos
 ign_msg_gen(
     name = "ignmsgs_proto_cc",
