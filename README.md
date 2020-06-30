@@ -9,7 +9,7 @@ of libraries designed to rapidly develop robot applications.
 
 Test coverage:
 
-[![codecov](https://codecov.io/bb/ignitionrobotics/ign-msgs/branch/master/graph/badge.svg)](https://codecov.io/bb/ignitionrobotics/ign-msgs)
+[![codecov](https://codecov.io/gh/ignitionrobotics/ign-msgs/branch/master/graph/badge.svg)](https://codecov.io/gh/ignitionrobotics/ign-msgs)
 
 ## Dependencies
 
@@ -120,5 +120,5 @@ ln -s /usr/local/share/ignition/transportlog7.yaml .
 export IGN_CONFIG_PATH=$HOME/.ignition/tools/configs
 ```
 
-This issue is tracked [here](https://bitbucket.org/ignitionrobotics/ign-tools/issues/8/too-strict-looking-for-config-paths).
+This issue is tracked [here](https://github.com/ignitionrobotics/ign-tools/issues/8).
 

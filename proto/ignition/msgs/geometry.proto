@@ -34,6 +34,7 @@ import "ignition/msgs/heightmapgeom.proto";
 import "ignition/msgs/meshgeom.proto";
 import "ignition/msgs/vector3d.proto";
 import "ignition/msgs/polylinegeom.proto";
+import "ignition/msgs/conegeom.proto";
 
 message Geometry
 {
@@ -49,7 +50,10 @@ message Geometry
     TRIANGLE_FAN = 7;
     LINE_STRIP   = 8;
     POLYLINE     = 9;
-    EMPTY        = 10;
+    CONE         = 10;
+    EMPTY        = 11;
+    ARROW        = 12;
+    AXIS         = 13;
   }
 
   /// \brief Optional header data
@@ -63,7 +67,8 @@ message Geometry
   ImageGeom image          = 7;
   HeightmapGeom heightmap  = 8;
   MeshGeom      mesh       = 9;
+  ConeGeom      cone       = 10;
 
-  repeated Vector3d points          = 10;
-  repeated Polyline polyline        = 11;
+  repeated Vector3d points          = 11;
+  repeated Polyline polyline        = 12;
 }
