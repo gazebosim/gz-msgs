@@ -128,7 +128,7 @@ namespace ignition
         ignition::msgs::Factory::Register(_msgtype, New##_classname);\
       } \
     }; \
-    static IgnMsg##_classname IgnitionMessagesInitializer;
+    static IgnMsg##_classname IgnitionMessagesInitializer##_classname;
     }
   }
 }
