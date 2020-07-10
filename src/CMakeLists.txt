@@ -11,6 +11,10 @@ if (UNIX)
   target_link_libraries(ign_msgs_gen pthread)
 endif()
 
+if(INSTALL_IGN_MSGS_GEN_EXECUTABLE)
+  set_target_properties(ign_msgs_gen PROPERTIES VERSION ${PROJECT_VERSION_FULL})
+  install(TARGETS ign_msgs_gen DESTINATION ${IGN_BIN_INSTALL_DIR})
+endif()
 
 ##################################################
 # A function that calls protoc on a protobuf file
@@ -57,7 +61,7 @@ function(ign_msgs_protoc)
     list(APPEND ${ign_msgs_protoc_OUTPUT_CPP_CC_VAR} ${output_source})
     list(APPEND output_files ${output_header})
     list(APPEND output_files ${output_source})
-    list(APPEND protoc_args "--plugin=protoc-gen-ignmsgs=$<TARGET_FILE:ign_msgs_gen>")
+    list(APPEND protoc_args "--plugin=protoc-gen-ignmsgs=${IGN_MSGS_GEN_EXECUTABLE}")
     list(APPEND protoc_args "--cpp_out=dllexport_decl=IGNITION_MSGS_VISIBLE:${ign_msgs_protoc_OUTPUT_CPP_DIR}")
     list(APPEND protoc_args "--ignmsgs_out" "${ign_msgs_protoc_OUTPUT_CPP_DIR}")
     set(${ign_msgs_protoc_OUTPUT_CPP_HH_VAR} ${${ign_msgs_protoc_OUTPUT_CPP_HH_VAR}} PARENT_SCOPE)
