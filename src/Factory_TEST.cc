@@ -124,7 +124,15 @@ TEST(FactoryTest, MultipleMessagesInAProto)
     EXPECT_EQ(nullptr, ptr);
   }
   {
+    msgs::ConstSerializedEntityMapUniquePtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
     msgs::SerializedEntityMapSharedPtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    msgs::ConstSerializedEntityMapSharedPtr ptr{nullptr};
     EXPECT_EQ(nullptr, ptr);
   }
 
@@ -133,7 +141,15 @@ TEST(FactoryTest, MultipleMessagesInAProto)
     EXPECT_EQ(nullptr, ptr);
   }
   {
+    msgs::ConstSerializedStateMapUniquePtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
     msgs::SerializedStateMapSharedPtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    msgs::ConstSerializedStateMapSharedPtr ptr{nullptr};
     EXPECT_EQ(nullptr, ptr);
   }
 
@@ -142,7 +158,15 @@ TEST(FactoryTest, MultipleMessagesInAProto)
     EXPECT_EQ(nullptr, ptr);
   }
   {
+    msgs::ConstSerializedStepMapUniquePtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
     msgs::SerializedStepMapSharedPtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    msgs::ConstSerializedStepMapSharedPtr ptr{nullptr};
     EXPECT_EQ(nullptr, ptr);
   }
 }
