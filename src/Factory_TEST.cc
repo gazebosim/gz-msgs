@@ -78,3 +78,95 @@ TEST(FactoryTest, NewDynamicFactory)
   msg = msgs::Factory::New("example.msgs.StringMsg");
   EXPECT_TRUE(msg.get() != nullptr);
 }
+
+/////////////////////////////////////////////////
+TEST(FactoryTest, NewAllRegisteredTypes)
+{
+  std::vector<std::string> types;
+  msgs::Factory::Types(types);
+  EXPECT_FALSE(types.empty());
+
+  for (const auto &type : types)
+  {
+    auto msg = msgs::Factory::New(type);
+    ASSERT_NE(nullptr, msg.get()) << type;
+  }
+}
+
+/////////////////////////////////////////////////
+TEST(FactoryTest, MultipleMessagesInAProto)
+{
+  auto typesInSameFile =
+  {
+    "ign_msgs.SerializedEntityMap",
+    "ign_msgs.SerializedStateMap",
+    "ign_msgs.SerializedStepMap"
+  };
+
+  std::vector<std::string> types;
+  msgs::Factory::Types(types);
+  EXPECT_FALSE(types.empty());
+
+  for (auto type : typesInSameFile)
+  {
+    // Check all types are registered
+    EXPECT_NE(std::find(types.begin(), types.end(), std::string(type)),
+        types.end()) << type;
+
+    // Check all types can be newed
+    auto msg = msgs::Factory::New(type);
+    EXPECT_NE(nullptr, msg.get()) << type;
+  }
+
+  // Compile-time check that pointer types exist
+  {
+    msgs::SerializedEntityMapUniquePtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    msgs::ConstSerializedEntityMapUniquePtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    msgs::SerializedEntityMapSharedPtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    msgs::ConstSerializedEntityMapSharedPtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+
+  {
+    msgs::SerializedStateMapUniquePtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    msgs::ConstSerializedStateMapUniquePtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    msgs::SerializedStateMapSharedPtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    msgs::ConstSerializedStateMapSharedPtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+
+  {
+    msgs::SerializedStepMapUniquePtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    msgs::ConstSerializedStepMapUniquePtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    msgs::SerializedStepMapSharedPtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    msgs::ConstSerializedStepMapSharedPtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+}
