@@ -206,6 +206,16 @@ namespace ignition
     }
 
     /////////////////////////////////////////////////
+    std::chrono::system_clock::time_point Convert(const msgs::Time &_time)
+    {
+      auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(
+        std::chrono::duration<double>(_time.sec() + _time.nsec()/1e9));
+      std::chrono::system_clock::time_point result = std::chrono::system_clock::from_time_t(0);
+      result += duration;
+      return result;
+    }
+
+    /////////////////////////////////////////////////
     msgs::Vector3d Convert(const ignition::math::Vector3d &_v)
     {
       msgs::Vector3d result;
@@ -337,6 +347,17 @@ namespace ignition
       msgs::Double result;
       result.set_data(_d);
       return result;
+    }
+
+    /////////////////////////////////////////////////
+    msgs::Time Convert(const std::chrono::system_clock::time_point &_time_point)
+    {
+      std::pair<uint64_t, uint64_t> timeSecAndNsecs =
+        ignition::math::timePointToSecNsec(_time_point);
+      msgs::Time msg;
+      msg.set_sec(timeSecAndNsecs.first);
+      msg.set_nsec(timeSecAndNsecs.second);
+      return msg;
     }
 
     /////////////////////////////////////////////
