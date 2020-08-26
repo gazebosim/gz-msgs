@@ -250,10 +250,12 @@ namespace ignition
     msgs::Float Convert(const float &_f);
 
     /// \brief Convert a std::chrono::system_clock::time_point to a msgs::Time
-    /// \param[in] _time_point The std::chrono::system_clock::time_poin to convert
+    /// \param[in] _time_point The std::chrono::system_clock::time_poin to
+    /// convert
     /// \return A msgs::Time object
     IGNITION_MSGS_VISIBLE
-    msgs::Time Convert(const std::chrono::system_clock::time_point &_time_point);
+    msgs::Time Convert(
+      const std::chrono::system_clock::time_point &_time_point);
 
     /// \brief Convert a string to a msgs::Joint::Type enum.
     /// \param[in] _str Joint type string.

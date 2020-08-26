@@ -319,7 +319,8 @@ TEST(UtilityTest, ConvertFloat)
 /////////////////////////////////////////////////
 TEST(UtilityTest, ConvertTimePoint)
 {
-  std::chrono::system_clock::time_point time_point = math::secNsecToTimePoint(0, 0);
+  std::chrono::system_clock::time_point time_point =
+    math::secNsecToTimePoint(0, 0);
   msgs::Time msg = msgs::Convert(time_point);
   EXPECT_EQ(0, msg.sec());
   EXPECT_EQ(0, msg.nsec());
