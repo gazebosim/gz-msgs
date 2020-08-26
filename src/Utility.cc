@@ -208,11 +208,7 @@ namespace ignition
     /////////////////////////////////////////////////
     std::chrono::system_clock::time_point Convert(const msgs::Time &_time)
     {
-      auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(
-        std::chrono::duration<double>(_time.sec() + _time.nsec()/1e9));
-      std::chrono::system_clock::time_point result = std::chrono::system_clock::from_time_t(0);
-      result += duration;
-      return result;
+      return math::secNsecToTimePoint(_time.sec(), _time.nsec());;
     }
 
     /////////////////////////////////////////////////
