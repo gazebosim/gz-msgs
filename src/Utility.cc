@@ -206,7 +206,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////////
-    std::chrono::system_clock::time_point Convert(const msgs::Time &_time)
+    std::chrono::steady_clock::time_point Convert(const msgs::Time &_time)
     {
       return math::secNsecToTimePoint(_time.sec(), _time.nsec());;
     }
@@ -346,7 +346,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////////
-    msgs::Time Convert(const std::chrono::system_clock::time_point &_time_point)
+    msgs::Time Convert(const std::chrono::steady_clock::time_point &_time_point)
     {
       std::pair<uint64_t, uint64_t> timeSecAndNsecs =
         ignition::math::timePointToSecNsec(_time_point);
