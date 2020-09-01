@@ -183,7 +183,7 @@ target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
     protobuf::libprotobuf
-    ${ignition-math${IGN_MATH_VER}_LIBRARIES}
+    ignition-math${IGN_MATH_VER}::ignition-math${IGN_MATH_VER}
   PRIVATE
     TINYXML2::TINYXML2
 )
