@@ -319,17 +319,17 @@ TEST(UtilityTest, ConvertFloat)
 /////////////////////////////////////////////////
 TEST(UtilityTest, ConvertTimePoint)
 {
-  std::chrono::steady_clock::time_point time_point =
+  std::chrono::steady_clock::time_point timePoint =
     math::secNsecToTimePoint(0, 0);
-  msgs::Time msg = msgs::Convert(time_point);
+  msgs::Time msg = msgs::Convert(timePoint);
   EXPECT_EQ(0, msg.sec());
   EXPECT_EQ(0, msg.nsec());
 
   std::chrono::steady_clock::time_point s = msgs::Convert(msg);
   EXPECT_EQ(s, math::secNsecToTimePoint(0, 0));
 
-  time_point = math::secNsecToTimePoint(200, 999);
-  msg = msgs::Convert(time_point);
+  timePoint = math::secNsecToTimePoint(200, 999);
+  msg = msgs::Convert(timePoint);
   EXPECT_EQ(200, msg.sec());
   EXPECT_EQ(999, msg.nsec());
 }
