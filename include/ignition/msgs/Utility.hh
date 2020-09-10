@@ -147,6 +147,12 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     float Convert(const msgs::Float &_m);
 
+    /// \brief Convert a msgs::Time to a std::chrono::steady_clock::time_point
+    /// \param[in] _time The message to convert
+    /// \return A std::chrono::steady_clock::time_point object
+    IGNITION_MSGS_VISIBLE
+    std::chrono::steady_clock::time_point Convert(const msgs::Time &_time);
+
     /// \brief Convert a ignition::math::Vector3d to a msgs::Vector3d
     /// \param[in] _v The vector to convert
     /// \return A msgs::Vector3d object
@@ -242,6 +248,14 @@ namespace ignition
     /// \return A msgs::Float object
     IGNITION_MSGS_VISIBLE
     msgs::Float Convert(const float &_f);
+
+    /// \brief Convert a std::chrono::steady_clock::time_point to a msgs::Time
+    /// \param[in] _time_point The std::chrono::system_clock::time_poin to
+    /// convert
+    /// \return A msgs::Time object
+    IGNITION_MSGS_VISIBLE
+    msgs::Time Convert(
+      const std::chrono::steady_clock::time_point &_time_point);
 
     /// \brief Convert a string to a msgs::Joint::Type enum.
     /// \param[in] _str Joint type string.
