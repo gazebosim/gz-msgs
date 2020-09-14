@@ -147,11 +147,11 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     float Convert(const msgs::Float &_m);
 
-    /// \brief Convert a msgs::Time to a std::chrono::steady_clock::time_point
+    /// \brief Convert a msgs::Time to a std::chrono::steady_clock::duration
     /// \param[in] _time The message to convert
-    /// \return A std::chrono::steady_clock::time_point object
+    /// \return A std::chrono::steady_clock::duration object
     IGNITION_MSGS_VISIBLE
-    std::chrono::steady_clock::time_point Convert(const msgs::Time &_time);
+    std::chrono::steady_clock::duration Convert(const msgs::Time &_time);
 
     /// \brief Convert a ignition::math::Vector3d to a msgs::Vector3d
     /// \param[in] _v The vector to convert
@@ -249,13 +249,13 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     msgs::Float Convert(const float &_f);
 
-    /// \brief Convert a std::chrono::steady_clock::time_point to a msgs::Time
-    /// \param[in] _time_point The std::chrono::system_clock::time_poin to
+    /// \brief Convert a std::chrono::steady_clock::duration to a msgs::Time
+    /// \param[in] _time_point The std::chrono::system_clock::duration to
     /// convert
     /// \return A msgs::Time object
     IGNITION_MSGS_VISIBLE
     msgs::Time Convert(
-      const std::chrono::steady_clock::time_point &_time_point);
+      const std::chrono::steady_clock::duration &_time_point);
 
     /// \brief Convert a string to a msgs::Joint::Type enum.
     /// \param[in] _str Joint type string.
