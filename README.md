@@ -15,7 +15,7 @@ Test coverage:
 
 Install required dependencies as follows:
 
-    sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev libignition-math4-dev
+    sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev libignition-math6-dev
 
 ## Installation
 
