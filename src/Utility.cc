@@ -976,7 +976,6 @@ namespace ignition
     bool ConvertFuelMetadata(const std::string &_modelConfigStr,
                              msgs::FuelMetadata &_meta)
     {
-      std::cout << "Converting string" << std::endl;
       ignition::msgs::FuelMetadata meta;
 
       // Load the model config into tinyxml
