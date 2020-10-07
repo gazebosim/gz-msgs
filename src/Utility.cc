@@ -976,6 +976,7 @@ namespace ignition
     bool ConvertFuelMetadata(const std::string &_modelConfigStr,
                              msgs::FuelMetadata &_meta)
     {
+      std::cout << "Converting string" << std::endl;
       ignition::msgs::FuelMetadata meta;
 
       // Load the model config into tinyxml
@@ -1009,6 +1010,24 @@ namespace ignition
       elem = modelElement->FirstChildElement("description");
       if (elem && elem->GetText())
         meta.set_description(trimmed(elem->GetText()));
+
+      // Read the dependencies, if any.
+      elem = modelElement->FirstChildElement("depend");
+      while (elem)
+      {
+        auto modelElem = elem->FirstChildElement("model");
+        if (modelElem)
+        {
+          auto uriElem = modelElem->FirstChildElement("uri");
+          if (uriElem)
+          {
+            std::string modelStr = uriElem->GetText();
+            auto dependency = meta.add_dependencies();
+            dependency->set_uri(uriElem->GetText());
+          }
+        }
+        elem = elem->NextSiblingElement("depend");
+      }
 
       // Read the authors, if any.
       elem = modelElement->FirstChildElement("author");
