@@ -1020,7 +1020,6 @@ namespace ignition
           auto uriElem = modelElem->FirstChildElement("uri");
           if (uriElem)
           {
-            std::string modelStr = uriElem->GetText();
             auto dependency = meta.add_dependencies();
             dependency->set_uri(uriElem->GetText());
           }
@@ -1130,6 +1129,16 @@ namespace ignition
         << "      <name>" << _meta.authors(i).name() << "</name>\n"
         << "      <email>" << _meta.authors(i).email() << "</email>\n"
         << "    </author>\n";
+      }
+
+      // Output dependency information.
+      for (int i = 0; i < _meta.dependencies_size(); ++i)
+      {
+        out << "    <depend>\n"
+        << "      <model>"
+        << "        <uri>" << _meta.dependencies(i).uri() << "</uri>\n"
+        << "      </model>"
+        << "    </depend>\n";
       }
 
       // Output closing tag.
