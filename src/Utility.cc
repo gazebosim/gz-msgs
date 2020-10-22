@@ -1028,6 +1028,23 @@ namespace ignition
       if (elem && elem->GetText())
         meta.set_description(trimmed(elem->GetText()));
 
+      // Read the dependencies, if any.
+      elem = modelElement->FirstChildElement("depend");
+      while (elem)
+      {
+        auto modelElem = elem->FirstChildElement("model");
+        if (modelElem)
+        {
+          auto uriElem = modelElem->FirstChildElement("uri");
+          if (uriElem)
+          {
+            auto dependency = meta.add_dependencies();
+            dependency->set_uri(uriElem->GetText());
+          }
+        }
+        elem = elem->NextSiblingElement("depend");
+      }
+
       // Read the authors, if any.
       elem = modelElement->FirstChildElement("author");
       while (elem)
@@ -1130,6 +1147,16 @@ namespace ignition
         << "      <name>" << _meta.authors(i).name() << "</name>\n"
         << "      <email>" << _meta.authors(i).email() << "</email>\n"
         << "    </author>\n";
+      }
+
+      // Output dependency information.
+      for (int i = 0; i < _meta.dependencies_size(); ++i)
+      {
+        out << "    <depend>\n"
+        << "      <model>"
+        << "        <uri>" << _meta.dependencies(i).uri() << "</uri>\n"
+        << "      </model>"
+        << "    </depend>\n";
       }
 
       // Output closing tag.
