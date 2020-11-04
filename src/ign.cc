@@ -25,7 +25,12 @@
 #pragma warning(pop)
 #endif
 
+#include "ign.hh"
+
 #include <iostream>
+#include <string>
+#include <vector>
+
 #include <ignition/msgs/config.hh>
 #include <ignition/msgs/Factory.hh>
 
