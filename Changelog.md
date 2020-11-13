@@ -16,6 +16,12 @@
 1. Use modern CMake targets when including ignition-math.
     * [Pull request 82](https://github.com/ignitionrobotics/ign-msgs/pull/82)
 
+1. Bump versions in readme.
+    * [Pull request 88](https://github.com/ignitionrobotics/ign-msgs/pull/88)
+
+1. Bump readme math version.
+    * [Pull request 90](https://github.com/ignitionrobotics/ign-msgs/pull/90)
+
 1. Improve fork experience.
     * [Pull request 94](https://github.com/ignitionrobotics/ign-msgs/pull/94)
 
