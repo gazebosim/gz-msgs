@@ -113,9 +113,9 @@ line is using symbolic links to each library's YAML file.
 ```
 mkdir ~/.ignition/tools/configs -p
 cd ~/.ignition/tools/configs/
-ln -s /usr/local/share/ignition/fuel4.yaml .
-ln -s /usr/local/share/ignition/transport8.yaml .
-ln -s /usr/local/share/ignition/transportlog8.yaml .
+ln -s /usr/local/share/ignition/fuel5.yaml .
+ln -s /usr/local/share/ignition/transport9.yaml .
+ln -s /usr/local/share/ignition/transportlog9.yaml .
 ...
 export IGN_CONFIG_PATH=$HOME/.ignition/tools/configs
 ```
