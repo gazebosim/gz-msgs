@@ -2,6 +2,10 @@
 
 ### Ignition Msgs 6.x.x
 
+### Ignition Msgs 6.1.0 (2020-12-01)
+
+1. Includes changes found in version 5.4.0.
+
 ### Ignition Msgs 6.0.0 (2020-09-28)
 
 1. Convert functions between duration and ignition::time.
