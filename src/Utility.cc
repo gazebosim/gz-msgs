@@ -22,9 +22,9 @@
 #include "ignition/msgs/Utility.hh"
 
 #ifdef _WIN32
-  const auto &ignstrtok = strtok_s;
+  static const auto &ignstrtok = strtok_s;
 #else
-  const auto &ignstrtok = strtok_r;
+  static const auto &ignstrtok = strtok_r;
 #endif
 
 
