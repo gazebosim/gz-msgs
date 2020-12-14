@@ -141,7 +141,6 @@ message FuelMetadata
   map<string, string> annotations = 9;
 
   /// \brief Resources that this resource depends on.
-  /// \todo(nkoenig) This field is currently not used.
   repeated Dependency dependencies = 10;
 
   /// \brief List of tools/libraries with version numbers that are compatible

@@ -35,7 +35,6 @@ message JointCmd
 
   string name     = 2;
   int32 axis      = 3;
-  double force    = 4[deprecated = true];
 
   PID position    = 5;
   PID velocity    = 6;
