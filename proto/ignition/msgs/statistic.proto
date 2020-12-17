@@ -47,6 +47,8 @@ message Statistic
     SAMPLE_COUNT     = 6;
     /// \brief A root mean square value is represented.
     ROOT_MEAN_SQUARE = 7;
+    /// \brief A maximum absolute value is represented.
+    MAX_ABS_VALUE    = 8;
   }
 
   /// \brief Optional header data
