@@ -28,23 +28,37 @@ import "ignition/msgs/header.proto";
 
 message Statistic
 {
+  /// \brief The type of data represented by this statistic.
   enum DataType
   {
-    UNITIALIZED = 0;
-    AVERAGE      = 1;
-    MINIMUM      = 2;
-    MAXIMUM      = 3;
-    STDDEV       = 4;
-    SAMPLE_COUNT = 5;
+    /// \brief The data type has not been initialized.
+    UNINITIALIZED    = 0;
+    /// \brief An average value is represented.
+    AVERAGE          = 1;
+    /// \brief A minimum value is represented.
+    MINIMUM          = 2;
+    /// \brief A maximum value is represented.
+    MAXIMUM          = 3;
+    /// \brief A variance is represented.
+    VARIANCE         = 4
+    /// \brief A standard deviation is represented.
+    STDDEV           = 5;
+    /// \brief A sample count is represented.
+    SAMPLE_COUNT     = 6;
+    /// \brief A root mean square value is represented.
+    ROOT_MEAN_SQUARE = 7;
   }
 
   /// \brief Optional header data
   Header header  = 1;
 
+  /// \brief The data type.
   DataType type  = 2;
 
+  /// \brief Name associated with the statistic.
   string   name  = 3;
 
+  /// \brief The statistic's value.
   double   value = 4;
 }
 
