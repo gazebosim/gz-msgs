@@ -40,7 +40,7 @@ message Statistic
     /// \brief A maximum value is represented.
     MAXIMUM          = 3;
     /// \brief A variance is represented.
-    VARIANCE         = 4
+    VARIANCE         = 4;
     /// \brief A standard deviation is represented.
     STDDEV           = 5;
     /// \brief A sample count is represented.
