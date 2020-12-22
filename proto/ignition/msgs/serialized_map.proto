@@ -53,7 +53,7 @@ message SerializedStateMap
 
   /// \brief Indicates if there is any one time component change,
   /// or if all changes are periodic.
-  bool is_periodic_change = 3;
+  bool has_one_time_component_changes = 3;
 };
 
 /// \brief All the data needed to step an ECS system, such as current
