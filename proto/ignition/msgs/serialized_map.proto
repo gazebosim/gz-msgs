@@ -50,6 +50,10 @@ message SerializedStateMap
 
   /// \brief All the entities currently in the simulation.
   map<uint64, SerializedEntityMap> entities = 2;
+
+  /// \brief Indicates if there is any one time component change,
+  /// or if all changes are periodic.
+  bool is_periodic_change = 3;
 };
 
 /// \brief All the data needed to step an ECS system, such as current
