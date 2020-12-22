@@ -117,4 +117,6 @@ message Material
 
   /// \brief Physically Based Rendering (PBR) material properties
   PBR pbr                = 10;
+
+  double render_order    = 11;
 }
