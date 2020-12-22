@@ -54,6 +54,11 @@
 
 ## Ignition Msgs 5.x
 
+### Ignition Msgs 5.5.0 (2020-12-21)
+
+1. Add statistics message.
+    * [Pull request 110](https://github.com/ignitionrobotics/ign-msgs/pull/110)
+
 ### Ignition Msgs 5.4.0 (2020-11-12)
 
 1. Add CMake options to support cross-compilation.
