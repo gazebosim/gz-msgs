@@ -118,5 +118,7 @@ message Material
   /// \brief Physically Based Rendering (PBR) material properties
   PBR pbr                = 10;
 
+  /// \brief Render order. The higher value will be rendered on top of the
+  /// other coplanar polygons
   double render_order    = 11;
 }
