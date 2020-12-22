@@ -5,6 +5,20 @@ Deprecated code produces compile-time warnings. These warning serve as
 notification to users that their code should be upgraded. The next major
 release will remove the deprecated code.
 
+## Ignition Msgs 6.X to 7.X
+
+### Removals
+
+1. `bool use_parent_model_frame` from `axis.proto`.
+    * [Pull Request 112](https://github.com/ignitionrobotics/ign-msgs/pull/112/files)
+
+1. `double force` from `joint_cmd.proto`.
+    * [Pull Request 112](https://github.com/ignitionrobotics/ign-msgs/pull/112/files)
+
+1. `double target`, `double p_gain`, `double i_gain`, `double d_gain`,
+   `double i_max`, `double i_min`, `double limit` from `pid.proto`.
+    * [Pull Request 112](https://github.com/ignitionrobotics/ign-msgs/pull/112/files)
+
 ## Ignition Msgs 4.X to 5.X
 
 ### Modifications

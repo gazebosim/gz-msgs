@@ -59,10 +59,6 @@ message Axis
   /// \brief The physical static friction value of the joint.
   double friction             = 8;
 
-  /// \brief True if the coordinates are expressed in the parent model frame.
-  /// \deprecated Use `xyz_expressed_in` instead.
-  bool use_parent_model_frame = 9[deprecated = true];
-
   /// \brief Position of the joint. For angular joints, such as revolute
   /// joints, the units are radians. For linear joints, such as prismatic
   /// joints, the units are meters.
