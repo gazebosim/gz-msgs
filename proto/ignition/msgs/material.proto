@@ -97,6 +97,9 @@ message Material
 
     /// \brief Filename of the emissive map
     string emissive_map          = 13;
+
+    /// \brief Filename of the light map.
+    string light_map             = 14;
   }
 
 
