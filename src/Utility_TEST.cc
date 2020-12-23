@@ -704,7 +704,16 @@ TEST(UtilityTest, InitPointCloudPacked)
       {"rgb", msgs::PointCloudPacked::Field::FLOAT32}});
 
   EXPECT_EQ(4, pc.field_size());
-  EXPECT_EQ(24u, pc.point_step());
+  if (4u == sizeof(size_t))
+  {
+    // 32-bit architecture
+    EXPECT_EQ(16u, pc.point_step());
+  }
+  else
+  {
+    // otherwise assume 64-bit architecture
+    EXPECT_EQ(24u, pc.point_step());
+  }
 
   EXPECT_EQ("x", pc.field(0).name());
   EXPECT_EQ(0u, pc.field(0).offset());
@@ -722,7 +731,16 @@ TEST(UtilityTest, InitPointCloudPacked)
   EXPECT_EQ(1u, pc.field(2).count());
 
   EXPECT_EQ("rgb", pc.field(3).name());
-  EXPECT_EQ(16u, pc.field(3).offset());
+  if (4u == sizeof(size_t))
+  {
+    // 32-bit architecture
+    EXPECT_EQ(12u, pc.field(3).offset());
+  }
+  else
+  {
+    // otherwise assume 64-bit architecture
+    EXPECT_EQ(16u, pc.field(3).offset());
+  }
   EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(3).datatype());
   EXPECT_EQ(1u, pc.field(3).count());
 
