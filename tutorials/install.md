@@ -17,8 +17,7 @@ sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev libignition
 
 ## Windows
 
-Install [Conda package management system](https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html).
-Miniconda suffices.
+First, follow the [ign-cmake](https://github.com/ignitionrobotics/ign-cmake) tutorial for installing Conda, Visual Studio, CMake, etc., prerequisites, and creating a Conda environment.
 
 Create if necessary, and activate a Conda environment:
 
@@ -31,6 +30,20 @@ Install prerequisites:
 
 ```
 conda install tinyxml2 protobuf --channel conda-forge
+```
+
+Install Ignition dependencies:
+
+You can view lists of dependencies:
+
+```
+conda search libignition-msgs* --channel conda-forge --info
+```
+
+Install dependencies, replacing `<#>` with the desired versions:
+
+```
+conda install libignition-cmake<#> libignition-math<#> libignition-tools<#> --channel conda-forge
 ```
 
 # Installation
