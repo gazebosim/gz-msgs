@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(ignition-msgs5 VERSION 5.5.0)
+project(ignition-msgs5 VERSION 5.6.0)
 
 #============================================================================
 # Find ignition-cmake
@@ -23,18 +23,18 @@ ign_configure_project()
 # Cross-compilation related options
 # In a cross-compilation scenario, it is possible that the ign_msgs_gen
 # generator compiled for the target machine cannot be used to generate
-# the C++ code corresponding to the .proto definition. For this scenario, 
-# the following two options can be used as follows. 
+# the C++ code corresponding to the .proto definition. For this scenario,
+# the following two options can be used as follows.
 # First of all, ign-msgs is compiled targeting the host machine, and in the
 # build targeting the host, the INSTALL_IGN_MSGS_GEN_EXECUTABLE option is
 # enabled:
-# > cmake -DINSTALL_IGN_MSGS_GEN_EXECUTABLE:BOOL=ON .. 
-# ensuring that the ign_msgs_gen is installed in 
-# <host_install_prefix>/bin/ign_msgs_gen . Then, the same version of ign-msgs 
+# > cmake -DINSTALL_IGN_MSGS_GEN_EXECUTABLE:BOOL=ON ..
+# ensuring that the ign_msgs_gen is installed in
+# <host_install_prefix>/bin/ign_msgs_gen . Then, the same version of ign-msgs
 # can be cross-compiled, and in the cross-compilation build the location of the
-# host ign_msgs_gen is specified via the IGN_MSGS_GEN_EXECUTABLE 
-# CMake cache variable: 
-# > cmake -IGN_MSGS_GEN_EXECUTABLE=<host_install_prefix>/bin/ign_msgs_gen .. 
+# host ign_msgs_gen is specified via the IGN_MSGS_GEN_EXECUTABLE
+# CMake cache variable:
+# > cmake -IGN_MSGS_GEN_EXECUTABLE=<host_install_prefix>/bin/ign_msgs_gen ..
 
 option(
   INSTALL_IGN_MSGS_GEN_EXECUTABLE

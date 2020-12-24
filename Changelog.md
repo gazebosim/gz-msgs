@@ -1,5 +1,14 @@
 ## Ignition Msgs 5.x
 
+### Ignition Msgs 5.X.X (20XX-XX-XX)
+
+
+### Ignition Msgs 5.6.0 (2020-12-28)
+
+1. Add JointTrajectory message.
+    * [Pull request 106](https://github.com/ignitionrobotics/ign-msgs/pull/106)
+    * [Pull request 117](https://github.com/ignitionrobotics/ign-msgs/pull/117)
+
 ### Ignition Msgs 5.5.0 (2020-12-21)
 
 1. Add statistics message.
