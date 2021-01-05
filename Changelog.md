@@ -2,6 +2,21 @@
 
 ### Ignition Msgs 6.x.x
 
+### Ignition Msgs 6.2.0 (2020-12-22)
+
+1. Make ignstrtok private to Utility.cc
+    * [Pull request 107](https://github.com/ignitionrobotics/ign-msgs/pull/107)
+
+1. Added JointTrajectory message
+    * [Pull request 106](https://github.com/ignitionrobotics/ign-msgs/pull/106)
+
+1. Added Statistics message
+    * [Pull request 110](https://github.com/ignitionrobotics/ign-msgs/pull/110)
+
+### Ignition Msgs 6.1.0 (2020-12-01)
+
+1. Includes changes found in version 5.4.0.
+
 ### Ignition Msgs 6.0.0 (2020-09-28)
 
 1. Convert functions between duration and ignition::time.
@@ -38,6 +53,11 @@
     * [Pull request 41](https://github.com/ignitionrobotics/ign-msgs/pull/41)
 
 ## Ignition Msgs 5.x
+
+### Ignition Msgs 5.5.0 (2020-12-21)
+
+1. Add statistics message.
+    * [Pull request 110](https://github.com/ignitionrobotics/ign-msgs/pull/110)
 
 ### Ignition Msgs 5.4.0 (2020-11-12)
 
