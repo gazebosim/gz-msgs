@@ -100,6 +100,9 @@ message Material
 
     /// \brief Filename of the light map.
     string light_map             = 14;
+
+    /// \brief Texture coordinate set for the light map
+    uint32 light_map_texcoord_set = 15;
   }
 
 
