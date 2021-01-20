@@ -123,3 +123,84 @@ This assumes you have created and activated a Conda environment while installing
   ```
   cmake --install . --config Release
   ```
+
+# Documentation
+
+API documentation and tutorials can be accessed at
+[https://ignitionrobotics.org/libs/cmake](https://ignitionrobotics.org/libs/cmake)
+
+You can also generate the documentation from a clone of this repository by following these steps.
+
+1. You will need [Doxygen](http://www.doxygen.org/). On Ubuntu Doxygen can be installed using
+
+  sudo apt-get install doxygen
+
+2. Clone the repository
+
+  git clone https://github.com/ignitionrobotics/ign-cmake
+
+3. Configure and build the documentation.
+
+  cd ign-cmake
+  mkdir build
+  cd build
+  cmake ..
+  make doc
+
+4. View the documentation by running the following command from the `build` directory.
+
+  firefox doxygen/html/index.html
+
+## Documentation Release
+
+1. Upload documentation to ignitionrobotics.org.
+
+```
+cd build
+sh upload.sh
+```
+
+2. If you're creating a new release, then tell ignitionrobotics.org about
+   the new version. For example:
+
+```
+curl -k -X POST -d '{"libName":"msgs", "version":"1.0.0", "releaseDate":"2017-10-09T12:10:13+02:00","password":"secret"}' https://api    .ignitionrobotics.org/1.0/versions
+```
+
+## Testing
+
+Run tests as follows:
+
+ make test
+
+Tests are automatically built. To disable them, run `cmake` as follows:
+
+ cmake .. -DENABLE_TESTS_COMPILATION=false
+
+### Test coverage
+
+To run test coverage:
+
+1. Install LCOV
+
+  sudo apt-get install lcov
+
+2. Build with coverage
+
+  cd build/
+  cmake .. -DCMAKE_BUILD_TYPE=coverage
+  make
+
+3. Run tests
+
+  make test
+
+4. Generate coverage
+
+  make coverage
+
+5. View results
+
+  firefox coverage/index.html
+
+See the [Writing Tests section of the Ignition documentation](https://ignitionrobotics.org/docs/all/contributing#writing-tests) for help creating or modifying tests.
