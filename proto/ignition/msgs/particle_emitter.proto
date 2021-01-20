@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Open Source Robotics Foundation
+ * Copyright (C) 2021 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,9 @@ message ParticleEmitter
   /// \brief The emitter name.
   string name                   = 2;
 
+  /// \brief Unique Id.
+  uint32 id                     = 3;
+
   /// \brief All possible emitter types.
   enum EmitterType
   {
@@ -51,49 +54,49 @@ message ParticleEmitter
     ELLIPSOID = 3;
   }
   /// \brief The emitter type.
-  EmitterType type              = 3;
+  EmitterType type              = 4;
 
   /// \brief The position of the emitter.
-  Pose pose                     = 4;
+  Pose pose                     = 5;
 
   /// The size of the emitter where the particles are sampled.
-  Vector3d size                 = 5;
+  Vector3d size                 = 6;
 
   /// \brief How many particles per second should be emitted.
-  float rate                    = 6;
+  float rate                    = 7;
 
   /// \brief The number of seconds the emitter is active.
-  float duration                = 7;
+  float duration                = 8;
 
   /// \brief Whether particle emitter is enabled or not.
-  bool emitting                 = 8;
+  bool emitting                 = 9;
 
   /// \brief The particle dimensions (width, height, depth).
-  Vector3d particle_size        = 9;
+  Vector3d particle_size        = 10;
 
   /// \brief The number of seconds each particle will ’live’ for before
   /// being destroyed.
-  float lifetime                = 10;
+  float lifetime                = 11;
 
   /// \brief The material which all particles in the emitter will use.
-  Material material             = 11;
+  Material material             = 12;
 
   /// \brief The minimum velocity each particle is emitted (m/s).
-  float min_velocity            = 12;
+  float min_velocity            = 13;
 
   /// \brief The maximum velocity each particle is emitted (m/s).
-  float max_velocity            = 13;
+  float max_velocity            = 14;
 
   /// \brief The starting color of the particles.
-  Color color_start             = 14;
+  Color color_start             = 15;
 
   /// \brief The end color of the particles.
-  Color color_end               = 15;
+  Color color_end               = 16;
 
   /// \brief The amount by which to scale the particles in both x and y
   /// direction per second.
-  float scale_rate              = 16;
+  float scale_rate              = 17;
 
   /// \brief The path to the color image used as an affector.
-  string color_range_image      = 17;
+  string color_range_image      = 18;
 }
