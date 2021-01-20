@@ -42,9 +42,6 @@ which version you need.
 
 # Source Installation
 
-Source installation can be performed by first installing the necessary
-prerequisites followed by building from source.
-
 ## Ubuntu
 
 ### Prerequisites
