@@ -24,17 +24,19 @@ option java_outer_classname = "GeometryProtos";
 /// \interface Geometry
 /// \brief Information about a geometry element
 
-import "ignition/msgs/header.proto";
 import "ignition/msgs/boxgeom.proto";
-import "ignition/msgs/cylindergeom.proto";
-import "ignition/msgs/spheregeom.proto";
-import "ignition/msgs/planegeom.proto";
-import "ignition/msgs/imagegeom.proto";
-import "ignition/msgs/heightmapgeom.proto";
-import "ignition/msgs/meshgeom.proto";
-import "ignition/msgs/vector3d.proto";
-import "ignition/msgs/polylinegeom.proto";
+import "ignition/msgs/capsulegeom.proto";
 import "ignition/msgs/conegeom.proto";
+import "ignition/msgs/cylindergeom.proto";
+import "ignition/msgs/ellipsoidgeom.proto";
+import "ignition/msgs/header.proto";
+import "ignition/msgs/heightmapgeom.proto";
+import "ignition/msgs/imagegeom.proto";
+import "ignition/msgs/meshgeom.proto";
+import "ignition/msgs/planegeom.proto";
+import "ignition/msgs/polylinegeom.proto";
+import "ignition/msgs/spheregeom.proto";
+import "ignition/msgs/vector3d.proto";
 
 message Geometry
 {
@@ -54,6 +56,8 @@ message Geometry
     EMPTY        = 11;
     ARROW        = 12;
     AXIS         = 13;
+    CAPSULE      = 14;
+    ELLIPSOID    = 15;
   }
 
   /// \brief Optional header data
@@ -68,6 +72,8 @@ message Geometry
   HeightmapGeom heightmap  = 8;
   MeshGeom      mesh       = 9;
   ConeGeom      cone       = 10;
+  CapsuleGeom   capsule    = 13;
+  EllipsoidGeom ellipsoid  = 14;
 
   repeated Vector3d points          = 11;
   repeated Polyline polyline        = 12;
