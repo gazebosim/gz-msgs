@@ -31,6 +31,8 @@ message CapsuleGeom
   /// \brief Optional header data
   Header header  = 1;
 
+  /// \brief Radius of the capsule
   double radius  = 2;
+  /// \brief Height of the cylinder
   double length  = 3;
 }

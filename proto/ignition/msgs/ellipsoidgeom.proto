@@ -32,5 +32,6 @@ message EllipsoidGeom
   /// \brief Optional header data
   Header header  = 1;
 
+  /// \brief 3D Vector with the three radius that define a ellipsoid
   Vector3d radii  = 2;
 }
