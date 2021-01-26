@@ -49,6 +49,8 @@ message Marker
     CONE           = 11;
     ARROW          = 12;
     AXIS           = 13;
+    CAPSULE        = 14;
+    ELLIPSOID      = 15;
   }
 
   /// \brief Visilibity defines what cameras render the marker.

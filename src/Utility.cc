@@ -594,9 +594,17 @@ namespace ignition
       {
         result = msgs::Geometry::BOX;
       }
+      else if (_str == "capsule")
+      {
+        result = msgs::Geometry::CAPSULE;
+      }
       else if (_str == "cylinder")
       {
         result = msgs::Geometry::CYLINDER;
+      }
+      else if (_str == "ellipsoid")
+      {
+        result = msgs::Geometry::ELLIPSOID;
       }
       else if (_str == "sphere")
       {
@@ -644,9 +652,19 @@ namespace ignition
           result = "box";
           break;
         }
+        case msgs::Geometry::CAPSULE:
+        {
+          result = "capsule";
+          break;
+        }
         case msgs::Geometry::CYLINDER:
         {
           result = "cylinder";
+          break;
+        }
+        case msgs::Geometry::ELLIPSOID:
+        {
+          result = "ellipsoid";
           break;
         }
         case msgs::Geometry::SPHERE:

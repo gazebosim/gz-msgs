@@ -577,7 +577,9 @@ TEST(MsgsTest, ConvertMsgsGeometryTypeToString)
 {
   CompareMsgsGeometryTypeToString(msgs::Geometry::BOX);
   CompareMsgsGeometryTypeToString(msgs::Geometry::SPHERE);
+  CompareMsgsGeometryTypeToString(msgs::Geometry::CAPSULE);
   CompareMsgsGeometryTypeToString(msgs::Geometry::CYLINDER);
+  CompareMsgsGeometryTypeToString(msgs::Geometry::ELLIPSOID);
   CompareMsgsGeometryTypeToString(msgs::Geometry::PLANE);
   CompareMsgsGeometryTypeToString(msgs::Geometry::IMAGE);
   CompareMsgsGeometryTypeToString(msgs::Geometry::HEIGHTMAP);
