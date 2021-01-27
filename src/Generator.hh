@@ -44,9 +44,9 @@ class Generator : public CodeGenerator
   /// \param[in] _generatorContext Output directory.
   /// \param[in] _error Unused string value
   public: virtual bool Generate(const FileDescriptor *_file,
-              const string &_parameter,
+              const std::string &_parameter,
               OutputDirectory *_generatorContext,
-              string *_error) const;
+              std::string *_error) const;
 
   // private: GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Generator);
 };
