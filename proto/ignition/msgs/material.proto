@@ -124,4 +124,8 @@ message Material
   /// \brief Render order. The higher value will be rendered on top of the
   /// other coplanar polygons
   double render_order    = 11;
+
+  /// \brief If true, the mesh that this material is applied to will be
+  /// rendered as double sided
+  bool double_sided      = 12;
 }
