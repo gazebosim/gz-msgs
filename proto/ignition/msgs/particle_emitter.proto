@@ -94,7 +94,7 @@ message ParticleEmitter
   Color color_end               = 16;
 
   /// \brief The amount by which to scale the particles in both x and y
-  /// direction per second.
+  /// direction per second (screen coordinates).
   float scale_rate              = 17;
 
   /// \brief The path to the color image used as an affector.
