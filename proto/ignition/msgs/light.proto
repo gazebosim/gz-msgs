@@ -55,11 +55,13 @@ message Light
   float spot_inner_angle        = 13;
   float spot_outer_angle        = 14;
   float spot_falloff            = 15;
-  float intensity            = 18;
 
   /// \brief Unique id of the light
   uint32 id                     = 16;
 
   /// \brief Unique id of light's parent
   uint32 parent_id              = 17;
+
+  /// \brief light intensity
+  float intensity               = 18;
 }
