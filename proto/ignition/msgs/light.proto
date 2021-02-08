@@ -61,4 +61,7 @@ message Light
 
   /// \brief Unique id of light's parent
   uint32 parent_id              = 17;
+
+  /// \brief light intensity
+  float intensity               = 18;
 }
