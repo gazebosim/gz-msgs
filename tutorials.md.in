@@ -6,7 +6,8 @@ Ignition @IGN_DESIGNATION_CAP@ library and how to use the library effectively.
 
 **The tutorials**
 
-1. \subpage cppgetstarted "C++ Get Started"
+1. \subpage install "Installation"
+2. \subpage cppgetstarted "C++ Get Started"
 
 ## License
 
