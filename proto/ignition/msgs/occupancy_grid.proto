@@ -29,24 +29,28 @@ option java_outer_classname = "OccpuancyGridProtos";
 
 import "ignition/msgs/header.proto";
 import "ignition/msgs/pose.proto";
+import "ignition/msgs/time.proto";
 
 
 message OccupancyGrid
 {
   message MapMetaInfo
   {
+    /// \brief The map load time
+    Time map_load_time = 1;
+
     /// \brief The map resolution (meters/cell)
-    double resolution = 1;
+    double resolution = 2;
 
     /// \brief The map width (cells)
-    uint32 width = 2;
+    uint32 width = 3;
 
     /// \brief The map height (cells)
-    uint32 height = 3;
+    uint32 height = 4;
 
     /// \brief  The origin of the map.  This is the real-world pose of the
     /// cell (0,0) in the map
-    Pose origin = 4;
+    Pose origin = 5;
   };
 
   /// \brief Optional header data. This should contain time of map validity
