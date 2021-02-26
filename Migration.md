@@ -11,7 +11,7 @@ release will remove the deprecated code.
 
 1. **particle_emitter.proto**
    + Fields have changed from plain data types to messages.
-       See [PR 137](https://github.com/ignitionrobotics/ign-msgs/pull/137)
+       * See [PR 137](https://github.com/ignitionrobotics/ign-msgs/pull/137)
 
 ## Ignition Msgs 4.X to 5.X
 
