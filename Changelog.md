@@ -2,6 +2,14 @@
 
 ### Ignition Msgs 6.x.x (2021-xx-xx)
 
+### Ignition Msgs 6.3.0 (2021-03-01)
+
+1. Support 'has' functionality in particle Emitter.
+    * [Pull request 137](https://github.com/ignitionrobotics/ign-msgs/pull/137)
+
+1. Add ignition version of nav_msgs/OccupancyGrid.
+    * [Pull request 138](https://github.com/ignitionrobotics/ign-msgs/pull/138)
+
 ### Ignition Msgs 6.3.0 (2021-02-17)
 
 1. Particle emitter message.
