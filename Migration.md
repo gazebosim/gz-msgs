@@ -19,6 +19,14 @@ release will remove the deprecated code.
    `double i_max`, `double i_min`, `double limit` from `pid.proto`.
     * [Pull Request 112](https://github.com/ignitionrobotics/ign-msgs/pull/112/files)
 
+## Ignition Msgs 6.3 to 6.4
+
+### Modifications
+
+1. **particle_emitter.proto**
+   + Fields have changed from plain data types to messages.
+       * See [PR 137](https://github.com/ignitionrobotics/ign-msgs/pull/137)
+
 ## Ignition Msgs 4.X to 5.X
 
 ### Modifications

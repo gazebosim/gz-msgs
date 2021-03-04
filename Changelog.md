@@ -1,6 +1,27 @@
 ## Ignition Msgs 6.x
 
-### Ignition Msgs 6.x.x
+### Ignition Msgs 6.x.x (2021-xx-xx)
+
+### Ignition Msgs 6.3.0 (2021-03-01)
+
+1. Support 'has' functionality in particle Emitter.
+    * [Pull request 137](https://github.com/ignitionrobotics/ign-msgs/pull/137)
+
+1. Add ignition version of nav_msgs/OccupancyGrid.
+    * [Pull request 138](https://github.com/ignitionrobotics/ign-msgs/pull/138)
+
+### Ignition Msgs 6.3.0 (2021-02-17)
+
+1. Particle emitter message.
+    * [Pull request 127](https://github.com/ignitionrobotics/ign-msgs/pull/127)
+
+1. Add std:: to strings in Generator.cc/hh
+    * [Pull request 129](https://github.com/ignitionrobotics/ign-msgs/pull/129)
+
+1. Add windows installation; move installation in README to tutorial
+    * [Pull request 126](https://github.com/ignitionrobotics/ign-msgs/pull/126)
+
+1. Includes changes found in version 5.6.0.
 
 ### Ignition Msgs 6.2.0 (2020-12-22)
 
