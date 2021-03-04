@@ -24,10 +24,13 @@ option java_outer_classname = "ParticleEmitterProtos";
 /// \interface ParticleEmitter
 /// \brief Message for a particle emitter.
 
+import "ignition/msgs/boolean.proto";
 import "ignition/msgs/color.proto";
+import "ignition/msgs/float.proto";
 import "ignition/msgs/header.proto";
 import "ignition/msgs/material.proto";
 import "ignition/msgs/pose.proto";
+import "ignition/msgs/stringmsg.proto";
 import "ignition/msgs/vector3d.proto";
 
 message ParticleEmitter
@@ -63,29 +66,29 @@ message ParticleEmitter
   Vector3d size                 = 6;
 
   /// \brief How many particles per second should be emitted.
-  float rate                    = 7;
+  Float rate                    = 7;
 
   /// \brief The number of seconds the emitter is active.
-  float duration                = 8;
+  Float duration                = 8;
 
   /// \brief Whether particle emitter is enabled or not.
-  bool emitting                 = 9;
+  Boolean emitting                 = 9;
 
   /// \brief The particle dimensions (width, height, depth).
   Vector3d particle_size        = 10;
 
   /// \brief The number of seconds each particle will ’live’ for before
   /// being destroyed.
-  float lifetime                = 11;
+  Float lifetime                = 11;
 
   /// \brief The material which all particles in the emitter will use.
   Material material             = 12;
 
   /// \brief The minimum velocity each particle is emitted (m/s).
-  float min_velocity            = 13;
+  Float min_velocity            = 13;
 
   /// \brief The maximum velocity each particle is emitted (m/s).
-  float max_velocity            = 14;
+  Float max_velocity            = 14;
 
   /// \brief The starting color of the particles.
   Color color_start             = 15;
@@ -95,8 +98,8 @@ message ParticleEmitter
 
   /// \brief The amount by which to scale the particles in both x and y
   /// direction per second (screen coordinates).
-  float scale_rate              = 17;
+  Float scale_rate              = 17;
 
   /// \brief The path to the color image used as an affector.
-  string color_range_image      = 18;
+  StringMsg color_range_image      = 18;
 }
