@@ -3,6 +3,18 @@
 ### Ignition Msgs 5.X.X (20XX-XX-XX)
 
 
+### Ignition Msgs 5.7.0 (2021-03-17)
+
+1. Add ignition version of nav_msgs/OccupancyGrid (backport #138) 
+    * [Pull request 143](https://github.com/ignitionrobotics/ign-msgs/pull/143)
+    * [Pull request 143](https://github.com/ignitionrobotics/ign-msgs/pull/138)
+
+1. Master branch updates 
+    * [Pull request 141](https://github.com/ignitionrobotics/ign-msgs/pull/141)
+
+1. Add windows installation; move installation in README to tutorial
+    * [Pull request 126](https://github.com/ignitionrobotics/ign-msgs/pull/126)
+
 ### Ignition Msgs 5.6.0 (2020-12-28)
 
 1. Add JointTrajectory message.
