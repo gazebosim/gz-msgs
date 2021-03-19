@@ -1,3 +1,42 @@
+## Ignition Msgs 7.x
+
+### Ignition Msgs 7.x.x (2021-xx-xx)
+
+### Ignition Msgs 7.0.0 (2021-xx-xx)
+
+1. Master branch updates
+    * [Pull request #141](https://github.com/ignitionrobotics/ign-msgs/pull/141)
+
+1. Added light intensity to light.proto
+    * [Pull request #131](https://github.com/ignitionrobotics/ign-msgs/pull/131)
+
+1. Add double sided field to material
+    * [Pull request #130](https://github.com/ignitionrobotics/ign-msgs/pull/130)
+
+1. Added capsule and ellipsoid geom msgs
+    * [Pull request #128](https://github.com/ignitionrobotics/ign-msgs/pull/128)
+
+1. Add lightmap texcoord set
+    * [Pull request #124](https://github.com/ignitionrobotics/ign-msgs/pull/124)
+
+1. README updates for Edifice
+    * [Pull request #125](https://github.com/ignitionrobotics/ign-msgs/pull/125)
+
+1. Added render order to material msgs
+    * [Pull request #118](https://github.com/ignitionrobotics/ign-msgs/pull/118)
+
+1. Added run_to_sim_time to world_control message.
+    * [Pull request #108](https://github.com/ignitionrobotics/ign-msgs/pull/108)
+
+1. Add a is_periodic_change field to SerializedStateMap
+    * [Pull request #119](https://github.com/ignitionrobotics/ign-msgs/pull/119)
+
+1. Remove deprecations, and a now invalid todo
+    * [Pull request #112](https://github.com/ignitionrobotics/ign-msgs/pull/112)
+
+1. Added light map to material.proto
+    * [Pull request #111](https://github.com/ignitionrobotics/ign-msgs/pull/111)
+
 ## Ignition Msgs 6.x
 
 ### Ignition Msgs 6.x.x (2021-xx-xx)
