@@ -19,7 +19,7 @@ framework, a set of libraries designed to rapidly develop robot applications.
 
 ## Installation
 
-See the [installation tutorial](https://ignitionrobotics.org/api/msgs/6.2/index.html).
+See the [installation tutorial](https://ignitionrobotics.org/api/msgs/7.0/install.html).
 
 ## Known issue of command line tools
 
