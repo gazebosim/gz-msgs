@@ -2,7 +2,7 @@
 
 ### Ignition Msgs 7.x.x (2021-xx-xx)
 
-### Ignition Msgs 7.0.0 (2021-xx-xx)
+### Ignition Msgs 7.0.0 (2021-03-30)
 
 1. Master branch updates
     * [Pull request #141](https://github.com/ignitionrobotics/ign-msgs/pull/141)
@@ -21,6 +21,7 @@
 
 1. README updates for Edifice
     * [Pull request #125](https://github.com/ignitionrobotics/ign-msgs/pull/125)
+    * [Pull request #148](https://github.com/ignitionrobotics/ign-msgs/pull/148)
 
 1. Added render order to material msgs
     * [Pull request #118](https://github.com/ignitionrobotics/ign-msgs/pull/118)
@@ -119,11 +120,11 @@
 
 ### Ignition Msgs 5.7.0 (2021-03-17)
 
-1. Add ignition version of nav_msgs/OccupancyGrid (backport #138) 
+1. Add ignition version of nav_msgs/OccupancyGrid (backport #138)
     * [Pull request 143](https://github.com/ignitionrobotics/ign-msgs/pull/143)
     * [Pull request 143](https://github.com/ignitionrobotics/ign-msgs/pull/138)
 
-1. Master branch updates 
+1. Master branch updates
     * [Pull request 141](https://github.com/ignitionrobotics/ign-msgs/pull/141)
 
 1. Add windows installation; move installation in README to tutorial
