@@ -62,7 +62,7 @@ To compile the code create a `CMakeLists.txt`:
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 # Find the Ignition msgs library
-find_package(ignition-msgs7 QUIET REQUIRED)
+find_package(ignition-msgs8 QUIET REQUIRED)
 
 add_executable(ignition-msgs-example main.cc)
 target_link_libraries(ignition-msgs-example ${IGNITION-MSGS_LIBRARIES})
