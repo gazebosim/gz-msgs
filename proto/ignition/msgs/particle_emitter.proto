@@ -102,4 +102,8 @@ message ParticleEmitter
 
   /// \brief The path to the color image used as an affector.
   StringMsg color_range_image      = 18;
+
+  /// \brief The topic name used by the particle emitter for control and
+  /// modification.
+  StringMsg topic                  = 19;
 }

@@ -29,6 +29,7 @@ import "ignition/msgs/collision.proto";
 import "ignition/msgs/visual.proto";
 import "ignition/msgs/light.proto";
 import "ignition/msgs/sensor.proto";
+import "ignition/msgs/particle_emitter.proto";
 import "ignition/msgs/projector.proto";
 import "ignition/msgs/pose.proto";
 import "ignition/msgs/battery.proto";
@@ -60,4 +61,7 @@ message Link
 
   /// \brief A vector of lights attached to this link
   repeated Light light          = 17;
+
+  /// \brief A vector of particle emitters attached to this link.
+  repeated ParticleEmitter particle_emitter = 18;
 }
