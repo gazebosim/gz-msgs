@@ -28,7 +28,7 @@ exports_files(["LICENSE"])
 
 PROJECT_NAME = "ignition-msgs"
 
-PROJECT_MAJOR = 6
+PROJECT_MAJOR = 7
 
 PROJECT_MINOR = 0
 
