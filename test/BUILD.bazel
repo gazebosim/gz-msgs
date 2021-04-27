@@ -1,0 +1,59 @@
+load(
+    "//ign_bazel:build_defs.bzl",
+    "IGNITION_ROOT",
+    "IGNITION_VISIBILITY",
+    "cmake_configure_file",
+)
+
+package(
+    default_visibility = IGNITION_VISIBILITY,
+    features = [
+        "-layering_check",
+    ],
+)
+
+licenses(["notice"])
+
+exports_files(["LICENSE"])
+
+MSGS_DIR = "./ign_msgs/"
+
+# Generates config.hh based on the version numbers in CMake code.
+cmake_configure_file(
+    name = "test_config",
+    src = "test_config.h.in",
+    out = "ignition/msgs/test_config.h",
+    cmakelists = ["CMakeLists.txt"],
+    defines = [
+        "CMAKE_BINARY_DIR=%s" % (MSGS_DIR),
+        "PROJECT_BINARY_DIR=%s" % (MSGS_DIR),
+        "PROJECT_SOURCE_DIR=%s" % (MSGS_DIR),
+    ],
+    visibility = ["//visibility:private"],
+)
+
+cc_library(
+    name = "test_utils",
+    srcs = ["ignition/msgs/test_config.h"],
+    includes = [".", "ignition"],
+)
+
+[
+    cc_test(
+        name = "INTEGRATION_" + test.split("/")[1].replace(".cc", ""),
+        srcs = [test],
+        includes = [
+            ".",
+            "integration",
+        ],
+        deps = [
+            ":test_utils",
+            IGNITION_ROOT + "ign_msgs",
+            "@gtest",
+            "@gtest//:gtest_main",
+        ],
+    )
+    for test in glob(["integration/*.cc"])
+]
+
+exports_files(["desc/stringmsg.desc"])
