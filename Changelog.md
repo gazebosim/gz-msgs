@@ -40,9 +40,12 @@
 
 ## Ignition Msgs 6.x
 
-### Ignition Msgs 6.x.x (2021-xx-xx)
+### Ignition Msgs 6.5.0 (2021-04-06)
 
-### Ignition Msgs 6.3.0 (2021-03-01)
+1. Added particle_emitter vector message
+    * [Pull request 149](https://github.com/ignitionrobotics/ign-msgs/pull/149)
+
+### Ignition Msgs 6.4.0 (2021-03-01)
 
 1. Support 'has' functionality in particle Emitter.
     * [Pull request 137](https://github.com/ignitionrobotics/ign-msgs/pull/137)
