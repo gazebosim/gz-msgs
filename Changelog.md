@@ -2,6 +2,11 @@
 
 ### Ignition Msgs 7.x.x (2021-xx-xx)
 
+### Ignition Msgs 7.1.0 (2021-04-30)
+
+1. Added particle_emitter vector message
+    * [Pull request #149](https://github.com/ignitionrobotics/ign-msgs/pull/149)
+
 ### Ignition Msgs 7.0.0 (2021-03-30)
 
 1. Master branch updates
