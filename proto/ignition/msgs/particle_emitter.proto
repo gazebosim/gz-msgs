@@ -106,4 +106,12 @@ message ParticleEmitter
   /// \brief The topic name used by the particle emitter for control and
   /// modification.
   StringMsg topic                  = 19;
+
+  /// \brief The ratio of particles that will be detected by sensors.
+  /// Increasing the ratio means there is a higher chance of particles
+  /// reflecting and interfering with depth sensing, making the emitter
+  /// appear more dense. Decreasing the ratio decreases the chance of
+  /// particles reflecting and interfering with depth sensing, making it
+  /// appear less dense. Value is in the range of [0, 1].
+  Float particle_scatter_ratio     = 20;
 }
