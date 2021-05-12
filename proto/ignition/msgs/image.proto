@@ -56,7 +56,7 @@ message Image
   /// \brief Optional header data
   Header header        = 1;
 
-  /// \brief Image wisth (number of columns)
+  /// \brief Image width (number of columns)
   uint32 width         = 2;
 
   /// \brief Image height (number of rows)
