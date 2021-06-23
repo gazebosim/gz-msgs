@@ -12,6 +12,7 @@ if (MSVC)
   list(REMOVE_ITEM test_sources ign_TEST.cc)
 endif()
 
-if (IGNITION-TOOLS_BINARY_DIRS)
+
+if (HAVE_IGN_TOOLS)
   ign_build_tests(TYPE UNIT SOURCES ${test_sources})
 endif ()
