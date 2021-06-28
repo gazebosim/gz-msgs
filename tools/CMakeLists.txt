@@ -7,7 +7,7 @@ set (test_sources
 )
 
 # Skip command line tests for Windows, see
-# https://bitbucket.org/ignitionrobotics/ign-msgs/issues/28
+# https://github.com/ignitionrobotics/ign-msgs/issues/28
 if (MSVC)
   list(REMOVE_ITEM test_sources ign_TEST.cc)
 endif()

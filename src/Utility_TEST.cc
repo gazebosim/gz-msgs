@@ -589,6 +589,44 @@ TEST(MsgsTest, ConvertMsgsShaderTypeToString)
       "unknown");
 }
 
+//////////////////////////////////////////////////
+void CompareMsgsPixelFormatTypeToString(const msgs::PixelFormatType _type)
+{
+  EXPECT_EQ(_type,
+      msgs::ConvertPixelFormatType(msgs::ConvertPixelFormatType(_type)))
+      << msgs::ConvertPixelFormatType(_type);
+}
+
+//////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMsgsPixelFormatTypeToString)
+{
+  CompareMsgsPixelFormatTypeToString(
+      msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::L_INT8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::L_INT16);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::RGB_INT8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::RGBA_INT8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BGRA_INT8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::RGB_INT16);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::RGB_INT32);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BGR_INT8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BGR_INT16);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BGR_INT32);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::R_FLOAT16);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::RGB_FLOAT16);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::R_FLOAT32);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::RGB_FLOAT32);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BAYER_RGGB8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BAYER_BGGR8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BAYER_GBRG8);
+  CompareMsgsPixelFormatTypeToString(msgs::PixelFormatType::BAYER_GRBG8);
+
+  EXPECT_EQ(msgs::ConvertPixelFormatType("bad type"),
+      msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT);
+  EXPECT_EQ(msgs::ConvertPixelFormatType(msgs::PixelFormatType(100)),
+      "UNKNOWN_PIXEL_FORMAT");
+}
+
 /////////////////////////////////////////////////
 TEST(UtilityTest, CovertMathAxisAlignedBox)
 {
@@ -636,4 +674,118 @@ TEST(UtilityTest, CovertMathAxisAlignedBox)
   EXPECT_DOUBLE_EQ(34.1, msg2.max_corner().x());
   EXPECT_DOUBLE_EQ(92.1, msg2.max_corner().y());
   EXPECT_DOUBLE_EQ(-723.2, msg2.max_corner().z());
+}
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, InitPointCloudPacked)
+{
+  msgs::PointCloudPacked pc;
+
+  msgs::InitPointCloudPacked(pc, "my_frame", true,
+      {{"xyz", msgs::PointCloudPacked::Field::FLOAT32},
+      {"rgb", msgs::PointCloudPacked::Field::FLOAT32}});
+
+  EXPECT_EQ(4, pc.field_size());
+  EXPECT_EQ(24u, pc.point_step());
+
+  EXPECT_EQ("x", pc.field(0).name());
+  EXPECT_EQ(0u, pc.field(0).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(0).datatype());
+  EXPECT_EQ(1u, pc.field(0).count());
+
+  EXPECT_EQ("y", pc.field(1).name());
+  EXPECT_EQ(4u, pc.field(1).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(1).datatype());
+  EXPECT_EQ(1u, pc.field(1).count());
+
+  EXPECT_EQ("z", pc.field(2).name());
+  EXPECT_EQ(8u, pc.field(2).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(2).datatype());
+  EXPECT_EQ(1u, pc.field(2).count());
+
+  EXPECT_EQ("rgb", pc.field(3).name());
+  EXPECT_EQ(16u, pc.field(3).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(3).datatype());
+  EXPECT_EQ(1u, pc.field(3).count());
+
+  // Don't align to word boundaries
+  msgs::InitPointCloudPacked(pc, "my_frame", false,
+      {{"xyz", msgs::PointCloudPacked::Field::FLOAT32},
+      {"rgb", msgs::PointCloudPacked::Field::FLOAT32}});
+  EXPECT_EQ(4, pc.field_size());
+  EXPECT_EQ(16u, pc.point_step());
+
+  EXPECT_EQ("x", pc.field(0).name());
+  EXPECT_EQ(0u, pc.field(0).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(0).datatype());
+  EXPECT_EQ(1u, pc.field(0).count());
+
+  EXPECT_EQ("y", pc.field(1).name());
+  EXPECT_EQ(4u, pc.field(1).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(1).datatype());
+  EXPECT_EQ(1u, pc.field(1).count());
+
+  EXPECT_EQ("z", pc.field(2).name());
+  EXPECT_EQ(8u, pc.field(2).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(2).datatype());
+  EXPECT_EQ(1u, pc.field(2).count());
+
+  EXPECT_EQ("rgb", pc.field(3).name());
+  EXPECT_EQ(12u, pc.field(3).offset());
+  EXPECT_EQ(msgs::PointCloudPacked::Field::FLOAT32, pc.field(3).datatype());
+  EXPECT_EQ(1u, pc.field(3).count());
+  EXPECT_EQ("my_frame", pc.header().data(0).value(0));
+  EXPECT_EQ("frame_id", pc.header().data(0).key());
+
+  // Test data types
+  msgs::InitPointCloudPacked(pc, "my_new_frame", false,
+      {{"x", msgs::PointCloudPacked::Field::INT8},
+       {"y", msgs::PointCloudPacked::Field::UINT8},
+       {"z", msgs::PointCloudPacked::Field::INT16},
+       {"r", msgs::PointCloudPacked::Field::UINT16},
+       {"s", msgs::PointCloudPacked::Field::INT32},
+       {"t", msgs::PointCloudPacked::Field::UINT32},
+       {"u", msgs::PointCloudPacked::Field::FLOAT64}});
+
+  EXPECT_EQ("frame_id", pc.header().data(0).key());
+  EXPECT_EQ("my_new_frame", pc.header().data(0).value(0));
+
+  EXPECT_EQ(0u, pc.field(0).offset());
+  EXPECT_EQ(1u, pc.field(1).offset());
+  EXPECT_EQ(2u, pc.field(2).offset());
+  EXPECT_EQ(4u, pc.field(3).offset());
+  EXPECT_EQ(6u, pc.field(4).offset());
+  EXPECT_EQ(10u, pc.field(5).offset());
+  EXPECT_EQ(14u, pc.field(6).offset());
+  EXPECT_EQ(22u, pc.point_step());
+}
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, DiscoveryTypeString)
+{
+  EXPECT_EQ("UNINITIALIZED",
+      msgs::ToString(msgs::Discovery::UNINITIALIZED));
+  EXPECT_EQ("ADVERTISE",
+      msgs::ToString(msgs::Discovery::ADVERTISE));
+  EXPECT_EQ("SUBSCRIBE",
+      msgs::ToString(msgs::Discovery::SUBSCRIBE));
+  EXPECT_EQ("UNADVERTISE",
+      msgs::ToString(msgs::Discovery::UNADVERTISE));
+  EXPECT_EQ("HEARTBEAT",
+      msgs::ToString(msgs::Discovery::HEARTBEAT));
+  EXPECT_EQ("BYE",
+      msgs::ToString(msgs::Discovery::BYE));
+  EXPECT_EQ("NEW_CONNECTION",
+      msgs::ToString(msgs::Discovery::NEW_CONNECTION));
+  EXPECT_EQ("END_CONNECTION",
+      msgs::ToString(msgs::Discovery::END_CONNECTION));
+
+  // If any of the following fail, then make sure you have added then new
+  // enum values to std::string ToString(const msgs::Discovery::Type &_t).
+  // Then update the following tests to match the new enum values.
+  EXPECT_EQ(msgs::Discovery::UNINITIALIZED,
+      msgs::Discovery::Type_MIN);
+  EXPECT_EQ(msgs::Discovery::END_CONNECTION,
+      msgs::Discovery::Type_MAX);
+  EXPECT_EQ(8, msgs::Discovery::Type_ARRAYSIZE);
 }

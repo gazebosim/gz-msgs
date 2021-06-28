@@ -37,15 +37,34 @@ message Model
   /// \brief Optional header data
   Header header       = 1;
 
+  /// \brief Name of the model.
   string name         = 2;
+
+  /// \brief Unique ID associated with the model
   uint32 id           = 3;
+
+  /// \brief True if the model is statc.
   bool is_static      = 4;
+
+  /// \brief Pose of the model.
   Pose pose           = 5;
+
+  /// \brief Information about the joints in this model.
   repeated Joint joint         = 6;
+
+  /// \brief Information about the links in this model.
   repeated Link link           = 7;
+
+  /// \brief True if the model was deleted.
   bool deleted        = 8;
+
+  /// \brief Information about the visuals in this model.
   repeated Visual visual       = 9;
+
+  /// \brief Scaling factor applied to the model
   Vector3d scale      = 10;
+
+  /// \brief True if self collide is enabled.
   bool self_collide   = 11;
 
   /// \brief An array of nested models.

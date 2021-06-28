@@ -64,27 +64,27 @@ message Joint
 
   string name           = 2;
   uint32 id             = 3;
-  repeated double angle          = 4;
-  Type type             = 5;
-  string parent         = 6;
-  uint32 parent_id      = 7;
-  string child          = 8;
-  uint32 child_id       = 9;
-  Pose pose             = 10;
-  Axis axis1            = 11;
-  Axis axis2            = 12;
 
-  double cfm            = 13;
-  double bounce         = 14;
-  double velocity       = 15;
-  double fudge_factor   = 16;
-  double limit_cfm      = 17;
-  double limit_erp      = 18;
-  double suspension_cfm = 19;
-  double suspension_erp = 20;
+  Type type             = 4;
+  string parent         = 5;
+  uint32 parent_id      = 6;
+  string child          = 7;
+  uint32 child_id       = 8;
+  Pose pose             = 9;
+  Axis axis1            = 10;
+  Axis axis2            = 11;
 
-  Gearbox gearbox       = 21;
-  Screw screw           = 22;
+  double cfm            = 12;
+  double bounce         = 13;
 
-  repeated Sensor sensor         = 23;
+  double fudge_factor   = 14;
+  double limit_cfm      = 15;
+  double limit_erp      = 16;
+  double suspension_cfm = 17;
+  double suspension_erp = 18;
+
+  Gearbox gearbox       = 19;
+  Screw screw           = 20;
+
+  repeated Sensor sensor         = 21;
 }

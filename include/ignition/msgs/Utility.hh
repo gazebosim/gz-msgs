@@ -18,6 +18,8 @@
 #define IGNITION_MSGS_UTILITY_HH_
 
 #include <string>
+#include <utility>
+#include <vector>
 
 #include <ignition/math/AxisAlignedBox.hh>
 #include <ignition/math/Color.hh>
@@ -267,6 +269,19 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     std::string ConvertGeometryType(const msgs::Geometry::Type _type);
 
+    /// \brief Convert a string to a msgs::PixelFormatType enum.
+    /// \param[in] _str PixelFormatType string.
+    /// \return A msgs::PixelFormatType enum.
+    IGNITION_MSGS_VISIBLE
+    msgs::PixelFormatType ConvertPixelFormatType(const std::string &_str);
+
+    /// \brief Convert a PixelFormatType to a string. This can be used for
+    /// debugging purposes.
+    // \param[in] _t PixelFormatType enum value.
+    /// \return String version of PixelFormatType.
+    IGNITION_MSGS_VISIBLE
+    std::string ConvertPixelFormatType(const msgs::PixelFormatType &_t);
+
     /// \brief Convert a string to a msgs::Material::ShaderType enum.
     /// \param[in] _str Shader type string.
     /// \return A msgs::Material::ShaderType enum. Defaults to VERTEX
@@ -382,6 +397,64 @@ namespace ignition
     /// \param[in] _v An math::AxisAlignedBox reference
     IGNITION_MSGS_VISIBLE
     void Set(msgs::AxisAlignedBox *_b, const math::AxisAlignedBox &_v);
+
+    /// \brief This function will set the header and field members of
+    /// a PointCloudPacked message. This will clear existing values in the
+    /// PointCloudPacked field and header.
+    /// \param[out] _msg The message to initialize.
+    /// \param[in] _frameId Name of the "frame_id". This will be stored as
+    /// key = "frame_id", value = _frameId in the message header.
+    /// \param[in] _memoryAligned If true, then each pair in the _fields
+    /// vector will be aligned at word (sizeof(size_t)) boundaries.
+    /// Additionally, the `point_step` of the _msg will be set to the
+    /// nearest word boundary.
+    /// \param[in] _fields The fields to add to the message. The following
+    /// strings are reserved, and will generate a set of fields
+    /// automatically.
+    ///
+    ///   * "xyz" : This will add the "x", "y", and "z" fields.
+    IGNITION_MSGS_VISIBLE
+    void InitPointCloudPacked(msgs::PointCloudPacked &_msg,
+        const std::string &_frameId, bool _memoryAligned,
+        const std::vector<std::pair<std::string,
+        msgs::PointCloudPacked::Field::DataType>> &_fields);
+
+    /// \brief Convert a Discovery::Type to a string. This can be used for
+    /// debugging purposes.
+    // \param[in] _t Type of the discovery message.
+    /// \return String version of Discovery::Type.
+    IGNITION_MSGS_VISIBLE
+    std::string ToString(const msgs::Discovery::Type &_t);
+
+    /// \brief Convert the contents of a model.config file, in the form of
+    /// an XML string, to a FuelMetadata message.
+    ///
+    /// Only the latest versioned model is added to the meta data message.
+    ///
+    /// The `<depend>` and `<version>` tags are ignored.
+    ///
+    /// \param[in] _modelConfigStr A string containing XML data that matches
+    /// the model.config format.
+    /// \param[out] _meta The message that receives the converted data.
+    /// \return True if the conversion was successful.
+    IGNITION_MSGS_VISIBLE
+    bool ConvertFuelMetadata(const std::string &_modelConfigStr,
+                             msgs::FuelMetadata &_meta);
+
+    /// \brief Convert a FuelMetadata message to a string containing XML
+    /// data that matches the model.config format.
+    ///
+    /// The model.config format contains only a subset of the information in
+    /// a metadata message. The extra information in the metadata message is
+    /// discarded.
+    ///
+    /// \param[in] _meta The FuelMetadata message to convert.
+    /// \param[out] _modelConfigStr XML string containing the converted
+    /// message data.
+    /// \return True if the conversion was successful.
+    IGNITION_MSGS_VISIBLE
+    bool ConvertFuelMetadata(const msgs::FuelMetadata &_meta,
+                             std::string &_modelConfigStr);
     }
   }
 }

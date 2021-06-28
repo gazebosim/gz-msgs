@@ -14,7 +14,19 @@
  * limitations under the License.
  *
 */
+#include <tinyxml2.h>
+#include <functional>
+#include <sstream>
+#include <ignition/math/Helpers.hh>
+#include <ignition/math/SemanticVersion.hh>
 #include "ignition/msgs/Utility.hh"
+
+#ifdef _WIN32
+  const auto &ignstrtok = strtok_s;
+#else
+  const auto &ignstrtok = strtok_r;
+#endif
+
 
 namespace ignition
 {
@@ -22,6 +34,49 @@ namespace ignition
   {
     // Inline bracket to help doxygen filtering.
     inline namespace IGNITION_MSGS_VERSION_NAMESPACE {
+    /// \brief Left and right trim a string. This was copied from ignition
+    /// common, ign-common/Util.hh, to avoid adding another dependency.
+    /// Remove this function if ign-common ever becomes a dependency.
+    /// \param[in] _s String to trim
+    /// \return Trimmed string
+    std::string trimmed(std::string _s)
+    {
+      // Left trim
+      _s.erase(_s.begin(), std::find_if(_s.begin(), _s.end(),
+            [](int c) {return !std::isspace(c);}));
+
+      // Right trim
+      _s.erase(std::find_if(_s.rbegin(), _s.rend(),
+            [](int c) {return !std::isspace(c);}).base(), _s.end());
+
+      return _s;
+    }
+
+    /// \brief Splits a string into tokens. This was copied from ignition
+    /// common, ign-common/Util.hh, to avoid adding another dependency.
+    /// Remove this function if ign-common every becomes a dependency.
+    /// \param[in] _str Input string.
+    /// \param[in] _delim Token delimiter.
+    /// \return Vector of tokens.
+    std::vector<std::string> split(const std::string &_str,
+        const std::string &_delim)
+    {
+      std::vector<std::string> tokens;
+      char *saveptr;
+      char *str = strdup(_str.c_str());
+
+      auto token = ignstrtok(str, _delim.c_str(), &saveptr);
+
+      while (token)
+      {
+        tokens.push_back(token);
+        token = ignstrtok(NULL, _delim.c_str(), &saveptr);
+      }
+
+      free(str);
+      return tokens;
+    }
+
     /////////////////////////////////////////////
     ignition::math::Vector3d Convert(const msgs::Vector3d &_v)
     {
@@ -686,6 +741,414 @@ namespace ignition
         }
       }
       return result;
+    }
+
+    /////////////////////////////////////////////////
+    void InitPointCloudPacked(msgs::PointCloudPacked &_msg,
+        const std::string &_frameId, bool _memoryAligned,
+        const std::vector<std::pair<std::string,
+        msgs::PointCloudPacked::Field::DataType>> &_fields)
+    {
+      uint32_t offset = 0;
+
+      // Helper function that will set a single field.
+      std::function<void(const std::string &,
+        msgs::PointCloudPacked::Field::DataType)> initPointCloudPackedHelper =
+        [&](const std::string &_name,
+           msgs::PointCloudPacked::Field::DataType _type) -> void
+        {
+          msgs::PointCloudPacked::Field *newField = _msg.add_field();
+          newField->set_name(_name);
+          newField->set_count(1);
+          newField->set_datatype(_type);
+          newField->set_offset(offset);
+          switch (_type)
+          {
+            case msgs::PointCloudPacked::Field::INT8:
+            case msgs::PointCloudPacked::Field::UINT8:
+              offset += 1;
+              break;
+            case msgs::PointCloudPacked::Field::INT16:
+            case msgs::PointCloudPacked::Field::UINT16:
+              offset += 2;
+              break;
+            case msgs::PointCloudPacked::Field::INT32:
+            case msgs::PointCloudPacked::Field::UINT32:
+            case msgs::PointCloudPacked::Field::FLOAT32:
+              offset += 4;
+              break;
+            case msgs::PointCloudPacked::Field::FLOAT64:
+              offset += 8;
+              break;
+            default:
+              std::cerr << "PointCloudPacked field datatype of ["
+                << _type << "] is invalid.\n";
+              break;
+          }
+        };
+
+      // Set the frame
+      _msg.mutable_header()->clear_data();
+      msgs::Header::Map *frame = _msg.mutable_header()->add_data();
+      frame->set_key("frame_id");
+      frame->add_value(_frameId);
+
+      _msg.clear_field();
+      // Setup the point cloud message.
+      for (const std::pair<std::string,
+           msgs::PointCloudPacked::Field::DataType> &field : _fields)
+      {
+        if (field.first == "xyz")
+        {
+          initPointCloudPackedHelper("x", field.second);
+          initPointCloudPackedHelper("y", field.second);
+          initPointCloudPackedHelper("z", field.second);
+        }
+        else
+        {
+          initPointCloudPackedHelper(field.first, field.second);
+        }
+
+        // Memory align the field.
+        if (_memoryAligned)
+          offset = math::roundUpMultiple(offset, sizeof(size_t));
+      }
+
+      // Set the point_step
+      if (_memoryAligned)
+        _msg.set_point_step(math::roundUpMultiple(offset, sizeof(size_t)));
+      else
+        _msg.set_point_step(offset);
+    }
+
+    /////////////////////////////////////////////
+    std::string ToString(const msgs::Discovery::Type &_t)
+    {
+      switch (_t)
+      {
+        default:
+        case msgs::Discovery::UNINITIALIZED:
+          return "UNINITIALIZED";
+        case msgs::Discovery::ADVERTISE:
+          return "ADVERTISE";
+        case msgs::Discovery::SUBSCRIBE:
+          return "SUBSCRIBE";
+        case msgs::Discovery::UNADVERTISE:
+          return "UNADVERTISE";
+        case msgs::Discovery::HEARTBEAT:
+          return "HEARTBEAT";
+        case msgs::Discovery::BYE:
+          return "BYE";
+        case msgs::Discovery::NEW_CONNECTION:
+          return "NEW_CONNECTION";
+        case msgs::Discovery::END_CONNECTION:
+          return "END_CONNECTION";
+      };
+    }
+
+    /////////////////////////////////////////////
+    msgs::PixelFormatType ConvertPixelFormatType(const std::string &_str)
+    {
+      if (_str == "L_INT8")
+      {
+        return msgs::PixelFormatType::L_INT8;
+      }
+      else if (_str == "L_INT16")
+      {
+        return msgs::PixelFormatType::L_INT16;
+      }
+      else if (_str == "RGB_INT8")
+      {
+        return msgs::PixelFormatType::RGB_INT8;
+      }
+      else if (_str == "RGBA_INT8")
+      {
+        return msgs::PixelFormatType::RGBA_INT8;
+      }
+      else if (_str == "BGRA_INT8")
+      {
+        return msgs::PixelFormatType::BGRA_INT8;
+      }
+      else if (_str == "RGB_INT16")
+      {
+        return msgs::PixelFormatType::RGB_INT16;
+      }
+      else if (_str == "RGB_INT32")
+      {
+        return msgs::PixelFormatType::RGB_INT32;
+      }
+      else if (_str == "BGR_INT8")
+      {
+        return msgs::PixelFormatType::BGR_INT8;
+      }
+      else if (_str == "BGR_INT16")
+      {
+        return msgs::PixelFormatType::BGR_INT16;
+      }
+      else if (_str == "BGR_INT32")
+      {
+        return msgs::PixelFormatType::BGR_INT32;
+      }
+      else if (_str == "R_FLOAT16")
+      {
+        return msgs::PixelFormatType::R_FLOAT16;
+      }
+      else if (_str == "RGB_FLOAT16")
+      {
+        return msgs::PixelFormatType::RGB_FLOAT16;
+      }
+      else if (_str == "R_FLOAT32")
+      {
+        return msgs::PixelFormatType::R_FLOAT32;
+      }
+      else if (_str == "RGB_FLOAT32")
+      {
+        return msgs::PixelFormatType::RGB_FLOAT32;
+      }
+      else if (_str == "BAYER_RGGB8")
+      {
+        return msgs::PixelFormatType::BAYER_RGGB8;
+      }
+      else if (_str == "BAYER_BGGR8")
+      {
+        return msgs::PixelFormatType::BAYER_BGGR8;
+      }
+      else if (_str == "BAYER_GBRG8")
+      {
+        return msgs::PixelFormatType::BAYER_GBRG8;
+      }
+      else if (_str == "BAYER_GRBG8")
+      {
+        return msgs::PixelFormatType::BAYER_GRBG8;
+      }
+
+      return msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT;
+    }
+
+    /////////////////////////////////////////////
+    std::string ConvertPixelFormatType(const msgs::PixelFormatType &_t)
+    {
+      switch (_t)
+      {
+        default:
+        case msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT:
+          return "UNKNOWN_PIXEL_FORMAT";
+        case msgs::PixelFormatType::L_INT8:
+          return "L_INT8";
+        case msgs::PixelFormatType::L_INT16:
+          return "L_INT16";
+        case msgs::PixelFormatType::RGB_INT8:
+          return "RGB_INT8";
+        case msgs::PixelFormatType::RGBA_INT8:
+          return "RGBA_INT8";
+        case msgs::PixelFormatType::BGRA_INT8:
+          return "BGRA_INT8";
+        case msgs::PixelFormatType::RGB_INT16:
+          return "RGB_INT16";
+        case msgs::PixelFormatType::RGB_INT32:
+          return "RGB_INT32";
+        case msgs::PixelFormatType::BGR_INT8:
+          return "BGR_INT8";
+        case msgs::PixelFormatType::BGR_INT16:
+          return "BGR_INT16";
+        case msgs::PixelFormatType::BGR_INT32:
+          return "BGR_INT32";
+        case msgs::PixelFormatType::R_FLOAT16:
+          return "R_FLOAT16";
+        case msgs::PixelFormatType::RGB_FLOAT16:
+          return "RGB_FLOAT16";
+        case msgs::PixelFormatType::R_FLOAT32:
+          return "R_FLOAT32";
+        case msgs::PixelFormatType::RGB_FLOAT32:
+          return "RGB_FLOAT32";
+        case msgs::PixelFormatType::BAYER_RGGB8:
+          return "BAYER_RGGB8";
+        case msgs::PixelFormatType::BAYER_BGGR8:
+          return "BAYER_BGGR8";
+        case msgs::PixelFormatType::BAYER_GBRG8:
+          return "BAYER_GBRG8";
+        case msgs::PixelFormatType::BAYER_GRBG8:
+          return "BAYER_GRBG8";
+      };
+    }
+
+    /////////////////////////////////////////////////
+    bool ConvertFuelMetadata(const std::string &_modelConfigStr,
+                             msgs::FuelMetadata &_meta)
+    {
+      ignition::msgs::FuelMetadata meta;
+
+      // Load the model config into tinyxml
+      tinyxml2::XMLDocument modelConfigDoc;
+      if (modelConfigDoc.Parse(_modelConfigStr.c_str()) !=
+          tinyxml2::XML_SUCCESS)
+      {
+        std::cerr << "Unable to parse model config XML string.\n";
+        return false;
+      }
+
+      // Get the top level <model> element.
+      tinyxml2::XMLElement *modelElement = modelConfigDoc.FirstChildElement(
+          "model");
+      if (!modelElement)
+      {
+        std::cerr << "Model config string does not contain a <model> element\n";
+        return false;
+      }
+
+      // Read the name, which is a mandatory element.
+      tinyxml2::XMLElement *elem = modelElement->FirstChildElement("name");
+      if (!elem || !elem->GetText())
+      {
+        std::cerr << "Model config string does not contain a <name> element\n";
+        return false;
+      }
+      meta.set_name(trimmed(elem->GetText()));
+
+      // Read the description, if present.
+      elem = modelElement->FirstChildElement("description");
+      if (elem && elem->GetText())
+        meta.set_description(trimmed(elem->GetText()));
+
+      // Read the dependencies, if any.
+      elem = modelElement->FirstChildElement("depend");
+      while (elem)
+      {
+        auto modelElem = elem->FirstChildElement("model");
+        if (modelElem)
+        {
+          auto uriElem = modelElem->FirstChildElement("uri");
+          if (uriElem)
+          {
+            auto dependency = meta.add_dependencies();
+            dependency->set_uri(uriElem->GetText());
+          }
+        }
+        elem = elem->NextSiblingElement("depend");
+      }
+
+      // Read the authors, if any.
+      elem = modelElement->FirstChildElement("author");
+      while (elem)
+      {
+        ignition::msgs::FuelMetadata::Contact *author = meta.add_authors();
+        // Get the author name and email
+        if (elem->FirstChildElement("name") &&
+            elem->FirstChildElement("name")->GetText())
+        {
+          author->set_name(trimmed(elem->FirstChildElement("name")->GetText()));
+        }
+        if (elem->FirstChildElement("email") &&
+            elem->FirstChildElement("email")->GetText())
+        {
+          author->set_email(
+              trimmed(elem->FirstChildElement("email")->GetText()));
+        }
+
+        elem = elem->NextSiblingElement("author");
+      }
+
+      // Get the most recent SDF file
+      elem = modelElement->FirstChildElement("sdf");
+      math::SemanticVersion maxVer;
+      while (elem)
+      {
+        if (elem->GetText() && elem->Attribute("version"))
+        {
+          std::string verStr = elem->Attribute("version");
+          math::SemanticVersion ver(trimmed(verStr));
+          if (ver > maxVer)
+          {
+            meta.mutable_model()->mutable_file_format()->set_name("sdf");
+            ignition::msgs::Version *verMsg =
+              meta.mutable_model()->mutable_file_format()->mutable_version();
+
+            verMsg->set_major(ver.Major());
+            verMsg->set_minor(ver.Minor());
+            verMsg->set_patch(ver.Patch());
+            verMsg->set_prerelease(ver.Prerelease());
+            verMsg->set_build(ver.Build());
+
+            meta.mutable_model()->set_file(trimmed(elem->GetText()));
+          }
+        }
+
+        elem = elem->NextSiblingElement("sdf");
+      }
+      if (meta.model().file().empty())
+      {
+        std::cerr << "Model config string does not contain an <sdf> element\n";
+        return false;
+      }
+
+      _meta.CopyFrom(meta);
+      return true;
+    }
+
+    /////////////////////////////////////////////////
+    bool ConvertFuelMetadata(const msgs::FuelMetadata &_meta,
+                             std::string &_modelConfigStr)
+    {
+      std::ostringstream out;
+
+      // Output opening tag.
+      if (_meta.has_model())
+      {
+        if (_meta.model().file_format().name() != "sdf")
+        {
+          std::cerr << "Model _metadata does not contain an SDF file.\n";
+          return false;
+        }
+
+        out << "<?xml version='1.0'?>\n"
+            << "  <model>\n";
+      }
+      else
+      {
+        if (_meta.world().file_format().name() != "sdf")
+        {
+          std::cerr << "World _metadata does not contain an SDF file.\n";
+          return false;
+        }
+
+        out << "<?xml version='1.0'?>\n"
+            << "  <world>\n";
+      }
+
+      out << "    <name>" << _meta.name() << "</name>\n"
+        << "    <version>" << _meta.version() << "</version>\n"
+        << "    <sdf version='" << _meta.model().file_format().version().major()
+        << "." << _meta.model().file_format().version().minor() << "'>"
+        << _meta.model().file() << "</sdf>\n"
+        << "    <description>" << _meta.description() << "</description>\n";
+
+      // Output author information.
+      for (int i = 0; i < _meta.authors_size(); ++i)
+      {
+        out << "    <author>\n"
+        << "      <name>" << _meta.authors(i).name() << "</name>\n"
+        << "      <email>" << _meta.authors(i).email() << "</email>\n"
+        << "    </author>\n";
+      }
+
+      // Output dependency information.
+      for (int i = 0; i < _meta.dependencies_size(); ++i)
+      {
+        out << "    <depend>\n"
+        << "      <model>"
+        << "        <uri>" << _meta.dependencies(i).uri() << "</uri>\n"
+        << "      </model>"
+        << "    </depend>\n";
+      }
+
+      // Output closing tag.
+      if (_meta.has_model())
+        out << "  </model>\n";
+      else
+        out << "  </world>\n";
+
+      _modelConfigStr = out.str();
+      return true;
     }
   }
 }

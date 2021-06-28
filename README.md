@@ -1,95 +1,52 @@
-# Ignition Messages
+# Ignition Messages: Protobuf messages and functions for robot applications
 
-**Protobuf messages and functions for robot applications.**
+**Maintainer:** caguero AT openrobotics DOT org
 
-Ignition Messages is a component in the ignition framework, a set
-of libraries designed to rapidly develop robot applications.
+[![GitHub open issues](https://img.shields.io/github/issues-raw/ignitionrobotics/ign-msgs.svg)](https://github.com/ignitionrobotics/ign-msgs/issues)
+[![GitHub open pull requests](https://img.shields.io/github/issues-pr-raw/ignitionrobotics/ign-msgs.svg)](https://github.com/ignitionrobotics/ign-msgs/pulls)
+[![Discourse topics](https://img.shields.io/discourse/https/community.gazebosim.org/topics.svg)](https://community.gazebosim.org)
+[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
-[http://ignitionrobotics.org](http://ignitionrobotics.org)
+Build | Status
+-- | --
+Test coverage | [![codecov](https://codecov.io/gh/ignitionrobotics/ign-msgs/branch/ign-msgs5/graph/badge.svg)](https://codecov.io/gh/ignitionrobotics/ign-msgs)
+Ubuntu Bionic | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=ignition_msgs-ci-ign-msgs5-bionic-amd64)](https://build.osrfoundation.org/job/ignition_msgs-ci-ign-msgs5-bionic-amd64)
+Homebrew      | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=ignition_msgs-ci-ign-msgs5-homebrew-amd64)](https://build.osrfoundation.org/job/ignition_msgs-ci-ign-msgs5-homebrew-amd64)
+Windows       | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=ignition_msgs-ci-ign-msgs5-windows7-amd64)](https://build.osrfoundation.org/job/ignition_msgs-ci-ign-msgs5-windows7-amd64)
 
-Test coverage:
-
-[![codecov](https://codecov.io/bb/ignitionrobotics/ign-msgs/branch/master/graph/badge.svg)](https://codecov.io/bb/ignitionrobotics/ign-msgs)
-
-## Dependencies
-
-Install required dependencies as follows:
-
-    sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev libignition-math4-dev
+Ignition Messages is a component in the [Ignition](http://ignitionrobotics.org)
+framework, a set of libraries designed to rapidly develop robot applications.
 
 ## Installation
 
-Standard installation can be performed in UNIX systems using the following
-steps:
+See the [installation tutorial](https://ignitionrobotics.org/api/msgs/6.2/index.html).
 
-    mkdir build/
-    cd build/
-    cmake ..
-    sudo make install
+## Known issue of command line tools
 
-## Uninstallation
+In the event that the installation is a mix of Debian and from source, command
+line tools from `ign-tools` may not work correctly.
 
-To uninstall the software installed with the previous steps:
-
-    cd build/
-    sudo make uninstall
-
-## Test
-
-Run tests as follows:
-
-    make test
-
-Tests are automatically built. To disable them, run `cmake` as follows:
-
-    cmake .. -DENABLE_TESTS_COMPILATION=false
-
-### Test coverage
-
-To run test coverage:
-
-1. Install LCOV
-
-        sudo apt-get install lcov
-
-1. Build with coverage
-
-        cd build/
-        cmake .. -DCMAKE_BUILD_TYPE=coverage
-        make
-
-1. Run tests
-
-        make test
-
-1. Generate coverage
-
-        make coverage
-
-1. View results
-
-        firefox coverage/index.html
-
-## Create Documentation & Release
-
-1. Build documentation
-
+A workaround for a single package is to define the environment variable
+`IGN_CONFIG_PATH` to point to the location of the Ignition library installation,
+where the YAML file for the package is found, such as
 ```
-cd build
-make doc
+export IGN_CONFIG_PATH=/usr/local/share/ignition
 ```
 
-1. Upload documentation to ignitionrobotics.org.
+However, that environment variable only takes a single path, which means if the
+installations from source are in different locations, only one can be specified.
 
+Another workaround for working with multiple Ignition libraries on the command
+line is using symbolic links to each library's YAML file.
 ```
-cd build
-sh upload.sh
+mkdir ~/.ignition/tools/configs -p
+cd ~/.ignition/tools/configs/
+ln -s /usr/local/share/ignition/fuel4.yaml .
+ln -s /usr/local/share/ignition/transport8.yaml .
+ln -s /usr/local/share/ignition/transportlog8.yaml .
+...
+export IGN_CONFIG_PATH=$HOME/.ignition/tools/configs
 ```
 
-1. If you're creating a new release, then tell ignitionrobotics.org about
-   the new version. For example:
-
-```
-curl -k -X POST -d '{"libName":"msgs", "version":"1.0.0", "releaseDate":"2017-10-09T12:10:13+02:00","password":"secret"}' https://api.ignitionrobotics.org/1.0/versions
-```
+This issue is tracked [here](https://github.com/ignitionrobotics/ign-tools/issues/8).
 

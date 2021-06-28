@@ -5,6 +5,47 @@ Deprecated code produces compile-time warnings. These warning serve as
 notification to users that their code should be upgraded. The next major
 release will remove the deprecated code.
 
+## Ignition Msgs 4.X to 5.X
+
+### Modifications
+
+
+### Deprecations
+
+1. **axis.proto**
+    + The `use_parent_model_frame` field is deprecated, use `xyz_expressed_in` instead. Setting `xyz_expressed_in = "__model__"` is equivalent to`use_parent_model_frame = true` and leaving `xyz_expressed_in` empty is equivalent to `use_parent_model_frame = false`
+
+## Ignition Msgs 3.X to 4.X
+
+### Modifications
+
+1. **image.proto**
+    + Corrected `BAYER_RGGR8` to `BAYER_BGGR8` in `PixelFormatType`.
+
+1. **joint.proto**
+    + The `axis.proto` message contains joint position, velocity, force, and
+    acceleration information.
+
+1. **serialized.proto**
+    + `SerializedComponent`'s `component` field type changed from `string` to `bytes`.
+
+1. **sensor.proto**
+    + Deprecating `RaySensor`, and replacing with `LidarSensor`.
+
+### Deprecations
+
+1. **joint.proto**
+    + The `angle` field is deprecated, use `position` in the axis.proto
+    message instead.
+    + The `velocity` field is deprecated, use `velocity` in the axis.proto
+    message instead.
+
+1. **image.proto**
+    + `pixel_format` field is deprecated, use `pixel_format_type` with enum `PixelFormatType` instead.
+
+### Removals
+
+1.  **include/ignition/msgs/ign.hh** is no longer installed.
 
 ## Ignition Msgs 2.X to 3.X
 

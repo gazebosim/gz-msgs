@@ -32,6 +32,7 @@ import "ignition/msgs/pose_v.proto";
 import "ignition/msgs/stringmsg_v.proto";
 import "ignition/msgs/time.proto";
 import "ignition/msgs/web_request.proto";
+import "ignition/msgs/world_stats.proto";
 
 message Packet
 {
@@ -50,5 +51,6 @@ message Packet
     Pose_V pose_v = 9;
     Time time = 10;
     Clock clock = 11;
+    WorldStatistics world_stats = 12;
   }
 }
