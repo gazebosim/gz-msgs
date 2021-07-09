@@ -1,0 +1,24 @@
+syntax = "proto3";
+package ignition.msgs;
+
+/// \brief This message contains information about the performance of
+/// a sensor in the world.
+/// If the sensor is a camera then it will publish the frame per second (fps).
+message PerformanceSensorMetrics
+{
+  /// \brief Sensor name
+  string name                 = 1;
+
+  /// \brief The update rate of the sensor in real time.
+  double real_update_rate     = 2;
+
+  /// \brief The update rate of the sensor in simulation time.
+  double sim_update_rate      = 3;
+
+  /// \brief The nominal update rate defined to the sensor.
+  double nominal_update_rate  = 4;
+
+  /// \brief If the sensor is a camera then this field should be filled
+  /// with average fps in real time.
+  double fps                  = 5;
+}
