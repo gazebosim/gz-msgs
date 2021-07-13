@@ -40,7 +40,7 @@ message Actor
 
     /// \brief Scale for the animation skeleton
     float scale           = 3;
-     
+
     /// \brief Set to true so the animation is interpolated on X
     bool interpolate_x = 4;
   }
@@ -78,7 +78,7 @@ message Actor
   /// \brief Pose of the actor
   Pose pose             =  3;
 
-  /// \brief Skin file which defines a visual 
+  /// \brief Skin file which defines a visual
   /// and the underlying skeleton which moves it
   string skin_filename  =  4;
 
@@ -94,7 +94,7 @@ message Actor
   /// \brief Time (in secs) to wait before starting the script
   float script_delay_start       = 8;
 
-  /// \brief Set to true if the animation should start 
+  /// \brief Set to true if the animation should start
   /// as soon as the simulation starts playing
   bool script_auto_start         = 9;
 
