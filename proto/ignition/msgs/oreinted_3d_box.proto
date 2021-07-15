@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2021 Open Source Robotics Foundation
  *
@@ -18,31 +19,27 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "BoundingBoxProtos";
+option java_outer_classname = "Oriented3DBoxProtos";
 
 /// \ingroup ignition.msgs
-/// \interface BoundingBox
-/// \brief BoundingBox message for object detection annotation
+/// \interface Oriented3DBox
+/// \brief A 3D oreinted bounding box
 
 import "ignition/msgs/header.proto";
+import "ignition/msgs/vector3d.proto";
+import "ignition/msgs/quaternion.proto";
 
-message BoundingBox
+message Oriented3DBox
 {
   /// \brief Optional header data
   Header header = 1;
 
-  /// \brief Min x coord of the box (top left corner)
-  uint32 minX = 2;
+  /// \brief Center of the bounding box
+  Vector3d center = 2;
 
-  /// \brief Min y coord of the box (top left corner)
-  uint32 minY = 3;
+  /// \brief Orientation of the bounding box
+  Quaternion orientation = 3;
 
-  /// \brief Max x coord of the box (bottom right corner)
-  uint32 maxX = 4;
-
-  /// \brief Max y coord of the box (bottom right corner)
-  uint32 maxY = 5;
-
-  /// \brief Label of the object
-  uint32 label = 6;
+  /// \brief The size of the bounding box (width/height/depth)
+  Vector3d boxSize = 4;
 }

@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2021 Open Source Robotics Foundation
  *
@@ -18,19 +19,20 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "BoundingBoxesProtos";
+option java_outer_classname = "AnnotatedAxisAligned2DBox_VProtos";
 
 /// \ingroup ignition.msgs
-/// \interface BoundingBoxes
-/// \brief Bounding boxes msg
+/// \interface AnnotatedAxisAligned2DBox_V
+/// \brief A message for a vector of annotated axis aligned 2d boxes
 
 import "ignition/msgs/header.proto";
-import "ignition/msgs/bounding_box.proto";
+import "ignition/msgs/annotated_axis_aligned_2d_box.proto";
 
-message BoundingBoxes
+message AnnotatedAxisAligned2DBox_V
 {
   /// \brief Optional header data
-  Header header = 1;
+  Header header  = 1;
 
-  repeated BoundingBox box = 2;
+  /// \brief vector of 2d annotated boxes
+  repeated AnnotatedAxisAligned2DBox annotated_box = 2;
 }
