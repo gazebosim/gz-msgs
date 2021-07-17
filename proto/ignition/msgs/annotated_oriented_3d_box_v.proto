@@ -23,10 +23,10 @@ option java_outer_classname = "AnnotatedOriented3DBox_VProtos";
 
 /// \ingroup ignition.msgs
 /// \interface AnnotatedOriented3DBox_V
-/// \brief A message for a vector of annotated oreinted 3d boxes
+/// \brief A message for a vector of annotated oriented 3d boxes
 
 import "ignition/msgs/header.proto";
-import "ignition/msgs/annotated_oreinted_3d_box.proto";
+import "ignition/msgs/annotated_oriented_3d_box.proto";
 
 message AnnotatedOriented3DBox_V
 {
