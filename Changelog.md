@@ -2,14 +2,24 @@
 
 ### Ignition Msgs 5.X.X (20XX-XX-XX)
 
+### Ignition Msgs 5.8.0 (2021-08-06)
+
+1. Adds PerformanceSensorMetrics proto message.
+    * [Pull request #172](https://github.com/ignitionrobotics/ign-msgs/pull/172)
+
+1. Detect ign instead of using cmake module to check for ignition-tools
+    * [Pull request #166](https://github.com/ignitionrobotics/ign-msgs/pull/166)
+
+1. Remove tools/code_check and update codecov
+    * [Pull request #164](https://github.com/ignitionrobotics/ign-msgs/pull/164)
 
 ### Ignition Msgs 5.7.0 (2021-03-17)
 
-1. Add ignition version of nav_msgs/OccupancyGrid (backport #138) 
+1. Add ignition version of nav_msgs/OccupancyGrid (backport #138)
     * [Pull request 143](https://github.com/ignitionrobotics/ign-msgs/pull/143)
     * [Pull request 143](https://github.com/ignitionrobotics/ign-msgs/pull/138)
 
-1. Master branch updates 
+1. Master branch updates
     * [Pull request 141](https://github.com/ignitionrobotics/ign-msgs/pull/141)
 
 1. Add windows installation; move installation in README to tutorial
