@@ -22,7 +22,7 @@ option java_outer_classname = "SphericalCoordinatesProtos";
 
 /// \ingroup ignition.msgs
 /// \interface SphericalCoordinates
-/// \brief Spherical coordinates information 
+/// \brief Spherical coordinates information
 
 import "ignition/msgs/header.proto";
 

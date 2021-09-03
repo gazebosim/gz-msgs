@@ -237,6 +237,29 @@ TEST(MsgsTest, ConvertMathMassMatrix3ToMsgs)
 }
 
 /////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
+{
+  auto msg = msgs::Convert(
+      math::SphericalCoordinates(
+      math::SphericalCoordinates::SurfaceType::EARTH_WGS84,
+      IGN_DTOR(1.1), IGN_DTOR(2.2), 3.3, IGN_DTOR(0.4)));
+
+  EXPECT_EQ(msgs::SphericalCoordinates::EARTH_WGS84, msg.surface_model());
+  EXPECT_DOUBLE_EQ(1.1, msg.latitude_deg());
+  EXPECT_DOUBLE_EQ(2.2, msg.longitude_deg());
+  EXPECT_DOUBLE_EQ(3.3, msg.elevation());
+  EXPECT_DOUBLE_EQ(0.4, msg.heading_deg());
+
+  auto math = msgs::Convert(msg);
+
+  EXPECT_EQ(math::SphericalCoordinates::EARTH_WGS84, math.Surface());
+  EXPECT_DOUBLE_EQ(1.1, math.LatitudeReference().Degree());
+  EXPECT_DOUBLE_EQ(2.2, math.LongitudeReference().Degree());
+  EXPECT_DOUBLE_EQ(3.3, math.ElevationReference());
+  EXPECT_DOUBLE_EQ(0.4, math.HeadingOffset().Degree());
+}
+
+/////////////////////////////////////////////////
 TEST(UtilityTest, ConvertStringMsg)
 {
   msgs::StringMsg msg = msgs::Convert(std::string("a string msg"));
@@ -449,6 +472,21 @@ TEST(MsgsTest, SetMassMatrix3)
   EXPECT_DOUBLE_EQ(0.2, msg.ixz());
   EXPECT_DOUBLE_EQ(0.3, msg.iyz());
   EXPECT_EQ(ignition::math::Pose3d::Zero, msgs::Convert(msg.pose()));
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, SetSphericalCoordinates)
+{
+  msgs::SphericalCoordinates msg;
+  msgs::Set(&msg, math::SphericalCoordinates(
+      math::SphericalCoordinates::SurfaceType::EARTH_WGS84,
+      IGN_DTOR(1.1), IGN_DTOR(2.2), 3.3, IGN_DTOR(0.4)));
+
+  EXPECT_EQ(msgs::SphericalCoordinates::EARTH_WGS84, msg.surface_model());
+  EXPECT_DOUBLE_EQ(1.1, msg.latitude_deg());
+  EXPECT_DOUBLE_EQ(2.2, msg.longitude_deg());
+  EXPECT_DOUBLE_EQ(3.3, msg.elevation());
+  EXPECT_DOUBLE_EQ(0.4, msg.heading_deg());
 }
 
 /////////////////////////////////////////////////
