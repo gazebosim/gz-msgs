@@ -36,11 +36,11 @@ message WorldControl
   bool pause           = 2;
   bool step            = 3;
   bool terminate       = 4;
-  uint32 multi_step    = 6;
+  uint32 multi_step    = 5;
   WorldReset reset     = 6;
   uint32 seed          = 7;
   
 
   // \brief A simulation time in the future to run to and then pause.
-  Time run_to_sim_time = 7;
+  Time run_to_sim_time = 8;
 }
