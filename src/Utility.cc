@@ -457,7 +457,8 @@ namespace ignition
     }
 
     /////////////////////////////////////////////////
-    void Set(msgs::SphericalCoordinates *_sc, const math::SphericalCoordinates &_m)
+    void Set(msgs::SphericalCoordinates *_sc,
+        const math::SphericalCoordinates &_m)
     {
       if (_m.Surface() == math::SphericalCoordinates::EARTH_WGS84)
       {
