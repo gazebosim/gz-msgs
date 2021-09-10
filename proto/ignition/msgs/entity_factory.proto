@@ -30,10 +30,11 @@ option java_outer_classname = "EntityFactoryProtos";
 /// 3. From a message (model / light)
 /// 4. Cloning an existing entity (clone_name)
 
-import "ignition/msgs/pose.proto";
+import "ignition/msgs/header.proto";
 import "ignition/msgs/light.proto";
 import "ignition/msgs/model.proto";
-import "ignition/msgs/header.proto";
+import "ignition/msgs/pose.proto";
+import "ignition/msgs/spherical_coordinates.proto";
 
 message EntityFactory
 {
@@ -60,6 +61,7 @@ message EntityFactory
   }
 
   /// \brief Pose where the entity will be spawned in the world.
+  /// If set, `spherical_coordinates` will be ignored.
   Pose pose                        = 7;
 
   /// \brief New name for the entity, overrides the name on the SDF.
@@ -72,4 +74,9 @@ message EntityFactory
   /// \brief The pose will be defined relative to this frame. If left empty,
   /// the "world" frame will be used.
   string relative_to               = 10;
+
+  /// \brief Spherical coordinates where the entity will be spawned in the
+  /// world.
+  /// It's ignored if `pose` is set.
+  SphericalCoordinates spherical_coordinates = 11;
 }
