@@ -128,6 +128,12 @@ namespace ignition
       {
         out.SetSurface(math::SphericalCoordinates::EARTH_WGS84);
       }
+      else
+      {
+        std::cerr << "Unrecognized spherical surface type ["
+                  << _sc.surface_model()
+                  << "]. Using default." << std::endl;
+      }
       out.SetLatitudeReference(IGN_DTOR(_sc.latitude_deg()));
       out.SetLongitudeReference(IGN_DTOR(_sc.longitude_deg()));
       out.SetElevationReference(_sc.elevation());
@@ -463,6 +469,12 @@ namespace ignition
       if (_m.Surface() == math::SphericalCoordinates::EARTH_WGS84)
       {
         _sc->set_surface_model(msgs::SphericalCoordinates::EARTH_WGS84);
+      }
+      else
+      {
+        std::cerr << "Unrecognized spherical surface type ["
+                  << _m.Surface()
+                  << "]. Not populating message field." << std::endl;
       }
       _sc->set_latitude_deg(_m.LatitudeReference().Degree());
       _sc->set_longitude_deg(_m.LongitudeReference().Degree());
