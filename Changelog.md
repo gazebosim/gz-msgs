@@ -49,6 +49,20 @@
 
 ## Ignition Msgs 6.x
 
+### Ignition Msgs 6.6.0 (2021-08-30)
+
+1. Adds PerformanceSensorMetrics proto message.
+    * [Pull request #172](https://github.com/ignitionrobotics/ign-msgs/pull/172)
+
+1. Detect ign instead of using cmake module to check for ignition-tools
+    * [Pull request #166](https://github.com/ignitionrobotics/ign-msgs/pull/166)
+
+1. Bazel build support for ign-msgs6
+    * [Pull request #95](https://github.com/ignitionrobotics/ign-msgs/pull/95)
+
+1. Remove tools/code_check and update codecov
+    * [Pull request #164](https://github.com/ignitionrobotics/ign-msgs/pull/164)
+
 ### Ignition Msgs 6.5.0 (2021-04-06)
 
 1. Added particle_emitter vector message
