@@ -121,6 +121,27 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
+    math::SphericalCoordinates Convert(const msgs::SphericalCoordinates &_sc)
+    {
+      math::SphericalCoordinates out;
+      if (_sc.surface_model() == msgs::SphericalCoordinates::EARTH_WGS84)
+      {
+        out.SetSurface(math::SphericalCoordinates::EARTH_WGS84);
+      }
+      else
+      {
+        std::cerr << "Unrecognized spherical surface type ["
+                  << _sc.surface_model()
+                  << "]. Using default." << std::endl;
+      }
+      out.SetLatitudeReference(IGN_DTOR(_sc.latitude_deg()));
+      out.SetLongitudeReference(IGN_DTOR(_sc.longitude_deg()));
+      out.SetElevationReference(_sc.elevation());
+      out.SetHeadingOffset(IGN_DTOR(_sc.heading_deg()));
+      return out;
+    }
+
+    /////////////////////////////////////////////
     math::AxisAlignedBox Convert(const msgs::AxisAlignedBox &_b)
     {
       return math::AxisAlignedBox(msgs::Convert(_b.min_corner()),
@@ -279,6 +300,14 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
+    msgs::SphericalCoordinates Convert(const math::SphericalCoordinates &_sc)
+    {
+      msgs::SphericalCoordinates result;
+      msgs::Set(&result, _sc);
+      return result;
+    }
+
+    /////////////////////////////////////////////
     msgs::PlaneGeom Convert(const ignition::math::Planed &_p)
     {
       msgs::PlaneGeom result;
@@ -431,6 +460,26 @@ namespace ignition
     {
       msgs::Set(_i, _m.MassMatrix());
       msgs::Set(_i->mutable_pose(), _m.Pose());
+    }
+
+    /////////////////////////////////////////////////
+    void Set(msgs::SphericalCoordinates *_sc,
+        const math::SphericalCoordinates &_m)
+    {
+      if (_m.Surface() == math::SphericalCoordinates::EARTH_WGS84)
+      {
+        _sc->set_surface_model(msgs::SphericalCoordinates::EARTH_WGS84);
+      }
+      else
+      {
+        std::cerr << "Unrecognized spherical surface type ["
+                  << _m.Surface()
+                  << "]. Not populating message field." << std::endl;
+      }
+      _sc->set_latitude_deg(_m.LatitudeReference().Degree());
+      _sc->set_longitude_deg(_m.LongitudeReference().Degree());
+      _sc->set_elevation(_m.ElevationReference());
+      _sc->set_heading_deg(_m.HeadingOffset().Degree());
     }
 
     /////////////////////////////////////////////////
