@@ -26,6 +26,7 @@
 #include <ignition/math/Inertial.hh>
 #include <ignition/math/Pose3.hh>
 #include <ignition/math/Plane.hh>
+#include <ignition/math/SphericalCoordinates.hh>
 #include <ignition/math/Vector3.hh>
 
 #include "ignition/msgs/config.hh"
@@ -84,6 +85,14 @@ namespace ignition
     /// \return An ignition::math::Inertiald object
     IGNITION_MSGS_VISIBLE
     math::Inertiald Convert(const msgs::Inertial &_i);
+
+    /// \brief Convert a msgs::SphericalCoordinates to an
+    /// ignition::math::SphericalCoordinates
+    /// \param[in] _coord The spherical coordinates to convert
+    /// \return An ignition::math::SphericalCoordinates object
+    IGNITION_MSGS_VISIBLE
+    math::SphericalCoordinates Convert(
+        const msgs::SphericalCoordinates &_coord);
 
     /// \brief Convert a msgs::AxisAlignedBox to an
     /// ignition::math::AxisAlignedBox
@@ -194,6 +203,14 @@ namespace ignition
     /// \return A msgs::Inertial object
     IGNITION_MSGS_VISIBLE
     msgs::Inertial Convert(const math::MassMatrix3d &_m);
+
+    /// \brief Convert an math::SphericalCoordinates to a
+    /// msgs::SphericalCoordinates
+    /// \param[in] _coord The SphericalCoordinates to convert
+    /// \return A msgs::SphericalCoordinates object
+    IGNITION_MSGS_VISIBLE
+    msgs::SphericalCoordinates Convert(
+        const math::SphericalCoordinates &_coord);
 
     /// \brief Convert a ignition::math::Planed to a msgs::PlaneGeom
     /// \param[in] _p The plane to convert
@@ -351,6 +368,14 @@ namespace ignition
     /// \param[in] _m An math::MassMatrix3d reference
     IGNITION_MSGS_VISIBLE
     void Set(msgs::Inertial *_i, const math::MassMatrix3d &_m);
+
+    /// \brief Set a msgs::SphericalCoordinates from a
+    /// math::SphericalCoordinates
+    /// \param[out] _sc A msgs::SphericalCoordinates pointer
+    /// \param[in] _m An math::SphericalCoordinates reference
+    IGNITION_MSGS_VISIBLE
+    void Set(msgs::SphericalCoordinates *_sc,
+        const math::SphericalCoordinates &_m);
 
     /// \brief Set a msgs::Plane from an ignition::math::Planed
     /// \param[out] _p A msgs::Plane pointer
