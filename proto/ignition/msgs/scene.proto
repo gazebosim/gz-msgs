@@ -29,17 +29,12 @@ import "ignition/msgs/fog.proto";
 import "ignition/msgs/sky.proto";
 import "ignition/msgs/light.proto";
 import "ignition/msgs/joint.proto";
+import "ignition/msgs/material.proto";
 import "ignition/msgs/model.proto";
 import "ignition/msgs/header.proto";
 
 message Scene
 {
-  message Script
-  {
-    repeated string uri = 1;
-    string material_name = 2;
-  }
-
   /// \brief Optional header data
   Header header       = 1;
 
@@ -58,6 +53,6 @@ message Scene
   /// \brief Show/hide world origin indicator.
   bool origin_visual  = 12;
 
-  /// \brief Name of shadow caster material.
-  Script shadow_caster_script = 13;
+  /// \brief Shadow caster material script.
+  Material.Script shadow_caster_material_script = 13;
 }
