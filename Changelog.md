@@ -1,6 +1,26 @@
 ## Ignition Msgs 8.x
 
-### Ignition Msgs 8.0.0 (2021-xx-xx)
+### Ignition Msgs 8.0.0 (2021-09-xx)
+
+1. scene.proto: add shadow_caster_material_name
+    * [Pull request #179](https://github.com/ignitionrobotics/ign-msgs/pull/179)
+
+1. 🌐 Spherical coordinates conversion and commands
+    * [Pull request #177](https://github.com/ignitionrobotics/ign-msgs/pull/177)
+
+1. Add BoundingBox Msg
+    * [Pull request #165](https://github.com/ignitionrobotics/ign-msgs/pull/165)
+
+1. Add particle scatter ratio field to particle emitter
+    * [Pull request #162](https://github.com/ignitionrobotics/ign-msgs/pull/162)
+
+1. Add particle emitters to link.proto and add topic to particle_emitter.proto
+    * [Pull request #153](https://github.com/ignitionrobotics/ign-msgs/pull/153)
+
+1. Infrastructure
+    * [Pull request #159](https://github.com/ignitionrobotics/ign-msgs/pull/159)
+    * [Pull request #155](https://github.com/ignitionrobotics/ign-msgs/pull/155)
+    * [Pull request #151](https://github.com/ignitionrobotics/ign-msgs/pull/151)
 
 ## Ignition Msgs 7.x
 
