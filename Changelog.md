@@ -17,12 +17,10 @@
 1. Add particle emitters to link.proto and add topic to particle_emitter.proto
     * [Pull request #153](https://github.com/ignitionrobotics/ign-msgs/pull/153)
 
-1. Bump main to 8.0.0~pre1
-    * [Pull request #151](https://github.com/ignitionrobotics/ign-msgs/pull/151)
-
 1. Infrastructure
     * [Pull request #159](https://github.com/ignitionrobotics/ign-msgs/pull/159)
     * [Pull request #155](https://github.com/ignitionrobotics/ign-msgs/pull/155)
+    * [Pull request #151](https://github.com/ignitionrobotics/ign-msgs/pull/151)
 
 ## Ignition Msgs 7.x
 
