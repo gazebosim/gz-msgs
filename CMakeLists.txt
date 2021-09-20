@@ -3,13 +3,13 @@ cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(ignition-msgs6 VERSION 6.5.0)
+project(ignition-msgs6 VERSION 6.6.0)
 
 #============================================================================
 # Find ignition-cmake
 #============================================================================
 # If you get an error at this line, you need to install ignition-cmake
-find_package(ignition-cmake2 REQUIRED)
+find_package(ignition-cmake2 2.8.0 REQUIRED)
 
 #============================================================================
 # Configure the project
@@ -69,9 +69,8 @@ ign_find_package(ignition-math6 REQUIRED VERSION 6.5)
 set(IGN_MATH_VER ${ignition-math6_VERSION_MAJOR})
 
 #--------------------------------------
-# Find ignition-tools
-ign_find_package(ignition-tools
-                 QUIET)
+# Find if ign command is available
+find_program(HAVE_IGN_TOOLS ign)
 
 #--------------------------------------
 # Find Tinyxml2
