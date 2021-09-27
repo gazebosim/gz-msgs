@@ -21,6 +21,22 @@ sudo apt install libignition-msgs<#>-dev
 Be sure to replace `<#>` with a number value, such as 2 or 3, depending on
 which version you need.
 
+## macOS
+
+On macOS, add OSRF packages:
+  ```
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew tap osrf/simulation
+  ```
+
+Install Ignition Msgs:
+  ```
+  brew install ignition-msgs<#>
+  ```
+
+Be sure to replace `<#>` with a number value, such as 1 or 2, depending on
+which version you need.
+
 ## Windows
 
 Install [Conda package management system](https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html).
@@ -69,6 +85,42 @@ To uninstall the software installed with the previous steps:
 cd build/
 sudo make uninstall
 ```
+
+## macOS
+
+1. Clone the repository
+  ```
+  git clone https://github.com/ignitionrobotics/ign-msgs -b ign-msgs<#>
+  ```
+  Be sure to replace `<#>` with a number value, such as 1 or 2, depending on
+  which version you need.
+
+2. Install dependencies
+  ```
+  brew install --only-dependencies ignition-msgs<#>
+  ```
+  Be sure to replace `<#>` with a number value, such as 1 or 2, depending on
+  which version you need.
+
+3. Configure and build
+  ```
+  cd ign-msgs
+  mkdir build
+  cd build
+  cmake ..
+  make
+  ```
+
+4. Optionally, install
+  ```
+  sudo make install
+  ```
+
+  To uninstall the software installed with the previous steps:
+  ```
+  cd build/
+  sudo make uninstall
+  ```
 
 ## Windows
 
