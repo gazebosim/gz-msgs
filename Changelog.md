@@ -1,6 +1,6 @@
 ## Ignition Msgs 8.x
 
-### Ignition Msgs 8.0.0 (2021-09-xx)
+### Ignition Msgs 8.0.0 (2021-09-27)
 
 1. scene.proto: add shadow_caster_material_name
     * [Pull request #179](https://github.com/ignitionrobotics/ign-msgs/pull/179)
