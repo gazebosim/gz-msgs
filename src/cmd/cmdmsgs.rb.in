@@ -40,7 +40,7 @@ COMMANDS = {  'msg' =>
                   "Options:\n\n" +
                   "  -i [ --info ] arg     " +
                   "Get info about the specified message type.\n" +
-                  "  -l [ --list ]         List all topics.\n" +
+                  "  -l [ --list ]         List all message types.\n" +
                   COMMON_OPTIONS
 }
 
