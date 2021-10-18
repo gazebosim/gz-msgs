@@ -32,5 +32,6 @@ message SerializedState_V
   /// \brief Optional header data
   Header header = 1;
 
+  /// \brief Vector of SerializedState data
   repeated SerializedState state = 2;
 };

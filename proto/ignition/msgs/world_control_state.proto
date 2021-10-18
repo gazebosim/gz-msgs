@@ -35,7 +35,10 @@ message WorldControlState
   /// \brief Optional header data
   Header header = 1;
 
+  /// \brief A WorldControl that allows for control of world functions
   WorldControl worldControl = 2;
 
+  /// \brief A SerializedState_V that may contain information about the
+  /// state of an entity-comonent-system (ECS)
   SerializedState_V state = 3;
 };
