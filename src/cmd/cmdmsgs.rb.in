@@ -38,12 +38,21 @@ COMMANDS = {  'msg' =>
                   "Print information about ignition messages.\n\n" +
                   "  ign msg [options]\n\n" +
                   "Options:\n\n" +
-                  "  -i [ --info ] arg     " +
+                  "  -i [ --info ] arg          " +
                   "Get info about the specified message type.\n" +
-                  "  -l [ --list ]         List all topics.\n" +
+                  "  -l [ --list ]              List all message types.\n" +
                   COMMON_OPTIONS
 }
 
+# COMMANDS = {  'msg' =>
+#                   "Print information about ignition messages.\n\n" +
+#                   "  ign msg [options]\n\n" +
+#                   "Options:\n\n" +
+#                   "  -i [ --info ] arg     " +
+#                   "Get info about the specified message type.\n" +
+#                   "  -l [ --list ]         List all message types.\n" +
+#                   COMMON_OPTIONS
+# }
 #
 # Class for the Ignition msgs command line tools.
 #
@@ -60,7 +69,7 @@ class Cmd
     opt_parser = OptionParser.new do |opts|
       opts.banner = usage
 
-      opts.on('-h', '--help", "Print this help message') do
+      opts.on('-h', '--help', 'Print this help message') do
         puts usage
         exit(0)
       end
