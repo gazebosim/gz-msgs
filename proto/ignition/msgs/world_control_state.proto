@@ -23,11 +23,11 @@ option java_outer_classname = "WorldControlStateProtos";
 /// \ingroup ignition.msgs
 /// \interface WorldControlState
 /// \brief A message that allows for control of world functions, along with
-/// a vector of serialized state information that can represent a sequence
-/// of actions applied to an entity-component-system (ECS)
+/// a serialized state that can represent the state of an
+/// entity-component-system (ECS)
 
 import "ignition/msgs/header.proto";
-import "ignition/msgs/serialized_state_v.proto";
+import "ignition/msgs/serialized.proto";
 import "ignition/msgs/world_control.proto";
 
 message WorldControlState
@@ -38,7 +38,7 @@ message WorldControlState
   /// \brief A WorldControl that allows for control of world functions
   WorldControl worldControl = 2;
 
-  /// \brief A SerializedState_V that may contain information about the
+  /// \brief A SerializedState that can contain information about the
   /// state of an entity-comonent-system (ECS)
-  SerializedState_V state = 3;
+  SerializedState state = 3;
 };
