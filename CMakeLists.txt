@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(ignition-msgs5 VERSION 5.8.0)
+project(ignition-msgs5 VERSION 5.8.1)
 
 #============================================================================
 # Find ignition-cmake
