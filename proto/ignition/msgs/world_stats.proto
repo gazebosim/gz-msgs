@@ -61,4 +61,7 @@ message WorldStatistics
 
   /// \brief Iteration step size. It's zero when paused.
   Time step_size = 10;
+
+  /// \brief True is the simulator is stepping, as opposed to running.
+  bool stepping = 11;
 }
