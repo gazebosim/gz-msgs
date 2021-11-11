@@ -18,22 +18,27 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "WrenchStampedProtos";
+option java_outer_classname = "WrenchVisualProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Wrench Stamped
 /// \brief Message for a wrench value
 
-import "ignition/msgs/wrench.proto";
+import "ignition/msgs/entity.proto";
 import "ignition/msgs/header.proto";
+import "ignition/msgs/wrench.proto";
 
-message WrenchStamped
+message WrenchVisual
 {
   /// \brief Optional header data
   Header header                   = 1;
 
-  int32 entity                    = 2;
-  string plugin                   = 4;
+  /// \brief The entity transmitting the data
+  Entity entity                    = 2;
 
+  /// \brief Label that will be visible int he GUI panel
+  string label                   = 4;
+  
+  /// \brief The actual wrench
   ignition.msgs.Wrench wrench     = 5;
 }
