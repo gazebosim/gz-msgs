@@ -24,21 +24,88 @@ option java_outer_classname = "CameraSensorProtos";
 /// \interface CameraSensor
 /// \brief Information about a camera sensor element
 
-import "ignition/msgs/vector2d.proto";
 import "ignition/msgs/distortion.proto";
+import "ignition/msgs/double.proto";
 import "ignition/msgs/header.proto";
+import "ignition/msgs/lens.proto";
+import "ignition/msgs/sensor_noise.proto";
+import "ignition/msgs/vector2d.proto";
 
 message CameraSensor
 {
+  /// \brief Bounding box types.
+  enum BoundingBoxType
+  {
+    /// \brief No bounding box.
+    NO_BOUNDING_BOX = 0;
+
+    /// \brief 2D box that shows the full box of occluded objects
+    FULL_BOX_2D     = 1;
+
+    /// \brief 2D box that shows the visible part of the occluded object
+    VISIBLE_BOX_2D  = 2;
+
+    /// \brief 3D oriented box
+    BOX_3D          = 3;
+  }
+
+  /// \brief Segmentation types.
+  enum SegmentationType
+  {
+    /// \brief No segmentation.
+    NO_SEGMENTATION = 0;
+
+    /// \brief Pixels of same label from different items
+    /// have the same color & id.
+    SEMANTIC        = 1;
+
+    /// \brief Pixels of same label from different items, have different
+    /// color & id. 1 channel for label id & 2 channels for instance id
+    PANTOPIC        = 2;
+  }
+
   /// \brief Optional header data
   Header header         = 1;
 
+  /// \brief Horizontal field of view
   double horizontal_fov = 2;
+
+  /// \brief Image size in pixels.
   Vector2d image_size   = 3;
+
+  /// \brief Image format
   string image_format   = 4;
+
+  /// \brief Near clip distance in meters.
   double near_clip      = 5;
+
+  /// \brief Far clip distance in meters.
   double far_clip       = 6;
+
+  /// \brief True if frames should be saved.
   bool save_enabled     = 7;
+
+  /// \brief Path in which to save frames.
   string save_path      = 8;
+
+  /// \brief Optional distortion information.
   Distortion distortion = 9;
+
+  /// \brief Optional noise parameters for the image.
+  SensorNoise image_noise = 10;
+
+  /// \brief Optional depth near clip
+  Double depth_near_clip  = 11;
+
+  /// \brief Optional depth f ar clip
+  Double depth_far_clip   = 12;
+
+  /// \brief Optional bounding box camera type.
+  BoundingBoxType bounding_box_type  = 13;
+
+  /// \brief Optional segmentation camera type.
+  SegmentationType segemntation_type = 14;
+
+  /// \brief Optional lens information
+  Lens lens = 15;
 }
