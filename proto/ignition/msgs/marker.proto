@@ -64,10 +64,10 @@ message Marker
     ALL = 1;
   }
 
-  /// \brief How to interpret the data. 
+  /// \brief How to interpret the data.
   enum Action
   {
-    /// \brief Use this action to create a new marker or modify an exisiting 
+    /// \brief Use this action to create a new marker or modify an exisiting
     /// marker. A marker will be created if the provided id does not match
     /// an exisiting marker, otherwise the marker with the provided id will
     /// be modified.
@@ -94,7 +94,7 @@ message Marker
   /// \brief Namespace of the marker. A namespace groups id's together.
   ///
   /// Relevant Action: ADD_MODIFY, DELETE_MARKER, DELETE_ALL
-  string ns         = 3; 
+  string ns         = 3;
 
   /// \brief The id within the namespace of the visual. Each marker has a
   /// unique id. It's up to the user to select id values.
@@ -102,7 +102,7 @@ message Marker
   /// Relevant Action: ADD_MODIFY, DELETE_MARKER
   ///
   /// Relevant Type: all
-  uint64 id         = 4; 
+  uint64 id         = 4;
 
   /// \brief The layer the visual belongs to.
   ///
@@ -116,7 +116,7 @@ message Marker
   /// Relevant Action: ADD_MODIFY
   Type type         = 6;
 
-  /// \brief How long to keep the visual alive before deletion. A value of 
+  /// \brief How long to keep the visual alive before deletion. A value of
   /// zero indicates forever. The lifetime is based on simulation-time, not
   /// real-time.
   ///
@@ -175,4 +175,12 @@ message Marker
   ///
   /// Relevant Type: all
   Visibility visibility  = 14;
+
+  /// \brief Marker color for repeated types.
+  ///
+  /// Relevant Action: ADD_MODIFY
+  ///
+  /// Relevant Type: LINE_STRIP, LINE_LIST, POINTS, TRIANGLE_FAN, TRIANGLE_LIST,
+  /// TRIANGLE_STRIP
+  repeated Material materials = 15;
 }
