@@ -4,6 +4,14 @@
 
 ## Ignition Msgs 8.x
 
+### Ignition Msgs 8.1.0 (2021-11-02)
+
+1. Added WorldControlState message.
+    * [Pull request #190](https://github.com/ignitionrobotics/ign-msgs/pull/190)
+
+1. Fixed trivial typo in command line help message.
+    * [Pull request #191](https://github.com/ignitionrobotics/ign-msgs/pull/191)
+
 ### Ignition Msgs 8.0.0 (2021-09-27)
 
 1. scene.proto: add shadow_caster_material_name
