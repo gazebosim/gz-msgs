@@ -84,6 +84,7 @@ message Sensor
   LogicalCameraSensor logical_camera = 14;
 
   /// \brief Description of a gps sensor
+  /// TODO(chapulina) Migrate to NavSat
   GPSSensor gps          = 15;
 
   /// \brief Description of an IMU sensor

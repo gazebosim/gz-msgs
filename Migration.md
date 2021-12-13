@@ -5,6 +5,16 @@ Deprecated code produces compile-time warnings. These warning serve as
 notification to users that their code should be upgraded. The next major
 release will remove the deprecated code.
 
+## Ignition Msgs 8.1 to 8.2
+
+### Modifications
+
+1. **gps.proto**
+    + Recommend the use of **navsat.proto** instead. The GPS message will be deprecated in the future.
+
+1. **gps_sensor.proto**
+    + Recommend the use of **navsat_sensor.proto** instead. The GPS message will be deprecated in the future.
+
 ## Ignition Msgs 6.X to 7.X
 
 ### Removals

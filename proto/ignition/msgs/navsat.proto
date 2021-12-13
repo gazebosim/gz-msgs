@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Open Source Robotics Foundation
+ * Copyright (C) 2021 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,25 +18,38 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "GPSProtos";
+option java_outer_classname = "NavSatProtos";
 
 /// \ingroup ignition.msgs
-/// \interface GPS
-/// \brief Data from a GPS sensor
-/// This message will be deprecated, use NavSat instead.
+/// \interface NavSat
+/// \brief Data from a NavSat sensor
+/// This replaces the GPS message.
 
 import "ignition/msgs/header.proto";
 
-message GPS
+message NavSat
 {
   /// \brief Optional header data
   Header header                = 1;
 
-  string link_name             = 2;
-  double latitude_deg          = 3;
-  double longitude_deg         = 4;
-  double altitude              = 5;
-  double velocity_east         = 6;
-  double velocity_north        = 7;
-  double velocity_up           = 8;
+  /// \brief Latitude in degrees
+  double latitude_deg          = 2;
+
+  /// \brief Longitude in degrees
+  double longitude_deg         = 3;
+
+  /// \brief Altitude in meters
+  double altitude              = 4;
+
+  /// \brief East velocity in the ENU frame, in m / s
+  double velocity_east         = 5;
+
+  /// \brief North velocity in the ENU frame, in m / s
+  double velocity_north        = 6;
+
+  /// \brief Up velocity in the ENU frame, in m / s
+  double velocity_up           = 7;
+
+  /// \brief ID of reference frame
+  string frame_id              = 8;
 }
