@@ -18,7 +18,7 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Protos";
+option java_outer_classname = "NavSatSensorProtos";
 
 /// \ingroup ignition.msgs
 /// \interface NavSatSensor
