@@ -1,5 +1,13 @@
 ## Ignition Msgs 6.x
 
+### Ignition Msgs 6.6.1 (2021-12-20)
+
+1. Fix trivial typo in command line help message
+    * [Pull request #191](https://github.com/ignitionrobotics/ign-msgs/pull/191)
+
+1. 🥳 Update ign-tools issue on README
+    * [Pull request #184](https://github.com/ignitionrobotics/ign-msgs/pull/184)
+
 ### Ignition Msgs 6.6.0 (2021-08-30)
 
 1. Adds PerformanceSensorMetrics proto message.
