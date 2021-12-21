@@ -22,7 +22,7 @@ option java_outer_classname = "WrenchVisualProtos";
 
 /// \ingroup ignition.msgs
 /// \interface Wrench Stamped
-/// \brief Message for a wrench value
+/// \brief Message used to visualize a wrench applied to an entity.
 
 import "ignition/msgs/entity.proto";
 import "ignition/msgs/header.proto";
@@ -31,14 +31,17 @@ import "ignition/msgs/wrench.proto";
 message WrenchVisual
 {
   /// \brief Optional header data
-  Header header                   = 1;
+  Header header                     = 1;
 
   /// \brief The entity transmitting the data
-  Entity entity                    = 2;
+  Entity entity                     = 2;
 
   /// \brief Label that will be visible int he GUI panel
-  string label                   = 4;
-  
+  string label                      = 4;
+
   /// \brief The actual wrench
-  ignition.msgs.Wrench wrench     = 5;
+  ignition.msgs.Wrench wrench       = 5;
+
+  /// \brief Location where the wrench is applied.
+  ignition.msgs.Vector3d pos        = 6;
 }
