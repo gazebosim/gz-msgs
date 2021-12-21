@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Open Source Robotics Foundation
+ * Copyright (C) 2021 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ option java_outer_classname = "WrenchVisualProtos";
 import "ignition/msgs/entity.proto";
 import "ignition/msgs/header.proto";
 import "ignition/msgs/wrench.proto";
+import "ignition/msgs/vector3d.proto";
 
 message WrenchVisual
 {
