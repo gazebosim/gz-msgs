@@ -64,7 +64,7 @@ which version you need.
 
 Install required dependencies as follows:
 ```
-sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev libignition-math6-dev
+sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev libignition-math7-dev
 ```
 
 ### Building from Source

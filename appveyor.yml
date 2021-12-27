@@ -20,7 +20,7 @@ install:
   - cmake --build . --target INSTALL
   - cd ../..
   # ign-math
-  - git clone https://github.com/ignitionrobotics/ign-math -b ign-math6
+  - git clone https://github.com/ignitionrobotics/ign-math -b main
   - cd ign-math
   - md build
   - cd build

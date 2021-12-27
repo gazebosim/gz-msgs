@@ -65,8 +65,8 @@ ign_find_package(IgnProtobuf
 
 #--------------------------------------
 # Find ignition-math
-ign_find_package(ignition-math6 REQUIRED VERSION 6.5)
-set(IGN_MATH_VER ${ignition-math6_VERSION_MAJOR})
+ign_find_package(ignition-math7 REQUIRED)
+set(IGN_MATH_VER ${ignition-math7_VERSION_MAJOR})
 
 #--------------------------------------
 # Find if ign command is available
