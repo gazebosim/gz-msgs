@@ -16,6 +16,7 @@
 */
 #include <tinyxml2.h>
 #include <functional>
+#include <iostream>
 #include <sstream>
 #include <ignition/math/Helpers.hh>
 #include <ignition/math/SemanticVersion.hh>
