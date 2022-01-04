@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Open Source Robotics Foundation
+ * Copyright (C) 2021 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,17 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "Protos";
+option java_outer_classname = "NavSatSensorProtos";
 
 /// \ingroup ignition.msgs
-/// \interface GPSSensor
-/// \brief Information about a GPS sensor element
-/// This message will be deprecated in favor of NavSat sensor.
+/// \interface NavSatSensor
+/// \brief Information about a NavSat sensor
+/// This replaces the GPS sensor message
 
 import "ignition/msgs/sensor_noise.proto";
 import "ignition/msgs/header.proto";
 
-message GPSSensor
+message NavSatSensor
 {
   /// \brief Sensing information
   message Sensing
