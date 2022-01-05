@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Open Source Robotics Foundation
+ * Copyright (C) 2022 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,12 +37,13 @@ message WrenchVisual
   /// \brief The entity transmitting the data
   Entity entity                     = 2;
 
-  /// \brief Label that will be visible int he GUI panel
+  /// \brief Label that will be visible in the GUI panel
   string label                      = 4;
 
   /// \brief The actual wrench
   ignition.msgs.Wrench wrench       = 5;
 
-  /// \brief Location where the wrench is applied.
+  /// \brief Location where the wrench is applied. The location should be in
+  /// the global frame of reference and units are m.
   ignition.msgs.Vector3d pos        = 6;
 }
