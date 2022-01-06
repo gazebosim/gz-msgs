@@ -103,7 +103,8 @@ class IGNITION_MSGS_VISIBLE PointCloudPackedConstIterator
 /// \param[in] _dataType One of the enums of
 ///            ignition::msgs::PointCloudPacked::Field
 /// \return Size in bytes. Returns -1 if the type is unknown.
-inline int IGNITION_MSGS_VISIBLE sizeOfPointField(
+IGNITION_MSGS_VISIBLE
+inline int sizeOfPointField(
     PointCloudPacked::Field::DataType _dataType)
 {
   if ((_dataType == PointCloudPacked::Field::INT8) ||
