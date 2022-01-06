@@ -65,7 +65,7 @@ namespace msgs
 ///
 /// \tparam FieldType Type of the element being iterated upon
 template<typename FieldType>
-class IGNITION_MSGS_VISIBLE PointCloudPackedIterator
+class PointCloudPackedIterator
   : public PointCloudPackedIteratorBase<
     FieldType, FieldType, char, PointCloudPacked, PointCloudPackedIterator>
 {
@@ -82,7 +82,7 @@ class IGNITION_MSGS_VISIBLE PointCloudPackedIterator
 /// \brief Same as a PointCloudPackedIterator but for const data
 /// \tparam FieldType Type of the element being iterated upon
 template<typename FieldType>
-class IGNITION_MSGS_VISIBLE PointCloudPackedConstIterator
+class PointCloudPackedConstIterator
   : public PointCloudPackedIteratorBase<
     FieldType, const FieldType, const char, const PointCloudPacked,
     PointCloudPackedConstIterator>

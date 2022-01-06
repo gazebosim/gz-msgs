@@ -26,7 +26,6 @@
 #include <string>
 
 #include "ignition/msgs/config.hh"
-#include "ignition/msgs/Export.hh"
 
 namespace ignition
 {
@@ -48,7 +47,7 @@ template<
     typename RawDataType,
     typename PointCloudType,
     template<typename> class DerivedClass>
-class IGNITION_MSGS_HIDDEN PointCloudPackedIteratorBase
+class PointCloudPackedIteratorBase
 {
   /// \brief Constructor
   /// \param[in] _cloudMsg The PointCloudPacked to iterate upon
