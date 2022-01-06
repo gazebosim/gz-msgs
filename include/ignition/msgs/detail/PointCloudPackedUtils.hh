@@ -327,7 +327,8 @@ DerivedClass<FieldType> PointCloudPackedIteratorBase<
     PointCloudType,
     DerivedClass>::End() const
 {
-  DerivedClass<FieldType> res = *static_cast<const DerivedClass<FieldType> *>(this);
+  DerivedClass<FieldType> res =
+      *static_cast<const DerivedClass<FieldType> *>(this);
   res.data = this->dataEnd;
   return res;
 }

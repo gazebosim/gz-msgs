@@ -72,8 +72,9 @@ class IGNITION_MSGS_VISIBLE PointCloudPackedIterator
   // Documentation inherited
   public: PointCloudPackedIterator(PointCloudPacked &_cloudMsg,
     const std::string &_fieldName)
-      : PointCloudPackedIteratorBase<FieldType, FieldType, char, PointCloudPacked,
-      PointCloudPackedIterator>::PointCloudPackedIteratorBase(_cloudMsg, _fieldName)
+      : PointCloudPackedIteratorBase<FieldType, FieldType, char,
+        PointCloudPacked, PointCloudPackedIterator>
+        ::PointCloudPackedIteratorBase(_cloudMsg, _fieldName)
   {
   }
 };
