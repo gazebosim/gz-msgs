@@ -30,7 +30,6 @@
 
 #include "ignition/msgs/config.hh"
 #include "ignition/msgs/detail/PointCloudPackedUtils.hh"
-#include "ignition/msgs/Export.hh"
 
 namespace ignition
 {
@@ -103,7 +102,6 @@ class PointCloudPackedConstIterator
 /// \param[in] _dataType One of the enums of
 ///            ignition::msgs::PointCloudPacked::Field
 /// \return Size in bytes. Returns -1 if the type is unknown.
-IGNITION_MSGS_VISIBLE
 inline int sizeOfPointField(
     PointCloudPacked::Field::DataType _dataType)
 {
