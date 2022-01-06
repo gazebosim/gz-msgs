@@ -17,8 +17,18 @@
 
 #include <gtest/gtest.h>
 
+// TODO(chapulina) Our headers shouldn't be leaking warnings from protobuf
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 #include "ignition/msgs/PointCloudPackedUtils.hh"
 #include "ignition/msgs/Utility.hh"
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 using namespace ignition;
 using namespace msgs;
@@ -164,7 +174,7 @@ TEST(PointCloudPackedUtilsTest, MultipleFields)
     *rIter = i + 3;
     *sIter = i + 4;
     *tIter = i + 5;
-    *uIter = i + 6;
+    *uIter = i + 6.0;
   }
   EXPECT_EQ(i * pcMsg.point_step(), total);
 
@@ -209,7 +219,7 @@ TEST(PointCloudPackedUtilsTest, MultipleFields)
     EXPECT_EQ(i + 3u, *rIterConst);
     EXPECT_EQ(static_cast<int>(i + 4), *sIterConst);
     EXPECT_EQ(i + 5u, *tIterConst);
-    EXPECT_DOUBLE_EQ(i + 6, *uIterConst);
+    EXPECT_DOUBLE_EQ(i + 6.0, *uIterConst);
   }
   EXPECT_EQ(i * pcMsg.point_step(), total);
 
