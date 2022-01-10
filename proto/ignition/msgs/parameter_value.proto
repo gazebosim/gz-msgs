@@ -20,20 +20,12 @@ syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 
-import "ignition/msgs/parameter.proto";
-
-/// \brief Representation of a parameter declaration
-message ParameterDeclaration
+/// \brief Representation of a parameter value
+message ParameterValue
 {
-  /// \brief Parameter name.
-  string name = 1;
-
-  /// \brief Parameter type, i.e. the component type.
+  /// \brief Component type name;
   string type = 2;
 
-  /// \brief Associated component id.
-  uint64 component_id = 3;
-
-  /// \brief Associated component type id.
-  uint64 component_type_id = 4;
+  /// \brief Serialized component data.
+  bytes value = 3;
 };
