@@ -28,7 +28,7 @@ message ParameterDeclaration
   /// \brief Parameter name.
   string name = 1;
 
-  /// \brief Parameter type, i.e. the component type.
+  /// \brief Parameter type, i.e. the associated protobuf type.
   string type = 2;
 
   /// \brief Associated component id.
@@ -36,4 +36,7 @@ message ParameterDeclaration
 
   /// \brief Associated component type id.
   uint64 component_type_id = 4;
+
+  /// \brief Associated entity id.
+  uint64 entity_id = 5;
 };
