@@ -18,18 +18,13 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "VisualProtos";
+option java_outer_classname = "WheelSlipParameters";
 
 /// \ingroup ignition.msgs
-/// \interface Visual
-/// \brief A message containing visual information for rendering::Visual
+/// \interface WheelSlipParameters
+/// \brief Message containing a wheel slip parameters user command.
 
 import "ignition/msgs/header.proto";
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/geometry.proto";
-import "ignition/msgs/material.proto";
-import "ignition/msgs/plugin.proto";
-import "ignition/msgs/vector3d.proto";
 
 message WheelSlipParameters
 {
