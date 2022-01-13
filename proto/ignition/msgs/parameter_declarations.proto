@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Open Source Robotics Foundation
+ * Copyright (C) 2022 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ option java_package = "com.ignition.msgs";
 
 import "ignition/msgs/parameter_declaration.proto";
 
-/// \brief Representation of a parameter
+/// \brief Collection of parameter declarations.
 message ParameterDeclarations
 {
-  /// \brief Parameter declarations;
+  /// \brief Parameter declarations.
   repeated ParameterDeclaration parameter_declarations = 1;
 };
