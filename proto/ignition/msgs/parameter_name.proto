@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Open Source Robotics Foundation
+ * Copyright (C) 2022 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,10 @@ syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 
-/// \brief Parameter name
+/// \brief Parameter name, used as a request to get a parameter.
 message ParameterName
 {
-  /// \brief Parameter name;
-  // TODO(ivanpauno: Maybe use `stringmsg.proto` instead (?).
+  /// \brief Parameter name.
+  // TODO(ivanpauno): Maybe use `stringmsg.proto` instead (?).
   string name = 1;
 };
