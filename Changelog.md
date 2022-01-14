@@ -4,6 +4,11 @@
 
 ## Ignition Msgs 8.x
 
+### Ignition Msgs 8.2.0 (2021-12-14)
+
+1. Add NavSat messages
+    * [Pull request #206](https://github.com/ignitionrobotics/ign-msgs/pull/206)
+
 ### Ignition Msgs 8.1.0 (2021-11-02)
 
 1. Added WorldControlState message.
