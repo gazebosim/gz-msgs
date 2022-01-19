@@ -567,6 +567,10 @@ namespace ignition
       {
         result = msgs::Joint::FIXED;
       }
+      else if (_str == "continuous")
+      {
+        result = msgs::Joint::CONTINUOUS;
+      }
       else
       {
         std::cerr << "Unrecognized JointType ["
@@ -621,6 +625,11 @@ namespace ignition
         case msgs::Joint::FIXED:
         {
           result = "fixed";
+          break;
+        }
+        case msgs::Joint::CONTINUOUS:
+        {
+          result = "continuous";
           break;
         }
         default:
