@@ -24,9 +24,9 @@
 #include <ignition/msgs/pointcloud_packed.pb.h>
 
 #include <cstdarg>
+#include <sstream>
 #include <string>
 #include <vector>
-#include <sstream>
 
 #include "ignition/msgs/config.hh"
 #include "ignition/msgs/detail/PointCloudPackedUtils.hh"
@@ -45,7 +45,7 @@ namespace msgs
 /// pcMsg.mutable_data()->resize(numPts * pcMsg.point_step());
 /// \endverbatim
 ///
-/// For iterating over "s", you do :
+/// For iterating over "a", you do :
 ///
 /// \verbatim
 /// ignition::msgs::PointCloudPackedIterator<float> iterA(pcMsg, "a");
