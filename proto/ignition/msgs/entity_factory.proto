@@ -77,6 +77,10 @@ message EntityFactory
 
   /// \brief Spherical coordinates where the entity will be spawned in the
   /// world.
-  /// It's ignored if `pose` is set.
+  /// If `pose` is also set:
+  /// * `pose.position` is ignored in favor of latitude, longitude and
+  ///   elevation.
+  /// * `pose.orientation` is used in conjunction with heading:
+  ///       Quaternion::fromEuler(0, 0, heading) * pose.orientation
   SphericalCoordinates spherical_coordinates = 11;
 }
