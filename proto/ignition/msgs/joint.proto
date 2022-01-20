@@ -57,6 +57,7 @@ message Joint
     SCREW     = 5;
     GEARBOX   = 6;
     FIXED     = 7;
+    CONTINUOUS = 8;
   }
 
   /// \brief Optional header data

@@ -599,6 +599,7 @@ TEST(MsgsTest, ConvertMsgsJointTypeToString)
   CompareMsgsJointTypeToString(msgs::Joint::SCREW);
   CompareMsgsJointTypeToString(msgs::Joint::GEARBOX);
   CompareMsgsJointTypeToString(msgs::Joint::FIXED);
+  CompareMsgsJointTypeToString(msgs::Joint::CONTINUOUS);
 
   EXPECT_EQ(msgs::ConvertJointType("bad type"), msgs::Joint::REVOLUTE);
   EXPECT_EQ(msgs::ConvertJointType(msgs::Joint::Type(100)), "unknown");
