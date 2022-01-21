@@ -23,6 +23,7 @@
 
 #include <ignition/msgs/pointcloud_packed.pb.h>
 
+#include <iostream>
 #include <string>
 
 #include "ignition/msgs/config.hh"
