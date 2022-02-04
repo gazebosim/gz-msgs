@@ -18,24 +18,22 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "WheelSlipParameters";
+option java_outer_classname = "WheelSlipParametersCmd";
 
 /// \ingroup ignition.msgs
-/// \interface WheelSlipParameters
+/// \interface WheelSlipParametersCmd
 /// \brief Message containing a wheel slip parameters user command.
 
 import "ignition/msgs/header.proto";
 
-message WheelSlipParameters
+message WheelSlipParametersCmd
 {
   /// \brief Optional header data
-  Header header       = 1;
+  Header header                       = 1;
 
-  string name         = 2;
-  uint32 id           = 3;
-  string parent_name  = 4;
-  uint32 parent_id    = 5;
+  string model_name                   = 2;
+  string link_name                    = 3;
 
-  double slip_compliance_lateral = 6;
-  double slip_compliance_longitudinal = 7;
+  double slip_compliance_lateral      = 4;
+  double slip_compliance_longitudinal = 5;
 }
