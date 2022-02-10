@@ -51,7 +51,7 @@ message DVL
   enum VelocityMode
   {
     DVL_MODE_BOTTOM = 0;
-    DVL_MODE_PHASED_ARRAY = 1;
+    DVL_MODE_WATER = 1;
   };
   VelocityMode mode = 3;
 
