@@ -32,8 +32,6 @@ option java_outer_classname = "DVLProtos";
 import "ignition/msgs/vector3d.proto";
 import "ignition/msgs/header.proto";
 
-
-
 message DVL
 {
   /// \brief Header
