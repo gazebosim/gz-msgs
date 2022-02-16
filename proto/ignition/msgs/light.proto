@@ -64,4 +64,8 @@ message Light
 
   /// \brief light intensity
   float intensity               = 18;
+
+  /// \brief is the light on or off
+  /// true is on, otherwise is off
+  bool is_light_on              = 19;
 }
