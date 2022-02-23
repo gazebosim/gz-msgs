@@ -32,7 +32,7 @@ message Twist
   /// \brief Optional header data.
   Header header          = 1;
 
-  /// \brief Lnear velocity in 3d space.
+  /// \brief Linear velocity in 3d space.
   Vector3d linear        = 2;
 
   /// \brief Angular velocity in 3d space.
