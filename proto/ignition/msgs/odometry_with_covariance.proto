@@ -29,12 +29,12 @@ import "ignition/msgs/twist_with_covariance.proto";
 
 message OdometryWithCovariance
 {
-  /// \brief Optional header data
+  /// \brief Optional header data.
   Header header                             = 1;
 
   /// \brief Estimated pose.
   PoseWithCovariance pose_with_covariance   = 2;
 
-  /// \brief Estimated velocity.
+  /// \brief Estimated linear and angular velocities.
   TwistWithCovariance twist_with_covariance = 3;
 }
