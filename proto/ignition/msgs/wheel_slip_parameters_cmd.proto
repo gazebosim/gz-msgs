@@ -31,9 +31,29 @@ message WheelSlipParametersCmd
   /// \brief Optional header data
   Header header                       = 1;
 
+  /// \brief Name of the model we want to modify the wheel slip parameters.
   string model_name                   = 2;
+  /// \brief Name of the model's link to apply the wheel slip parameters.
   string link_name                    = 3;
 
+  /// \brief Unitless lateral slip ratio.
+  ///
+  /// See https://en.wikipedia.org/wiki/Slip_(vehicle_dynamics).
+  /// to tangential force ratio (tangential / normal force).
+  /// Note that the maximum force ratio is the friction coefficient.
+  /// At each time step, these compliances are multiplied by
+  /// the linear wheel spin velocity and divided by the wheel_normal_force
+  /// parameter specified below in order to match the units of the
+  /// slip parameters.
   double slip_compliance_lateral      = 4;
+  /// \brief Unitless longitudinal slip ratio.
+  ///
+  /// See https://en.wikipedia.org/wiki/Slip_(vehicle_dynamics).
+  /// to tangential force ratio (tangential / normal force).
+  /// Note that the maximum force ratio is the friction coefficient.
+  /// At each time step, these compliances are multiplied by
+  /// the linear wheel spin velocity and divided by the wheel_normal_force
+  /// parameter specified below in order to match the units of the
+  /// slip parameters.
   double slip_compliance_longitudinal = 5;
 }
