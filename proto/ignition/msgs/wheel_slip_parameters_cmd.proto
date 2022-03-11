@@ -57,20 +57,16 @@ message WheelSlipParametersCmd
   ///
   /// See https://en.wikipedia.org/wiki/Slip_(vehicle_dynamics).
   /// to tangential force ratio (tangential / normal force).
-  /// Note that the maximum force ratio is the friction coefficient.
   /// At each time step, these compliances are multiplied by
-  /// the linear wheel spin velocity and divided by the wheel_normal_force
-  /// parameter specified below in order to match the units of the
-  /// slip parameters.
+  /// the linear wheel spin velocity and divided by the wheel normal force
+  /// parameter specified in the sdf.
   double slip_compliance_lateral      = 4;
   /// \brief Unitless longitudinal slip ratio.
   ///
   /// See https://en.wikipedia.org/wiki/Slip_(vehicle_dynamics).
   /// to tangential force ratio (tangential / normal force).
-  /// Note that the maximum force ratio is the friction coefficient.
   /// At each time step, these compliances are multiplied by
-  /// the linear wheel spin velocity and divided by the wheel_normal_force
-  /// parameter specified below in order to match the units of the
-  /// slip parameters.
+  /// the linear wheel spin velocity and divided by the wheel normal force
+  /// parameter specified in the sdf.
   double slip_compliance_longitudinal = 5;
 }
