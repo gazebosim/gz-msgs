@@ -152,6 +152,18 @@
 
 ## Ignition Msgs 5.x
 
+### Ignition Msgs 5.9.0 (2022-03-16)
+
+1. Backport NavSat message for ROS bridge compatibility
+    * [Pull request #231](https://github.com/ignitionrobotics/ign-msgs/pull/231)
+
+1. Focal CI: static checkers and doxygen linters
+    * [Pull request #230](https://github.com/ignitionrobotics/ign-msgs/pull/230)
+
+1. Add PointCloudPacked iterators
+    * [Pull request #210](https://github.com/ignitionrobotics/ign-msgs/pull/210)
+    * [Pull request #218](https://github.com/ignitionrobotics/ign-msgs/pull/218)
+
 ### Ignition Msgs 5.8.1 (2021-10-29)
 
 1. Utility\_TEST: adjust expectations for 32-bit arch (Backport of #120)
