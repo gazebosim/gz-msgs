@@ -24,6 +24,7 @@ option java_outer_classname = "WheelSlipParametersCmd";
 /// \interface WheelSlipParametersCmd
 /// \brief Message containing a wheel slip parameters user command.
 
+import "ignition/msgs/entity.proto";
 import "ignition/msgs/header.proto";
 
 message WheelSlipParametersCmd
@@ -31,9 +32,41 @@ message WheelSlipParametersCmd
   /// \brief Optional header data
   Header header                       = 1;
 
-  string model_name                   = 2;
-  string link_name                    = 3;
+  /// \brief Entity which wheel slip parameters are going to be modified.
+  ///
+  /// The entity might be a model with at least one link or a link.
+  /// If the entity is a model, the wheel slip parameters of all its
+  /// links will be updated.
+  ///
+  /// The entity name (entity.name) will be used as an scoped name.
+  /// For example, in this
+  /// hierarchy:
+  ///
+  /// world_name
+  ///  model_name
+  ///    link_name
+  ///
+  /// All these names will return the link entity:
+  ///
+  /// * world_name::model_name::link_name
+  /// * model_name::link_name
+  /// * link_name
+  Entity entity                       = 2;
 
+  /// \brief Unitless lateral slip ratio.
+  ///
+  /// See https://en.wikipedia.org/wiki/Slip_(vehicle_dynamics).
+  /// to tangential force ratio (tangential / normal force).
+  /// At each time step, these compliances are multiplied by
+  /// the linear wheel spin velocity and divided by the wheel normal force
+  /// parameter specified in the sdf.
   double slip_compliance_lateral      = 4;
+  /// \brief Unitless longitudinal slip ratio.
+  ///
+  /// See https://en.wikipedia.org/wiki/Slip_(vehicle_dynamics).
+  /// to tangential force ratio (tangential / normal force).
+  /// At each time step, these compliances are multiplied by
+  /// the linear wheel spin velocity and divided by the wheel normal force
+  /// parameter specified in the sdf.
   double slip_compliance_longitudinal = 5;
 }
