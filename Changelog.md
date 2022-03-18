@@ -41,6 +41,34 @@
 
 ## Ignition Msgs 7.x
 
+### Ignition Msgs 7.3.0 (2022-03-17)
+
+1. Backport NavSat message for bridge compatibility
+    * [Pull request #231](https://github.com/ignitionrobotics/ign-msgs/pull/231)
+
+1. Focal CI: static checkers and doxygen linters
+    * [Pull request #230](https://github.com/ignitionrobotics/ign-msgs/pull/230)
+
+1. Add wheel slip message definition
+    * [Pull request #205](https://github.com/ignitionrobotics/ign-msgs/pull/205)
+    * [Pull request #227](https://github.com/ignitionrobotics/ign-msgs/pull/227)
+
+1. Add PointCloudPacked iterators
+    * [Pull request #210](https://github.com/ignitionrobotics/ign-msgs/pull/210)
+    * [Pull request #218](https://github.com/ignitionrobotics/ign-msgs/pull/218)
+
+1. Utility\_TEST: adjust expectations for 32-bit arch (#120)
+    * [Pull request #120) (#196](https://github.com/ignitionrobotics/ign-msgs/pull/120) (#196)
+
+1. Fix trivial typo in command line help message
+    * [Pull request #191](https://github.com/ignitionrobotics/ign-msgs/pull/191)
+
+1. Support colcon in windows CI
+    * [Pull request #189](https://github.com/ignitionrobotics/ign-msgs/pull/189)
+
+1. 🥳 Update ign-tools issue on README
+    * [Pull request #184](https://github.com/ignitionrobotics/ign-msgs/pull/184)
+
 ### Ignition Msgs 7.2.0 (2021-09-10)
 
 1. Adds PerformanceSensorMetrics proto message.
@@ -192,6 +220,18 @@
     * [Pull request 41](https://github.com/ignitionrobotics/ign-msgs/pull/41)
 
 ## Ignition Msgs 5.x
+
+### Ignition Msgs 5.9.0 (2022-03-16)
+
+1. Backport NavSat message for ROS bridge compatibility
+    * [Pull request #231](https://github.com/ignitionrobotics/ign-msgs/pull/231)
+
+1. Focal CI: static checkers and doxygen linters
+    * [Pull request #230](https://github.com/ignitionrobotics/ign-msgs/pull/230)
+
+1. Add PointCloudPacked iterators
+    * [Pull request #210](https://github.com/ignitionrobotics/ign-msgs/pull/210)
+    * [Pull request #218](https://github.com/ignitionrobotics/ign-msgs/pull/218)
 
 ### Ignition Msgs 5.8.1 (2021-10-29)
 
