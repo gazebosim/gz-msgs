@@ -38,29 +38,30 @@ namespace msgs
 /// \brief Class that can iterate over a PointCloudPacked message.
 ///
 /// E.g, you create your message and reserve space for data as follows:
-/// \verbatim
+///
+/// \code{.cpp}
 /// ignition::msgs::PointCloudPacked pcMsg;
 /// ignition::msgs::InitPointCloudPacked(pcMsg, "my_new_frame", false,
 ///     {{"a", PointCloudPacked::Field::FLOAT32}});
 /// pcMsg.mutable_data()->resize(numPts * pcMsg.point_step());
-/// \endverbatim
+/// \endcode
 ///
 /// For iterating over "a", you do :
 ///
-/// \verbatim
+/// \code{.cpp}
 /// ignition::msgs::PointCloudPackedIterator<float> iterA(pcMsg, "a");
-/// \endverbatim
+/// \endcode
 ///
 /// And then access it through iterA[0] or *iterA.
 ///
 /// For iterating over RGBA, you can access each element as uint8_t:
 ///
-/// \verbatim
+/// \code{.cpp}
 /// ignition::msgs::PointCloudPackedIterator<uint8_t> iterR(pcMsg, "r");
 /// ignition::msgs::PointCloudPackedIterator<uint8_t> iterG(pcMsg, "g");
 /// ignition::msgs::PointCloudPackedIterator<uint8_t> iterB(pcMsg, "b");
 /// ignition::msgs::PointCloudPackedIterator<uint8_t> iterA(pcMsg, "a");
-/// \endverbatim
+/// \endcode
 ///
 /// \tparam FieldType Type of the element being iterated upon
 template<typename FieldType>
