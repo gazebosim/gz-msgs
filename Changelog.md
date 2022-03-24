@@ -1,5 +1,90 @@
 ## Ignition Msgs 8.x
 
+### Ignition Msgs 8.3.0 (2022-03-24)
+1. Merge pull request #226 from ignitionrobotics/merge78
+    * [Pull request #226 from ignitionrobotics/merge78](https://github.com/ignitionrobotics/ign-msgs/pull/226 from ignitionrobotics/merge78)
+
+1. Merge branch 'ign-msgs7' into merge78
+    * [Pull request #Merge branch 'ign-msgs7' into merge78](https://github.com/ignitionrobotics/ign-msgs/pull/Merge branch 'ign-msgs7' into merge78)
+
+1. Prepare for 7.3.0 release
+    * [Pull request #234](https://github.com/ignitionrobotics/ign-msgs/pull/234)
+
+1. Merge pull request #233 from scpeters/merge57
+    * [Pull request #233 from scpeters/merge57](https://github.com/ignitionrobotics/ign-msgs/pull/233 from scpeters/merge57)
+
+1. Merge branch 'ign-msgs5' into merge57
+    * [Pull request #Merge branch 'ign-msgs5' into merge57](https://github.com/ignitionrobotics/ign-msgs/pull/Merge branch 'ign-msgs5' into merge57)
+
+1. 🎈 5.9.0
+    * [Pull request #232](https://github.com/ignitionrobotics/ign-msgs/pull/232)
+
+1. backport NavSat message for bridge compatibility
+    * [Pull request #231](https://github.com/ignitionrobotics/ign-msgs/pull/231)
+
+1. Merge branch 'ign-msgs7' into merge78
+    * [Pull request #Merge branch 'ign-msgs7' into merge78](https://github.com/ignitionrobotics/ign-msgs/pull/Merge branch 'ign-msgs7' into merge78)
+
+1. Add docs to wheel_slip_parameters_cmd.proto and update entity field
+    * [Pull request #227](https://github.com/ignitionrobotics/ign-msgs/pull/227)
+
+1. Focal CI: static checkers and doxygen linters
+    * [Pull request #230](https://github.com/ignitionrobotics/ign-msgs/pull/230)
+
+1. Merge branch 'ign-msgs8' into merge78
+    * [Pull request #Merge branch 'ign-msgs8' into merge78](https://github.com/ignitionrobotics/ign-msgs/pull/Merge branch 'ign-msgs8' into merge78)
+
+1. Pose, twist and odometry with covariance msgs
+    * [Pull request #224](https://github.com/ignitionrobotics/ign-msgs/pull/224)
+
+1. Merge branch 'ign-msgs7' into merge78
+    * [Pull request #Merge branch 'ign-msgs7' into merge78](https://github.com/ignitionrobotics/ign-msgs/pull/Merge branch 'ign-msgs7' into merge78)
+
+1. Add wheel slip message definition
+    * [Pull request #205](https://github.com/ignitionrobotics/ign-msgs/pull/205)
+
+1. Add Ubuntu Jammy CI
+    * [Pull request #225](https://github.com/ignitionrobotics/ign-msgs/pull/225)
+
+1. 7 ➡️ 8
+    * [Pull request #220](https://github.com/ignitionrobotics/ign-msgs/pull/220)
+
+1. 7 ➡️  8
+    * [Pull request #7 ➡️  8](https://github.com/ignitionrobotics/ign-msgs/pull/7 ➡️  8)
+
+1. 5 ➡️ 7
+    * [Pull request #219](https://github.com/ignitionrobotics/ign-msgs/pull/219)
+
+1. 5 ➡️  7
+    * [Pull request #5 ➡️  7](https://github.com/ignitionrobotics/ign-msgs/pull/5 ➡️  7)
+
+1. Add missing include to PointCloudPackedUtils
+    * [Pull request #218](https://github.com/ignitionrobotics/ign-msgs/pull/218)
+
+1. 7 ➡️ 8
+    * [Pull request #216](https://github.com/ignitionrobotics/ign-msgs/pull/216)
+
+1. 7 ➡️  8
+    * [Pull request #7 ➡️  8](https://github.com/ignitionrobotics/ign-msgs/pull/7 ➡️  8)
+
+1. 5 ➡️ 7
+    * [Pull request #214](https://github.com/ignitionrobotics/ign-msgs/pull/214)
+
+1. 5 ➡️  7
+    * [Pull request #5 ➡️  7](https://github.com/ignitionrobotics/ign-msgs/pull/5 ➡️  7)
+
+1. Add PointCloudPacked iterators
+    * [Pull request #210](https://github.com/ignitionrobotics/ign-msgs/pull/210)
+
+1. Document pose + spherical coordinates combination on spawn
+    * [Pull request #212](https://github.com/ignitionrobotics/ign-msgs/pull/212)
+
+1. Prepare for 5.8.1 release
+    * [Pull request #197](https://github.com/ignitionrobotics/ign-msgs/pull/197)
+
+1. Utility_TEST: adjust expectations for 32-bit arch (#120)
+    * [Pull request #120) (#196](https://github.com/ignitionrobotics/ign-msgs/pull/120) (#196)
+
 ### Ignition Msgs 8.2.0 (2021-12-14)
 
 1. Add NavSat messages
