@@ -1,5 +1,30 @@
 ## Ignition Msgs 8.x
 
+### Ignition Msgs 8.3.0 (2022-03-24)
+
+1. Focal CI: static checkers and doxygen linters
+    * [Pull request #230](https://github.com/ignitionrobotics/ign-msgs/pull/230)
+
+1. Pose, twist and odometry with covariance msgs
+    * [Pull request #224](https://github.com/ignitionrobotics/ign-msgs/pull/224)
+
+1. Add wheel slip message definition
+    * [Pull request #205](https://github.com/ignitionrobotics/ign-msgs/pull/205)
+    * [Pull request #227](https://github.com/ignitionrobotics/ign-msgs/pull/227)
+
+1. Add Ubuntu Jammy CI
+    * [Pull request #225](https://github.com/ignitionrobotics/ign-msgs/pull/225)
+
+1. Add PointCloudPacked iterators
+    * [Pull request #210](https://github.com/ignitionrobotics/ign-msgs/pull/210)
+    * [Pull request #218](https://github.com/ignitionrobotics/ign-msgs/pull/218)
+
+1. Document pose + spherical coordinates combination on spawn
+    * [Pull request #212](https://github.com/ignitionrobotics/ign-msgs/pull/212)
+
+1. Utility_TEST: adjust expectations for 32-bit arch (#120)
+    * [Pull request #120) (#196](https://github.com/ignitionrobotics/ign-msgs/pull/120) (#196)
+
 ### Ignition Msgs 8.2.0 (2021-12-14)
 
 1. Add NavSat messages
