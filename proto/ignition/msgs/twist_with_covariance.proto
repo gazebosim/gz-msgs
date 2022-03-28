@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Open Source Robotics Foundation
+ * Copyright (C) 2022 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,23 +18,23 @@
 syntax = "proto3";
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
-option java_outer_classname = "TwistProtos";
+option java_outer_classname = "TwistWithCovarianceProtos";
 
 /// \ingroup ignition.msgs
-/// \interface Twist
-/// \brief Message with linear and angular velocities.
+/// \interface TwistWithCovariance
+/// \brief Message with twist and a covariance matrix
 
-import "ignition/msgs/vector3d.proto";
-import "ignition/msgs/header.proto";
+import "ignition/msgs/float_v.proto";
+import "ignition/msgs/twist.proto";
 
-message Twist
+message TwistWithCovariance
 {
-  /// \brief Optional header data.
-  Header header          = 1;
+  /// \brief Twist message.
+  Twist twist        = 1;
 
-  /// \brief Linear velocity in 3d space.
-  Vector3d linear        = 2;
-
-  /// \brief Angular velocity in 3d space.
-  Vector3d angular       = 3;
+  /// \brief Row-major representation of the 6x6 covariance matrix
+  /// The orientation parameters use a fixed-axis representation.
+  /// In order, the parameters are:
+  /// (x, y, z, rotation about X axis, rotation about Y axis, rotation about Z axis)
+  Float_V covariance = 2;
 }
