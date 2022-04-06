@@ -1,5 +1,10 @@
 ## Ignition Msgs 8.x
 
+### Ignition Msgs 8.4.0 (2022-04-06)
+
+1. Add Dataframe msg
+    * [Pull request #238](https://github.com/ignitionrobotics/ign-msgs/pull/238)
+
 ### Ignition Msgs 8.3.0 (2022-03-24)
 
 1. Focal CI: static checkers and doxygen linters
