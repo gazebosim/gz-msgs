@@ -22,7 +22,7 @@
 #include <string>
 
 #include <ignition/msgs/Export.hh>
-#include <ignition/msgs/SuppressWarning.hh>
+#include <ignition/utils/SuppressWarning.hh>
 
 namespace ignition
 {
@@ -82,10 +82,10 @@ namespace ignition
       /// \brief Close an open directory handle.
       private: void CloseHandle();
 
-      IGN_MSGS_WARN_IGNORE__DLL_INTERFACE_MISSING
+      IGN_UTILS_WARN_IGNORE__DLL_INTERFACE_MISSING
       /// \brief Private data.
       private: std::unique_ptr<DirIterPrivate> dataPtr;
-      IGN_MSGS_WARN_RESUME__DLL_INTERFACE_MISSING
+      IGN_UTILS_WARN_RESUME__DLL_INTERFACE_MISSING
     };
   }
 }
