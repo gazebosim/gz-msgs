@@ -7,7 +7,8 @@ release will remove the deprecated code.
 
 ## Ignition Msgs 8.X to 9.X
 
-1. **SuppressWarnings** is deprecated, use ign-utils instead.
+1. **SuppressWarnings.hh** is deprecated and isn't part of `msgs.hh` anymore.
+   Use ign-utils instead.
 
 ## Ignition Msgs 8.1 to 8.2
 
