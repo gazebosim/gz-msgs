@@ -12,7 +12,7 @@ install:
   - vcpkg install protobuf
   - vcpkg install tinyxml2
   # ign-cmake
-  - git clone https://github.com/ignitionrobotics/ign-cmake -b ign-cmake2
+  - git clone https://github.com/ignitionrobotics/ign-cmake -b ign-cmake3
   - cd ign-cmake
   - md build
   - cd build
