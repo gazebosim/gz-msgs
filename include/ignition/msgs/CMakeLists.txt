@@ -7,6 +7,6 @@ ign_install_all_headers(
 
 install(
   FILES
-    SuppressWarning.h
+    SuppressWarning.hh
   DESTINATION ${IGN_INCLUDE_INSTALL_DIR_FULL}/${PROJECT_INCLUDE_DIR}
 )
