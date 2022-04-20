@@ -68,4 +68,9 @@ message Light
   /// \brief is the light on or off
   /// true is off, otherwise is on
   bool is_light_off             = 19;
+
+  /// \brief Set if the visual of the light
+  /// is visible, true is visible,
+  /// otherwise is invisible
+  bool visualize_visual     = 20;
 }
