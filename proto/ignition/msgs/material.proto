@@ -128,4 +128,6 @@ message Material
   /// \brief If true, the mesh that this material is applied to will be
   /// rendered as double sided
   bool double_sided      = 12;
+
+  double shininess       = 13;
 }
