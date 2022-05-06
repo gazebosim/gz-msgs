@@ -15,17 +15,17 @@
  *
 */
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "OdometryProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Odometry
 /// \brief Message for odometry
 
-import "ignition/msgs/header.proto";
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/twist.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/pose.proto";
+import "gz/msgs/twist.proto";
 
 message Odometry
 {

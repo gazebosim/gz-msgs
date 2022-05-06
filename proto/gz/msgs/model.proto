@@ -16,21 +16,21 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "ModelProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Model
 /// \brief Information about a model
 
-import "ignition/msgs/axis_aligned_box.proto";
-import "ignition/msgs/joint.proto";
-import "ignition/msgs/link.proto";
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/visual.proto";
-import "ignition/msgs/vector3d.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/axis_aligned_box.proto";
+import "gz/msgs/joint.proto";
+import "gz/msgs/link.proto";
+import "gz/msgs/pose.proto";
+import "gz/msgs/visual.proto";
+import "gz/msgs/vector3d.proto";
+import "gz/msgs/header.proto";
 
 message Model
 {

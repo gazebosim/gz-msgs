@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "WirelessNodesProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface WirelessNodes
 /// \brief Msgs for sending information about a list of wireless transmitters
 
-import "ignition/msgs/wireless_node.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/wireless_node.proto";
+import "gz/msgs/header.proto";
 
 message WirelessNodes
 {

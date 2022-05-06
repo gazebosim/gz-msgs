@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "TwistWithCovarianceProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface TwistWithCovariance
 /// \brief Message with twist and a covariance matrix
 
-import "ignition/msgs/float_v.proto";
-import "ignition/msgs/twist.proto";
+import "gz/msgs/float_v.proto";
+import "gz/msgs/twist.proto";
 
 message TwistWithCovariance
 {

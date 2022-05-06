@@ -16,15 +16,15 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "PoseTrajectoryProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface PoseTrajectory
 /// \brief Message for a pose trajectory
 
-import "ignition/msgs/pose.proto";
+import "gz/msgs/pose.proto";
 
 message PoseTrajectory
 {

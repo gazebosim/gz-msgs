@@ -16,27 +16,27 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "GeometryProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Geometry
 /// \brief Information about a geometry element
 
-import "ignition/msgs/boxgeom.proto";
-import "ignition/msgs/capsulegeom.proto";
-import "ignition/msgs/conegeom.proto";
-import "ignition/msgs/cylindergeom.proto";
-import "ignition/msgs/ellipsoidgeom.proto";
-import "ignition/msgs/header.proto";
-import "ignition/msgs/heightmapgeom.proto";
-import "ignition/msgs/imagegeom.proto";
-import "ignition/msgs/meshgeom.proto";
-import "ignition/msgs/planegeom.proto";
-import "ignition/msgs/polylinegeom.proto";
-import "ignition/msgs/spheregeom.proto";
-import "ignition/msgs/vector3d.proto";
+import "gz/msgs/boxgeom.proto";
+import "gz/msgs/capsulegeom.proto";
+import "gz/msgs/conegeom.proto";
+import "gz/msgs/cylindergeom.proto";
+import "gz/msgs/ellipsoidgeom.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/heightmapgeom.proto";
+import "gz/msgs/imagegeom.proto";
+import "gz/msgs/meshgeom.proto";
+import "gz/msgs/planegeom.proto";
+import "gz/msgs/polylinegeom.proto";
+import "gz/msgs/spheregeom.proto";
+import "gz/msgs/vector3d.proto";
 
 message Geometry
 {

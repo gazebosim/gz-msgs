@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "InertialProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Inertial 
 /// \brief Information about inertia
 
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/pose.proto";
+import "gz/msgs/header.proto";
 
 message Inertial
 {

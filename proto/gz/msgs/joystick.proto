@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "JoyStickProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Joystick 
 /// \brief Message for a joystick
 
-import "ignition/msgs/vector3d.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/vector3d.proto";
+import "gz/msgs/header.proto";
 
 message Joystick
 {

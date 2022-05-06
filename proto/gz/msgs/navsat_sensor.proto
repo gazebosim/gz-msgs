@@ -16,17 +16,17 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "NavSatSensorProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface NavSatSensor
 /// \brief Information about a NavSat sensor
 /// This replaces the GPS sensor message
 
-import "ignition/msgs/sensor_noise.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/sensor_noise.proto";
+import "gz/msgs/header.proto";
 
 message NavSatSensor
 {

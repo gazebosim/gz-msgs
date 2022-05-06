@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "AnnotatedAxisAligned2DBox_VProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface AnnotatedAxisAligned2DBox_V
 /// \brief A message for a vector of annotated axis aligned 2d boxes
 
-import "ignition/msgs/header.proto";
-import "ignition/msgs/annotated_axis_aligned_2d_box.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/annotated_axis_aligned_2d_box.proto";
 
 message AnnotatedAxisAligned2DBox_V
 {
