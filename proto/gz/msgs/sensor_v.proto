@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "SensorVProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Sensor_V
 /// \brief An array of sensors.
 
-import "ignition/msgs/sensor.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/sensor.proto";
+import "gz/msgs/header.proto";
 
 message Sensor_V
 {

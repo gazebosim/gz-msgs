@@ -16,17 +16,17 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "FuelMetadata";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface FuelMetadata
-/// \brief Meta data for an Ignition Fuel resource, such as a model or world.
+/// \brief Meta data for an ignition Fuel resource, such as a model or world.
 
-import "ignition/msgs/version.proto";
-import "ignition/msgs/version_range.proto";
-import "ignition/msgs/versioned_name.proto";
+import "gz/msgs/version.proto";
+import "gz/msgs/version_range.proto";
+import "gz/msgs/versioned_name.proto";
 
 message FuelMetadata
 {

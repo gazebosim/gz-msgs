@@ -14,24 +14,24 @@
  * limitations under the License.
  *
 */
-#ifndef IGNITION_MSGS_UTILITY_HH_
-#define IGNITION_MSGS_UTILITY_HH_
+#ifndef GZ_MSGS_UTILITY_HH_
+#define GZ_MSGS_UTILITY_HH_
 
 #include <string>
 #include <utility>
 #include <vector>
 
-#include <ignition/math/AxisAlignedBox.hh>
-#include <ignition/math/Color.hh>
-#include <ignition/math/Inertial.hh>
-#include <ignition/math/Pose3.hh>
-#include <ignition/math/Plane.hh>
-#include <ignition/math/SphericalCoordinates.hh>
-#include <ignition/math/Vector3.hh>
+#include <gz/math/AxisAlignedBox.hh>
+#include <gz/math/Color.hh>
+#include <gz/math/Inertial.hh>
+#include <gz/math/Pose3.hh>
+#include <gz/math/Plane.hh>
+#include <gz/math/SphericalCoordinates.hh>
+#include <gz/math/Vector3.hh>
 
-#include "ignition/msgs/config.hh"
-#include "ignition/msgs/Export.hh"
-#include "ignition/msgs/MessageTypes.hh"
+#include "gz/msgs/config.hh"
+#include "gz/msgs/Export.hh"
+#include "gz/msgs/MessageTypes.hh"
 
 /// \file Utility.hh
 /// \brief Utility functions that support conversion between message type

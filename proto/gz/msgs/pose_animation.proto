@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "PoseAnimationProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface PoseAnimation 
 /// \brief Message for a model pose animation
 
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/time.proto";
+import "gz/msgs/pose.proto";
+import "gz/msgs/time.proto";
 
 message PoseAnimation
 {

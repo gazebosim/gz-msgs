@@ -16,15 +16,15 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "WorldModifyProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface WorldModify
 /// \brief A message that allows for modifying (open, close) worlds
 
-import "ignition/msgs/header.proto";
+import "gz/msgs/header.proto";
 
 message WorldModify
 {

@@ -16,17 +16,17 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "IMUProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface IMU
 /// \brief Data from an IMU sensor
 
-import "ignition/msgs/header.proto";
-import "ignition/msgs/vector3d.proto";
-import "ignition/msgs/quaternion.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/vector3d.proto";
+import "gz/msgs/quaternion.proto";
 
 message IMU
 {

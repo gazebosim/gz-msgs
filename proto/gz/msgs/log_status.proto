@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "LogStatusProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface LogStatus
 /// \brief A message that contains information about data logging
 
-import "ignition/msgs/time.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/time.proto";
+import "gz/msgs/header.proto";
 
 message LogStatus
 {

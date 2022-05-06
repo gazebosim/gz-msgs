@@ -16,17 +16,17 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "Oriented3DBoxProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Oriented3DBox
 /// \brief A 3D oreinted bounding box
 
-import "ignition/msgs/header.proto";
-import "ignition/msgs/vector3d.proto";
-import "ignition/msgs/quaternion.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/vector3d.proto";
+import "gz/msgs/quaternion.proto";
 
 message Oriented3DBox
 {

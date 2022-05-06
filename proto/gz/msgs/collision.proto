@@ -16,19 +16,19 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "CollisionProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Collision 
 /// \brief Information about a collision element
 
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/geometry.proto";
-import "ignition/msgs/surface.proto";
-import "ignition/msgs/visual.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/pose.proto";
+import "gz/msgs/geometry.proto";
+import "gz/msgs/surface.proto";
+import "gz/msgs/visual.proto";
+import "gz/msgs/header.proto";
 
 message Collision
 {

@@ -18,18 +18,18 @@
 // Inspired by
 // https://github.com/ros/common_msgs/blob/275b09a/sensor_msgs/include/sensor_msgs/point_cloud2_iterator.h
 
-#ifndef IGNITION_MSGS_POINTCLOUDPACKEDUTILS_HH_
-#define IGNITION_MSGS_POINTCLOUDPACKEDUTILS_HH_
+#ifndef GZ_MSGS_POINTCLOUDPACKEDUTILS_HH_
+#define GZ_MSGS_POINTCLOUDPACKEDUTILS_HH_
 
-#include <ignition/msgs/pointcloud_packed.pb.h>
+#include <gz/msgs/pointcloud_packed.pb.h>
 
 #include <cstdarg>
 #include <sstream>
 #include <string>
 #include <vector>
 
-#include "ignition/msgs/config.hh"
-#include "ignition/msgs/detail/PointCloudPackedUtils.hh"
+#include "gz/msgs/config.hh"
+#include "gz/msgs/detail/PointCloudPackedUtils.hh"
 
 namespace ignition
 {

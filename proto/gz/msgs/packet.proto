@@ -16,23 +16,23 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "PacketProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Packet
 /// \brief A message for a vector of string data
-import "ignition/msgs/double_v.proto";
-import "ignition/msgs/clock.proto";
-import "ignition/msgs/cmd_vel2d.proto";
-import "ignition/msgs/image.proto";
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/pose_v.proto";
-import "ignition/msgs/stringmsg_v.proto";
-import "ignition/msgs/time.proto";
-import "ignition/msgs/web_request.proto";
-import "ignition/msgs/world_stats.proto";
+import "gz/msgs/double_v.proto";
+import "gz/msgs/clock.proto";
+import "gz/msgs/cmd_vel2d.proto";
+import "gz/msgs/image.proto";
+import "gz/msgs/pose.proto";
+import "gz/msgs/pose_v.proto";
+import "gz/msgs/stringmsg_v.proto";
+import "gz/msgs/time.proto";
+import "gz/msgs/web_request.proto";
+import "gz/msgs/world_stats.proto";
 
 message Packet
 {

@@ -16,17 +16,17 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "DiagnosticsProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Diagnostics
 /// \brief Diagnostic information about a running instance of Gazebo.
 /// Gazebo must have been compiled with the ENABLE_DIAGNOSTICS flag.
 
-import "ignition/msgs/time.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/time.proto";
+import "gz/msgs/header.proto";
 
 message Diagnostics
 {

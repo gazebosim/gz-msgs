@@ -16,17 +16,17 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "VersionRange";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface VersionRange.
 /// \brief Message that represents a range of versions, e.g. [1.4, 1.6].
 /// If a min or max value is not present, then the interval is considered to
 /// be unbounded in that direction.
 
-import "ignition/msgs/version.proto";
+import "gz/msgs/version.proto";
 
 message VersionRange
 {

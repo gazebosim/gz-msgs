@@ -16,15 +16,15 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "LogicalCameraSensorProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface LogicalCameraSensor
 /// \brief Information about a logical camera sensor element
 
-import "ignition/msgs/header.proto";
+import "gz/msgs/header.proto";
 
 message LogicalCameraSensor
 {

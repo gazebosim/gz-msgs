@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "FluidPressureProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Fluid pressure
 /// \brief Data from a pressure sensor. The data in message is suitable for
 /// fluids, and not force/pressure contact sensors.
 
-import "ignition/msgs/header.proto";
+import "gz/msgs/header.proto";
 
 /// \brief Fluid pressure data.
 message FluidPressure

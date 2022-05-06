@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "EmptyProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Param_V
 /// \brief Message for a vector of params.
 
-import "ignition/msgs/param.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/param.proto";
+import "gz/msgs/header.proto";
 
 message Param_V
 {

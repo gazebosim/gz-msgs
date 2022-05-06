@@ -16,20 +16,20 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "VisualProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Visual
 /// \brief A message containing visual information for rendering::Visual
 
-import "ignition/msgs/header.proto";
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/geometry.proto";
-import "ignition/msgs/material.proto";
-import "ignition/msgs/plugin.proto";
-import "ignition/msgs/vector3d.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/pose.proto";
+import "gz/msgs/geometry.proto";
+import "gz/msgs/material.proto";
+import "gz/msgs/plugin.proto";
+import "gz/msgs/vector3d.proto";
 
 message Visual
 {
