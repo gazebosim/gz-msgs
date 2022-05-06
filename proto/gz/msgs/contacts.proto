@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "ContactsProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Contacts
 /// \brief Contacts from collision detection
 
-import "ignition/msgs/header.proto";
-import "ignition/msgs/contact.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/contact.proto";
 
 message Contacts
 {

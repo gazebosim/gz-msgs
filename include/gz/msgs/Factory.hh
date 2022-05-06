@@ -14,8 +14,8 @@
  * limitations under the License.
  *
 */
-#ifndef IGNITION_MSGS_FACTORY_HH_
-#define IGNITION_MSGS_FACTORY_HH_
+#ifndef GZ_MSGS_FACTORY_HH_
+#define GZ_MSGS_FACTORY_HH_
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -31,8 +31,8 @@
 #include <memory>
 #include <vector>
 
-#include "ignition/msgs/config.hh"
-#include "ignition/msgs/Export.hh"
+#include "gz/msgs/config.hh"
+#include "gz/msgs/Export.hh"
 
 namespace ignition
 {

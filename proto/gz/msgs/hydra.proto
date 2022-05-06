@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "HydraProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Hydra
 /// \brief Message that contains information about a Hydra Razer controller
 
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/pose.proto";
+import "gz/msgs/header.proto";
 
 message Hydra
 {

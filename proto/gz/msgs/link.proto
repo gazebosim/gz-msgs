@@ -16,25 +16,25 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "LinkProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Link
 /// \brief Information about a link
 
-import "ignition/msgs/inertial.proto";
-import "ignition/msgs/collision.proto";
-import "ignition/msgs/visual.proto";
-import "ignition/msgs/light.proto";
-import "ignition/msgs/sensor.proto";
-import "ignition/msgs/particle_emitter.proto";
-import "ignition/msgs/projector.proto";
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/battery.proto";
-import "ignition/msgs/density.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/inertial.proto";
+import "gz/msgs/collision.proto";
+import "gz/msgs/visual.proto";
+import "gz/msgs/light.proto";
+import "gz/msgs/sensor.proto";
+import "gz/msgs/particle_emitter.proto";
+import "gz/msgs/projector.proto";
+import "gz/msgs/pose.proto";
+import "gz/msgs/battery.proto";
+import "gz/msgs/density.proto";
+import "gz/msgs/header.proto";
 
 message Link
 {

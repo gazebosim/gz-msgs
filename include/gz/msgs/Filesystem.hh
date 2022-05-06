@@ -15,14 +15,14 @@
  *
  */
 
-#ifndef IGNITION_MSGS_FILESYSTEM_HH_
-#define IGNITION_MSGS_FILESYSTEM_HH_
+#ifndef GZ_MSGS_FILESYSTEM_HH_
+#define GZ_MSGS_FILESYSTEM_HH_
 
 #include <memory>
 #include <string>
 
-#include <ignition/msgs/Export.hh>
-#include <ignition/utils/SuppressWarning.hh>
+#include <gz/msgs/Export.hh>
+#include <gz/utils/SuppressWarning.hh>
 
 namespace ignition
 {

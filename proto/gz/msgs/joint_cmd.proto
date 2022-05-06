@@ -16,17 +16,17 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "JointCmdProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface JointCmd
 /// \brief Message for joint command, used by physics::JointControlWidget
 
-import "ignition/msgs/double.proto";
-import "ignition/msgs/pid.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/double.proto";
+import "gz/msgs/pid.proto";
+import "gz/msgs/header.proto";
 
 message JointCmd
 {

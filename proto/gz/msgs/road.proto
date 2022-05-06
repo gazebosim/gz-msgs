@@ -16,17 +16,17 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "RoadProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Road 
 /// \brief Message for a road
 
-import "ignition/msgs/vector3d.proto";
-import "ignition/msgs/material.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/vector3d.proto";
+import "gz/msgs/material.proto";
+import "gz/msgs/header.proto";
 
 message Road
 {

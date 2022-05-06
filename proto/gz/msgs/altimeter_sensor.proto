@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "AltimeterSensorProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface AltimeterSensor
 /// \brief Definition of an altimeter sensor
 
-import "ignition/msgs/header.proto";
-import "ignition/msgs/sensor_noise.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/sensor_noise.proto";
 
 /// \brief Message that describes an altimeter sensor.
 message AltimeterSensor

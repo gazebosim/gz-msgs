@@ -16,25 +16,25 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "SensorProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Sensor
 /// \brief Information about a sensor element
 
-import "ignition/msgs/altimeter_sensor.proto";
-import "ignition/msgs/camerasensor.proto";
-import "ignition/msgs/contactsensor.proto";
-import "ignition/msgs/air_pressure_sensor.proto";
-import "ignition/msgs/gps_sensor.proto";
-import "ignition/msgs/header.proto";
-import "ignition/msgs/imu_sensor.proto";
-import "ignition/msgs/lidar_sensor.proto";
-import "ignition/msgs/logical_camera_sensor.proto";
-import "ignition/msgs/magnetometer_sensor.proto";
-import "ignition/msgs/pose.proto";
+import "gz/msgs/altimeter_sensor.proto";
+import "gz/msgs/camerasensor.proto";
+import "gz/msgs/contactsensor.proto";
+import "gz/msgs/air_pressure_sensor.proto";
+import "gz/msgs/gps_sensor.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/imu_sensor.proto";
+import "gz/msgs/lidar_sensor.proto";
+import "gz/msgs/logical_camera_sensor.proto";
+import "gz/msgs/magnetometer_sensor.proto";
+import "gz/msgs/pose.proto";
 
 message Sensor
 {

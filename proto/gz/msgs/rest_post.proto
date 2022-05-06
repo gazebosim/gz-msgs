@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "RestPostProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface RestPost
 /// \brief A message to POST data on a REST service. The route (ex /news) and
 /// the content of the message in JSON format are specified.
 
-import "ignition/msgs/header.proto";
+import "gz/msgs/header.proto";
 
 message RestPost
 {

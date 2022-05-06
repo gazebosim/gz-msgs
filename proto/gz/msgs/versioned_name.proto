@@ -16,17 +16,17 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "VersionedName";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Version.
 /// \brief Version information that contains an associated name. This message
 /// can be used to represent a versioned library, such as
 /// "<library_name> 1.2.3".
 
-import "ignition/msgs/version.proto";
+import "gz/msgs/version.proto";
 
 message VersionedName
 {

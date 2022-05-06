@@ -17,12 +17,12 @@
 
 syntax = "proto3";
 
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 
-import "ignition/msgs/header.proto";
-import "ignition/msgs/world_stats.proto";
-import "ignition/msgs/serialized.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/world_stats.proto";
+import "gz/msgs/serialized.proto";
 
 /// \brief Holds all the information needed to reconstruct an entity and its
 /// components.
@@ -46,7 +46,7 @@ message SerializedEntityMap
 message SerializedStateMap
 {
   /// \brief Header data, which contains the simulation time.
-  ignition.msgs.Header header = 1;
+  gz.msgs.Header header = 1;
 
   /// \brief All the entities currently in the simulation.
   map<uint64, SerializedEntityMap> entities = 2;
