@@ -195,6 +195,15 @@ bool Generator::Generate(const FileDescriptor *_file,
     warningPop += "#endif";
 
     printer.Print(warningPop.c_str(), "name", "global_scope");
+
+    // NOTE(CH3): GOOD PLACE TO TICK TOCK NAMESPACING
+    // (either here or in Factory.hh?)
+    // printer.Print("// namespace [[deprecated(\"Use gz namespace.\")]]"
+    //               "  ignition\n"
+    //               "// {\n//   using namespace gz;\n// }\n",
+    //               "name", "includes");
+    //
+    // printer.Print("namespace ignition = gz;\n", "name", "includes");
   }
 
   return true;
