@@ -100,6 +100,33 @@ endfunction()
 
 ##################################################
 # do the code generation
+# TODO(CH3): LATER!!
+# file (GLOB proto_files ${PROJECT_SOURCE_DIR}/proto/gz/msgs/*.proto)
+#
+# foreach(proto_file ${proto_files})
+#   ign_msgs_protoc(
+#     PROTO_PACKAGE
+#       .gz.msgs
+#     GENERATE_CPP
+#     GENERATE_RUBY
+#     INPUT_PROTO
+#       ${proto_file}
+#     PROTOC_EXEC
+#       protobuf::protoc
+#     OUTPUT_CPP_DIR
+#       "${PROJECT_BINARY_DIR}/include"
+#     OUTPUT_RUBY_DIR
+#       "${PROJECT_BINARY_DIR}/ruby"
+#     OUTPUT_CPP_HH_VAR
+#       gen_headers
+#     OUTPUT_CPP_CC_VAR
+#       gen_sources
+#     OUTPUT_RUBY_VAR
+#       gen_ruby_scripts
+#     PROTO_PATH
+#       "${PROJECT_SOURCE_DIR}/proto")
+# endforeach()
+
 file (GLOB proto_files ${PROJECT_SOURCE_DIR}/proto/ignition/msgs/*.proto)
 
 foreach(proto_file ${proto_files})
@@ -149,25 +176,26 @@ set_source_files_properties(${gen_headers} ${gen_sources} ${gen_ruby_scripts}
 message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR}")
 install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR})
 
+message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/gz/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR}")
+install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/gz/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR})
+
 ign_install_includes(
   "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}"
   ${gen_headers})
 
-
 ##################################################
-# Generate ignition/msgs/MessageTypes.hh
+# Generate gz/msgs/MessageTypes.hh
 foreach (hdr ${gen_headers})
   string(REPLACE "${PROJECT_BINARY_DIR}/include/" "" hdr ${hdr})
   string(CONCAT ign_msgs_headers ${ign_msgs_headers} "#include <${hdr}>\n")
 endforeach()
 
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/MessageTypes.hh.in
-  ${PROJECT_BINARY_DIR}/include/ignition/msgs/MessageTypes.hh)
+  ${PROJECT_BINARY_DIR}/include/gz/msgs/MessageTypes.hh)
 
 ign_install_includes(
-  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}"
-  "${PROJECT_BINARY_DIR}/include/ignition/${IGN_DESIGNATION}/MessageTypes.hh")
-
+  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}"
+  "${PROJECT_BINARY_DIR}/include/gz/${IGN_DESIGNATION}/MessageTypes.hh")
 
 ##################################################
 # Build the main library
