@@ -1,3 +1,8 @@
+install(
+  DIRECTORY gz
+  DESTINATION "${IGN_INCLUDE_INSTALL_DIR_FULL}"
+  COMPONENT proto
+  FILES_MATCHING PATTERN "*.proto")
 
 install(
   DIRECTORY ignition
