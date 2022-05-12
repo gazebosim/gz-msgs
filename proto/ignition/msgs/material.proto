@@ -129,5 +129,6 @@ message Material
   /// rendered as double sided
   bool double_sided      = 12;
 
+  /// \brief Specular exponent
   double shininess       = 13;
 }
