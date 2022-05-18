@@ -9,6 +9,7 @@ release will remove the deprecated code.
 
 1. **SuppressWarnings.hh** is deprecated and isn't part of `msgs.hh` anymore.
    Use ign-utils instead.
+2. The `ignition` namespace is deprecated and will be removed in future versions.  Use `gz` instead.
 
 ## Ignition Msgs 8.1 to 8.2
 
@@ -133,9 +134,9 @@ release will remove the deprecated code.
 ### Modifications
 
 1. Use `ignition-math6` instead of `ignition-math5`.
-  This implies an indirect dependency on `ignition-cmake2` and cmake 3.10.2,
-  which are not available on Ubuntu Xenial, so migration to Ubuntu Bionic may
-  be required.
+    This implies an indirect dependency on `ignition-cmake2` and cmake 3.10.2,
+    which are not available on Ubuntu Xenial, so migration to Ubuntu Bionic may
+    be required.
 
 ## Ignition Msgs 1.X to 2.0
 
