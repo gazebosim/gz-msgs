@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/imagegeom.pb.h>
+#include <ignition/msgs/config.hh>

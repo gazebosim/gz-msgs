@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/geometry.pb.h>
+#include <ignition/msgs/config.hh>

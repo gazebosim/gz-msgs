@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/pose_trajectory.pb.h>
+#include <ignition/msgs/config.hh>

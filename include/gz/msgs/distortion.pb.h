@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/distortion.pb.h>
+#include <ignition/msgs/config.hh>

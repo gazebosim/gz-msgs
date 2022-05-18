@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/pose_with_covariance.pb.h>
+#include <ignition/msgs/config.hh>

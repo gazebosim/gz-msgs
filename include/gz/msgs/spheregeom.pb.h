@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/spheregeom.pb.h>
+#include <ignition/msgs/config.hh>

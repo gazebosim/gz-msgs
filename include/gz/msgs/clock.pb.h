@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/clock.pb.h>
+#include <ignition/msgs/config.hh>

@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/projector.pb.h>
+#include <ignition/msgs/config.hh>

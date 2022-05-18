@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/gps_sensor.pb.h>
+#include <ignition/msgs/config.hh>

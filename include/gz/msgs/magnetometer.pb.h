@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/magnetometer.pb.h>
+#include <ignition/msgs/config.hh>

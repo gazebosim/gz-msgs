@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/raysensor.pb.h>
+#include <ignition/msgs/config.hh>

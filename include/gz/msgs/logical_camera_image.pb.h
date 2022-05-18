@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/logical_camera_image.pb.h>
+#include <ignition/msgs/config.hh>

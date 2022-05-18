@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/web_request.pb.h>
+#include <ignition/msgs/config.hh>

@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/camera_lens.pb.h>
+#include <ignition/msgs/config.hh>

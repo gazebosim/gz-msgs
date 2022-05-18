@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/friction.pb.h>
+#include <ignition/msgs/config.hh>

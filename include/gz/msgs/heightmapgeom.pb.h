@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/heightmapgeom.pb.h>
+#include <ignition/msgs/config.hh>

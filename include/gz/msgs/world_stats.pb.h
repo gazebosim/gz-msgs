@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/world_stats.pb.h>
+#include <ignition/msgs/config.hh>

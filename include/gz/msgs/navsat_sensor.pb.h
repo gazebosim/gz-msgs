@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/navsat_sensor.pb.h>
+#include <ignition/msgs/config.hh>

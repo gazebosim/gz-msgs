@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/sensor_noise.pb.h>
+#include <ignition/msgs/config.hh>

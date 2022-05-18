@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/contacts.pb.h>
+#include <ignition/msgs/config.hh>

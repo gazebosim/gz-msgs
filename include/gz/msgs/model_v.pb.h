@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/model_v.pb.h>
+#include <ignition/msgs/config.hh>

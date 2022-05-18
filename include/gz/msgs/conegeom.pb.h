@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/conegeom.pb.h>
+#include <ignition/msgs/config.hh>

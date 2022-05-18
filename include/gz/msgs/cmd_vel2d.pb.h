@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/cmd_vel2d.pb.h>
+#include <ignition/msgs/config.hh>

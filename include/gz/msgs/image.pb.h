@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/image.pb.h>
+#include <ignition/msgs/config.hh>

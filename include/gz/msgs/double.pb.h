@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/double.pb.h>
+#include <ignition/msgs/config.hh>

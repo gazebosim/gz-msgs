@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/wrench.pb.h>
+#include <ignition/msgs/config.hh>

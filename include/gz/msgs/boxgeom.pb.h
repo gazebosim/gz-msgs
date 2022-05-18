@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/boxgeom.pb.h>
+#include <ignition/msgs/config.hh>

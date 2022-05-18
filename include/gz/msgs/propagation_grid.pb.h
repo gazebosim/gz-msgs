@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/propagation_grid.pb.h>
+#include <ignition/msgs/config.hh>

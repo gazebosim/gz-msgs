@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/link_data.pb.h>
+#include <ignition/msgs/config.hh>

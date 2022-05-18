@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/dataframe.pb.h>
+#include <ignition/msgs/config.hh>

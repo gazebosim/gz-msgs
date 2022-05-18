@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/topic_info.pb.h>
+#include <ignition/msgs/config.hh>

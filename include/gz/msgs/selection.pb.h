@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/selection.pb.h>
+#include <ignition/msgs/config.hh>

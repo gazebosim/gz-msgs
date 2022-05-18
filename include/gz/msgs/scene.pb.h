@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/scene.pb.h>
+#include <ignition/msgs/config.hh>

@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/magnetometer_sensor.pb.h>
+#include <ignition/msgs/config.hh>

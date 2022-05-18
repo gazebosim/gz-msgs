@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/hydra.pb.h>
+#include <ignition/msgs/config.hh>

@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/cylindergeom.pb.h>
+#include <ignition/msgs/config.hh>

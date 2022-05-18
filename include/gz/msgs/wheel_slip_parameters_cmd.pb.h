@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/wheel_slip_parameters_cmd.pb.h>
+#include <ignition/msgs/config.hh>

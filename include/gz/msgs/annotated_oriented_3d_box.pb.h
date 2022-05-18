@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/annotated_oriented_3d_box.pb.h>
+#include <ignition/msgs/config.hh>

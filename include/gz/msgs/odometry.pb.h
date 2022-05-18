@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/odometry.pb.h>
+#include <ignition/msgs/config.hh>

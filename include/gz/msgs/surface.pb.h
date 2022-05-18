@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/surface.pb.h>
+#include <ignition/msgs/config.hh>

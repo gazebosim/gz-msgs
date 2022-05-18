@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/inertial.pb.h>
+#include <ignition/msgs/config.hh>

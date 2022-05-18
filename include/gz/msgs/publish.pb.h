@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/publish.pb.h>
+#include <ignition/msgs/config.hh>

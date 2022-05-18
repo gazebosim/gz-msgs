@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/undo_redo.pb.h>
+#include <ignition/msgs/config.hh>

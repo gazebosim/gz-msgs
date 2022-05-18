@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/wireless_node.pb.h>
+#include <ignition/msgs/config.hh>

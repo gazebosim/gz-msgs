@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/int32_v.pb.h>
+#include <ignition/msgs/config.hh>

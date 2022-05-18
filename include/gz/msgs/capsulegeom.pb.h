@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/capsulegeom.pb.h>
+#include <ignition/msgs/config.hh>

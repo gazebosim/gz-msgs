@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/versioned_name.pb.h>
+#include <ignition/msgs/config.hh>

@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/performance_sensor_metrics.pb.h>
+#include <ignition/msgs/config.hh>

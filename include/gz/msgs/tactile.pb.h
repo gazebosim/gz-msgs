@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/tactile.pb.h>
+#include <ignition/msgs/config.hh>

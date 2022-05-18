@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/axis_aligned_2d_box.pb.h>
+#include <ignition/msgs/config.hh>

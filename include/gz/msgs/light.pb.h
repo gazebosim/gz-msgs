@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/light.pb.h>
+#include <ignition/msgs/config.hh>

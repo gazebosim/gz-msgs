@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/fuel_metadata.pb.h>
+#include <ignition/msgs/config.hh>

@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/axis.pb.h>
+#include <ignition/msgs/config.hh>

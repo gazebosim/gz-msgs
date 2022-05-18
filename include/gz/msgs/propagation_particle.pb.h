@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/propagation_particle.pb.h>
+#include <ignition/msgs/config.hh>

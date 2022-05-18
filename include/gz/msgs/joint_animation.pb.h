@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/joint_animation.pb.h>
+#include <ignition/msgs/config.hh>

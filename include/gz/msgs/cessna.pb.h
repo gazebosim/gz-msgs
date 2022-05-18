@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/cessna.pb.h>
+#include <ignition/msgs/config.hh>

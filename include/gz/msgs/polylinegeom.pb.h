@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/polylinegeom.pb.h>
+#include <ignition/msgs/config.hh>

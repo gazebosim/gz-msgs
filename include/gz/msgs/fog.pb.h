@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/fog.pb.h>
+#include <ignition/msgs/config.hh>

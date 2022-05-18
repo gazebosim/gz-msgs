@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/meshgeom.pb.h>
+#include <ignition/msgs/config.hh>

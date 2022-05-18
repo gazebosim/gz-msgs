@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/log_control.pb.h>
+#include <ignition/msgs/config.hh>

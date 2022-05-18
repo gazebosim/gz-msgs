@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/road.pb.h>
+#include <ignition/msgs/config.hh>

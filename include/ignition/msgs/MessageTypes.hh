@@ -16,3 +16,4 @@
 */
 
 #include <gz/msgs/MessageTypes.hh>
+#include <ignition/msgs/config.hh>

@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/rest_response.pb.h>
+#include <ignition/msgs/config.hh>

@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/boolean.pb.h>
+#include <ignition/msgs/config.hh>

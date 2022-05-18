@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/log_playback_control.pb.h>
+#include <ignition/msgs/config.hh>

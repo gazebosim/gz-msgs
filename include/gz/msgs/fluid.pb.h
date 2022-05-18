@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/fluid.pb.h>
+#include <ignition/msgs/config.hh>

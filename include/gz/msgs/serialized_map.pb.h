@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/serialized_map.pb.h>
+#include <ignition/msgs/config.hh>

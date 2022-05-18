@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/wind.pb.h>
+#include <ignition/msgs/config.hh>

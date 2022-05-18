@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/video_record.pb.h>
+#include <ignition/msgs/config.hh>

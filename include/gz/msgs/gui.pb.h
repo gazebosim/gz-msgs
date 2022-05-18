@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/gui.pb.h>
+#include <ignition/msgs/config.hh>

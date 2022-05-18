@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/sim_event.pb.h>
+#include <ignition/msgs/config.hh>

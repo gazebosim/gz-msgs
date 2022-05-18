@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/pointcloud_packed.pb.h>
+#include <ignition/msgs/config.hh>

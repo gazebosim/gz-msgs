@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/odometry_with_covariance.pb.h>
+#include <ignition/msgs/config.hh>

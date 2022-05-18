@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/world_control_state.pb.h>
+#include <ignition/msgs/config.hh>

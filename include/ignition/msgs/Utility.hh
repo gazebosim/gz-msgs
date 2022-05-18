@@ -16,3 +16,4 @@
  */
 
 #include <gz/msgs/Utility.hh>
+#include <ignition/msgs/config.hh>

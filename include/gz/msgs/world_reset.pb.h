@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/world_reset.pb.h>
+#include <ignition/msgs/config.hh>

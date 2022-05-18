@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/joy.pb.h>
+#include <ignition/msgs/config.hh>

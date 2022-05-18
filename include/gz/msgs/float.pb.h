@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/float.pb.h>
+#include <ignition/msgs/config.hh>

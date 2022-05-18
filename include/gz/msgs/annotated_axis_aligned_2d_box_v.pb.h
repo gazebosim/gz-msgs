@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/annotated_axis_aligned_2d_box_v.pb.h>
+#include <ignition/msgs/config.hh>

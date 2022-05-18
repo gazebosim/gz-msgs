@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/color.pb.h>
+#include <ignition/msgs/config.hh>

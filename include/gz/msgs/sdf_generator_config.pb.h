@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/sdf_generator_config.pb.h>
+#include <ignition/msgs/config.hh>

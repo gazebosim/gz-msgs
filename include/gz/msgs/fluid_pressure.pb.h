@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/fluid_pressure.pb.h>
+#include <ignition/msgs/config.hh>

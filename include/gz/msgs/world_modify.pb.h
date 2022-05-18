@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/world_modify.pb.h>
+#include <ignition/msgs/config.hh>

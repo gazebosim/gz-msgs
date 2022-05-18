@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/gui_camera.pb.h>
+#include <ignition/msgs/config.hh>

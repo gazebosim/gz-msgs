@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/contactsensor.pb.h>
+#include <ignition/msgs/config.hh>

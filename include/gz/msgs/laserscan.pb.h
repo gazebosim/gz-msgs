@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/laserscan.pb.h>
+#include <ignition/msgs/config.hh>

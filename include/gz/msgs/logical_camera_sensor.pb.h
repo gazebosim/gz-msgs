@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/logical_camera_sensor.pb.h>
+#include <ignition/msgs/config.hh>

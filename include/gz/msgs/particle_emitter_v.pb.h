@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/particle_emitter_v.pb.h>
+#include <ignition/msgs/config.hh>

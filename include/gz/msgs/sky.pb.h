@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/sky.pb.h>
+#include <ignition/msgs/config.hh>

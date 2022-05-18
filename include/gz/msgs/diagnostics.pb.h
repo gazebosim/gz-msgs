@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/diagnostics.pb.h>
+#include <ignition/msgs/config.hh>

@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/marker.pb.h>
+#include <ignition/msgs/config.hh>

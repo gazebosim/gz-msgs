@@ -16,3 +16,4 @@
  */
 
 #include <ignition/msgs/user_cmd_stats.pb.h>
+#include <ignition/msgs/config.hh>
