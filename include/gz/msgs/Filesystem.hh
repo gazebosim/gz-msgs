@@ -24,7 +24,7 @@
 #include <gz/msgs/Export.hh>
 #include <gz/utils/SuppressWarning.hh>
 
-namespace ignition
+namespace gz
 {
   namespace msgs
   {

@@ -27,7 +27,7 @@ option java_outer_classname = "ImageProtos";
 import "ignition/msgs/header.proto";
 
 /// \brief Possible pixel formats.
-/// This list should match ignition::common::Image::PixelFormatType
+/// This list should match gz::common::Image::PixelFormatType
 enum PixelFormatType
 {
   UNKNOWN_PIXEL_FORMAT = 0;

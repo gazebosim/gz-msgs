@@ -203,7 +203,7 @@ bool Generator::Generate(const FileDescriptor *_file,
     //               "// {\n//   using namespace gz;\n// }\n",
     //               "name", "includes");
     //
-    // printer.Print("namespace ignition = gz;\n", "name", "includes");
+    // printer.Print("namespace gz = gz;\n", "name", "includes");
   }
 
   return true;

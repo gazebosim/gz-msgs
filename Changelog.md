@@ -216,7 +216,7 @@
 
 ### Ignition Msgs 6.0.0 (2020-09-28)
 
-1. Convert functions between duration and ignition::time.
+1. Convert functions between duration and gz::time.
     * [Pull request 85](https://github.com/ignitionrobotics/ign-msgs/pull/85)
 
 1. Added utility functions to convert between msg::time and std::chrono time_point.
@@ -533,7 +533,7 @@
 1. Added serialized messages: SerializedState, SerializedEntity, SerializedComponent
     * [BitBucket pull request 99](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/99)
 
-1. image.proto: add `PixelFormatType` enum, copied from `ignition::common::Image::PixelFormatType`
+1. image.proto: add `PixelFormatType` enum, copied from `gz::common::Image::PixelFormatType`
     * [BitBucket pull request 97](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/97)
 
 

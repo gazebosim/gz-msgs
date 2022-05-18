@@ -22,13 +22,13 @@
 TEST(Messages, NestedHeaders)
 {
   // Empty contact
-  ignition::msgs::Contact contact;
+  gz::msgs::Contact contact;
   std::string contactSerialized;
   contact.SerializeToString(&contactSerialized);
   EXPECT_EQ(0u, contactSerialized.size());
 
   // Empty wrench
-  ignition::msgs::JointWrench wrench;
+  gz::msgs::JointWrench wrench;
   std::string wrenchSerialized;
   wrench.SerializeToString(&wrenchSerialized);
   EXPECT_EQ(0u, wrenchSerialized.size());

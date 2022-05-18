@@ -23,7 +23,7 @@
 #include "ignition/msgs/MessageTypes.hh"
 #include "ignition/msgs/Factory.hh"
 
-using namespace ignition;
+using namespace gz;
 
 /////////////////////////////////////////////////
 TEST(FactoryTest, Type)

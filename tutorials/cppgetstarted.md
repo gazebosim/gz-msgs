@@ -30,7 +30,7 @@ int main()
 ```
 
 Now let's create a message to store three points with arbitrary values.
-We will use the `ignition::msgs::Vector3` class to store these points and the
+We will use the `gz::msgs::Vector3` class to store these points and the
 function `DebugString()` to print the content on the terminal.
 
 
@@ -40,11 +40,11 @@ function `DebugString()` to print the content on the terminal.
 
 int main()
 {
-  ignition::msgs::Vector3d point1;
+  gz::msgs::Vector3d point1;
   point1.set_x(1);
   point1.set_y(3);
   point1.set_z(5);
-  ignition::msgs::Vector3d point2;
+  gz::msgs::Vector3d point2;
   point2.set_x(2);
   point2.set_y(4);
   point2.set_z(6);

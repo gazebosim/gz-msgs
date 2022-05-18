@@ -39,7 +39,7 @@
 #include "ignition/msgs/Factory.hh"
 #include "ignition/msgs/Filesystem.hh"
 
-using namespace ignition;
+using namespace gz;
 using namespace msgs;
 
 /// \def ProtobufUniquePtr

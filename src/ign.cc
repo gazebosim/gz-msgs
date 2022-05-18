@@ -38,7 +38,7 @@
 # pragma warning(disable: 4503)
 #endif
 
-using namespace ignition;
+using namespace gz;
 using namespace msgs;
 
 //////////////////////////////////////////////////
@@ -47,7 +47,7 @@ void cmdMsgInfo(const char *_msg)
 {
   if (_msg)
   {
-    auto msg = ignition::msgs::Factory::New(_msg);
+    auto msg = gz::msgs::Factory::New(_msg);
     if (msg)
     {
       auto descriptor = msg->GetDescriptor();
@@ -71,7 +71,7 @@ extern "C" IGNITION_MSGS_VISIBLE
 void cmdMsgList()
 {
   std::vector<std::string> types;
-  ignition::msgs::Factory::Types(types);
+  gz::msgs::Factory::Types(types);
 
   for (auto const &type : types)
     std::cout << type << std::endl;

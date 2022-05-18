@@ -58,7 +58,7 @@
 
 #include "ignition/msgs/Filesystem.hh"
 
-namespace ignition
+namespace gz
 {
   namespace msgs
   {
