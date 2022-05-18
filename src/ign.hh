@@ -15,8 +15,8 @@
  *
 */
 
-#ifndef IGNITION_MSGS_IGN_HH_
-#define IGNITION_MSGS_IGN_HH_
+#ifndef GZ_MSGS_GZ_HH_
+#define GZ_MSGS_GZ_HH_
 
 #include <cstring>
 #include "ignition/msgs/Export.hh"

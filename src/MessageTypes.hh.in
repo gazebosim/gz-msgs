@@ -20,8 +20,8 @@
  *      ign-msgs/src/MessageTypes.hh.in
  */
 
-#ifndef IGNITION_MSGS_MESSAGE_TYPES_HH_
-#define IGNITION_MSGS_MESSAGE_TYPES_HH_
+#ifndef GZ_MSGS_MESSAGE_TYPES_HH_
+#define GZ_MSGS_MESSAGE_TYPES_HH_
 
 #ifdef _MSC_VER
 #pragma warning(push)

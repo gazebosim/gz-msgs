@@ -15,8 +15,8 @@
  *
  */
 
-#ifndef IGNITION_MSGS_SUPPRESSWARNING_HH_
-#define IGNITION_MSGS_SUPPRESSWARNING_HH_
+#ifndef GZ_MSGS_SUPPRESSWARNING_HH_
+#define GZ_MSGS_SUPPRESSWARNING_HH_
 
 #include <ignition/utils/SuppressWarning.hh>
 
