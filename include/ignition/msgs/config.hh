@@ -15,4 +15,14 @@
  *
  */
 
+#ifndef IGNITION_MSGS__CONFIG_HH_
+#define IGNITION_MSGS__CONFIG_HH_
+
 #include <gz/msgs/config.hh>
+
+namespace [[deprecated("Use gz namespace.")]]  ignition
+{
+  using namespace gz;
+}
+
+#endif
