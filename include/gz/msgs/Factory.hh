@@ -45,7 +45,7 @@ namespace gz
     /// \brief Prototype for message factory generation
     typedef std::unique_ptr<google::protobuf::Message> (*FactoryFn) ();
 
-    /// \class Factory Factory.hh ignition/msgs.hh
+    /// \class Factory Factory.hh gz/msgs.hh
     /// \brief A factory that generates protobuf message based on a string type.
     /// This class  will also try to load all Protobuf descriptors specified
     /// in the IGN_DESCRIPTOR_PATH environment variable on program start.

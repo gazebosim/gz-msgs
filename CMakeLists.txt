@@ -23,33 +23,33 @@ ign_configure_project(
 #============================================================================
 
 # Cross-compilation related options
-# In a cross-compilation scenario, it is possible that the ign_msgs_gen
+# In a cross-compilation scenario, it is possible that the gz_msgs_gen
 # generator compiled for the target machine cannot be used to generate
 # the C++ code corresponding to the .proto definition. For this scenario,
 # the following two options can be used as follows.
 # First of all, ign-msgs is compiled targeting the host machine, and in the
-# build targeting the host, the INSTALL_IGN_MSGS_GEN_EXECUTABLE option is
+# build targeting the host, the INSTALL_GZ_MSGS_GEN_EXECUTABLE option is
 # enabled:
-# > cmake -DINSTALL_IGN_MSGS_GEN_EXECUTABLE:BOOL=ON ..
-# ensuring that the ign_msgs_gen is installed in
-# <host_install_prefix>/bin/ign_msgs_gen . Then, the same version of ign-msgs
+# > cmake -DINSTALL_GZ_MSGS_GEN_EXECUTABLE:BOOL=ON ..
+# ensuring that the gz_msgs_gen is installed in
+# <host_install_prefix>/bin/gz_msgs_gen . Then, the same version of ign-msgs
 # can be cross-compiled, and in the cross-compilation build the location of the
-# host ign_msgs_gen is specified via the IGN_MSGS_GEN_EXECUTABLE
+# host gz_msgs_gen is specified via the GZ_MSGS_GEN_EXECUTABLE
 # CMake cache variable:
-# > cmake -IGN_MSGS_GEN_EXECUTABLE=<host_install_prefix>/bin/ign_msgs_gen ..
+# > cmake -GZ_MSGS_GEN_EXECUTABLE=<host_install_prefix>/bin/gz_msgs_gen ..
 
 option(
-  INSTALL_IGN_MSGS_GEN_EXECUTABLE
-  "Install the ign_msgs_gen executable."
+  INSTALL_GZ_MSGS_GEN_EXECUTABLE
+  "Install the gz_msgs_gen executable."
   OFF)
-mark_as_advanced(INSTALL_IGN_MSGS_GEN_EXECUTABLE)
+mark_as_advanced(INSTALL_GZ_MSGS_GEN_EXECUTABLE)
 
 set(
-  IGN_MSGS_GEN_EXECUTABLE
-  "$<TARGET_FILE:ign_msgs_gen>"
+  GZ_MSGS_GEN_EXECUTABLE
+  "$<TARGET_FILE:gz_msgs_gen>"
   CACHE STRING
-  "ign_msgs_gen executable used in the ign_msgs_protoc CMake function.")
-mark_as_advanced(IGN_MSGS_GEN_EXECUTABLE)
+  "gz_msgs_gen executable used in the gz_msgs_protoc CMake function.")
+mark_as_advanced(GZ_MSGS_GEN_EXECUTABLE)
 
 #============================================================================
 # Search for project-specific dependencies
@@ -98,7 +98,7 @@ add_subdirectory(tools)
 #============================================================================
 # TODO: Consider tweaking ign_configure_build() to call add_subdirectory(proto)
 # whenever a proto subdirectory exists. This could be used alongside
-# ign_msgs_protoc to get uniform support for proto messages across all ignition
+# gz_msgs_protoc to get uniform support for proto messages across all ignition
 # projects.
 add_subdirectory(proto)
 

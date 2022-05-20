@@ -109,7 +109,7 @@ bool Generator::Generate(const FileDescriptor *_file,
 
     // Add the Export header so that we can apply visibility macros
     // to the messages
-    printer.Print("#include <ignition/msgs/Export.hh>\n", "name",
+    printer.Print("#include <gz/msgs/Export.hh>\n", "name",
       "includes");
   }
 
@@ -121,7 +121,7 @@ bool Generator::Generate(const FileDescriptor *_file,
     io::Printer printer(output.get(), '$');
 
     // Add the ign-msgs Factory header
-    printer.Print("#include \"ignition/msgs/Factory.hh\"\n", "name",
+    printer.Print("#include \"gz/msgs/Factory.hh\"\n", "name",
                   "includes");
 
     // Suppress warnings
@@ -144,7 +144,7 @@ bool Generator::Generate(const FileDescriptor *_file,
     // Call the IGN_REGISTER_STATIC_MSG macro for each message
     for (auto i = 0; i < _file->message_type_count(); ++i)
     {
-      std::string factory = "IGN_REGISTER_STATIC_MSG(\"ign_msgs.";
+      std::string factory = "IGN_REGISTER_STATIC_MSG(\"gz_msgs.";
       factory += _file->message_type(i)->name() + "\", " +
         _file->message_type(i)->name() +")\n";
       printer.Print(factory.c_str(), "name", "includes");
@@ -195,15 +195,6 @@ bool Generator::Generate(const FileDescriptor *_file,
     warningPop += "#endif";
 
     printer.Print(warningPop.c_str(), "name", "global_scope");
-
-    // NOTE(CH3): GOOD PLACE TO TICK TOCK NAMESPACING
-    // (either here or in Factory.hh?)
-    // printer.Print("// namespace [[deprecated(\"Use gz namespace.\")]]"
-    //               "  ignition\n"
-    //               "// {\n//   using namespace gz;\n// }\n",
-    //               "name", "includes");
-    //
-    // printer.Print("namespace gz = gz;\n", "name", "includes");
   }
 
   return true;

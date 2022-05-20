@@ -19,8 +19,8 @@
 #define GZ_TRANSPORT_TEST_CONFIG_H_
 
 #define PROJECT_SOURCE_PATH "${PROJECT_SOURCE_DIR}"
-#define IGN_CONFIG_PATH "@CMAKE_BINARY_DIR@/test/conf"
-#define IGN_TEST_LIBRARY_PATH "${PROJECT_BINARY_DIR}/src"
+#define GZ_CONFIG_PATH "@CMAKE_BINARY_DIR@/test/conf"
+#define GZ_TEST_LIBRARY_PATH "${PROJECT_BINARY_DIR}/src"
 
 #if (_MSC_VER >= 1400) // Visual Studio 2005
   #include <sstream>

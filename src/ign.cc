@@ -31,8 +31,8 @@
 #include <string>
 #include <vector>
 
-#include <ignition/msgs/config.hh>
-#include <ignition/msgs/Factory.hh>
+#include <gz/msgs/config.hh>
+#include <gz/msgs/Factory.hh>
 
 #ifdef _MSC_VER
 # pragma warning(disable: 4503)
@@ -81,5 +81,5 @@ void cmdMsgList()
 extern "C" GZ_MSGS_VISIBLE
 const char *ignitionMsgsVersion()
 {
-  return IGNITION_MSGS_VERSION_FULL;
+  return GZ_MSGS_VERSION_FULL;
 }

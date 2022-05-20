@@ -473,7 +473,7 @@
     * [BitBucket pull request 120](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/120)
 
 1. Corrected `BAYER_RGGR8` to `BAYER_BGGR8` in `PixelFormatType` located in
-`proto/ignition/msgs/image.proto`.
+`proto/gz/msgs/image.proto`.
     * [BitBucket pull request 118](https://github.com/ignitionrobotics/ign-common/pull-requests/118)
 
 1. Adding `dynamic_bias_stddev` and `dynamic_bias_correlation_time` sensor noise parameters.

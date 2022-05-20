@@ -12,7 +12,7 @@ Build | Status
 Test coverage | [![codecov](https://codecov.io/gh/ignitionrobotics/ign-msgs/branch/main/graph/badge.svg)](https://codecov.io/gh/ignitionrobotics/ign-msgs)
 Ubuntu Focal | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=ignition_msgs-ci-main-focal-amd64)](https://build.osrfoundation.org/job/ignition_msgs-ci-main-focal-amd64)
 Homebrew      | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=ignition_msgs-ci-main-homebrew-amd64)](https://build.osrfoundation.org/job/ignition_msgs-ci-main-homebrew-amd64)
-Windows       | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=ign_msgs-ci-win)](https://build.osrfoundation.org/job/ign_msgs-ci-win)
+Windows       | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-ci-win)](https://build.osrfoundation.org/job/gz_msgs-ci-win)
 
 Ignition Messages is a component in the [Ignition](http://ignitionrobotics.org)
 framework, a set of libraries designed to rapidly develop robot applications.
@@ -27,10 +27,10 @@ In the event that the installation is a mix of Debian and from source, command
 line tools from `ign-tools` may not work correctly.
 
 A workaround for a single package is to define the environment variable
-`IGN_CONFIG_PATH` to point to the location of the Ignition library installation,
+`GZ_CONFIG_PATH` to point to the location of the Ignition library installation,
 where the YAML file for the package is found, such as
 ```
-export IGN_CONFIG_PATH=/usr/local/share/ignition
+export GZ_CONFIG_PATH=/usr/local/share/ignition
 ```
 
 However, that environment variable only takes a single path, which means if the
@@ -45,7 +45,7 @@ ln -s /usr/local/share/ignition/fuel8.yaml .
 ln -s /usr/local/share/ignition/transport12.yaml .
 ln -s /usr/local/share/ignition/transportlog12.yaml .
 ...
-export IGN_CONFIG_PATH=$HOME/.ignition/tools/configs
+export GZ_CONFIG_PATH=$HOME/.ignition/tools/configs
 ```
 
 This issue is tracked [here](https://github.com/ignitionrobotics/ign-tools/issues/8).

@@ -8,7 +8,7 @@ load(
     "protos_from_context",
 )
 
-def ign_msg_gen_impl(ctx):
+def gz_msg_gen_impl(ctx):
     protos = protos_from_context(ctx)
     dir_out = get_out_dir(protos, ctx)
 
@@ -20,8 +20,8 @@ def ign_msg_gen_impl(ctx):
 
     args = [
         "--cpp_out=" + dir_out.path,
-        "--plugin=protoc-gen-ignmsgs=" + ctx.executable._plugin.path,
-        "--ignmsgs_out=" + dir_out.path,
+        "--plugin=protoc-gen-gzmsgs=" + ctx.executable._plugin.path,
+        "--gzmsgs_out=" + dir_out.path,
     ]
 
     for include_dir in include_dirs.to_list():
@@ -44,7 +44,7 @@ def ign_msg_gen_impl(ctx):
         CcInfo(compilation_context = compilation_context),
     ]
 
-ign_msg_gen = rule(
+gz_msg_gen = rule(
     attrs = {
         "deps": attr.label_list(
             mandatory = True,
@@ -52,7 +52,7 @@ ign_msg_gen = rule(
             providers = [ProtoInfo],
         ),
         "_plugin": attr.label(
-            default = Label("//ign_msgs:ign_msgs_gen"),
+            default = Label("//gz_msgs:gz_msgs_gen"),
             executable = True,
             cfg = "host",
         ),
@@ -64,7 +64,7 @@ ign_msg_gen = rule(
     },
     # We generate .h files, so we need to output to genfiles.
     output_to_genfiles = True,
-    implementation = ign_msg_gen_impl,
+    implementation = gz_msg_gen_impl,
 )
 
 def get_proto_headers(protos):

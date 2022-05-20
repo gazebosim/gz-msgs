@@ -17,9 +17,9 @@
 
 #include <gtest/gtest.h>
 #include <limits>
-#include <ignition/math/Helpers.hh>
-#include "ignition/msgs/MessageTypes.hh"
-#include "ignition/msgs/Utility.hh"
+#include <gz/math/Helpers.hh>
+#include "gz/msgs/MessageTypes.hh"
+#include "gz/msgs/Utility.hh"
 
 using namespace gz;
 

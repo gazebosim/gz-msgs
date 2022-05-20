@@ -28,7 +28,7 @@
 #pragma warning(disable: 4100 4512 4127 4068 4244 4267 4251 4146)
 #endif
 
-@ign_msgs_headers@
+@gz_msgs_headers@
 
 
 #ifdef _MSC_VER
