@@ -1,4 +1,4 @@
-# Ignition Messages: Protobuf messages and functions for robot applications
+# Gazebo Messages: Protobuf messages and functions for robot applications
 
 **Maintainer:** caguero AT openrobotics DOT org
 
@@ -14,7 +14,7 @@ Ubuntu Focal | [![Build Status](https://build.osrfoundation.org/buildStatus/icon
 Homebrew      | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=ignition_msgs-ci-main-homebrew-amd64)](https://build.osrfoundation.org/job/ignition_msgs-ci-main-homebrew-amd64)
 Windows       | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-ci-win)](https://build.osrfoundation.org/job/gz_msgs-ci-win)
 
-Ignition Messages is a component in the [Ignition](http://ignitionrobotics.org)
+Gazebo Messages is a component in the [Ignition](http://ignitionrobotics.org)
 framework, a set of libraries designed to rapidly develop robot applications.
 
 ## Installation

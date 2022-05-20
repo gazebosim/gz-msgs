@@ -2,7 +2,7 @@
 
 ## Overview
 
-This tutorial describes how to get started using Ignition Msgs with C++.
+This tutorial describes how to get started using Gazebo Msgs with C++.
 
 We will run through a simple example that populates a message and prints it.
 Start by creating a bare-bones main file using the editor of your choice.
@@ -14,7 +14,7 @@ int main()
 }
 ```
 
-The easiest way to include Ignition Msgs is through the `gz/msgs.hh`
+The easiest way to include Gazebo Msgs is through the `gz/msgs.hh`
 header file. Alternatively, you can include only the header files you need.
 For this example, we'll take the short and easy approach.
 

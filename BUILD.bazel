@@ -81,7 +81,7 @@ public_headers = public_headers_no_gen + [
     "include/gz/msgs.hh",
 ]
 
-# Custom Ignition Protoc plugin
+# Custom Gazebo Protoc plugin
 cc_binary(
     name = "gz_msgs_gen",
     srcs = [

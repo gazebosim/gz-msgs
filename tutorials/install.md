@@ -2,7 +2,7 @@
 
 Next Tutorial: \ref cppgetstarted
 
-These instructions are for installing only Ignition Messages.
+These instructions are for installing only Gazebo Messages.
 If you're interested in using all the Ignition libraries, check out this [Ignition installation](https://ignitionrobotics.org/docs/latest/install).
 
 We recommend following the Binary Installation instructions to get up and running as quickly and painlessly as possible.
@@ -29,7 +29,7 @@ On macOS, add OSRF packages:
   brew tap osrf/simulation
   ```
 
-Install Ignition Msgs:
+Install Gazebo Msgs:
   ```
   brew install ignition-msgs<#>
   ```
