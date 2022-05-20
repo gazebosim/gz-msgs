@@ -29,4 +29,6 @@ TEST(Deprecated, IgnitionNamespace)
   ignition::msgs::Factory factory;
 }
 
+#undef SUPPRESS_IGNITION_HEADER_DEPRECATION
+
 IGN_UTILS_WARN_RESUME__DEPRECATED_DECLARATION

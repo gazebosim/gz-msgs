@@ -42,7 +42,7 @@ using namespace gz;
 using namespace msgs;
 
 //////////////////////////////////////////////////
-extern "C" IGNITION_MSGS_VISIBLE
+extern "C" GZ_MSGS_VISIBLE
 void cmdMsgInfo(const char *_msg)
 {
   if (_msg)
@@ -67,7 +67,7 @@ void cmdMsgInfo(const char *_msg)
 }
 
 //////////////////////////////////////////////////
-extern "C" IGNITION_MSGS_VISIBLE
+extern "C" GZ_MSGS_VISIBLE
 void cmdMsgList()
 {
   std::vector<std::string> types;
@@ -78,7 +78,7 @@ void cmdMsgList()
 }
 
 //////////////////////////////////////////////////
-extern "C" IGNITION_MSGS_VISIBLE
+extern "C" GZ_MSGS_VISIBLE
 const char *ignitionMsgsVersion()
 {
   return IGNITION_MSGS_VERSION_FULL;

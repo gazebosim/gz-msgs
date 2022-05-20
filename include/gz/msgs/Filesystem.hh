@@ -47,7 +47,7 @@ namespace gz
 
     /// \class DirIter Filesystem.hh
     /// \brief A class for iterating over all items in a directory.
-    class IGNITION_MSGS_VISIBLE DirIter
+    class GZ_MSGS_VISIBLE DirIter
     {
       /// \brief Constructor.
       /// \param[in] _in  Directory to iterate over.

@@ -49,7 +49,7 @@ namespace gz
     /// \brief A factory that generates protobuf message based on a string type.
     /// This class  will also try to load all Protobuf descriptors specified
     /// in the IGN_DESCRIPTOR_PATH environment variable on program start.
-    class IGNITION_MSGS_VISIBLE Factory
+    class GZ_MSGS_VISIBLE Factory
     {
       /// \brief Register a message.
       /// \param[in] _msgType Type of message to register.
@@ -115,13 +115,13 @@ namespace gz
     /// \param[in] _msgtype Message type name.
     /// \param[in] _classname Class name for message.
     #define IGN_REGISTER_STATIC_MSG(_msgtype, _classname) \
-    IGNITION_MSGS_VISIBLE \
+    GZ_MSGS_VISIBLE \
     std::unique_ptr<google::protobuf::Message> New##_classname() \
     { \
       return std::unique_ptr<gz::msgs::_classname>(\
           new gz::msgs::_classname); \
     } \
-    class IGNITION_MSGS_VISIBLE IgnMsg##_classname \
+    class GZ_MSGS_VISIBLE IgnMsg##_classname \
     { \
       public: IgnMsg##_classname() \
       { \

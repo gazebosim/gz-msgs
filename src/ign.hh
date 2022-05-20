@@ -23,13 +23,13 @@
 
 /// \brief External hook to execute 'ign msg -i' from the command line.
 /// \param[in] _msg Message type name.
-extern "C" IGNITION_MSGS_VISIBLE void cmdMsgInfo(const char *_msg);
+extern "C" GZ_MSGS_VISIBLE void cmdMsgInfo(const char *_msg);
 
 /// \brief External hook to execute 'ign msg -l' from the command line.
-extern "C" IGNITION_MSGS_VISIBLE void cmdMsgList();
+extern "C" GZ_MSGS_VISIBLE void cmdMsgList();
 
 /// \brief External hook to read the library version.
 /// \return C-string representing the version. Ex.: 0.1.2
-extern "C" IGNITION_MSGS_VISIBLE const char *ignitionMsgsVersion();
+extern "C" GZ_MSGS_VISIBLE const char *ignitionMsgsVersion();
 
 #endif
