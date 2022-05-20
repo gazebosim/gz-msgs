@@ -31,6 +31,10 @@
 
 #define IGNITION_MSGS_VERSION_HEADER GZ_MSGS_VERSION_HEADER
 
+namespace gz
+{
+}
+
 namespace ignition
 {
   // TODO(CH3): Uncomment this on hard tock to gz
