@@ -27,14 +27,14 @@ release will remove the deprecated code.
 ### Removals
 
 1. `bool use_parent_model_frame` from `axis.proto`.
-    * [Pull Request 112](https://github.com/ignitionrobotics/ign-msgs/pull/112/files)
+    * [Pull Request 112](https://github.com/gazebosim/gz-msgs/pull/112/files)
 
 1. `double force` from `joint_cmd.proto`.
-    * [Pull Request 112](https://github.com/ignitionrobotics/ign-msgs/pull/112/files)
+    * [Pull Request 112](https://github.com/gazebosim/gz-msgs/pull/112/files)
 
 1. `double target`, `double p_gain`, `double i_gain`, `double d_gain`,
    `double i_max`, `double i_min`, `double limit` from `pid.proto`.
-    * [Pull Request 112](https://github.com/ignitionrobotics/ign-msgs/pull/112/files)
+    * [Pull Request 112](https://github.com/gazebosim/gz-msgs/pull/112/files)
 
 ## Ignition Msgs 6.3 to 6.4
 
@@ -42,7 +42,7 @@ release will remove the deprecated code.
 
 1. **particle_emitter.proto**
    + Fields have changed from plain data types to messages.
-       * See [PR 137](https://github.com/ignitionrobotics/ign-msgs/pull/137)
+       * See [PR 137](https://github.com/gazebosim/gz-msgs/pull/137)
 
 ## Ignition Msgs 4.X to 5.X
 

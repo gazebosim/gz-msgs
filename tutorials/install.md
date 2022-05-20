@@ -90,7 +90,7 @@ sudo make uninstall
 
 1. Clone the repository
   ```
-  git clone https://github.com/ignitionrobotics/ign-msgs -b ign-msgs<#>
+  git clone https://github.com/gazebosim/gz-msgs -b ign-msgs<#>
   ```
   Be sure to replace `<#>` with a number value, such as 1 or 2, depending on
   which version you need.
@@ -126,7 +126,7 @@ sudo make uninstall
 
 ### Prerequisites
 
-First, follow the [ign-cmake](https://github.com/ignitionrobotics/ign-cmake) tutorial for installing Conda, Visual Studio, CMake, etc., prerequisites, and creating a Conda environment.
+First, follow the [ign-cmake](https://github.com/gazebosim/gz-cmake) tutorial for installing Conda, Visual Studio, CMake, etc., prerequisites, and creating a Conda environment.
 
 Navigate to `condabin` if necessary to use the `conda` command (i.e., if Conda is not in your `PATH` environment variable. You can find the location of `condabin` in Anaconda Prompt, `where conda`).
 
@@ -159,7 +159,7 @@ This assumes you have created and activated a Conda environment while installing
 1. Navigate to where you would like to build the library, and clone the repository.
   ```
   # Optionally, append `-b ign-msgs#` (replace # with a number) to check out a specific version
-  git clone https://github.com/ignitionrobotics/ign-msgs.git
+  git clone https://github.com/gazebosim/gz-msgs.git
   ```
 
 2. Configure and build
@@ -190,7 +190,7 @@ You can also generate the documentation from a clone of this repository by follo
 
 2. Clone the repository
   ```
-  git clone https://github.com/ignitionrobotics/ign-cmake
+  git clone https://github.com/gazebosim/gz-cmake
   ```
 
 3. Configure and build the documentation.
