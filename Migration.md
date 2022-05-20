@@ -10,6 +10,8 @@ release will remove the deprecated code.
 1. **SuppressWarnings.hh** is deprecated and isn't part of `msgs.hh` anymore.
    Use ign-utils instead.
 2. The `ignition` namespace is deprecated and will be removed in future versions.  Use `gz` instead.
+3. Header files under `ignition/...` are deprecated and will be removed in future versions.
+   Use `gz/...` instead.
 
 ## Ignition Msgs 8.1 to 8.2
 
