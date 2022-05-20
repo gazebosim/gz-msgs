@@ -39,7 +39,7 @@ namespace gz
   namespace msgs
   {
     // Inline bracket to help doxygen filtering.
-    inline namespace IGNITION_MSGS_VERSION_NAMESPACE {
+    inline namespace GZ_MSGS_VERSION_NAMESPACE {
     //
     /// \typedef FactoryFn
     /// \brief Prototype for message factory generation
