@@ -33,7 +33,7 @@ namespace gz
     enum FilesystemWarningOp
     {
       /// \brief Errors that occur during filesystem manipulation should be
-      /// logged as warnings using ignwarn. (Recommended)
+      /// logged as warnings using gzwarn. (Recommended)
       FSWO_LOG_WARNINGS = 0,
 
       /// \brief Errors that occur during filesystem manipulation should not be
