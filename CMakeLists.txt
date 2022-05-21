@@ -71,6 +71,9 @@ set(IGN_MATH_VER ${ignition-math6_VERSION_MAJOR})
 #--------------------------------------
 # Find if ign command is available
 find_program(HAVE_IGN_TOOLS ign)
+if (HAVE_IGN_TOOLS)
+  set(IGN_TOOLS_VER 1)
+endif()
 
 #--------------------------------------
 # Find Tinyxml2

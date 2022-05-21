@@ -15,6 +15,7 @@
  *
 */
 
+#include <fstream>
 #include <string>
 #include <gtest/gtest.h>
 #include <ignition/msgs/config.hh>
@@ -87,6 +88,30 @@ TEST(CmdLine, MsgInfo)
     "--force-version " + g_version);
   EXPECT_NE(std::string::npos, output.find("message WorldControl {"))
     << output;
+}
+
+/////////////////////////////////////////////////
+TEST(CmdLine, MsgHelpVsCompletionFlags)
+{
+  // Flags in help message
+  auto output = custom_exec_str("ign msg --help --force-version " + g_version);
+  EXPECT_NE(std::string::npos, output.find("--info")) << output;
+  EXPECT_NE(std::string::npos, output.find("--list")) << output;
+  EXPECT_NE(std::string::npos, output.find("--help")) << output;
+  EXPECT_NE(std::string::npos, output.find("--force-version")) << output;
+  EXPECT_NE(std::string::npos, output.find("--versions")) << output;
+
+  // Flags in bash completion
+  std::ifstream scriptFile(std::string(PROJECT_SOURCE_PATH) +
+    "/src/cmd/msgs.bash_completion.sh");
+  std::string script((std::istreambuf_iterator<char>(scriptFile)),
+    std::istreambuf_iterator<char>());
+
+  EXPECT_NE(std::string::npos, script.find("--info")) << script;
+  EXPECT_NE(std::string::npos, script.find("--list")) << script;
+  EXPECT_NE(std::string::npos, script.find("--help")) << script;
+  EXPECT_NE(std::string::npos, script.find("--force-version")) << script;
+  EXPECT_NE(std::string::npos, script.find("--versions")) << script;
 }
 
 /////////////////////////////////////////////////
