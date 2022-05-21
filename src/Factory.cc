@@ -219,12 +219,12 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
   // Convert "gz.msgs." to "gz_msgs.".
   if (_msgType.find("gz.msgs.") == 0)
   {
-    type = "gz_msgs." + _msgType.substr(14);
+    type = "gz_msgs." + _msgType.substr(8);
   }
   // Convert ".gz.msgs." to "gz_msgs.".
   else if (_msgType.find(".gz.msgs.") == 0)
   {
-    type = "gz_msgs." + _msgType.substr(15);
+    type = "gz_msgs." + _msgType.substr(9);
   }
   else
   {
