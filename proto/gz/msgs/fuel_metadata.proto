@@ -100,7 +100,7 @@ message FuelMetadata
 
   /// \brief Categories associated with this resource. The set of
   /// Fuel categories are available at
-  /// https://fuel.gazebosim.org/1.0/categories.
+  /// https://fuel.ignitionrobotics.org/1.0/categories.
   ///
   /// A limited number of categories can be assigned to a Fuel resource.
   message Categories
