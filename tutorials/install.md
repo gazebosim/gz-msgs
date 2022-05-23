@@ -3,7 +3,7 @@
 Next Tutorial: \ref cppgetstarted
 
 These instructions are for installing only Gazebo Messages.
-If you're interested in using all the Ignition libraries, check out this [Ignition installation](https://ignitionrobotics.org/docs/latest/install).
+If you're interested in using all the Ignition libraries, check out this [Ignition installation](https://gazebosim.org/docs/latest/install).
 
 We recommend following the Binary Installation instructions to get up and running as quickly and painlessly as possible.
 
@@ -179,7 +179,7 @@ This assumes you have created and activated a Conda environment while installing
 # Documentation
 
 API documentation and tutorials can be accessed at
-[https://ignitionrobotics.org/libs/cmake](https://ignitionrobotics.org/libs/cmake)
+[https://gazebosim.org/libs/cmake](https://gazebosim.org/libs/cmake)
 
 You can also generate the documentation from a clone of this repository by following these steps.
 
@@ -209,16 +209,16 @@ You can also generate the documentation from a clone of this repository by follo
 
 ## Documentation Release
 
-1. Upload documentation to ignitionrobotics.org.
+1. Upload documentation to gazebosim.org.
   ```
   cd build
   sh upload.sh
   ```
 
-2. If you're creating a new release, then tell ignitionrobotics.org about
+2. If you're creating a new release, then tell gazebosim.org about
    the new version. For example:
   ```
-  curl -k -X POST -d '{"libName":"msgs", "version":"1.0.0", "releaseDate":"2017-10-09T12:10:13+02:00","password":"secret"}' https://api    .ignitionrobotics.org/1.0/versions
+  curl -k -X POST -d '{"libName":"msgs", "version":"1.0.0", "releaseDate":"2017-10-09T12:10:13+02:00","password":"secret"}' https://api    .gazebosim.org/1.0/versions
   ```
 
 ## Testing
@@ -264,4 +264,4 @@ To run test coverage:
   firefox coverage/index.html
   ```
 
-See the [Writing Tests section of the Ignition documentation](https://ignitionrobotics.org/docs/all/contributing#writing-tests) for help creating or modifying tests.
+See the [Writing Tests section of the Ignition documentation](https://gazebosim.org/docs/all/contributing#writing-tests) for help creating or modifying tests.

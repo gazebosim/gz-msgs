@@ -14,12 +14,12 @@ Ubuntu Focal | [![Build Status](https://build.osrfoundation.org/buildStatus/icon
 Homebrew      | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=ignition_msgs-ci-main-homebrew-amd64)](https://build.osrfoundation.org/job/ignition_msgs-ci-main-homebrew-amd64)
 Windows       | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-ci-win)](https://build.osrfoundation.org/job/gz_msgs-ci-win)
 
-Gazebo Messages is a component in the [Ignition](http://ignitionrobotics.org)
+Gazebo Messages is a component in the [Ignition](http://gazebosim.org)
 framework, a set of libraries designed to rapidly develop robot applications.
 
 ## Installation
 
-See the [installation tutorial](https://ignitionrobotics.org/api/msgs/7.0/install.html).
+See the [installation tutorial](https://gazebosim.org/api/msgs/7.0/install.html).
 
 ## Known issue of command line tools
 
