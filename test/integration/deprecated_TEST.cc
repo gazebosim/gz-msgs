@@ -27,6 +27,7 @@
 TEST(Deprecated, IgnitionNamespace)
 {
   ignition::msgs::Factory factory;
+  (void)factory;
 }
 
 IGN_UTILS_WARN_RESUME__DEPRECATED_DECLARATION
