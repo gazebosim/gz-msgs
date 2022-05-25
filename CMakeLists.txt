@@ -38,10 +38,18 @@ ign_configure_project(
 # CMake cache variable:
 # > cmake -GZ_MSGS_GEN_EXECUTABLE=<host_install_prefix>/bin/gz_msgs_gen ..
 
-option(
-  INSTALL_GZ_MSGS_GEN_EXECUTABLE
-  "Install the gz_msgs_gen executable."
-  OFF)
+# TODO(CH3): Deprecated. Remove IGN_MSGS CMake variables on tick-tock.
+if(INSTALL_IGN_MSGS_GEN_EXECUTABLE)
+  set(INSTALL_GZ_MSGS_GEN_EXECUTABLE INSTALL_IGN_MSGS_GEN_EXECUTABLE)
+else()
+  option(
+    INSTALL_GZ_MSGS_GEN_EXECUTABLE
+    "Install the gz_msgs_gen executable."
+    OFF)
+  set(INSTALL_IGN_MSGS_GEN_EXECUTABLE INSTALL_GZ_MSGS_GEN_EXECUTABLE)
+endif()
+
+mark_as_advanced(INSTALL_IGN_MSGS_GEN_EXECUTABLE)
 mark_as_advanced(INSTALL_GZ_MSGS_GEN_EXECUTABLE)
 
 set(
@@ -50,6 +58,14 @@ set(
   CACHE STRING
   "gz_msgs_gen executable used in the gz_msgs_protoc CMake function.")
 mark_as_advanced(GZ_MSGS_GEN_EXECUTABLE)
+
+# TODO(CH3): Deprecated. Remove IGN_MSGS CMake variables on tick-tock.
+set(
+  IGN_MSGS_GEN_EXECUTABLE
+  "$<TARGET_FILE:gz_msgs_gen>"
+  CACHE STRING
+  "gz_msgs_gen executable used in the gz_msgs_protoc CMake function.")
+mark_as_advanced(IGN_MSGS_GEN_EXECUTABLE)
 
 #============================================================================
 # Search for project-specific dependencies
