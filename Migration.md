@@ -9,8 +9,10 @@ release will remove the deprecated code.
 
 1. **SuppressWarnings.hh** is deprecated and isn't part of `msgs.hh` anymore.
    Use ign-utils instead.
-2. All references to `ignition` should be replaced with `gz`, including msg packages, headers,
-   and lib names.
+2. Header files under `ignition/...` are deprecated and will be removed in future versions.
+   Use `gz/...` instead.
+3. Protobuf messages and packages will no longer use `ignition.msgs`, use `gz.msgs` instead
+4. `INSTALL_IGN_MSGS_GEN_EXECUTABLE` and `IGN_MSGS_GEN_EXECUTABLE` are deprecated and will be removed. Use `INSTALL_GZ_MSGS_GEN_EXECUTABLE` and `GZ_MSGS_GEN_EXECUTABLE` instead.
 
 ## Gazebo Msgs 8.1 to 8.2
 
