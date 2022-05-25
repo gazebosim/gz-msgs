@@ -40,6 +40,7 @@ ign_configure_project(
 
 # TODO(CH3): Deprecated. Remove IGN_MSGS CMake variables on tick-tock.
 if(INSTALL_IGN_MSGS_GEN_EXECUTABLE)
+  message(WARNING "INSTALL_IGN_MSGS_GEN_EXECUTABLE is deprecated, use INSTALL_GZ_MSGS_GEN_EXECUTABLE instead")
   set(INSTALL_GZ_MSGS_GEN_EXECUTABLE INSTALL_IGN_MSGS_GEN_EXECUTABLE)
 else()
   option(
