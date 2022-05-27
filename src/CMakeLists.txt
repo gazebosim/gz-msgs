@@ -5,7 +5,7 @@ target_link_libraries(ign_msgs_gen
   protobuf::libprotoc
   protobuf::libprotobuf)
 target_include_directories(ign_msgs_gen PRIVATE ${PROTOBUF_INCLUDE_DIR})
-target_compile_features(ign_msgs_gen PRIVATE ${IGN_CXX_11_FEATURES})
+set_property(TARGET ign_msgs_gen PROPERTY CXX_STANDARD 17)
 
 if (UNIX)
   target_link_libraries(ign_msgs_gen pthread)
@@ -15,6 +15,8 @@ if(INSTALL_IGN_MSGS_GEN_EXECUTABLE)
   set_target_properties(ign_msgs_gen PROPERTIES VERSION ${PROJECT_VERSION_FULL})
   install(TARGETS ign_msgs_gen DESTINATION ${IGN_BIN_INSTALL_DIR})
 endif()
+
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
 ##################################################
 # A function that calls protoc on a protobuf file
@@ -45,10 +47,6 @@ function(ign_msgs_protoc)
   set(protoc_args)
   set(output_files)
 
-  foreach(proto_path ${ign_msgs_protoc_PROTO_PATH})
-    list(APPEND protoc_args "--proto_path=${proto_path}")
-  endforeach()
-
   set(proto_package_dir ".")
   if(ign_msgs_protoc_PROTO_PACKAGE)
     string(REPLACE "." "/" proto_package_dir ${ign_msgs_protoc_PROTO_PACKAGE})
@@ -56,14 +54,14 @@ function(ign_msgs_protoc)
 
   if(ign_msgs_protoc_GENERATE_CPP)
     set(output_header "${ign_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.h")
+    set(output_detail_header "${ign_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/detail/${FIL_WE}.pb.h")
     set(output_source "${ign_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.cc")
     list(APPEND ${ign_msgs_protoc_OUTPUT_CPP_HH_VAR} ${output_header})
+    list(APPEND ${ign_msgs_protoc_OUTPUT_CPP_HH_VAR} ${output_detail_header})
     list(APPEND ${ign_msgs_protoc_OUTPUT_CPP_CC_VAR} ${output_source})
     list(APPEND output_files ${output_header})
+    list(APPEND output_files ${output_detail_header})
     list(APPEND output_files ${output_source})
-    list(APPEND protoc_args "--plugin=protoc-gen-ignmsgs=${IGN_MSGS_GEN_EXECUTABLE}")
-    list(APPEND protoc_args "--cpp_out=dllexport_decl=IGNITION_MSGS_VISIBLE:${ign_msgs_protoc_OUTPUT_CPP_DIR}")
-    list(APPEND protoc_args "--ignmsgs_out" "${ign_msgs_protoc_OUTPUT_CPP_DIR}")
     set(${ign_msgs_protoc_OUTPUT_CPP_HH_VAR} ${${ign_msgs_protoc_OUTPUT_CPP_HH_VAR}} PARENT_SCOPE)
     set(${ign_msgs_protoc_OUTPUT_CPP_CC_VAR} ${${ign_msgs_protoc_OUTPUT_CPP_CC_VAR}} PARENT_SCOPE)
   endif()
@@ -83,18 +81,25 @@ function(ign_msgs_protoc)
   #endforeach()
 
   add_custom_command(
-    OUTPUT
-      ${output_files}
-    COMMAND
-      ${ign_msgs_protoc_PROTOC_EXEC}
-    ARGS
-      ${protoc_args}
-      ${ABS_FIL}
+    OUTPUT ${output_files}
+    COMMAND Python3::Interpreter
+    ARGS tools/gz_msgs_generate
+      --protoc-exec "$<TARGET_FILE:${ign_msgs_protoc_PROTOC_EXEC}>"
+      --ign-generator-bin "$<TARGET_FILE:ign_msgs_gen>"
+      --generate-cpp "${ign_msgs_protoc_GENERATE_CPP}"
+      --generate-ruby "${ign_msgs_protoc_GENERATE_RUBY}"
+      --output-cpp-path "${ign_msgs_protoc_OUTPUT_CPP_DIR}"
+      --output-ruby-path "${ign_msgs_protoc_OUTPUT_RUBY_DIR}"
+      --proto-path "${ign_msgs_protoc_PROTO_PATH}"
+      --input-path "${ABS_FIL}"
     DEPENDS
       ${ABS_FIL}
       ign_msgs_gen
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     COMMENT "Running protoc on ${ign_msgs_protoc_INPUT_PROTO}"
-    VERBATIM)
+    VERBATIM
+  )
+
 endfunction()
 
 
@@ -207,9 +212,6 @@ ign_create_core_library(SOURCES
   ${PROJECT_SOURCE_DIR}/src/Utility.cc
   CXX_STANDARD 17)
 
-target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
-  PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
-
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
     protobuf::libprotobuf
@@ -218,12 +220,18 @@ target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
     TINYXML2::TINYXML2
 )
 
+if (${Protobuf_VERSION} VERSION_LESS 3.12.0)
+  # Older versions of protobuf (eg on focal) will throw up float-equal errors
+  # Fixed via: https://github.com/protocolbuffers/protobuf/pull/6000
+  target_compile_options(${PROJECT_LIBRARY_TARGET_NAME} PRIVATE -Wno-float-equal)
+endif()
+
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   SYSTEM PUBLIC $<TARGET_PROPERTY:protobuf::libprotobuf,INTERFACE_INCLUDE_DIRECTORIES>)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   # Disable warning in generated *.pb.cc code
-  target_compile_options(${PROJECT_LIBRARY_TARGET_NAME} PRIVATE -Wno-extended-offsetof)
+  target_compile_options(${PROJECT_LIBRARY_TARGET_NAME} PRIVATE -Wno-invalid-offsetof)
 endif()
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
