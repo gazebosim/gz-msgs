@@ -16,7 +16,7 @@ licenses(["notice"])
 
 exports_files(["LICENSE"])
 
-MSGS_DIR = "./ign_msgs/"
+MSGS_DIR = "./gz_msgs/"
 
 # Generates config.hh based on the version numbers in CMake code.
 cmake_configure_file(
@@ -48,7 +48,7 @@ cc_library(
         ],
         deps = [
             ":test_utils",
-            IGNITION_ROOT + "ign_msgs",
+            IGNITION_ROOT + "gz_msgs",
             "@gtest",
             "@gtest//:gtest_main",
         ],

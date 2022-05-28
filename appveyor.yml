@@ -12,15 +12,15 @@ install:
   - vcpkg install protobuf
   - vcpkg install tinyxml2
   # ign-cmake
-  - git clone https://github.com/ignitionrobotics/ign-cmake -b ign-cmake3
-  - cd ign-cmake
+  - git clone https://github.com/gazebosim/gz-cmake -b main
+  - cd gz-cmake
   - md build
   - cd build
   - cmake .. -DBUILD_TESTING=Off
   - cmake --build . --target INSTALL
   - cd ../..
   # ign-math
-  - git clone https://github.com/ignitionrobotics/ign-math -b main
+  - git clone https://github.com/gazebosim/gz-math -b main
   - cd ign-math
   - md build
   - cd build

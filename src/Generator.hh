@@ -15,8 +15,8 @@
  *
 */
 
-#ifndef IGNITION_MSGS_GENERATOR_HH_
-#define IGNITION_MSGS_GENERATOR_HH_
+#ifndef GZ_MSGS_GENERATOR_HH_
+#define GZ_MSGS_GENERATOR_HH_
 
 #include <google/protobuf/compiler/code_generator.h>
 #include <string>

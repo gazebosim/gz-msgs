@@ -24,7 +24,7 @@
 #include <gz/msgs/Export.hh>
 #include <gz/utils/SuppressWarning.hh>
 
-namespace ignition
+namespace gz
 {
   namespace msgs
   {
@@ -33,7 +33,7 @@ namespace ignition
     enum FilesystemWarningOp
     {
       /// \brief Errors that occur during filesystem manipulation should be
-      /// logged as warnings using ignwarn. (Recommended)
+      /// logged as warnings using gzwarn. (Recommended)
       FSWO_LOG_WARNINGS = 0,
 
       /// \brief Errors that occur during filesystem manipulation should not be
@@ -47,7 +47,7 @@ namespace ignition
 
     /// \class DirIter Filesystem.hh
     /// \brief A class for iterating over all items in a directory.
-    class IGNITION_MSGS_VISIBLE DirIter
+    class GZ_MSGS_VISIBLE DirIter
     {
       /// \brief Constructor.
       /// \param[in] _in  Directory to iterate over.

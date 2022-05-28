@@ -16,3 +16,4 @@
  */
 
 #include <gz/msgs/test_config.h>
+#include <ignition/msgs/config.hh>
