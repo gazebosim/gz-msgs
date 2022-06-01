@@ -31,7 +31,7 @@
 #include "gz/msgs/config.hh"
 #include "gz/msgs/detail/PointCloudPackedUtils.hh"
 
-namespace ignition
+namespace gz
 {
 namespace msgs
 {
@@ -40,8 +40,8 @@ namespace msgs
 /// E.g, you create your message and reserve space for data as follows:
 ///
 /// \code{.cpp}
-/// ignition::msgs::PointCloudPacked pcMsg;
-/// ignition::msgs::InitPointCloudPacked(pcMsg, "my_new_frame", false,
+/// gz::msgs::PointCloudPacked pcMsg;
+/// gz::msgs::InitPointCloudPacked(pcMsg, "my_new_frame", false,
 ///     {{"a", PointCloudPacked::Field::FLOAT32}});
 /// pcMsg.mutable_data()->resize(numPts * pcMsg.point_step());
 /// \endcode
@@ -49,7 +49,7 @@ namespace msgs
 /// For iterating over "a", you do :
 ///
 /// \code{.cpp}
-/// ignition::msgs::PointCloudPackedIterator<float> iterA(pcMsg, "a");
+/// gz::msgs::PointCloudPackedIterator<float> iterA(pcMsg, "a");
 /// \endcode
 ///
 /// And then access it through iterA[0] or *iterA.
@@ -57,10 +57,10 @@ namespace msgs
 /// For iterating over RGBA, you can access each element as uint8_t:
 ///
 /// \code{.cpp}
-/// ignition::msgs::PointCloudPackedIterator<uint8_t> iterR(pcMsg, "r");
-/// ignition::msgs::PointCloudPackedIterator<uint8_t> iterG(pcMsg, "g");
-/// ignition::msgs::PointCloudPackedIterator<uint8_t> iterB(pcMsg, "b");
-/// ignition::msgs::PointCloudPackedIterator<uint8_t> iterA(pcMsg, "a");
+/// gz::msgs::PointCloudPackedIterator<uint8_t> iterR(pcMsg, "r");
+/// gz::msgs::PointCloudPackedIterator<uint8_t> iterG(pcMsg, "g");
+/// gz::msgs::PointCloudPackedIterator<uint8_t> iterB(pcMsg, "b");
+/// gz::msgs::PointCloudPackedIterator<uint8_t> iterA(pcMsg, "a");
 /// \endcode
 ///
 /// \tparam FieldType Type of the element being iterated upon
@@ -99,9 +99,9 @@ class PointCloudPackedConstIterator
 };
 
 /// \brief Return the size of a datatype (which is an enum of
-/// ignition::msgs::PointCloudPacked::Field) in bytes.
+/// gz::msgs::PointCloudPacked::Field) in bytes.
 /// \param[in] _dataType One of the enums of
-///            ignition::msgs::PointCloudPacked::Field
+///            gz::msgs::PointCloudPacked::Field
 /// \return Size in bytes. Returns -1 if the type is unknown.
 inline int sizeOfPointField(
     PointCloudPacked::Field::DataType _dataType)

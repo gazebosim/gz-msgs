@@ -31,23 +31,23 @@
 #include <string>
 #include <vector>
 
-#include <ignition/msgs/config.hh>
-#include <ignition/msgs/Factory.hh>
+#include <gz/msgs/config.hh>
+#include <gz/msgs/Factory.hh>
 
 #ifdef _MSC_VER
 # pragma warning(disable: 4503)
 #endif
 
-using namespace ignition;
+using namespace gz;
 using namespace msgs;
 
 //////////////////////////////////////////////////
-extern "C" IGNITION_MSGS_VISIBLE
+extern "C" GZ_MSGS_VISIBLE
 void cmdMsgInfo(const char *_msg)
 {
   if (_msg)
   {
-    auto msg = ignition::msgs::Factory::New(_msg);
+    auto msg = gz::msgs::Factory::New(_msg);
     if (msg)
     {
       auto descriptor = msg->GetDescriptor();
@@ -67,19 +67,19 @@ void cmdMsgInfo(const char *_msg)
 }
 
 //////////////////////////////////////////////////
-extern "C" IGNITION_MSGS_VISIBLE
+extern "C" GZ_MSGS_VISIBLE
 void cmdMsgList()
 {
   std::vector<std::string> types;
-  ignition::msgs::Factory::Types(types);
+  gz::msgs::Factory::Types(types);
 
   for (auto const &type : types)
     std::cout << type << std::endl;
 }
 
 //////////////////////////////////////////////////
-extern "C" IGNITION_MSGS_VISIBLE
+extern "C" GZ_MSGS_VISIBLE
 const char *ignitionMsgsVersion()
 {
-  return IGNITION_MSGS_VERSION_FULL;
+  return GZ_MSGS_VERSION_FULL;
 }

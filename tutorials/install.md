@@ -2,8 +2,8 @@
 
 Next Tutorial: \ref cppgetstarted
 
-These instructions are for installing only Ignition Messages.
-If you're interested in using all the Ignition libraries, check out this [Ignition installation](https://ignitionrobotics.org/docs/latest/install).
+These instructions are for installing only Gazebo Messages.
+If you're interested in using all the Ignition libraries, check out this [Ignition installation](https://gazebosim.org/docs/latest/install).
 
 We recommend following the Binary Installation instructions to get up and running as quickly and painlessly as possible.
 
@@ -29,7 +29,7 @@ On macOS, add OSRF packages:
   brew tap osrf/simulation
   ```
 
-Install Ignition Msgs:
+Install Gazebo Msgs:
   ```
   brew install ignition-msgs<#>
   ```
@@ -90,7 +90,7 @@ sudo make uninstall
 
 1. Clone the repository
   ```
-  git clone https://github.com/ignitionrobotics/ign-msgs -b ign-msgs<#>
+  git clone https://github.com/gazebosim/gz-msgs -b ign-msgs<#>
   ```
   Be sure to replace `<#>` with a number value, such as 1 or 2, depending on
   which version you need.
@@ -126,7 +126,7 @@ sudo make uninstall
 
 ### Prerequisites
 
-First, follow the [ign-cmake](https://github.com/ignitionrobotics/ign-cmake) tutorial for installing Conda, Visual Studio, CMake, etc., prerequisites, and creating a Conda environment.
+First, follow the [ign-cmake](https://github.com/gazebosim/gz-cmake) tutorial for installing Conda, Visual Studio, CMake, etc., prerequisites, and creating a Conda environment.
 
 Navigate to `condabin` if necessary to use the `conda` command (i.e., if Conda is not in your `PATH` environment variable. You can find the location of `condabin` in Anaconda Prompt, `where conda`).
 
@@ -159,7 +159,7 @@ This assumes you have created and activated a Conda environment while installing
 1. Navigate to where you would like to build the library, and clone the repository.
   ```
   # Optionally, append `-b ign-msgs#` (replace # with a number) to check out a specific version
-  git clone https://github.com/ignitionrobotics/ign-msgs.git
+  git clone https://github.com/gazebosim/gz-msgs.git
   ```
 
 2. Configure and build
@@ -179,7 +179,7 @@ This assumes you have created and activated a Conda environment while installing
 # Documentation
 
 API documentation and tutorials can be accessed at
-[https://ignitionrobotics.org/libs/cmake](https://ignitionrobotics.org/libs/cmake)
+[https://gazebosim.org/libs/cmake](https://gazebosim.org/libs/cmake)
 
 You can also generate the documentation from a clone of this repository by following these steps.
 
@@ -190,7 +190,7 @@ You can also generate the documentation from a clone of this repository by follo
 
 2. Clone the repository
   ```
-  git clone https://github.com/ignitionrobotics/ign-cmake
+  git clone https://github.com/gazebosim/gz-cmake
   ```
 
 3. Configure and build the documentation.
@@ -209,16 +209,16 @@ You can also generate the documentation from a clone of this repository by follo
 
 ## Documentation Release
 
-1. Upload documentation to ignitionrobotics.org.
+1. Upload documentation to gazebosim.org.
   ```
   cd build
   sh upload.sh
   ```
 
-2. If you're creating a new release, then tell ignitionrobotics.org about
+2. If you're creating a new release, then tell gazebosim.org about
    the new version. For example:
   ```
-  curl -k -X POST -d '{"libName":"msgs", "version":"1.0.0", "releaseDate":"2017-10-09T12:10:13+02:00","password":"secret"}' https://api    .ignitionrobotics.org/1.0/versions
+  curl -k -X POST -d '{"libName":"msgs", "version":"1.0.0", "releaseDate":"2017-10-09T12:10:13+02:00","password":"secret"}' https://api    .gazebosim.org/1.0/versions
   ```
 
 ## Testing
@@ -264,4 +264,4 @@ To run test coverage:
   firefox coverage/index.html
   ```
 
-See the [Writing Tests section of the Ignition documentation](https://ignitionrobotics.org/docs/all/contributing#writing-tests) for help creating or modifying tests.
+See the [Writing Tests section of the Ignition documentation](https://gazebosim.org/docs/all/contributing#writing-tests) for help creating or modifying tests.

@@ -5,12 +5,16 @@ Deprecated code produces compile-time warnings. These warning serve as
 notification to users that their code should be upgraded. The next major
 release will remove the deprecated code.
 
-## Ignition Msgs 8.X to 9.X
+## Gazebo Msgs 8.X to 9.X
 
 1. **SuppressWarnings.hh** is deprecated and isn't part of `msgs.hh` anymore.
    Use ign-utils instead.
+2. Header files under `ignition/...` are deprecated and will be removed in future versions.
+   Use `gz/...` instead.
+3. Protobuf messages and packages will no longer use `ignition.msgs`, use `gz.msgs` instead
+4. `INSTALL_IGN_MSGS_GEN_EXECUTABLE` and `IGN_MSGS_GEN_EXECUTABLE` are deprecated and will be removed. Use `INSTALL_GZ_MSGS_GEN_EXECUTABLE` and `GZ_MSGS_GEN_EXECUTABLE` instead.
 
-## Ignition Msgs 8.1 to 8.2
+## Gazebo Msgs 8.1 to 8.2
 
 ### Modifications
 
@@ -20,29 +24,29 @@ release will remove the deprecated code.
 1. **gps_sensor.proto**
     + Recommend the use of **navsat_sensor.proto** instead. The GPS message will be deprecated in the future.
 
-## Ignition Msgs 6.X to 7.X
+## Gazebo Msgs 6.X to 7.X
 
 ### Removals
 
 1. `bool use_parent_model_frame` from `axis.proto`.
-    * [Pull Request 112](https://github.com/ignitionrobotics/ign-msgs/pull/112/files)
+    * [Pull Request 112](https://github.com/gazebosim/gz-msgs/pull/112/files)
 
 1. `double force` from `joint_cmd.proto`.
-    * [Pull Request 112](https://github.com/ignitionrobotics/ign-msgs/pull/112/files)
+    * [Pull Request 112](https://github.com/gazebosim/gz-msgs/pull/112/files)
 
 1. `double target`, `double p_gain`, `double i_gain`, `double d_gain`,
    `double i_max`, `double i_min`, `double limit` from `pid.proto`.
-    * [Pull Request 112](https://github.com/ignitionrobotics/ign-msgs/pull/112/files)
+    * [Pull Request 112](https://github.com/gazebosim/gz-msgs/pull/112/files)
 
-## Ignition Msgs 6.3 to 6.4
+## Gazebo Msgs 6.3 to 6.4
 
 ### Modifications
 
 1. **particle_emitter.proto**
    + Fields have changed from plain data types to messages.
-       * See [PR 137](https://github.com/ignitionrobotics/ign-msgs/pull/137)
+       * See [PR 137](https://github.com/gazebosim/gz-msgs/pull/137)
 
-## Ignition Msgs 4.X to 5.X
+## Gazebo Msgs 4.X to 5.X
 
 ### Modifications
 
@@ -52,7 +56,7 @@ release will remove the deprecated code.
 1. **axis.proto**
     + The `use_parent_model_frame` field is deprecated, use `xyz_expressed_in` instead. Setting `xyz_expressed_in = "__model__"` is equivalent to`use_parent_model_frame = true` and leaving `xyz_expressed_in` empty is equivalent to `use_parent_model_frame = false`
 
-## Ignition Msgs 3.X to 4.X
+## Gazebo Msgs 3.X to 4.X
 
 ### Modifications
 
@@ -82,9 +86,9 @@ release will remove the deprecated code.
 
 ### Removals
 
-1.  **include/ignition/msgs/ign.hh** is no longer installed.
+1.  **include/gz/msgs/ign.hh** is no longer installed.
 
-## Ignition Msgs 2.X to 3.X
+## Gazebo Msgs 2.X to 3.X
 
 ### Additions
 
@@ -128,16 +132,16 @@ release will remove the deprecated code.
 ### Removals
 
 
-## Ignition Msgs 2.0 to 2.1
+## Gazebo Msgs 2.0 to 2.1
 
 ### Modifications
 
 1. Use `ignition-math6` instead of `ignition-math5`.
-  This implies an indirect dependency on `ignition-cmake2` and cmake 3.10.2,
-  which are not available on Ubuntu Xenial, so migration to Ubuntu Bionic may
-  be required.
+    This implies an indirect dependency on `ignition-cmake2` and cmake 3.10.2,
+    which are not available on Ubuntu Xenial, so migration to Ubuntu Bionic may
+    be required.
 
-## Ignition Msgs 1.X to 2.0
+## Gazebo Msgs 1.X to 2.0
 
 ### Additions
 
