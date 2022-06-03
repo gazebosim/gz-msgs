@@ -15,6 +15,7 @@
  *
 */
 
+#include <filesystem>
 #include <fstream>
 #include <string>
 #include <gtest/gtest.h>
@@ -102,8 +103,10 @@ TEST(CmdLine, MsgHelpVsCompletionFlags)
   EXPECT_NE(std::string::npos, output.find("--versions")) << output;
 
   // Flags in bash completion
-  std::ifstream scriptFile(std::string(PROJECT_SOURCE_PATH) +
-    "/src/cmd/msgs.bash_completion.sh");
+  std::filesystem::path scriptPath = PROJECT_SOURCE_PATH;
+  scriptPath = scriptPath / "src" / "cmd" / "msgs.bash_completion.sh";
+  std::ifstream scriptFile(scriptPath);
+
   std::string script((std::istreambuf_iterator<char>(scriptFile)),
     std::istreambuf_iterator<char>());
 
