@@ -135,10 +135,10 @@ namespace gz
                   << _sc.surface_model()
                   << "]. Using default." << std::endl;
       }
-      out.SetLatitudeReference(IGN_DTOR(_sc.latitude_deg()));
-      out.SetLongitudeReference(IGN_DTOR(_sc.longitude_deg()));
+      out.SetLatitudeReference(GZ_DTOR(_sc.latitude_deg()));
+      out.SetLongitudeReference(GZ_DTOR(_sc.longitude_deg()));
       out.SetElevationReference(_sc.elevation());
-      out.SetHeadingOffset(IGN_DTOR(_sc.heading_deg()));
+      out.SetHeadingOffset(GZ_DTOR(_sc.heading_deg()));
       return out;
     }
 

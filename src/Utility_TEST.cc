@@ -63,7 +63,7 @@ TEST(UtilityTest, ConvertMsgsVector2dToMath)
 TEST(UtilityTest, ConvertMathQuaterionToMsgs)
 {
   msgs::Quaternion msg =
-    msgs::Convert(math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI));
+    msgs::Convert(math::Quaterniond(GZ_PI * 0.25, GZ_PI * 0.5, GZ_PI));
 
   EXPECT_TRUE(math::equal(msg.x(), -0.65328148243818818));
   EXPECT_TRUE(math::equal(msg.y(), 0.27059805007309856));
@@ -75,7 +75,7 @@ TEST(UtilityTest, ConvertMathQuaterionToMsgs)
 TEST(UtilityTest, ConvertMsgsQuaterionToMath)
 {
   msgs::Quaternion msg =
-    msgs::Convert(math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI));
+    msgs::Convert(math::Quaterniond(GZ_PI * 0.25, GZ_PI * 0.5, GZ_PI));
   math::Quaterniond v = msgs::Convert(msg);
 
   // TODO(anyone): to real unit test move math::equal to EXPECT_DOUBLE_EQ
@@ -90,7 +90,7 @@ TEST(UtilityTest, ConvertPoseMathToMsgs)
 {
   msgs::Pose msg = msgs::Convert(math::Pose3d(
         math::Vector3d(1, 2, 3),
-        math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI)));
+        math::Quaterniond(GZ_PI * 0.25, GZ_PI * 0.5, GZ_PI)));
 
   EXPECT_DOUBLE_EQ(1, msg.position().x());
   EXPECT_DOUBLE_EQ(2, msg.position().y());
@@ -107,7 +107,7 @@ TEST(UtilityTest, ConvertMsgPoseToMath)
 {
   msgs::Pose msg = msgs::Convert(
       math::Pose3d(math::Vector3d(1, 2, 3),
-        math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI)));
+        math::Quaterniond(GZ_PI * 0.25, GZ_PI * 0.5, GZ_PI)));
   math::Pose3d v = msgs::Convert(msg);
 
   EXPECT_DOUBLE_EQ(1, v.Pos().X());
@@ -242,7 +242,7 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
   auto msg = msgs::Convert(
       math::SphericalCoordinates(
       math::SphericalCoordinates::SurfaceType::EARTH_WGS84,
-      IGN_DTOR(1.1), IGN_DTOR(2.2), 3.3, IGN_DTOR(0.4)));
+      GZ_DTOR(1.1), GZ_DTOR(2.2), 3.3, GZ_DTOR(0.4)));
 
   EXPECT_EQ(msgs::SphericalCoordinates::EARTH_WGS84, msg.surface_model());
   EXPECT_DOUBLE_EQ(1.1, msg.latitude_deg());
@@ -380,7 +380,7 @@ TEST(UtilityTest, SetVector2d)
 TEST(UtilityTest, SetQuaternion)
 {
   msgs::Quaternion msg;
-  msgs::Set(&msg, math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI));
+  msgs::Set(&msg, math::Quaterniond(GZ_PI * 0.25, GZ_PI * 0.5, GZ_PI));
   EXPECT_TRUE(math::equal(msg.x(), -0.65328148243818818));
   EXPECT_TRUE(math::equal(msg.y(), 0.27059805007309856));
   EXPECT_TRUE(math::equal(msg.z(), 0.65328148243818829));
@@ -392,7 +392,7 @@ TEST(UtilityTest, SetPose)
 {
   msgs::Pose msg;
   msgs::Set(&msg, math::Pose3d(math::Vector3d(1, 2, 3),
-        math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI)));
+        math::Quaterniond(GZ_PI * 0.25, GZ_PI * 0.5, GZ_PI)));
 
   EXPECT_DOUBLE_EQ(1, msg.position().x());
   EXPECT_DOUBLE_EQ(2, msg.position().y());
@@ -480,7 +480,7 @@ TEST(MsgsTest, SetSphericalCoordinates)
   msgs::SphericalCoordinates msg;
   msgs::Set(&msg, math::SphericalCoordinates(
       math::SphericalCoordinates::SurfaceType::EARTH_WGS84,
-      IGN_DTOR(1.1), IGN_DTOR(2.2), 3.3, IGN_DTOR(0.4)));
+      GZ_DTOR(1.1), GZ_DTOR(2.2), 3.3, GZ_DTOR(0.4)));
 
   EXPECT_EQ(msgs::SphericalCoordinates::EARTH_WGS84, msg.surface_model());
   EXPECT_DOUBLE_EQ(1.1, msg.latitude_deg());
