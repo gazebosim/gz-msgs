@@ -20,17 +20,20 @@
 # This is a per-library function definition, used in conjunction with the
 # top-level entry point in ign-tools.
 
+GZ_MSGS_COMPLETION_LIST="
+  -i --info
+  -l --list
+  -h --help
+  --force-version
+  --versions
+"
+
 function _gz_msg
 {
   if [[ ${COMP_WORDS[COMP_CWORD]} == -* ]]; then
     # Specify options (-*) word list for this subcommand
-    COMPREPLY=($(compgen -W "
-      -i --info
-      -l --list
-      -h --help
-      --force-version
-      --versions
-      " -- "${COMP_WORDS[COMP_CWORD]}" ))
+    COMPREPLY=($(compgen -W "$GZ_MSGS_COMPLETION_LIST" \
+      -- "${COMP_WORDS[COMP_CWORD]}" ))
     return
   else
     # Just use bash default auto-complete, because we never have two
@@ -39,4 +42,11 @@ function _gz_msg
     COMPREPLY=($(compgen -o default -- "${COMP_WORDS[COMP_CWORD]}"))
     return
   fi
+}
+
+function _gz_msgs_flags
+{
+  for word in $GZ_MSGS_COMPLETION_LIST; do
+    echo "$word"
+  done
 }

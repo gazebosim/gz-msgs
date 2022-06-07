@@ -95,26 +95,30 @@ TEST(CmdLine, MsgInfo)
 TEST(CmdLine, MsgHelpVsCompletionFlags)
 {
   // Flags in help message
-  auto output = custom_exec_str("ign msg --help --force-version " + g_version);
-  EXPECT_NE(std::string::npos, output.find("--info")) << output;
-  EXPECT_NE(std::string::npos, output.find("--list")) << output;
-  EXPECT_NE(std::string::npos, output.find("--help")) << output;
-  EXPECT_NE(std::string::npos, output.find("--force-version")) << output;
-  EXPECT_NE(std::string::npos, output.find("--versions")) << output;
+  auto helpOutput = custom_exec_str("ign msg --help --force-version "
+    + g_version);
 
-  // Flags in bash completion
+  // Call the output function in the bash completion script
   std::filesystem::path scriptPath = PROJECT_SOURCE_PATH;
   scriptPath = scriptPath / "src" / "cmd" / "msgs.bash_completion.sh";
-  std::ifstream scriptFile(scriptPath);
 
-  std::string script((std::istreambuf_iterator<char>(scriptFile)),
-    std::istreambuf_iterator<char>());
+  // Equivalent to:
+  // sh -c "bash -c \". /path/to/msgs.bash_completion.sh; _gz_msgs_flags\""
+  std::string cmd = "bash -c \". " + scriptPath.string() + "; _gz_msgs_flags\"";
+  std::string scriptOutput = custom_exec_str(cmd);
 
-  EXPECT_NE(std::string::npos, script.find("--info")) << script;
-  EXPECT_NE(std::string::npos, script.find("--list")) << script;
-  EXPECT_NE(std::string::npos, script.find("--help")) << script;
-  EXPECT_NE(std::string::npos, script.find("--force-version")) << script;
-  EXPECT_NE(std::string::npos, script.find("--versions")) << script;
+  // Tokenize script output
+  std::istringstream iss(scriptOutput);
+  std::vector<std::string> flags((std::istream_iterator<std::string>(iss)),
+    std::istream_iterator<std::string>());
+
+  EXPECT_GT(flags.size(), 0u);
+
+  // Match each flag in script output with help message
+  for (std::string flag : flags)
+  {
+    EXPECT_NE(std::string::npos, helpOutput.find(flag)) << helpOutput;
+  }
 }
 
 /////////////////////////////////////////////////
