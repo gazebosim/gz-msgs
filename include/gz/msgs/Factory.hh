@@ -114,21 +114,21 @@ namespace gz
     /// Use this macro to register messages.
     /// \param[in] _msgtype Message type name.
     /// \param[in] _classname Class name for message.
-    #define IGN_REGISTER_STATIC_MSG(_msgtype, _classname) \
+    #define GZ_REGISTER_STATIC_MSG(_msgtype, _classname) \
     GZ_MSGS_VISIBLE \
     std::unique_ptr<google::protobuf::Message> New##_classname() \
     { \
       return std::unique_ptr<gz::msgs::_classname>(\
           new gz::msgs::_classname); \
     } \
-    class GZ_MSGS_VISIBLE IgnMsg##_classname \
+    class GZ_MSGS_VISIBLE GzMsg##_classname \
     { \
-      public: IgnMsg##_classname() \
+      public: GzMsg##_classname() \
       { \
         gz::msgs::Factory::Register(_msgtype, New##_classname);\
       } \
     }; \
-    static IgnMsg##_classname IgnitionMessagesInitializer##_classname;
+    static GzMsg##_classname GzMessagesInitializer##_classname;
     }
   }
 }

@@ -17,3 +17,6 @@
 
 #include <gz/msgs/Factory.hh>
 #include <ignition/msgs/config.hh>
+
+#define IGN_REGISTER_STATIC_MSG(_msgtype, _classname) \
+  GZ_REGISTER_STATIC_MSG(_msgtype, _classname)
