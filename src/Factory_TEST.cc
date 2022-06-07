@@ -60,15 +60,6 @@ TEST(FactoryTest, New)
 
   msg = msgs::Factory::New<msgs::Vector3d>(".gz.msgs.Vector3d");
   EXPECT_TRUE(msg.get() != nullptr);
-
-  unsetenv("GZ_DESCRIPTOR_PATH");
-  setenv("IGN_DESCRIPTOR_PATH", "TEST_PATH", 1);
-
-  msg = msgs::Factory::New<msgs::Vector3d>("gz.msgs.Vector3d");
-  EXPECT_NE(msg, nullptr);
-
-  msg = msgs::Factory::New<msgs::Vector3d>(".gz.msgs.Vector3d");
-  EXPECT_TRUE(msg.get() != nullptr);
 }
 
 /////////////////////////////////////////////////
