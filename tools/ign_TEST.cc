@@ -99,7 +99,7 @@ int main(int argc, char **argv)
 
   // Make sure that we load the library recently built and not the one installed
   // in your system.
-  // Add the directory where ignition msgs has been built.
+  // Add the directory where Gazebo msgs has been built.
   std::string value = std::string(GZ_TEST_LIBRARY_PATH);
   // Save the current value of LD_LIBRARY_PATH.
   auto cvalue = std::getenv("LD_LIBRARY_PATH");
