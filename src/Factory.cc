@@ -81,14 +81,14 @@ class DynamicFactory
   public: DynamicFactory()
   {
     // Try to get the list of paths from an environment variable.
-    const char *ignDescPaths = std::getenv("GZ_DESCRIPTOR_PATH");
-    if (!ignDescPaths)
+    const char *descPaths = std::getenv("GZ_DESCRIPTOR_PATH");
+    if (!descPaths)
     {
       // TODO(CH3): Deprecated. Remove on tock.
       // Remember to still return !!
-      ignDescPaths = std::getenv("IGN_DESCRIPTOR_PATH");
+      descPaths = std::getenv("IGN_DESCRIPTOR_PATH");
 
-      if (!ignDescPaths)
+      if (!descPaths)
       {
         return;
       }
@@ -100,7 +100,7 @@ class DynamicFactory
     }
 
     // Load all the descriptors found in the paths set with GZ_DESCRIPTOR_PATH.
-    this->LoadDescriptors(ignDescPaths);
+    this->LoadDescriptors(descPaths);
   }
 
   //////////////////////////////////////////////////
