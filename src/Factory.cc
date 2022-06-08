@@ -69,7 +69,7 @@ std::vector<std::string> split(const std::string &_orig, char _delim)
 /////////////////////////////////////////////////
 /// \brief A factory class to generate protobuf messages at runtime based on
 /// their message descriptors. The location of the .desc files is expected
-/// via the IGN_DESCRIPTOR_PATH environment variable. This environment
+/// via the GZ_DESCRIPTOR_PATH environment variable. This environment
 /// variable expects paths to directories containing .desc files.
 /// Any file without the .desc extension will be ignored.
 class DynamicFactory
@@ -77,16 +77,30 @@ class DynamicFactory
   //////////////////////////////////////////////////
   /// \brief Constructor.
   /// The constructor will try to load all descriptors specified in the
-  /// IGN_DESCRIPTOR_PATH environment variable.
+  /// GZ_DESCRIPTOR_PATH environment variable.
   public: DynamicFactory()
   {
     // Try to get the list of paths from an environment variable.
-    const char *ignDescPaths = std::getenv("IGN_DESCRIPTOR_PATH");
-    if (!ignDescPaths)
-      return;
+    const char *descPaths = std::getenv("GZ_DESCRIPTOR_PATH");
+    if (!descPaths)
+    {
+      // TODO(CH3): Deprecated. Remove on tock.
+      // Remember to still return !!
+      descPaths = std::getenv("IGN_DESCRIPTOR_PATH");
 
-    // Load all the descriptors found in the paths set with IGN_DESCRIPTOR_PATH.
-    this->LoadDescriptors(ignDescPaths);
+      if (!descPaths)
+      {
+        return;
+      }
+      else
+      {
+        std::cerr << "IGN_DESCRIPTOR_PATH is deprecated and will be removed! "
+                  << "Use GZ_DESCRIPTOR_PATH instead!" << std::endl;
+      }
+    }
+
+    // Load all the descriptors found in the paths set with GZ_DESCRIPTOR_PATH.
+    this->LoadDescriptors(descPaths);
   }
 
   //////////////////////////////////////////////////
