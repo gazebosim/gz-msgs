@@ -31,6 +31,5 @@ extern "C" GZ_MSGS_VISIBLE void cmdMsgList();
 /// \brief External hook to read the library version.
 /// \return C-string representing the version. Ex.: 0.1.2
 extern "C" GZ_MSGS_VISIBLE const char *gzMsgsVersion();
-extern "C" GZ_MSGS_VISIBLE const char GZ_DEPRECATED(9) *ignitionMsgsVersion();
 
 #endif
