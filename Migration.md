@@ -14,8 +14,6 @@ release will remove the deprecated code.
 3. Protobuf messages and packages will no longer use `ignition.msgs`, use `gz.msgs` instead
 4. `INSTALL_IGN_MSGS_GEN_EXECUTABLE` and `IGN_MSGS_GEN_EXECUTABLE` are deprecated and will be removed. Use `INSTALL_GZ_MSGS_GEN_EXECUTABLE` and `GZ_MSGS_GEN_EXECUTABLE` instead.
 5. `IGN_DESCRIPTOR_PATH` is deprecated and will be removed. Use `GZ_DESCRIPTOR_PATH` instead.
-6. `ignitionMsgsVersion()` is deprecated and will be removed in future versions.
-  Please use `gzMsgsVersion()` instead.
 
 ## Gazebo Msgs 8.1 to 8.2
 
