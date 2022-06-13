@@ -21,11 +21,11 @@
 #include <cstring>
 #include "gz/msgs/Export.hh"
 
-/// \brief External hook to execute 'ign msg -i' from the command line.
+/// \brief External hook to execute 'gz msg -i' from the command line.
 /// \param[in] _msg Message type name.
 extern "C" GZ_MSGS_VISIBLE void cmdMsgInfo(const char *_msg);
 
-/// \brief External hook to execute 'ign msg -l' from the command line.
+/// \brief External hook to execute 'gz msg -l' from the command line.
 extern "C" GZ_MSGS_VISIBLE void cmdMsgList();
 
 /// \brief External hook to read the library version.

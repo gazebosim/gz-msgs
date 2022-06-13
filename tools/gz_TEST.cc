@@ -52,8 +52,8 @@ std::string custom_exec_str(std::string _cmd)
 /////////////////////////////////////////////////
 TEST(CmdLine, Versions)
 {
-  auto outputDebug = custom_exec_str("ign");
-  auto output = custom_exec_str("ign msg --versions");
+  auto outputDebug = custom_exec_str("gz");
+  auto output = custom_exec_str("gz msg --versions");
   EXPECT_NE(std::string::npos, output.find(g_version));
 }
 
@@ -61,20 +61,20 @@ TEST(CmdLine, Versions)
 TEST(CmdLine, Help)
 {
   auto output =
-    custom_exec_str("ign msg --force-version " + g_version + " --help");
+    custom_exec_str("gz msg --force-version " + g_version + " --help");
   EXPECT_NE(std::string::npos, output.find("list"));
 
-  output = custom_exec_str("ign msg --force-version " + g_version + " -h");
+  output = custom_exec_str("gz msg --force-version " + g_version + " -h");
   EXPECT_NE(std::string::npos, output.find("list"));
 
-  output = custom_exec_str("ign msg --force-version " + g_version);
+  output = custom_exec_str("gz msg --force-version " + g_version);
   EXPECT_NE(std::string::npos, output.find("list"));
 }
 
 /////////////////////////////////////////////////
 TEST(CmdLine, MsgList)
 {
-  auto output = custom_exec_str("ign msg --list --force-version " +
+  auto output = custom_exec_str("gz msg --list --force-version " +
     g_version);
   EXPECT_NE(std::string::npos, output.find("gz_msgs.WorldControl"))
     << output;
@@ -83,7 +83,7 @@ TEST(CmdLine, MsgList)
 /////////////////////////////////////////////////
 TEST(CmdLine, MsgInfo)
 {
-  auto output = custom_exec_str("ign msg --info gz_msgs.WorldControl "
+  auto output = custom_exec_str("gz msg --info gz_msgs.WorldControl "
     "--force-version " + g_version);
   EXPECT_NE(std::string::npos, output.find("message WorldControl {"))
     << output;
