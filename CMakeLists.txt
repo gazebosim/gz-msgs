@@ -16,6 +16,12 @@ find_package(ignition-cmake2 2.8.0 REQUIRED)
 #============================================================================
 ign_configure_project()
 
+if (UNIX AND NOT APPLE)
+  set (EXTRA_TEST_LIB_DEPS stdc++fs)
+else()
+  set (EXTRA_TEST_LIB_DEPS)
+endif()
+
 #============================================================================
 # Set project-specific options
 #============================================================================
@@ -69,8 +75,11 @@ ign_find_package(ignition-math6 REQUIRED)
 set(IGN_MATH_VER ${ignition-math6_VERSION_MAJOR})
 
 #--------------------------------------
-# Find if ign command is available
+# Find if command is available. This is used to enable tests.
+# Note that CLI files are installed regardless of whether the dependency is
+# available during build time
 find_program(HAVE_IGN_TOOLS ign)
+set(IGN_TOOLS_VER 1)
 
 #--------------------------------------
 # Find Tinyxml2
