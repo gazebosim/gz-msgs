@@ -12,7 +12,10 @@ if (MSVC)
   list(REMOVE_ITEM test_sources ign_TEST.cc)
 endif()
 
-
 if (HAVE_IGN_TOOLS)
-  ign_build_tests(TYPE UNIT SOURCES ${test_sources})
+  ign_build_tests(
+    TYPE UNIT
+    SOURCES ${test_sources}
+    LIB_DEPS
+      ${EXTRA_TEST_LIB_DEPS})
 endif ()
