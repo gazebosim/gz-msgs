@@ -33,6 +33,7 @@
 #include "gz/msgs/Export.hh"
 #include "gz/msgs/MessageTypes.hh"
 
+
 /// \file Utility.hh
 /// \brief Utility functions that support conversion between message type
 /// and ignition math types.

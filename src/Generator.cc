@@ -15,7 +15,15 @@
  *
 */
 
+#include <algorithm>
+#include <filesystem>
+#include <iostream>
+#include <map>
+#include <memory>
 #include <sstream>
+#include <string>
+#include <utility>
+#include <vector>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -31,15 +39,6 @@
 #ifdef _MSC_VER
 #pragma warning(pop)
 #endif
-
-#include <algorithm>
-#include <filesystem>
-#include <iostream>
-#include <map>
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
 
 #include "Generator.hh"
 
@@ -96,9 +95,9 @@ bool Generator::Generate(const FileDescriptor *_file,
   //
   // The renaming operation is handled via the outside python script
   //
-  // ignition/msgs/msg.pb.cc - stays in place
-  // ignition/msgs/msg.pb.h -> ignition/msgs/detail/msg.pb.h
-  // ignition/msgs/msg.gz.h (generated here) -> ignition/msgs/msg.pb.h
+  // gz/msgs/msg.pb.cc - stays in place
+  // gz/msgs/msg.pb.h -> gz/msgs/detail/msg.pb.h
+  // gz/msgs/msg.gz.h (generated here) -> gz/msgs/msg.pb.h
   std::string identifier;
   std::string headerFilename;
   std::string newHeaderFilename;

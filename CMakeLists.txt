@@ -14,6 +14,7 @@ find_package(ignition-cmake3 REQUIRED)
 #============================================================================
 # Configure the project
 #============================================================================
+set (CMAKE_CXX_STANDARD 17)
 ign_configure_project(
   REPLACE_IGNITION_INCLUDE_PATH gz/msgs
   VERSION_SUFFIX pre1)

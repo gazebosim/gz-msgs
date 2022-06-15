@@ -14,7 +14,7 @@ endif()
 if(INSTALL_GZ_MSGS_GEN_EXECUTABLE)
   set_target_properties(gz_msgs_gen PROPERTIES VERSION ${PROJECT_VERSION_FULL})
   install(TARGETS gz_msgs_gen DESTINATION ${IGN_BIN_INSTALL_DIR})
-  
+
   # TODO(chapulina) Deprecated. Remove on v10.
   install(FILES $<TARGET_FILE:gz_msgs_gen> DESTINATION ${IGN_BIN_INSTALL_DIR} RENAME ign_msgs_gen PERMISSIONS OWNER_EXECUTE)
 endif()
@@ -32,14 +32,16 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter)
 #   INPUT_PROTO         - Path to the input .proto file
 #   OUTPUT_CPP_DIR      - Path where C++ files are saved
 #   OUTPUT_RUBY_DIR     - Path where Ruby files are saved
+#   OUTPUT_INCLUDES     - A CMake variable name containing a list that the C++ header path should be appended to
 #   OUTPUT_CPP_HH_VAR   - A CMake variable name containing a list that the C++ header path should be appended to
+#   OUTPUT_IGN_CPP_HH_VAR - A CMake variable name containing a list that the C++ header path should be appended to
 #   OUTPUT_CPP_CC_VAR   - A Cmake variable name containing a list that the C++ source path should be appended to
 #   OUTPUT_RUBY_VAR     - A Cmake variable name containing a list that the ruby file should be apenned to
 # Multi value arguments
 #   PROTO_PATH          - Passed to protoc --proto_path
 function(gz_msgs_protoc)
   set(options GENERATE_RUBY GENERATE_CPP)
-  set(oneValueArgs PROTO_PACKAGE PROTOC_EXEC INPUT_PROTO OUTPUT_CPP_DIR OUTPUT_RUBY_DIR OUTPUT_CPP_HH_VAR OUTPUT_CPP_CC_VAR OUTPUT_RUBY_VAR)
+  set(oneValueArgs PROTO_PACKAGE PROTOC_EXEC INPUT_PROTO OUTPUT_CPP_DIR OUTPUT_RUBY_DIR OUTPUT_INCLUDES OUTPUT_CPP_HH_VAR OUTPUT_IGN_CPP_HH_VAR OUTPUT_DETAIL_CPP_HH_VAR OUTPUT_CPP_CC_VAR OUTPUT_RUBY_VAR)
   set(multiValueArgs PROTO_PATH)
 
   cmake_parse_arguments(gz_msgs_protoc "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -56,17 +58,34 @@ function(gz_msgs_protoc)
   endif()
 
   if(gz_msgs_protoc_GENERATE_CPP)
+    # Full path to generated header (${PROJECT_BINARY_DIR}/include/gz/msgs/foo.pb.h)
     set(output_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.h")
+    # Full path to generated detail header (${PROJECT_BINARY_DIR}/include/gz/msgs/detail/foo.pb.h)
     set(output_detail_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/detail/${FIL_WE}.pb.h")
+    # Full path to generated ignition header (${PROJECT_BINARY_DIR}/include/ignition/msgs/foo.pb.h)
+    set(output_ign_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}/ignition/msgs/${FIL_WE}.pb.h")
+    # Full path to generated ignition header (${PROJECT_BINARY_DIR}/include/foo.pb.cc)
     set(output_source "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.cc")
+
+    # Generate a clean relative path (gz/msgs/foo.pb.h)
+    string(REPLACE "${PROJECT_BINARY_DIR}/include/" "" output_include ${output_header})
+    list(APPEND ${gz_msgs_protoc_OUTPUT_INCLUDES} "${output_include}")
+
     list(APPEND ${gz_msgs_protoc_OUTPUT_CPP_HH_VAR} ${output_header})
-    list(APPEND ${gz_msgs_protoc_OUTPUT_CPP_HH_VAR} ${output_detail_header})
     list(APPEND ${gz_msgs_protoc_OUTPUT_CPP_CC_VAR} ${output_source})
+    list(APPEND ${gz_msgs_protoc_OUTPUT_IGN_CPP_HH_VAR} ${output_ign_header})
+    list(APPEND ${gz_msgs_protoc_OUTPUT_DETAIL_CPP_HH_VAR} ${output_detail_header})
+
     list(APPEND output_files ${output_header})
     list(APPEND output_files ${output_detail_header})
+    list(APPEND output_files ${output_ign_header})
     list(APPEND output_files ${output_source})
-    set(${gz_msgs_protoc_OUTPUT_CPP_HH_VAR} ${${ign_msgs_protoc_OUTPUT_CPP_HH_VAR}} PARENT_SCOPE)
-    set(${gz_msgs_protoc_OUTPUT_CPP_CC_VAR} ${${ign_msgs_protoc_OUTPUT_CPP_CC_VAR}} PARENT_SCOPE)
+
+    set(${gz_msgs_protoc_OUTPUT_INCLUDES} ${${gz_msgs_protoc_OUTPUT_INCLUDES}} PARENT_SCOPE)
+    set(${gz_msgs_protoc_OUTPUT_IGN_CPP_HH_VAR} ${${gz_msgs_protoc_OUTPUT_IGN_CPP_HH_VAR}} PARENT_SCOPE)
+    set(${gz_msgs_protoc_OUTPUT_DETAIL_CPP_HH_VAR} ${${gz_msgs_protoc_OUTPUT_DETAIL_CPP_HH_VAR}} PARENT_SCOPE)
+    set(${gz_msgs_protoc_OUTPUT_CPP_HH_VAR} ${${gz_msgs_protoc_OUTPUT_CPP_HH_VAR}} PARENT_SCOPE)
+    set(${gz_msgs_protoc_OUTPUT_CPP_CC_VAR} ${${gz_msgs_protoc_OUTPUT_CPP_CC_VAR}} PARENT_SCOPE)
   endif()
 
   if(gz_msgs_protoc_GENERATE_RUBY)
@@ -83,9 +102,10 @@ function(gz_msgs_protoc)
     COMMAND Python3::Interpreter
     ARGS tools/gz_msgs_generate
       --protoc-exec "$<TARGET_FILE:${gz_msgs_protoc_PROTOC_EXEC}>"
-      --ign-generator-bin "$<TARGET_FILE:gz_msgs_gen>"
+      --gz-generator-bin "$<TARGET_FILE:gz_msgs_gen>"
       --generate-cpp "${gz_msgs_protoc_GENERATE_CPP}"
       --generate-ruby "${gz_msgs_protoc_GENERATE_RUBY}"
+      --generate-ignition "TRUE"
       --output-cpp-path "${gz_msgs_protoc_OUTPUT_CPP_DIR}"
       --output-ruby-path "${gz_msgs_protoc_OUTPUT_RUBY_DIR}"
       --proto-path "${gz_msgs_protoc_PROTO_PATH}"
@@ -118,8 +138,14 @@ foreach(proto_file ${proto_files})
       "${PROJECT_BINARY_DIR}/include"
     OUTPUT_RUBY_DIR
       "${PROJECT_BINARY_DIR}/ruby"
+    OUTPUT_INCLUDES
+      gen_includes
     OUTPUT_CPP_HH_VAR
       gen_headers
+    OUTPUT_DETAIL_CPP_HH_VAR
+      gen_detail_headers
+    OUTPUT_IGN_CPP_HH_VAR
+      gen_ign_headers
     OUTPUT_CPP_CC_VAR
       gen_sources
     OUTPUT_RUBY_VAR
@@ -145,23 +171,35 @@ if(MSVC)
   add_definitions(/bigobj)
 endif()
 
-set_source_files_properties(${gen_headers} ${gen_sources} ${gen_ruby_scripts}
+set_source_files_properties(${gen_headers} ${gen_ign_headers} ${gen_detail_headers} ${gen_sources} ${gen_ruby_scripts}
   PROPERTIES GENERATED TRUE)
 
+# Install ruby with ignition prefix
 message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR}")
 install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR})
 
+# Install ruby with gz prefix
 message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/gz/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR}")
 install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/gz/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR})
 
+# Install gz/msgs
 ign_install_includes(
   "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}"
   ${gen_headers})
 
+# Install gz/msgs/detail
+ign_install_includes(
+  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}/detail"
+  ${gen_detail_headers})
+
+# Install ignition/msgs
+ign_install_includes(
+  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/msgs"
+  ${gen_ign_headers})
+
 ##################################################
 # Generate gz/msgs/MessageTypes.hh
-foreach (hdr ${gen_headers})
-  string(REPLACE "${PROJECT_BINARY_DIR}/include/" "" hdr ${hdr})
+foreach (hdr ${gen_includes})
   string(CONCAT gz_msgs_headers ${gz_msgs_headers} "#include <${hdr}>\n")
 endforeach()
 
