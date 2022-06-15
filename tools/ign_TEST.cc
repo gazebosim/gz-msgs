@@ -17,15 +17,15 @@
 
 #include <string>
 #include <gtest/gtest.h>
-#include <ignition/msgs/config.hh>
-#include "test_config.h"
+#include <gz/msgs/config.hh>
+#include "gz/msgs/test_config.h"
 
 #ifdef _MSC_VER
 #    define popen _popen
 #    define pclose _pclose
 #endif
 
-static const std::string g_version(std::string(IGNITION_MSGS_VERSION_FULL));
+static const std::string g_version(std::string(GZ_MSGS_VERSION_FULL));
 
 /////////////////////////////////////////////////
 std::string custom_exec_str(std::string _cmd)
@@ -76,14 +76,14 @@ TEST(CmdLine, MsgList)
 {
   auto output = custom_exec_str("ign msg --list --force-version " +
     g_version);
-  EXPECT_NE(std::string::npos, output.find("ign_msgs.WorldControl"))
+  EXPECT_NE(std::string::npos, output.find("gz_msgs.WorldControl"))
     << output;
 }
 
 /////////////////////////////////////////////////
 TEST(CmdLine, MsgInfo)
 {
-  auto output = custom_exec_str("ign msg --info ign_msgs.WorldControl "
+  auto output = custom_exec_str("ign msg --info gz_msgs.WorldControl "
     "--force-version " + g_version);
   EXPECT_NE(std::string::npos, output.find("message WorldControl {"))
     << output;
@@ -93,14 +93,14 @@ TEST(CmdLine, MsgInfo)
 /// Main
 int main(int argc, char **argv)
 {
-  // Set IGN_CONFIG_PATH to the directory where the .yaml configuration files
+  // Set GZ_CONFIG_PATH to the directory where the .yaml configuration files
   // is located.
-  setenv("IGN_CONFIG_PATH", IGN_CONFIG_PATH, 1);
+  setenv("GZ_CONFIG_PATH", GZ_CONFIG_PATH, 1);
 
   // Make sure that we load the library recently built and not the one installed
   // in your system.
   // Add the directory where ignition msgs has been built.
-  std::string value = std::string(IGN_TEST_LIBRARY_PATH);
+  std::string value = std::string(GZ_TEST_LIBRARY_PATH);
   // Save the current value of LD_LIBRARY_PATH.
   auto cvalue = std::getenv("LD_LIBRARY_PATH");
   if (cvalue)

@@ -16,3 +16,4 @@
  */
 
 #include <gz/msgs/PointCloudPackedUtils.hh>
+#include <ignition/msgs/config.hh>

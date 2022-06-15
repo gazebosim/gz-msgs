@@ -137,7 +137,7 @@ bool Generator::Generate(const FileDescriptor *_file,
 
 #include <memory>
 
-#include <ignition/msgs/Export.hh>
+#include <gz/msgs/Export.hh>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -202,13 +202,13 @@ bool Generator::Generate(const FileDescriptor *_file,
     io::Printer printer(output.get(), '$');
 
     // Add the ign-msgs Factory header
-    printer.Print("#include \"ignition/msgs/Factory.hh\"\n", "name",
+    printer.Print("#include \"gz/msgs/Factory.hh\"\n", "name",
                   "includes");
 
     // Call the IGN_REGISTER_STATIC_MSG macro for each message
     for (auto i = 0; i < _file->message_type_count(); ++i)
     {
-      std::string factory = "IGN_REGISTER_STATIC_MSG(\"ign_msgs.";
+      std::string factory = "IGN_REGISTER_STATIC_MSG(\"gz_msgs.";
       factory += _file->message_type(i)->name() + "\", " +
         _file->message_type(i)->name() +")\n";
       printer.Print(factory.c_str(), "name", "includes");

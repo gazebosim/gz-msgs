@@ -28,7 +28,7 @@
 
 #include "gz/msgs/config.hh"
 
-namespace ignition
+namespace gz
 {
 namespace msgs
 {

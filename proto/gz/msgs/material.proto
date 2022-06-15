@@ -112,10 +112,19 @@ message Material
   Script script          = 2;
   ShaderType shader_type = 3;
   string normal_map      = 4;
+
+  /// \brief Ambient color
   Color ambient          = 5;
+
+  /// \brief Diffuse color
   Color diffuse          = 6;
+
+  /// \brief Specular color
   Color specular         = 7;
+
+  /// \brief Emissive color
   Color emissive         = 8;
+
   bool lighting          = 9;
 
   /// \brief Physically Based Rendering (PBR) material properties
@@ -128,4 +137,7 @@ message Material
   /// \brief If true, the mesh that this material is applied to will be
   /// rendered as double sided
   bool double_sided      = 12;
+
+  /// \brief Specular exponent
+  double shininess       = 13;
 }

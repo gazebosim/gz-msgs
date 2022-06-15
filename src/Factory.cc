@@ -36,10 +36,10 @@
 #pragma warning(pop)
 #endif
 
-#include "ignition/msgs/Factory.hh"
-#include "ignition/msgs/Filesystem.hh"
+#include "gz/msgs/Factory.hh"
+#include "gz/msgs/Filesystem.hh"
 
-using namespace ignition;
+using namespace gz;
 using namespace msgs;
 
 /// \def ProtobufUniquePtr
@@ -69,7 +69,7 @@ std::vector<std::string> split(const std::string &_orig, char _delim)
 /////////////////////////////////////////////////
 /// \brief A factory class to generate protobuf messages at runtime based on
 /// their message descriptors. The location of the .desc files is expected
-/// via the IGN_DESCRIPTOR_PATH environment variable. This environment
+/// via the GZ_DESCRIPTOR_PATH environment variable. This environment
 /// variable expects paths to directories containing .desc files.
 /// Any file without the .desc extension will be ignored.
 class DynamicFactory
@@ -77,16 +77,30 @@ class DynamicFactory
   //////////////////////////////////////////////////
   /// \brief Constructor.
   /// The constructor will try to load all descriptors specified in the
-  /// IGN_DESCRIPTOR_PATH environment variable.
+  /// GZ_DESCRIPTOR_PATH environment variable.
   public: DynamicFactory()
   {
     // Try to get the list of paths from an environment variable.
-    const char *ignDescPaths = std::getenv("IGN_DESCRIPTOR_PATH");
-    if (!ignDescPaths)
-      return;
+    const char *descPaths = std::getenv("GZ_DESCRIPTOR_PATH");
+    if (!descPaths)
+    {
+      // TODO(CH3): Deprecated. Remove on tock.
+      // Remember to still return !!
+      descPaths = std::getenv("IGN_DESCRIPTOR_PATH");
 
-    // Load all the descriptors found in the paths set with IGN_DESCRIPTOR_PATH.
-    this->LoadDescriptors(ignDescPaths);
+      if (!descPaths)
+      {
+        return;
+      }
+      else
+      {
+        std::cerr << "IGN_DESCRIPTOR_PATH is deprecated and will be removed! "
+                  << "Use GZ_DESCRIPTOR_PATH instead!" << std::endl;
+      }
+    }
+
+    // Load all the descriptors found in the paths set with GZ_DESCRIPTOR_PATH.
+    this->LoadDescriptors(descPaths);
   }
 
   //////////////////////////////////////////////////
@@ -216,21 +230,21 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
   std::unique_ptr<google::protobuf::Message> msg;
 
   std::string type;
-  // Convert "ignition.msgs." to "ign_msgs.".
-  if (_msgType.find("ignition.msgs.") == 0)
+  // Convert "gz.msgs." to "gz_msgs.".
+  if (_msgType.find("gz.msgs.") == 0)
   {
-    type = "ign_msgs." + _msgType.substr(14);
+    type = "gz_msgs." + _msgType.substr(8);
   }
-  // Convert ".ignition.msgs." to "ign_msgs.".
-  else if (_msgType.find(".ignition.msgs.") == 0)
+  // Convert ".gz.msgs." to "gz_msgs.".
+  else if (_msgType.find(".gz.msgs.") == 0)
   {
-    type = "ign_msgs." + _msgType.substr(15);
+    type = "gz_msgs." + _msgType.substr(9);
   }
   else
   {
-    // Fix typenames that are missing "ign_msgs." at the beginning.
-    if (_msgType.find("ign_msgs.") != 0)
-      type = "ign_msgs.";
+    // Fix typenames that are missing "gz_msgs." at the beginning.
+    if (_msgType.find("gz_msgs.") != 0)
+      type = "gz_msgs.";
     type += _msgType;
   }
 

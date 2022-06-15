@@ -23,14 +23,14 @@
 #pragma warning(disable: 4251)
 #endif
 
-#include "ignition/msgs/PointCloudPackedUtils.hh"
-#include "ignition/msgs/Utility.hh"
+#include "gz/msgs/PointCloudPackedUtils.hh"
+#include "gz/msgs/Utility.hh"
 
 #ifdef _MSC_VER
 #pragma warning(pop)
 #endif
 
-using namespace ignition;
+using namespace gz;
 using namespace msgs;
 
 /////////////////////////////////////////////////

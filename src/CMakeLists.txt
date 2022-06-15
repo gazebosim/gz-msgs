@@ -1,19 +1,22 @@
 ##################################################
 # Build a custom protoc plugin
-ign_add_executable(ign_msgs_gen Generator.cc generator_main.cc)
-target_link_libraries(ign_msgs_gen
+ign_add_executable(gz_msgs_gen Generator.cc generator_main.cc)
+target_link_libraries(gz_msgs_gen
   protobuf::libprotoc
   protobuf::libprotobuf)
-target_include_directories(ign_msgs_gen PRIVATE ${PROTOBUF_INCLUDE_DIR})
-set_property(TARGET ign_msgs_gen PROPERTY CXX_STANDARD 17)
+target_include_directories(gz_msgs_gen PRIVATE ${PROTOBUF_INCLUDE_DIR})
+target_compile_features(gz_msgs_gen PRIVATE ${IGN_CXX_11_FEATURES})
 
 if (UNIX)
-  target_link_libraries(ign_msgs_gen pthread)
+  target_link_libraries(gz_msgs_gen pthread)
 endif()
 
-if(INSTALL_IGN_MSGS_GEN_EXECUTABLE)
-  set_target_properties(ign_msgs_gen PROPERTIES VERSION ${PROJECT_VERSION_FULL})
-  install(TARGETS ign_msgs_gen DESTINATION ${IGN_BIN_INSTALL_DIR})
+if(INSTALL_GZ_MSGS_GEN_EXECUTABLE)
+  set_target_properties(gz_msgs_gen PROPERTIES VERSION ${PROJECT_VERSION_FULL})
+  install(TARGETS gz_msgs_gen DESTINATION ${IGN_BIN_INSTALL_DIR})
+  
+  # TODO(chapulina) Deprecated. Remove on v10.
+  install(FILES $<TARGET_FILE:gz_msgs_gen> DESTINATION ${IGN_BIN_INSTALL_DIR} RENAME ign_msgs_gen PERMISSIONS OWNER_EXECUTE)
 endif()
 
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
@@ -24,7 +27,7 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter)
 #   GENERATE_RUBY       - generates ruby code for the message if specified
 #   GENERATE_CPP        - generates c++ code for the message if specified
 # One value arguments:
-#   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. ".ignition.msgs")
+#   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. ".gz.msgs")
 #   PROTOC_EXEC         - Path to protoc
 #   INPUT_PROTO         - Path to the input .proto file
 #   OUTPUT_CPP_DIR      - Path where C++ files are saved
@@ -34,69 +37,64 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter)
 #   OUTPUT_RUBY_VAR     - A Cmake variable name containing a list that the ruby file should be apenned to
 # Multi value arguments
 #   PROTO_PATH          - Passed to protoc --proto_path
-function(ign_msgs_protoc)
+function(gz_msgs_protoc)
   set(options GENERATE_RUBY GENERATE_CPP)
   set(oneValueArgs PROTO_PACKAGE PROTOC_EXEC INPUT_PROTO OUTPUT_CPP_DIR OUTPUT_RUBY_DIR OUTPUT_CPP_HH_VAR OUTPUT_CPP_CC_VAR OUTPUT_RUBY_VAR)
   set(multiValueArgs PROTO_PATH)
 
-  cmake_parse_arguments(ign_msgs_protoc "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+  cmake_parse_arguments(gz_msgs_protoc "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-  get_filename_component(ABS_FIL ${ign_msgs_protoc_INPUT_PROTO} ABSOLUTE)
-  get_filename_component(FIL_WE ${ign_msgs_protoc_INPUT_PROTO} NAME_WE)
+  get_filename_component(ABS_FIL ${gz_msgs_protoc_INPUT_PROTO} ABSOLUTE)
+  get_filename_component(FIL_WE ${gz_msgs_protoc_INPUT_PROTO} NAME_WE)
 
   set(protoc_args)
   set(output_files)
 
   set(proto_package_dir ".")
-  if(ign_msgs_protoc_PROTO_PACKAGE)
-    string(REPLACE "." "/" proto_package_dir ${ign_msgs_protoc_PROTO_PACKAGE})
+  if(gz_msgs_protoc_PROTO_PACKAGE)
+    string(REPLACE "." "/" proto_package_dir ${gz_msgs_protoc_PROTO_PACKAGE})
   endif()
 
-  if(ign_msgs_protoc_GENERATE_CPP)
-    set(output_header "${ign_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.h")
-    set(output_detail_header "${ign_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/detail/${FIL_WE}.pb.h")
-    set(output_source "${ign_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.cc")
-    list(APPEND ${ign_msgs_protoc_OUTPUT_CPP_HH_VAR} ${output_header})
-    list(APPEND ${ign_msgs_protoc_OUTPUT_CPP_HH_VAR} ${output_detail_header})
-    list(APPEND ${ign_msgs_protoc_OUTPUT_CPP_CC_VAR} ${output_source})
+  if(gz_msgs_protoc_GENERATE_CPP)
+    set(output_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.h")
+    set(output_detail_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/detail/${FIL_WE}.pb.h")
+    set(output_source "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.cc")
+    list(APPEND ${gz_msgs_protoc_OUTPUT_CPP_HH_VAR} ${output_header})
+    list(APPEND ${gz_msgs_protoc_OUTPUT_CPP_HH_VAR} ${output_detail_header})
+    list(APPEND ${gz_msgs_protoc_OUTPUT_CPP_CC_VAR} ${output_source})
     list(APPEND output_files ${output_header})
     list(APPEND output_files ${output_detail_header})
     list(APPEND output_files ${output_source})
-    set(${ign_msgs_protoc_OUTPUT_CPP_HH_VAR} ${${ign_msgs_protoc_OUTPUT_CPP_HH_VAR}} PARENT_SCOPE)
-    set(${ign_msgs_protoc_OUTPUT_CPP_CC_VAR} ${${ign_msgs_protoc_OUTPUT_CPP_CC_VAR}} PARENT_SCOPE)
+    set(${gz_msgs_protoc_OUTPUT_CPP_HH_VAR} ${${ign_msgs_protoc_OUTPUT_CPP_HH_VAR}} PARENT_SCOPE)
+    set(${gz_msgs_protoc_OUTPUT_CPP_CC_VAR} ${${ign_msgs_protoc_OUTPUT_CPP_CC_VAR}} PARENT_SCOPE)
   endif()
 
-  if(ign_msgs_protoc_GENERATE_RUBY)
-    file(MAKE_DIRECTORY ${ign_msgs_protoc_OUTPUT_RUBY_DIR})
-    set(output_ruby "${ign_msgs_protoc_OUTPUT_RUBY_DIR}${proto_package_dir}/${FIL_WE}_pb.rb")
-    list(APPEND ${ign_msgs_protoc_OUTPUT_RUBY_VAR} ${output_ruby})
+  if(gz_msgs_protoc_GENERATE_RUBY)
+    file(MAKE_DIRECTORY ${gz_msgs_protoc_OUTPUT_RUBY_DIR})
+    set(output_ruby "${gz_msgs_protoc_OUTPUT_RUBY_DIR}${proto_package_dir}/${FIL_WE}_pb.rb")
+    list(APPEND ${gz_msgs_protoc_OUTPUT_RUBY_VAR} ${output_ruby})
     list(APPEND output_files ${output_ruby})
-    list(APPEND protoc_args "--ruby_out=${ign_msgs_protoc_OUTPUT_RUBY_DIR}")
-    set(${ign_msgs_protoc_OUTPUT_RUBY_VAR} ${${ign_msgs_protoc_OUTPUT_RUBY_VAR}} PARENT_SCOPE)
+    list(APPEND protoc_args "--ruby_out=${gz_msgs_protoc_OUTPUT_RUBY_DIR}")
+    set(${gz_msgs_protoc_OUTPUT_RUBY_VAR} ${${gz_msgs_protoc_OUTPUT_RUBY_VAR}} PARENT_SCOPE)
   endif()
-
-  #get_cmake_property(_variableNames VARIABLES)
-  #foreach (_variableName ${_variableNames})
-  #    message(STATUS "${_variableName}=${${_variableName}}")
-  #endforeach()
 
   add_custom_command(
     OUTPUT ${output_files}
     COMMAND Python3::Interpreter
     ARGS tools/gz_msgs_generate
-      --protoc-exec "$<TARGET_FILE:${ign_msgs_protoc_PROTOC_EXEC}>"
-      --ign-generator-bin "$<TARGET_FILE:ign_msgs_gen>"
-      --generate-cpp "${ign_msgs_protoc_GENERATE_CPP}"
-      --generate-ruby "${ign_msgs_protoc_GENERATE_RUBY}"
-      --output-cpp-path "${ign_msgs_protoc_OUTPUT_CPP_DIR}"
-      --output-ruby-path "${ign_msgs_protoc_OUTPUT_RUBY_DIR}"
-      --proto-path "${ign_msgs_protoc_PROTO_PATH}"
+      --protoc-exec "$<TARGET_FILE:${gz_msgs_protoc_PROTOC_EXEC}>"
+      --ign-generator-bin "$<TARGET_FILE:gz_msgs_gen>"
+      --generate-cpp "${gz_msgs_protoc_GENERATE_CPP}"
+      --generate-ruby "${gz_msgs_protoc_GENERATE_RUBY}"
+      --output-cpp-path "${gz_msgs_protoc_OUTPUT_CPP_DIR}"
+      --output-ruby-path "${gz_msgs_protoc_OUTPUT_RUBY_DIR}"
+      --proto-path "${gz_msgs_protoc_PROTO_PATH}"
       --input-path "${ABS_FIL}"
     DEPENDS
       ${ABS_FIL}
-      ign_msgs_gen
+      gz_msgs_gen
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-    COMMENT "Running protoc on ${ign_msgs_protoc_INPUT_PROTO}"
+    COMMENT "Running protoc on ${gz_msgs_protoc_INPUT_PROTO}"
     VERBATIM
   )
 
@@ -104,40 +102,12 @@ endfunction()
 
 
 ##################################################
-# do the code generation
-# TODO(CH3): LATER!!
-# file (GLOB proto_files ${PROJECT_SOURCE_DIR}/proto/gz/msgs/*.proto)
-#
-# foreach(proto_file ${proto_files})
-#   ign_msgs_protoc(
-#     PROTO_PACKAGE
-#       .gz.msgs
-#     GENERATE_CPP
-#     GENERATE_RUBY
-#     INPUT_PROTO
-#       ${proto_file}
-#     PROTOC_EXEC
-#       protobuf::protoc
-#     OUTPUT_CPP_DIR
-#       "${PROJECT_BINARY_DIR}/include"
-#     OUTPUT_RUBY_DIR
-#       "${PROJECT_BINARY_DIR}/ruby"
-#     OUTPUT_CPP_HH_VAR
-#       gen_headers
-#     OUTPUT_CPP_CC_VAR
-#       gen_sources
-#     OUTPUT_RUBY_VAR
-#       gen_ruby_scripts
-#     PROTO_PATH
-#       "${PROJECT_SOURCE_DIR}/proto")
-# endforeach()
-
-file (GLOB proto_files ${PROJECT_SOURCE_DIR}/proto/ignition/msgs/*.proto)
+file (GLOB proto_files ${PROJECT_SOURCE_DIR}/proto/gz/msgs/*.proto)
 
 foreach(proto_file ${proto_files})
-  ign_msgs_protoc(
+  gz_msgs_protoc(
     PROTO_PACKAGE
-      .ignition.msgs
+      .gz.msgs
     GENERATE_CPP
     GENERATE_RUBY
     INPUT_PROTO
@@ -185,14 +155,14 @@ message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_IN
 install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/gz/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR})
 
 ign_install_includes(
-  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${IGN_DESIGNATION}"
+  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}"
   ${gen_headers})
 
 ##################################################
 # Generate gz/msgs/MessageTypes.hh
 foreach (hdr ${gen_headers})
   string(REPLACE "${PROJECT_BINARY_DIR}/include/" "" hdr ${hdr})
-  string(CONCAT ign_msgs_headers ${ign_msgs_headers} "#include <${hdr}>\n")
+  string(CONCAT gz_msgs_headers ${gz_msgs_headers} "#include <${hdr}>\n")
 endforeach()
 
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/MessageTypes.hh.in
