@@ -1,12 +1,12 @@
 load(
-    "//ign_bazel:build_defs.bzl",
+    "//gz_bazel:build_defs.bzl",
     "IGNITION_ROOT",
     "IGNITION_VISIBILITY",
     "cmake_configure_file",
     "generate_include_header",
     "generate_yaml",
-    "ign_config_header",
-    "ign_export_header",
+    "gz_config_header",
+    "gz_export_header",
 )
 load(
     ":gz_msg_gen.bzl",
@@ -35,7 +35,7 @@ PROJECT_MINOR = 0
 PROJECT_PATCH = 0
 
 # Generates config.hh based on the version numbers in CMake code.
-ign_config_header(
+gz_config_header(
     name = "config",
     src = "include/gz/msgs/config.hh.in",
     cmakelists = ["CMakeLists.txt"],
@@ -43,7 +43,7 @@ ign_config_header(
     project_version = (PROJECT_MAJOR, PROJECT_MINOR, PROJECT_PATCH),
 )
 
-ign_export_header(
+gz_export_header(
     name = "include/gz/msgs/Export.hh",
     export_base = "IGNITION_MSGS",
     lib_name = "ignition-msgs",
@@ -127,7 +127,7 @@ cc_library(
     includes = ["include"],
     deps = [
         ":gzmsgs_proto_cc",
-        IGNITION_ROOT + "ign_math",
+        IGNITION_ROOT + "gz_math",
         "@com_google_protobuf//:protobuf",
         "@tinyxml2",
     ],
@@ -154,7 +154,7 @@ cc_binary(
     data = [IGNITION_ROOT + "gz_msgs/test:desc/stringmsg.desc"],
     deps = [
         ":gz_msgs",
-        IGNITION_ROOT + "ign_math",
+        IGNITION_ROOT + "gz_math",
         IGNITION_ROOT + "gz_msgs/test:test_utils",
         "@gtest",
         "@gtest//:gtest_main",
