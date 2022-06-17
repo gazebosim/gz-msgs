@@ -1,6 +1,6 @@
 ##################################################
 # Build a custom protoc plugin
-ign_add_executable(gz_msgs_gen Generator.cc generator_main.cc)
+gz_add_executable(gz_msgs_gen Generator.cc generator_main.cc)
 target_link_libraries(gz_msgs_gen
   protobuf::libprotoc
   protobuf::libprotobuf)
@@ -183,17 +183,17 @@ message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_IN
 install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/gz/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR})
 
 # Install gz/msgs
-ign_install_includes(
+gz_install_includes(
   "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}"
   ${gen_headers})
 
 # Install gz/msgs/detail
-ign_install_includes(
+gz_install_includes(
   "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}/detail"
   ${gen_detail_headers})
 
 # Install ignition/msgs
-ign_install_includes(
+gz_install_includes(
   "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/msgs"
   ${gen_ign_headers})
 
@@ -206,13 +206,13 @@ endforeach()
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/MessageTypes.hh.in
   ${PROJECT_BINARY_DIR}/include/gz/msgs/MessageTypes.hh)
 
-ign_install_includes(
+gz_install_includes(
   "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}"
   "${PROJECT_BINARY_DIR}/include/gz/${IGN_DESIGNATION}/MessageTypes.hh")
 
 ##################################################
 # Build the main library
-ign_create_core_library(SOURCES
+gz_create_core_library(SOURCES
   ${gen_sources}
   ${PROJECT_SOURCE_DIR}/src/Factory.cc
   ${PROJECT_SOURCE_DIR}/src/Filesystem.cc
@@ -249,10 +249,10 @@ target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
 
 ##################################################
 # Build unit tests
-ign_get_libsources_and_unittests(sources gtest_sources)
+gz_get_libsources_and_unittests(sources gtest_sources)
 
 # Build the unit tests.
-ign_build_tests(TYPE UNIT
+gz_build_tests(TYPE UNIT
   SOURCES
     ${gtest_sources}
   LIB_DEPS

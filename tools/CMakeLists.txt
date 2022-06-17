@@ -14,5 +14,5 @@ endif()
 
 
 if (HAVE_IGN_TOOLS)
-  ign_build_tests(TYPE UNIT SOURCES ${test_sources})
+  gz_build_tests(TYPE UNIT SOURCES ${test_sources})
 endif ()
