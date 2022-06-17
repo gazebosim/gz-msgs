@@ -79,7 +79,7 @@ void cmdMsgList()
 
 //////////////////////////////////////////////////
 extern "C" GZ_MSGS_VISIBLE
-const char *ignitionMsgsVersion()
+const char *gzMsgsVersion()
 {
   return GZ_MSGS_VERSION_FULL;
 }

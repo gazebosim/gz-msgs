@@ -120,11 +120,11 @@ class Cmd
     end
 
     # Read the library version.
-    Importer.extern 'const char* ignitionMsgsVersion()'
+    Importer.extern 'const char* gzMsgsVersion()'
     begin
-      plugin_version = Importer.ignitionMsgsVersion.to_s
+      plugin_version = Importer.gzMsgsVersion.to_s
     rescue DLError
-      puts "Library error: Problem running 'ignitionMsgsVersion()' from #{plugin}."
+      puts "Library error: Problem running 'gzMsgsVersion()' from #{plugin}."
       exit(-1)
     end
 

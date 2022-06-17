@@ -35,7 +35,7 @@
 
 /// \file Utility.hh
 /// \brief Utility functions that support conversion between message type
-/// and ignition math types.
+/// and Gazebo Math types.
 
 namespace gz
 {

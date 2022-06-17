@@ -23,7 +23,7 @@ option java_outer_classname = "PointCloudPackedProtos";
 /// \ingroup gz.msgs
 /// \interface PointCloudPacked
 /// \brief This message is designed to mimic ROS sensor_msgs/PointCloud2 to
-/// facilitate transfer/conversion of data between ignition and ROS.
+/// facilitate transfer/conversion of data between Gazebo and ROS.
 ///
 /// See: http://docs.ros.org/melodic/api/sensor_msgs/html/msg/PointCloud2.html
 
