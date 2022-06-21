@@ -137,8 +137,8 @@ cc_library(
 cc_binary(
     name = "libignition-msgs.so",
     srcs = [
-        "src/ign.cc",
-        "src/ign.hh",
+        "src/gz.cc",
+        "src/gz.hh",
     ],
     includes = ["include"],
     linkshared = True,

@@ -178,7 +178,7 @@ gz_create_core_library(SOURCES
   ${gen_sources}
   ${PROJECT_SOURCE_DIR}/src/Factory.cc
   ${PROJECT_SOURCE_DIR}/src/Filesystem.cc
-  ${PROJECT_SOURCE_DIR}/src/ign.cc
+  ${PROJECT_SOURCE_DIR}/src/gz.cc
   ${PROJECT_SOURCE_DIR}/src/Utility.cc
   CXX_STANDARD 17)
 
@@ -219,7 +219,7 @@ gz_build_tests(TYPE UNIT
 )
 
 ##################################################
-# ign msgs command
+# gz msgs command
 if(NOT WIN32)
   add_subdirectory(cmd)
 endif()

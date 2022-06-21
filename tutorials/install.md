@@ -44,8 +44,8 @@ Miniconda suffices.
 
 Create if necessary, and activate a Conda environment:
 ```
-conda create -n ign-ws
-conda activate ign-ws
+conda create -n gz-ws
+conda activate gz-ws
 ```
 
 Install `ignition-msgs`:
@@ -132,7 +132,7 @@ Navigate to `condabin` if necessary to use the `conda` command (i.e., if Conda i
 
 Activate the Conda environment:
 ```
-conda activate ign-ws
+conda activate gz-ws
 ```
 
 Install prerequisites:

@@ -30,7 +30,7 @@ A workaround for a single package is to define the environment variable
 `GZ_CONFIG_PATH` to point to the location of the Ignition library installation,
 where the YAML file for the package is found, such as
 ```
-export GZ_CONFIG_PATH=/usr/local/share/ignition
+export GZ_CONFIG_PATH=/usr/local/share/gz
 ```
 
 However, that environment variable only takes a single path, which means if the
@@ -41,9 +41,9 @@ line is using symbolic links to each library's YAML file.
 ```
 mkdir ~/.ignition/tools/configs -p
 cd ~/.ignition/tools/configs/
-ln -s /usr/local/share/ignition/fuel8.yaml .
-ln -s /usr/local/share/ignition/transport12.yaml .
-ln -s /usr/local/share/ignition/transportlog12.yaml .
+ln -s /usr/local/share/gz/fuel8.yaml .
+ln -s /usr/local/share/gz/transport12.yaml .
+ln -s /usr/local/share/gz/transportlog12.yaml .
 ...
 export GZ_CONFIG_PATH=$HOME/.ignition/tools/configs
 ```
