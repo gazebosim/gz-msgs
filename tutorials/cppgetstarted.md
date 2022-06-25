@@ -65,7 +65,7 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 find_package(ignition-msgs9 QUIET REQUIRED)
 
 add_executable(ignition-msgs-example main.cc)
-target_link_libraries(ignition-msgs-example ${IGNITION-MSGS_LIBRARIES})
+target_link_libraries(ignition-msgs-example ${GZ-MSGS_LIBRARIES})
 ```
 
 Let's start by compiling the examples:
