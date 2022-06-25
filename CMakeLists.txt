@@ -88,8 +88,8 @@ gz_find_package(gz-math7 REQUIRED)
 set(GZ_MATH_VER ${gz-math7_VERSION_MAJOR})
 
 #--------------------------------------
-# Find if ign command is available
-find_program(HAVE_IGN_TOOLS ign)
+# Find if gz command is available
+find_program(HAVE_GZ_TOOLS gz)
 
 #--------------------------------------
 # Find Tinyxml2
@@ -101,7 +101,7 @@ gz_find_package(TINYXML2 REQUIRED PRIVATE PRETTY tinyxml2)
 gz_configure_build(QUIT_IF_BUILD_ERRORS)
 
 #============================================================================
-# ign command line support
+# gz command line support
 #============================================================================
 add_subdirectory(conf)
 

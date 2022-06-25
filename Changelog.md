@@ -104,7 +104,7 @@
 1. Adds PerformanceSensorMetrics proto message.
     * [Pull request #172](https://github.com/gazebosim/gz-msgs/pull/172)
 
-1. Detect ign instead of using cmake module to check for ignition-tools
+1. Detect gz instead of using cmake module to check for ignition-tools
     * [Pull request #166](https://github.com/gazebosim/gz-msgs/pull/166)
 
 1. Bazel build support
@@ -164,7 +164,7 @@
 1. Adds PerformanceSensorMetrics proto message.
     * [Pull request #172](https://github.com/gazebosim/gz-msgs/pull/172)
 
-1. Detect ign instead of using cmake module to check for ignition-tools
+1. Detect gz instead of using cmake module to check for ignition-tools
     * [Pull request #166](https://github.com/gazebosim/gz-msgs/pull/166)
 
 1. Bazel build support for ign-msgs6
@@ -280,7 +280,7 @@
 1. Adds PerformanceSensorMetrics proto message.
     * [Pull request #172](https://github.com/gazebosim/gz-msgs/pull/172)
 
-1. Detect ign instead of using cmake module to check for ignition-tools
+1. Detect gz instead of using cmake module to check for ignition-tools
     * [Pull request #166](https://github.com/gazebosim/gz-msgs/pull/166)
 
 1. Remove tools/code\_check and update codecov
@@ -499,7 +499,7 @@
 
 1. Updated `model.proto` with more documentation. Position, velocity, force,
    and acceleration information for joint have been moved to the `axis.proto`
-   message, see the Migration guide. The `ign.hh` header file is no longer
+   message, see the Migration guide. The `gz.hh` header file is no longer
    installed.
     * [BitBucket pull request 104](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/104)
 

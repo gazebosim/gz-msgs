@@ -36,7 +36,7 @@ COMMON_OPTIONS =
                '  --versions                 Show the available versions.'
 COMMANDS = {  'msg' =>
                   "Print information about ignition messages.\n\n" +
-                  "  ign msg [options]\n\n" +
+                  "  gz msg [options]\n\n" +
                   "Options:\n\n" +
                   "  -i [ --info ] arg          " +
                   "Get info about the specified message type.\n" +
@@ -151,7 +151,7 @@ class Cmd
         end
       else
         puts 'Command error: I do not have an implementation for '\
-             "command [ign #{options['command']}]."
+             "command [gz #{options['command']}]."
       end
     rescue
       puts "Library error: Problem running [#{options['command']}]() "\

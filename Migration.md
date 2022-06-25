@@ -87,7 +87,7 @@ release will remove the deprecated code.
 
 ### Removals
 
-1.  **include/gz/msgs/ign.hh** is no longer installed.
+1.  **include/gz/msgs/gz.hh** is no longer installed.
 
 ## Gazebo Msgs 2.X to 3.X
 
