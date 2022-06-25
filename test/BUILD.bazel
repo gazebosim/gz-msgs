@@ -1,5 +1,5 @@
 load(
-    "//ign_bazel:build_defs.bzl",
+    "//gz_bazel:build_defs.bzl",
     "IGNITION_ROOT",
     "IGNITION_VISIBILITY",
     "cmake_configure_file",
