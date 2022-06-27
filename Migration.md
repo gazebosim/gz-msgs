@@ -8,7 +8,7 @@ release will remove the deprecated code.
 ## Gazebo Msgs 8.X to 9.X
 
 1. **SuppressWarnings.hh** is deprecated and isn't part of `msgs.hh` anymore.
-   Use ign-utils instead.
+   Use gz-utils instead.
 2. Header files under `ignition/...` are deprecated and will be removed in future versions.
    Use `gz/...` instead.
 3. Protobuf messages and packages will no longer use `ignition.msgs`, use `gz.msgs` instead
@@ -137,8 +137,8 @@ release will remove the deprecated code.
 
 ### Modifications
 
-1. Use `ignition-math6` instead of `ignition-math5`.
-    This implies an indirect dependency on `ignition-cmake2` and cmake 3.10.2,
+1. Use `gz-math6` instead of `gz-math5`.
+    This implies an indirect dependency on `gz-cmake2` and cmake 3.10.2,
     which are not available on Ubuntu Xenial, so migration to Ubuntu Bionic may
     be required.
 

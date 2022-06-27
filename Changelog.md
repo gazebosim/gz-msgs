@@ -599,7 +599,7 @@
 1. Added inline versioned namespace. Generator.hh is no longer installed
     * [BitBucket pull request 59](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/59)
 
-1. Upgrade to ign-cmake1
+1. Upgrade to gz-cmake1
     * [BitBucket pull request 55](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/55)
 
 1. Extend Factory class

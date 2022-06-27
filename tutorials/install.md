@@ -3,7 +3,7 @@
 Next Tutorial: \ref cppgetstarted
 
 These instructions are for installing only Gazebo Messages.
-If you're interested in using all the Ignition libraries, check out this [Ignition installation](https://gazebosim.org/docs/latest/install).
+If you're interested in using all the Gazebo libraries, check out this [Gazebo installation](https://gazebosim.org/docs/latest/install).
 
 We recommend following the Binary Installation instructions to get up and running as quickly and painlessly as possible.
 
@@ -13,7 +13,7 @@ The Source Installation instructions should be used if you need the very latest 
 
 ## Ubuntu
 
-On Ubuntu systems, `apt-get` can be used to install `ignition-msgs`:
+On Ubuntu systems, `apt-get` can be used to install `gz-msgs`:
 ```
 sudo apt install libignition-msgs<#>-dev
 ```
@@ -48,7 +48,7 @@ conda create -n gz-ws
 conda activate gz-ws
 ```
 
-Install `ignition-msgs`:
+Install `gz-msgs`:
 ```
 conda install libignition-msgs<#> --channel conda-forge
 ```
@@ -104,7 +104,7 @@ sudo make uninstall
 
 3. Configure and build
   ```
-  cd ign-msgs
+  cd gz-msgs
   mkdir build
   cd build
   cmake ..
@@ -126,7 +126,7 @@ sudo make uninstall
 
 ### Prerequisites
 
-First, follow the [ign-cmake](https://github.com/gazebosim/gz-cmake) tutorial for installing Conda, Visual Studio, CMake, etc., prerequisites, and creating a Conda environment.
+First, follow the [gz-cmake](https://github.com/gazebosim/gz-cmake) tutorial for installing Conda, Visual Studio, CMake, etc., prerequisites, and creating a Conda environment.
 
 Navigate to `condabin` if necessary to use the `conda` command (i.e., if Conda is not in your `PATH` environment variable. You can find the location of `condabin` in Anaconda Prompt, `where conda`).
 
@@ -140,7 +140,7 @@ Install prerequisites:
 conda install tinyxml2 protobuf --channel conda-forge
 ```
 
-Install Ignition dependencies:
+Install Gazebo dependencies:
 
 You can view lists of dependencies:
 ```
@@ -164,7 +164,7 @@ This assumes you have created and activated a Conda environment while installing
 
 2. Configure and build
   ```
-  cd ign-msgs
+  cd gz-msgs
   mkdir build
   cd build
   cmake .. -DBUILD_TESTING=OFF  # Optionally, -DCMAKE_INSTALL_PREFIX=path\to\install
@@ -195,7 +195,7 @@ You can also generate the documentation from a clone of this repository by follo
 
 3. Configure and build the documentation.
   ```
-  cd ign-cmake
+  cd gz-cmake
   mkdir build
   cd build
   cmake ..
@@ -264,4 +264,4 @@ To run test coverage:
   firefox coverage/index.html
   ```
 
-See the [Writing Tests section of the Ignition documentation](https://gazebosim.org/docs/all/contributing#writing-tests) for help creating or modifying tests.
+See the [Writing Tests section of the Gazebo documentation](https://gazebosim.org/docs/all/contributing#writing-tests) for help creating or modifying tests.
