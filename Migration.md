@@ -15,6 +15,15 @@ release will remove the deprecated code.
 4. `INSTALL_IGN_MSGS_GEN_EXECUTABLE` and `IGN_MSGS_GEN_EXECUTABLE` are deprecated and will be removed. Use `INSTALL_GZ_MSGS_GEN_EXECUTABLE` and `GZ_MSGS_GEN_EXECUTABLE` instead.
 5. `IGN_DESCRIPTOR_PATH` is deprecated and will be removed. Use `GZ_DESCRIPTOR_PATH` instead.
 
+### Breaking Changes
+
+1. The project name has been changed to use the `gz-` prefix, you **must** use the `gz` prefix!
+  * This also means that any generated code that use the project name (e.g. CMake variables, in-source macros) would have to be migrated.
+  * Some non-exhaustive examples of this include:
+    * `GZ_<PROJECT>_<VISIBLE/HIDDEN>`
+    * CMake `-config` files
+    * Paths that depend on the project name
+
 ## Gazebo Msgs 8.1 to 8.2
 
 ### Modifications
