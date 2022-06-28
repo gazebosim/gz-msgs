@@ -96,7 +96,7 @@
 1. Support colcon in windows CI
     * [Pull request #189](https://github.com/gazebosim/gz-msgs/pull/189)
 
-1. 🥳 Update ign-tools issue on README
+1. 🥳 Update gz-tools issue on README
     * [Pull request #184](https://github.com/gazebosim/gz-msgs/pull/184)
 
 ### Gazebo Msgs 7.2.0 (2021-09-10)
@@ -104,7 +104,7 @@
 1. Adds PerformanceSensorMetrics proto message.
     * [Pull request #172](https://github.com/gazebosim/gz-msgs/pull/172)
 
-1. Detect gz instead of using cmake module to check for ignition-tools
+1. Detect gz instead of using cmake module to check for gz-tools
     * [Pull request #166](https://github.com/gazebosim/gz-msgs/pull/166)
 
 1. Bazel build support
@@ -164,7 +164,7 @@
 1. Adds PerformanceSensorMetrics proto message.
     * [Pull request #172](https://github.com/gazebosim/gz-msgs/pull/172)
 
-1. Detect gz instead of using cmake module to check for ignition-tools
+1. Detect gz instead of using cmake module to check for gz-tools
     * [Pull request #166](https://github.com/gazebosim/gz-msgs/pull/166)
 
 1. Bazel build support for gz-msgs6
@@ -272,7 +272,7 @@
 1. Fix trivial typo in command line help message
     * [Pull request #191](https://github.com/gazebosim/gz-msgs/pull/191)
 
-1. 🥳 Update ign-tools issue on README
+1. 🥳 Update gz-tools issue on README
     * [Pull request #184](https://github.com/gazebosim/gz-msgs/pull/184)
 
 ### Gazebo Msgs 5.8.0 (2021-08-06)
@@ -280,7 +280,7 @@
 1. Adds PerformanceSensorMetrics proto message.
     * [Pull request #172](https://github.com/gazebosim/gz-msgs/pull/172)
 
-1. Detect gz instead of using cmake module to check for ignition-tools
+1. Detect gz instead of using cmake module to check for gz-tools
     * [Pull request #166](https://github.com/gazebosim/gz-msgs/pull/166)
 
 1. Remove tools/code\_check and update codecov
@@ -608,4 +608,3 @@
 
 1. Add real\_time\_factor field to WorldStatistics
     * [BitBucket pull request 67](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/67)
-
