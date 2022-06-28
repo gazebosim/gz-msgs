@@ -8,12 +8,21 @@ release will remove the deprecated code.
 ## Gazebo Msgs 8.X to 9.X
 
 1. **SuppressWarnings.hh** is deprecated and isn't part of `msgs.hh` anymore.
-   Use ign-utils instead.
+   Use gz-utils instead.
 2. Header files under `ignition/...` are deprecated and will be removed in future versions.
    Use `gz/...` instead.
 3. Protobuf messages and packages will no longer use `ignition.msgs`, use `gz.msgs` instead
 4. `INSTALL_IGN_MSGS_GEN_EXECUTABLE` and `IGN_MSGS_GEN_EXECUTABLE` are deprecated and will be removed. Use `INSTALL_GZ_MSGS_GEN_EXECUTABLE` and `GZ_MSGS_GEN_EXECUTABLE` instead.
 5. `IGN_DESCRIPTOR_PATH` is deprecated and will be removed. Use `GZ_DESCRIPTOR_PATH` instead.
+
+### Breaking Changes
+
+1. The project name has been changed to use the `gz-` prefix, you **must** use the `gz` prefix!
+  * This also means that any generated code that use the project name (e.g. CMake variables, in-source macros) would have to be migrated.
+  * Some non-exhaustive examples of this include:
+    * `GZ_<PROJECT>_<VISIBLE/HIDDEN>`
+    * CMake `-config` files
+    * Paths that depend on the project name
 
 ## Gazebo Msgs 8.1 to 8.2
 
@@ -87,7 +96,7 @@ release will remove the deprecated code.
 
 ### Removals
 
-1.  **include/gz/msgs/ign.hh** is no longer installed.
+1.  **include/gz/msgs/gz.hh** is no longer installed.
 
 ## Gazebo Msgs 2.X to 3.X
 
@@ -137,8 +146,8 @@ release will remove the deprecated code.
 
 ### Modifications
 
-1. Use `ignition-math6` instead of `ignition-math5`.
-    This implies an indirect dependency on `ignition-cmake2` and cmake 3.10.2,
+1. Use `gz-math6` instead of `gz-math5`.
+    This implies an indirect dependency on `gz-cmake2` and cmake 3.10.2,
     which are not available on Ubuntu Xenial, so migration to Ubuntu Bionic may
     be required.
 

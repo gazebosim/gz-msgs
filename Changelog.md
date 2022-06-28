@@ -96,7 +96,7 @@
 1. Support colcon in windows CI
     * [Pull request #189](https://github.com/gazebosim/gz-msgs/pull/189)
 
-1. 🥳 Update ign-tools issue on README
+1. 🥳 Update gz-tools issue on README
     * [Pull request #184](https://github.com/gazebosim/gz-msgs/pull/184)
 
 ### Gazebo Msgs 7.2.0 (2021-09-10)
@@ -104,7 +104,7 @@
 1. Adds PerformanceSensorMetrics proto message.
     * [Pull request #172](https://github.com/gazebosim/gz-msgs/pull/172)
 
-1. Detect ign instead of using cmake module to check for ignition-tools
+1. Detect gz instead of using cmake module to check for gz-tools
     * [Pull request #166](https://github.com/gazebosim/gz-msgs/pull/166)
 
 1. Bazel build support
@@ -164,10 +164,10 @@
 1. Adds PerformanceSensorMetrics proto message.
     * [Pull request #172](https://github.com/gazebosim/gz-msgs/pull/172)
 
-1. Detect ign instead of using cmake module to check for ignition-tools
+1. Detect gz instead of using cmake module to check for gz-tools
     * [Pull request #166](https://github.com/gazebosim/gz-msgs/pull/166)
 
-1. Bazel build support for ign-msgs6
+1. Bazel build support for gz-msgs6
     * [Pull request #95](https://github.com/gazebosim/gz-msgs/pull/95)
 
 1. Remove tools/code_check and update codecov
@@ -272,7 +272,7 @@
 1. Fix trivial typo in command line help message
     * [Pull request #191](https://github.com/gazebosim/gz-msgs/pull/191)
 
-1. 🥳 Update ign-tools issue on README
+1. 🥳 Update gz-tools issue on README
     * [Pull request #184](https://github.com/gazebosim/gz-msgs/pull/184)
 
 ### Gazebo Msgs 5.8.0 (2021-08-06)
@@ -280,7 +280,7 @@
 1. Adds PerformanceSensorMetrics proto message.
     * [Pull request #172](https://github.com/gazebosim/gz-msgs/pull/172)
 
-1. Detect ign instead of using cmake module to check for ignition-tools
+1. Detect gz instead of using cmake module to check for gz-tools
     * [Pull request #166](https://github.com/gazebosim/gz-msgs/pull/166)
 
 1. Remove tools/code\_check and update codecov
@@ -499,7 +499,7 @@
 
 1. Updated `model.proto` with more documentation. Position, velocity, force,
    and acceleration information for joint have been moved to the `axis.proto`
-   message, see the Migration guide. The `ign.hh` header file is no longer
+   message, see the Migration guide. The `gz.hh` header file is no longer
    installed.
     * [BitBucket pull request 104](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/104)
 
@@ -583,7 +583,7 @@
 
 ### Gazebo Msgs 2.1.0
 
-1. Upgrade to ign-math6
+1. Upgrade to gz-math6
     * [BitBucket pull request 138](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/138)
 
 
@@ -599,7 +599,7 @@
 1. Added inline versioned namespace. Generator.hh is no longer installed
     * [BitBucket pull request 59](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/59)
 
-1. Upgrade to ign-cmake1
+1. Upgrade to gz-cmake1
     * [BitBucket pull request 55](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/55)
 
 1. Extend Factory class
@@ -608,4 +608,3 @@
 
 1. Add real\_time\_factor field to WorldStatistics
     * [BitBucket pull request 67](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/67)
-

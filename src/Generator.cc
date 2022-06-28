@@ -204,10 +204,9 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print("#include \"gz/msgs/Factory.hh\"\n", "name",
                   "includes");
 
-    // Call the IGN_REGISTER_STATIC_MSG macro for each message
     for (auto i = 0; i < _file->message_type_count(); ++i)
     {
-      std::string factory = "IGN_REGISTER_STATIC_MSG(\"gz_msgs.";
+      std::string factory = "GZ_REGISTER_STATIC_MSG(\"gz_msgs.";
       factory += _file->message_type(i)->name() + "\", " +
         _file->message_type(i)->name() +")\n";
       printer.Print(factory.c_str(), "name", "includes");

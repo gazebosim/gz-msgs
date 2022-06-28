@@ -36,7 +36,7 @@ namespace gz
   {
     // Inline bracket to help doxygen filtering.
     inline namespace GZ_MSGS_VERSION_NAMESPACE {
-    /// \brief Left and right trim a string. This was copied from ignition
+    /// \brief Left and right trim a string. This was copied from Gazebo
     /// common, ign-common/Util.hh, to avoid adding another dependency.
     /// Remove this function if ign-common ever becomes a dependency.
     /// \param[in] _s String to trim
@@ -54,7 +54,7 @@ namespace gz
       return _s;
     }
 
-    /// \brief Splits a string into tokens. This was copied from ignition
+    /// \brief Splits a string into tokens. This was copied from Gazebo
     /// common, ign-common/Util.hh, to avoid adding another dependency.
     /// Remove this function if ign-common every becomes a dependency.
     /// \param[in] _str Input string.
@@ -136,10 +136,10 @@ namespace gz
                   << _sc.surface_model()
                   << "]. Using default." << std::endl;
       }
-      out.SetLatitudeReference(IGN_DTOR(_sc.latitude_deg()));
-      out.SetLongitudeReference(IGN_DTOR(_sc.longitude_deg()));
+      out.SetLatitudeReference(GZ_DTOR(_sc.latitude_deg()));
+      out.SetLongitudeReference(GZ_DTOR(_sc.longitude_deg()));
       out.SetElevationReference(_sc.elevation());
-      out.SetHeadingOffset(IGN_DTOR(_sc.heading_deg()));
+      out.SetHeadingOffset(GZ_DTOR(_sc.heading_deg()));
       return out;
     }
 

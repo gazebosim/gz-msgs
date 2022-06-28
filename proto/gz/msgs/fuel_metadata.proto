@@ -22,7 +22,7 @@ option java_outer_classname = "FuelMetadata";
 
 /// \ingroup gz.msgs
 /// \interface FuelMetadata
-/// \brief Meta data for an ignition Fuel resource, such as a model or world.
+/// \brief Meta data for a Gazebo Fuel resource, such as a model or world.
 
 import "gz/msgs/version.proto";
 import "gz/msgs/version_range.proto";
