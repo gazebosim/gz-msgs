@@ -180,7 +180,7 @@ gz_create_core_library(SOURCES
   ${PROJECT_SOURCE_DIR}/src/Filesystem.cc
   ${PROJECT_SOURCE_DIR}/src/gz.cc
   ${PROJECT_SOURCE_DIR}/src/Utility.cc
-  CXX_STANDARD 17)
+)
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   PRIVATE ${CMAKE_CURRENT_BINARY_DIR})

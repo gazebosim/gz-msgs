@@ -18,7 +18,7 @@
 #include <string>
 #include <gtest/gtest.h>
 #include <gz/msgs/config.hh>
-#include "gz/msgs/test_config.h"
+#include "test_config.hh"
 
 #ifdef _MSC_VER
 #    define popen _popen
