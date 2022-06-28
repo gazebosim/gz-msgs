@@ -167,7 +167,7 @@
 1. Detect gz instead of using cmake module to check for ignition-tools
     * [Pull request #166](https://github.com/gazebosim/gz-msgs/pull/166)
 
-1. Bazel build support for ign-msgs6
+1. Bazel build support for gz-msgs6
     * [Pull request #95](https://github.com/gazebosim/gz-msgs/pull/95)
 
 1. Remove tools/code_check and update codecov
@@ -583,7 +583,7 @@
 
 ### Gazebo Msgs 2.1.0
 
-1. Upgrade to ign-math6
+1. Upgrade to gz-math6
     * [BitBucket pull request 138](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/138)
 
 
