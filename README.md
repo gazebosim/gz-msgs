@@ -14,7 +14,7 @@ Ubuntu Focal | [![Build Status](https://build.osrfoundation.org/buildStatus/icon
 Homebrew      | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=ignition_msgs-ci-main-homebrew-amd64)](https://build.osrfoundation.org/job/ignition_msgs-ci-main-homebrew-amd64)
 Windows       | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-ci-win)](https://build.osrfoundation.org/job/gz_msgs-ci-win)
 
-Gazebo Messages is a component in the [Ignition](http://gazebosim.org)
+Gazebo Messages is a component in the [Gazebo](http://gazebosim.org)
 framework, a set of libraries designed to rapidly develop robot applications.
 
 ## Installation
@@ -24,10 +24,10 @@ See the [installation tutorial](https://gazebosim.org/api/msgs/7.0/install.html)
 ## Known issue of command line tools
 
 In the event that the installation is a mix of Debian and from source, command
-line tools from `ign-tools` may not work correctly.
+line tools from `gz-tools` may not work correctly.
 
 A workaround for a single package is to define the environment variable
-`GZ_CONFIG_PATH` to point to the location of the Ignition library installation,
+`GZ_CONFIG_PATH` to point to the location of the Gazebo library installation,
 where the YAML file for the package is found, such as
 ```
 export GZ_CONFIG_PATH=/usr/local/share/gz
@@ -36,7 +36,7 @@ export GZ_CONFIG_PATH=/usr/local/share/gz
 However, that environment variable only takes a single path, which means if the
 installations from source are in different locations, only one can be specified.
 
-Another workaround for working with multiple Ignition libraries on the command
+Another workaround for working with multiple Gazebo libraries on the command
 line is using symbolic links to each library's YAML file.
 ```
 mkdir ~/.ignition/tools/configs -p
