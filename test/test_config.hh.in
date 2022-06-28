@@ -15,8 +15,8 @@
  *
 */
 
-#ifndef GZ_MSGS_TEST_CONFIG_H_
-#define GZ_MSGS_TEST_CONFIG_H_
+#ifndef GZ_MSGS_TEST_CONFIG_HH_
+#define GZ_MSGS_TEST_CONFIG_HH_
 
 #define PROJECT_SOURCE_PATH "${PROJECT_SOURCE_DIR}"
 #define GZ_CONFIG_PATH "@CMAKE_BINARY_DIR@/test/conf"
@@ -53,4 +53,4 @@
   }
 #endif
 
-#endif
+#endif  // GZ_MSGS_TEST_CONFIG_HH_
