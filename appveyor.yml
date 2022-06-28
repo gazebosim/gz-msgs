@@ -21,7 +21,7 @@ install:
   - cd ../..
   # ign-math
   - git clone https://github.com/gazebosim/gz-math -b main
-  - cd ign-math
+  - cd gz-math
   - md build
   - cd build
   - cmake .. -DBUILD_TESTING=Off
