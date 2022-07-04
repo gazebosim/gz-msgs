@@ -24,6 +24,5 @@ option java_package = "com.ignition.msgs";
 message ParameterName
 {
   /// \brief Parameter name.
-  // TODO(ivanpauno): Maybe use `stringmsg.proto` instead (?).
   string name = 1;
 };

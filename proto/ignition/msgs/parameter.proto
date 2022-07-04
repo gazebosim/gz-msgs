@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/any.proto";
+
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
 
@@ -26,9 +28,6 @@ message Parameter
   /// \brief Parameter name.
   string name = 1;
 
-  /// \brief Parameter type, i.e. the associated protobuf type.
-  string type = 2;
-
-  /// \brief Serialized protobuf message.
-  bytes value = 3;
+  /// \brief Serialized parameter value.
+  google.protobuf.Any value = 2;
 };
