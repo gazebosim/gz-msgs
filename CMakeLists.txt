@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(ignition-msgs8 VERSION 8.4.0)
+project(ignition-msgs8 VERSION 8.5.0)
 
 #============================================================================
 # Find ignition-cmake
@@ -15,6 +15,12 @@ find_package(ignition-cmake2 2.8.0 REQUIRED)
 # Configure the project
 #============================================================================
 ign_configure_project(VERSION_SUFFIX)
+
+if (UNIX AND NOT APPLE)
+  set (EXTRA_TEST_LIB_DEPS stdc++fs)
+else()
+  set (EXTRA_TEST_LIB_DEPS)
+endif()
 
 #============================================================================
 # Set project-specific options
@@ -69,8 +75,11 @@ ign_find_package(ignition-math6 REQUIRED VERSION 6.5)
 set(IGN_MATH_VER ${ignition-math6_VERSION_MAJOR})
 
 #--------------------------------------
-# Find if ign command is available
+# Find if command is available. This is used to enable tests.
+# Note that CLI files are installed regardless of whether the dependency is
+# available during build time
 find_program(HAVE_IGN_TOOLS ign)
+set(IGN_TOOLS_VER 1)
 
 #--------------------------------------
 # Find Tinyxml2

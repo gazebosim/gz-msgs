@@ -15,6 +15,8 @@
  *
 */
 
+#include <filesystem>
+#include <fstream>
 #include <string>
 #include <gtest/gtest.h>
 #include <ignition/msgs/config.hh>
@@ -87,6 +89,36 @@ TEST(CmdLine, MsgInfo)
     "--force-version " + g_version);
   EXPECT_NE(std::string::npos, output.find("message WorldControl {"))
     << output;
+}
+
+/////////////////////////////////////////////////
+TEST(CmdLine, MsgHelpVsCompletionFlags)
+{
+  // Flags in help message
+  auto helpOutput = custom_exec_str("ign msg --help --force-version "
+    + g_version);
+
+  // Call the output function in the bash completion script
+  std::filesystem::path scriptPath = PROJECT_SOURCE_PATH;
+  scriptPath = scriptPath / "src" / "cmd" / "msgs.bash_completion.sh";
+
+  // Equivalent to:
+  // sh -c "bash -c \". /path/to/msgs.bash_completion.sh; _gz_msgs_flags\""
+  std::string cmd = "bash -c \". " + scriptPath.string() + "; _gz_msgs_flags\"";
+  std::string scriptOutput = custom_exec_str(cmd);
+
+  // Tokenize script output
+  std::istringstream iss(scriptOutput);
+  std::vector<std::string> flags((std::istream_iterator<std::string>(iss)),
+    std::istream_iterator<std::string>());
+
+  EXPECT_GT(flags.size(), 0u);
+
+  // Match each flag in script output with help message
+  for (std::string flag : flags)
+  {
+    EXPECT_NE(std::string::npos, helpOutput.find(flag)) << helpOutput;
+  }
 }
 
 /////////////////////////////////////////////////

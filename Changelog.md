@@ -1,5 +1,22 @@
 ## Ignition Msgs 8.x
 
+### Ignition Msgs 8.5.0 (2022-06-23)
+
+1. Add entity plugin v proto file
+    * [Pull request #261](https://github.com/gazebosim/gz-msgs/pull/261)
+
+1. Bash completion for flags
+    * [Pull request #254](https://github.com/gazebosim/gz-msgs/pull/254)
+
+1. Remove dead files
+    * [Pull request #255](https://github.com/gazebosim/gz-msgs/pull/255)
+
+1. Fix typo REGRESION/REGRESSION
+    * [Pull request #247](https://github.com/gazebosim/gz-msgs/pull/247)
+
+1. Generator: Add missing std namespace to string arguments
+    * [Pull request #242](https://github.com/gazebosim/gz-msgs/pull/242)
+
 ### Ignition Msgs 8.4.0 (2022-04-06)
 
 1. Add Dataframe msg
