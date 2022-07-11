@@ -18,7 +18,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 gz_configure_project(
-  REPLACE_GZ_INCLUDE_PATH gz/msgs
+  REPLACE_INCLUDE_PATH gz/msgs
   VERSION_SUFFIX pre1)
 
 #============================================================================
@@ -30,12 +30,12 @@ gz_configure_project(
 # generator compiled for the target machine cannot be used to generate
 # the C++ code corresponding to the .proto definition. For this scenario,
 # the following two options can be used as follows.
-# First of all, ign-msgs is compiled targeting the host machine, and in the
+# First of all, gz-msgs is compiled targeting the host machine, and in the
 # build targeting the host, the INSTALL_GZ_MSGS_GEN_EXECUTABLE option is
 # enabled:
 # > cmake -DINSTALL_GZ_MSGS_GEN_EXECUTABLE:BOOL=ON ..
 # ensuring that the gz_msgs_gen is installed in
-# <host_install_prefix>/bin/gz_msgs_gen . Then, the same version of ign-msgs
+# <host_install_prefix>/bin/gz_msgs_gen . Then, the same version of gz-msgs
 # can be cross-compiled, and in the cross-compilation build the location of the
 # host gz_msgs_gen is specified via the GZ_MSGS_GEN_EXECUTABLE
 # CMake cache variable:
