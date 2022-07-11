@@ -120,7 +120,7 @@ bool Generator::Generate(const FileDescriptor *_file,
         _generatorContext->OpenForInsert(sourceFilename, "includes"));
     io::Printer printer(output.get(), '$');
 
-    // Add the ign-msgs Factory header
+    // Add the gz-msgs Factory header
     printer.Print("#include \"gz/msgs/Factory.hh\"\n", "name",
                   "includes");
 
