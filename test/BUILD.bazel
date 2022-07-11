@@ -1,12 +1,12 @@
 load(
     "//gz_bazel:build_defs.bzl",
-    "IGNITION_ROOT",
-    "IGNITION_VISIBILITY",
+    "GZ_ROOT",
+    "GZ_VISIBILITY",
     "cmake_configure_file",
 )
 
 package(
-    default_visibility = IGNITION_VISIBILITY,
+    default_visibility = GZ_VISIBILITY,
     features = [
         "-layering_check",
     ],
@@ -48,7 +48,7 @@ cc_library(
         ],
         deps = [
             ":test_utils",
-            IGNITION_ROOT + "gz_msgs",
+            GZ_ROOT + "gz_msgs",
             "@gtest",
             "@gtest//:gtest_main",
         ],

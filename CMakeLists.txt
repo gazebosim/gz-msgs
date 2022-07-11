@@ -18,7 +18,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 gz_configure_project(
-  REPLACE_IGNITION_INCLUDE_PATH gz/msgs
+  REPLACE_GZ_INCLUDE_PATH gz/msgs
   VERSION_SUFFIX pre1)
 
 #============================================================================
@@ -44,13 +44,13 @@ gz_configure_project(
 # TODO(CH3): Deprecated. Remove IGN_MSGS CMake variables on tick-tock.
 if(INSTALL_IGN_MSGS_GEN_EXECUTABLE)
   message(WARNING "INSTALL_IGN_MSGS_GEN_EXECUTABLE is deprecated, use INSTALL_GZ_MSGS_GEN_EXECUTABLE instead")
-  set(INSTALL_GZ_MSGS_GEN_EXECUTABLE INSTALL_IGN_MSGS_GEN_EXECUTABLE)
+  set(INSTALL_GZ_MSGS_GEN_EXECUTABLE ${INSTALL_IGN_MSGS_GEN_EXECUTABLE})
 else()
   option(
     INSTALL_GZ_MSGS_GEN_EXECUTABLE
     "Install the gz_msgs_gen executable."
     OFF)
-  set(INSTALL_IGN_MSGS_GEN_EXECUTABLE INSTALL_GZ_MSGS_GEN_EXECUTABLE)
+  set(INSTALL_IGN_MSGS_GEN_EXECUTABLE ${INSTALL_GZ_MSGS_GEN_EXECUTABLE})
 endif()
 
 mark_as_advanced(INSTALL_IGN_MSGS_GEN_EXECUTABLE)
@@ -79,7 +79,7 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
 #--------------------------------------
 # Find Protobuf
 set(REQ_PROTOBUF_VER 3)
-gz_find_package(IgnProtobuf
+gz_find_package(GzProtobuf
                  VERSION ${REQ_PROTOBUF_VER}
                  REQUIRED
                  COMPONENTS all
@@ -118,7 +118,7 @@ add_subdirectory(tools)
 #============================================================================
 # TODO: Consider tweaking gz_configure_build() to call add_subdirectory(proto)
 # whenever a proto subdirectory exists. This could be used alongside
-# gz_msgs_protoc to get uniform support for proto messages across all ignition
+# gz_msgs_protoc to get uniform support for proto messages across all Gazebo
 # projects.
 add_subdirectory(proto)
 

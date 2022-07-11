@@ -1,7 +1,7 @@
 load(
     "//gz_bazel:build_defs.bzl",
-    "IGNITION_ROOT",
-    "IGNITION_VISIBILITY",
+    "GZ_ROOT",
+    "GZ_VISIBILITY",
     "cmake_configure_file",
     "generate_include_header",
     "generate_yaml",
@@ -15,7 +15,7 @@ load(
 )
 
 package(
-    default_visibility = IGNITION_VISIBILITY,
+    default_visibility = GZ_VISIBILITY,
     features = [
         "-parse_headers",
         "-layering_check",
@@ -45,8 +45,8 @@ gz_config_header(
 
 gz_export_header(
     name = "include/gz/msgs/Export.hh",
-    export_base = "IGNITION_MSGS",
-    lib_name = "ignition-msgs",
+    export_base = "GZ_MSGS",
+    lib_name = "gz-msgs",
     visibility = ["//visibility:private"],
 )
 
@@ -127,7 +127,7 @@ cc_library(
     includes = ["include"],
     deps = [
         ":gzmsgs_proto_cc",
-        IGNITION_ROOT + "gz_math",
+        GZ_ROOT + "gz_math",
         "@com_google_protobuf//:protobuf",
         "@tinyxml2",
     ],
@@ -135,7 +135,7 @@ cc_library(
 
 # use shared library only when absolutely needd
 cc_binary(
-    name = "libignition-msgs.so",
+    name = "libgz-msgs.so",
     srcs = [
         "src/gz.cc",
         "src/gz.hh",
@@ -151,11 +151,11 @@ cc_binary(
 [cc_test(
     name = src.replace("/", "_").replace(".cc", "").replace("src_", ""),
     srcs = [src],
-    data = [IGNITION_ROOT + "gz_msgs/test:desc/stringmsg.desc"],
+    data = [GZ_ROOT + "gz_msgs/test:desc/stringmsg.desc"],
     deps = [
         ":gz_msgs",
-        IGNITION_ROOT + "gz_math",
-        IGNITION_ROOT + "gz_msgs/test:test_utils",
+        GZ_ROOT + "gz_math",
+        GZ_ROOT + "gz_msgs/test:test_utils",
         "@gtest",
         "@gtest//:gtest_main",
     ],
@@ -171,7 +171,7 @@ cmake_configure_file(
     out = "cmdmsgs.rb",
     cmakelists = ["CMakeLists.txt"],
     defines = [
-        "library_location=libignition-msgs.so",
+        "library_location=libgz-msgs.so",
         "PROJECT_VERSION_FULL=%d.%d.%d" % (PROJECT_MAJOR, PROJECT_MINOR, PROJECT_PATCH),  # noqa
         "IGN_LIBRARY_NAME=%s" % [PROJECT_NAME],
     ],
