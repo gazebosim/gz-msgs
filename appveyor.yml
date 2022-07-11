@@ -11,7 +11,7 @@ environment:
 install:
   - vcpkg install protobuf
   - vcpkg install tinyxml2
-  # ign-cmake
+  # gz-cmake
   - git clone https://github.com/gazebosim/gz-cmake -b main
   - cd gz-cmake
   - md build
@@ -19,7 +19,7 @@ install:
   - cmake .. -DBUILD_TESTING=Off
   - cmake --build . --target INSTALL
   - cd ../..
-  # ign-math
+  # gz-math
   - git clone https://github.com/gazebosim/gz-math -b main
   - cd gz-math
   - md build

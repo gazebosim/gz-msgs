@@ -36,8 +36,8 @@ namespace gz
     // Inline bracket to help doxygen filtering.
     inline namespace GZ_MSGS_VERSION_NAMESPACE {
     /// \brief Left and right trim a string. This was copied from Gazebo
-    /// common, ign-common/Util.hh, to avoid adding another dependency.
-    /// Remove this function if ign-common ever becomes a dependency.
+    /// common, gz-common/Util.hh, to avoid adding another dependency.
+    /// Remove this function if gz-common ever becomes a dependency.
     /// \param[in] _s String to trim
     /// \return Trimmed string
     std::string trimmed(std::string _s)
@@ -54,8 +54,8 @@ namespace gz
     }
 
     /// \brief Splits a string into tokens. This was copied from Gazebo
-    /// common, ign-common/Util.hh, to avoid adding another dependency.
-    /// Remove this function if ign-common every becomes a dependency.
+    /// common, gz-common/Util.hh, to avoid adding another dependency.
+    /// Remove this function if gz-common every becomes a dependency.
     /// \param[in] _str Input string.
     /// \param[in] _delim Token delimiter.
     /// \return Vector of tokens.

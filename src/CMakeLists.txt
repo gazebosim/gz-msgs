@@ -5,7 +5,7 @@ target_link_libraries(gz_msgs_gen
   protobuf::libprotoc
   protobuf::libprotobuf)
 target_include_directories(gz_msgs_gen PRIVATE ${PROTOBUF_INCLUDE_DIR})
-target_compile_features(gz_msgs_gen PRIVATE ${IGN_CXX_11_FEATURES})
+target_compile_features(gz_msgs_gen PRIVATE ${GZ_CXX_11_FEATURES})
 
 if (UNIX)
   target_link_libraries(gz_msgs_gen pthread)
@@ -13,10 +13,10 @@ endif()
 
 if(INSTALL_GZ_MSGS_GEN_EXECUTABLE)
   set_target_properties(gz_msgs_gen PROPERTIES VERSION ${PROJECT_VERSION_FULL})
-  install(TARGETS gz_msgs_gen DESTINATION ${IGN_BIN_INSTALL_DIR})
+  install(TARGETS gz_msgs_gen DESTINATION ${GZ_BIN_INSTALL_DIR})
 
   # TODO(chapulina) Deprecated. Remove on v10.
-  install(FILES $<TARGET_FILE:gz_msgs_gen> DESTINATION ${IGN_BIN_INSTALL_DIR} RENAME ign_msgs_gen PERMISSIONS OWNER_EXECUTE)
+  install(FILES $<TARGET_FILE:gz_msgs_gen> DESTINATION ${GZ_BIN_INSTALL_DIR} RENAME ign_msgs_gen PERMISSIONS OWNER_EXECUTE)
 endif()
 
 ##################################################
@@ -148,14 +148,14 @@ endif()
 set_source_files_properties(${gen_headers} ${gen_sources} ${gen_ruby_scripts}
   PROPERTIES GENERATED TRUE)
 
-message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR}")
-install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR})
+message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/ruby/ignition/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}")
+install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/ruby/ignition/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR})
 
-message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/gz/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR}")
-install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/gz/${IGN_DESIGNATION}${PROJECT_VERSION_MAJOR})
+message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/ruby/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}")
+install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/ruby/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR})
 
 gz_install_includes(
-  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}"
+  "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${GZ_DESIGNATION}"
   ${gen_headers})
 
 ##################################################
@@ -169,8 +169,8 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/MessageTypes.hh.in
   ${PROJECT_BINARY_DIR}/include/gz/msgs/MessageTypes.hh)
 
 gz_install_includes(
-  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}"
-  "${PROJECT_BINARY_DIR}/include/gz/${IGN_DESIGNATION}/MessageTypes.hh")
+  "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${GZ_DESIGNATION}"
+  "${PROJECT_BINARY_DIR}/include/gz/${GZ_DESIGNATION}/MessageTypes.hh")
 
 ##################################################
 # Build the main library
