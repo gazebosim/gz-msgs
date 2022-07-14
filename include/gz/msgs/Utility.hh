@@ -44,27 +44,27 @@ namespace gz
     // Inline bracket to help doxygen filtering.
     inline namespace GZ_MSGS_VERSION_NAMESPACE {
     //
-    /// \brief Convert a msgs::Vector3d to an gz::math::Vector
+    /// \brief Convert a msgs::Vector3d to a gz::math::Vector
     /// \param[in] _v The vector to convert
-    /// \return An gz::math::Vector3d object
+    /// \return A gz::math::Vector3d object
     GZ_MSGS_VISIBLE
     gz::math::Vector3d Convert(const msgs::Vector3d &_v);
 
-    /// \brief Convert a msgs::Vector2d to an gz::math::Vector2d
+    /// \brief Convert a msgs::Vector2d to a gz::math::Vector2d
     /// \param[in] _v The vector2 to convert
-    /// \return An gz::math::Vector2d object
+    /// \return A gz::math::Vector2d object
     GZ_MSGS_VISIBLE
     gz::math::Vector2d Convert(const msgs::Vector2d &_v);
 
-    /// \brief Convert a msgs::Quaternion to an gz::math::Quaterniond
+    /// \brief Convert a msgs::Quaternion to a gz::math::Quaterniond
     /// \param[in] _q The quaternion to convert
-    /// \return An gz::math::Quaterniond object
+    /// \return A gz::math::Quaterniond object
     GZ_MSGS_VISIBLE
     gz::math::Quaterniond Convert(const msgs::Quaternion &_q);
 
-    /// \brief Convert a msgs::Pose to an gz::math::Pose3d
+    /// \brief Convert a msgs::Pose to a gz::math::Pose3d
     /// \param[in] _p The pose to convert
-    /// \return An gz::math::Pose3d object
+    /// \return A gz::math::Pose3d object
     GZ_MSGS_VISIBLE
     gz::math::Pose3d Convert(const msgs::Pose &_p);
 
@@ -74,22 +74,22 @@ namespace gz
     GZ_MSGS_VISIBLE
     math::Color Convert(const msgs::Color &_c);
 
-    /// \brief Convert a msgs::PlaneGeom to an gz::math::Planed
+    /// \brief Convert a msgs::PlaneGeom to a gz::math::Planed
     /// \param[in] _p The plane to convert
-    /// \return An gz::math::Planed object
+    /// \return A gz::math::Planed object
     GZ_MSGS_VISIBLE
     gz::math::Planed Convert(const msgs::PlaneGeom &_p);
 
-    /// \brief Convert a msgs::Inertial to an gz::math::Inertiald
+    /// \brief Convert a msgs::Inertial to a gz::math::Inertiald
     /// \param[in] _i The inertial to convert
-    /// \return An gz::math::Inertiald object
+    /// \return A gz::math::Inertiald object
     GZ_MSGS_VISIBLE
     math::Inertiald Convert(const msgs::Inertial &_i);
 
     /// \brief Convert a msgs::SphericalCoordinates to an
     /// gz::math::SphericalCoordinates
     /// \param[in] _coord The spherical coordinates to convert
-    /// \return An gz::math::SphericalCoordinates object
+    /// \return A gz::math::SphericalCoordinates object
     GZ_MSGS_VISIBLE
     math::SphericalCoordinates Convert(
         const msgs::SphericalCoordinates &_coord);
@@ -97,14 +97,14 @@ namespace gz
     /// \brief Convert a msgs::AxisAlignedBox to an
     /// gz::math::AxisAlignedBox
     /// \param[in] _b The axis aligned box to convert
-    /// \return An gz::math::AxisAlignedBox object
+    /// \return A gz::math::AxisAlignedBox object
     GZ_MSGS_VISIBLE
     math::AxisAlignedBox Convert(const msgs::AxisAlignedBox &_b);
 
     /// \brief Convert gz::math::AxisAlignedBox to
     /// msgs::AxisAlignedBox.
     /// \param[in] _b The axis aligned box to convert
-    /// \return An gz::math::AxisAlignedBox object
+    /// \return A gz::math::AxisAlignedBox object
     GZ_MSGS_VISIBLE
     msgs::AxisAlignedBox Convert(const math::AxisAlignedBox &_b);
 
@@ -327,27 +327,27 @@ namespace gz
     GZ_MSGS_VISIBLE
     std::string ConvertShaderType(const msgs::Material::ShaderType &_type);
 
-    /// \brief Set a msgs::Vector3d from an gz::math::Vector3d
+    /// \brief Set a msgs::Vector3d from a gz::math::Vector3d
     /// \param[out] _pt A msgs::Vector3d pointer
-    /// \param[in] _v An gz::math::Vector3d reference
+    /// \param[in] _v A gz::math::Vector3d reference
     GZ_MSGS_VISIBLE
     void Set(msgs::Vector3d *_pt, const gz::math::Vector3d &_v);
 
-    /// \brief Set a msgs::Vector2d from an gz::math::Vector2d
+    /// \brief Set a msgs::Vector2d from a gz::math::Vector2d
     /// \param[out] _pt A msgs::Vector2d pointer
-    /// \param[in] _v An gz::math::Vector2d reference
+    /// \param[in] _v A gz::math::Vector2d reference
     GZ_MSGS_VISIBLE
     void Set(msgs::Vector2d *_pt, const gz::math::Vector2d &_v);
 
-    /// \brief Set a msgs::Quaternion from an gz::math::Quaterniond
+    /// \brief Set a msgs::Quaternion from a gz::math::Quaterniond
     /// \param[out] _q A msgs::Quaternion pointer
-    /// \param[in] _v An gz::math::Quaterniond reference
+    /// \param[in] _v A gz::math::Quaterniond reference
     GZ_MSGS_VISIBLE
     void Set(msgs::Quaternion *_q, const gz::math::Quaterniond &_v);
 
-    /// \brief Set a msgs::Pose from an gz::math::Pose3d
+    /// \brief Set a msgs::Pose from a gz::math::Pose3d
     /// \param[out] _p A msgs::Pose pointer
-    /// \param[in] _v An gz::math::Pose3d reference
+    /// \param[in] _v A gz::math::Pose3d reference
     GZ_MSGS_VISIBLE
     void Set(msgs::Pose *_p, const gz::math::Pose3d &_v);
 
@@ -377,9 +377,9 @@ namespace gz
     void Set(msgs::SphericalCoordinates *_sc,
         const math::SphericalCoordinates &_m);
 
-    /// \brief Set a msgs::Plane from an gz::math::Planed
+    /// \brief Set a msgs::Plane from a gz::math::Planed
     /// \param[out] _p A msgs::Plane pointer
-    /// \param[in] _v An gz::math::Planed reference
+    /// \param[in] _v A gz::math::Planed reference
     GZ_MSGS_VISIBLE
     void Set(msgs::PlaneGeom *_p, const gz::math::Planed &_v);
 
