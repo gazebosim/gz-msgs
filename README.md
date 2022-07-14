@@ -9,7 +9,7 @@
 
 Build | Status
 -- | --
-Test coverage | [![codecov](https://codecov.io/gh/ignitionrobotics/ign-msgs/branch/ign-msgs5/graph/badge.svg)](https://codecov.io/gh/ignitionrobotics/ign-msgs)
+Test coverage | [![codecov](https://codecov.io/gh/gazebosim/gz-msgs/branch/ign-msgs5/graph/badge.svg)](https://codecov.io/gh/gazebosim/gz-msgs/branch/ign-msgs5)
 Ubuntu Bionic | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=ignition_msgs-ci-ign-msgs5-bionic-amd64)](https://build.osrfoundation.org/job/ignition_msgs-ci-ign-msgs5-bionic-amd64)
 Homebrew      | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=ignition_msgs-ci-ign-msgs5-homebrew-amd64)](https://build.osrfoundation.org/job/ignition_msgs-ci-ign-msgs5-homebrew-amd64)
 Windows       | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=ignition_msgs-ci-ign-msgs5-windows7-amd64)](https://build.osrfoundation.org/job/ignition_msgs-ci-ign-msgs5-windows7-amd64)
@@ -34,4 +34,3 @@ export IGN_CONFIG_PATH=/usr/local/share/ignition
 ```
 
 This issue is tracked [here](https://github.com/ignitionrobotics/ign-tools/issues/61).
-
