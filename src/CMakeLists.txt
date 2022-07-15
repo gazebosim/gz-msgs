@@ -100,7 +100,7 @@ function(gz_msgs_protoc)
   add_custom_command(
     OUTPUT ${output_files}
     COMMAND Python3::Interpreter
-    ARGS tools/gz_msgs_generate
+    ARGS tools/gz_msgs_generate.py
       --protoc-exec "$<TARGET_FILE:${gz_msgs_protoc_PROTOC_EXEC}>"
       --gz-generator-bin "$<TARGET_FILE:gz_msgs_gen>"
       --generate-cpp "${gz_msgs_protoc_GENERATE_CPP}"
