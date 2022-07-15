@@ -15,7 +15,7 @@ The Source Installation instructions should be used if you need the very latest 
 
 On Ubuntu systems, `apt-get` can be used to install `gz-msgs`:
 ```
-sudo apt install libignition-msgs<#>-dev
+sudo apt install libgz-msgs<#>-dev
 ```
 
 Be sure to replace `<#>` with a number value, such as 2 or 3, depending on
@@ -31,7 +31,7 @@ On macOS, add OSRF packages:
 
 Install Gazebo Msgs:
   ```
-  brew install ignition-msgs<#>
+  brew install gz-msgs<#>
   ```
 
 Be sure to replace `<#>` with a number value, such as 1 or 2, depending on
@@ -50,7 +50,7 @@ conda activate gz-ws
 
 Install `gz-msgs`:
 ```
-conda install libignition-msgs<#> --channel conda-forge
+conda install libgz-msgs<#> --channel conda-forge
 ```
 
 Be sure to replace `<#>` with a number value, such as 2 or 3, depending on
@@ -64,7 +64,7 @@ which version you need.
 
 Install required dependencies as follows:
 ```
-sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev libignition-math7-dev
+sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev libgz-math7-dev
 ```
 
 ### Building from Source
@@ -97,7 +97,7 @@ sudo make uninstall
 
 2. Install dependencies
   ```
-  brew install --only-dependencies ignition-msgs<#>
+  brew install --only-dependencies gz-msgs<#>
   ```
   Be sure to replace `<#>` with a number value, such as 1 or 2, depending on
   which version you need.
@@ -144,12 +144,12 @@ Install Gazebo dependencies:
 
 You can view lists of dependencies:
 ```
-conda search libignition-msgs* --channel conda-forge --info
+conda search libgz-msgs* --channel conda-forge --info
 ```
 
 Install dependencies, replacing `<#>` with the desired versions:
 ```
-conda install libignition-cmake<#> libignition-math<#> libignition-tools<#> --channel conda-forge
+conda install libgz-cmake<#> libgz-math<#> libgz-tools<#> --channel conda-forge
 ```
 
 ### Building from Source
