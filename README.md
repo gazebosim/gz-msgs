@@ -33,4 +33,4 @@ where the YAML file for the package is found, such as
 export IGN_CONFIG_PATH=/usr/local/share/ignition
 ```
 
-This issue is tracked [here](https://github.com/gazebosim/ign-tools/issues/61).
+This issue is tracked [here](https://github.com/gazebosim/gz-tools/issues/61).
