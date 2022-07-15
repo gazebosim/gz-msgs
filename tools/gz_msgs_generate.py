@@ -56,7 +56,8 @@ def main(argv=sys.argv[1:]):
     try:
         subprocess.check_call(cmd)
     except subprocess.CalledProcessError as e:
-        pass
+        print(f'Failed to execute protoc compiler: {e}')
+        sys.exit(-1)
 
     # Move original generated cpp to detail/
     proto_file = os.path.splitext(os.path.relpath(args.input_path, args.proto_path))[0]
@@ -68,7 +69,6 @@ def main(argv=sys.argv[1:]):
     detail_proto_file.insert(-1, 'detail')
     detail_proto_file = os.path.join(*detail_proto_file)
 
-    source = os.path.join(args.output_cpp_path, proto_file + ".pb.cc")
     header = os.path.join(args.output_cpp_path, proto_file + ".pb.h")
     gz_header = os.path.join(args.output_cpp_path, proto_file + ".gz.h")
     detail_header = os.path.join(args.output_cpp_path, detail_proto_file + ".pb.h")
