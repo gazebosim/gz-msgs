@@ -68,6 +68,9 @@ message Entity
 
     /// \brief Actor
     ACTOR = 8;
+
+    /// \brief World
+    WORLD = 9;
   }
 
   /// \brief Optional header data
