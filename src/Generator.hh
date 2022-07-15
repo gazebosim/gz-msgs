@@ -43,6 +43,7 @@ class Generator : public CodeGenerator
   /// \param[in] _parameter Unused string value
   /// \param[in] _generatorContext Output directory.
   /// \param[in] _error Unused string value
+  /// \return true if successful, otherwise sets _error and returns false
   public: virtual bool Generate(const FileDescriptor *_file,
               const std::string &_parameter,
               OutputDirectory *_generatorContext,
@@ -51,7 +52,6 @@ class Generator : public CodeGenerator
   // private: GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Generator);
 };
 /// \endcond
-
 }
 }
 }
