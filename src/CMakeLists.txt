@@ -34,14 +34,25 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter)
 #   OUTPUT_RUBY_DIR     - Path where Ruby files are saved
 #   OUTPUT_INCLUDES     - A CMake variable name containing a list that the C++ header path should be appended to
 #   OUTPUT_CPP_HH_VAR   - A CMake variable name containing a list that the C++ header path should be appended to
-#   OUTPUT_IGN_CPP_HH_VAR - A CMake variable name containing a list that the C++ header path should be appended to
+#   OUTPUT_GZ_CPP_HH_VAR - A CMake variable name containing a list that the C++ header path should be appended to
 #   OUTPUT_CPP_CC_VAR   - A Cmake variable name containing a list that the C++ source path should be appended to
 #   OUTPUT_RUBY_VAR     - A Cmake variable name containing a list that the ruby file should be apenned to
 # Multi value arguments
 #   PROTO_PATH          - Passed to protoc --proto_path
 function(gz_msgs_protoc)
   set(options GENERATE_RUBY GENERATE_CPP)
-  set(oneValueArgs PROTO_PACKAGE PROTOC_EXEC INPUT_PROTO OUTPUT_CPP_DIR OUTPUT_RUBY_DIR OUTPUT_INCLUDES OUTPUT_CPP_HH_VAR OUTPUT_IGN_CPP_HH_VAR OUTPUT_DETAIL_CPP_HH_VAR OUTPUT_CPP_CC_VAR OUTPUT_RUBY_VAR)
+  set(oneValueArgs
+    PROTO_PACKAGE
+    PROTOC_EXEC
+    INPUT_PROTO
+    OUTPUT_CPP_DIR
+    OUTPUT_RUBY_DIR
+    OUTPUT_INCLUDES
+    OUTPUT_CPP_HH_VAR
+    OUTPUT_GZ_CPP_HH_VAR
+    OUTPUT_DETAIL_CPP_HH_VAR
+    OUTPUT_CPP_CC_VAR
+    OUTPUT_RUBY_VAR)
   set(multiValueArgs PROTO_PATH)
 
   cmake_parse_arguments(gz_msgs_protoc "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -73,7 +84,7 @@ function(gz_msgs_protoc)
 
     list(APPEND ${gz_msgs_protoc_OUTPUT_CPP_HH_VAR} ${output_header})
     list(APPEND ${gz_msgs_protoc_OUTPUT_CPP_CC_VAR} ${output_source})
-    list(APPEND ${gz_msgs_protoc_OUTPUT_IGN_CPP_HH_VAR} ${output_ign_header})
+    list(APPEND ${gz_msgs_protoc_OUTPUT_GZ_CPP_HH_VAR} ${output_ign_header})
     list(APPEND ${gz_msgs_protoc_OUTPUT_DETAIL_CPP_HH_VAR} ${output_detail_header})
 
     list(APPEND output_files ${output_header})
@@ -82,7 +93,7 @@ function(gz_msgs_protoc)
     list(APPEND output_files ${output_source})
 
     set(${gz_msgs_protoc_OUTPUT_INCLUDES} ${${gz_msgs_protoc_OUTPUT_INCLUDES}} PARENT_SCOPE)
-    set(${gz_msgs_protoc_OUTPUT_IGN_CPP_HH_VAR} ${${gz_msgs_protoc_OUTPUT_IGN_CPP_HH_VAR}} PARENT_SCOPE)
+    set(${gz_msgs_protoc_OUTPUT_GZ_CPP_HH_VAR} ${${gz_msgs_protoc_OUTPUT_GZ_CPP_HH_VAR}} PARENT_SCOPE)
     set(${gz_msgs_protoc_OUTPUT_DETAIL_CPP_HH_VAR} ${${gz_msgs_protoc_OUTPUT_DETAIL_CPP_HH_VAR}} PARENT_SCOPE)
     set(${gz_msgs_protoc_OUTPUT_CPP_HH_VAR} ${${gz_msgs_protoc_OUTPUT_CPP_HH_VAR}} PARENT_SCOPE)
     set(${gz_msgs_protoc_OUTPUT_CPP_CC_VAR} ${${gz_msgs_protoc_OUTPUT_CPP_CC_VAR}} PARENT_SCOPE)
@@ -146,7 +157,7 @@ foreach(proto_file ${proto_files})
       gen_headers
     OUTPUT_DETAIL_CPP_HH_VAR
       gen_detail_headers
-    OUTPUT_IGN_CPP_HH_VAR
+    OUTPUT_GZ_CPP_HH_VAR
       gen_ign_headers
     OUTPUT_CPP_CC_VAR
       gen_sources
@@ -189,12 +200,12 @@ gz_install_includes(
 
 # Install gz/msgs/detail
 gz_install_includes(
-  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}/detail"
+  "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}/detail"
   ${gen_detail_headers})
 
 # Install ignition/msgs
 gz_install_includes(
-  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/msgs"
+  "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/msgs"
   ${gen_ign_headers})
 
 ##################################################
