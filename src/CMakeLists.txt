@@ -113,6 +113,8 @@ function(gz_msgs_protoc)
     DEPENDS
       ${ABS_FIL}
       gz_msgs_gen
+    # While the script is executed in the source directory, it does not write
+    # to the source tree.  All outputs are stored in the build directory.
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     COMMENT "Running protoc on ${gz_msgs_protoc_INPUT_PROTO}"
     VERBATIM
