@@ -12,7 +12,10 @@ if (MSVC)
   list(REMOVE_ITEM test_sources gz_TEST.cc)
 endif()
 
-
 if (HAVE_GZ_TOOLS)
-  gz_build_tests(TYPE UNIT SOURCES ${test_sources})
+  gz_build_tests(
+    TYPE UNIT
+    SOURCES ${test_sources}
+    LIB_DEPS
+      ${EXTRA_TEST_LIB_DEPS})
 endif ()
