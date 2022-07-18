@@ -19,6 +19,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 gz_configure_project(VERSION_SUFFIX pre1)
 
+if (UNIX AND NOT APPLE)
+  set (EXTRA_TEST_LIB_DEPS stdc++fs)
+else()
+  set (EXTRA_TEST_LIB_DEPS)
+endif()
+
 #============================================================================
 # Set project-specific options
 #============================================================================
@@ -89,8 +95,11 @@ gz_find_package(gz-math7 REQUIRED)
 set(GZ_MATH_VER ${gz-math7_VERSION_MAJOR})
 
 #--------------------------------------
-# Find if gz command is available
+# Find if command is available. This is used to enable tests.
+# Note that CLI files are installed regardless of whether the dependency is
+# available during build time
 find_program(HAVE_GZ_TOOLS gz)
+set(GZ_TOOLS_VER 1)
 
 #--------------------------------------
 # Find Tinyxml2
