@@ -31,34 +31,12 @@
 
 #include "gz/msgs/config.hh"
 #include "gz/msgs/Export.hh"
-
-#include "gz/msgs/axis_aligned_box.pb.h"
-#include "gz/msgs/boolean.pb.h"
-#include "gz/msgs/color.pb.h"
-#include "gz/msgs/discovery.pb.h"
-#include "gz/msgs/double.pb.h"
-#include "gz/msgs/float.pb.h"
-#include "gz/msgs/fuel_metadata.pb.h"
-#include "gz/msgs/geometry.pb.h"
-#include "gz/msgs/inertial.pb.h"
-#include "gz/msgs/int32.pb.h"
-#include "gz/msgs/int64.pb.h"
-#include "gz/msgs/joint.pb.h"
-#include "gz/msgs/material.pb.h"
-#include "gz/msgs/planegeom.pb.h"
-#include "gz/msgs/pointcloud_packed.pb.h"
-#include "gz/msgs/pose.pb.h"
-#include "gz/msgs/quaternion.pb.h"
-#include "gz/msgs/spherical_coordinates.pb.h"
-#include "gz/msgs/stringmsg.pb.h"
-#include "gz/msgs/uint32.pb.h"
-#include "gz/msgs/uint64.pb.h"
-#include "gz/msgs/vector2d.pb.h"
-#include "gz/msgs/vector3d.pb.h"
+#include "gz/msgs/MessageTypes.hh"
 
 /// \file Utility.hh
 /// \brief Utility functions that support conversion between message type
 /// and Gazebo Math types.
+
 namespace gz
 {
   namespace msgs

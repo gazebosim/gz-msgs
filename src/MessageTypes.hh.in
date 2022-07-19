@@ -23,16 +23,8 @@
 #ifndef GZ_MSGS_MESSAGE_TYPES_HH_
 #define GZ_MSGS_MESSAGE_TYPES_HH_
 
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4100 4512 4127 4068 4244 4267 4251 4146)
-#endif
+#pragma message("Don't include top level headers like MessageTypes.hh")
 
 @gz_msgs_headers@
-
-
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
 
 #endif
