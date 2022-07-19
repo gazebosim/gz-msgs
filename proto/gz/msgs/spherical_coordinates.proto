@@ -33,42 +33,42 @@ message SphericalCoordinates
   enum SurfaceModel
   {
     /// \brief World Geodetic System 1984
-    EARTH_WGS84 = 0;
+    EARTH_WGS84                   = 0;
 
     /// \brief Model of the moon, based on the Selenographic
     /// coordinate system, see wikipedia: Selenographic
     /// Coordinate System.
-    MOON_SCS = 1;
+    MOON_SCS                      = 1;
 
     /// \brief Custom surface type
-    CUSTOM_SURFACE = 2;
+    CUSTOM_SURFACE                = 2;
   }
 
   /// \brief Optional header data.
-  Header header                = 3;
+  Header header                   = 3;
 
   /// \brief Planetary surface model.
-  SurfaceModel surface_model   = 4;
+  SurfaceModel surface_model      = 4;
 
   /// \brief Latitude in degrees.
-  double latitude_deg          = 5;
+  double latitude_deg             = 5;
 
   /// \brief Longitude in degrees.
-  double longitude_deg         = 6;
+  double longitude_deg            = 6;
 
   /// \brief Elevation in meters.
-  double elevation             = 7;
+  double elevation                = 7;
 
   /// \brief Heading in degrees.
-  double heading_deg           = 8;
+  double heading_deg              = 8;
 
   /// \brief Entity that the coordinates apply to.
   /// If not set, defaults to the world origin.
-  Entity entity                = 9;
+  Entity entity                   = 9;
 
   /// \brief Equatorial axis in meters.
-  double axis_equatorial       = 10;
+  double surface_axis_equatorial = 10;
 
   /// \brief Polar axis in meters.
-  double axis_polar            = 11;
+  double surface_axis_polar      = 11;
 }

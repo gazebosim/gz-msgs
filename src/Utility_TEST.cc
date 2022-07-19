@@ -297,6 +297,8 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
   EXPECT_DOUBLE_EQ(2.2, msgCustom.longitude_deg());
   EXPECT_DOUBLE_EQ(3.3, msgCustom.elevation());
   EXPECT_DOUBLE_EQ(0.4, msgCustom.heading_deg());
+  EXPECT_DOUBLE_EQ(12000, msgCustom.surface_axis_equatorial());
+  EXPECT_DOUBLE_EQ(10000, msgCustom.surface_axis_polar());
 
   auto mathCustom = msgs::Convert(msgCustom);
 
@@ -306,6 +308,8 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
   EXPECT_DOUBLE_EQ(2.2, mathCustom.LongitudeReference().Degree());
   EXPECT_DOUBLE_EQ(3.3, mathCustom.ElevationReference());
   EXPECT_DOUBLE_EQ(0.4, mathCustom.HeadingOffset().Degree());
+  EXPECT_DOUBLE_EQ(12000, mathCustom.SurfaceAxisEquatorial());
+  EXPECT_DOUBLE_EQ(10000, mathCustom.SurfaceAxisPolar());
 }
 
 /////////////////////////////////////////////////

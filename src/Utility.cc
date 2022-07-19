@@ -136,7 +136,7 @@ namespace gz
       if (_sc.surface_model() == msgs::SphericalCoordinates::CUSTOM_SURFACE)
       {
         out.SetSurface(math::SphericalCoordinates::CUSTOM_SURFACE,
-            _sc.axis_equatorial(), _sc.axis_polar());
+            _sc.surface_axis_equatorial(), _sc.surface_axis_polar());
       }
       else
       {
@@ -487,8 +487,8 @@ namespace gz
       if (_m.Surface() == math::SphericalCoordinates::CUSTOM_SURFACE)
       {
         _sc->set_surface_model(msgs::SphericalCoordinates::CUSTOM_SURFACE);
-        _sc->set_axis_equatorial(_m.SurfaceAxisEquatorial());
-        _sc->set_axis_polar(_m.SurfaceAxisPolar());
+        _sc->set_surface_axis_equatorial(_m.SurfaceAxisEquatorial());
+        _sc->set_surface_axis_polar(_m.SurfaceAxisPolar());
       }
       else
       {
