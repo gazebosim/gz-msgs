@@ -268,6 +268,29 @@
 
 ## Gazebo Msgs 5.x
 
+### Gazebo Msgs 5.10.0 (2022-07-18)
+
+1. Add entity wrench message
+    * [Pull request #274](https://github.com/gazebosim/gz-msgs/pull/274)
+
+1. Ignition -> Gazebo
+    * [Pull request #273](https://github.com/gazebosim/gz-msgs/pull/273)
+
+1. Add ACTOR and WORLD types to entity
+    * [Pull request #275](https://github.com/gazebosim/gz-msgs/pull/275)
+
+1. Bash completion for flags
+    * [Pull request #254](https://github.com/gazebosim/gz-msgs/pull/254)
+
+1. Remove dead files
+    * [Pull request #255](https://github.com/gazebosim/gz-msgs/pull/255)
+
+1. Fix typo REGRESION/REGRESSION
+    * [Pull request #247](https://github.com/gazebosim/gz-msgs/pull/247)
+
+1. Generator: Add missing std namespace to string arguments
+    * [Pull request #242](https://github.com/gazebosim/gz-msgs/pull/242)
+
 ### Gazebo Msgs 5.9.0 (2022-03-16)
 
 1. Backport NavSat message for ROS bridge compatibility
