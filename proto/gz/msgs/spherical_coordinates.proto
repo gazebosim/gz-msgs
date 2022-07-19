@@ -45,30 +45,30 @@ message SphericalCoordinates
   }
 
   /// \brief Optional header data.
-  Header header                   = 3;
+  Header header                   = 1;
 
   /// \brief Planetary surface model.
-  SurfaceModel surface_model      = 4;
+  SurfaceModel surface_model      = 2;
 
   /// \brief Latitude in degrees.
-  double latitude_deg             = 5;
+  double latitude_deg             = 3;
 
   /// \brief Longitude in degrees.
-  double longitude_deg            = 6;
+  double longitude_deg            = 4;
 
   /// \brief Elevation in meters.
-  double elevation                = 7;
+  double elevation                = 5;
 
   /// \brief Heading in degrees.
-  double heading_deg              = 8;
+  double heading_deg              = 6;
 
   /// \brief Entity that the coordinates apply to.
   /// If not set, defaults to the world origin.
-  Entity entity                   = 9;
+  Entity entity                   = 7;
 
   /// \brief Equatorial axis in meters.
-  double surface_axis_equatorial = 10;
+  double surface_axis_equatorial  = 8;
 
   /// \brief Polar axis in meters.
-  double surface_axis_polar      = 11;
+  double surface_axis_polar       = 9;
 }

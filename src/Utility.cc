@@ -129,11 +129,11 @@ namespace gz
       {
         out.SetSurface(math::SphericalCoordinates::EARTH_WGS84);
       }
-      if (_sc.surface_model() == msgs::SphericalCoordinates::MOON_SCS)
+      else if (_sc.surface_model() == msgs::SphericalCoordinates::MOON_SCS)
       {
         out.SetSurface(math::SphericalCoordinates::MOON_SCS);
       }
-      if (_sc.surface_model() == msgs::SphericalCoordinates::CUSTOM_SURFACE)
+      else if (_sc.surface_model() == msgs::SphericalCoordinates::CUSTOM_SURFACE)
       {
         out.SetSurface(math::SphericalCoordinates::CUSTOM_SURFACE,
             _sc.surface_axis_equatorial(), _sc.surface_axis_polar());
@@ -480,11 +480,11 @@ namespace gz
       {
         _sc->set_surface_model(msgs::SphericalCoordinates::EARTH_WGS84);
       }
-      if (_m.Surface() == math::SphericalCoordinates::MOON_SCS)
+      else if (_m.Surface() == math::SphericalCoordinates::MOON_SCS)
       {
         _sc->set_surface_model(msgs::SphericalCoordinates::MOON_SCS);
       }
-      if (_m.Surface() == math::SphericalCoordinates::CUSTOM_SURFACE)
+      else if (_m.Surface() == math::SphericalCoordinates::CUSTOM_SURFACE)
       {
         _sc->set_surface_model(msgs::SphericalCoordinates::CUSTOM_SURFACE);
         _sc->set_surface_axis_equatorial(_m.SurfaceAxisEquatorial());
