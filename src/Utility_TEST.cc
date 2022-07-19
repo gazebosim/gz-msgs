@@ -264,7 +264,8 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
       math::SphericalCoordinates::SurfaceType::MOON_SCS,
       GZ_DTOR(1.1), GZ_DTOR(2.2), 3.3, GZ_DTOR(0.4)));
 
-  EXPECT_EQ(msgs::SphericalCoordinates::MOON_SCS, msgMoon.surface_model());
+  EXPECT_EQ(msgs::SphericalCoordinates::MOON_SCS,
+      msgMoon.surface_model());
   EXPECT_DOUBLE_EQ(1.1, msgMoon.latitude_deg());
   EXPECT_DOUBLE_EQ(2.2, msgMoon.longitude_deg());
   EXPECT_DOUBLE_EQ(3.3, msgMoon.elevation());
@@ -272,7 +273,8 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
 
   auto mathMoon = msgs::Convert(msgMoon);
 
-  EXPECT_EQ(math::SphericalCoordinates::MOON_SCS, mathMoon.Surface());
+  EXPECT_EQ(math::SphericalCoordinates::MOON_SCS,
+      mathMoon.Surface());
   EXPECT_DOUBLE_EQ(1.1, mathMoon.LatitudeReference().Degree());
   EXPECT_DOUBLE_EQ(2.2, mathMoon.LongitudeReference().Degree());
   EXPECT_DOUBLE_EQ(3.3, mathMoon.ElevationReference());
@@ -289,7 +291,8 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
 
   auto msgCustom = msgs::Convert(sc);
 
-  EXPECT_EQ(msgs::SphericalCoordinates::CUSTOM_SURFACE, msgCustom.surface_model());
+  EXPECT_EQ(msgs::SphericalCoordinates::CUSTOM_SURFACE,
+      msgCustom.surface_model());
   EXPECT_DOUBLE_EQ(1.1, msgCustom.latitude_deg());
   EXPECT_DOUBLE_EQ(2.2, msgCustom.longitude_deg());
   EXPECT_DOUBLE_EQ(3.3, msgCustom.elevation());
@@ -297,7 +300,8 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
 
   auto mathCustom = msgs::Convert(msgCustom);
 
-  EXPECT_EQ(math::SphericalCoordinates::CUSTOM_SURFACE, mathCustom.Surface());
+  EXPECT_EQ(math::SphericalCoordinates::CUSTOM_SURFACE,
+      mathCustom.Surface());
   EXPECT_DOUBLE_EQ(1.1, mathCustom.LatitudeReference().Degree());
   EXPECT_DOUBLE_EQ(2.2, mathCustom.LongitudeReference().Degree());
   EXPECT_DOUBLE_EQ(3.3, mathCustom.ElevationReference());
@@ -539,7 +543,8 @@ TEST(MsgsTest, SetSphericalCoordinates)
       math::SphericalCoordinates::SurfaceType::MOON_SCS,
       GZ_DTOR(1.2), GZ_DTOR(2.3), 3.4, GZ_DTOR(0.5)));
 
-  EXPECT_EQ(msgs::SphericalCoordinates::MOON_SCS, msgMoon.surface_model());
+  EXPECT_EQ(msgs::SphericalCoordinates::MOON_SCS,
+      msgMoon.surface_model());
   EXPECT_DOUBLE_EQ(1.2, msgMoon.latitude_deg());
   EXPECT_DOUBLE_EQ(2.3, msgMoon.longitude_deg());
   EXPECT_DOUBLE_EQ(3.4, msgMoon.elevation());
