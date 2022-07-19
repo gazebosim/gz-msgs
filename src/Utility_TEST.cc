@@ -18,7 +18,8 @@
 #include <gtest/gtest.h>
 #include <limits>
 #include <gz/math/Helpers.hh>
-#include "gz/msgs/MessageTypes.hh"
+
+#include "gz/msgs/wrench.pb.h"
 #include "gz/msgs/Utility.hh"
 
 using namespace gz;

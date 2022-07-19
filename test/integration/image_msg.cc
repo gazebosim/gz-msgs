@@ -16,7 +16,7 @@
 */
 #include <gtest/gtest.h>
 
-#include "gz/msgs/MessageTypes.hh"
+#include "gz/msgs/image.pb.h"
 
 /////////////////////////////////////////////////
 TEST(Image, PixelFormat)
