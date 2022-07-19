@@ -19,7 +19,9 @@
 #include <algorithm>
 #include <cstddef>
 
-#include "gz/msgs/MessageTypes.hh"
+#include "gz/msgs/vector3d.pb.h"
+#include "gz/msgs/serialized_map.pb.h"
+
 #include "gz/msgs/Factory.hh"
 #include "test_config.hh"
 
