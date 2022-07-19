@@ -129,6 +129,15 @@ namespace gz
       {
         out.SetSurface(math::SphericalCoordinates::EARTH_WGS84);
       }
+      if (_sc.surface_model() == msgs::SphericalCoordinates::MOON_SCS)
+      {
+        out.SetSurface(math::SphericalCoordinates::MOON_SCS);
+      }
+      if (_sc.surface_model() == msgs::SphericalCoordinates::CUSTOM_SURFACE)
+      {
+        out.SetSurface(math::SphericalCoordinates::CUSTOM_SURFACE,
+            _sc.axis_equatorial(), _sc.axis_polar());
+      }
       else
       {
         std::cerr << "Unrecognized spherical surface type ["
@@ -470,6 +479,16 @@ namespace gz
       if (_m.Surface() == math::SphericalCoordinates::EARTH_WGS84)
       {
         _sc->set_surface_model(msgs::SphericalCoordinates::EARTH_WGS84);
+      }
+      if (_m.Surface() == math::SphericalCoordinates::MOON_SCS)
+      {
+        _sc->set_surface_model(msgs::SphericalCoordinates::MOON_SCS);
+      }
+      if (_m.Surface() == math::SphericalCoordinates::CUSTOM_SURFACE)
+      {
+        _sc->set_surface_model(msgs::SphericalCoordinates::CUSTOM_SURFACE);
+        _sc->set_axis_equatorial(_m.SurfaceAxisEquatorial());
+        _sc->set_axis_polar(_m.SurfaceAxisPolar());
       }
       else
       {
