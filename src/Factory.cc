@@ -166,7 +166,7 @@ class DynamicFactory
     {
       msgType.replace(0, 8, "gz");
       std::cerr << "Trying to create deprecated message type ["
-                << _msgType << "]. Use [" << msgType << "] instead."
+                << _msgType << "]. Using [" << msgType << "] instead."
                 << std::endl;
     }
 
@@ -241,7 +241,7 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
   {
     msgType.replace(0, 8, "gz");
     std::cerr << "Trying to create deprecated message type ["
-              << _msgType << "]. Use [" << msgType << "] instead."
+              << _msgType << "]. Using [" << msgType << "] instead."
               << std::endl;
   }
 
@@ -285,7 +285,7 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
   {
     msgType.replace(0, 8, "gz");
     std::cerr << "Trying to create deprecated message type ["
-              << _msgType << "]. Use [" << msgType << "] instead."
+              << _msgType << "]. Using [" << msgType << "] instead."
               << std::endl;
   }
 
