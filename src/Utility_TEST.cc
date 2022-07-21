@@ -554,6 +554,27 @@ TEST(MsgsTest, SetSphericalCoordinates)
   EXPECT_DOUBLE_EQ(2.3, msgMoon.longitude_deg());
   EXPECT_DOUBLE_EQ(3.4, msgMoon.elevation());
   EXPECT_DOUBLE_EQ(0.5, msgMoon.heading_deg());
+
+  // For a custom surface.
+  msgs::SphericalCoordinates msgCustom;
+  auto sc = math::SphericalCoordinates(
+      math::SphericalCoordinates::CUSTOM_SURFACE,
+      12000, 10000);
+  sc.SetLatitudeReference(GZ_DTOR(1.9));
+  sc.SetLongitudeReference(GZ_DTOR(2.8));
+  sc.SetElevationReference(3.7);
+  sc.SetHeadingOffset(GZ_DTOR(0.6));
+
+  msgs::Set(&msgCustom, sc);
+
+  EXPECT_EQ(msgs::SphericalCoordinates::CUSTOM_SURFACE,
+      msgCustom.surface_model());
+  EXPECT_DOUBLE_EQ(1.9, msgCustom.latitude_deg());
+  EXPECT_DOUBLE_EQ(2.8, msgCustom.longitude_deg());
+  EXPECT_DOUBLE_EQ(3.7, msgCustom.elevation());
+  EXPECT_DOUBLE_EQ(0.6, msgCustom.heading_deg());
+  EXPECT_DOUBLE_EQ(12000, msgCustom.surface_axis_equatorial());
+  EXPECT_DOUBLE_EQ(10000, msgCustom.surface_axis_polar());
 }
 
 /////////////////////////////////////////////////
