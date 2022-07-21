@@ -69,8 +69,8 @@ namespace gz
                 {
                   msgType.replace(0, 8, "gz");
                   std::cerr << "Trying to create deprecated message type ["
-                            << _msgType << "]. Using [" << msgType << "] instead."
-                            << std::endl;
+                            << _msgType << "]. Using [" << msgType
+                            << "] instead." << std::endl;
                 }
                 return std::unique_ptr<T>(
                     static_cast<T*>(New(msgType).release()));
@@ -90,8 +90,8 @@ namespace gz
                 {
                   msgType.replace(0, 8, "gz");
                   std::cerr << "Trying to create deprecated message type ["
-                            << _msgType << "]. Using [" << msgType << "] instead."
-                            << std::endl;
+                            << _msgType << "]. Using [" << msgType
+                            << "] instead." << std::endl;
                 }
                 return std::unique_ptr<T>(
                     static_cast<T*>(New(msgType, _args).release()));
