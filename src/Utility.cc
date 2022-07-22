@@ -52,31 +52,6 @@ namespace ignition
       return _s;
     }
 
-    /// \brief Splits a string into tokens. This was copied from ignition
-    /// common, ign-common/Util.hh, to avoid adding another dependency.
-    /// Remove this function if ign-common every becomes a dependency.
-    /// \param[in] _str Input string.
-    /// \param[in] _delim Token delimiter.
-    /// \return Vector of tokens.
-    std::vector<std::string> split(const std::string &_str,
-        const std::string &_delim)
-    {
-      std::vector<std::string> tokens;
-      char *saveptr;
-      char *str = strdup(_str.c_str());
-
-      auto token = ignstrtok(str, _delim.c_str(), &saveptr);
-
-      while (token)
-      {
-        tokens.push_back(token);
-        token = ignstrtok(NULL, _delim.c_str(), &saveptr);
-      }
-
-      free(str);
-      return tokens;
-    }
-
     /////////////////////////////////////////////
     ignition::math::Vector3d Convert(const msgs::Vector3d &_v)
     {
