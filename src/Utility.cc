@@ -780,10 +780,12 @@ namespace ignition
             case msgs::PointCloudPacked::Field::FLOAT64:
               offset += 8;
               break;
+            // LCOV_EXCL_START
             default:
               std::cerr << "PointCloudPacked field datatype of ["
                 << _type << "] is invalid.\n";
               break;
+            // LCOV_EXCL_STOP
           }
         };
 
@@ -1005,6 +1007,14 @@ namespace ignition
       }
       meta.set_name(trimmed(elem->GetText()));
 
+      // Read the version, if present.
+      elem = modelElement->FirstChildElement("version");
+      if (elem && elem->GetText())
+      {
+        auto version = std::stoi(trimmed(elem->GetText()));
+        meta.set_version(version);
+      }
+
       // Read the description, if present.
       elem = modelElement->FirstChildElement("description");
       if (elem && elem->GetText())
@@ -1101,7 +1111,11 @@ namespace ignition
         }
 
         out << "<?xml version='1.0'?>\n"
-            << "  <model>\n";
+            << "  <model>\n"
+            << "    <sdf version='"
+            << _meta.model().file_format().version().major()
+            << "." << _meta.model().file_format().version().minor() << "'>"
+            << _meta.model().file() << "</sdf>\n";
       }
       else
       {
@@ -1112,15 +1126,16 @@ namespace ignition
         }
 
         out << "<?xml version='1.0'?>\n"
-            << "  <world>\n";
+            << "  <world>\n"
+            << "    <sdf version='"
+            << _meta.world().file_format().version().major()
+            << "." << _meta.world().file_format().version().minor() << "'>"
+            << _meta.world().file() << "</sdf>\n";
       }
 
       out << "    <name>" << _meta.name() << "</name>\n"
-        << "    <version>" << _meta.version() << "</version>\n"
-        << "    <sdf version='" << _meta.model().file_format().version().major()
-        << "." << _meta.model().file_format().version().minor() << "'>"
-        << _meta.model().file() << "</sdf>\n"
-        << "    <description>" << _meta.description() << "</description>\n";
+          << "    <version>" << _meta.version() << "</version>\n"
+          << "    <description>" << _meta.description() << "</description>\n";
 
       // Output author information.
       for (int i = 0; i < _meta.authors_size(); ++i)
@@ -1135,9 +1150,9 @@ namespace ignition
       for (int i = 0; i < _meta.dependencies_size(); ++i)
       {
         out << "    <depend>\n"
-        << "      <model>"
+        << "      <model>\n"
         << "        <uri>" << _meta.dependencies(i).uri() << "</uri>\n"
-        << "      </model>"
+        << "      </model>\n"
         << "    </depend>\n";
       }
 

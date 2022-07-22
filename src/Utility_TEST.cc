@@ -316,6 +316,119 @@ TEST(UtilityTest, ConvertFloat)
   EXPECT_DOUBLE_EQ(s, 0.999f);
 }
 
+
+/////////////////////////////////////////////////
+TEST(UtilityTest, ConvertFuelMetadata)
+{
+  msgs::FuelMetadata metaMsg;
+  std::string modelConfigStr;
+
+  // test ConvertFuelMetadata(string, msgs::FuelMetadata)
+  {
+    EXPECT_FALSE(msgs::ConvertFuelMetadata(modelConfigStr, metaMsg));
+
+    metaMsg.Clear();
+    modelConfigStr = "<test/>";
+    EXPECT_FALSE(msgs::ConvertFuelMetadata(modelConfigStr, metaMsg));
+
+    metaMsg.Clear();
+    modelConfigStr = "<model>test</model>";
+    EXPECT_FALSE(msgs::ConvertFuelMetadata(modelConfigStr, metaMsg));
+
+    metaMsg.Clear();
+    modelConfigStr = R"(
+      <model>
+        <name>test_model</name>
+      </model>
+    )";
+    EXPECT_FALSE(msgs::ConvertFuelMetadata(modelConfigStr, metaMsg));
+
+    metaMsg.Clear();
+    modelConfigStr = R"(<?xml version='1.0'?>
+  <model>
+    <sdf version='1.7'>model.sdf</sdf>
+    <name>test_model</name>
+    <version>3</version>
+    <description>A model for testing</description>
+    <author>
+      <name>Foo Bar</name>
+      <email>foo@bar.org</email>
+    </author>
+    <depend>
+      <model>
+        <uri>model://some_model</uri>
+      </model>
+    </depend>
+  </model>
+)";
+
+    EXPECT_TRUE(msgs::ConvertFuelMetadata(modelConfigStr, metaMsg));
+    EXPECT_EQ("test_model", metaMsg.name());
+    EXPECT_EQ(3, metaMsg.version());
+    EXPECT_EQ("A model for testing", metaMsg.description());
+    EXPECT_EQ("model.sdf", metaMsg.model().file());
+    EXPECT_EQ("sdf", metaMsg.model().file_format().name());
+    EXPECT_EQ(1, metaMsg.model().file_format().version().major());
+    EXPECT_EQ(7, metaMsg.model().file_format().version().minor());
+    EXPECT_EQ(1, metaMsg.authors().size());
+    EXPECT_EQ("Foo Bar", metaMsg.authors(0).name());
+    EXPECT_EQ("foo@bar.org", metaMsg.authors(0).email());
+    EXPECT_EQ(1, metaMsg.dependencies().size());
+    EXPECT_EQ("model://some_model", metaMsg.dependencies(0).uri());
+  }
+
+  // test ConvertFuelMetadata(msgs::FuelMetadata, string)
+  {
+    std::string modelConfigOutput;
+
+    // Test <world>
+    metaMsg.Clear();
+    metaMsg.mutable_world()->set_file("world.sdf");
+    EXPECT_FALSE(msgs::ConvertFuelMetadata(metaMsg, modelConfigOutput));
+
+    metaMsg.set_name("test_world");
+    metaMsg.set_description("A world for testing");
+    metaMsg.set_version(2);
+    metaMsg.mutable_world()->mutable_file_format()->set_name("sdf");
+    metaMsg.mutable_world()->mutable_file_format()
+           ->mutable_version()->set_major(1);
+    metaMsg.mutable_world()->mutable_file_format()
+           ->mutable_version()->set_minor(7);
+    EXPECT_TRUE(msgs::ConvertFuelMetadata(metaMsg, modelConfigOutput));
+
+    std::string expectedOutput = R"(<?xml version='1.0'?>
+  <world>
+    <sdf version='1.7'>world.sdf</sdf>
+    <name>test_world</name>
+    <version>2</version>
+    <description>A world for testing</description>
+  </world>
+)";
+    EXPECT_EQ(expectedOutput, modelConfigOutput);
+
+    // Test <model>
+    metaMsg.Clear();
+    metaMsg.mutable_model()->set_file("model.sdf");
+    EXPECT_FALSE(msgs::ConvertFuelMetadata(metaMsg, modelConfigOutput));
+
+    metaMsg.set_name("test_model");
+    metaMsg.set_description("A model for testing");
+    metaMsg.set_version(3);
+    metaMsg.mutable_model()->mutable_file_format()->set_name("sdf");
+    metaMsg.mutable_model()->mutable_file_format()
+           ->mutable_version()->set_major(1);
+    metaMsg.mutable_model()->mutable_file_format()
+           ->mutable_version()->set_minor(7);
+    EXPECT_TRUE(msgs::ConvertFuelMetadata(metaMsg, modelConfigOutput));
+
+    metaMsg.add_authors()->set_name("Foo Bar");
+    metaMsg.mutable_authors(0)->set_email("foo@bar.org");
+    metaMsg.add_dependencies()->set_uri("model://some_model");
+    EXPECT_TRUE(msgs::ConvertFuelMetadata(metaMsg, modelConfigOutput));
+    EXPECT_EQ(modelConfigStr, modelConfigOutput);
+  }
+}
+
 /////////////////////////////////////////////////
 TEST(UtilityTest, SetVector3)
 {
