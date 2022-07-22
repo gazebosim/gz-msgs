@@ -321,30 +321,31 @@ TEST(UtilityTest, ConvertFloat)
 TEST(UtilityTest, ConvertFuelMetadata)
 {
   msgs::FuelMetadata metaMsg;
-  std::string modelConfigStr;
+  std::string modelConfigInput, worldConfigInput;
 
   // test ConvertFuelMetadata(string, msgs::FuelMetadata)
   {
-    EXPECT_FALSE(msgs::ConvertFuelMetadata(modelConfigStr, metaMsg));
+    EXPECT_FALSE(msgs::ConvertFuelMetadata(modelConfigInput, metaMsg));
 
     metaMsg.Clear();
-    modelConfigStr = "<test/>";
-    EXPECT_FALSE(msgs::ConvertFuelMetadata(modelConfigStr, metaMsg));
+    modelConfigInput = "<test/>";
+    EXPECT_FALSE(msgs::ConvertFuelMetadata(modelConfigInput, metaMsg));
 
     metaMsg.Clear();
-    modelConfigStr = "<model>test</model>";
-    EXPECT_FALSE(msgs::ConvertFuelMetadata(modelConfigStr, metaMsg));
+    modelConfigInput = "<model>test</model>";
+    EXPECT_FALSE(msgs::ConvertFuelMetadata(modelConfigInput, metaMsg));
 
+    // Test <model>
     metaMsg.Clear();
-    modelConfigStr = R"(
+    modelConfigInput = R"(
       <model>
         <name>test_model</name>
       </model>
     )";
-    EXPECT_FALSE(msgs::ConvertFuelMetadata(modelConfigStr, metaMsg));
+    EXPECT_FALSE(msgs::ConvertFuelMetadata(modelConfigInput, metaMsg));
 
     metaMsg.Clear();
-    modelConfigStr = R"(<?xml version='1.0'?>
+    modelConfigInput = R"(<?xml version='1.0'?>
   <model>
     <sdf version='1.7'>model.sdf</sdf>
     <name>test_model</name>
@@ -362,7 +363,7 @@ TEST(UtilityTest, ConvertFuelMetadata)
   </model>
 )";
 
-    EXPECT_TRUE(msgs::ConvertFuelMetadata(modelConfigStr, metaMsg));
+    EXPECT_TRUE(msgs::ConvertFuelMetadata(modelConfigInput, metaMsg));
     EXPECT_EQ("test_model", metaMsg.name());
     EXPECT_EQ(3, metaMsg.version());
     EXPECT_EQ("A model for testing", metaMsg.description());
@@ -375,16 +376,37 @@ TEST(UtilityTest, ConvertFuelMetadata)
     EXPECT_EQ("foo@bar.org", metaMsg.authors(0).email());
     EXPECT_EQ(1, metaMsg.dependencies().size());
     EXPECT_EQ("model://some_model", metaMsg.dependencies(0).uri());
+
+    // Test <world>
+    metaMsg.Clear();
+    worldConfigInput = R"(<?xml version='1.0'?>
+  <world>
+    <sdf version='1.7'>world.sdf</sdf>
+    <name>test_world</name>
+    <version>2</version>
+    <description>A world for testing</description>
+  </world>
+)";
+    EXPECT_TRUE(msgs::ConvertFuelMetadata(worldConfigInput, metaMsg));
+    EXPECT_EQ("test_world", metaMsg.name());
+    EXPECT_EQ(2, metaMsg.version());
+    EXPECT_EQ("A world for testing", metaMsg.description());
+    EXPECT_EQ("world.sdf", metaMsg.world().file());
+    EXPECT_EQ("sdf", metaMsg.world().file_format().name());
+    EXPECT_EQ(1, metaMsg.world().file_format().version().major());
+    EXPECT_EQ(7, metaMsg.world().file_format().version().minor());
+    EXPECT_EQ(0, metaMsg.authors().size());
+    EXPECT_EQ(0, metaMsg.dependencies().size());
   }
 
   // test ConvertFuelMetadata(msgs::FuelMetadata, string)
   {
-    std::string modelConfigOutput;
+    std::string modelConfig;
 
     // Test <world>
     metaMsg.Clear();
     metaMsg.mutable_world()->set_file("world.sdf");
-    EXPECT_FALSE(msgs::ConvertFuelMetadata(metaMsg, modelConfigOutput));
+    EXPECT_FALSE(msgs::ConvertFuelMetadata(metaMsg, modelConfig));
 
     metaMsg.set_name("test_world");
     metaMsg.set_description("A world for testing");
@@ -394,22 +416,14 @@ TEST(UtilityTest, ConvertFuelMetadata)
            ->mutable_version()->set_major(1);
     metaMsg.mutable_world()->mutable_file_format()
            ->mutable_version()->set_minor(7);
-    EXPECT_TRUE(msgs::ConvertFuelMetadata(metaMsg, modelConfigOutput));
+    EXPECT_TRUE(msgs::ConvertFuelMetadata(metaMsg, modelConfig));
 
-    std::string expectedOutput = R"(<?xml version='1.0'?>
-  <world>
-    <sdf version='1.7'>world.sdf</sdf>
-    <name>test_world</name>
-    <version>2</version>
-    <description>A world for testing</description>
-  </world>
-)";
-    EXPECT_EQ(expectedOutput, modelConfigOutput);
+    EXPECT_EQ(worldConfigInput, modelConfig);
 
     // Test <model>
     metaMsg.Clear();
     metaMsg.mutable_model()->set_file("model.sdf");
-    EXPECT_FALSE(msgs::ConvertFuelMetadata(metaMsg, modelConfigOutput));
+    EXPECT_FALSE(msgs::ConvertFuelMetadata(metaMsg, modelConfig));
 
     metaMsg.set_name("test_model");
     metaMsg.set_description("A model for testing");
@@ -419,13 +433,13 @@ TEST(UtilityTest, ConvertFuelMetadata)
            ->mutable_version()->set_major(1);
     metaMsg.mutable_model()->mutable_file_format()
            ->mutable_version()->set_minor(7);
-    EXPECT_TRUE(msgs::ConvertFuelMetadata(metaMsg, modelConfigOutput));
+    EXPECT_TRUE(msgs::ConvertFuelMetadata(metaMsg, modelConfig));
 
     metaMsg.add_authors()->set_name("Foo Bar");
     metaMsg.mutable_authors(0)->set_email("foo@bar.org");
     metaMsg.add_dependencies()->set_uri("model://some_model");
-    EXPECT_TRUE(msgs::ConvertFuelMetadata(metaMsg, modelConfigOutput));
-    EXPECT_EQ(modelConfigStr, modelConfigOutput);
+    EXPECT_TRUE(msgs::ConvertFuelMetadata(metaMsg, modelConfig));
+    EXPECT_EQ(modelConfigInput, modelConfig);
   }
 }
 

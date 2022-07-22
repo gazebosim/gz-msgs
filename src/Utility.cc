@@ -967,10 +967,17 @@ namespace ignition
       // Get the top level <model> element.
       tinyxml2::XMLElement *modelElement = modelConfigDoc.FirstChildElement(
           "model");
+      bool isModel = true;
       if (!modelElement)
       {
-        std::cerr << "Model config string does not contain a <model> element\n";
-        return false;
+        modelElement = modelConfigDoc.FirstChildElement("world");
+        if (!modelElement)
+        {
+          std::cerr << "Model config string does not contain a "
+                    << "<model> or <world> element\n";
+          return false;
+        }
+        isModel = false;
       }
 
       // Read the name, which is a mandatory element.
@@ -1044,23 +1051,34 @@ namespace ignition
           math::SemanticVersion ver(trimmed(verStr));
           if (ver > maxVer)
           {
-            meta.mutable_model()->mutable_file_format()->set_name("sdf");
-            ignition::msgs::Version *verMsg =
-              meta.mutable_model()->mutable_file_format()->mutable_version();
+            ignition::msgs::Version *verMsg;
+
+            if (isModel)
+            {
+              meta.mutable_model()->mutable_file_format()->set_name("sdf");
+              verMsg =
+                meta.mutable_model()->mutable_file_format()->mutable_version();
+              meta.mutable_model()->set_file(trimmed(elem->GetText()));
+            }
+            else
+            {
+              meta.mutable_world()->mutable_file_format()->set_name("sdf");
+              verMsg =
+                meta.mutable_world()->mutable_file_format()->mutable_version();
+              meta.mutable_world()->set_file(trimmed(elem->GetText()));
+            }
 
             verMsg->set_major(ver.Major());
             verMsg->set_minor(ver.Minor());
             verMsg->set_patch(ver.Patch());
             verMsg->set_prerelease(ver.Prerelease());
             verMsg->set_build(ver.Build());
-
-            meta.mutable_model()->set_file(trimmed(elem->GetText()));
           }
         }
 
         elem = elem->NextSiblingElement("sdf");
       }
-      if (meta.model().file().empty())
+      if (meta.model().file().empty() && meta.world().file().empty())
       {
         std::cerr << "Model config string does not contain an <sdf> element\n";
         return false;
