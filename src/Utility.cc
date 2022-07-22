@@ -964,14 +964,14 @@ namespace ignition
         return false;
       }
 
-      // Get the top level <model> element.
-      tinyxml2::XMLElement *modelElement = modelConfigDoc.FirstChildElement(
+      // Get the top level <model> or <world> element.
+      tinyxml2::XMLElement *topElement = modelConfigDoc.FirstChildElement(
           "model");
       bool isModel = true;
-      if (!modelElement)
+      if (!topElement)
       {
-        modelElement = modelConfigDoc.FirstChildElement("world");
-        if (!modelElement)
+        topElement = modelConfigDoc.FirstChildElement("world");
+        if (!topElement)
         {
           std::cerr << "Model config string does not contain a "
                     << "<model> or <world> element\n";
@@ -981,7 +981,7 @@ namespace ignition
       }
 
       // Read the name, which is a mandatory element.
-      tinyxml2::XMLElement *elem = modelElement->FirstChildElement("name");
+      tinyxml2::XMLElement *elem = topElement->FirstChildElement("name");
       if (!elem || !elem->GetText())
       {
         std::cerr << "Model config string does not contain a <name> element\n";
@@ -990,7 +990,7 @@ namespace ignition
       meta.set_name(trimmed(elem->GetText()));
 
       // Read the version, if present.
-      elem = modelElement->FirstChildElement("version");
+      elem = topElement->FirstChildElement("version");
       if (elem && elem->GetText())
       {
         auto version = std::stoi(trimmed(elem->GetText()));
@@ -998,12 +998,12 @@ namespace ignition
       }
 
       // Read the description, if present.
-      elem = modelElement->FirstChildElement("description");
+      elem = topElement->FirstChildElement("description");
       if (elem && elem->GetText())
         meta.set_description(trimmed(elem->GetText()));
 
       // Read the dependencies, if any.
-      elem = modelElement->FirstChildElement("depend");
+      elem = topElement->FirstChildElement("depend");
       while (elem)
       {
         auto modelElem = elem->FirstChildElement("model");
@@ -1020,7 +1020,7 @@ namespace ignition
       }
 
       // Read the authors, if any.
-      elem = modelElement->FirstChildElement("author");
+      elem = topElement->FirstChildElement("author");
       while (elem)
       {
         ignition::msgs::FuelMetadata::Contact *author = meta.add_authors();
@@ -1041,7 +1041,7 @@ namespace ignition
       }
 
       // Get the most recent SDF file
-      elem = modelElement->FirstChildElement("sdf");
+      elem = topElement->FirstChildElement("sdf");
       math::SemanticVersion maxVer;
       while (elem)
       {
