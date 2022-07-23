@@ -52,31 +52,6 @@ namespace ignition
       return _s;
     }
 
-    /// \brief Splits a string into tokens. This was copied from ignition
-    /// common, ign-common/Util.hh, to avoid adding another dependency.
-    /// Remove this function if ign-common every becomes a dependency.
-    /// \param[in] _str Input string.
-    /// \param[in] _delim Token delimiter.
-    /// \return Vector of tokens.
-    std::vector<std::string> split(const std::string &_str,
-        const std::string &_delim)
-    {
-      std::vector<std::string> tokens;
-      char *saveptr;
-      char *str = strdup(_str.c_str());
-
-      auto token = ignstrtok(str, _delim.c_str(), &saveptr);
-
-      while (token)
-      {
-        tokens.push_back(token);
-        token = ignstrtok(NULL, _delim.c_str(), &saveptr);
-      }
-
-      free(str);
-      return tokens;
-    }
-
     /////////////////////////////////////////////
     ignition::math::Vector3d Convert(const msgs::Vector3d &_v)
     {
@@ -780,10 +755,12 @@ namespace ignition
             case msgs::PointCloudPacked::Field::FLOAT64:
               offset += 8;
               break;
+            // LCOV_EXCL_START
             default:
               std::cerr << "PointCloudPacked field datatype of ["
                 << _type << "] is invalid.\n";
               break;
+            // LCOV_EXCL_STOP
           }
         };
 
@@ -987,17 +964,24 @@ namespace ignition
         return false;
       }
 
-      // Get the top level <model> element.
-      tinyxml2::XMLElement *modelElement = modelConfigDoc.FirstChildElement(
+      // Get the top level <model> or <world> element.
+      tinyxml2::XMLElement *topElement = modelConfigDoc.FirstChildElement(
           "model");
-      if (!modelElement)
+      bool isModel = true;
+      if (!topElement)
       {
-        std::cerr << "Model config string does not contain a <model> element\n";
-        return false;
+        topElement = modelConfigDoc.FirstChildElement("world");
+        if (!topElement)
+        {
+          std::cerr << "Model config string does not contain a "
+                    << "<model> or <world> element\n";
+          return false;
+        }
+        isModel = false;
       }
 
       // Read the name, which is a mandatory element.
-      tinyxml2::XMLElement *elem = modelElement->FirstChildElement("name");
+      tinyxml2::XMLElement *elem = topElement->FirstChildElement("name");
       if (!elem || !elem->GetText())
       {
         std::cerr << "Model config string does not contain a <name> element\n";
@@ -1005,13 +989,21 @@ namespace ignition
       }
       meta.set_name(trimmed(elem->GetText()));
 
+      // Read the version, if present.
+      elem = topElement->FirstChildElement("version");
+      if (elem && elem->GetText())
+      {
+        auto version = std::stoi(trimmed(elem->GetText()));
+        meta.set_version(version);
+      }
+
       // Read the description, if present.
-      elem = modelElement->FirstChildElement("description");
+      elem = topElement->FirstChildElement("description");
       if (elem && elem->GetText())
         meta.set_description(trimmed(elem->GetText()));
 
       // Read the dependencies, if any.
-      elem = modelElement->FirstChildElement("depend");
+      elem = topElement->FirstChildElement("depend");
       while (elem)
       {
         auto modelElem = elem->FirstChildElement("model");
@@ -1028,7 +1020,7 @@ namespace ignition
       }
 
       // Read the authors, if any.
-      elem = modelElement->FirstChildElement("author");
+      elem = topElement->FirstChildElement("author");
       while (elem)
       {
         ignition::msgs::FuelMetadata::Contact *author = meta.add_authors();
@@ -1049,7 +1041,7 @@ namespace ignition
       }
 
       // Get the most recent SDF file
-      elem = modelElement->FirstChildElement("sdf");
+      elem = topElement->FirstChildElement("sdf");
       math::SemanticVersion maxVer;
       while (elem)
       {
@@ -1059,23 +1051,34 @@ namespace ignition
           math::SemanticVersion ver(trimmed(verStr));
           if (ver > maxVer)
           {
-            meta.mutable_model()->mutable_file_format()->set_name("sdf");
-            ignition::msgs::Version *verMsg =
-              meta.mutable_model()->mutable_file_format()->mutable_version();
+            ignition::msgs::Version *verMsg;
+
+            if (isModel)
+            {
+              meta.mutable_model()->mutable_file_format()->set_name("sdf");
+              verMsg =
+                meta.mutable_model()->mutable_file_format()->mutable_version();
+              meta.mutable_model()->set_file(trimmed(elem->GetText()));
+            }
+            else
+            {
+              meta.mutable_world()->mutable_file_format()->set_name("sdf");
+              verMsg =
+                meta.mutable_world()->mutable_file_format()->mutable_version();
+              meta.mutable_world()->set_file(trimmed(elem->GetText()));
+            }
 
             verMsg->set_major(ver.Major());
             verMsg->set_minor(ver.Minor());
             verMsg->set_patch(ver.Patch());
             verMsg->set_prerelease(ver.Prerelease());
             verMsg->set_build(ver.Build());
-
-            meta.mutable_model()->set_file(trimmed(elem->GetText()));
           }
         }
 
         elem = elem->NextSiblingElement("sdf");
       }
-      if (meta.model().file().empty())
+      if (meta.model().file().empty() && meta.world().file().empty())
       {
         std::cerr << "Model config string does not contain an <sdf> element\n";
         return false;
@@ -1101,7 +1104,11 @@ namespace ignition
         }
 
         out << "<?xml version='1.0'?>\n"
-            << "  <model>\n";
+            << "  <model>\n"
+            << "    <sdf version='"
+            << _meta.model().file_format().version().major()
+            << "." << _meta.model().file_format().version().minor() << "'>"
+            << _meta.model().file() << "</sdf>\n";
       }
       else
       {
@@ -1112,15 +1119,16 @@ namespace ignition
         }
 
         out << "<?xml version='1.0'?>\n"
-            << "  <world>\n";
+            << "  <world>\n"
+            << "    <sdf version='"
+            << _meta.world().file_format().version().major()
+            << "." << _meta.world().file_format().version().minor() << "'>"
+            << _meta.world().file() << "</sdf>\n";
       }
 
       out << "    <name>" << _meta.name() << "</name>\n"
-        << "    <version>" << _meta.version() << "</version>\n"
-        << "    <sdf version='" << _meta.model().file_format().version().major()
-        << "." << _meta.model().file_format().version().minor() << "'>"
-        << _meta.model().file() << "</sdf>\n"
-        << "    <description>" << _meta.description() << "</description>\n";
+          << "    <version>" << _meta.version() << "</version>\n"
+          << "    <description>" << _meta.description() << "</description>\n";
 
       // Output author information.
       for (int i = 0; i < _meta.authors_size(); ++i)
@@ -1135,9 +1143,9 @@ namespace ignition
       for (int i = 0; i < _meta.dependencies_size(); ++i)
       {
         out << "    <depend>\n"
-        << "      <model>"
+        << "      <model>\n"
         << "        <uri>" << _meta.dependencies(i).uri() << "</uri>\n"
-        << "      </model>"
+        << "      </model>\n"
         << "    </depend>\n";
       }
 
