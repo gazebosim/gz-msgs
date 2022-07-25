@@ -64,8 +64,16 @@ namespace gz
       public: template<typename T>
               static std::unique_ptr<T> New(const std::string &_msgType)
               {
+                auto msgType = _msgType;
+                if (msgType.find("ignition") == 0)
+                {
+                  msgType.replace(0, 8, "gz");
+                  std::cerr << "Trying to create deprecated message type ["
+                            << _msgType << "]. Using [" << msgType
+                            << "] instead." << std::endl;
+                }
                 return std::unique_ptr<T>(
-                    static_cast<T*>(New(_msgType).release()));
+                    static_cast<T*>(New(msgType).release()));
               }
 
       /// \brief Create a new instance of a message.
@@ -77,8 +85,16 @@ namespace gz
               static std::unique_ptr<T> New(const std::string &_msgType,
                   const std::string &_args)
               {
+                auto msgType = _msgType;
+                if (msgType.find("ignition") == 0)
+                {
+                  msgType.replace(0, 8, "gz");
+                  std::cerr << "Trying to create deprecated message type ["
+                            << _msgType << "]. Using [" << msgType
+                            << "] instead." << std::endl;
+                }
                 return std::unique_ptr<T>(
-                    static_cast<T*>(New(_msgType, _args).release()));
+                    static_cast<T*>(New(msgType, _args).release()));
               }
 
       /// \brief Create a new instance of a message.

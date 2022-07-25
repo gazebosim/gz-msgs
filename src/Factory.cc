@@ -161,16 +161,25 @@ class DynamicFactory
   /// type could not be handled.
   public: static ProtoUniquePtr New(const std::string &_msgType)
   {
+    auto msgType = _msgType;
+    if (msgType.find("ignition") == 0)
+    {
+      msgType.replace(0, 8, "gz");
+      std::cerr << "Trying to create deprecated message type ["
+                << _msgType << "]. Using [" << msgType << "] instead."
+                << std::endl;
+    }
+
     // Shortcut if the type has been already registered.
     std::map<std::string, std::function<ProtoUniquePtr()>>::iterator msgF =
-      dynamicMsgMap.find(_msgType);
+      dynamicMsgMap.find(msgType);
 
     if (msgF != dynamicMsgMap.end())
       return msgF->second();
 
     // Nothing to do if we don't know about this type in the descriptor map.
     const google::protobuf::Descriptor *descriptor =
-      pool.FindMessageTypeByName(_msgType);
+      pool.FindMessageTypeByName(msgType);
     if (!descriptor)
       return nullptr;
 
@@ -227,25 +236,34 @@ void Factory::Register(const std::string &_msgType,
 std::unique_ptr<google::protobuf::Message> Factory::New(
     const std::string &_msgType)
 {
+  auto msgType = _msgType;
+  if (msgType.find("ignition") == 0)
+  {
+    msgType.replace(0, 8, "gz");
+    std::cerr << "Trying to create deprecated message type ["
+              << _msgType << "]. Using [" << msgType << "] instead."
+              << std::endl;
+  }
+
   std::unique_ptr<google::protobuf::Message> msg;
 
   std::string type;
   // Convert "gz.msgs." to "gz_msgs.".
-  if (_msgType.find("gz.msgs.") == 0)
+  if (msgType.find("gz.msgs.") == 0)
   {
-    type = "gz_msgs." + _msgType.substr(8);
+    type = "gz_msgs." + msgType.substr(8);
   }
   // Convert ".gz.msgs." to "gz_msgs.".
-  else if (_msgType.find(".gz.msgs.") == 0)
+  else if (msgType.find(".gz.msgs.") == 0)
   {
-    type = "gz_msgs." + _msgType.substr(9);
+    type = "gz_msgs." + msgType.substr(9);
   }
   else
   {
     // Fix typenames that are missing "gz_msgs." at the beginning.
-    if (_msgType.find("gz_msgs.") != 0)
+    if (msgType.find("gz_msgs.") != 0)
       type = "gz_msgs.";
-    type += _msgType;
+    type += msgType;
   }
 
   // Create a new message if a FactoryFn has been assigned to the message type
@@ -253,7 +271,7 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
     return ((*msgMap)[type]) ();
 
   // Check if we have the message descriptor.
-  msg = dynamicFactory.New(_msgType);
+  msg = dynamicFactory.New(msgType);
 
   return msg;
 }
@@ -262,7 +280,16 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
 std::unique_ptr<google::protobuf::Message> Factory::New(
     const std::string &_msgType, const std::string &_args)
 {
-  std::unique_ptr<google::protobuf::Message> msg = New(_msgType);
+  auto msgType = _msgType;
+  if (msgType.find("ignition") == 0)
+  {
+    msgType.replace(0, 8, "gz");
+    std::cerr << "Trying to create deprecated message type ["
+              << _msgType << "]. Using [" << msgType << "] instead."
+              << std::endl;
+  }
+
+  std::unique_ptr<google::protobuf::Message> msg = New(msgType);
   if (msg)
   {
     google::protobuf::TextFormat::ParseFromString(_args, msg.get());
