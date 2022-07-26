@@ -1,12 +1,12 @@
 load(
-    "//ign_bazel:build_defs.bzl",
-    "IGNITION_ROOT",
-    "IGNITION_VISIBILITY",
+    "//gz_bazel:build_defs.bzl",
+    "GZ_ROOT",
+    "GZ_VISIBILITY",
     "cmake_configure_file",
 )
 
 package(
-    default_visibility = IGNITION_VISIBILITY,
+    default_visibility = GZ_VISIBILITY,
     features = [
         "-layering_check",
     ],
@@ -16,13 +16,13 @@ licenses(["notice"])
 
 exports_files(["LICENSE"])
 
-MSGS_DIR = "./ign_msgs/"
+MSGS_DIR = "./gz_msgs/"
 
 # Generates config.hh based on the version numbers in CMake code.
 cmake_configure_file(
     name = "test_config",
     src = "test_config.h.in",
-    out = "ignition/msgs/test_config.h",
+    out = "gz/msgs/test_config.h",
     cmakelists = ["CMakeLists.txt"],
     defines = [
         "CMAKE_BINARY_DIR=%s" % (MSGS_DIR),
@@ -34,8 +34,8 @@ cmake_configure_file(
 
 cc_library(
     name = "test_utils",
-    srcs = ["ignition/msgs/test_config.h"],
-    includes = [".", "ignition"],
+    srcs = ["gz/msgs/test_config.h"],
+    includes = [".", "gz"],
 )
 
 [
@@ -48,7 +48,7 @@ cc_library(
         ],
         deps = [
             ":test_utils",
-            IGNITION_ROOT + "ign_msgs",
+            GZ_ROOT + "gz_msgs",
             "@gtest",
             "@gtest//:gtest_main",
         ],

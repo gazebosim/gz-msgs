@@ -56,9 +56,9 @@
 #include <vector>
 #include <algorithm>
 
-#include "ignition/msgs/Filesystem.hh"
+#include "gz/msgs/Filesystem.hh"
 
-namespace ignition
+namespace gz
 {
   namespace msgs
   {

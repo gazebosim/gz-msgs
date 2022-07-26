@@ -2,8 +2,8 @@
 
 Next Tutorial: \ref cppgetstarted
 
-These instructions are for installing only Ignition Messages.
-If you're interested in using all the Ignition libraries, check out this [Ignition installation](https://ignitionrobotics.org/docs/latest/install).
+These instructions are for installing only Gazebo Messages.
+If you're interested in using all the Gazebo libraries, check out this [Gazebo installation](https://gazebosim.org/docs/latest/install).
 
 We recommend following the Binary Installation instructions to get up and running as quickly and painlessly as possible.
 
@@ -13,9 +13,9 @@ The Source Installation instructions should be used if you need the very latest 
 
 ## Ubuntu
 
-On Ubuntu systems, `apt-get` can be used to install `ignition-msgs`:
+On Ubuntu systems, `apt-get` can be used to install `gz-msgs`:
 ```
-sudo apt install libignition-msgs<#>-dev
+sudo apt install libgz-msgs<#>-dev
 ```
 
 Be sure to replace `<#>` with a number value, such as 2 or 3, depending on
@@ -29,9 +29,9 @@ On macOS, add OSRF packages:
   brew tap osrf/simulation
   ```
 
-Install Ignition Msgs:
+Install Gazebo Msgs:
   ```
-  brew install ignition-msgs<#>
+  brew install gz-msgs<#>
   ```
 
 Be sure to replace `<#>` with a number value, such as 1 or 2, depending on
@@ -44,13 +44,13 @@ Miniconda suffices.
 
 Create if necessary, and activate a Conda environment:
 ```
-conda create -n ign-ws
-conda activate ign-ws
+conda create -n gz-ws
+conda activate gz-ws
 ```
 
-Install `ignition-msgs`:
+Install `gz-msgs`:
 ```
-conda install libignition-msgs<#> --channel conda-forge
+conda install libgz-msgs<#> --channel conda-forge
 ```
 
 Be sure to replace `<#>` with a number value, such as 2 or 3, depending on
@@ -64,7 +64,7 @@ which version you need.
 
 Install required dependencies as follows:
 ```
-sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev libignition-math6-dev
+sudo apt-get install libprotobuf-dev protobuf-compiler libprotoc-dev libgz-math7-dev
 ```
 
 ### Building from Source
@@ -90,21 +90,21 @@ sudo make uninstall
 
 1. Clone the repository
   ```
-  git clone https://github.com/ignitionrobotics/ign-msgs -b ign-msgs<#>
+  git clone https://github.com/gazebosim/gz-msgs -b ign-msgs<#>
   ```
   Be sure to replace `<#>` with a number value, such as 1 or 2, depending on
   which version you need.
 
 2. Install dependencies
   ```
-  brew install --only-dependencies ignition-msgs<#>
+  brew install --only-dependencies gz-msgs<#>
   ```
   Be sure to replace `<#>` with a number value, such as 1 or 2, depending on
   which version you need.
 
 3. Configure and build
   ```
-  cd ign-msgs
+  cd gz-msgs
   mkdir build
   cd build
   cmake ..
@@ -126,13 +126,13 @@ sudo make uninstall
 
 ### Prerequisites
 
-First, follow the [ign-cmake](https://github.com/ignitionrobotics/ign-cmake) tutorial for installing Conda, Visual Studio, CMake, etc., prerequisites, and creating a Conda environment.
+First, follow the [gz-cmake](https://github.com/gazebosim/gz-cmake) tutorial for installing Conda, Visual Studio, CMake, etc., prerequisites, and creating a Conda environment.
 
 Navigate to `condabin` if necessary to use the `conda` command (i.e., if Conda is not in your `PATH` environment variable. You can find the location of `condabin` in Anaconda Prompt, `where conda`).
 
 Activate the Conda environment:
 ```
-conda activate ign-ws
+conda activate gz-ws
 ```
 
 Install prerequisites:
@@ -140,16 +140,16 @@ Install prerequisites:
 conda install tinyxml2 protobuf --channel conda-forge
 ```
 
-Install Ignition dependencies:
+Install Gazebo dependencies:
 
 You can view lists of dependencies:
 ```
-conda search libignition-msgs* --channel conda-forge --info
+conda search libgz-msgs* --channel conda-forge --info
 ```
 
 Install dependencies, replacing `<#>` with the desired versions:
 ```
-conda install libignition-cmake<#> libignition-math<#> libignition-tools<#> --channel conda-forge
+conda install libgz-cmake<#> libgz-math<#> libgz-tools<#> --channel conda-forge
 ```
 
 ### Building from Source
@@ -159,12 +159,12 @@ This assumes you have created and activated a Conda environment while installing
 1. Navigate to where you would like to build the library, and clone the repository.
   ```
   # Optionally, append `-b ign-msgs#` (replace # with a number) to check out a specific version
-  git clone https://github.com/ignitionrobotics/ign-msgs.git
+  git clone https://github.com/gazebosim/gz-msgs.git
   ```
 
 2. Configure and build
   ```
-  cd ign-msgs
+  cd gz-msgs
   mkdir build
   cd build
   cmake .. -DBUILD_TESTING=OFF  # Optionally, -DCMAKE_INSTALL_PREFIX=path\to\install
@@ -179,7 +179,7 @@ This assumes you have created and activated a Conda environment while installing
 # Documentation
 
 API documentation and tutorials can be accessed at
-[https://ignitionrobotics.org/libs/cmake](https://ignitionrobotics.org/libs/cmake)
+[https://gazebosim.org/libs/cmake](https://gazebosim.org/libs/cmake)
 
 You can also generate the documentation from a clone of this repository by following these steps.
 
@@ -190,12 +190,12 @@ You can also generate the documentation from a clone of this repository by follo
 
 2. Clone the repository
   ```
-  git clone https://github.com/ignitionrobotics/ign-cmake
+  git clone https://github.com/gazebosim/gz-cmake
   ```
 
 3. Configure and build the documentation.
   ```
-  cd ign-cmake
+  cd gz-cmake
   mkdir build
   cd build
   cmake ..
@@ -209,16 +209,16 @@ You can also generate the documentation from a clone of this repository by follo
 
 ## Documentation Release
 
-1. Upload documentation to ignitionrobotics.org.
+1. Upload documentation to gazebosim.org.
   ```
   cd build
   sh upload.sh
   ```
 
-2. If you're creating a new release, then tell ignitionrobotics.org about
+2. If you're creating a new release, then tell gazebosim.org about
    the new version. For example:
   ```
-  curl -k -X POST -d '{"libName":"msgs", "version":"1.0.0", "releaseDate":"2017-10-09T12:10:13+02:00","password":"secret"}' https://api    .ignitionrobotics.org/1.0/versions
+  curl -k -X POST -d '{"libName":"msgs", "version":"1.0.0", "releaseDate":"2017-10-09T12:10:13+02:00","password":"secret"}' https://api    .gazebosim.org/1.0/versions
   ```
 
 ## Testing
@@ -264,4 +264,4 @@ To run test coverage:
   firefox coverage/index.html
   ```
 
-See the [Writing Tests section of the Ignition documentation](https://ignitionrobotics.org/docs/all/contributing#writing-tests) for help creating or modifying tests.
+See the [Writing Tests section of the Gazebo documentation](https://gazebosim.org/docs/all/contributing#writing-tests) for help creating or modifying tests.

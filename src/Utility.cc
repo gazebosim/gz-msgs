@@ -14,12 +14,14 @@
  * limitations under the License.
  *
 */
+
 #include <tinyxml2.h>
 #include <functional>
+#include <iostream>
 #include <sstream>
-#include <ignition/math/Helpers.hh>
-#include <ignition/math/SemanticVersion.hh>
-#include "ignition/msgs/Utility.hh"
+#include <gz/math/Helpers.hh>
+#include <gz/math/SemanticVersion.hh>
+#include "gz/msgs/Utility.hh"
 
 #ifdef _WIN32
   static const auto &ignstrtok = strtok_s;
@@ -28,15 +30,15 @@
 #endif
 
 
-namespace ignition
+namespace gz
 {
   namespace msgs
   {
     // Inline bracket to help doxygen filtering.
-    inline namespace IGNITION_MSGS_VERSION_NAMESPACE {
-    /// \brief Left and right trim a string. This was copied from ignition
-    /// common, ign-common/Util.hh, to avoid adding another dependency.
-    /// Remove this function if ign-common ever becomes a dependency.
+    inline namespace GZ_MSGS_VERSION_NAMESPACE {
+    /// \brief Left and right trim a string. This was copied from Gazebo
+    /// common, gz-common/Util.hh, to avoid adding another dependency.
+    /// Remove this function if gz-common ever becomes a dependency.
     /// \param[in] _s String to trim
     /// \return Trimmed string
     std::string trimmed(std::string _s)
@@ -52,9 +54,9 @@ namespace ignition
       return _s;
     }
 
-    /// \brief Splits a string into tokens. This was copied from ignition
-    /// common, ign-common/Util.hh, to avoid adding another dependency.
-    /// Remove this function if ign-common every becomes a dependency.
+    /// \brief Splits a string into tokens. This was copied from Gazebo
+    /// common, gz-common/Util.hh, to avoid adding another dependency.
+    /// Remove this function if gz-common every becomes a dependency.
     /// \param[in] _str Input string.
     /// \param[in] _delim Token delimiter.
     /// \return Vector of tokens.
@@ -78,27 +80,27 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    ignition::math::Vector3d Convert(const msgs::Vector3d &_v)
+    gz::math::Vector3d Convert(const msgs::Vector3d &_v)
     {
-      return ignition::math::Vector3d(_v.x(), _v.y(), _v.z());
+      return gz::math::Vector3d(_v.x(), _v.y(), _v.z());
     }
 
     /////////////////////////////////////////////
-    ignition::math::Vector2d Convert(const msgs::Vector2d &_v)
+    gz::math::Vector2d Convert(const msgs::Vector2d &_v)
     {
-      return ignition::math::Vector2d(_v.x(), _v.y());
+      return gz::math::Vector2d(_v.x(), _v.y());
     }
 
     /////////////////////////////////////////////
-    ignition::math::Quaterniond Convert(const msgs::Quaternion &_q)
+    gz::math::Quaterniond Convert(const msgs::Quaternion &_q)
     {
-      return ignition::math::Quaterniond(_q.w(), _q.x(), _q.y(), _q.z());
+      return gz::math::Quaterniond(_q.w(), _q.x(), _q.y(), _q.z());
     }
 
     /////////////////////////////////////////////
-    ignition::math::Pose3d Convert(const msgs::Pose &_p)
+    gz::math::Pose3d Convert(const msgs::Pose &_p)
     {
-      ignition::math::Pose3d result;
+      gz::math::Pose3d result;
 
       if (_p.has_position())
        result.Pos() = Convert(_p.position());
@@ -128,16 +130,26 @@ namespace ignition
       {
         out.SetSurface(math::SphericalCoordinates::EARTH_WGS84);
       }
+      else if (_sc.surface_model() == msgs::SphericalCoordinates::MOON_SCS)
+      {
+        out.SetSurface(math::SphericalCoordinates::MOON_SCS);
+      }
+      else if (_sc.surface_model() ==
+          msgs::SphericalCoordinates::CUSTOM_SURFACE)
+      {
+        out.SetSurface(math::SphericalCoordinates::CUSTOM_SURFACE,
+            _sc.surface_axis_equatorial(), _sc.surface_axis_polar());
+      }
       else
       {
         std::cerr << "Unrecognized spherical surface type ["
                   << _sc.surface_model()
                   << "]. Using default." << std::endl;
       }
-      out.SetLatitudeReference(IGN_DTOR(_sc.latitude_deg()));
-      out.SetLongitudeReference(IGN_DTOR(_sc.longitude_deg()));
+      out.SetLatitudeReference(GZ_DTOR(_sc.latitude_deg()));
+      out.SetLongitudeReference(GZ_DTOR(_sc.longitude_deg()));
       out.SetElevationReference(_sc.elevation());
-      out.SetHeadingOffset(IGN_DTOR(_sc.heading_deg()));
+      out.SetHeadingOffset(GZ_DTOR(_sc.heading_deg()));
       return out;
     }
 
@@ -171,10 +183,10 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    ignition::math::Planed Convert(const msgs::PlaneGeom &_p)
+    gz::math::Planed Convert(const msgs::PlaneGeom &_p)
     {
-      return ignition::math::Planed(Convert(_p.normal()),
-          ignition::math::Vector2d(_p.size().x(), _p.size().y()),
+      return gz::math::Planed(Convert(_p.normal()),
+          gz::math::Vector2d(_p.size().x(), _p.size().y()),
           _p.d());
     }
 
@@ -234,7 +246,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////////
-    msgs::Vector3d Convert(const ignition::math::Vector3d &_v)
+    msgs::Vector3d Convert(const gz::math::Vector3d &_v)
     {
       msgs::Vector3d result;
       result.set_x(_v.X());
@@ -244,7 +256,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////////
-    msgs::Vector2d Convert(const ignition::math::Vector2d &_v)
+    msgs::Vector2d Convert(const gz::math::Vector2d &_v)
     {
       msgs::Vector2d result;
       result.set_x(_v.X());
@@ -253,7 +265,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    msgs::Quaternion Convert(const ignition::math::Quaterniond &_q)
+    msgs::Quaternion Convert(const gz::math::Quaterniond &_q)
     {
       msgs::Quaternion result;
       result.set_x(_q.X());
@@ -264,7 +276,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    msgs::Pose Convert(const ignition::math::Pose3d &_p)
+    msgs::Pose Convert(const gz::math::Pose3d &_p)
     {
       msgs::Pose result;
       result.mutable_position()->CopyFrom(Convert(_p.Pos()));
@@ -308,7 +320,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    msgs::PlaneGeom Convert(const ignition::math::Planed &_p)
+    msgs::PlaneGeom Convert(const gz::math::Planed &_p)
     {
       msgs::PlaneGeom result;
       result.mutable_normal()->CopyFrom(Convert(_p.Normal()));
@@ -379,7 +391,7 @@ namespace ignition
     msgs::Time Convert(const std::chrono::steady_clock::duration &_time_point)
     {
       std::pair<uint64_t, uint64_t> timeSecAndNsecs =
-        ignition::math::durationToSecNsec(_time_point);
+        gz::math::durationToSecNsec(_time_point);
       msgs::Time msg;
       msg.set_sec(timeSecAndNsecs.first);
       msg.set_nsec(timeSecAndNsecs.second);
@@ -395,7 +407,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    void Set(msgs::Vector3d *_pt, const ignition::math::Vector3d &_v)
+    void Set(msgs::Vector3d *_pt, const gz::math::Vector3d &_v)
     {
       _pt->set_x(_v.X());
       _pt->set_y(_v.Y());
@@ -403,14 +415,14 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    void Set(msgs::Vector2d *_pt, const ignition::math::Vector2d &_v)
+    void Set(msgs::Vector2d *_pt, const gz::math::Vector2d &_v)
     {
       _pt->set_x(_v.X());
       _pt->set_y(_v.Y());
     }
 
     /////////////////////////////////////////////
-    void Set(msgs::Quaternion *_q, const ignition::math::Quaterniond &_v)
+    void Set(msgs::Quaternion *_q, const gz::math::Quaterniond &_v)
     {
       _q->set_x(_v.X());
       _q->set_y(_v.Y());
@@ -419,14 +431,14 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    void Set(msgs::Pose *_p, const ignition::math::Pose3d &_v)
+    void Set(msgs::Pose *_p, const gz::math::Pose3d &_v)
     {
       Set(_p->mutable_position(), _v.Pos());
       Set(_p->mutable_orientation(), _v.Rot());
     }
 
     /////////////////////////////////////////////////
-    void Set(msgs::PlaneGeom *_p, const ignition::math::Planed &_v)
+    void Set(msgs::PlaneGeom *_p, const gz::math::Planed &_v)
     {
       Set(_p->mutable_normal(), _v.Normal());
       _p->mutable_size()->set_x(_v.Size().X());
@@ -469,6 +481,18 @@ namespace ignition
       if (_m.Surface() == math::SphericalCoordinates::EARTH_WGS84)
       {
         _sc->set_surface_model(msgs::SphericalCoordinates::EARTH_WGS84);
+      }
+      else if (_m.Surface() == math::SphericalCoordinates::MOON_SCS)
+      {
+        _sc->set_surface_model(msgs::SphericalCoordinates::MOON_SCS);
+      }
+      else if (_m.Surface() ==
+          math::SphericalCoordinates::CUSTOM_SURFACE)
+      {
+        _sc->set_surface_model(
+            msgs::SphericalCoordinates::CUSTOM_SURFACE);
+        _sc->set_surface_axis_equatorial(_m.SurfaceAxisEquatorial());
+        _sc->set_surface_axis_polar(_m.SurfaceAxisPolar());
       }
       else
       {
@@ -566,6 +590,10 @@ namespace ignition
       {
         result = msgs::Joint::FIXED;
       }
+      else if (_str == "continuous")
+      {
+        result = msgs::Joint::CONTINUOUS;
+      }
       else
       {
         std::cerr << "Unrecognized JointType ["
@@ -620,6 +648,11 @@ namespace ignition
         case msgs::Joint::FIXED:
         {
           result = "fixed";
+          break;
+        }
+        case msgs::Joint::CONTINUOUS:
+        {
+          result = "continuous";
           break;
         }
         default:
@@ -1061,7 +1094,7 @@ namespace ignition
     bool ConvertFuelMetadata(const std::string &_modelConfigStr,
                              msgs::FuelMetadata &_meta)
     {
-      ignition::msgs::FuelMetadata meta;
+      gz::msgs::FuelMetadata meta;
 
       // Load the model config into tinyxml
       tinyxml2::XMLDocument modelConfigDoc;
@@ -1116,7 +1149,7 @@ namespace ignition
       elem = modelElement->FirstChildElement("author");
       while (elem)
       {
-        ignition::msgs::FuelMetadata::Contact *author = meta.add_authors();
+        gz::msgs::FuelMetadata::Contact *author = meta.add_authors();
         // Get the author name and email
         if (elem->FirstChildElement("name") &&
             elem->FirstChildElement("name")->GetText())
@@ -1145,7 +1178,7 @@ namespace ignition
           if (ver > maxVer)
           {
             meta.mutable_model()->mutable_file_format()->set_name("sdf");
-            ignition::msgs::Version *verMsg =
+            gz::msgs::Version *verMsg =
               meta.mutable_model()->mutable_file_format()->mutable_version();
 
             verMsg->set_major(ver.Major());

@@ -16,19 +16,19 @@
 */
 #include <gtest/gtest.h>
 
-#include "ignition/msgs/MessageTypes.hh"
+#include "gz/msgs/image.pb.h"
 
 /////////////////////////////////////////////////
 TEST(Image, PixelFormat)
 {
   // Check that pixel format enum is properly set
-  ignition::msgs::Image msg;
+  gz::msgs::Image msg;
   EXPECT_EQ(
-    static_cast<int>(ignition::msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT),
+    static_cast<int>(gz::msgs::PixelFormatType::UNKNOWN_PIXEL_FORMAT),
     static_cast<int>(msg.pixel_format_type()));
 
-  msg.set_pixel_format_type(ignition::msgs::PixelFormatType::RGB_INT8);
+  msg.set_pixel_format_type(gz::msgs::PixelFormatType::RGB_INT8);
   EXPECT_EQ(
-    static_cast<int>(ignition::msgs::PixelFormatType::RGB_INT8),
+    static_cast<int>(gz::msgs::PixelFormatType::RGB_INT8),
     static_cast<int>(msg.pixel_format_type()));
 }
