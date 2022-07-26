@@ -16,13 +16,16 @@
 */
 
 syntax = "proto3";
+package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "ParameterProtos";
+
+/// \ingroup ignition.msgs
+/// \interface Parameter
+/// \brief Representation of a parameter, used to request to set a parameter.
 
 import "google/protobuf/any.proto";
 
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
-
-/// \brief Representation of a parameter, used to request to set a parameter.
 message Parameter
 {
   /// \brief Parameter name.

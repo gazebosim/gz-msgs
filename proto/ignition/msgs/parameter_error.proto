@@ -16,11 +16,14 @@
 */
 
 syntax = "proto3";
-
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
+option java_outer_classname = "ParameterErrorProtos";
 
+/// \ingroup ignition.msgs
+/// \interface ParameterError
 /// \brief Parameter server errors for declare or set parameter.
+
 message ParameterError
 {
   enum Type {

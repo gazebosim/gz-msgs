@@ -16,13 +16,16 @@
 */
 
 syntax = "proto3";
-
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
+option java_outer_classname = "ParameterDeclarationsProtos";
+
+/// \ingroup ignition.msgs
+/// \interface ParameterDeclarations
+/// \brief Collection of parameter declarations.
 
 import "ignition/msgs/parameter_declaration.proto";
 
-/// \brief Collection of parameter declarations.
 message ParameterDeclarations
 {
   /// \brief Parameter declarations.

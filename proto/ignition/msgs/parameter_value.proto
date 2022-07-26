@@ -16,13 +16,16 @@
 */
 
 syntax = "proto3";
+package ignition.msgs;
+option java_package = "com.ignition.msgs";
+option java_outer_classname = "ParameterValueProtos";
+
+/// \ingroup ignition.msgs
+/// \interface ParameterValue
+/// \brief Representation of a parameter value, used as a response to get a parameter.
 
 import "google/protobuf/any.proto";
 
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
-
-/// \brief Representation of a parameter value, used as a response to get a parameter.
 message ParameterValue
 {
   /// \brief Serialized protobuf message.

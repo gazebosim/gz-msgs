@@ -16,11 +16,14 @@
 */
 
 syntax = "proto3";
-
 package ignition.msgs;
 option java_package = "com.ignition.msgs";
+option java_outer_classname = "ParameterNameProtos";
 
+/// \ingroup ignition.msgs
+/// \interface ParameterName
 /// \brief Parameter name, used as a request to get a parameter.
+
 message ParameterName
 {
   /// \brief Parameter name.
