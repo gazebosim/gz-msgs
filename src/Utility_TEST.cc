@@ -17,11 +17,12 @@
 
 #include <gtest/gtest.h>
 #include <limits>
-#include <ignition/math/Helpers.hh>
-#include "ignition/msgs/MessageTypes.hh"
-#include "ignition/msgs/Utility.hh"
+#include <gz/math/Helpers.hh>
 
-using namespace ignition;
+#include "gz/msgs/wrench.pb.h"
+#include "gz/msgs/Utility.hh"
+
+using namespace gz;
 
 /////////////////////////////////////////////////
 TEST(UtilityTest, CovertMathVector3ToMsgs)
@@ -63,7 +64,7 @@ TEST(UtilityTest, ConvertMsgsVector2dToMath)
 TEST(UtilityTest, ConvertMathQuaterionToMsgs)
 {
   msgs::Quaternion msg =
-    msgs::Convert(math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI));
+    msgs::Convert(math::Quaterniond(GZ_PI * 0.25, GZ_PI * 0.5, GZ_PI));
 
   EXPECT_TRUE(math::equal(msg.x(), -0.65328148243818818));
   EXPECT_TRUE(math::equal(msg.y(), 0.27059805007309856));
@@ -75,7 +76,7 @@ TEST(UtilityTest, ConvertMathQuaterionToMsgs)
 TEST(UtilityTest, ConvertMsgsQuaterionToMath)
 {
   msgs::Quaternion msg =
-    msgs::Convert(math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI));
+    msgs::Convert(math::Quaterniond(GZ_PI * 0.25, GZ_PI * 0.5, GZ_PI));
   math::Quaterniond v = msgs::Convert(msg);
 
   // TODO(anyone): to real unit test move math::equal to EXPECT_DOUBLE_EQ
@@ -90,7 +91,7 @@ TEST(UtilityTest, ConvertPoseMathToMsgs)
 {
   msgs::Pose msg = msgs::Convert(math::Pose3d(
         math::Vector3d(1, 2, 3),
-        math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI)));
+        math::Quaterniond(GZ_PI * 0.25, GZ_PI * 0.5, GZ_PI)));
 
   EXPECT_DOUBLE_EQ(1, msg.position().x());
   EXPECT_DOUBLE_EQ(2, msg.position().y());
@@ -107,7 +108,7 @@ TEST(UtilityTest, ConvertMsgPoseToMath)
 {
   msgs::Pose msg = msgs::Convert(
       math::Pose3d(math::Vector3d(1, 2, 3),
-        math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI)));
+        math::Quaterniond(GZ_PI * 0.25, GZ_PI * 0.5, GZ_PI)));
   math::Pose3d v = msgs::Convert(msg);
 
   EXPECT_DOUBLE_EQ(1, v.Pos().X());
@@ -178,12 +179,12 @@ TEST(UtilityTest, ConvertMsgsPlaneToMath)
 /////////////////////////////////////////////////
 TEST(MsgsTest, ConvertMathInertialToMsgs)
 {
-  const auto pose = ignition::math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
+  const auto pose = gz::math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
   msgs::Inertial msg = msgs::Convert(
-      ignition::math::Inertiald(
-        ignition::math::MassMatrix3d(12.0,
-          ignition::math::Vector3d(2, 3, 4),
-          ignition::math::Vector3d(0.1, 0.2, 0.3)),
+      gz::math::Inertiald(
+        gz::math::MassMatrix3d(12.0,
+          gz::math::Vector3d(2, 3, 4),
+          gz::math::Vector3d(0.1, 0.2, 0.3)),
         pose));
 
   EXPECT_DOUBLE_EQ(12.0, msg.mass());
@@ -199,12 +200,12 @@ TEST(MsgsTest, ConvertMathInertialToMsgs)
 /////////////////////////////////////////////////
 TEST(MsgsTest, ConvertMsgsInertialToMath)
 {
-  const auto pose = ignition::math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
+  const auto pose = gz::math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
   msgs::Inertial msg = msgs::Convert(
-      ignition::math::Inertiald(
-        ignition::math::MassMatrix3d(12.0,
-          ignition::math::Vector3d(2, 3, 4),
-          ignition::math::Vector3d(0.1, 0.2, 0.3)),
+      gz::math::Inertiald(
+        gz::math::MassMatrix3d(12.0,
+          gz::math::Vector3d(2, 3, 4),
+          gz::math::Vector3d(0.1, 0.2, 0.3)),
         pose));
   auto inertial = msgs::Convert(msg);
 
@@ -222,9 +223,9 @@ TEST(MsgsTest, ConvertMsgsInertialToMath)
 TEST(MsgsTest, ConvertMathMassMatrix3ToMsgs)
 {
   msgs::Inertial msg = msgs::Convert(
-      ignition::math::MassMatrix3d(12.0,
-        ignition::math::Vector3d(2, 3, 4),
-        ignition::math::Vector3d(0.1, 0.2, 0.3)));
+      gz::math::MassMatrix3d(12.0,
+        gz::math::Vector3d(2, 3, 4),
+        gz::math::Vector3d(0.1, 0.2, 0.3)));
 
   EXPECT_DOUBLE_EQ(12.0, msg.mass());
   EXPECT_DOUBLE_EQ(2.0, msg.ixx());
@@ -233,7 +234,7 @@ TEST(MsgsTest, ConvertMathMassMatrix3ToMsgs)
   EXPECT_DOUBLE_EQ(0.1, msg.ixy());
   EXPECT_DOUBLE_EQ(0.2, msg.ixz());
   EXPECT_DOUBLE_EQ(0.3, msg.iyz());
-  EXPECT_EQ(ignition::math::Pose3d::Zero, msgs::Convert(msg.pose()));
+  EXPECT_EQ(gz::math::Pose3d::Zero, msgs::Convert(msg.pose()));
 }
 
 /////////////////////////////////////////////////
@@ -242,7 +243,7 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
   auto msg = msgs::Convert(
       math::SphericalCoordinates(
       math::SphericalCoordinates::SurfaceType::EARTH_WGS84,
-      IGN_DTOR(1.1), IGN_DTOR(2.2), 3.3, IGN_DTOR(0.4)));
+      GZ_DTOR(1.1), GZ_DTOR(2.2), 3.3, GZ_DTOR(0.4)));
 
   EXPECT_EQ(msgs::SphericalCoordinates::EARTH_WGS84, msg.surface_model());
   EXPECT_DOUBLE_EQ(1.1, msg.latitude_deg());
@@ -257,6 +258,59 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
   EXPECT_DOUBLE_EQ(2.2, math.LongitudeReference().Degree());
   EXPECT_DOUBLE_EQ(3.3, math.ElevationReference());
   EXPECT_DOUBLE_EQ(0.4, math.HeadingOffset().Degree());
+
+  // For Moon's surface.
+  auto msgMoon = msgs::Convert(
+      math::SphericalCoordinates(
+      math::SphericalCoordinates::SurfaceType::MOON_SCS,
+      GZ_DTOR(1.1), GZ_DTOR(2.2), 3.3, GZ_DTOR(0.4)));
+
+  EXPECT_EQ(msgs::SphericalCoordinates::MOON_SCS,
+      msgMoon.surface_model());
+  EXPECT_DOUBLE_EQ(1.1, msgMoon.latitude_deg());
+  EXPECT_DOUBLE_EQ(2.2, msgMoon.longitude_deg());
+  EXPECT_DOUBLE_EQ(3.3, msgMoon.elevation());
+  EXPECT_DOUBLE_EQ(0.4, msgMoon.heading_deg());
+
+  auto mathMoon = msgs::Convert(msgMoon);
+
+  EXPECT_EQ(math::SphericalCoordinates::MOON_SCS,
+      mathMoon.Surface());
+  EXPECT_DOUBLE_EQ(1.1, mathMoon.LatitudeReference().Degree());
+  EXPECT_DOUBLE_EQ(2.2, mathMoon.LongitudeReference().Degree());
+  EXPECT_DOUBLE_EQ(3.3, mathMoon.ElevationReference());
+  EXPECT_DOUBLE_EQ(0.4, mathMoon.HeadingOffset().Degree());
+
+  // For custom surfaces.
+  auto sc = math::SphericalCoordinates(
+      math::SphericalCoordinates::CUSTOM_SURFACE,
+      12000, 10000);
+  sc.SetLatitudeReference(GZ_DTOR(1.1));
+  sc.SetLongitudeReference(GZ_DTOR(2.2));
+  sc.SetElevationReference(3.3);
+  sc.SetHeadingOffset(GZ_DTOR(0.4));
+
+  auto msgCustom = msgs::Convert(sc);
+
+  EXPECT_EQ(msgs::SphericalCoordinates::CUSTOM_SURFACE,
+      msgCustom.surface_model());
+  EXPECT_DOUBLE_EQ(1.1, msgCustom.latitude_deg());
+  EXPECT_DOUBLE_EQ(2.2, msgCustom.longitude_deg());
+  EXPECT_DOUBLE_EQ(3.3, msgCustom.elevation());
+  EXPECT_DOUBLE_EQ(0.4, msgCustom.heading_deg());
+  EXPECT_DOUBLE_EQ(12000, msgCustom.surface_axis_equatorial());
+  EXPECT_DOUBLE_EQ(10000, msgCustom.surface_axis_polar());
+
+  auto mathCustom = msgs::Convert(msgCustom);
+
+  EXPECT_EQ(math::SphericalCoordinates::CUSTOM_SURFACE,
+      mathCustom.Surface());
+  EXPECT_DOUBLE_EQ(1.1, mathCustom.LatitudeReference().Degree());
+  EXPECT_DOUBLE_EQ(2.2, mathCustom.LongitudeReference().Degree());
+  EXPECT_DOUBLE_EQ(3.3, mathCustom.ElevationReference());
+  EXPECT_DOUBLE_EQ(0.4, mathCustom.HeadingOffset().Degree());
+  EXPECT_DOUBLE_EQ(12000, mathCustom.SurfaceAxisEquatorial());
+  EXPECT_DOUBLE_EQ(10000, mathCustom.SurfaceAxisPolar());
 }
 
 /////////////////////////////////////////////////
@@ -380,7 +434,7 @@ TEST(UtilityTest, SetVector2d)
 TEST(UtilityTest, SetQuaternion)
 {
   msgs::Quaternion msg;
-  msgs::Set(&msg, math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI));
+  msgs::Set(&msg, math::Quaterniond(GZ_PI * 0.25, GZ_PI * 0.5, GZ_PI));
   EXPECT_TRUE(math::equal(msg.x(), -0.65328148243818818));
   EXPECT_TRUE(math::equal(msg.y(), 0.27059805007309856));
   EXPECT_TRUE(math::equal(msg.z(), 0.65328148243818829));
@@ -392,7 +446,7 @@ TEST(UtilityTest, SetPose)
 {
   msgs::Pose msg;
   msgs::Set(&msg, math::Pose3d(math::Vector3d(1, 2, 3),
-        math::Quaterniond(IGN_PI * 0.25, IGN_PI * 0.5, IGN_PI)));
+        math::Quaterniond(GZ_PI * 0.25, GZ_PI * 0.5, GZ_PI)));
 
   EXPECT_DOUBLE_EQ(1, msg.position().x());
   EXPECT_DOUBLE_EQ(2, msg.position().y());
@@ -436,13 +490,13 @@ TEST(UtilityTest, SetPlane)
 /////////////////////////////////////////////////
 TEST(MsgsTest, SetInertial)
 {
-  const auto pose = ignition::math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
+  const auto pose = gz::math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
   msgs::Inertial msg;
-  msgs::Set(&msg, ignition::math::Inertiald(
-      ignition::math::MassMatrix3d(
+  msgs::Set(&msg, gz::math::Inertiald(
+      gz::math::MassMatrix3d(
         12.0,
-        ignition::math::Vector3d(2, 3, 4),
-        ignition::math::Vector3d(0.1, 0.2, 0.3)),
+        gz::math::Vector3d(2, 3, 4),
+        gz::math::Vector3d(0.1, 0.2, 0.3)),
       pose));
 
   EXPECT_DOUBLE_EQ(12.0, msg.mass());
@@ -459,10 +513,10 @@ TEST(MsgsTest, SetInertial)
 TEST(MsgsTest, SetMassMatrix3)
 {
   msgs::Inertial msg;
-  msgs::Set(&msg, ignition::math::MassMatrix3d(
+  msgs::Set(&msg, gz::math::MassMatrix3d(
         12.0,
-        ignition::math::Vector3d(2, 3, 4),
-        ignition::math::Vector3d(0.1, 0.2, 0.3)));
+        gz::math::Vector3d(2, 3, 4),
+        gz::math::Vector3d(0.1, 0.2, 0.3)));
 
   EXPECT_DOUBLE_EQ(12.0, msg.mass());
   EXPECT_DOUBLE_EQ(2.0, msg.ixx());
@@ -471,7 +525,7 @@ TEST(MsgsTest, SetMassMatrix3)
   EXPECT_DOUBLE_EQ(0.1, msg.ixy());
   EXPECT_DOUBLE_EQ(0.2, msg.ixz());
   EXPECT_DOUBLE_EQ(0.3, msg.iyz());
-  EXPECT_EQ(ignition::math::Pose3d::Zero, msgs::Convert(msg.pose()));
+  EXPECT_EQ(gz::math::Pose3d::Zero, msgs::Convert(msg.pose()));
 }
 
 /////////////////////////////////////////////////
@@ -480,13 +534,47 @@ TEST(MsgsTest, SetSphericalCoordinates)
   msgs::SphericalCoordinates msg;
   msgs::Set(&msg, math::SphericalCoordinates(
       math::SphericalCoordinates::SurfaceType::EARTH_WGS84,
-      IGN_DTOR(1.1), IGN_DTOR(2.2), 3.3, IGN_DTOR(0.4)));
+      GZ_DTOR(1.1), GZ_DTOR(2.2), 3.3, GZ_DTOR(0.4)));
 
   EXPECT_EQ(msgs::SphericalCoordinates::EARTH_WGS84, msg.surface_model());
   EXPECT_DOUBLE_EQ(1.1, msg.latitude_deg());
   EXPECT_DOUBLE_EQ(2.2, msg.longitude_deg());
   EXPECT_DOUBLE_EQ(3.3, msg.elevation());
   EXPECT_DOUBLE_EQ(0.4, msg.heading_deg());
+
+  // For Moon's surface.
+  msgs::SphericalCoordinates msgMoon;
+  msgs::Set(&msgMoon, math::SphericalCoordinates(
+      math::SphericalCoordinates::SurfaceType::MOON_SCS,
+      GZ_DTOR(1.2), GZ_DTOR(2.3), 3.4, GZ_DTOR(0.5)));
+
+  EXPECT_EQ(msgs::SphericalCoordinates::MOON_SCS,
+      msgMoon.surface_model());
+  EXPECT_DOUBLE_EQ(1.2, msgMoon.latitude_deg());
+  EXPECT_DOUBLE_EQ(2.3, msgMoon.longitude_deg());
+  EXPECT_DOUBLE_EQ(3.4, msgMoon.elevation());
+  EXPECT_DOUBLE_EQ(0.5, msgMoon.heading_deg());
+
+  // For a custom surface.
+  msgs::SphericalCoordinates msgCustom;
+  auto sc = math::SphericalCoordinates(
+      math::SphericalCoordinates::CUSTOM_SURFACE,
+      12000, 10000);
+  sc.SetLatitudeReference(GZ_DTOR(1.9));
+  sc.SetLongitudeReference(GZ_DTOR(2.8));
+  sc.SetElevationReference(3.7);
+  sc.SetHeadingOffset(GZ_DTOR(0.6));
+
+  msgs::Set(&msgCustom, sc);
+
+  EXPECT_EQ(msgs::SphericalCoordinates::CUSTOM_SURFACE,
+      msgCustom.surface_model());
+  EXPECT_DOUBLE_EQ(1.9, msgCustom.latitude_deg());
+  EXPECT_DOUBLE_EQ(2.8, msgCustom.longitude_deg());
+  EXPECT_DOUBLE_EQ(3.7, msgCustom.elevation());
+  EXPECT_DOUBLE_EQ(0.6, msgCustom.heading_deg());
+  EXPECT_DOUBLE_EQ(12000, msgCustom.surface_axis_equatorial());
+  EXPECT_DOUBLE_EQ(10000, msgCustom.surface_axis_polar());
 }
 
 /////////////////////////////////////////////////
@@ -599,6 +687,7 @@ TEST(MsgsTest, ConvertMsgsJointTypeToString)
   CompareMsgsJointTypeToString(msgs::Joint::SCREW);
   CompareMsgsJointTypeToString(msgs::Joint::GEARBOX);
   CompareMsgsJointTypeToString(msgs::Joint::FIXED);
+  CompareMsgsJointTypeToString(msgs::Joint::CONTINUOUS);
 
   EXPECT_EQ(msgs::ConvertJointType("bad type"), msgs::Joint::REVOLUTE);
   EXPECT_EQ(msgs::ConvertJointType(msgs::Joint::Type(100)), "unknown");

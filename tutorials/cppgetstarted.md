@@ -2,7 +2,7 @@
 
 ## Overview
 
-This tutorial describes how to get started using Ignition Msgs with C++.
+This tutorial describes how to get started using Gazebo Msgs with C++.
 
 We will run through a simple example that populates a message and prints it.
 Start by creating a bare-bones main file using the editor of your choice.
@@ -14,14 +14,14 @@ int main()
 }
 ```
 
-The easiest way to include Ignition Msgs is through the `ignition/msgs.hh`
+The easiest way to include Gazebo Msgs is through the `gz/msgs.hh`
 header file. Alternatively, you can include only the header files you need.
 For this example, we'll take the short and easy approach.
 
 At this point your main file should look like
 
 ```{.cpp}
-#include <ignition/msgs.hh>
+#include <gz/msgs.hh>
 
 int main()
 {
@@ -30,21 +30,21 @@ int main()
 ```
 
 Now let's create a message to store three points with arbitrary values.
-We will use the `ignition::msgs::Vector3` class to store these points and the
+We will use the `gz::msgs::Vector3` class to store these points and the
 function `DebugString()` to print the content on the terminal.
 
 
 ```{.cpp}
 #include <iostream>
-#include <ignition/msgs.hh>
+#include <gz/msgs.hh>
 
 int main()
 {
-  ignition::msgs::Vector3d point1;
+  gz::msgs::Vector3d point1;
   point1.set_x(1);
   point1.set_y(3);
   point1.set_z(5);
-  ignition::msgs::Vector3d point2;
+  gz::msgs::Vector3d point2;
   point2.set_x(2);
   point2.set_y(4);
   point2.set_z(6);
@@ -61,11 +61,11 @@ To compile the code create a `CMakeLists.txt`:
 ```
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
-# Find the Ignition msgs library
-find_package(ignition-msgs9 QUIET REQUIRED)
+# Find the Gazebo msgs library
+find_package(gz-msgs9 QUIET REQUIRED)
 
-add_executable(ignition-msgs-example main.cc)
-target_link_libraries(ignition-msgs-example ${IGNITION-MSGS_LIBRARIES})
+add_executable(gz-msgs-example main.cc)
+target_link_libraries(gz-msgs-example ${GZ-MSGS_LIBRARIES})
 ```
 
 Let's start by compiling the examples:

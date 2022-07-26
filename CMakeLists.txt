@@ -3,50 +3,76 @@ cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(ignition-msgs9 VERSION 9.0.0)
+project(gz-msgs9 VERSION 9.0.0)
 
 #============================================================================
-# Find ignition-cmake
+# Find gz-cmake
 #============================================================================
-# If you get an error at this line, you need to install ignition-cmake
-find_package(ignition-cmake2 2.8.0 REQUIRED)
+# If you get an error at this line, you need to install gz-cmake
+find_package(gz-cmake3 REQUIRED)
 
 #============================================================================
 # Configure the project
 #============================================================================
-ign_configure_project(VERSION_SUFFIX pre1)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+gz_configure_project(VERSION_SUFFIX pre1)
+
+if (UNIX AND NOT APPLE)
+  set (EXTRA_TEST_LIB_DEPS stdc++fs)
+else()
+  set (EXTRA_TEST_LIB_DEPS)
+endif()
 
 #============================================================================
 # Set project-specific options
 #============================================================================
 
 # Cross-compilation related options
-# In a cross-compilation scenario, it is possible that the ign_msgs_gen
+# In a cross-compilation scenario, it is possible that the gz_msgs_gen
 # generator compiled for the target machine cannot be used to generate
 # the C++ code corresponding to the .proto definition. For this scenario,
 # the following two options can be used as follows.
-# First of all, ign-msgs is compiled targeting the host machine, and in the
-# build targeting the host, the INSTALL_IGN_MSGS_GEN_EXECUTABLE option is
+# First of all, gz-msgs is compiled targeting the host machine, and in the
+# build targeting the host, the INSTALL_GZ_MSGS_GEN_EXECUTABLE option is
 # enabled:
-# > cmake -DINSTALL_IGN_MSGS_GEN_EXECUTABLE:BOOL=ON ..
-# ensuring that the ign_msgs_gen is installed in
-# <host_install_prefix>/bin/ign_msgs_gen . Then, the same version of ign-msgs
+# > cmake -DINSTALL_GZ_MSGS_GEN_EXECUTABLE:BOOL=ON ..
+# ensuring that the gz_msgs_gen is installed in
+# <host_install_prefix>/bin/gz_msgs_gen . Then, the same version of gz-msgs
 # can be cross-compiled, and in the cross-compilation build the location of the
-# host ign_msgs_gen is specified via the IGN_MSGS_GEN_EXECUTABLE
+# host gz_msgs_gen is specified via the GZ_MSGS_GEN_EXECUTABLE
 # CMake cache variable:
-# > cmake -IGN_MSGS_GEN_EXECUTABLE=<host_install_prefix>/bin/ign_msgs_gen ..
+# > cmake -GZ_MSGS_GEN_EXECUTABLE=<host_install_prefix>/bin/gz_msgs_gen ..
 
-option(
-  INSTALL_IGN_MSGS_GEN_EXECUTABLE
-  "Install the ign_msgs_gen executable."
-  OFF)
+# TODO(CH3): Deprecated. Remove IGN_MSGS CMake variables on tick-tock.
+if(INSTALL_IGN_MSGS_GEN_EXECUTABLE)
+  message(WARNING "INSTALL_IGN_MSGS_GEN_EXECUTABLE is deprecated, use INSTALL_GZ_MSGS_GEN_EXECUTABLE instead")
+  set(INSTALL_GZ_MSGS_GEN_EXECUTABLE ${INSTALL_IGN_MSGS_GEN_EXECUTABLE})
+else()
+  option(
+    INSTALL_GZ_MSGS_GEN_EXECUTABLE
+    "Install the gz_msgs_gen executable."
+    OFF)
+  set(INSTALL_IGN_MSGS_GEN_EXECUTABLE ${INSTALL_GZ_MSGS_GEN_EXECUTABLE})
+endif()
+
 mark_as_advanced(INSTALL_IGN_MSGS_GEN_EXECUTABLE)
+mark_as_advanced(INSTALL_GZ_MSGS_GEN_EXECUTABLE)
 
 set(
-  IGN_MSGS_GEN_EXECUTABLE
-  "$<TARGET_FILE:ign_msgs_gen>"
+  GZ_MSGS_GEN_EXECUTABLE
+  "$<TARGET_FILE:gz_msgs_gen>"
   CACHE STRING
-  "ign_msgs_gen executable used in the ign_msgs_protoc CMake function.")
+  "gz_msgs_gen executable used in the gz_msgs_protoc CMake function.")
+mark_as_advanced(GZ_MSGS_GEN_EXECUTABLE)
+
+# TODO(CH3): Deprecated. Remove IGN_MSGS CMake variables on tick-tock.
+set(
+  IGN_MSGS_GEN_EXECUTABLE
+  "$<TARGET_FILE:gz_msgs_gen>"
+  CACHE STRING
+  "gz_msgs_gen executable used in the gz_msgs_protoc CMake function.")
 mark_as_advanced(IGN_MSGS_GEN_EXECUTABLE)
 
 #============================================================================
@@ -57,32 +83,35 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
 #--------------------------------------
 # Find Protobuf
 set(REQ_PROTOBUF_VER 3)
-ign_find_package(IgnProtobuf
+gz_find_package(GzProtobuf
                  VERSION ${REQ_PROTOBUF_VER}
                  REQUIRED
                  COMPONENTS all
                  PRETTY Protobuf)
 
 #--------------------------------------
-# Find ignition-math
-ign_find_package(ignition-math6 REQUIRED VERSION 6.5)
-set(IGN_MATH_VER ${ignition-math6_VERSION_MAJOR})
+# Find gz-math
+gz_find_package(gz-math7 REQUIRED)
+set(GZ_MATH_VER ${gz-math7_VERSION_MAJOR})
 
 #--------------------------------------
-# Find if ign command is available
-find_program(HAVE_IGN_TOOLS ign)
+# Find if command is available. This is used to enable tests.
+# Note that CLI files are installed regardless of whether the dependency is
+# available during build time
+find_program(HAVE_GZ_TOOLS gz)
+set(GZ_TOOLS_VER 1)
 
 #--------------------------------------
 # Find Tinyxml2
-ign_find_package(TINYXML2 REQUIRED PRIVATE PRETTY tinyxml2)
+gz_find_package(TINYXML2 REQUIRED PRIVATE PRETTY tinyxml2)
 
 #============================================================================
 # Configure the build
 #============================================================================
-ign_configure_build(QUIT_IF_BUILD_ERRORS)
+gz_configure_build(QUIT_IF_BUILD_ERRORS)
 
 #============================================================================
-# ign command line support
+# gz command line support
 #============================================================================
 add_subdirectory(conf)
 
@@ -94,16 +123,16 @@ add_subdirectory(tools)
 #============================================================================
 # Install proto files
 #============================================================================
-# TODO: Consider tweaking ign_configure_build() to call add_subdirectory(proto)
+# TODO: Consider tweaking gz_configure_build() to call add_subdirectory(proto)
 # whenever a proto subdirectory exists. This could be used alongside
-# ign_msgs_protoc to get uniform support for proto messages across all ignition
+# gz_msgs_protoc to get uniform support for proto messages across all Gazebo
 # projects.
 add_subdirectory(proto)
 
 #============================================================================
 # Create package information
 #============================================================================
-ign_create_packages()
+gz_create_packages()
 
 #============================================================================
 # Create documentation
@@ -112,16 +141,16 @@ configure_file(${CMAKE_SOURCE_DIR}/api.md.in ${CMAKE_BINARY_DIR}/api.md)
 configure_file(${CMAKE_SOURCE_DIR}/tutorials.md.in ${CMAKE_BINARY_DIR}/tutorials.md)
 
 
-ign_create_docs(
+gz_create_docs(
   API_MAINPAGE_MD "${CMAKE_BINARY_DIR}/api.md"
   TUTORIALS_MAINPAGE_MD "${CMAKE_BINARY_DIR}/tutorials.md"
-  AUTOGENERATED_DOC "${CMAKE_BINARY_DIR}/include/ignition/msgs/"
+  AUTOGENERATED_DOC "${CMAKE_BINARY_DIR}/include/gz/msgs/"
   TAGFILES
-    "${IGNITION-MATH_DOXYGEN_TAGFILE} = ${IGNITION-MATH_API_URL}"
+    "${GZ-MATH_DOXYGEN_TAGFILE} = ${GZ-MATH_API_URL}"
 )
 
 # Wait to build the doc for the autogenerated code
 # The TARGET will exist if doxygen is installed
 if(TARGET doc)
-  add_dependencies(doc ignition-msgs${PROJECT_VERSION_MAJOR})
+  add_dependencies(doc gz-msgs${PROJECT_VERSION_MAJOR})
 endif()
