@@ -87,11 +87,17 @@ def main(argv=sys.argv[1:]):
     gz_header = os.path.join(args.output_cpp_path, proto_file + ".gz.h")
     detail_header = os.path.join(args.output_cpp_path, detail_proto_file + ".pb.h")
 
-    os.makedirs(os.path.join(args.output_cpp_path, detail_proto_dir),
-            exist_ok=True)
-
-    os.rename(header, detail_header)
-    os.rename(gz_header, header)
+    try:
+        os.makedirs(os.path.join(args.output_cpp_path, detail_proto_dir),
+                exist_ok=True)
+        # Windows cannot rename a file to an existing file
+        if os.path.exists(detail_header):
+            os.remove(detail_header)
+        os.rename(header, detail_header)
+        os.rename(gz_header, header)
+    except e:
+        print(f'Failed to manipulate gz-msgs headers: {e}')
+        sys.exit(-1)
 
     ignition_header_dir = os.path.join(args.output_cpp_path, 'ignition', 'msgs')
     ignition_header = proto_file.split(os.sep)
