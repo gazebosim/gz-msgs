@@ -32,28 +32,28 @@ message Inertial
   /// \brief Optional header data
   Header header           = 1;
 
-  /// \brief Mass in Kg
+  /// \brief Mass in kg
   double mass             = 2;
 
   /// \brief CoM pose with respect to the link origin. In meters.
   Pose pose               = 3;
 
-  /// \brief Inertia matrix's XX element.
+  /// \brief Inertia matrix's XX element, in kg * m^2.
   double ixx              = 4;
 
-  /// \brief Inertia matrix's XY element.
+  /// \brief Inertia matrix's XY element, in kg * m^2.
   double ixy              = 5;
 
-  /// \brief Inertia matrix's XZ element.
+  /// \brief Inertia matrix's XZ element, in kg * m^2.
   double ixz              = 6;
 
-  /// \brief Inertia matrix's YY element.
+  /// \brief Inertia matrix's YY element, in kg * m^2.
   double iyy              = 7;
 
-  /// \brief Inertia matrix's YZ element.
+  /// \brief Inertia matrix's YZ element, in kg * m^2.
   double iyz              = 8;
 
-  /// \brief Inertia matrix's ZZ element.
+  /// \brief Inertia matrix's ZZ element, in kg * m^2.
   double izz              = 9;
 
   /// \brief Fluid added mass matrix. The matrix is symmetric, so only the 21
@@ -65,5 +65,8 @@ message Inertial
   ///             33, 34, 35,
   ///                 44, 45,
   ///                     55,
+  ///
+  /// Elements on the top-left 3x3 corner are in kg, the bottom-right ones are
+  /// in kg * m^2, and the rest are in kg * m.
   repeated double fluid_added_mass = 10;
 }
