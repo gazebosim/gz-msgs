@@ -61,4 +61,17 @@ message WorldStatistics
 
   /// \brief Iteration step size. It's zero when paused.
   Time step_size = 10;
+
+  /// \brief True if the simulator is stepping, as opposed to running. This
+  /// field can be ignored if the paused field is true.
+  ///
+  /// When `paused == true`, then simulation is paused and not updating at all
+  /// and the `stepping` field can be ignored.
+  ///
+  /// When `paused == false` and
+  ///   * `stepping == true` then Simulation is updating for a fixed number of
+  ///     iterations, or
+  ///   * `stepping == false` then Simulation is running for an unbounded
+  ///     number of iterations. 
+  bool stepping = 11;
 }
