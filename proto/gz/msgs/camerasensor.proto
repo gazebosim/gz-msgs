@@ -61,13 +61,13 @@ message CameraSensor
 
     /// \brief Pixels of same label from different items, have different
     /// color & id. 1 channel for label id & 2 channels for instance id
-    PANTOPIC        = 2;
+    PANOTOPIC       = 2;
   }
 
   /// \brief Optional header data
   Header header         = 1;
 
-  /// \brief Horizontal field of view
+  /// \brief Horizontal field of view in radians
   double horizontal_fov = 2;
 
   /// \brief Image size in pixels.
@@ -94,10 +94,10 @@ message CameraSensor
   /// \brief Optional noise parameters for the image.
   SensorNoise image_noise = 10;
 
-  /// \brief Optional depth near clip
+  /// \brief Optional depth near clip in meters.
   Double depth_near_clip  = 11;
 
-  /// \brief Optional depth f ar clip
+  /// \brief Optional depth far clip in meters.
   Double depth_far_clip   = 12;
 
   /// \brief Optional bounding box camera type.
