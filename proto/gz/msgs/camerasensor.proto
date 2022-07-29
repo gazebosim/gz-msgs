@@ -62,7 +62,7 @@ message CameraSensor
 
     /// \brief Pixels of same label from different items, have different
     /// color & id. 1 channel for label id & 2 channels for instance id
-    PANOTOPIC       = 2;
+    PANOPTIC       = 2;
   }
 
   /// \brief Optional header data
@@ -105,7 +105,7 @@ message CameraSensor
   BoundingBoxType bounding_box_type  = 13;
 
   /// \brief Optional segmentation camera type.
-  SegmentationType segemntation_type = 14;
+  SegmentationType segmentation_type = 14;
 
   /// \brief Optional lens information
   Lens lens = 15;
