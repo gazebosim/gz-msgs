@@ -108,4 +108,21 @@ message CameraSensor
 
   /// \brief Optional lens information
   Lens lens = 15;
+
+  /// \brief True if the camera will be triggered by a topic
+  bool triggered = 16;
+
+  /// \brief Name of the topic that will trigger the camera if enabled
+  string triggered_topic = 17;
+
+  /// \brief Value used for anti-aliasing
+  int32 anti_aliasing = 18;
+
+  /// \brief Visibility mask of a camera. When the camera's visibility_mask and 
+  /// a visual's visibility_flags evaluates to non-zero, then the visual will
+  /// be visible to the camera.
+  uint32 visibility_mask = 19;
+
+  /// \brief True if the camera is a depth camera.
+  bool is_depth_camera = 20;
 }
