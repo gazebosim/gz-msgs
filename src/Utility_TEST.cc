@@ -195,6 +195,7 @@ TEST(MsgsTest, ConvertMathInertialToMsgs)
   EXPECT_DOUBLE_EQ(0.2, msg.ixz());
   EXPECT_DOUBLE_EQ(0.3, msg.iyz());
   EXPECT_EQ(pose, msgs::Convert(msg.pose()));
+  EXPECT_TRUE(msg.fluid_added_mass().empty());
 }
 
 /////////////////////////////////////////////////
@@ -217,6 +218,90 @@ TEST(MsgsTest, ConvertMsgsInertialToMath)
   EXPECT_DOUBLE_EQ(0.2, inertial.MassMatrix().Ixz());
   EXPECT_DOUBLE_EQ(0.3, inertial.MassMatrix().Iyz());
   EXPECT_EQ(pose, inertial.Pose());
+  EXPECT_FALSE(inertial.FluidAddedMass().has_value());
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMathInertialAddedMassToMsgs)
+{
+  const auto pose = math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
+  math::Matrix6d addedMass{
+      0.1, 0.2, 0.3, 0.4, 0.5, 0.6,
+      0.2, 0.7, 0.8, 0.9, 1.0, 1.1,
+      0.3, 0.8, 1.2, 1.3, 1.4, 1.5,
+      0.4, 0.9, 1.3, 1.6, 1.7, 1.8,
+      0.5, 1.0, 1.4, 1.7, 1.9, 2.0,
+      0.6, 1.1, 1.5, 1.8, 2.0, 2.1};
+
+  auto msg = msgs::Convert(
+      math::Inertiald(
+        math::MassMatrix3d(12.0,
+          math::Vector3d(2, 3, 4),
+          math::Vector3d(0.1, 0.2, 0.3)),
+        pose, addedMass));
+
+  EXPECT_DOUBLE_EQ(12.0, msg.mass());
+  EXPECT_DOUBLE_EQ(2.0, msg.ixx());
+  EXPECT_DOUBLE_EQ(3.0, msg.iyy());
+  EXPECT_DOUBLE_EQ(4.0, msg.izz());
+  EXPECT_DOUBLE_EQ(0.1, msg.ixy());
+  EXPECT_DOUBLE_EQ(0.2, msg.ixz());
+  EXPECT_DOUBLE_EQ(0.3, msg.iyz());
+  EXPECT_EQ(pose, msgs::Convert(msg.pose()));
+  ASSERT_EQ(21, msg.fluid_added_mass().size());
+  EXPECT_DOUBLE_EQ(0.1, msg.fluid_added_mass(0));
+  EXPECT_DOUBLE_EQ(0.2, msg.fluid_added_mass(1));
+  EXPECT_DOUBLE_EQ(0.3, msg.fluid_added_mass(2));
+  EXPECT_DOUBLE_EQ(0.4, msg.fluid_added_mass(3));
+  EXPECT_DOUBLE_EQ(0.5, msg.fluid_added_mass(4));
+  EXPECT_DOUBLE_EQ(0.6, msg.fluid_added_mass(5));
+  EXPECT_DOUBLE_EQ(0.7, msg.fluid_added_mass(6));
+  EXPECT_DOUBLE_EQ(0.8, msg.fluid_added_mass(7));
+  EXPECT_DOUBLE_EQ(0.9, msg.fluid_added_mass(8));
+  EXPECT_DOUBLE_EQ(1.0, msg.fluid_added_mass(9));
+  EXPECT_DOUBLE_EQ(1.1, msg.fluid_added_mass(10));
+  EXPECT_DOUBLE_EQ(1.2, msg.fluid_added_mass(11));
+  EXPECT_DOUBLE_EQ(1.3, msg.fluid_added_mass(12));
+  EXPECT_DOUBLE_EQ(1.4, msg.fluid_added_mass(13));
+  EXPECT_DOUBLE_EQ(1.5, msg.fluid_added_mass(14));
+  EXPECT_DOUBLE_EQ(1.6, msg.fluid_added_mass(15));
+  EXPECT_DOUBLE_EQ(1.7, msg.fluid_added_mass(16));
+  EXPECT_DOUBLE_EQ(1.8, msg.fluid_added_mass(17));
+  EXPECT_DOUBLE_EQ(1.9, msg.fluid_added_mass(18));
+  EXPECT_DOUBLE_EQ(2.0, msg.fluid_added_mass(19));
+  EXPECT_DOUBLE_EQ(2.1, msg.fluid_added_mass(20));
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMsgsInertialAddedMassToMath)
+{
+  const auto pose = math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
+  math::Matrix6d addedMass{
+      0.1, 0.2, 0.3, 0.4, 0.5, 0.6,
+      0.2, 0.7, 0.8, 0.9, 1.0, 1.1,
+      0.3, 0.8, 1.2, 1.3, 1.4, 1.5,
+      0.4, 0.9, 1.3, 1.6, 1.7, 1.8,
+      0.5, 1.0, 1.4, 1.7, 1.9, 2.0,
+      0.6, 1.1, 1.5, 1.8, 2.0, 2.1};
+
+  auto msg = msgs::Convert(
+      math::Inertiald(
+        math::MassMatrix3d(12.0,
+          math::Vector3d(2, 3, 4),
+          math::Vector3d(0.1, 0.2, 0.3)),
+        pose, addedMass));
+  auto inertial = msgs::Convert(msg);
+
+  EXPECT_DOUBLE_EQ(12.0, inertial.MassMatrix().Mass());
+  EXPECT_DOUBLE_EQ(2.0, inertial.MassMatrix().Ixx());
+  EXPECT_DOUBLE_EQ(3.0, inertial.MassMatrix().Iyy());
+  EXPECT_DOUBLE_EQ(4.0, inertial.MassMatrix().Izz());
+  EXPECT_DOUBLE_EQ(0.1, inertial.MassMatrix().Ixy());
+  EXPECT_DOUBLE_EQ(0.2, inertial.MassMatrix().Ixz());
+  EXPECT_DOUBLE_EQ(0.3, inertial.MassMatrix().Iyz());
+  EXPECT_EQ(pose, inertial.Pose());
+  ASSERT_TRUE(inertial.FluidAddedMass().has_value());
+  EXPECT_EQ(addedMass, inertial.FluidAddedMass().value());
 }
 
 /////////////////////////////////////////////////
