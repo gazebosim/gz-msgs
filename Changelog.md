@@ -1,4 +1,22 @@
-## Ignition Msgs 8.x
+## Gazebo Msgs 8.x
+
+### Gazebo Msgs 8.6.0 (2022-08-02)
+
+1. Increase `Utility` test coverage
+    * [Pull request #283](https://github.com/gazebosim/gz-msgs/pull/283)
+
+1. Change `IGN_DESIGNATION` to `GZ_DESIGNATION`
+    * [Pull request #282](https://github.com/gazebosim/gz-msgs/pull/282)
+    * [Pull request #284](https://github.com/gazebosim/gz-msgs/pull/284)
+
+1. Add entity wrench message
+    * [Pull request #274](https://github.com/gazebosim/gz-msgs/pull/274)
+
+1. Ignition -> Gazebo
+    * [Pull request #273](https://github.com/gazebosim/gz-msgs/pull/273)
+
+1. Add `ACTOR` and `WORLD` types to entity
+    * [Pull request #275](https://github.com/gazebosim/gz-msgs/pull/275)
 
 ### Ignition Msgs 8.5.0 (2022-06-23)
 
