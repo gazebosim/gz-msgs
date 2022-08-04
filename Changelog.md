@@ -1,4 +1,22 @@
-## Ignition Msgs 8.x
+## Gazebo Msgs 8.x
+
+### Gazebo Msgs 8.6.0 (2022-08-02)
+
+1. Increase `Utility` test coverage
+    * [Pull request #283](https://github.com/gazebosim/gz-msgs/pull/283)
+
+1. Change `IGN_DESIGNATION` to `GZ_DESIGNATION`
+    * [Pull request #282](https://github.com/gazebosim/gz-msgs/pull/282)
+    * [Pull request #284](https://github.com/gazebosim/gz-msgs/pull/284)
+
+1. Add entity wrench message
+    * [Pull request #274](https://github.com/gazebosim/gz-msgs/pull/274)
+
+1. Ignition -> Gazebo
+    * [Pull request #273](https://github.com/gazebosim/gz-msgs/pull/273)
+
+1. Add `ACTOR` and `WORLD` types to entity
+    * [Pull request #275](https://github.com/gazebosim/gz-msgs/pull/275)
 
 ### Ignition Msgs 8.5.0 (2022-06-23)
 
@@ -263,6 +281,29 @@
     * [Pull request 41](https://github.com/ignitionrobotics/ign-msgs/pull/41)
 
 ## Ignition Msgs 5.x
+
+### Ignition Msgs 5.10.0 (2022-07-18)
+
+1. Add entity wrench message
+    * [Pull request #274](https://github.com/gazebosim/gz-msgs/pull/274)
+
+1. Ignition -> Gazebo
+    * [Pull request #273](https://github.com/gazebosim/gz-msgs/pull/273)
+
+1. Add ACTOR and WORLD types to entity
+    * [Pull request #275](https://github.com/gazebosim/gz-msgs/pull/275)
+
+1. Bash completion for flags
+    * [Pull request #254](https://github.com/gazebosim/gz-msgs/pull/254)
+
+1. Remove dead files
+    * [Pull request #255](https://github.com/gazebosim/gz-msgs/pull/255)
+
+1. Fix typo REGRESION/REGRESSION
+    * [Pull request #247](https://github.com/gazebosim/gz-msgs/pull/247)
+
+1. Generator: Add missing std namespace to string arguments
+    * [Pull request #242](https://github.com/gazebosim/gz-msgs/pull/242)
 
 ### Ignition Msgs 5.9.0 (2022-03-16)
 
@@ -621,4 +662,3 @@
 
 1. Add real\_time\_factor field to WorldStatistics
     * [BitBucket pull request 67](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/67)
-
