@@ -24,8 +24,6 @@ option java_outer_classname = "ParameterDeclarationProtos";
 /// \interface ParameterDeclaration
 /// \brief Representation of a parameter declaration.
 
-import "ignition/msgs/parameter.proto";
-
 message ParameterDeclaration
 {
   /// \brief Parameter name.
