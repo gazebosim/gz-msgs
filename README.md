@@ -39,13 +39,13 @@ installations from source are in different locations, only one can be specified.
 Another workaround for working with multiple Gazebo libraries on the command
 line is using symbolic links to each library's YAML file.
 ```
-mkdir ~/.ignition/tools/configs -p
-cd ~/.ignition/tools/configs/
+mkdir ~/.gz/tools/configs -p
+cd ~/.gz/tools/configs/
 ln -s /usr/local/share/gz/fuel8.yaml .
 ln -s /usr/local/share/gz/transport12.yaml .
 ln -s /usr/local/share/gz/transportlog12.yaml .
 ...
-export GZ_CONFIG_PATH=$HOME/.ignition/tools/configs
+export GZ_CONFIG_PATH=$HOME/.gz/tools/configs
 ```
 
 This issue is tracked [here](https://github.com/gazebosim/gz-tools/issues/8).
