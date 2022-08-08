@@ -1,3 +1,8 @@
+## Gazebo Msgs 10.x
+
+### Gazebo Msgs 10.0.0 (202x-xx-xx)
+
+
 ## Gazebo Msgs 9.x
 
 ### Gazebo Msgs 9.0.0 (202x-xx-xx)
