@@ -83,11 +83,17 @@ Generator::~Generator() = default;
 bool Generator::Generate(const FileDescriptor *_file,
                                const std::string &/*_parameter*/,
                                OutputDirectory *_generatorContext,
-                               std::string * /*_error*/) const
+                               std::string * _error) const
 {
   auto filePath = std::filesystem::path(_file->name());
   auto parent_path = filePath.parent_path();
   auto fileStem = filePath.stem().string();
+
+  if (!std::filesystem::exists(filePath))
+  {
+    *_error = "The input file does not exist: " + _file->name();
+    return false;
+  }
 
   // protoc generates ignition/msgs/msg.pb.cc and ignition/msgs/msg.pb.hh
   // This generator injects code into the msg.pb.cc file, but generates
