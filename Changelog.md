@@ -1,5 +1,10 @@
 ## Gazebo Msgs 8.x
 
+### Gazebo Msgs 8.7.0 (2022-08-17)
+
+1. Add parameter component message definitions
+    * [Pull request #241](https://github.com/gazebosim/gz-msgs/pull/241)
+
 ### Gazebo Msgs 8.6.0 (2022-08-02)
 
 1. Increase `Utility` test coverage
