@@ -5,6 +5,9 @@
 1. Add parameter component message definitions
     * [Pull request #241](https://github.com/gazebosim/gz-msgs/pull/241)
 
+1. Remove redunant namespace references
+    * [Pull request #293](https://github.com/gazebosim/gz-msgs/pull/293)
+
 ### Gazebo Msgs 8.6.0 (2022-08-02)
 
 1. Increase `Utility` test coverage
