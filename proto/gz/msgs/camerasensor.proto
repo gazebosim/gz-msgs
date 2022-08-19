@@ -16,17 +16,17 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "CameraSensorProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface CameraSensor
 /// \brief Information about a camera sensor element
 
-import "ignition/msgs/vector2d.proto";
-import "ignition/msgs/distortion.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/vector2d.proto";
+import "gz/msgs/distortion.proto";
+import "gz/msgs/header.proto";
 
 message CameraSensor
 {

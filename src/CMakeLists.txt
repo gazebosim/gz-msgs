@@ -22,7 +22,7 @@ endif()
 #   GENERATE_RUBY       - generates ruby code for the message if specified
 #   GENERATE_CPP        - generates c++ code for the message if specified
 # One value arguments:
-#   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. ".ignition.msgs")
+#   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. ".gz.msgs")
 #   PROTOC_EXEC         - Path to protoc
 #   INPUT_PROTO         - Path to the input .proto file
 #   OUTPUT_CPP_DIR      - Path where C++ files are saved
@@ -100,12 +100,12 @@ endfunction()
 
 ##################################################
 # do the code generation
-file (GLOB proto_files ${PROJECT_SOURCE_DIR}/proto/ignition/msgs/*.proto)
+file (GLOB proto_files ${PROJECT_SOURCE_DIR}/proto/gz/msgs/*.proto)
 
 foreach(proto_file ${proto_files})
   ign_msgs_protoc(
     PROTO_PACKAGE
-      .ignition.msgs
+      .gz.msgs
     GENERATE_CPP
     GENERATE_RUBY
     INPUT_PROTO
@@ -145,15 +145,16 @@ set_source_files_properties(${gen_headers} ${gen_sources} ${gen_ruby_scripts}
   PROPERTIES GENERATED TRUE)
 
 message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}")
+install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR})
 install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IGN_LIB_INSTALL_DIR}/ruby/ignition/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR})
 
 ign_install_includes(
-  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${GZ_DESIGNATION}"
+  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${GZ_DESIGNATION}"
   ${gen_headers})
 
 
 ##################################################
-# Generate ignition/msgs/MessageTypes.hh
+# Generate gz/msgs/MessageTypes.hh
 foreach (hdr ${gen_headers})
   string(REPLACE "${PROJECT_BINARY_DIR}/include/" "" hdr ${hdr})
   string(CONCAT ign_msgs_headers ${ign_msgs_headers} "#include <${hdr}>\n")
@@ -163,7 +164,7 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/MessageTypes.hh.in
   ${PROJECT_BINARY_DIR}/include/ignition/msgs/MessageTypes.hh)
 
 ign_install_includes(
-  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/${GZ_DESIGNATION}"
+  "${IGN_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${GZ_DESIGNATION}"
   "${PROJECT_BINARY_DIR}/include/ignition/${GZ_DESIGNATION}/MessageTypes.hh")
 
 
@@ -173,7 +174,7 @@ ign_create_core_library(SOURCES
   ${gen_sources}
   ${PROJECT_SOURCE_DIR}/src/Factory.cc
   ${PROJECT_SOURCE_DIR}/src/Filesystem.cc
-  ${PROJECT_SOURCE_DIR}/src/ign.cc
+  ${PROJECT_SOURCE_DIR}/src/gz.cc
   ${PROJECT_SOURCE_DIR}/src/Utility.cc
   CXX_STANDARD 17)
 

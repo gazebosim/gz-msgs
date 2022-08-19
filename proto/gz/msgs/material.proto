@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "MaterialProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Material
 /// \brief Information about a material
 
-import "ignition/msgs/color.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/color.proto";
+import "gz/msgs/header.proto";
 
 message Material
 {

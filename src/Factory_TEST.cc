@@ -23,7 +23,7 @@
 #include "ignition/msgs/MessageTypes.hh"
 #include "ignition/msgs/Factory.hh"
 
-using namespace ignition;
+using namespace gz;
 
 /////////////////////////////////////////////////
 TEST(FactoryTest, Type)
@@ -32,14 +32,14 @@ TEST(FactoryTest, Type)
   msgs::Factory::Types(types);
   EXPECT_FALSE(types.empty());
   EXPECT_TRUE(std::find(types.begin(), types.end(),
-        std::string("ign_msgs.Vector3d")) !=
+        std::string("gz_msgs.Vector3d")) !=
       types.end());
 }
 
 /////////////////////////////////////////////////
 TEST(FactoryTest, New)
 {
-  auto msg = msgs::Factory::New<msgs::Vector3d>("ign_msgs.Vector3d");
+  auto msg = msgs::Factory::New<msgs::Vector3d>("gz_msgs.Vector3d");
 
   ASSERT_TRUE(msg.get() != nullptr);
 
@@ -48,17 +48,17 @@ TEST(FactoryTest, New)
   msg->set_z(3.0);
 
   auto msgFilled = msgs::Factory::New<msgs::Vector3d>(
-      "ign_msgs.Vector3d", "x: 1.0, y: 2.0, z: 3.0");
+      "gz_msgs.Vector3d", "x: 1.0, y: 2.0, z: 3.0");
   ASSERT_TRUE(msgFilled.get() != nullptr);
 
   EXPECT_DOUBLE_EQ(msg->x(), msgFilled->x());
   EXPECT_DOUBLE_EQ(msg->y(), msgFilled->y());
   EXPECT_DOUBLE_EQ(msg->z(), msgFilled->z());
 
-  msg = msgs::Factory::New<msgs::Vector3d>("ignition.msgs.Vector3d");
+  msg = msgs::Factory::New<msgs::Vector3d>("gz.msgs.Vector3d");
   EXPECT_TRUE(msg.get() != nullptr);
 
-  msg = msgs::Factory::New<msgs::Vector3d>(".ignition.msgs.Vector3d");
+  msg = msgs::Factory::New<msgs::Vector3d>(".gz.msgs.Vector3d");
   EXPECT_TRUE(msg.get() != nullptr);
 }
 

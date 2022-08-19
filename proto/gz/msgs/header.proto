@@ -16,15 +16,15 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "HeaderProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Header 
 /// \brief General information included by many messages
 
-import "ignition/msgs/time.proto";
+import "gz/msgs/time.proto";
 
 message Header
 {

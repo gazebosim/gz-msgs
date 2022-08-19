@@ -16,11 +16,11 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "EntityProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Entity
 /// \brief A message for identifying an entity.
 ///
@@ -35,7 +35,7 @@ option java_outer_classname = "EntityProtos";
 ///       error
 ///     end
 
-import "ignition/msgs/header.proto";
+import "gz/msgs/header.proto";
 
 message Entity
 {

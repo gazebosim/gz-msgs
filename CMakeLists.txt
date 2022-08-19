@@ -14,7 +14,9 @@ find_package(ignition-cmake2 2.13 REQUIRED)
 #============================================================================
 # Configure the project
 #============================================================================
-ign_configure_project()
+ign_configure_project(
+  REPLACE_IGNITION_INCLUDE_PATH gz/msgs
+)
 
 if (UNIX AND NOT APPLE)
   set (EXTRA_TEST_LIB_DEPS stdc++fs)

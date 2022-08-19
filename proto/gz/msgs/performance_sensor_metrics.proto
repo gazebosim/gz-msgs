@@ -16,9 +16,9 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
+package gz.msgs;
 
-import "ignition/msgs/double.proto";
+import "gz/msgs/double.proto";
 
 /// \brief This message contains information about the performance of
 /// a sensor in the world.

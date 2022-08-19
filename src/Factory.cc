@@ -39,7 +39,7 @@
 #include "ignition/msgs/Factory.hh"
 #include "ignition/msgs/Filesystem.hh"
 
-using namespace ignition;
+using namespace gz;
 using namespace msgs;
 
 /// \def ProtobufUniquePtr
@@ -216,21 +216,21 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
   std::unique_ptr<google::protobuf::Message> msg;
 
   std::string type;
-  // Convert "ignition.msgs." to "ign_msgs.".
-  if (_msgType.find("ignition.msgs.") == 0)
+  // Convert "gz.msgs." to "gz_msgs.".
+  if (_msgType.find("gz.msgs.") == 0)
   {
-    type = "ign_msgs." + _msgType.substr(14);
+    type = "gz_msgs." + _msgType.substr(8);
   }
-  // Convert ".ignition.msgs." to "ign_msgs.".
-  else if (_msgType.find(".ignition.msgs.") == 0)
+  // Convert ".gz.msgs." to "gz_msgs.".
+  else if (_msgType.find(".gz.msgs.") == 0)
   {
-    type = "ign_msgs." + _msgType.substr(15);
+    type = "gz_msgs." + _msgType.substr(9);
   }
   else
   {
-    // Fix typenames that are missing "ign_msgs." at the beginning.
-    if (_msgType.find("ign_msgs.") != 0)
-      type = "ign_msgs.";
+    // Fix typenames that are missing "gz_msgs." at the beginning.
+    if (_msgType.find("gz_msgs.") != 0)
+      type = "gz_msgs.";
     type += _msgType;
   }
 

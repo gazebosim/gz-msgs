@@ -16,16 +16,16 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "EntityFactoryVProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface EntityFactory_V
 /// \brief A message for a vector of EntityFactory messages
 //
-import "ignition/msgs/entity_factory.proto";
-import "ignition/msgs/header.proto";
+import "gz/msgs/entity_factory.proto";
+import "gz/msgs/header.proto";
 
 message EntityFactory_V
 {

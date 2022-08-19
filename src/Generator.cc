@@ -142,7 +142,7 @@ bool Generator::Generate(const FileDescriptor *_file,
     printer.Print("#endif\n", "name", "includes");
 
     // Call the IGN_REGISTER_STATIC_MSG macro
-    std::string factory = "IGN_REGISTER_STATIC_MSG(\"ign_msgs.";
+    std::string factory = "IGN_REGISTER_STATIC_MSG(\"gz_msgs.";
     factory += _file->message_type(0)->name() + "\", " +
       _file->message_type(0)->name() +")";
     printer.Print(factory.c_str(), "name", "includes");

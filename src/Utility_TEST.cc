@@ -21,7 +21,7 @@
 #include "ignition/msgs/MessageTypes.hh"
 #include "ignition/msgs/Utility.hh"
 
-using namespace ignition;
+using namespace gz;
 
 /////////////////////////////////////////////////
 TEST(UtilityTest, CovertMathVector3ToMsgs)

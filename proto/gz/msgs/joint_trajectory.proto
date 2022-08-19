@@ -16,18 +16,18 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "JointTrajectoryProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface JointTrajectory
 /// \brief Message for joint trajectory, which can be used to control a model
 /// with multiple single-axis joints simultaneously. This message is utilised
 /// by JointTrajectoryController plugin
 
-import "ignition/msgs/header.proto";
-import "ignition/msgs/joint_trajectory_point.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/joint_trajectory_point.proto";
 
 message JointTrajectory
 {

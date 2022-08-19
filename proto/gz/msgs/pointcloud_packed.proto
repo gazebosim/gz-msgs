@@ -16,18 +16,18 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "PointCloudPackedProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface PointCloudPacked
 /// \brief This message is designed to mimic ROS sensor_msgs/PointCloud2 to
 /// facilitate transfer/conversion of data between Ignition and ROS.
 ///
 /// See: http://docs.ros.org/melodic/api/sensor_msgs/html/msg/PointCloud2.html
 
-import "ignition/msgs/header.proto";
+import "gz/msgs/header.proto";
 
 /// \brief (Copied from the ROS message): This message holds a collection of
 /// N-dimensional points, which may contain additional information such as

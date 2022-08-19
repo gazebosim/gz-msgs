@@ -15,8 +15,8 @@
  *
  */
 
-#ifndef IGNITION_MSGS_FILESYSTEM_HH_
-#define IGNITION_MSGS_FILESYSTEM_HH_
+#ifndef GZ_MSGS_FILESYSTEM_HH_
+#define GZ_MSGS_FILESYSTEM_HH_
 
 #include <memory>
 #include <string>
@@ -24,7 +24,7 @@
 #include <ignition/msgs/Export.hh>
 #include <ignition/msgs/SuppressWarning.hh>
 
-namespace ignition
+namespace gz
 {
   namespace msgs
   {

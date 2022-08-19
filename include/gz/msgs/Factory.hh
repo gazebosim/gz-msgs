@@ -14,8 +14,8 @@
  * limitations under the License.
  *
 */
-#ifndef IGNITION_MSGS_FACTORY_HH_
-#define IGNITION_MSGS_FACTORY_HH_
+#ifndef GZ_MSGS_FACTORY_HH_
+#define GZ_MSGS_FACTORY_HH_
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -34,7 +34,7 @@
 #include "ignition/msgs/config.hh"
 #include "ignition/msgs/Export.hh"
 
-namespace ignition
+namespace gz
 {
   namespace msgs
   {
@@ -118,14 +118,14 @@ namespace ignition
     IGNITION_MSGS_VISIBLE \
     std::unique_ptr<google::protobuf::Message> New##_classname() \
     { \
-      return std::unique_ptr<ignition::msgs::_classname>(\
-          new ignition::msgs::_classname); \
+      return std::unique_ptr<gz::msgs::_classname>(\
+          new gz::msgs::_classname); \
     } \
     class IGNITION_MSGS_VISIBLE IgnMsg##_classname \
     { \
       public: IgnMsg##_classname() \
       { \
-        ignition::msgs::Factory::Register(_msgtype, New##_classname);\
+        gz::msgs::Factory::Register(_msgtype, New##_classname);\
       } \
     }; \
     static IgnMsg##_classname IgnitionMessagesInitializer;

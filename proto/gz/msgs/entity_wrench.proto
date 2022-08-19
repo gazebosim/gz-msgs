@@ -17,17 +17,17 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "EntityWrenchProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface EntityWrench
 /// \brief A wrench to apply to an entity
 
-import "ignition/msgs/entity.proto";
-import "ignition/msgs/header.proto";
-import "ignition/msgs/wrench.proto";
+import "gz/msgs/entity.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/wrench.proto";
 
 message EntityWrench
 {

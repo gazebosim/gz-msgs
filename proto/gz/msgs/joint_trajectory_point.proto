@@ -16,17 +16,17 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "JointTrajectoryPointProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface JointTrajectoryPoint
 /// \brief Message that specifies the desired state of all single-axis joints
 /// at a specific trajectory point. All values for each joint must be ordered
 /// according to the joint names provided in JointTrajectory message
 
-import "ignition/msgs/duration.proto";
+import "gz/msgs/duration.proto";
 
 message JointTrajectoryPoint
 {

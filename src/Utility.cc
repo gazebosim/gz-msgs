@@ -28,7 +28,7 @@
 #endif
 
 
-namespace ignition
+namespace gz
 {
   namespace msgs
   {
@@ -53,27 +53,27 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    ignition::math::Vector3d Convert(const msgs::Vector3d &_v)
+    gz::math::Vector3d Convert(const msgs::Vector3d &_v)
     {
-      return ignition::math::Vector3d(_v.x(), _v.y(), _v.z());
+      return gz::math::Vector3d(_v.x(), _v.y(), _v.z());
     }
 
     /////////////////////////////////////////////
-    ignition::math::Vector2d Convert(const msgs::Vector2d &_v)
+    gz::math::Vector2d Convert(const msgs::Vector2d &_v)
     {
-      return ignition::math::Vector2d(_v.x(), _v.y());
+      return gz::math::Vector2d(_v.x(), _v.y());
     }
 
     /////////////////////////////////////////////
-    ignition::math::Quaterniond Convert(const msgs::Quaternion &_q)
+    gz::math::Quaterniond Convert(const msgs::Quaternion &_q)
     {
-      return ignition::math::Quaterniond(_q.w(), _q.x(), _q.y(), _q.z());
+      return gz::math::Quaterniond(_q.w(), _q.x(), _q.y(), _q.z());
     }
 
     /////////////////////////////////////////////
-    ignition::math::Pose3d Convert(const msgs::Pose &_p)
+    gz::math::Pose3d Convert(const msgs::Pose &_p)
     {
-      ignition::math::Pose3d result;
+      gz::math::Pose3d result;
 
       if (_p.has_position())
        result.Pos() = Convert(_p.position());
@@ -125,10 +125,10 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    ignition::math::Planed Convert(const msgs::PlaneGeom &_p)
+    gz::math::Planed Convert(const msgs::PlaneGeom &_p)
     {
-      return ignition::math::Planed(Convert(_p.normal()),
-          ignition::math::Vector2d(_p.size().x(), _p.size().y()),
+      return gz::math::Planed(Convert(_p.normal()),
+          gz::math::Vector2d(_p.size().x(), _p.size().y()),
           _p.d());
     }
 
@@ -181,7 +181,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////////
-    msgs::Vector3d Convert(const ignition::math::Vector3d &_v)
+    msgs::Vector3d Convert(const gz::math::Vector3d &_v)
     {
       msgs::Vector3d result;
       result.set_x(_v.X());
@@ -191,7 +191,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////////
-    msgs::Vector2d Convert(const ignition::math::Vector2d &_v)
+    msgs::Vector2d Convert(const gz::math::Vector2d &_v)
     {
       msgs::Vector2d result;
       result.set_x(_v.X());
@@ -200,7 +200,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    msgs::Quaternion Convert(const ignition::math::Quaterniond &_q)
+    msgs::Quaternion Convert(const gz::math::Quaterniond &_q)
     {
       msgs::Quaternion result;
       result.set_x(_q.X());
@@ -211,7 +211,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    msgs::Pose Convert(const ignition::math::Pose3d &_p)
+    msgs::Pose Convert(const gz::math::Pose3d &_p)
     {
       msgs::Pose result;
       result.mutable_position()->CopyFrom(Convert(_p.Pos()));
@@ -247,7 +247,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    msgs::PlaneGeom Convert(const ignition::math::Planed &_p)
+    msgs::PlaneGeom Convert(const gz::math::Planed &_p)
     {
       msgs::PlaneGeom result;
       result.mutable_normal()->CopyFrom(Convert(_p.Normal()));
@@ -323,7 +323,7 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    void Set(msgs::Vector3d *_pt, const ignition::math::Vector3d &_v)
+    void Set(msgs::Vector3d *_pt, const gz::math::Vector3d &_v)
     {
       _pt->set_x(_v.X());
       _pt->set_y(_v.Y());
@@ -331,14 +331,14 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    void Set(msgs::Vector2d *_pt, const ignition::math::Vector2d &_v)
+    void Set(msgs::Vector2d *_pt, const gz::math::Vector2d &_v)
     {
       _pt->set_x(_v.X());
       _pt->set_y(_v.Y());
     }
 
     /////////////////////////////////////////////
-    void Set(msgs::Quaternion *_q, const ignition::math::Quaterniond &_v)
+    void Set(msgs::Quaternion *_q, const gz::math::Quaterniond &_v)
     {
       _q->set_x(_v.X());
       _q->set_y(_v.Y());
@@ -347,14 +347,14 @@ namespace ignition
     }
 
     /////////////////////////////////////////////
-    void Set(msgs::Pose *_p, const ignition::math::Pose3d &_v)
+    void Set(msgs::Pose *_p, const gz::math::Pose3d &_v)
     {
       Set(_p->mutable_position(), _v.Pos());
       Set(_p->mutable_orientation(), _v.Rot());
     }
 
     /////////////////////////////////////////////////
-    void Set(msgs::PlaneGeom *_p, const ignition::math::Planed &_v)
+    void Set(msgs::PlaneGeom *_p, const gz::math::Planed &_v)
     {
       Set(_p->mutable_normal(), _v.Normal());
       _p->mutable_size()->set_x(_v.Size().X());
@@ -953,7 +953,7 @@ namespace ignition
     bool ConvertFuelMetadata(const std::string &_modelConfigStr,
                              msgs::FuelMetadata &_meta)
     {
-      ignition::msgs::FuelMetadata meta;
+      gz::msgs::FuelMetadata meta;
 
       // Load the model config into tinyxml
       tinyxml2::XMLDocument modelConfigDoc;
@@ -1023,7 +1023,7 @@ namespace ignition
       elem = topElement->FirstChildElement("author");
       while (elem)
       {
-        ignition::msgs::FuelMetadata::Contact *author = meta.add_authors();
+        gz::msgs::FuelMetadata::Contact *author = meta.add_authors();
         // Get the author name and email
         if (elem->FirstChildElement("name") &&
             elem->FirstChildElement("name")->GetText())
@@ -1051,7 +1051,7 @@ namespace ignition
           math::SemanticVersion ver(trimmed(verStr));
           if (ver > maxVer)
           {
-            ignition::msgs::Version *verMsg;
+            gz::msgs::Version *verMsg;
 
             if (isModel)
             {

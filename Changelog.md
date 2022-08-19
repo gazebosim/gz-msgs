@@ -227,7 +227,7 @@
     * [BitBucket pull request 120](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/120)
 
 1. Corrected `BAYER_RGGR8` to `BAYER_BGGR8` in `PixelFormatType` located in
-`proto/ignition/msgs/image.proto`.
+`proto/gz/msgs/image.proto`.
     * [BitBucket pull request 118](https://github.com/ignitionrobotics/ign-common/pull-requests/118)
 
 1. Adding `dynamic_bias_stddev` and `dynamic_bias_correlation_time` sensor noise parameters.
@@ -253,7 +253,7 @@
 
 1. Updated `model.proto` with more documentation. Position, velocity, force,
    and acceleration information for joint have been moved to the `axis.proto`
-   message, see the Migration guide. The `ign.hh` header file is no longer
+   message, see the Migration guide. The `gz.hh` header file is no longer
    installed.
     * [BitBucket pull request 104](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/104)
 
@@ -287,7 +287,7 @@
 1. Added serialized messages: SerializedState, SerializedEntity, SerializedComponent
     * [BitBucket pull request 99](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/99)
 
-1. image.proto: add `PixelFormatType` enum, copied from `ignition::common::Image::PixelFormatType`
+1. image.proto: add `PixelFormatType` enum, copied from `gz::common::Image::PixelFormatType`
     * [BitBucket pull request 97](https://osrf-migration.github.io/ignition-gh-pages/#!/ignitionrobotics/ign-msgs/pull-requests/97)
 
 

@@ -16,18 +16,18 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "ImageProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Image
 /// \brief Message for an image
 
-import "ignition/msgs/header.proto";
+import "gz/msgs/header.proto";
 
 /// \brief Possible pixel formats.
-/// This list should match ignition::common::Image::PixelFormatType
+/// This list should match gz::common::Image::PixelFormatType
 enum PixelFormatType
 {
   UNKNOWN_PIXEL_FORMAT = 0;

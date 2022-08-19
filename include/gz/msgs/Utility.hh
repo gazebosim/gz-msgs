@@ -14,8 +14,8 @@
  * limitations under the License.
  *
 */
-#ifndef IGNITION_MSGS_UTILITY_HH_
-#define IGNITION_MSGS_UTILITY_HH_
+#ifndef GZ_MSGS_UTILITY_HH_
+#define GZ_MSGS_UTILITY_HH_
 
 #include <string>
 #include <utility>
@@ -36,36 +36,36 @@
 /// \brief Utility functions that support conversion between message type
 /// and ignition math types.
 
-namespace ignition
+namespace gz
 {
   namespace msgs
   {
     // Inline bracket to help doxygen filtering.
     inline namespace IGNITION_MSGS_VERSION_NAMESPACE {
     //
-    /// \brief Convert a msgs::Vector3d to an ignition::math::Vector
+    /// \brief Convert a msgs::Vector3d to an gz::math::Vector
     /// \param[in] _v The vector to convert
-    /// \return An ignition::math::Vector3d object
+    /// \return An gz::math::Vector3d object
     IGNITION_MSGS_VISIBLE
-    ignition::math::Vector3d Convert(const msgs::Vector3d &_v);
+    gz::math::Vector3d Convert(const msgs::Vector3d &_v);
 
-    /// \brief Convert a msgs::Vector2d to an ignition::math::Vector2d
+    /// \brief Convert a msgs::Vector2d to an gz::math::Vector2d
     /// \param[in] _v The vector2 to convert
-    /// \return An ignition::math::Vector2d object
+    /// \return An gz::math::Vector2d object
     IGNITION_MSGS_VISIBLE
-    ignition::math::Vector2d Convert(const msgs::Vector2d &_v);
+    gz::math::Vector2d Convert(const msgs::Vector2d &_v);
 
-    /// \brief Convert a msgs::Quaternion to an ignition::math::Quaterniond
+    /// \brief Convert a msgs::Quaternion to an gz::math::Quaterniond
     /// \param[in] _q The quaternion to convert
-    /// \return An ignition::math::Quaterniond object
+    /// \return An gz::math::Quaterniond object
     IGNITION_MSGS_VISIBLE
-    ignition::math::Quaterniond Convert(const msgs::Quaternion &_q);
+    gz::math::Quaterniond Convert(const msgs::Quaternion &_q);
 
-    /// \brief Convert a msgs::Pose to an ignition::math::Pose3d
+    /// \brief Convert a msgs::Pose to an gz::math::Pose3d
     /// \param[in] _p The pose to convert
-    /// \return An ignition::math::Pose3d object
+    /// \return An gz::math::Pose3d object
     IGNITION_MSGS_VISIBLE
-    ignition::math::Pose3d Convert(const msgs::Pose &_p);
+    gz::math::Pose3d Convert(const msgs::Pose &_p);
 
     /// \brief Convert a msgs::Color to a math::Color
     /// \param[in] _c The color to convert
@@ -73,29 +73,29 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     math::Color Convert(const msgs::Color &_c);
 
-    /// \brief Convert a msgs::PlaneGeom to an ignition::math::Planed
+    /// \brief Convert a msgs::PlaneGeom to an gz::math::Planed
     /// \param[in] _p The plane to convert
-    /// \return An ignition::math::Planed object
+    /// \return An gz::math::Planed object
     IGNITION_MSGS_VISIBLE
-    ignition::math::Planed Convert(const msgs::PlaneGeom &_p);
+    gz::math::Planed Convert(const msgs::PlaneGeom &_p);
 
-    /// \brief Convert a msgs::Inertial to an ignition::math::Inertiald
+    /// \brief Convert a msgs::Inertial to an gz::math::Inertiald
     /// \param[in] _i The inertial to convert
-    /// \return An ignition::math::Inertiald object
+    /// \return An gz::math::Inertiald object
     IGNITION_MSGS_VISIBLE
     math::Inertiald Convert(const msgs::Inertial &_i);
 
     /// \brief Convert a msgs::AxisAlignedBox to an
-    /// ignition::math::AxisAlignedBox
+    /// gz::math::AxisAlignedBox
     /// \param[in] _b The axis aligned box to convert
-    /// \return An ignition::math::AxisAlignedBox object
+    /// \return An gz::math::AxisAlignedBox object
     IGNITION_MSGS_VISIBLE
     math::AxisAlignedBox Convert(const msgs::AxisAlignedBox &_b);
 
-    /// \brief Convert ignition::math::AxisAlignedBox to
+    /// \brief Convert gz::math::AxisAlignedBox to
     /// msgs::AxisAlignedBox.
     /// \param[in] _b The axis aligned box to convert
-    /// \return An ignition::math::AxisAlignedBox object
+    /// \return An gz::math::AxisAlignedBox object
     IGNITION_MSGS_VISIBLE
     msgs::AxisAlignedBox Convert(const math::AxisAlignedBox &_b);
 
@@ -147,29 +147,29 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     float Convert(const msgs::Float &_m);
 
-    /// \brief Convert a ignition::math::Vector3d to a msgs::Vector3d
+    /// \brief Convert a gz::math::Vector3d to a msgs::Vector3d
     /// \param[in] _v The vector to convert
     /// \return A msgs::Vector3d object
     IGNITION_MSGS_VISIBLE
-    msgs::Vector3d Convert(const ignition::math::Vector3d &_v);
+    msgs::Vector3d Convert(const gz::math::Vector3d &_v);
 
-    /// \brief Convert a ignition::math::Vector2d to a msgs::Vector2d
+    /// \brief Convert a gz::math::Vector2d to a msgs::Vector2d
     /// \param[in] _v The vector to convert
     /// \return A msgs::Vector2d object
     IGNITION_MSGS_VISIBLE
-    msgs::Vector2d Convert(const ignition::math::Vector2d &_v);
+    msgs::Vector2d Convert(const gz::math::Vector2d &_v);
 
-    /// \brief Convert a ignition::math::Quaterniond to a msgs::Quaternion
+    /// \brief Convert a gz::math::Quaterniond to a msgs::Quaternion
     /// \param[in] _q The quaternion to convert
     /// \return A msgs::Quaternion object
     IGNITION_MSGS_VISIBLE
-    msgs::Quaternion Convert(const ignition::math::Quaterniond &_q);
+    msgs::Quaternion Convert(const gz::math::Quaterniond &_q);
 
-    /// \brief Convert a ignition::math::Pose3d to a msgs::Pose
+    /// \brief Convert a gz::math::Pose3d to a msgs::Pose
     /// \param[in] _p The pose to convert
     /// \return A msgs::Pose object
     IGNITION_MSGS_VISIBLE
-    msgs::Pose Convert(const ignition::math::Pose3d &_p);
+    msgs::Pose Convert(const gz::math::Pose3d &_p);
 
     /// \brief Convert a math::Color to a msgs::Color
     /// \param[in] _c The color to convert
@@ -189,11 +189,11 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     msgs::Inertial Convert(const math::MassMatrix3d &_m);
 
-    /// \brief Convert a ignition::math::Planed to a msgs::PlaneGeom
+    /// \brief Convert a gz::math::Planed to a msgs::PlaneGeom
     /// \param[in] _p The plane to convert
     /// \return A msgs::PlaneGeom object
     IGNITION_MSGS_VISIBLE
-    msgs::PlaneGeom Convert(const ignition::math::Planed &_p);
+    msgs::PlaneGeom Convert(const gz::math::Planed &_p);
 
     /// \brief Convert an std::string to a msgs::StringMsg
     /// \param[in] _s The string to convert
@@ -296,29 +296,29 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     std::string ConvertShaderType(const msgs::Material::ShaderType &_type);
 
-    /// \brief Set a msgs::Vector3d from an ignition::math::Vector3d
+    /// \brief Set a msgs::Vector3d from an gz::math::Vector3d
     /// \param[out] _pt A msgs::Vector3d pointer
-    /// \param[in] _v An ignition::math::Vector3d reference
+    /// \param[in] _v An gz::math::Vector3d reference
     IGNITION_MSGS_VISIBLE
-    void Set(msgs::Vector3d *_pt, const ignition::math::Vector3d &_v);
+    void Set(msgs::Vector3d *_pt, const gz::math::Vector3d &_v);
 
-    /// \brief Set a msgs::Vector2d from an ignition::math::Vector2d
+    /// \brief Set a msgs::Vector2d from an gz::math::Vector2d
     /// \param[out] _pt A msgs::Vector2d pointer
-    /// \param[in] _v An ignition::math::Vector2d reference
+    /// \param[in] _v An gz::math::Vector2d reference
     IGNITION_MSGS_VISIBLE
-    void Set(msgs::Vector2d *_pt, const ignition::math::Vector2d &_v);
+    void Set(msgs::Vector2d *_pt, const gz::math::Vector2d &_v);
 
-    /// \brief Set a msgs::Quaternion from an ignition::math::Quaterniond
+    /// \brief Set a msgs::Quaternion from an gz::math::Quaterniond
     /// \param[out] _q A msgs::Quaternion pointer
-    /// \param[in] _v An ignition::math::Quaterniond reference
+    /// \param[in] _v An gz::math::Quaterniond reference
     IGNITION_MSGS_VISIBLE
-    void Set(msgs::Quaternion *_q, const ignition::math::Quaterniond &_v);
+    void Set(msgs::Quaternion *_q, const gz::math::Quaterniond &_v);
 
-    /// \brief Set a msgs::Pose from an ignition::math::Pose3d
+    /// \brief Set a msgs::Pose from an gz::math::Pose3d
     /// \param[out] _p A msgs::Pose pointer
-    /// \param[in] _v An ignition::math::Pose3d reference
+    /// \param[in] _v An gz::math::Pose3d reference
     IGNITION_MSGS_VISIBLE
-    void Set(msgs::Pose *_p, const ignition::math::Pose3d &_v);
+    void Set(msgs::Pose *_p, const gz::math::Pose3d &_v);
 
     /// \brief Set a msgs::Color from a math::Color
     /// \param[out] _c A msgs::Color pointer
@@ -338,11 +338,11 @@ namespace ignition
     IGNITION_MSGS_VISIBLE
     void Set(msgs::Inertial *_i, const math::MassMatrix3d &_m);
 
-    /// \brief Set a msgs::Plane from an ignition::math::Planed
+    /// \brief Set a msgs::Plane from an gz::math::Planed
     /// \param[out] _p A msgs::Plane pointer
-    /// \param[in] _v An ignition::math::Planed reference
+    /// \param[in] _v An gz::math::Planed reference
     IGNITION_MSGS_VISIBLE
-    void Set(msgs::PlaneGeom *_p, const ignition::math::Planed &_v);
+    void Set(msgs::PlaneGeom *_p, const gz::math::Planed &_v);
 
     /// \brief Set a msgs::StringMsg from an std::string
     /// \param[out] _p A msgs::StringMsg pointer

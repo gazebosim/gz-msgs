@@ -16,18 +16,18 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "JointProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Joint
 /// \brief Message for creating joint
 
-import "ignition/msgs/header.proto";
-import "ignition/msgs/axis.proto";
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/sensor.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/axis.proto";
+import "gz/msgs/pose.proto";
+import "gz/msgs/sensor.proto";
 
 message Joint
 {

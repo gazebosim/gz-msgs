@@ -16,20 +16,20 @@
 */
 
 syntax = "proto3";
-package ignition.msgs;
-option java_package = "com.ignition.msgs";
+package gz.msgs;
+option java_package = "com.gz.msgs";
 option java_outer_classname = "OccpuancyGridProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface OccupancyGrid
 /// \brief This message is designed to mimic ROS nav_msgs/OccupancyGrid to
 /// facilitate transfer/conversion of data between Ignition and ROS.
 ///
 /// See: http://docs.ros.org/melodic/api/nav_msgs/html/msg/OccupancyGrid.html
 
-import "ignition/msgs/header.proto";
-import "ignition/msgs/pose.proto";
-import "ignition/msgs/time.proto";
+import "gz/msgs/header.proto";
+import "gz/msgs/pose.proto";
+import "gz/msgs/time.proto";
 
 
 message OccupancyGrid

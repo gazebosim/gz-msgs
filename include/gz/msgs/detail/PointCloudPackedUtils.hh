@@ -18,8 +18,8 @@
 // Inspired by
 // https://github.com/ros/common_msgs/blob/275b09a/sensor_msgs/include/sensor_msgs/point_cloud2_iterator.h
 
-#ifndef IGNITION_MSGS_DETAIL_POINTCLOUDPACKEDUTILS_HH_
-#define IGNITION_MSGS_DETAIL_POINTCLOUDPACKEDUTILS_HH_
+#ifndef GZ_MSGS_DETAIL_POINTCLOUDPACKEDUTILS_HH_
+#define GZ_MSGS_DETAIL_POINTCLOUDPACKEDUTILS_HH_
 
 #include <ignition/msgs/pointcloud_packed.pb.h>
 
@@ -28,7 +28,7 @@
 
 #include "ignition/msgs/config.hh"
 
-namespace ignition
+namespace gz
 {
 namespace msgs
 {
