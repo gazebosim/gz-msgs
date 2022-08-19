@@ -25,7 +25,7 @@
 #pragma warning(pop)
 #endif
 
-#include "ign.hh"
+#include "gz.hh"
 
 #include <iostream>
 #include <string>
