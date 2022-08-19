@@ -36,8 +36,8 @@
 #pragma warning(pop)
 #endif
 
-#include "ignition/msgs/Factory.hh"
-#include "ignition/msgs/Filesystem.hh"
+#include "gz/msgs/Factory.hh"
+#include "gz/msgs/Filesystem.hh"
 
 using namespace gz;
 using namespace msgs;

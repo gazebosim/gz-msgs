@@ -21,8 +21,8 @@
 #include <memory>
 #include <string>
 
-#include <ignition/msgs/Export.hh>
-#include <ignition/msgs/SuppressWarning.hh>
+#include <gz/msgs/Export.hh>
+#include <gz/msgs/SuppressWarning.hh>
 
 namespace gz
 {

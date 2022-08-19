@@ -31,8 +31,8 @@
 #include <memory>
 #include <vector>
 
-#include "ignition/msgs/config.hh"
-#include "ignition/msgs/Export.hh"
+#include "gz/msgs/config.hh"
+#include "gz/msgs/Export.hh"
 
 namespace gz
 {

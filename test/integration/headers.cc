@@ -16,7 +16,7 @@
 */
 #include <gtest/gtest.h>
 
-#include "ignition/msgs/contact.pb.h"
+#include "gz/msgs/contact.pb.h"
 
 /////////////////////////////////////////////////
 TEST(Messages, NestedHeaders)

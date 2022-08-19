@@ -21,12 +21,12 @@
 #ifndef GZ_MSGS_DETAIL_POINTCLOUDPACKEDUTILS_HH_
 #define GZ_MSGS_DETAIL_POINTCLOUDPACKEDUTILS_HH_
 
-#include <ignition/msgs/pointcloud_packed.pb.h>
+#include <gz/msgs/pointcloud_packed.pb.h>
 
 #include <iostream>
 #include <string>
 
-#include "ignition/msgs/config.hh"
+#include "gz/msgs/config.hh"
 
 namespace gz
 {

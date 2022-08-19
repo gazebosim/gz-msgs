@@ -31,8 +31,8 @@
 #include <string>
 #include <vector>
 
-#include <ignition/msgs/config.hh>
-#include <ignition/msgs/Factory.hh>
+#include <gz/msgs/config.hh>
+#include <gz/msgs/Factory.hh>
 
 #ifdef _MSC_VER
 # pragma warning(disable: 4503)

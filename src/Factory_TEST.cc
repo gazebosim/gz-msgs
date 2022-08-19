@@ -19,9 +19,9 @@
 #include <algorithm>
 #include <cstddef>
 
-#include "ignition/msgs/test_config.h"
-#include "ignition/msgs/MessageTypes.hh"
-#include "ignition/msgs/Factory.hh"
+#include "gz/msgs/test_config.h"
+#include "gz/msgs/MessageTypes.hh"
+#include "gz/msgs/Factory.hh"
 
 using namespace gz;
 

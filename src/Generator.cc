@@ -109,7 +109,7 @@ bool Generator::Generate(const FileDescriptor *_file,
 
     // Add the Export header so that we can apply visibility macros
     // to the messages
-    printer.Print("#include <ignition/msgs/Export.hh>\n", "name",
+    printer.Print("#include <gz/msgs/Export.hh>\n", "name",
       "includes");
   }
 
@@ -121,7 +121,7 @@ bool Generator::Generate(const FileDescriptor *_file,
     io::Printer printer(output.get(), '$');
 
     // Add the ign-msgs Factory header
-    printer.Print("#include \"ignition/msgs/Factory.hh\"\n", "name",
+    printer.Print("#include \"gz/msgs/Factory.hh\"\n", "name",
                   "includes");
 
     // Suppress warnings

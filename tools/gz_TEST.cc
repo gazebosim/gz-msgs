@@ -19,8 +19,8 @@
 #include <fstream>
 #include <string>
 #include <gtest/gtest.h>
-#include <ignition/msgs/config.hh>
-#include "ignition/msgs/test_config.h"
+#include <gz/msgs/config.hh>
+#include "gz/msgs/test_config.h"
 
 #ifdef _MSC_VER
 #    define popen _popen

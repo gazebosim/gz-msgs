@@ -21,7 +21,7 @@ For this example, we'll take the short and easy approach.
 At this point your main file should look like
 
 ```{.cpp}
-#include <ignition/msgs.hh>
+#include <gz/msgs.hh>
 
 int main()
 {
@@ -36,7 +36,7 @@ function `DebugString()` to print the content on the terminal.
 
 ```{.cpp}
 #include <iostream>
-#include <ignition/msgs.hh>
+#include <gz/msgs.hh>
 
 int main()
 {

@@ -17,9 +17,9 @@
 #include <tinyxml2.h>
 #include <functional>
 #include <sstream>
-#include <ignition/math/Helpers.hh>
-#include <ignition/math/SemanticVersion.hh>
-#include "ignition/msgs/Utility.hh"
+#include <gz/math/Helpers.hh>
+#include <gz/math/SemanticVersion.hh>
+#include "gz/msgs/Utility.hh"
 
 #ifdef _WIN32
   const auto &ignstrtok = strtok_s;
