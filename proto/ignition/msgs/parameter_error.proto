@@ -27,7 +27,7 @@ option java_outer_classname = "ParameterErrorProtos";
 message ParameterError
 {
   enum Type {
-    NO_ERROR = 0;
+    SUCCESS = 0;
     ALREADY_DECLARED = 1;
     INVALID_TYPE = 2;
     NOT_DECLARED = 3;
