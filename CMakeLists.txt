@@ -14,7 +14,7 @@ find_package(ignition-cmake2 2.13 REQUIRED)
 #============================================================================
 # Configure the project
 #============================================================================
-ign_configure_project(VERSION_SUFFIX pre1)
+ign_configure_project(VERSION_SUFFIX pre2)
 
 if (UNIX AND NOT APPLE)
   set (EXTRA_TEST_LIB_DEPS stdc++fs)

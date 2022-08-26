@@ -1,9 +1,10 @@
 ## Gazebo Msgs 8.x
 
-### Gazebo Msgs 8.7.0 (2022-08-17)
+### Gazebo Msgs 8.7.0 (2022-08-25)
 
 1. Add parameter component message definitions
     * [Pull request #241](https://github.com/gazebosim/gz-msgs/pull/241)
+    * [Pull request #298](https://github.com/gazebosim/gz-msgs/pull/298)
 
 1. Remove redunant namespace references
     * [Pull request #293](https://github.com/gazebosim/gz-msgs/pull/293)
