@@ -95,7 +95,7 @@ TEST(CmdLine, MsgInfo)
 TEST(CmdLine, MsgHelpVsCompletionFlags)
 {
   // Flags in help message
-  auto helpOutput = custom_exec_str("ign msg --help --force-version "
+  auto helpOutput = custom_exec_str("gz msg --help --force-version "
     + g_version);
 
   // Call the output function in the bash completion script
