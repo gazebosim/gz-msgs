@@ -71,8 +71,8 @@ function(gz_msgs_protoc)
   if(gz_msgs_protoc_GENERATE_CPP)
     # Full path to generated header (${PROJECT_BINARY_DIR}/include/gz/msgs/foo.pb.h)
     set(output_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.h")
-    # Full path to generated detail header (${PROJECT_BINARY_DIR}/include/gz/msgs/detail/foo.pb.h)
-    set(output_detail_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/detail/${FIL_WE}.pb.h")
+    # Full path to generated detail header (${PROJECT_BINARY_DIR}/include/gz/msgs/details/foo.pb.h)
+    set(output_detail_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/details/${FIL_WE}.pb.h")
     # Full path to generated ignition header (${PROJECT_BINARY_DIR}/include/ignition/msgs/foo.pb.h)
     set(output_ign_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}/ignition/msgs/${FIL_WE}.pb.h")
     # Full path to generated ignition header (${PROJECT_BINARY_DIR}/include/foo.pb.cc)
@@ -198,9 +198,9 @@ gz_install_includes(
   "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${GZ_DESIGNATION}"
   ${gen_headers})
 
-# Install gz/msgs/detail
+# Install gz/msgs/details
 gz_install_includes(
-  "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}/detail"
+  "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}/details"
   ${gen_detail_headers})
 
 # Install ignition/msgs

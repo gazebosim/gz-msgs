@@ -96,7 +96,7 @@ bool Generator::Generate(const FileDescriptor *_file,
   // The renaming operation is handled via the outside python script
   //
   // gz/msgs/msg.pb.cc - stays in place
-  // gz/msgs/msg.pb.h -> gz/msgs/detail/msg.pb.h
+  // gz/msgs/msg.pb.h -> gz/msgs/details/msg.pb.h
   // gz/msgs/msg.gz.h (generated here) -> gz/msgs/msg.pb.h
   std::string identifier;
   std::string headerFilename;
@@ -114,7 +114,7 @@ bool Generator::Generate(const FileDescriptor *_file,
   }
   identifier += fileStem;
   headerFilename += fileStem + ".gz.h";
-  newHeaderFilename += "detail/" + fileStem + ".pb.h";
+  newHeaderFilename += "details/" + fileStem + ".pb.h";
   sourceFilename += fileStem + ".pb.cc";
 
   std::map<std::string, std::string> variables;
