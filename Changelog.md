@@ -1,6 +1,10 @@
 ## Gazebo Msgs 8.x
 
-### Gazebo Msgs 8.7.0 (2022-08-25)
+### Gazebo Msgs 8.7.0 (2022-09-27)
+
+1. ign -> gz Redirect Gz Headers
+    * [Pull request #300](https://github.com/gazebosim/gz-msgs/pull/300)
+    * [Pull request #307](https://github.com/gazebosim/gz-msgs/pull/307)
 
 1. Add parameter component message definitions
     * [Pull request #241](https://github.com/gazebosim/gz-msgs/pull/241)
