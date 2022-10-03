@@ -1,5 +1,18 @@
 ## Gazebo Msgs 8.x
 
+### Gazebo Msgs 8.7.0 (2022-09-27)
+
+1. ign -> gz Redirect Gz Headers
+    * [Pull request #300](https://github.com/gazebosim/gz-msgs/pull/300)
+    * [Pull request #307](https://github.com/gazebosim/gz-msgs/pull/307)
+
+1. Add parameter component message definitions
+    * [Pull request #241](https://github.com/gazebosim/gz-msgs/pull/241)
+    * [Pull request #298](https://github.com/gazebosim/gz-msgs/pull/298)
+
+1. Remove redunant namespace references
+    * [Pull request #293](https://github.com/gazebosim/gz-msgs/pull/293)
+
 ### Gazebo Msgs 8.6.0 (2022-08-02)
 
 1. Increase `Utility` test coverage
