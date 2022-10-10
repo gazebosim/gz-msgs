@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(ignition-msgs5 VERSION 5.10.0)
+project(ignition-msgs5 VERSION 5.11.0)
 
 #============================================================================
 # Find ignition-cmake
@@ -14,7 +14,7 @@ find_package(ignition-cmake2 2.13 REQUIRED)
 #============================================================================
 # Configure the project
 #============================================================================
-ign_configure_project()
+ign_configure_project(VERSION_SUFFIX pre1)
 
 if (UNIX AND NOT APPLE)
   set (EXTRA_TEST_LIB_DEPS stdc++fs)
