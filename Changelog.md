@@ -1,5 +1,18 @@
 ## Ignition Msgs 5.x
 
+### Ignition Msgs 5.10.0 (2022-10-10)
+
+1. Ignition to Gazebo renaming.
+    * [Pull request #282](https://github.com/gazebosim/gz-msgs/pull/282)
+    * [Pull request #293](https://github.com/gazebosim/gz-msgs/pull/293)
+    * [Pull request #300](https://github.com/gazebosim/gz-msgs/pull/300)
+
+1. Remove mistaken VERSION.
+    * [Pull request #284](https://github.com/gazebosim/gz-msgs/pull/284)
+
+1. Increase utility coverage.
+    * [Pull request #283](https://github.com/gazebosim/gz-msgs/pull/283)
+
 ### Ignition Msgs 5.10.0 (2022-07-18)
 
 1. Add entity wrench message
