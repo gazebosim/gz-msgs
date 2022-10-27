@@ -179,12 +179,12 @@ TEST(UtilityTest, ConvertMsgsPlaneToMath)
 /////////////////////////////////////////////////
 TEST(MsgsTest, ConvertMathInertialToMsgs)
 {
-  const auto pose = gz::math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
+  const auto pose = math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
   msgs::Inertial msg = msgs::Convert(
-      gz::math::Inertiald(
-        gz::math::MassMatrix3d(12.0,
-          gz::math::Vector3d(2, 3, 4),
-          gz::math::Vector3d(0.1, 0.2, 0.3)),
+      math::Inertiald(
+        math::MassMatrix3d(12.0,
+          math::Vector3d(2, 3, 4),
+          math::Vector3d(0.1, 0.2, 0.3)),
         pose));
 
   EXPECT_DOUBLE_EQ(12.0, msg.mass());
@@ -201,12 +201,12 @@ TEST(MsgsTest, ConvertMathInertialToMsgs)
 /////////////////////////////////////////////////
 TEST(MsgsTest, ConvertMsgsInertialToMath)
 {
-  const auto pose = gz::math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
+  const auto pose = math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
   msgs::Inertial msg = msgs::Convert(
-      gz::math::Inertiald(
-        gz::math::MassMatrix3d(12.0,
-          gz::math::Vector3d(2, 3, 4),
-          gz::math::Vector3d(0.1, 0.2, 0.3)),
+      math::Inertiald(
+        math::MassMatrix3d(12.0,
+          math::Vector3d(2, 3, 4),
+          math::Vector3d(0.1, 0.2, 0.3)),
         pose));
   auto inertial = msgs::Convert(msg);
 
@@ -308,9 +308,9 @@ TEST(MsgsTest, ConvertMsgsInertialAddedMassToMath)
 TEST(MsgsTest, ConvertMathMassMatrix3ToMsgs)
 {
   msgs::Inertial msg = msgs::Convert(
-      gz::math::MassMatrix3d(12.0,
-        gz::math::Vector3d(2, 3, 4),
-        gz::math::Vector3d(0.1, 0.2, 0.3)));
+      math::MassMatrix3d(12.0,
+        math::Vector3d(2, 3, 4),
+        math::Vector3d(0.1, 0.2, 0.3)));
 
   EXPECT_DOUBLE_EQ(12.0, msg.mass());
   EXPECT_DOUBLE_EQ(2.0, msg.ixx());
@@ -319,7 +319,7 @@ TEST(MsgsTest, ConvertMathMassMatrix3ToMsgs)
   EXPECT_DOUBLE_EQ(0.1, msg.ixy());
   EXPECT_DOUBLE_EQ(0.2, msg.ixz());
   EXPECT_DOUBLE_EQ(0.3, msg.iyz());
-  EXPECT_EQ(gz::math::Pose3d::Zero, msgs::Convert(msg.pose()));
+  EXPECT_EQ(math::Pose3d::Zero, msgs::Convert(msg.pose()));
 }
 
 /////////////////////////////////////////////////
@@ -702,13 +702,13 @@ TEST(UtilityTest, SetPlane)
 /////////////////////////////////////////////////
 TEST(MsgsTest, SetInertial)
 {
-  const auto pose = gz::math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
+  const auto pose = math::Pose3d(5, 6, 7, 0.4, 0.5, 0.6);
   msgs::Inertial msg;
-  msgs::Set(&msg, gz::math::Inertiald(
-      gz::math::MassMatrix3d(
+  msgs::Set(&msg, math::Inertiald(
+      math::MassMatrix3d(
         12.0,
-        gz::math::Vector3d(2, 3, 4),
-        gz::math::Vector3d(0.1, 0.2, 0.3)),
+        math::Vector3d(2, 3, 4),
+        math::Vector3d(0.1, 0.2, 0.3)),
       pose));
 
   EXPECT_DOUBLE_EQ(12.0, msg.mass());
@@ -725,10 +725,10 @@ TEST(MsgsTest, SetInertial)
 TEST(MsgsTest, SetMassMatrix3)
 {
   msgs::Inertial msg;
-  msgs::Set(&msg, gz::math::MassMatrix3d(
+  msgs::Set(&msg, math::MassMatrix3d(
         12.0,
-        gz::math::Vector3d(2, 3, 4),
-        gz::math::Vector3d(0.1, 0.2, 0.3)));
+        math::Vector3d(2, 3, 4),
+        math::Vector3d(0.1, 0.2, 0.3)));
 
   EXPECT_DOUBLE_EQ(12.0, msg.mass());
   EXPECT_DOUBLE_EQ(2.0, msg.ixx());
@@ -737,7 +737,7 @@ TEST(MsgsTest, SetMassMatrix3)
   EXPECT_DOUBLE_EQ(0.1, msg.ixy());
   EXPECT_DOUBLE_EQ(0.2, msg.ixz());
   EXPECT_DOUBLE_EQ(0.3, msg.iyz());
-  EXPECT_EQ(gz::math::Pose3d::Zero, msgs::Convert(msg.pose()));
+  EXPECT_EQ(math::Pose3d::Zero, msgs::Convert(msg.pose()));
 }
 
 /////////////////////////////////////////////////

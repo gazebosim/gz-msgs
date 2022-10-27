@@ -107,6 +107,38 @@
 1. Bumps in garden : ci_matching_branch/bump_garden_ign-msgs9
     * [Pull request #203](https://github.com/gazebosim/gz-msgs/pull/203)
 
+## Gazebo Msgs 8.x
+
+### Gazebo Msgs 8.7.0 (2022-09-27)
+
+1. ign -> gz Redirect Gz Headers
+    * [Pull request #300](https://github.com/gazebosim/gz-msgs/pull/300)
+    * [Pull request #307](https://github.com/gazebosim/gz-msgs/pull/307)
+
+1. Add parameter component message definitions
+    * [Pull request #241](https://github.com/gazebosim/gz-msgs/pull/241)
+    * [Pull request #298](https://github.com/gazebosim/gz-msgs/pull/298)
+
+1. Remove redunant namespace references
+    * [Pull request #293](https://github.com/gazebosim/gz-msgs/pull/293)
+
+### Gazebo Msgs 8.6.0 (2022-08-02)
+
+1. Increase `Utility` test coverage
+    * [Pull request #283](https://github.com/gazebosim/gz-msgs/pull/283)
+
+1. Change `IGN_DESIGNATION` to `GZ_DESIGNATION`
+    * [Pull request #282](https://github.com/gazebosim/gz-msgs/pull/282)
+    * [Pull request #284](https://github.com/gazebosim/gz-msgs/pull/284)
+
+1. Add entity wrench message
+    * [Pull request #274](https://github.com/gazebosim/gz-msgs/pull/274)
+
+1. Ignition -> Gazebo
+    * [Pull request #273](https://github.com/gazebosim/gz-msgs/pull/273)
+
+1. Add `ACTOR` and `WORLD` types to entity
+    * [Pull request #275](https://github.com/gazebosim/gz-msgs/pull/275)
 
 ### Gazebo Msgs 8.5.0 (2022-06-23)
 
@@ -124,8 +156,6 @@
 
 1. Generator: Add missing std namespace to string arguments
     * [Pull request #242](https://github.com/gazebosim/gz-msgs/pull/242)
-
-## Gazebo Msgs 8.x
 
 ### Gazebo Msgs 8.4.0 (2022-04-06)
 
@@ -373,6 +403,19 @@
     * [Pull request 41](https://github.com/gazebosim/gz-msgs/pull/41)
 
 ## Gazebo Msgs 5.x
+
+### Gazebo Msgs 5.10.0 (2022-10-10)
+
+1. Ignition to Gazebo renaming.
+    * [Pull request #282](https://github.com/gazebosim/gz-msgs/pull/282)
+    * [Pull request #293](https://github.com/gazebosim/gz-msgs/pull/293)
+    * [Pull request #300](https://github.com/gazebosim/gz-msgs/pull/300)
+
+1. Remove mistaken VERSION.
+    * [Pull request #284](https://github.com/gazebosim/gz-msgs/pull/284)
+
+1. Increase utility coverage.
+    * [Pull request #283](https://github.com/gazebosim/gz-msgs/pull/283)
 
 ### Gazebo Msgs 5.10.0 (2022-07-18)
 
