@@ -47,7 +47,7 @@ void cmdMsgInfo(const char *_msg)
 {
   if (_msg)
   {
-    auto msg = gz::msgs::Factory::New(_msg);
+    auto msg = Factory::New(_msg);
     if (msg)
     {
       auto descriptor = msg->GetDescriptor();
@@ -71,7 +71,7 @@ extern "C" GZ_MSGS_VISIBLE
 void cmdMsgList()
 {
   std::vector<std::string> types;
-  gz::msgs::Factory::Types(types);
+  Factory::Types(types);
 
   for (auto const &type : types)
     std::cout << type << std::endl;
