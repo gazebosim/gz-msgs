@@ -125,17 +125,17 @@ TEST(PointCloudPackedUtilsTest, MultipleFields)
 
   EXPECT_EQ("x", pcMsg.field(0).name());
   EXPECT_EQ(0u, pcMsg.field(0).offset());
-  EXPECT_EQ(msgs::PointCloudPacked::Field::INT8, pcMsg.field(0).datatype());
+  EXPECT_EQ(PointCloudPacked::Field::INT8, pcMsg.field(0).datatype());
   EXPECT_EQ(1u, pcMsg.field(0).count());
 
   EXPECT_EQ("y", pcMsg.field(1).name());
   EXPECT_EQ(1u, pcMsg.field(1).offset());
-  EXPECT_EQ(msgs::PointCloudPacked::Field::UINT8, pcMsg.field(1).datatype());
+  EXPECT_EQ(PointCloudPacked::Field::UINT8, pcMsg.field(1).datatype());
   EXPECT_EQ(1u, pcMsg.field(1).count());
 
   EXPECT_EQ("z", pcMsg.field(2).name());
   EXPECT_EQ(2u, pcMsg.field(2).offset());
-  EXPECT_EQ(msgs::PointCloudPacked::Field::INT16, pcMsg.field(2).datatype());
+  EXPECT_EQ(PointCloudPacked::Field::INT16, pcMsg.field(2).datatype());
   EXPECT_EQ(1u, pcMsg.field(2).count());
 
   // Reserve space for data
@@ -237,9 +237,9 @@ TEST(PointCloudPackedUtilsTest, XYZRGBA)
 {
   PointCloudPacked pcMsg;
 
-  msgs::InitPointCloudPacked(pcMsg, "my_frame", true,
-      {{"xyz", msgs::PointCloudPacked::Field::FLOAT32},
-      {"rgba", msgs::PointCloudPacked::Field::FLOAT32}});
+  InitPointCloudPacked(pcMsg, "my_frame", true,
+      {{"xyz", PointCloudPacked::Field::FLOAT32},
+      {"rgba", PointCloudPacked::Field::FLOAT32}});
 
   // Reserve space for data
   unsigned int total{5 * pcMsg.point_step()};
