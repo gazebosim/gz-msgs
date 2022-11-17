@@ -5,7 +5,145 @@
 
 ## Gazebo Msgs 9.x
 
-### Gazebo Msgs 9.0.0 (202x-xx-xx)
+### Gazebo Msgs 9.0.0 (2022-09-22)
+
+1. Move generated message to details folder
+    * [Pull request #304](https://github.com/gazebosim/gz-msgs/pull/304)
+
+1. gz_TEST: one more ign -> gz
+    * [Pull request #301](https://github.com/gazebosim/gz-msgs/pull/301)
+
+1. Remove incorrect redirection header
+    * [Pull request #303](https://github.com/gazebosim/gz-msgs/pull/303)
+
+1. Migrate config and log directories
+    * [Pull request #291](https://github.com/gazebosim/gz-msgs/pull/291)
+
+1. Adding additional fields to the camera sensor message
+    * [Pull request #201](https://github.com/gazebosim/gz-msgs/pull/201)
+
+1. Add fluid added mass to inertial
+    * [Pull request #271](https://github.com/gazebosim/gz-msgs/pull/271)
+
+1. Safer move/rename for Windows
+    * [Pull request #285](https://github.com/gazebosim/gz-msgs/pull/285)
+
+1. Added stepping bool to world statistics
+    * [Pull request #199](https://github.com/gazebosim/gz-msgs/pull/199)
+
+1. [ign to gz] Factory::New accept ignition with warning
+    * [Pull request #281](https://github.com/gazebosim/gz-msgs/pull/281)
+
+1. Allow moon and custom surfaces in spherical coords msg
+    * [Pull request #279](https://github.com/gazebosim/gz-msgs/pull/279)
+
+1. Change message generation workflow
+    * [Pull request #256](https://github.com/gazebosim/gz-msgs/pull/256)
+
+1. ign -> gz Provisional Finale: Source Migration : gz-msgs
+    * [Pull request #272](https://github.com/gazebosim/gz-msgs/pull/272)
+
+1. Migrate bazel file
+    * [Pull request #270](https://github.com/gazebosim/gz-msgs/pull/270)
+
+1. Update GoogleTest to latest version
+    * [Pull request #257](https://github.com/gazebosim/gz-msgs/pull/257)
+
+1. ign -> gz Partial Docs Migration and Project Name Followups : gz-msgs
+    * [Pull request #267](https://github.com/gazebosim/gz-msgs/pull/267)
+
+1. Migrate IGNITION- CMake variables
+    * [Pull request #266](https://github.com/gazebosim/gz-msgs/pull/266)
+
+1. Rename CMake project to gz
+    * [Pull request #250](https://github.com/gazebosim/gz-msgs/pull/250)
+
+1. ign -> gz CLI Migration : gz-msgs
+    * [Pull request #262](https://github.com/gazebosim/gz-msgs/pull/262)
+
+1. ign -> gz Upstream Macro Migration : gz-msgs
+    * [Pull request #260](https://github.com/gazebosim/gz-msgs/pull/260)
+
+1. [ign -> gz] CMake functions
+    * [Pull request #263](https://github.com/gazebosim/gz-msgs/pull/263)
+
+1. ign -> gz Environment Variable Migration
+    * [Pull request #259](https://github.com/gazebosim/gz-msgs/pull/259)
+
+1. [garden] Added shininess to material message
+    * [Pull request #251](https://github.com/gazebosim/gz-msgs/pull/251)
+
+1. ign -> gz: namespaces and CMake var
+    * [Pull request #252](https://github.com/gazebosim/gz-msgs/pull/252)
+
+1. ign -> gz migration
+    * [Pull request #249](https://github.com/gazebosim/gz-msgs/pull/249)
+
+1. Added visualize_visual to light.proto
+    * [Pull request #248](https://github.com/gazebosim/gz-msgs/pull/248)
+
+1. Bumps in garden : ign-msgs9
+    * [Pull request #246](https://github.com/gazebosim/gz-msgs/pull/246)
+
+1. Remove SuppressWarning from msgs.hh to fix warnings
+    * [Pull request #245](https://github.com/gazebosim/gz-msgs/pull/245)
+
+1. Use SuppressWarning from ign-utils
+    * [Pull request #243](https://github.com/gazebosim/gz-msgs/pull/243)
+
+1. Remove Bionic from future releases (Garden+)
+    * [Pull request #229](https://github.com/gazebosim/gz-msgs/pull/229)
+
+1. Change is_light_on to is_light_off
+    * [Pull request #228](https://github.com/gazebosim/gz-msgs/pull/228)
+
+1. Added field to light.proto to define if a light is on or off
+    * [Pull request #223](https://github.com/gazebosim/gz-msgs/pull/223)
+
+1. Added continuous joint type
+    * [Pull request #215](https://github.com/gazebosim/gz-msgs/pull/215)
+
+1. Bumps in garden : depend on ign-math7
+    * [Pull request #208](https://github.com/gazebosim/gz-msgs/pull/208)
+
+1. Configurable marker point color
+    * [Pull request #202](https://github.com/gazebosim/gz-msgs/pull/202)
+
+1. Bumps in garden : ci_matching_branch/bump_garden_ign-msgs9
+    * [Pull request #203](https://github.com/gazebosim/gz-msgs/pull/203)
+
+## Gazebo Msgs 8.x
+
+### Gazebo Msgs 8.7.0 (2022-09-27)
+
+1. ign -> gz Redirect Gz Headers
+    * [Pull request #300](https://github.com/gazebosim/gz-msgs/pull/300)
+    * [Pull request #307](https://github.com/gazebosim/gz-msgs/pull/307)
+
+1. Add parameter component message definitions
+    * [Pull request #241](https://github.com/gazebosim/gz-msgs/pull/241)
+    * [Pull request #298](https://github.com/gazebosim/gz-msgs/pull/298)
+
+1. Remove redunant namespace references
+    * [Pull request #293](https://github.com/gazebosim/gz-msgs/pull/293)
+
+### Gazebo Msgs 8.6.0 (2022-08-02)
+
+1. Increase `Utility` test coverage
+    * [Pull request #283](https://github.com/gazebosim/gz-msgs/pull/283)
+
+1. Change `IGN_DESIGNATION` to `GZ_DESIGNATION`
+    * [Pull request #282](https://github.com/gazebosim/gz-msgs/pull/282)
+    * [Pull request #284](https://github.com/gazebosim/gz-msgs/pull/284)
+
+1. Add entity wrench message
+    * [Pull request #274](https://github.com/gazebosim/gz-msgs/pull/274)
+
+1. Ignition -> Gazebo
+    * [Pull request #273](https://github.com/gazebosim/gz-msgs/pull/273)
+
+1. Add `ACTOR` and `WORLD` types to entity
+    * [Pull request #275](https://github.com/gazebosim/gz-msgs/pull/275)
 
 ### Gazebo Msgs 8.5.0 (2022-06-23)
 
@@ -23,8 +161,6 @@
 
 1. Generator: Add missing std namespace to string arguments
     * [Pull request #242](https://github.com/gazebosim/gz-msgs/pull/242)
-
-## Gazebo Msgs 8.x
 
 ### Gazebo Msgs 8.4.0 (2022-04-06)
 
@@ -272,6 +408,19 @@
     * [Pull request 41](https://github.com/gazebosim/gz-msgs/pull/41)
 
 ## Gazebo Msgs 5.x
+
+### Gazebo Msgs 5.10.0 (2022-10-10)
+
+1. Ignition to Gazebo renaming.
+    * [Pull request #282](https://github.com/gazebosim/gz-msgs/pull/282)
+    * [Pull request #293](https://github.com/gazebosim/gz-msgs/pull/293)
+    * [Pull request #300](https://github.com/gazebosim/gz-msgs/pull/300)
+
+1. Remove mistaken VERSION.
+    * [Pull request #284](https://github.com/gazebosim/gz-msgs/pull/284)
+
+1. Increase utility coverage.
+    * [Pull request #283](https://github.com/gazebosim/gz-msgs/pull/283)
 
 ### Gazebo Msgs 5.10.0 (2022-07-18)
 

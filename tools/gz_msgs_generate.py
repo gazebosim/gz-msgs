@@ -73,14 +73,14 @@ def main(argv=sys.argv[1:]):
         print(f'Failed to execute protoc compiler: {e}')
         sys.exit(-1)
 
-    # Move original generated cpp to detail/
+    # Move original generated cpp to details/
     proto_file = os.path.splitext(os.path.relpath(args.input_path, args.proto_path))[0]
     detail_proto_file = proto_file.split(os.sep)
 
     detail_proto_dir = detail_proto_file[:-1]
-    detail_proto_dir.append('detail')
+    detail_proto_dir.append('details')
     detail_proto_dir = os.path.join(*detail_proto_dir)
-    detail_proto_file.insert(-1, 'detail')
+    detail_proto_file.insert(-1, 'details')
     detail_proto_file = os.path.join(*detail_proto_file)
 
     header = os.path.join(args.output_cpp_path, proto_file + ".pb.h")
