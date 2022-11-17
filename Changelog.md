@@ -1,5 +1,10 @@
 ## Gazebo Msgs 9.x
 
+### Gazebo Msgs 9.1.0 (2022-11-17)
+
+1. Forward port of msgs 8.7.0.
+    * [Pull request #313](https://github.com/gazebosim/gz-msgs/pull/313)
+
 ### Gazebo Msgs 9.0.0 (2022-09-22)
 
 1. Move generated message to details folder
