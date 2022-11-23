@@ -22,7 +22,7 @@ option java_outer_classname = "DVLVelocityTrackingProtos";
 
 /// \ingroup gz.msgs
 /// \interface DVLVelocityTracking
-/// \brief Velocity tracking estimates from a Doppler Velocity Log sensor. 
+/// \brief Velocity tracking estimates from a Doppler Velocity Log sensor.
 /// Doppler velocity logs are used by the maritime community to track the velocity
 /// of a vessel with respect to some (reflecting) target.
 
@@ -36,10 +36,14 @@ message DVLVelocityTracking
   /// \brief Message header.
   Header header = 1;
 
+  /// \brief DVL types.
   enum DVLType
   {
+    /// \brief Unspecific DVL type.
     DVL_TYPE_UNSPECIFIED = 0;
+    /// \brief Piston DVLs.
     DVL_TYPE_PISTON = 1;
+    /// \brief Phased array DVLs.
     DVL_TYPE_PHASED_ARRAY = 2;
   };
   /// \brief Type of DVL.
@@ -48,7 +52,8 @@ message DVLVelocityTracking
   /// \brief Locked on target.
   DVLTrackingTarget target = 3;
 
-  /// \brief Estimated velocity.
+  /// \brief Estimated velocity of either target or sensor
+  /// w.r.t. the specified frame, in meters per second.
   DVLKinematicEstimate velocity = 4;
 
   /// \brief Tracking beams' state.

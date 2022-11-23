@@ -23,7 +23,7 @@ option java_outer_classname = "DVLBeamStateProtos";
 /// \ingroup gz.msgs
 /// \interface DVLBeamState
 /// \brief State of some acoustic beam in a Doppler Velocity Log sensor. Each beam, when locked,
-/// estimates the distance to the reflecting target as well as its velocity in some reference 
+/// estimates the distance to the reflecting target as well as its velocity in some reference
 /// frame. Some additional attributes may also be available.
 
 import "gz/msgs/dvl_kinematic_estimate.proto";
@@ -34,18 +34,22 @@ message DVLBeamState
   /// \brief Beam ID.
   int32 id = 1;
 
-  /// \brief Beam velocity estimate.
+  /// \brief Beam velocity estimate, measured along
+  /// its axis, in meters per second.
   DVLKinematicEstimate velocity = 2;
 
-  /// \brief Beam range estimate.
+  /// \brief Beam range estimate, in meters.
   DVLRangeEstimate range = 3;
 
   /// \brief Beam signal strength indicator.
   double rssi = 4;
 
-  /// \brief Measured background noise spectral density.
+  /// \brief Measured background noise spectral density,
+  /// in watts per hertz.
   double nsd = 5;
 
-  /// \brief Whether beam is locked or not.
+  /// \brief Whether beam is locked to its target or not.
+  /// A beam is said to be locked when it can reliably
+  /// measure signal reflections.
   bool locked = 6;
 }

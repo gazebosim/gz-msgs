@@ -31,18 +31,22 @@ import "gz/msgs/dvl_range_estimate.proto";
 
 message DVLTrackingTarget
 {
+  /// \brief Target types
   enum TargetType
   {
+    /// \brief Unspecific target type.
     DVL_TARGET_UNSPECIFIED = 0;
+    /// \brief Bottom ground (ie. solid) target.
     DVL_TARGET_BOTTOM = 1;
+    /// \brief Water mass layer (ie. fluid) target.
     DVL_TARGET_WATER_MASS = 2;
   };
   /// \brief Type of target used for tracking.
   TargetType type = 1;
 
-  /// \brief Target range (or distance).
-  DVLRangeEstimate range = 3;
+  /// \brief Target range (or distance), in meters
+  DVLRangeEstimate range = 2;
 
-  /// \brief Target position estimate.
-  DVLKinematicEstimate position = 2;
+  /// \brief Target position estimate, in meters.
+  DVLKinematicEstimate position = 3;
 }

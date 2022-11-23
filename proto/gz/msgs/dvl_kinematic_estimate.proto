@@ -31,12 +31,15 @@ import "gz/msgs/vector3d.proto";
 
 message DVLKinematicEstimate
 {
+  /// \brief Frames of reference (incl. conventions)
   enum ReferenceType
   {
+     /// \brief Unspecific frame of reference.
      DVL_REFERENCE_UNSPECIFIED = 0;
+     /// \brief Earth bound frame of reference (typically ENU).
      DVL_REFERENCE_EARTH = 1;
+     /// \brief Ship bound frame of reference (typically FSK).
      DVL_REFERENCE_SHIP = 2;
-     DVL_REFERENCE_BEAM = 3;
   };
   /// \brief Estimate frame of reference (incl. conventions).
   ReferenceType reference = 1;
