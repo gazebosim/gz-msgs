@@ -94,6 +94,14 @@ namespace gz
     math::SphericalCoordinates Convert(
         const msgs::SphericalCoordinates &_coord);
 
+    /// \brief Convert a msgs::SphericalCoordinatesType to an
+    /// gz::math::SphericalCoordinates::CoordinateTpye
+    /// \param[in] _sc The spherical coordinate type to convert
+    /// \return A gz::math::SphericalCoordinatesType object
+    GZ_MSGS_VISIBLE
+    math::SphericalCoordinates::CoordinateType Convert(
+      const msgs::SphericalCoordinatesType &_sc);
+
     /// \brief Convert a msgs::AxisAlignedBox to an
     /// gz::math::AxisAlignedBox
     /// \param[in] _b The axis aligned box to convert
@@ -211,6 +219,14 @@ namespace gz
     GZ_MSGS_VISIBLE
     msgs::SphericalCoordinates Convert(
         const math::SphericalCoordinates &_coord);
+
+    /// \brief Convert a msgs::SphericalCoordinatesType to an
+    /// gz::math::SphericalCoordinates::CoordinateTpye
+    /// \param[in] _coord The spherical coordinates to convert
+    /// \return A gz::math::SphericalCoordinatesType object
+    GZ_MSGS_VISIBLE
+    msgs::SphericalCoordinatesType ConvertCoord(
+      const math::SphericalCoordinates::CoordinateType &_sc);
 
     /// \brief Convert a gz::math::Planed to a msgs::PlaneGeom
     /// \param[in] _p The plane to convert

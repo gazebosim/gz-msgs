@@ -184,6 +184,25 @@ namespace gz
     }
 
     /////////////////////////////////////////////
+    math::SphericalCoordinates::CoordinateType Convert(
+      const msgs::SphericalCoordinatesType &_sc)
+    {
+      switch (_sc)
+      {
+        case msgs::SphericalCoordinatesType::ECEF:
+          return math::SphericalCoordinates::CoordinateType::ECEF;
+        case msgs::SphericalCoordinatesType::GLOBAL:
+          return math::SphericalCoordinates::CoordinateType::GLOBAL;
+        case msgs::SphericalCoordinatesType::SPHERICAL:
+          return math::SphericalCoordinates::CoordinateType::SPHERICAL;
+        case msgs::SphericalCoordinatesType::LOCAL:
+          return math::SphericalCoordinates::CoordinateType::LOCAL;
+        case msgs::SphericalCoordinatesType::LOCAL2:
+          return math::SphericalCoordinates::CoordinateType::LOCAL2;
+      }
+    }
+
+    /////////////////////////////////////////////
     math::AxisAlignedBox Convert(const msgs::AxisAlignedBox &_b)
     {
       return math::AxisAlignedBox(msgs::Convert(_b.min_corner()),
@@ -347,6 +366,25 @@ namespace gz
       msgs::SphericalCoordinates result;
       msgs::Set(&result, _sc);
       return result;
+    }
+
+    /////////////////////////////////////////////
+    msgs::SphericalCoordinatesType ConvertCoord(
+      const math::SphericalCoordinates::CoordinateType &_sc)
+    {
+      switch (_sc)
+      {
+        case math::SphericalCoordinates::CoordinateType::ECEF:
+          return msgs::SphericalCoordinatesType::ECEF;
+        case math::SphericalCoordinates::CoordinateType::GLOBAL:
+          return msgs::SphericalCoordinatesType::GLOBAL;
+        case math::SphericalCoordinates::CoordinateType::SPHERICAL:
+          return msgs::SphericalCoordinatesType::SPHERICAL;
+        case math::SphericalCoordinates::CoordinateType::LOCAL:
+          return  msgs::SphericalCoordinatesType::LOCAL;
+        case math::SphericalCoordinates::CoordinateType::LOCAL2:
+          return msgs::SphericalCoordinatesType::LOCAL2;
+      }
     }
 
     /////////////////////////////////////////////

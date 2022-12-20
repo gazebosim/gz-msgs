@@ -399,6 +399,29 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
 }
 
 /////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMsgsSphericalCoordinatesTypeToMath)
+{
+  EXPECT_EQ(Convert(msgs::SphericalCoordinatesType::ECEF),
+    math::SphericalCoordinates::CoordinateType::ECEF);
+  EXPECT_EQ(Convert(msgs::SphericalCoordinatesType::GLOBAL),
+    math::SphericalCoordinates::CoordinateType::GLOBAL);
+  EXPECT_EQ(Convert(msgs::SphericalCoordinatesType::SPHERICAL),
+    math::SphericalCoordinates::CoordinateType::SPHERICAL);
+  EXPECT_EQ(Convert(msgs::SphericalCoordinatesType::LOCAL),
+    math::SphericalCoordinates::CoordinateType::LOCAL);
+  EXPECT_EQ(Convert(msgs::SphericalCoordinatesType::LOCAL2),
+    math::SphericalCoordinates::CoordinateType::LOCAL2);
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMathSphericalCoordinatedTypeToMsg)
+{
+  EXPECT_EQ(msgs::ConvertCoord(
+      math::SphericalCoordinates::CoordinateType::ECEF),
+    msgs::SphericalCoordinatesType::ECEF);
+}
+
+/////////////////////////////////////////////////
 TEST(UtilityTest, ConvertStringMsg)
 {
   msgs::StringMsg msg = msgs::Convert(std::string("a string msg"));
