@@ -22,8 +22,6 @@ option java_outer_classname = "DataLoadPathOptions";
 
 import "gz/msgs/spherical_coordinates.proto";
 
-
-
 /// \brief Used for specifying how to load environmental data
 message DataLoadPathOptions
 {

@@ -226,7 +226,7 @@ namespace gz
     /// \return A gz::math::SphericalCoordinatesType object
     GZ_MSGS_VISIBLE
     msgs::SphericalCoordinatesType ConvertCoord(
-      const math::SphericalCoordinates::CoordinateType &_sc);
+      const math::SphericalCoordinates::CoordinateType &_coord);
 
     /// \brief Convert a gz::math::Planed to a msgs::PlaneGeom
     /// \param[in] _p The plane to convert
