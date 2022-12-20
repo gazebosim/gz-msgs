@@ -220,10 +220,10 @@ namespace gz
     msgs::SphericalCoordinates Convert(
         const math::SphericalCoordinates &_coord);
 
-    /// \brief Convert a msgs::SphericalCoordinatesType to an
-    /// gz::math::SphericalCoordinates::CoordinateTpye
+    /// \brief Convert a gz::math::SphericalCoordinates::CoordinateType
+    /// to a msgs::SphericalCoordinatesType
     /// \param[in] _coord The spherical coordinates to convert
-    /// \return A gz::math::SphericalCoordinatesType object
+    /// \return A gz::msgs::SphericalCoordinatesType object
     GZ_MSGS_VISIBLE
     msgs::SphericalCoordinatesType ConvertCoord(
       const math::SphericalCoordinates::CoordinateType &_coord);

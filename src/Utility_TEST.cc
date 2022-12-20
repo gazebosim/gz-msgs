@@ -419,6 +419,18 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatedTypeToMsg)
   EXPECT_EQ(msgs::ConvertCoord(
       math::SphericalCoordinates::CoordinateType::ECEF),
     msgs::SphericalCoordinatesType::ECEF);
+  EXPECT_EQ(msgs::ConvertCoord(
+      math::SphericalCoordinates::CoordinateType::GLOBAL),
+    msgs::SphericalCoordinatesType::GLOBAL);
+  EXPECT_EQ(msgs::ConvertCoord(
+      math::SphericalCoordinates::CoordinateType::SPHERICAL),
+    msgs::SphericalCoordinatesType::SPHERICAL);
+  EXPECT_EQ(msgs::ConvertCoord(
+      math::SphericalCoordinates::CoordinateType::LOCAL),
+    msgs::SphericalCoordinatesType::LOCAL);
+  EXPECT_EQ(msgs::ConvertCoord(
+      math::SphericalCoordinates::CoordinateType::LOCAL2),
+    msgs::SphericalCoordinatesType::LOCAL2);
 }
 
 /////////////////////////////////////////////////

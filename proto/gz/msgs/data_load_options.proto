@@ -25,7 +25,7 @@ import "gz/msgs/spherical_coordinates.proto";
 /// \brief Used for specifying how to load environmental data
 message DataLoadPathOptions
 {
-    /// \brief
+    /// \brief Units used by spherical coordinates
     enum DataAngularUnits
     {
         RADIANS = 0;
