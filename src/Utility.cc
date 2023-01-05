@@ -197,12 +197,8 @@ namespace gz
           return math::SphericalCoordinates::CoordinateType::SPHERICAL;
         case msgs::SphericalCoordinatesType::LOCAL:
           return math::SphericalCoordinates::CoordinateType::LOCAL;
-        case msgs::SphericalCoordinatesType::LOCAL2:
-          return math::SphericalCoordinates::CoordinateType::LOCAL2;
         default:
-          // Default to local coords
-          std::cerr << "Invalid coordinate type passed. Defaulting to local.\n";
-          return math::SphericalCoordinates::CoordinateType::LOCAL;
+          return math::SphericalCoordinates::CoordinateType::LOCAL2;
       }
     }
 
@@ -386,11 +382,8 @@ namespace gz
           return msgs::SphericalCoordinatesType::SPHERICAL;
         case math::SphericalCoordinates::CoordinateType::LOCAL:
           return  msgs::SphericalCoordinatesType::LOCAL;
-        case math::SphericalCoordinates::CoordinateType::LOCAL2:
-          return msgs::SphericalCoordinatesType::LOCAL2;
         default:
-          std::cerr << "Invalid coordinate type passed. Defaulting to local.\n";
-          return msgs::SphericalCoordinatesType::LOCAL;
+          return msgs::SphericalCoordinatesType::LOCAL2;
       }
     }
 
