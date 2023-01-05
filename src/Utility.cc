@@ -200,7 +200,7 @@ namespace gz
         case msgs::SphericalCoordinatesType::LOCAL2:
           return math::SphericalCoordinates::CoordinateType::LOCAL2;
         default:
-          //default to local coords
+          // Default to local coords
           std::cerr << "Invalid coordinate type passed. Defaulting to local.\n";
           return math::SphericalCoordinates::CoordinateType::LOCAL;
       }
