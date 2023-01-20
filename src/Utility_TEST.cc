@@ -1156,13 +1156,17 @@ TEST(UtilityTest, DiscoveryTypeString)
       msgs::ToString(msgs::Discovery::NEW_CONNECTION));
   EXPECT_EQ("END_CONNECTION",
       msgs::ToString(msgs::Discovery::END_CONNECTION));
+  EXPECT_EQ("SUBSCRIBERS_REQ",
+      msgs::ToString(msgs::Discovery::SUBSCRIBERS_REQ));
+  EXPECT_EQ("SUBSCRIBERS_REP",
+      msgs::ToString(msgs::Discovery::SUBSCRIBERS_REP));
 
   // If any of the following fail, then make sure you have added then new
   // enum values to std::string ToString(const msgs::Discovery::Type &_t).
   // Then update the following tests to match the new enum values.
   EXPECT_EQ(msgs::Discovery::UNINITIALIZED,
       msgs::Discovery::Type_MIN);
-  EXPECT_EQ(msgs::Discovery::END_CONNECTION,
+  EXPECT_EQ(msgs::Discovery::SUBSCRIBERS_REP,
       msgs::Discovery::Type_MAX);
-  EXPECT_EQ(8, msgs::Discovery::Type_ARRAYSIZE);
+  EXPECT_EQ(10, msgs::Discovery::Type_ARRAYSIZE);
 }
