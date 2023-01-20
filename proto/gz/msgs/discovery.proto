@@ -56,9 +56,9 @@ message Discovery
     END_CONNECTION  = 7;
 
     /// \brief Request the list of subscribers.
-    SUBSCRIBERS     = 8;
+    SUBSCRIBERS_REQ = 8;
 
-    /// \brief Reply to a SUBSCRIBERS request.
+    /// \brief Reply to a SUBSCRIBERS_REQ.
     SUBSCRIBERS_REP = 9;
   }
 
