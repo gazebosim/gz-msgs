@@ -62,7 +62,7 @@ To compile the code create a `CMakeLists.txt`:
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 # Find the Gazebo msgs library
-find_package(gz-msgs9 QUIET REQUIRED)
+find_package(gz-msgs10 QUIET REQUIRED)
 
 add_executable(gz-msgs-example main.cc)
 target_link_libraries(gz-msgs-example ${GZ-MSGS_LIBRARIES})
