@@ -113,7 +113,7 @@ function(gz_msgs_protoc)
     COMMAND Python3::Interpreter
     ARGS tools/gz_msgs_generate.py
       --protoc-exec "$<TARGET_FILE:${gz_msgs_protoc_PROTOC_EXEC}>"
-      --gz-generator-bin "$<TARGET_FILE:gz_msgs_gen>"
+      --gz-generator-bin "${GZ_MSGS_GEN_EXECUTABLE}"
       --generate-cpp "${gz_msgs_protoc_GENERATE_CPP}"
       --generate-ruby "${gz_msgs_protoc_GENERATE_RUBY}"
       --generate-ignition "TRUE"
