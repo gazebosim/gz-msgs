@@ -38,7 +38,7 @@ message DataLoadPathOptions
     /// \brief Name of time axis
     string time = 2;
 
-     /// \brief Is the data static in time
+    /// \brief Is the data static in time
     bool static_time = 3;
 
     /// \brief Name of x axis
