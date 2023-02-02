@@ -21,9 +21,9 @@
 
 #include "gz/msgs/vector3d.pb.h"
 #include "gz/msgs/serialized_map.pb.h"
-
 #include "gz/msgs/Factory.hh"
-#include "test_config.hh"
+
+#include <gz/common/testing/TestPaths.hh>
 
 using namespace gz;
 
@@ -72,9 +72,8 @@ TEST(FactoryTest, NewDynamicFactory)
   auto msg = msgs::Factory::New("example.msgs.StringMsg");
   EXPECT_TRUE(msg.get() == nullptr);
 
-  paths =
-      PROJECT_SOURCE_PATH "/test/desc:"
-      PROJECT_SOURCE_PATH "/test";
+  paths = gz::common::testing::TestFile("desc") + ":" +
+          gz::common::testing::TestFile("");
   msgs::Factory::LoadDescriptors(paths);
 
   msg = msgs::Factory::New("example.msgs.StringMsg");
