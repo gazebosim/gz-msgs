@@ -30,7 +30,7 @@ import "gz/msgs/sensor_noise.proto";
 /// \brief Message that describes an air speed sensor.
 message AirSpeedSensor
 {
-  /// \brief Optional header data
+  /// \brief header data
   Header header               = 1;
 
   /// \brief Differential pressure.
