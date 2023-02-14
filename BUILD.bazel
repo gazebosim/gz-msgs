@@ -128,10 +128,9 @@ test_sources = glob(
     data = [
         "test/desc",
     ],
-    env = {
-        "GZ_BAZEL": "1",
-        "GZ_BAZEL_PATH": "msgs",
-    },
+    defines = [
+      'GZ_MSGS_TEST_PATH=\\"msgs/test\\"',
+    ],
     deps = [
         ":msgs",
         GZ_ROOT + "common/testing",

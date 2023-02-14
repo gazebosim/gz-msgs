@@ -282,6 +282,11 @@ gz_build_tests(TYPE UNIT
       TINYXML2::TINYXML2
 )
 
+if (TARGET UNIT_Factory_TEST)
+  target_compile_definitions(UNIT_Factory_TEST
+    PRIVATE GZ_MSGS_TEST_PATH="${PROJECT_SOURCE_DIR}/test")
+endif()
+
 ##################################################
 # gz msgs command
 if(NOT WIN32)
