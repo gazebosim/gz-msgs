@@ -1,5 +1,13 @@
 ## Gazebo Msgs 9.x
 
+### Gazebo Msgs 9.3.0 (2023-02-08)
+
+1. Added airspeed sensor
+    * [Pull request #321](https://github.com/gazebosim/gz-msgs/pull/321)
+
+1. Fix cross-compilation workflow
+    * [Pull request #319](https://github.com/gazebosim/gz-msgs/pull/319)
+
 ### Gazebo Msgs 9.2.0 (2022-11-23)
 
 1. Add DVL specific messages
