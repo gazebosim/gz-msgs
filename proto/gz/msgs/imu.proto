@@ -27,6 +27,7 @@ option java_outer_classname = "IMUProtos";
 import "gz/msgs/header.proto";
 import "gz/msgs/vector3d.proto";
 import "gz/msgs/quaternion.proto";
+import "gz/msgs/float_v.proto";
 
 message IMU
 {
@@ -37,4 +38,7 @@ message IMU
   Quaternion orientation       = 3;
   Vector3d angular_velocity    = 4;
   Vector3d linear_acceleration = 5;
+  Float_V orientation_covariance         = 6;
+  Float_V angular_velocity_covariance    = 7;
+  Float_V linear_acceleration_covariance = 8;
 }
