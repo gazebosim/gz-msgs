@@ -430,7 +430,7 @@
 
 ## Gazebo Msgs 5.x
 
-### Gazebo Msgs 5.10.0 (2022-10-10)
+### Gazebo Msgs 5.11.0 (2022-10-10)
 
 1. Ignition to Gazebo renaming.
     * [Pull request #282](https://github.com/gazebosim/gz-msgs/pull/282)
