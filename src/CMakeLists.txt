@@ -73,9 +73,7 @@ function(gz_msgs_protoc)
     set(output_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.h")
     # Full path to generated detail header (${PROJECT_BINARY_DIR}/include/gz/msgs/details/foo.pb.h)
     set(output_detail_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/details/${FIL_WE}.pb.h")
-    # Full path to generated ignition header (${PROJECT_BINARY_DIR}/include/ignition/msgs/foo.pb.h)
-    set(output_ign_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}/ignition/msgs/${FIL_WE}.pb.h")
-    # Full path to generated ignition header (${PROJECT_BINARY_DIR}/include/foo.pb.cc)
+    # Full path to generated source (${PROJECT_BINARY_DIR}/include/foo.pb.cc)
     set(output_source "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.cc")
 
     # Generate a clean relative path (gz/msgs/foo.pb.h)
@@ -116,7 +114,6 @@ function(gz_msgs_protoc)
       --gz-generator-bin "${GZ_MSGS_GEN_EXECUTABLE}"
       --generate-cpp "${gz_msgs_protoc_GENERATE_CPP}"
       --generate-ruby "${gz_msgs_protoc_GENERATE_RUBY}"
-      --generate-ignition "TRUE"
       --output-cpp-path "${gz_msgs_protoc_OUTPUT_CPP_DIR}"
       --output-ruby-path "${gz_msgs_protoc_OUTPUT_RUBY_DIR}"
       --proto-path "${gz_msgs_protoc_PROTO_PATH}"
@@ -187,9 +184,6 @@ endif()
 set_source_files_properties(${gen_headers} ${gen_ign_headers} ${gen_detail_headers} ${gen_sources} ${gen_ruby_scripts}
   PROPERTIES GENERATED TRUE)
 
-message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/ruby/ignition/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}")
-install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/ruby/ignition/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR})
-
 message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/ruby/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}")
 install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/ruby/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR})
 
@@ -202,11 +196,6 @@ gz_install_includes(
 gz_install_includes(
   "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}/details"
   ${gen_detail_headers})
-
-# Install ignition/msgs
-gz_install_includes(
-  "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}/ignition/msgs"
-  ${gen_ign_headers})
 
 ##################################################
 # Generate gz/msgs/MessageTypes.hh
