@@ -32,8 +32,10 @@
 namespace gz::msgs::detail
 {
 
+/// Cast a base unique pointer to protobuf message type to child type
 template<typename MsgT>
-std::unique_ptr<MsgT> dynamic_message_cast(std::unique_ptr<google::protobuf::Message> &&_baseMsg)
+std::unique_ptr<MsgT>
+dynamic_message_cast(std::unique_ptr<google::protobuf::Message> &&_baseMsg)
 {
   auto converted = std::unique_ptr<MsgT>{dynamic_cast<MsgT*>(_baseMsg.get())};
   if (converted) {

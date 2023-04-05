@@ -17,11 +17,15 @@
 
 #include <fstream>
 #include <filesystem>
+#include <vector>
 
 #include "DynamicFactory.hh"
+#include "gz/utils/Environment.hh"
 
 using namespace gz;
 using namespace msgs;
+
+static constexpr const char * kDescriptorEnv = "GZ_DESCRIPTOR_PATH";
 
 //////////////////////////////////////////////////
 /// \brief split at a one character delimiter to get a vector of something
@@ -47,10 +51,11 @@ std::vector<std::string> split(const std::string &_orig, char _delim)
 DynamicFactory::DynamicFactory()
 {
   // Try to get the list of paths from an environment variable.
-  const char *descPaths = std::getenv("GZ_DESCRIPTOR_PATH");
-
-  // Load all the descriptors found in the paths set with GZ_DESCRIPTOR_PATH.
-  this->LoadDescriptors(descPaths);
+  std::string descPaths;
+  if (gz::utils::env(kDescriptorEnv, descPaths)) {
+    // Load all the descriptors found in the paths set with GZ_DESCRIPTOR_PATH.
+    this->LoadDescriptors(descPaths);
+  }
 }
 
 //////////////////////////////////////////////////
@@ -73,7 +78,8 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
       std::ifstream ifs(dirIter.path().string(), std::ifstream::in);
       if (!ifs.is_open())
       {
-        std::cerr << "DynamicFactory(): Unable to open [" << dirIter.path() << "]"
+        std::cerr << "DynamicFactory(): Unable to open ["
+                  << dirIter.path() << "]"
                   << std::endl;
         continue;
       }
@@ -92,7 +98,8 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
         if (!pool.BuildFile(fileDescriptorProto))
         {
           std::cerr << "DynamicFactory(). Unable to place descriptors from ["
-                    << dirIter.path() << "] in the descriptor pool" << std::endl;
+                    << dirIter.path()
+                    << "] in the descriptor pool" << std::endl;
         }
       }
     }
