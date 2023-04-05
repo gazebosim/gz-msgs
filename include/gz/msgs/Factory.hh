@@ -17,15 +17,6 @@
 #ifndef GZ_MSGS_FACTORY_HH_
 #define GZ_MSGS_FACTORY_HH_
 
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4100 4512 4127 4068 4244 4267 4251 4146)
-#endif
-#include <google/protobuf/message.h>
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
-
 #include <string>
 #include <map>
 #include <memory>
@@ -33,6 +24,7 @@
 
 #include "gz/msgs/config.hh"
 #include "gz/msgs/Export.hh"
+#include "gz/msgs/detail/dynamic_message_cast.hh"
 
 namespace gz
 {
@@ -40,22 +32,23 @@ namespace gz
   {
     // Inline bracket to help doxygen filtering.
     inline namespace GZ_MSGS_VERSION_NAMESPACE {
-    //
-    /// \typedef FactoryFn
-    /// \brief Prototype for message factory generation
-    typedef std::unique_ptr<google::protobuf::Message> (*FactoryFn) ();
-
     /// \class Factory Factory.hh gz/msgs.hh
+  /// This class  will also try to load all Protobuf descriptors specified
     /// \brief A factory that generates protobuf message based on a string type.
-    /// This class  will also try to load all Protobuf descriptors specified
     /// in the GZ_DESCRIPTOR_PATH environment variable on program start.
+
     class GZ_MSGS_VISIBLE Factory
     {
+      public: using Message = google::protobuf::Message;
+      public: using MessagePtr = std::unique_ptr<Message>;
+      public: using FactoryFn =
+        std::function<MessagePtr(void)>;
+
       /// \brief Register a message.
       /// \param[in] _msgType Type of message to register.
       /// \param[in] _factoryfn Function that generates the message.
-      public: static void Register(const std::string &_msgType,
-                                   FactoryFn _factoryfn);
+      public: static void
+              Register(const std::string &_msgType, FactoryFn _factoryFn);
 
       /// \brief Create a new instance of a message.
       /// \param[in] _msgType Type of message to create.
@@ -64,16 +57,7 @@ namespace gz
       public: template<typename T>
               static std::unique_ptr<T> New(const std::string &_msgType)
               {
-                auto msgType = _msgType;
-                if (msgType.find("ignition") == 0)
-                {
-                  msgType.replace(0, 8, "gz");
-                  std::cerr << "Trying to create deprecated message type ["
-                            << _msgType << "]. Using [" << msgType
-                            << "] instead." << std::endl;
-                }
-                return std::unique_ptr<T>(
-                    static_cast<T*>(New(msgType).release()));
+                return detail::dynamic_message_cast<T>(New(_msgType));
               }
 
       /// \brief Create a new instance of a message.
@@ -85,32 +69,23 @@ namespace gz
               static std::unique_ptr<T> New(const std::string &_msgType,
                   const std::string &_args)
               {
-                auto msgType = _msgType;
-                if (msgType.find("ignition") == 0)
-                {
-                  msgType.replace(0, 8, "gz");
-                  std::cerr << "Trying to create deprecated message type ["
-                            << _msgType << "]. Using [" << msgType
-                            << "] instead." << std::endl;
-                }
-                return std::unique_ptr<T>(
-                    static_cast<T*>(New(msgType, _args).release()));
+                return detail::dynamic_message_cast<T>(New(_msgType, _args));
               }
 
       /// \brief Create a new instance of a message.
       /// \param[in] _msgType Type of message to create.
       /// \return Pointer to a google protobuf message. Null if the message
       /// type could not be handled.
-      public: static std::unique_ptr<google::protobuf::Message> New(
-                  const std::string &_msgType);
+      public: static MessagePtr
+              New(const std::string &_msgType);
 
       /// \brief Create a new instance of a message.
       /// \param[in] _msgType Type of message to create.
       /// \param[in] _args Message arguments. This will populate the message.
       /// \return Pointer to a google protobuf message. Null if the message
       /// type could not be handled.
-      public: static std::unique_ptr<google::protobuf::Message> New(
-                  const std::string &_msgType, const std::string &_args);
+      public: static MessagePtr
+              New(const std::string &_msgType, const std::string &_args);
 
       /// \brief Get all the message types
       /// \param[out] _types Vector of strings of the message types.
@@ -120,9 +95,6 @@ namespace gz
       /// \param[in] _paths A set of directories containing .desc decriptor
       /// files. Each directory should be separated by ":".
       public: static void LoadDescriptors(const std::string &_paths);
-
-      /// \brief A list of registered message types
-      private: static std::map<std::string, FactoryFn> *msgMap;
     };
 
     /// \brief Static message registration macro
@@ -132,7 +104,7 @@ namespace gz
     /// \param[in] _classname Class name for message.
     #define GZ_REGISTER_STATIC_MSG(_msgtype, _classname) \
     GZ_MSGS_VISIBLE \
-    std::unique_ptr<google::protobuf::Message> New##_classname() \
+    gz::msgs::Factory::MessagePtr New##_classname() \
     { \
       return std::unique_ptr<gz::msgs::_classname>(\
           new gz::msgs::_classname); \

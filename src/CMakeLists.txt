@@ -214,8 +214,9 @@ gz_install_includes(
 # Build the main library
 gz_create_core_library(SOURCES
   ${gen_sources}
+  ${PROJECT_SOURCE_DIR}/src/DynamicFactory.cc
   ${PROJECT_SOURCE_DIR}/src/Factory.cc
-  ${PROJECT_SOURCE_DIR}/src/Filesystem.cc
+  ${PROJECT_SOURCE_DIR}/src/MessageFactory.cc
   ${PROJECT_SOURCE_DIR}/src/gz.cc
   ${PROJECT_SOURCE_DIR}/src/Utility.cc
 )
