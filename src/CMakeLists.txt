@@ -4,7 +4,7 @@ gz_add_executable(gz_msgs_gen Generator.cc generator_main.cc)
 target_link_libraries(gz_msgs_gen
   protobuf::libprotoc
   protobuf::libprotobuf)
-target_include_directories(gz_msgs_gen PRIVATE ${PROTOBUF_INCLUDE_DIR})
+target_include_directories(gz_msgs_gen PRIVATE ${PROTOBUF_INCLUDE_DIRS})
 target_compile_features(gz_msgs_gen PRIVATE ${GZ_CXX_11_FEATURES})
 
 if (UNIX)
