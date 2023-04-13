@@ -108,19 +108,31 @@ function(gz_msgs_protoc)
     set(${gz_msgs_protoc_OUTPUT_RUBY_VAR} ${${gz_msgs_protoc_OUTPUT_RUBY_VAR}} PARENT_SCOPE)
   endif()
 
+
+  set(GENERATE_ARGS
+      --protoc-exec "$<TARGET_FILE:${gz_msgs_protoc_PROTOC_EXEC}>"
+      --gz-generator-bin "${GZ_MSGS_GEN_EXECUTABLE}"
+      --proto-path "${gz_msgs_protoc_PROTO_PATH}"
+      --input-path "${ABS_FIL}"
+      --generate-ignition
+  )
+
+  if(${gz_msgs_protoc_GENERATE_CPP})
+    list(APPEND GENERATE_ARGS
+      --generate-cpp
+      --output-cpp-path "${gz_msgs_protoc_OUTPUT_CPP_DIR}")
+  endif()
+
+  if(${gz_msgs_protoc_GENERATE_RUBY})
+    list(APPEND GENERATE_ARGS
+      --generate-ruby
+      --output-ruby-path "${gz_msgs_protoc_OUTPUT_RUBY_DIR}")
+  endif()
+
   add_custom_command(
     OUTPUT ${output_files}
     COMMAND Python3::Interpreter
-    ARGS tools/gz_msgs_generate.py
-      --protoc-exec "$<TARGET_FILE:${gz_msgs_protoc_PROTOC_EXEC}>"
-      --gz-generator-bin "${GZ_MSGS_GEN_EXECUTABLE}"
-      --generate-cpp "${gz_msgs_protoc_GENERATE_CPP}"
-      --generate-ruby "${gz_msgs_protoc_GENERATE_RUBY}"
-      --generate-ignition "TRUE"
-      --output-cpp-path "${gz_msgs_protoc_OUTPUT_CPP_DIR}"
-      --output-ruby-path "${gz_msgs_protoc_OUTPUT_RUBY_DIR}"
-      --proto-path "${gz_msgs_protoc_PROTO_PATH}"
-      --input-path "${ABS_FIL}"
+    ARGS tools/gz_msgs_generate.py ${GENERATE_ARGS}
     DEPENDS
       ${ABS_FIL}
       gz_msgs_gen
@@ -269,6 +281,11 @@ gz_build_tests(TYPE UNIT
   LIB_DEPS
       TINYXML2::TINYXML2
 )
+
+if (TARGET UNIT_Factory_TEST)
+  target_compile_definitions(UNIT_Factory_TEST
+    PRIVATE GZ_MSGS_TEST_PATH="${PROJECT_SOURCE_DIR}/test")
+endif()
 
 ##################################################
 # gz msgs command

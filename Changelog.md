@@ -1,5 +1,13 @@
 ## Gazebo Msgs 9.x
 
+### Gazebo Msgs 9.4.0 (2023-03-10)
+
+1. Support for bazel in garden
+    * [Pull request #325](https://github.com/gazebosim/ign-msgs/pull/325)
+
+1. Add entity wrench map
+    * [Pull request #328](https://github.com/gazebosim/ign-msgs/pull/328)
+
 ### Gazebo Msgs 9.3.0 (2023-02-08)
 
 1. Added airspeed sensor
@@ -422,7 +430,7 @@
 
 ## Gazebo Msgs 5.x
 
-### Gazebo Msgs 5.10.0 (2022-10-10)
+### Gazebo Msgs 5.11.0 (2022-10-10)
 
 1. Ignition to Gazebo renaming.
     * [Pull request #282](https://github.com/gazebosim/gz-msgs/pull/282)
