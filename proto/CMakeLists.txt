@@ -1,5 +1,5 @@
 install(
   DIRECTORY gz
-  DESTINATION "${GZ_INCLUDE_INSTALL_DIR_FULL}"
+  DESTINATION share/protos
   COMPONENT proto
   FILES_MATCHING PATTERN "*.proto")

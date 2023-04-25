@@ -136,15 +136,7 @@ bool Generator::Generate(const FileDescriptor *_file,
 
 #include <memory>
 
-#include <gz/msgs/Export.hh>
-
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4100 4512 4127 4068 4244 4267 4251 4146)
-#endif
-
 #include <$detail_header$>
-
 )");
 
     auto ns = getNamespaces(_file->package());
@@ -185,33 +177,11 @@ bool Generator::Generate(const FileDescriptor *_file,
       printer.PrintRaw("}  // namespace " + *name + "\n");
     }
 
-    printer.PrintRaw("#ifdef _MSC_VER\n");
-    printer.PrintRaw("#pragma warning(pop)\n");
-    printer.PrintRaw("#endif\n");
     printer.PrintRaw("\n");
 
     printer.Print(variables, "#endif  // $define_guard$\n");
   }
 
-  // Inject code in the auto-generated source files immediately following
-  // the #include <google/protobuf*.h> calls.
-  {
-    std::unique_ptr<io::ZeroCopyOutputStream> output(
-        _generatorContext->OpenForInsert(sourceFilename, "includes"));
-    io::Printer printer(output.get(), '$');
-
-    // Add the gz-msgs Factory header
-    printer.Print("#include \"gz/msgs/Factory.hh\"\n", "name",
-                  "includes");
-
-    for (auto i = 0; i < _file->message_type_count(); ++i)
-    {
-      std::string factory = "GZ_REGISTER_STATIC_MSG(\"gz_msgs.";
-      factory += _file->message_type(i)->name() + "\", " +
-        _file->message_type(i)->name() +")\n";
-      printer.Print(factory.c_str(), "name", "includes");
-    }
-  }
   return true;
 }
 }

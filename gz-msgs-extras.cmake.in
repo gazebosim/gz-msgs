@@ -1,0 +1,100 @@
+# Copyright 2023 Open Source Robotics Foundation, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# copied from gz-msgs/gz-msgs-extras.cmake
+
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
+
+
+include(${@PROJECT_NAME@_DIR}/gz_msgs_protoc.cmake)
+
+set(@PROJECT_NAME@_INSTALL_PATH "${@PROJECT_NAME@_DIR}/../../..")
+cmake_path(NORMAL_PATH @PROJECT_NAME@_INSTALL_PATH OUTPUT_VARIABLE @PROJECT_NAME@_INSTALL_PATH)
+set(PROTOC_NAME "@PROJECT_NAME@_protoc_plugin")
+set(PROTO_SCRIPT_NAME "@PROJECT_NAME@_generate.py")
+set(FACTORY_SCRIPT_NAME "@PROJECT_NAME@_factory.py")
+
+set(@PROJECT_NAME@_PROTO_PATH ${@PROJECT_NAME@_INSTALL_PATH}/share/protos)
+set(@PROJECT_NAME@_PROTO_GENERATOR_PLUGIN ${@PROJECT_NAME@_INSTALL_PATH}/bin/${PROTOC_NAME})
+set(@PROJECT_NAME@_PROTO_GENERATOR_SCRIPT ${@PROJECT_NAME@_INSTALL_PATH}/bin/${PROTO_SCRIPT_NAME})
+set(@PROJECT_NAME@_FACTORY_GENERATOR_SCRIPT ${@PROJECT_NAME@_INSTALL_PATH}/bin/${FACTORY_SCRIPT_NAME})
+
+function(get_installed_messages)
+  set(options "")
+  set(oneValueArgs MESSAGES_PATH_VARIABLE MESSAGES_PROTOS_VARIABLE)
+  set(multiValueArgs "")
+
+  cmake_parse_arguments(get_installed_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+  set(@PROJECT_NAME@_INSTALL_PATH "${@PROJECT_NAME@_DIR}/../../..")
+  cmake_path(NORMAL_PATH @PROJECT_NAME@_INSTALL_PATH OUTPUT_VARIABLE @PROJECT_NAME@_INSTALL_PATH)
+
+  set(@PROJECT_NAME@_PROTO_PATH ${@PROJECT_NAME@_INSTALL_PATH}/share/protos)
+  file (GLOB protos ${@PROJECT_NAME@_PROTO_PATH}/gz/msgs/*.proto)
+  set(${get_installed_messages_MESSAGES_PROTOS_VARIABLE} ${protos} PARENT_SCOPE)
+  set(${get_installed_messages_MESSAGES_PATH_VARIABLE} ${@PROJECT_NAME@_PROTO_PATH} PARENT_SCOPE)
+endfunction()
+
+function(generate_messages)
+  set(options "")
+  set(oneValueArgs MSGS_PATH TARGET)
+  set(multiValueArgs MSGS_PROTOS)
+
+  cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+  foreach(proto_file ${generate_messages_MSGS_PROTOS})
+    gz_msgs_protoc(
+        MSGS_GEN_SCRIPT
+          ${@PROJECT_NAME@_PROTO_GENERATOR_SCRIPT}
+        PROTO_PACKAGE
+          .gz.msgs
+        GENERATE_CPP
+        INPUT_PROTO
+          ${proto_file}
+        PROTOC_EXEC
+          protobuf::protoc
+        GZ_PROTOC_PLUGIN
+          ${@PROJECT_NAME@_PROTO_GENERATOR_PLUGIN}
+        OUTPUT_CPP_DIR
+          "${PROJECT_BINARY_DIR}/include"
+        OUTPUT_INCLUDES
+          gen_includes
+        OUTPUT_CPP_HH_VAR
+          gen_headers
+        OUTPUT_DETAIL_CPP_HH_VAR
+          gen_detail_headers
+        OUTPUT_CPP_CC_VAR
+          gen_sources
+        PROTO_PATH
+          ${generate_messages_MSGS_PATH})
+  endforeach()
+
+  set_source_files_properties(
+    ${gen_headers}
+    ${gen_detail_headers}
+    ${gen_sources}
+    PROPERTIES GENERATED TRUE)
+
+  if(WIN32)
+    set_source_files_properties(${gen_sources}
+      COMPILE_FLAGS "/wd4100 /wd4512 /wd4127 /wd4068 /wd4244 /wd4267 /wd4251 /wd4146")
+  endif()
+
+
+  add_library(${generate_messages_TARGET} ${gen_sources})
+  target_link_libraries(${generate_messages_TARGET} PUBLIC protobuf::libprotobuf gz-msgs10::gz-msgs10)
+  target_include_directories(${generate_messages_TARGET} PUBLIC ${PROJECT_BINARY_DIR}/include)
+
+
+endfunction()

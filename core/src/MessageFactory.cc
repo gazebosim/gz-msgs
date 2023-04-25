@@ -36,6 +36,8 @@ MessageFactory::MessageFactory():
 {
 }
 
+MessageFactory::~MessageFactory() = default;
+
 /////////////////////////////////////////////////
 void MessageFactory::Register(const std::string &_msgType,
                               FactoryFn _factoryfn)

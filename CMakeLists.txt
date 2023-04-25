@@ -17,7 +17,14 @@ find_package(gz-cmake3 REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-gz_configure_project(VERSION_SUFFIX)
+gz_configure_project(VERSION_SUFFIX
+  CONFIG_EXTRAS "gz-msgs-extras.cmake.in")
+
+# Install cmake support files
+install(
+  DIRECTORY cmake/
+  DESTINATION "lib/cmake/${PROJECT_NAME}"
+)
 
 if (UNIX AND NOT APPLE)
   set (EXTRA_TEST_LIB_DEPS stdc++fs)
@@ -74,6 +81,11 @@ gz_find_package(GzProtobuf
                  PRETTY Protobuf)
 
 #--------------------------------------
+# Find gz-utils
+gz_find_package(gz-utils2 REQUIRED)
+set(GZ_UTILS_VER ${gz-utils2_VERSION_MAJOR})
+
+#--------------------------------------
 # Find gz-math
 gz_find_package(gz-math7 REQUIRED)
 set(GZ_MATH_VER ${gz-math7_VERSION_MAJOR})
@@ -92,7 +104,7 @@ gz_find_package(TINYXML2 REQUIRED PRIVATE PRETTY tinyxml2)
 #============================================================================
 # Configure the build
 #============================================================================
-gz_configure_build(QUIT_IF_BUILD_ERRORS)
+gz_configure_build(QUIT_IF_BUILD_ERRORS COMPONENTS compiled)
 
 #============================================================================
 # gz command line support

@@ -32,15 +32,10 @@ def main(argv=sys.argv[1:]):
         help='The path to the gz specific protobuf generator')
     parser.add_argument(
         '--generate-cpp',
-        help='Flag to indicate if C++ bindings should be generated')
-    parser.add_argument(
-        '--generate-ruby',
-        help='Flag to indicate if Ruby bindings should be generated')
+        help='Flag to indicate if C++ bindings should be generated',
+        action='store_true')
     parser.add_argument(
         '--output-cpp-path',
-        help='The basepath of the generated C++ files')
-    parser.add_argument(
-        '--output-ruby-path',
         help='The basepath of the generated C++ files')
     parser.add_argument(
         '--proto-path',
@@ -52,16 +47,14 @@ def main(argv=sys.argv[1:]):
         help='The location of the template files')
     args = parser.parse_args(argv)
 
-    # First generate the base cpp and ruby files
+    # First generate the base cpp files
     cmd = [args.protoc_exec]
     cmd += [f'--proto_path={args.proto_path}']
 
     if args.generate_cpp:
         cmd += [f'--plugin=protoc-gen-ignmsgs={args.gz_generator_bin}']
-        cmd += [f'--cpp_out=dllexport_decl=GZ_MSGS_VISIBLE:{args.output_cpp_path}']
+        cmd += [f'--cpp_out={args.output_cpp_path}']
         cmd += [f'--ignmsgs_out={args.output_cpp_path}']
-    if args.generate_ruby:
-        cmd += [f'--ruby_out=dllexport_decl=GZ_MSGS_VISIBLE:{args.output_ruby_path}']
     cmd += [args.input_path]
 
     try:

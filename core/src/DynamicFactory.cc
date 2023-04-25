@@ -22,11 +22,9 @@
 #include "DynamicFactory.hh"
 #include "gz/utils/Environment.hh"
 
-using namespace gz;
-using namespace msgs;
-
 static constexpr const char * kDescriptorEnv = "GZ_DESCRIPTOR_PATH";
 
+namespace {
 //////////////////////////////////////////////////
 /// \brief split at a one character delimiter to get a vector of something
 /// \param[in] _orig The string to split
@@ -46,6 +44,9 @@ std::vector<std::string> split(const std::string &_orig, char _delim)
   pieces.push_back(_orig.substr(pos1, _orig.size()-pos1));
   return pieces;
 }
+}  // namespace
+
+namespace gz::msgs {
 
 //////////////////////////////////////////////////
 DynamicFactory::DynamicFactory()
@@ -136,3 +137,4 @@ DynamicFactory::MessagePtr DynamicFactory::New(const std::string &_msgType)
 
   return f();
 }
+}  // namespace gz::msgs

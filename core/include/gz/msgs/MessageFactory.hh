@@ -39,7 +39,11 @@ namespace gz::msgs {
     public: using MessagePtr = std::unique_ptr<Message>;
     public: using FactoryFn = std::function<MessagePtr(void)>;
 
+    /// \brief Constructor
     public: MessageFactory();
+
+    /// \brief Destructor
+    public: ~MessageFactory();
 
     /// \brief Register a message.
     /// \param[in] _msgType Type of message to register.
@@ -94,7 +98,8 @@ namespace gz::msgs {
     /// \brief A list of registered message types
     private: std::map<std::string, FactoryFn> msgMap;
 
-    private: std::unique_ptr<DynamicFactory> dynamicFactory;
+    /// \brief Pointer to dynamic factory implementation
+    private: std::unique_ptr<gz::msgs::DynamicFactory> dynamicFactory;
   };
 }
 }  // namespace gz::msgs

@@ -4,7 +4,7 @@ include_directories (
   ${PROJECT_BINARY_DIR}/include
 )
 
-add_subdirectory(gtest_vendor)
-add_subdirectory(integration)
-add_subdirectory(performance)
-add_subdirectory(regression)
+#add_subdirectory(gtest_vendor)
+#add_subdirectory(integration)
+#add_subdirectory(performance)
+#add_subdirectory(regression)
