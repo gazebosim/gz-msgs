@@ -222,7 +222,7 @@ namespace gz
 
     /// \brief Convert a gz::math::SphericalCoordinates::CoordinateType
     /// to a msgs::SphericalCoordinatesType
-    /// \param[in] _coord The spherical coordinates to convert
+    /// \param[in] _coord The spherical coordinates type to convert
     /// \return A gz::msgs::SphericalCoordinatesType object
     GZ_MSGS_VISIBLE
     msgs::SphericalCoordinatesType ConvertCoord(
