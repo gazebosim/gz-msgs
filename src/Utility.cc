@@ -201,7 +201,7 @@ namespace gz
           return math::SphericalCoordinates::CoordinateType::LOCAL2;
         default:
           std::cerr << "Invalid coordinate type passed" << std::endl;
-      }      
+      }
       return math::SphericalCoordinates::CoordinateType::LOCAL2;
     }
 
