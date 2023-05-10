@@ -199,8 +199,9 @@ namespace gz
           return math::SphericalCoordinates::CoordinateType::LOCAL;
         case msgs::SphericalCoordinatesType::LOCAL2:
           return math::SphericalCoordinates::CoordinateType::LOCAL2;
-      }
-      std::cerr << "Invalid coordinate type passed" << std::endl;
+        default:
+          std::cerr << "Invalid coordinate type passed" << std::endl;
+      }      
       return math::SphericalCoordinates::CoordinateType::LOCAL2;
     }
 
@@ -374,20 +375,28 @@ namespace gz
     msgs::SphericalCoordinatesType ConvertCoord(
       const math::SphericalCoordinates::CoordinateType &_sc)
     {
+      auto result = msgs::SphericalCoordinatesType::LOCAL2;
       switch (_sc)
       {
         case math::SphericalCoordinates::CoordinateType::ECEF:
-          return msgs::SphericalCoordinatesType::ECEF;
+          result = msgs::SphericalCoordinatesType::ECEF;
+          break;
         case math::SphericalCoordinates::CoordinateType::GLOBAL:
-          return msgs::SphericalCoordinatesType::GLOBAL;
+          result = msgs::SphericalCoordinatesType::GLOBAL;
+          break;
         case math::SphericalCoordinates::CoordinateType::SPHERICAL:
-          return msgs::SphericalCoordinatesType::SPHERICAL;
+          result = msgs::SphericalCoordinatesType::SPHERICAL;
+          break;
         case math::SphericalCoordinates::CoordinateType::LOCAL:
-          return  msgs::SphericalCoordinatesType::LOCAL;
+          result = msgs::SphericalCoordinatesType::LOCAL;
+          break;
+        case math::SphericalCoordinates::CoordinateType::LOCAL2:
+          result = msgs::SphericalCoordinatesType::LOCAL2;
+          break;
         default:
-          return msgs::SphericalCoordinatesType::LOCAL2;
+          std::cerr << "Invalid coordinate type passed" << std::endl;
       }
-      std::cerr << "Invalid coordinate type passed" << std::endl;
+      return result;
     }
 
     /////////////////////////////////////////////
