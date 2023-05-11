@@ -45,11 +45,19 @@ def main(argv=sys.argv[1:]):
         '--input-path',
         required=True,
         help='The location of the template files')
+    parser.add_argument(
+        '--dependency-proto-paths',
+        nargs='*',
+        help='The location of the protos')
     args = parser.parse_args(argv)
 
     # First generate the base cpp files
     cmd = [args.protoc_exec]
     cmd += [f'--proto_path={args.proto_path}']
+
+    if args.dependency_proto_paths:
+        for path in args.dependency_proto_paths:
+            cmd += [f'--proto_path={path}']
 
     if args.generate_cpp:
         cmd += [f'--plugin=protoc-gen-ignmsgs={args.gz_generator_bin}']

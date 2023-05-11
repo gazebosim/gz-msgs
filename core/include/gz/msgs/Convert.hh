@@ -24,6 +24,10 @@
 #include "gz/msgs/config.hh"
 #include "gz/msgs/Export.hh"
 
+#if not __has_include(<gz/msgs/MessageTypes.hh>)
+ static_assert(false, "something is wrong")
+#endif
+
 /// \file Utility.hh
 /// \brief Utility functions that support conversion between message type
 /// and Gazebo Math types.

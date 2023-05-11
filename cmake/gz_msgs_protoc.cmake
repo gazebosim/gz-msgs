@@ -25,7 +25,7 @@ function(gz_msgs_protoc)
     OUTPUT_CPP_HH_VAR
     OUTPUT_DETAIL_CPP_HH_VAR
     OUTPUT_CPP_CC_VAR)
-  set(multiValueArgs PROTO_PATH)
+  set(multiValueArgs PROTO_PATH DEPENDENCY_PROTO_PATHS)
 
   cmake_parse_arguments(gz_msgs_protoc "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -42,11 +42,16 @@ function(gz_msgs_protoc)
 
   if(gz_msgs_protoc_GENERATE_CPP)
     # Full path to generated header (${PROJECT_BINARY_DIR}/include/gz/msgs/foo.pb.h)
-    set(output_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.h")
+    set(output_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}/${proto_package_dir}/${FIL_WE}.pb.h")
     # Full path to generated detail header (${PROJECT_BINARY_DIR}/include/gz/msgs/details/foo.pb.h)
-    set(output_detail_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/details/${FIL_WE}.pb.h")
+    set(output_detail_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}/${proto_package_dir}/details/${FIL_WE}.pb.h")
     # Full path to generated ignition header (${PROJECT_BINARY_DIR}/include/foo.pb.cc)
-    set(output_source "${gz_msgs_protoc_OUTPUT_CPP_DIR}${proto_package_dir}/${FIL_WE}.pb.cc")
+    set(output_source "${gz_msgs_protoc_OUTPUT_CPP_DIR}/${proto_package_dir}/${FIL_WE}.pb.cc")
+
+    # Full path to an index file, which contains all defined message types for that proto file
+    string(REPLACE "." "_" PACKAGE_UNDER ${gz_msgs_protoc_PROTO_PACKAGE})
+    string(REPLACE "." "_" MESSAGE_UNDER ${FIL_WE})
+    set(output_index "${gz_msgs_protoc_OUTPUT_CPP_DIR}/${PACKAGE_UNDER}_${MESSAGE_UNDER}.pb_index")
 
     # Generate a clean relative path (gz/msgs/foo.pb.h)
     string(REPLACE "${PROJECT_BINARY_DIR}/include/" "" output_include ${output_header})
@@ -59,6 +64,7 @@ function(gz_msgs_protoc)
     list(APPEND output_files ${output_header})
     list(APPEND output_files ${output_detail_header})
     list(APPEND output_files ${output_source})
+    list(APPEND output_files ${output_index})
 
     set(${gz_msgs_protoc_OUTPUT_INCLUDES} ${${gz_msgs_protoc_OUTPUT_INCLUDES}} PARENT_SCOPE)
     set(${gz_msgs_protoc_OUTPUT_DETAIL_CPP_HH_VAR} ${${gz_msgs_protoc_OUTPUT_DETAIL_CPP_HH_VAR}} PARENT_SCOPE)
@@ -72,6 +78,12 @@ function(gz_msgs_protoc)
       --proto-path "${gz_msgs_protoc_PROTO_PATH}"
       --input-path "${ABS_FIL}"
   )
+
+  if(gz_msgs_protoc_DEPENDENCY_PROTO_PATHS)
+    list(APPEND GENERATE_ARGS
+      --dependency-proto-paths "${gz_msgs_protoc_DEPENDENCY_PROTO_PATHS}"
+    )
+  endif()
 
   if(${gz_msgs_protoc_GENERATE_CPP})
     list(APPEND GENERATE_ARGS

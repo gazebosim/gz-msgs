@@ -18,6 +18,7 @@
 #include <algorithm>
 #include <filesystem>
 #include <iostream>
+#include <fstream>
 #include <map>
 #include <memory>
 #include <sstream>
@@ -89,6 +90,7 @@ bool Generator::Generate(const FileDescriptor *_file,
   auto parent_path = filePath.parent_path();
   auto fileStem = filePath.stem().string();
 
+
   // protoc generates ignition/msgs/msg.pb.cc and ignition/msgs/msg.pb.hh
   // This generator injects code into the msg.pb.cc file, but generates
   // a completely new header that wraps the original protobuf header
@@ -112,6 +114,10 @@ bool Generator::Generate(const FileDescriptor *_file,
     newHeaderFilename += part.string() + "/";
     sourceFilename += part.string() + "/";
   }
+
+  auto message_type_index = _generatorContext->Open(identifier + fileStem + ".pb_index");
+  io::Printer index_printer(message_type_index, '$');
+
   identifier += fileStem;
   headerFilename += fileStem + ".gz.h";
   newHeaderFilename += "details/" + fileStem + ".pb.h";
@@ -148,6 +154,9 @@ bool Generator::Generate(const FileDescriptor *_file,
     {
       auto desc = _file->message_type(i);
       std::string ptrTypes;
+
+      index_printer.PrintRaw(desc->name());
+      index_printer.PrintRaw("\n");
 
       // Define std::unique_ptr types for our messages
       ptrTypes += "typedef std::unique_ptr<"

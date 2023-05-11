@@ -16,14 +16,14 @@
 
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
-
 include(${@PROJECT_NAME@_DIR}/gz_msgs_protoc.cmake)
+include(${@PROJECT_NAME@_DIR}/gz_msgs_factory.cmake)
 
 set(@PROJECT_NAME@_INSTALL_PATH "${@PROJECT_NAME@_DIR}/../../..")
 cmake_path(NORMAL_PATH @PROJECT_NAME@_INSTALL_PATH OUTPUT_VARIABLE @PROJECT_NAME@_INSTALL_PATH)
 set(PROTOC_NAME "@PROJECT_NAME@_protoc_plugin")
 set(PROTO_SCRIPT_NAME "@PROJECT_NAME@_generate.py")
-set(FACTORY_SCRIPT_NAME "@PROJECT_NAME@_factory.py")
+set(FACTORY_SCRIPT_NAME "@PROJECT_NAME@_generate_factory.py")
 
 set(@PROJECT_NAME@_PROTO_PATH ${@PROJECT_NAME@_INSTALL_PATH}/share/protos)
 set(@PROJECT_NAME@_PROTO_GENERATOR_PLUGIN ${@PROJECT_NAME@_INSTALL_PATH}/bin/${PROTOC_NAME})
@@ -33,7 +33,7 @@ set(@PROJECT_NAME@_FACTORY_GENERATOR_SCRIPT ${@PROJECT_NAME@_INSTALL_PATH}/bin/$
 function(get_installed_messages)
   set(options "")
   set(oneValueArgs MESSAGES_PATH_VARIABLE MESSAGES_PROTOS_VARIABLE)
-  set(multiValueArgs "")
+  set(multiValueArgs DEPENDS)
 
   cmake_parse_arguments(get_installed_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -48,42 +48,74 @@ endfunction()
 
 function(generate_messages)
   set(options "")
-  set(oneValueArgs MSGS_PATH TARGET)
-  set(multiValueArgs MSGS_PROTOS)
+  set(oneValueArgs MSGS_PATH TARGET PROTO_PACKAGE)
+  set(multiValueArgs MSGS_PROTOS DEPENDENCIES)
 
   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+  string(REPLACE "." "_" gen_dir ${generate_messages_PROTO_PACKAGE})
+
+  set(depends_proto_paths)
+  set(depends_includes)
+  foreach(dep ${generate_messages_DEPENDENCIES})
+    get_target_property(dep_proto_path ${dep} PROTO_DIR)
+    get_target_property(dep_proto_include_path ${dep} PROTO_INCLUDE_DIR)
+    list(APPEND depends_proto_paths ${dep_proto_path})
+    list(APPEND depends_includes ${dep_proto_include_path})
+  endforeach()
 
   foreach(proto_file ${generate_messages_MSGS_PROTOS})
     gz_msgs_protoc(
-        MSGS_GEN_SCRIPT
-          ${@PROJECT_NAME@_PROTO_GENERATOR_SCRIPT}
-        PROTO_PACKAGE
-          .gz.msgs
-        GENERATE_CPP
-        INPUT_PROTO
-          ${proto_file}
-        PROTOC_EXEC
-          protobuf::protoc
-        GZ_PROTOC_PLUGIN
-          ${@PROJECT_NAME@_PROTO_GENERATOR_PLUGIN}
-        OUTPUT_CPP_DIR
-          "${PROJECT_BINARY_DIR}/include"
-        OUTPUT_INCLUDES
-          gen_includes
-        OUTPUT_CPP_HH_VAR
-          gen_headers
-        OUTPUT_DETAIL_CPP_HH_VAR
-          gen_detail_headers
-        OUTPUT_CPP_CC_VAR
-          gen_sources
-        PROTO_PATH
-          ${generate_messages_MSGS_PATH})
+      MSGS_GEN_SCRIPT
+        ${@PROJECT_NAME@_PROTO_GENERATOR_SCRIPT}
+      PROTO_PACKAGE
+        ${generate_messages_PROTO_PACKAGE}
+      GENERATE_CPP
+      INPUT_PROTO
+        ${proto_file}
+      PROTOC_EXEC
+        protobuf::protoc
+      GZ_PROTOC_PLUGIN
+        ${@PROJECT_NAME@_PROTO_GENERATOR_PLUGIN}
+      OUTPUT_CPP_DIR
+        "${PROJECT_BINARY_DIR}/${gen_dir}_gen"
+      OUTPUT_INCLUDES
+        gen_includes
+      OUTPUT_CPP_HH_VAR
+        gen_headers
+      OUTPUT_DETAIL_CPP_HH_VAR
+        gen_detail_headers
+      OUTPUT_CPP_CC_VAR
+        gen_sources
+      PROTO_PATH
+        ${generate_messages_MSGS_PATH}
+      DEPENDENCY_PROTO_PATHS
+        ${depends_proto_paths}
+    )
   endforeach()
+
+  gz_msgs_factory(
+    FACTORY_GEN_SCRIPT
+      ${@PROJECT_NAME@_FACTORY_GENERATOR_SCRIPT}
+    PROTO_PACKAGE
+      ${generate_messages_PROTO_PACKAGE}
+    INPUT_PROTOS
+      ${generate_messages_MSGS_PROTOS}
+    OUTPUT_CPP_DIR
+      "${PROJECT_BINARY_DIR}/${gen_dir}_gen"
+    OUTPUT_CPP_HH_VAR
+      gen_factory_headers
+    OUTPUT_CPP_CC_VAR
+      gen_factory_sources
+    PROTO_PATH
+      ${generate_messages_MSGS_PATH}
+  )
 
   set_source_files_properties(
     ${gen_headers}
     ${gen_detail_headers}
     ${gen_sources}
+    ${gen_factory_headers}
+    ${gen_factory_sources}
     PROPERTIES GENERATED TRUE)
 
   if(WIN32)
@@ -91,10 +123,53 @@ function(generate_messages)
       COMPILE_FLAGS "/wd4100 /wd4512 /wd4127 /wd4068 /wd4244 /wd4267 /wd4251 /wd4146")
   endif()
 
+  add_library(${generate_messages_TARGET} ${gen_sources} ${gen_factory_sources})
 
-  add_library(${generate_messages_TARGET} ${gen_sources})
+  # Export the messages path and dependency messages paths for potential dependent message libs
+  set(PROTO_DIR)
+  list(APPEND PROTO_DIR ${generate_messages_MSGS_PATH})
+  list(APPEND PROTO_DIR ${depends_proto_paths})
+
+  set(PROTO_INCLUDE_DIR)
+  list(APPEND PROTO_INCLUDE_DIR ${PROJECT_BINARY_DIR}/${gen_dir}_gen)
+  list(APPEND PROTO_INCLUDE_DIR ${depends_includes})
+
+  set_target_properties(${generate_messages_TARGET} PROPERTIES PROTO_DIR "${PROTO_DIR}")
+  set_target_properties(${generate_messages_TARGET} PROPERTIES PROTO_INCLUDE_DIR "${PROTO_INCLUDE_DIR}")
+
   target_link_libraries(${generate_messages_TARGET} PUBLIC protobuf::libprotobuf gz-msgs10::gz-msgs10)
-  target_include_directories(${generate_messages_TARGET} PUBLIC ${PROJECT_BINARY_DIR}/include)
+  target_include_directories(${generate_messages_TARGET} PUBLIC ${PROJECT_BINARY_DIR}/${gen_dir}_gen ${depends_includes})
+endfunction()
+
+function(target_link_messages)
+  set(options PUBLIC PRIVATE)
+  set(oneValueArgs TARGET)
+  set(multiValueArgs MSG_TARGETS)
+
+  cmake_parse_arguments(target_link_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+  if (target_link_messages_PUBLIC)
+    set(VISIBILITY PUBLIC)
+  elseif (target_link_messages_PRIVATE)
+    set(VISIBILITY PRIVATE)
+  endif()
+
+
+  foreach(message_lib ${target_link_messages_MSG_TARGETS})
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+      # MSVC link flag doesn't work with generator expressions
+      # TODO(mjcarroll) When CMake 3.24 is genrally available, use
+      # linking generator expressions as described here:
+      # https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html#genex:LINK_LIBRARY
+      target_link_libraries(${target_link_messages_TARGET} ${VISIBILITY} -WHOLEARCHIVE:$<TARGET_FILE:${message_lib}>)
+    else()
+      target_link_libraries(${target_link_messages_TARGET} PRIVATE
+          $<$<CXX_COMPILER_ID:GNU>:-Wl,--whole-archive>
+          $<$<CXX_COMPILER_ID:Clang>:-force_load>
+          $<$<CXX_COMPILER_ID:AppleClang>:-force_load> ${message_lib}
+          $<$<CXX_COMPILER_ID:GNU>:-Wl,--no-whole-archive>)
+    endif()
+  endforeach()
 
 
 endfunction()

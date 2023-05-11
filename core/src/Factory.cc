@@ -16,47 +16,46 @@
 */
 
 #include "gz/msgs/Factory.hh"
-#include "gz/msgs/MessageFactory.hh"
 #include <gz/utils/NeverDestroyed.hh>
 
-using namespace gz;
-using namespace msgs;
-
-
-gz::msgs::MessageFactory& GetFactoryInstance() {
+namespace gz::msgs
+{
+/////////////////////////////////////////////////
+MessageFactory& Factory::Instance()
+{
   static gz::utils::NeverDestroyed<MessageFactory> instance;
   return instance.Access();
 }
 
 /////////////////////////////////////////////////
 void Factory::Register(const std::string &_msgType,
-                       Factory::FactoryFn _factoryfn)
+                       FactoryFn _factoryfn)
 {
-  GetFactoryInstance().Register(_msgType, _factoryfn);
+  Factory::Instance().Register(_msgType, _factoryfn);
 }
 
 /////////////////////////////////////////////////
-std::unique_ptr<google::protobuf::Message> Factory::New(
-    const std::string &_msgType)
+int Factory::RegisterCollection(FactoryFnCollection &_functions)
 {
-  return GetFactoryInstance().New(_msgType);
-}
-
-/////////////////////////////////////////////////
-std::unique_ptr<google::protobuf::Message> Factory::New(
-    const std::string &_msgType, const std::string &_args)
-{
-  return GetFactoryInstance().New(_msgType, _args);
+  return Factory::Instance().RegisterCollection(_functions);
 }
 
 /////////////////////////////////////////////////
 void Factory::Types(std::vector<std::string> &_types)
 {
-  GetFactoryInstance().Types(_types);
+  Factory::Instance().Types(_types);
 }
 
 /////////////////////////////////////////////////
-void Factory::LoadDescriptors(const std::string &_paths)
+Factory::MessagePtr Factory::New(const std::string &_msgType)
 {
-  GetFactoryInstance().LoadDescriptors(_paths);
+  return Factory::Instance().New(_msgType);
 }
+
+/////////////////////////////////////////////////
+Factory::MessagePtr Factory::New(const std::string &_msgType, const std::string &_args)
+{
+  return Factory::Instance().New(_msgType, _args);
+}
+
+}  // namespace gz::msgs

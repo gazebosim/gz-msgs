@@ -36,6 +36,7 @@ MessageFactory::MessageFactory():
 {
 }
 
+/////////////////////////////////////////////////
 MessageFactory::~MessageFactory() = default;
 
 /////////////////////////////////////////////////
@@ -46,37 +47,30 @@ void MessageFactory::Register(const std::string &_msgType,
 }
 
 /////////////////////////////////////////////////
+int MessageFactory::RegisterCollection(FactoryFnCollection &_functions)
+{
+  int registered = 0;
+  for (auto it: _functions) {
+    this->Register(it.first, it.second);
+    registered++;
+  }
+  return registered;
+}
+
+/////////////////////////////////////////////////
 MessageFactory::MessagePtr MessageFactory::New(
     const std::string &_msgType)
 {
-  auto msgType = _msgType;
-  MessagePtr msg;
-
-  std::string type;
-  // Convert "gz.msgs." to "gz_msgs.".
-  if (msgType.find("gz.msgs.") == 0)
+  if (msgMap.find(_msgType) != msgMap.end())
   {
-    type = "gz_msgs." + msgType.substr(8);
-  }
-  // Convert ".gz.msgs." to "gz_msgs.".
-  else if (msgType.find(".gz.msgs.") == 0)
-  {
-    type = "gz_msgs." + msgType.substr(9);
+    // Create a new message if a FactoryFn has been assigned to the message type
+    return msgMap[_msgType]();
   }
   else
   {
-    // Fix typenames that are missing "gz_msgs." at the beginning.
-    if (msgType.find("gz_msgs.") != 0)
-      type = "gz_msgs.";
-    type += msgType;
+    // Check if we have the message descriptor.
+    return dynamicFactory->New(_msgType);
   }
-
-  // Create a new message if a FactoryFn has been assigned to the message type
-  if (msgMap.find(type) != msgMap.end())
-    return msgMap[type]();
-
-  // Check if we have the message descriptor.
-  return dynamicFactory->New(msgType);
 }
 
 /////////////////////////////////////////////////
