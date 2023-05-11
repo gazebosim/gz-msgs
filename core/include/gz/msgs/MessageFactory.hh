@@ -14,8 +14,8 @@
  * limitations under the License.
  *
 */
-#ifndef GZ_MSGS_FACTORY_HH_
-#define GZ_MSGS_FACTORY_HH_
+#ifndef GZ_MSGS_MESSAGE_FACTORY_HH_
+#define GZ_MSGS_MESSAGE_FACTORY_HH_
 
 #include <string>
 #include <map>
@@ -24,50 +24,46 @@
 
 #include "gz/msgs/config.hh"
 #include "gz/msgs/Export.hh"
+#include "gz/msgs/detail/dynamic_message_cast.hh"
 
-#include "gz/msgs/MessageFactory.hh"
+namespace gz::msgs {
+  /// Forward declarations
+  class DynamicFactory;
 
-namespace gz::msgs
-{
   // Inline bracket to help doxygen filtering.
   inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
-  /// \class Factory Factory.hh gz/msgs.hh
-  /// \brief A factory that generates protobuf message based on a string type.
-  /// This class  will also try to load all Protobuf descriptors specified
-  /// in the GZ_DESCRIPTOR_PATH environment variable on program start.
-  class GZ_MSGS_VISIBLE Factory
+  class GZ_MSGS_VISIBLE MessageFactory
   {
-    public: using FactoryFn = MessageFactory::FactoryFn;
-    public: using FactoryFnCollection = MessageFactory::FactoryFnCollection;
-    public: using MessagePtr = MessageFactory::MessagePtr;
+    public: using Message = google::protobuf::Message;
+    public: using MessagePtr = std::unique_ptr<Message>;
+    public: using FactoryFn = std::function<MessagePtr(void)>;
+    public: using FactoryFnCollection = std::map<std::string, FactoryFn>;
 
-    private: Factory() = default;
-    public: Factory(const Factory&) = delete;
-    public: void operator=(const Factory&) = delete;
-    public: Factory(Factory&&) = delete;
-    public: void operator=(Factory&&) = delete;
-    public: static MessageFactory& Instance();
+    /// \brief Constructor
+    public: MessageFactory();
+
+    /// \brief Destructor
+    public: ~MessageFactory();
 
     /// \brief Register a message.
     /// \param[in] _msgType Type of message to register.
     /// \param[in] _factoryfn Function that generates the message.
-    public: static void Register(const std::string &_msgType,
-                                 FactoryFn _factoryfn);
+    public: void Register(const std::string &_msgType, FactoryFn _factoryFn);
 
     /// \brief Register a collection of messages.
-    /// \param[in] _functions message generation functions
+    /// \param[in] _functions Collection of messages to register.
     /// \return Number of registered message types
-    public: static int RegisterCollection(FactoryFnCollection &_functions);
+    public: int RegisterCollection(FactoryFnCollection &_funtions);
 
     /// \brief Create a new instance of a message.
     /// \param[in] _msgType Type of message to create.
     /// \return Pointer to a google protobuf message. Null if the message
     /// type could not be handled.
     public: template<typename T>
-            static std::unique_ptr<T> New(const std::string &_msgType)
+            std::unique_ptr<T> New(const std::string &_msgType)
             {
-              return Factory::Instance().New<T>(_msgType);
+              return detail::dynamic_message_cast<T>(New(_msgType));
             }
 
     /// \brief Create a new instance of a message.
@@ -76,30 +72,41 @@ namespace gz::msgs
     /// \return Pointer to a google protobuf message. Null if the message
     /// type could not be handled.
     public: template<typename T>
-            static std::unique_ptr<T> New(const std::string &_msgType,
+            std::unique_ptr<T> New(const std::string &_msgType,
                 const std::string &_args)
             {
-              return Factory::Instance().New<T>(_msgType, _args);
+              return detail::dynamic_message_cast<T>(New(_msgType, _args));
             }
 
     /// \brief Create a new instance of a message.
     /// \param[in] _msgType Type of message to create.
     /// \return Pointer to a google protobuf message. Null if the message
     /// type could not be handled.
-    public: static MessagePtr New(const std::string &_msgType);
+    public: MessagePtr New(const std::string &_msgType);
 
     /// \brief Create a new instance of a message.
     /// \param[in] _msgType Type of message to create.
     /// \param[in] _args Message arguments. This will populate the message.
     /// \return Pointer to a google protobuf message. Null if the message
     /// type could not be handled.
-    public: static MessagePtr
-            New(const std::string &_msgType, const std::string &_args);
+    public: MessagePtr New(
+                const std::string &_msgType, const std::string &_args);
 
     /// \brief Get all the message types
     /// \param[out] _types Vector of strings of the message types.
-    public: static void Types(std::vector<std::string> &_types);
+    public: void Types(std::vector<std::string> &_types);
+
+    /// \brief Load a collection of descriptor .desc files.
+    /// \param[in] _paths A set of directories containing .desc decriptor
+    /// files. Each directory should be separated by ":".
+    public: void LoadDescriptors(const std::string &_paths);
+
+    /// \brief A list of registered message types
+    private: FactoryFnCollection msgMap;
+
+    /// \brief Pointer to dynamic factory implementation
+    private: std::unique_ptr<gz::msgs::DynamicFactory> dynamicFactory;
   };
 }
 }  // namespace gz::msgs
-#endif
+#endif  // GZ_MSGS_MESSAGE_FACTORY_HH_

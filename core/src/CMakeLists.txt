@@ -206,6 +206,8 @@ gz_install_includes(
 gz_create_core_library(SOURCES
   ${gen_sources}
   Factory.cc
+  MessageFactory.cc
+  DynamicFactory.cc
   gz.cc
   Utility.cc
 )
