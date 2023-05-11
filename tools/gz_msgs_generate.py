@@ -40,7 +40,8 @@ def main(argv=sys.argv[1:]):
     parser.add_argument(
         '--proto-path',
         required=True,
-        help='The location of the protos')
+        help='The location of the protos',
+        action='append')
     parser.add_argument(
         '--input-path',
         required=True,
@@ -72,7 +73,7 @@ def main(argv=sys.argv[1:]):
         sys.exit(-1)
 
     # Move original generated cpp to details/
-    proto_file = os.path.splitext(os.path.relpath(args.input_path, args.proto_path))[0]
+    proto_file = os.path.splitext(os.path.relpath(input_file, args.proto_path[0]))[0]
     detail_proto_file = proto_file.split(os.sep)
 
     detail_proto_dir = detail_proto_file[:-1]
@@ -85,15 +86,19 @@ def main(argv=sys.argv[1:]):
     gz_header = os.path.join(args.output_cpp_path, proto_file + ".gz.h")
     detail_header = os.path.join(args.output_cpp_path, detail_proto_file + ".pb.h")
 
+    if proto_file.find('google/protobuf') >= 0:
+        continue
+
     try:
         os.makedirs(os.path.join(args.output_cpp_path, detail_proto_dir),
                 exist_ok=True)
         # Windows cannot rename a file to an existing file
         if os.path.exists(detail_header):
             os.remove(detail_header)
+
         os.rename(header, detail_header)
         os.rename(gz_header, header)
-    except e:
+    except Exception as e:
         print(f'Failed to manipulate gz-msgs headers: {e}')
         sys.exit(-1)
 
