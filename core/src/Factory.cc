@@ -25,6 +25,7 @@
 #include <google/protobuf/text_format.h>
 
 #include <cstdlib>
+#include <filesystem>
 #include <fstream>
 #include <functional>
 #include <iostream>
@@ -37,7 +38,6 @@
 #endif
 
 #include "gz/msgs/Factory.hh"
-#include "gz/msgs/Filesystem.hh"
 
 using namespace gz;
 using namespace msgs;
@@ -46,6 +46,7 @@ using namespace msgs;
 /// \brief An abbreviated unique pointer to a protobuf message type.
 using ProtoUniquePtr = std::unique_ptr<google::protobuf::Message>;
 
+namespace {
 //////////////////////////////////////////////////
 /// \brief split at a one character delimiter to get a vector of something
 /// \param[in] _orig The string to split
@@ -65,6 +66,7 @@ std::vector<std::string> split(const std::string &_orig, char _delim)
   pieces.push_back(_orig.substr(pos1, _orig.size()-pos1));
   return pieces;
 }
+}  // namespace
 
 /////////////////////////////////////////////////
 /// \brief A factory class to generate protobuf messages at runtime based on
@@ -117,17 +119,17 @@ class DynamicFactory
 
     for (const std::string &descDir : descDirs)
     {
-      for (DirIter dirIter(descDir); dirIter != DirIter(); ++dirIter)
+      for (auto const &dirIter : std::filesystem::directory_iterator{descDir})
       {
         // Ignore files without the .desc extension.
-        if ((*dirIter).rfind(".desc") == std::string::npos)
+        if (dirIter.path().extension() != ".desc")
           continue;
 
         // Parse the .desc file.
-        std::ifstream ifs(*dirIter);
+        std::ifstream ifs(dirIter.path().string());
         if (!ifs.is_open())
         {
-          std::cerr << "DynamicFactory(): Unable to open [" << *dirIter << "]"
+          std::cerr << "DynamicFactory(): Unable to open [" << dirIter.path().string() << "]"
                     << std::endl;
           continue;
         }
@@ -136,7 +138,7 @@ class DynamicFactory
         if (!fileDescriptorSet.ParseFromIstream(&ifs))
         {
           std::cerr << "DynamicFactory(): Unable to parse descriptor set from ["
-                    << *dirIter << "]" << std::endl;
+                    << dirIter.path().string() << "]" << std::endl;
           continue;
         }
 
@@ -147,7 +149,7 @@ class DynamicFactory
           if (!pool.BuildFile(fileDescriptorProto))
           {
             std::cerr << "DynamicFactory(). Unable to place descriptors from ["
-                      << *dirIter << "] in the descriptor pool" << std::endl;
+                      << dirIter.path().string() << "] in the descriptor pool" << std::endl;
           }
         }
       }
