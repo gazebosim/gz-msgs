@@ -35,6 +35,8 @@
 #include <gz/msgs/config.hh>
 #include <gz/msgs/Factory.hh>
 
+#include <gz/msgs/MessageTypes.hh>
+
 #ifdef _MSC_VER
 # pragma warning(disable: 4503)
 #endif
@@ -46,6 +48,7 @@ using namespace msgs;
 extern "C" GZ_MSGS_VISIBLE
 void cmdMsgInfo(const char *_msg)
 {
+  gz::msgs::RegisterAll();
   if (_msg)
   {
     auto msg = Factory::New(_msg);
@@ -71,6 +74,7 @@ void cmdMsgInfo(const char *_msg)
 extern "C" GZ_MSGS_VISIBLE
 void cmdMsgList()
 {
+  gz::msgs::RegisterAll();
   std::vector<std::string> types;
   Factory::Types(types);
 

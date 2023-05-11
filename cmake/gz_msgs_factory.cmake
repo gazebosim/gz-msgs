@@ -45,14 +45,13 @@ function(gz_msgs_factory)
   set(depends_index)
 
   # Full path to an index file, which contains all defined message types for that proto file
-  foreach(proto_file ${generate_messages_MSGS_PROTOS})
+  foreach(proto_file ${gz_msgs_factory_INPUT_PROTOS})
     get_filename_component(FIL_WE ${proto_file} NAME_WE)
     string(REPLACE "." "_" PACKAGE_UNDER ${gz_msgs_factory_PROTO_PACKAGE})
     string(REPLACE "." "_" MESSAGE_UNDER ${FIL_WE})
     set(input_index "${gz_msgs_factory_OUTPUT_CPP_DIR}/${PACKAGE_UNDER}_${MESSAGE_UNDER}.pb_index")
     list(APPEND depends_index ${input_index})
   endforeach()
-
 
   set(GENERATE_ARGS
     --output-cpp-path "${gz_msgs_factory_OUTPUT_CPP_DIR}"

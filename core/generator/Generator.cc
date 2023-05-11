@@ -18,6 +18,7 @@
 #include <algorithm>
 #include <filesystem>
 #include <iostream>
+#include <fstream>
 #include <map>
 #include <memory>
 #include <sstream>
@@ -89,6 +90,7 @@ bool Generator::Generate(const FileDescriptor *_file,
   auto parent_path = filePath.parent_path();
   auto fileStem = filePath.stem().string();
 
+
   // protoc generates ignition/msgs/msg.pb.cc and ignition/msgs/msg.pb.hh
   // This generator injects code into the msg.pb.cc file, but generates
   // a completely new header that wraps the original protobuf header
@@ -112,6 +114,10 @@ bool Generator::Generate(const FileDescriptor *_file,
     newHeaderFilename += part.string() + "/";
     sourceFilename += part.string() + "/";
   }
+
+  auto message_type_index = _generatorContext->Open(identifier + fileStem + ".pb_index");
+  io::Printer index_printer(message_type_index, '$');
+
   identifier += fileStem;
   headerFilename += fileStem + ".gz.h";
   newHeaderFilename += "details/" + fileStem + ".pb.h";
@@ -136,15 +142,7 @@ bool Generator::Generate(const FileDescriptor *_file,
 
 #include <memory>
 
-#include <gz/msgs/Export.hh>
-
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4100 4512 4127 4068 4244 4267 4251 4146)
-#endif
-
 #include <$detail_header$>
-
 )");
 
     auto ns = getNamespaces(_file->package());
@@ -156,6 +154,9 @@ bool Generator::Generate(const FileDescriptor *_file,
     {
       auto desc = _file->message_type(i);
       std::string ptrTypes;
+
+      index_printer.PrintRaw(desc->name());
+      index_printer.PrintRaw("\n");
 
       // Define std::unique_ptr types for our messages
       ptrTypes += "typedef std::unique_ptr<"
@@ -185,33 +186,11 @@ bool Generator::Generate(const FileDescriptor *_file,
       printer.PrintRaw("}  // namespace " + *name + "\n");
     }
 
-    printer.PrintRaw("#ifdef _MSC_VER\n");
-    printer.PrintRaw("#pragma warning(pop)\n");
-    printer.PrintRaw("#endif\n");
     printer.PrintRaw("\n");
 
     printer.Print(variables, "#endif  // $define_guard$\n");
   }
 
-  // Inject code in the auto-generated source files immediately following
-  // the #include <google/protobuf*.h> calls.
-  {
-    std::unique_ptr<io::ZeroCopyOutputStream> output(
-        _generatorContext->OpenForInsert(sourceFilename, "includes"));
-    io::Printer printer(output.get(), '$');
-
-    // Add the gz-msgs Factory header
-    printer.Print("#include \"gz/msgs/Factory.hh\"\n", "name",
-                  "includes");
-
-    for (auto i = 0; i < _file->message_type_count(); ++i)
-    {
-      std::string factory = "GZ_REGISTER_STATIC_MSG(\"gz_msgs.";
-      factory += _file->message_type(i)->name() + "\", " +
-        _file->message_type(i)->name() +")\n";
-      printer.Print(factory.c_str(), "name", "includes");
-    }
-  }
   return true;
 }
 }

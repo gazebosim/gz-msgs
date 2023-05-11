@@ -17,7 +17,7 @@ find_package(gz-cmake3 REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-gz_configure_project(VERSION_SUFFIX)
+gz_configure_project(VERSION_SUFFIX
   CONFIG_EXTRAS "gz-msgs-extras.cmake.in")
 
 # Install cmake support files
@@ -122,6 +122,8 @@ add_subdirectory(tools)
 # gz_msgs_protoc to get uniform support for proto messages across all Gazebo
 # projects.
 add_subdirectory(proto)
+
+add_subdirectory(compiled)
 
 #============================================================================
 # Create package information
