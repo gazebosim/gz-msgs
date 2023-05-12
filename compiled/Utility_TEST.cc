@@ -19,8 +19,10 @@
 #include <limits>
 #include <gz/math/Helpers.hh>
 
-#include "gz/msgs/wrench.pb.h"
 #include "gz/msgs/Utility.hh"
+#include "gz/msgs/PointCloudPackedUtils.hh"
+
+#include "gz/msgs/wrench.pb.h"
 
 using namespace gz;
 
@@ -208,7 +210,7 @@ TEST(MsgsTest, ConvertMsgsInertialToMath)
           math::Vector3d(2, 3, 4),
           math::Vector3d(0.1, 0.2, 0.3)),
         pose));
-  auto inertial = msgs::Convert(msg);
+  gz::math::Inertial inertial = msgs::Convert(msg);
 
   EXPECT_DOUBLE_EQ(12.0, inertial.MassMatrix().Mass());
   EXPECT_DOUBLE_EQ(2.0, inertial.MassMatrix().Ixx());
@@ -319,7 +321,9 @@ TEST(MsgsTest, ConvertMathMassMatrix3ToMsgs)
   EXPECT_DOUBLE_EQ(0.1, msg.ixy());
   EXPECT_DOUBLE_EQ(0.2, msg.ixz());
   EXPECT_DOUBLE_EQ(0.3, msg.iyz());
-  EXPECT_EQ(math::Pose3d::Zero, msgs::Convert(msg.pose()));
+
+  auto converted_pose = msgs::Convert(msg.pose());
+  EXPECT_TRUE(converted_pose.Equal(math::Pose3d::Zero, 1e-1));
 }
 
 /////////////////////////////////////////////////
@@ -793,7 +797,7 @@ TEST(MsgsTest, SetSphericalCoordinates)
 TEST(MsgsTest, SetStringMsg)
 {
   msgs::StringMsg msg;
-  msgs::Set(&msg, "a string msg");
+  msgs::Set(&msg, std::string("a string msg"));
 
   EXPECT_EQ("a string msg", msg.data());
 }

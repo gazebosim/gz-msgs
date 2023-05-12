@@ -36,7 +36,7 @@ TEST(FactoryTest, Type)
   msgs::Factory::Types(types);
   EXPECT_FALSE(types.empty());
   EXPECT_TRUE(std::find(types.begin(), types.end(),
-        std::string("gz_msgs.Vector3d")) !=
+        std::string("gz.msgs.Vector3d")) !=
       types.end());
 }
 
@@ -103,9 +103,9 @@ TEST(FactoryTest, MultipleMessagesInAProto)
 {
   auto typesInSameFile =
   {
-    "gz_msgs.SerializedEntityMap",
-    "gz_msgs.SerializedStateMap",
-    "gz_msgs.SerializedStepMap"
+    "gz.msgs.SerializedEntityMap",
+    "gz.msgs.SerializedStateMap",
+    "gz.msgs.SerializedStepMap"
   };
 
   std::vector<std::string> types;

@@ -17,18 +17,8 @@
 
 #include <gtest/gtest.h>
 
-// TODO(chapulina) Our headers shouldn't be leaking warnings from protobuf
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4251)
-#endif
-
 #include "gz/msgs/PointCloudPackedUtils.hh"
 #include "gz/msgs/Utility.hh"
-
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
 
 using namespace gz;
 using namespace msgs;
@@ -326,4 +316,3 @@ TEST(PointCloudPackedUtilsTest, SizeOfPointField)
   EXPECT_EQ(4, sizeOfPointField(PointCloudPacked::Field::FLOAT32));
   EXPECT_EQ(8, sizeOfPointField(PointCloudPacked::Field::FLOAT64));
 }
-

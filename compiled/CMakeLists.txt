@@ -51,6 +51,7 @@ if (TARGET UNIT_Factory_TEST)
 endif()
 
 if (TARGET UNIT_Utility_TEST)
+  target_include_directories(UNIT_Utility_TEST PRIVATE ${PROJECT_BINARY_DIR}/gz_msgs_gen)
   target_link_messages(TARGET UNIT_Utility_TEST MSG_TARGETS gz_msgs_msgs)
 endif()
 

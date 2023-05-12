@@ -61,15 +61,31 @@ int MessageFactory::RegisterCollection(FactoryFnCollection &_functions)
 MessageFactory::MessagePtr MessageFactory::New(
     const std::string &_msgType)
 {
-  if (msgMap.find(_msgType) != msgMap.end())
+  std::string type;
+  // Convert "gz.msgs." to "gz_msgs.".
+  if (_msgType.find("gz_msgs.") == 0)
+  {
+    type = "gz.msgs." + _msgType.substr(8);
+  }
+  // Convert ".gz.msgs." to "gz_msgs.".
+  else if (_msgType.find(".gz.msgs.") == 0)
+  {
+    type = "gz.msgs." + _msgType.substr(9);
+  }
+  else
+  {
+    type = _msgType;
+  }
+
+  if (msgMap.find(type) != msgMap.end())
   {
     // Create a new message if a FactoryFn has been assigned to the message type
-    return msgMap[_msgType]();
+    return msgMap[type]();
   }
   else
   {
     // Check if we have the message descriptor.
-    return dynamicFactory->New(_msgType);
+    return dynamicFactory->New(type);
   }
 }
 
