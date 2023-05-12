@@ -1,18 +1,18 @@
 ##################################################
-# A function that calls protoc on a protobuf file
+# A function that generates factory methods for generated gz-msgs
+# The output of this is are a header and source file that can be used as part of your library
+# for the gz::msgs::Factory
 # Options:
 # One value arguments:
 #   FACTORY_GEN_SCRIPT  - Location of the factory generator script
-#   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. ".gz.msgs")
+#   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
 #   PROTOC_EXEC         - Path to protoc
-#   INPUT_PROTO         - Path to the input .proto file
 #   OUTPUT_CPP_DIR      - Path where C++ files are saved
-#   OUTPUT_INCLUDES     - A CMake variable name containing a list that the C++ header path should be appended to
-#   OUTPUT_CPP_HH_VAR   - A CMake variable name containing a list that the C++ header path should be appended to
-#   OUTPUT_CPP_CC_VAR   - A Cmake variable name containing a list that the C++ source path should be appended to
+#   OUTPUT_CPP_HH_VAR   - A CMake variable name containing a list that the C++ headers should be appended to
+#   OUTPUT_CPP_CC_VAR   - A Cmake variable name containing a list that the C++ sources should be appended to
 # Multi value arguments
-#   INPUT_PROTOS - Passed to protoc --proto_path
-#   PROTO_PATH          - Passed to protoc --proto_path
+#   INPUT_PROTOS        - List of input proto files
+#   PROTO_PATH          - Base directory of the proto files
 function(gz_msgs_factory)
   set(options "")
   set(oneValueArgs

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Open Source Robotics Foundation
+ * Copyright (C) 2023 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,11 +33,22 @@ namespace gz::msgs {
   // Inline bracket to help doxygen filtering.
   inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
+  /// \class MessageFactory MessageFactory.hh
+  /// \brief A factory that generates protobuf message based on a string type.
+  /// This class will also try to load all Protobuf descriptors in paths provided in
+  /// LoadDescriptors as well as the GZ_DESCRIPTOR_PATH environment variable.
   class GZ_MSGS_VISIBLE MessageFactory
   {
+    /// \brief Base message type
     public: using Message = google::protobuf::Message;
+
+    /// \brief Unique pointer to base message type
     public: using MessagePtr = std::unique_ptr<Message>;
+
+    /// \brief Function that returns unique pointer to base message type
     public: using FactoryFn = std::function<MessagePtr(void)>;
+
+    /// \brief A map of message types as strings to factory functions
     public: using FactoryFnCollection = std::map<std::string, FactoryFn>;
 
     /// \brief Constructor

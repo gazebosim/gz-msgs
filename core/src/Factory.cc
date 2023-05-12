@@ -59,4 +59,10 @@ Factory::New(const std::string &_msgType, const std::string &_args)
   return Factory::Instance().New(_msgType, _args);
 }
 
+/////////////////////////////////////////////////
+void Factory::LoadDescriptors(const std::string &_paths)
+{
+  Factory::Instance().LoadDescriptors(_paths);
+}
+
 }  // namespace gz::msgs

@@ -3,15 +3,19 @@
 # Options:
 #   GENERATE_CPP        - generates c++ code for the message if specified
 # One value arguments:
-#   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. ".gz.msgs")
+#   MSGS_GEN_SCRIPT     - Path to the message generation python script
+#   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
 #   PROTOC_EXEC         - Path to protoc
+#   GZ_PROTOC_PLUGIN    - Path to the gazebo-specific protobuf compiler executable
 #   INPUT_PROTO         - Path to the input .proto file
 #   OUTPUT_CPP_DIR      - Path where C++ files are saved
 #   OUTPUT_INCLUDES     - A CMake variable name containing a list that the C++ header path should be appended to
-#   OUTPUT_CPP_HH_VAR   - A CMake variable name containing a list that the C++ header path should be appended to
-#   OUTPUT_CPP_CC_VAR   - A Cmake variable name containing a list that the C++ source path should be appended to
+#   OUTPUT_CPP_HH_VAR   - A CMake variable name containing a list generated headers should be appended to
+#   OUTPUT_DETAIL_CPP_HH_VAR - A CMake variable name containing a list that the C++ detail headers should be appended to
+#   OUTPUT_CPP_CC_VAR   - A Cmake variable name containing a list that the C++ source files should be appended to
 # Multi value arguments
 #   PROTO_PATH          - Passed to protoc --proto_path
+#   DEPENDENCY_PROTO_PATHS - Passed to protoc --proto_path
 function(gz_msgs_protoc)
   set(options GENERATE_CPP)
   set(oneValueArgs

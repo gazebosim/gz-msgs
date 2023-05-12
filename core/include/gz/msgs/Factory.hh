@@ -33,20 +33,37 @@ namespace gz::msgs
   inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
   /// \class Factory Factory.hh gz/msgs.hh
-  /// \brief A factory that generates protobuf message based on a string type.
-  /// This class  will also try to load all Protobuf descriptors specified
-  /// in the GZ_DESCRIPTOR_PATH environment variable on program start.
+  /// \brief A global factory that generates protobuf message based on a string type.
+  /// This allows for global registration of messages via static initialization.
+  /// If you don't need the singleton, consider using MessageFactory instead
   class GZ_MSGS_VISIBLE Factory
   {
-    public: using FactoryFn = MessageFactory::FactoryFn;
-    public: using FactoryFnCollection = MessageFactory::FactoryFnCollection;
+    /// \brief Unique pointer to base message type
     public: using MessagePtr = MessageFactory::MessagePtr;
 
+    /// \brief Function that returns unique pointer to base message type
+    public: using FactoryFn = MessageFactory::FactoryFn;
+
+    /// \brief A map of message types as strings to factory functions
+    public: using FactoryFnCollection = MessageFactory::FactoryFnCollection;
+
+    /// \brief Private constuctor
     private: Factory() = default;
+
+    /// \brief Deleted copy constructor
     public: Factory(const Factory&) = delete;
+
+    /// \brief Deleted copy assignment
     public: void operator=(const Factory&) = delete;
+
+    /// \brief Deleted move constructor
     public: Factory(Factory&&) = delete;
+
+    /// \brief Deleted move assignment
     public: void operator=(Factory&&) = delete;
+
+    /// \brief Get the global MessageFactory instance
+    /// \return Reference to the global MessageFactory instance
     public: static MessageFactory& Instance();
 
     /// \brief Register a message.
@@ -99,6 +116,11 @@ namespace gz::msgs
     /// \brief Get all the message types
     /// \param[out] _types Vector of strings of the message types.
     public: static void Types(std::vector<std::string> &_types);
+
+    /// \brief Load a collection of descriptor .desc files.
+    /// \param[in] _paths A set of directories containing .desc decriptor
+    /// files. Each directory should be separated by ":".
+    public: static void LoadDescriptors(const std::string &_paths);
   };
 }
 }  // namespace gz::msgs
