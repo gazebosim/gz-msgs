@@ -12,7 +12,7 @@ gz_msgs_generate_messages_impl(
   FACTORY_GEN_SCRIPT
     ${PROJECT_SOURCE_DIR}/tools/gz_msgs_generate_factory.py
   GZ_PROTOC_PLUGIN
-    $<TARGET_FILE:gz_msgs_gen>
+    $<TARGET_FILE:${PROJECT_NAME}_protoc_plugin>
   INPUT_PROTOS
     ${proto_files}
   PROTO_PACKAGE

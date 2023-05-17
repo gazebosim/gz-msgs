@@ -77,7 +77,7 @@ gz_find_package(GzProtobuf
 gz_find_package(gz-utils2 REQUIRED)
 set(GZ_UTILS_VER ${gz-utils2_VERSION_MAJOR})
 
-
+#--------------------------------------
 # Find gz-math
 gz_find_package(gz-math7 REQUIRED)
 set(GZ_MATH_VER ${gz-math7_VERSION_MAJOR})
@@ -96,7 +96,7 @@ gz_find_package(TINYXML2 REQUIRED PRIVATE PRETTY tinyxml2)
 #============================================================================
 # Configure the build
 #============================================================================
-gz_configure_build(QUIT_IF_BUILD_ERRORS)
+gz_configure_build(QUIT_IF_BUILD_ERRORS COMPONENTS compiled)
 
 #============================================================================
 # gz command line support
@@ -116,8 +116,6 @@ add_subdirectory(tools)
 # gz_msgs_protoc to get uniform support for proto messages across all Gazebo
 # projects.
 add_subdirectory(proto)
-
-add_subdirectory(compiled)
 
 #============================================================================
 # Create package information

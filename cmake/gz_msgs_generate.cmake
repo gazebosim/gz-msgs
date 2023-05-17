@@ -14,7 +14,7 @@
 function(gz_msgs_generate_messages_impl)
   set(options "")
   set(oneValueArgs MSGS_PATH TARGET PROTO_PACKAGE MSGS_GEN_SCRIPT GZ_PROTOC_PLUGIN FACTORY_GEN_SCRIPT MSGS_LIB PROTO_PATH)
-  set(multiValueArgs INPUT_PROTOS)
+  set(multiValueArgs INPUT_PROTOS DEPENDENCIES)
 
   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
   string(REPLACE "." "_" gen_dir ${generate_messages_PROTO_PACKAGE})
@@ -22,12 +22,16 @@ function(gz_msgs_generate_messages_impl)
   # Extract dependency information from targets
   set(depends_proto_paths)
   set(depends_includes)
+
   foreach(dep ${generate_messages_DEPENDENCIES})
     get_target_property(dep_proto_path ${dep} PROTO_DIR)
     get_target_property(dep_proto_include_path ${dep} PROTO_INCLUDE_DIR)
+
     list(APPEND depends_proto_paths ${dep_proto_path})
     list(APPEND depends_includes ${dep_proto_include_path})
   endforeach()
+
+  message(STATUS "Dependencies: ${generate_messages_DEPENDENCIES} (${depends_proto_paths}) (${depends_includes})")
 
   foreach(proto_file ${generate_messages_INPUT_PROTOS})
     gz_msgs_protoc(
@@ -100,7 +104,7 @@ function(gz_msgs_generate_messages_impl)
 
   # Export the messages path and dependency messages paths for potential dependent message libs
   set(PROTO_DIR)
-  list(APPEND PROTO_DIR ${generate_messages_MSGS_PATH})
+  list(APPEND PROTO_DIR ${generate_messages_PROTO_PATH})
   list(APPEND PROTO_DIR ${depends_proto_paths})
 
   set(PROTO_INCLUDE_DIR)
