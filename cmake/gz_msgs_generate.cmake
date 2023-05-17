@@ -96,7 +96,7 @@ function(gz_msgs_generate_messages_impl)
   endif()
 
   add_library(${generate_messages_TARGET} STATIC ${gen_sources} ${gen_factory_sources})
-  set_property(TARGET gz_msgs_msgs PROPERTY POSITION_INDEPENDENT_CODE ON)
+  set_property(TARGET ${generate_messages_TARGET} PROPERTY POSITION_INDEPENDENT_CODE ON)
 
   # Export the messages path and dependency messages paths for potential dependent message libs
   set(PROTO_DIR)

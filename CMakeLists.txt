@@ -26,12 +26,6 @@ install(
   DESTINATION "lib/cmake/${PROJECT_NAME}"
 )
 
-if (UNIX AND NOT APPLE)
-  set (EXTRA_TEST_LIB_DEPS stdc++fs)
-else()
-  set (EXTRA_TEST_LIB_DEPS)
-endif()
-
 #============================================================================
 # Set project-specific options
 #============================================================================

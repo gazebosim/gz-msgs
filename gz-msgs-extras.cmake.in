@@ -18,7 +18,7 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
 include(${@PROJECT_NAME@_DIR}/gz_msgs_protoc.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_factory.cmake)
-include(${@PROJECT_NAME@_DIR}/gz_messages_generate.cmake)
+include(${@PROJECT_NAME@_DIR}/gz_msgs_generate.cmake)
 include(${@PROJECT_NAME@_DIR}/target_link_messages.cmake)
 
 set(@PROJECT_NAME@_INSTALL_PATH "${@PROJECT_NAME@_DIR}/../../..")
