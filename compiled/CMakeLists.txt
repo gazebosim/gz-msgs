@@ -26,11 +26,16 @@ gz_msgs_generate_messages_impl(
 )
 
 gz_add_component(compiled
-  SOURCES gz.cc
+  SOURCES src/gz.cc
   GET_TARGET_NAME compiled_target)
 
 # Not using target_link_messages because  we are registering messages in gz.cc
 target_link_libraries(${compiled_target} PRIVATE gz_msgs_msgs)
+target_include_directories(${compiled_target} PRIVATE include)
+
+install(
+  DIRECTORY include/
+  DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL})
 
 ##################################################
 # Build unit tests

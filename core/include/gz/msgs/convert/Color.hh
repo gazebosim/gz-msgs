@@ -31,7 +31,8 @@ inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::Color, gz::math::Color>::Set(gz::msgs::Color *_msg, const gz::math::Color &_data)
+inline void Converter<gz::msgs::Color, gz::math::Color>::Set(
+    gz::msgs::Color *_msg, const gz::math::Color &_data)
 {
   _msg->set_r(_data.R());
   _msg->set_g(_data.G());
@@ -40,7 +41,8 @@ inline void Converter<gz::msgs::Color, gz::math::Color>::Set(gz::msgs::Color *_m
 }
 
 template<>
-inline void Converter<gz::msgs::Color, gz::math::Color>::Set(gz::math::Color *_data, const gz::msgs::Color &_msg)
+inline void Converter<gz::msgs::Color, gz::math::Color>::Set(
+    gz::math::Color *_data, const gz::msgs::Color &_msg)
 {
   _data->Set(_msg.r(), _msg.g(), _msg.b(), _msg.a());
 }

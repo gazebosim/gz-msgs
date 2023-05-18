@@ -85,7 +85,6 @@ inline msgs::Discovery::Type ConvertDiscoveryType(const std::string &_str)
 /////////////////////////////////////////////
 inline std::string ConvertDiscoveryType(const msgs::Discovery::Type &_type)
 {
-  std::string result;
   switch (_type)
   {
     default:

@@ -32,27 +32,34 @@ inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::AxisAlignedBox, gz::math::AxisAlignedBox>::Set(gz::msgs::AxisAlignedBox *_msg, const gz::math::AxisAlignedBox &_data)
+inline void
+Converter<gz::msgs::AxisAlignedBox, gz::math::AxisAlignedBox>::Set(
+    gz::msgs::AxisAlignedBox *_msg, const gz::math::AxisAlignedBox &_data)
 {
-  Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(_msg->mutable_min_corner(), _data.Min());
-  Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(_msg->mutable_max_corner(), _data.Max());
+  using Vector3Converter = Converter<gz::msgs::Vector3d, gz::math::Vector3d>;
+  Vector3Converter::Set(_msg->mutable_min_corner(), _data.Min());
+  Vector3Converter::Set(_msg->mutable_max_corner(), _data.Max());
 }
 
 template<>
-inline void Converter<gz::msgs::AxisAlignedBox, gz::math::AxisAlignedBox>::Set(gz::math::AxisAlignedBox *_data, const gz::msgs::AxisAlignedBox &_msg)
+inline void Converter<gz::msgs::AxisAlignedBox, gz::math::AxisAlignedBox>::Set(
+    gz::math::AxisAlignedBox *_data, const gz::msgs::AxisAlignedBox &_msg)
 {
-  Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(&_data->Min(), _msg.min_corner());
-  Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(&_data->Max(), _msg.max_corner());
+  using Vector3Converter = Converter<gz::msgs::Vector3d, gz::math::Vector3d>;
+  Vector3Converter::Set(&_data->Min(), _msg.min_corner());
+  Vector3Converter::Set(&_data->Max(), _msg.max_corner());
 }
 
 inline gz::msgs::AxisAlignedBox Convert(const gz::math::AxisAlignedBox &_data)
 {
-  return Converter<gz::msgs::AxisAlignedBox, gz::math::AxisAlignedBox>::Convert(_data);
+  return Converter<gz::msgs::AxisAlignedBox,
+                   gz::math::AxisAlignedBox>::Convert(_data);
 }
 
 inline gz::math::AxisAlignedBox Convert(const gz::msgs::AxisAlignedBox &_msg)
 {
-  return Converter<gz::msgs::AxisAlignedBox, gz::math::AxisAlignedBox>::Convert(_msg);
+  return Converter<gz::msgs::AxisAlignedBox,
+                   gz::math::AxisAlignedBox>::Convert(_msg);
 }
 
 

@@ -33,16 +33,19 @@ inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::PlaneGeom, gz::math::Planed>::Set(gz::msgs::PlaneGeom *_msg, const gz::math::Planed &_data)
+inline void Converter<gz::msgs::PlaneGeom, gz::math::Planed>::Set(
+    gz::msgs::PlaneGeom *_msg, const gz::math::Planed &_data)
 {
-  Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(_msg->mutable_normal(), _data.Normal());
+  Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(
+        _msg->mutable_normal(), _data.Normal());
   _msg->mutable_size()->set_x(_data.Size().X());
   _msg->mutable_size()->set_y(_data.Size().Y());
   _msg->set_d(_data.Offset());
 }
 
 template<>
-inline void Converter<gz::msgs::PlaneGeom, gz::math::Planed>::Set(gz::math::Planed *_data, const gz::msgs::PlaneGeom &_msg)
+inline void Converter<gz::msgs::PlaneGeom, gz::math::Planed>::Set(
+    gz::math::Planed *_data, const gz::msgs::PlaneGeom &_msg)
 {
   _data->Set(
     Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Convert(_msg.normal()),

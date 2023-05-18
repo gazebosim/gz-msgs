@@ -26,14 +26,13 @@
 #pragma warning(pop)
 #endif
 
-#include "gz.hh"
-
 #include <iostream>
 #include <string>
 #include <vector>
 
 #include <gz/msgs/config.hh>
 #include <gz/msgs/Factory.hh>
+#include <gz/msgs/gz.hh>
 
 #include <gz/msgs/MessageTypes.hh>
 

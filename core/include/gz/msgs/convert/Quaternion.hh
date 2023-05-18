@@ -31,7 +31,8 @@ inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::Quaternion, gz::math::Quaterniond>::Set(gz::msgs::Quaternion *_msg, const gz::math::Quaterniond &_data)
+inline void Converter<gz::msgs::Quaternion, gz::math::Quaterniond>::Set(
+    gz::msgs::Quaternion *_msg, const gz::math::Quaterniond &_data)
 {
   _msg->set_w(_data.W());
   _msg->set_x(_data.X());
@@ -40,7 +41,8 @@ inline void Converter<gz::msgs::Quaternion, gz::math::Quaterniond>::Set(gz::msgs
 }
 
 template<>
-inline void Converter<gz::msgs::Quaternion, gz::math::Quaterniond>::Set(gz::math::Quaterniond *_data, const gz::msgs::Quaternion &_msg)
+inline void Converter<gz::msgs::Quaternion, gz::math::Quaterniond>::Set(
+    gz::math::Quaterniond *_data, const gz::msgs::Quaternion &_msg)
 {
   _data->Set(_msg.w(), _msg.x(), _msg.y(), _msg.z());
 }

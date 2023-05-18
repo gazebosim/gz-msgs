@@ -26,7 +26,11 @@ namespace gz::msgs {
 // Inline bracket to help doxygen filtering.
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
-template <typename MessageT, typename DataT, std::enable_if_t<std::is_base_of_v<google::protobuf::Message, MessageT>, bool> = true>
+template <typename MessageT,
+  typename DataT,
+  std::enable_if_t<
+    std::is_base_of_v<
+      google::protobuf::Message, MessageT>, bool> = true>
 struct GZ_MSGS_VISIBLE Converter
 {
   static void Set(MessageT *_msg, const DataT &_data);
@@ -34,24 +38,32 @@ struct GZ_MSGS_VISIBLE Converter
 
   static DataT Convert(const MessageT &_msg){
     DataT ret;
-    Converter<MessageT,DataT>::Set(&ret, _msg);
+    Converter<MessageT, DataT>::Set(&ret, _msg);
     return ret;
   }
 
   static MessageT Convert(const DataT &_data){
     MessageT ret;
-    Converter<MessageT,DataT>::Set(&ret, _data);
+    Converter<MessageT, DataT>::Set(&ret, _data);
     return ret;
   }
 };
 
-template <typename MessageT, typename DataT, std::enable_if_t<std::is_base_of_v<google::protobuf::Message, MessageT>, bool> = true>
+template <typename MessageT,
+  typename DataT,
+  std::enable_if_t<
+    std::is_base_of_v<
+      google::protobuf::Message, MessageT>, bool> = true>
 GZ_MSGS_VISIBLE void Set(MessageT *_msg, const DataT &_data)
 {
   Converter<MessageT, DataT>::Set(_msg, _data);
 }
 
-template <typename MessageT, typename DataT, std::enable_if_t<std::is_base_of_v<google::protobuf::Message, MessageT>, bool> = true>
+template <typename MessageT,
+  typename DataT,
+  std::enable_if_t<
+    std::is_base_of_v<
+      google::protobuf::Message, MessageT>, bool> = true>
 GZ_MSGS_VISIBLE void Set(DataT *_data , const MessageT &_msg)
 {
   Converter<MessageT, DataT>::Set(_data, _msg);

@@ -35,6 +35,7 @@
 // Data Headers
 #include <chrono>
 #include <string>
+#include <utility>
 
 namespace gz::msgs {
 // Inline bracket to help doxygen filtering.
@@ -42,7 +43,9 @@ inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::Time, std::chrono::steady_clock::duration>::Set(gz::msgs::Time *_msg, const std::chrono::steady_clock::duration &_data)
+inline void
+Converter<gz::msgs::Time, std::chrono::steady_clock::duration>::Set(
+    gz::msgs::Time *_msg, const std::chrono::steady_clock::duration &_data)
 {
   std::pair<uint64_t, uint64_t> timeSecAndNsecs =
         gz::math::durationToSecNsec(_data);
@@ -52,35 +55,48 @@ inline void Converter<gz::msgs::Time, std::chrono::steady_clock::duration>::Set(
 }
 
 template<>
-inline void Converter<gz::msgs::Time, std::chrono::steady_clock::duration>::Set(std::chrono::steady_clock::duration *_data, const gz::msgs::Time &_msg)
+inline void
+Converter<gz::msgs::Time, std::chrono::steady_clock::duration>::Set(
+    std::chrono::steady_clock::duration *_data, const gz::msgs::Time &_msg)
 {
-  *_data = std::chrono::seconds(_msg.sec()) + std::chrono::nanoseconds(_msg.nsec());
+  *_data = (
+      std::chrono::seconds(_msg.sec()) +
+      std::chrono::nanoseconds(_msg.nsec()));
 }
 
-inline gz::msgs::Time Convert(const std::chrono::steady_clock::duration &_data)
+inline gz::msgs::Time
+Convert(const std::chrono::steady_clock::duration &_data)
 {
-  return Converter<gz::msgs::Time, std::chrono::steady_clock::duration>::Convert(_data);
+  return Converter<gz::msgs::Time,
+                   std::chrono::steady_clock::duration>::Convert(_data);
 }
 
-inline std::chrono::steady_clock::duration Convert(const gz::msgs::Time &_msg)
+inline std::chrono::steady_clock::duration
+Convert(const gz::msgs::Time &_msg)
 {
-  return Converter<gz::msgs::Time, std::chrono::steady_clock::duration>::Convert(_msg);
+  return Converter<gz::msgs::Time,
+                   std::chrono::steady_clock::duration>::Convert(_msg);
 }
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::StringMsg, std::string>::Set(gz::msgs::StringMsg *_msg, const std::string &_data)
+inline void
+Converter<gz::msgs::StringMsg, std::string>::Set(
+    gz::msgs::StringMsg *_msg, const std::string &_data)
 {
   _msg->set_data(_data);
 }
 
 template<>
-inline void Converter<gz::msgs::StringMsg, std::string>::Set(std::string *_data, const gz::msgs::StringMsg &_msg)
+inline void
+Converter<gz::msgs::StringMsg, std::string>::Set(
+    std::string *_data, const gz::msgs::StringMsg &_msg)
 {
   *_data = _msg.data();
 }
 
-inline gz::msgs::StringMsg Convert(const std::string &_data)
+inline gz::msgs::StringMsg
+Convert(const std::string &_data)
 {
   return Converter<gz::msgs::StringMsg, std::string>::Convert(_data);
 }
@@ -92,13 +108,15 @@ inline std::string Convert(const gz::msgs::StringMsg &_msg)
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::Boolean, bool>::Set(gz::msgs::Boolean *_msg, const bool &_data)
+inline void Converter<gz::msgs::Boolean, bool>::Set(
+    gz::msgs::Boolean *_msg, const bool &_data)
 {
   _msg->set_data(_data);
 }
 
 template<>
-inline void Converter<gz::msgs::Boolean, bool>::Set(bool *_data, const gz::msgs::Boolean &_msg)
+inline void Converter<gz::msgs::Boolean, bool>::Set(
+    bool *_data, const gz::msgs::Boolean &_msg)
 {
   *_data = _msg.data();
 }
@@ -115,13 +133,15 @@ inline bool Convert(const gz::msgs::Boolean &_msg)
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::Int32, int32_t>::Set(gz::msgs::Int32 *_msg, const int32_t &_data)
+inline void Converter<gz::msgs::Int32, int32_t>::Set(
+    gz::msgs::Int32 *_msg, const int32_t &_data)
 {
   _msg->set_data(_data);
 }
 
 template<>
-inline void Converter<gz::msgs::Int32, int32_t>::Set(int32_t *_data, const gz::msgs::Int32 &_msg)
+inline void Converter<gz::msgs::Int32, int32_t>::Set(
+    int32_t *_data, const gz::msgs::Int32 &_msg)
 {
   *_data = _msg.data();
 }
@@ -138,13 +158,15 @@ inline int32_t Convert(const gz::msgs::Int32 &_msg)
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::UInt32, uint32_t>::Set(gz::msgs::UInt32 *_msg, const uint32_t &_data)
+inline void Converter<gz::msgs::UInt32, uint32_t>::Set(
+    gz::msgs::UInt32 *_msg, const uint32_t &_data)
 {
   _msg->set_data(_data);
 }
 
 template<>
-inline void Converter<gz::msgs::UInt32, uint32_t>::Set(uint32_t *_data, const gz::msgs::UInt32 &_msg)
+inline void Converter<gz::msgs::UInt32, uint32_t>::Set(
+    uint32_t *_data, const gz::msgs::UInt32 &_msg)
 {
   *_data = _msg.data();
 }
@@ -161,13 +183,15 @@ inline uint32_t Convert(const gz::msgs::UInt32 &_msg)
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::Int64, int64_t>::Set(gz::msgs::Int64 *_msg, const int64_t &_data)
+inline void Converter<gz::msgs::Int64, int64_t>::Set(
+    gz::msgs::Int64 *_msg, const int64_t &_data)
 {
   _msg->set_data(_data);
 }
 
 template<>
-inline void Converter<gz::msgs::Int64, int64_t>::Set(int64_t *_data, const gz::msgs::Int64 &_msg)
+inline void Converter<gz::msgs::Int64, int64_t>::Set(
+    int64_t *_data, const gz::msgs::Int64 &_msg)
 {
   *_data = _msg.data();
 }
@@ -184,13 +208,15 @@ inline int64_t Convert(const gz::msgs::Int64 &_msg)
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::UInt64, uint64_t>::Set(gz::msgs::UInt64 *_msg, const uint64_t &_data)
+inline void Converter<gz::msgs::UInt64, uint64_t>::Set(
+    gz::msgs::UInt64 *_msg, const uint64_t &_data)
 {
   _msg->set_data(_data);
 }
 
 template<>
-inline void Converter<gz::msgs::UInt64, uint64_t>::Set(uint64_t *_data, const gz::msgs::UInt64 &_msg)
+inline void Converter<gz::msgs::UInt64, uint64_t>::Set(
+    uint64_t *_data, const gz::msgs::UInt64 &_msg)
 {
   *_data = _msg.data();
 }
@@ -207,13 +233,15 @@ inline uint64_t Convert(const gz::msgs::UInt64 &_msg)
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::Float, float>::Set(gz::msgs::Float *_msg, const float &_data)
+inline void Converter<gz::msgs::Float, float>::Set(
+    gz::msgs::Float *_msg, const float &_data)
 {
   _msg->set_data(_data);
 }
 
 template<>
-inline void Converter<gz::msgs::Float, float>::Set(float *_data, const gz::msgs::Float &_msg)
+inline void Converter<gz::msgs::Float, float>::Set(
+    float *_data, const gz::msgs::Float &_msg)
 {
   *_data = _msg.data();
 }
@@ -230,13 +258,15 @@ inline float Convert(const gz::msgs::Float &_msg)
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::Double, double>::Set(gz::msgs::Double *_msg, const double &_data)
+inline void Converter<gz::msgs::Double, double>::Set(
+    gz::msgs::Double *_msg, const double &_data)
 {
   _msg->set_data(_data);
 }
 
 template<>
-inline void Converter<gz::msgs::Double, double>::Set(double *_data, const gz::msgs::Double &_msg)
+inline void Converter<gz::msgs::Double, double>::Set(
+    double *_data, const gz::msgs::Double &_msg)
 {
   *_data = _msg.data();
 }
@@ -250,9 +280,6 @@ inline double Convert(const gz::msgs::Double &_msg)
 {
   return Converter<gz::msgs::Double, double>::Convert(_msg);
 }
-
-
 }  // namespce
 }  // namespace gz::msgs
-
 #endif  // GZ_MSGS_CONVERT_VECTOR3_HH_

@@ -33,7 +33,7 @@ namespace gz::msgs
   inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
   /// \class Factory Factory.hh gz/msgs.hh
-  /// \brief A global factory that generates protobuf message based on a string type.
+  /// \brief A factory that generates protobuf message based on a string type.
   /// This allows for global registration of messages via static initialization.
   /// If you don't need the singleton, consider using MessageFactory instead
   class GZ_MSGS_VISIBLE Factory

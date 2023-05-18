@@ -31,7 +31,8 @@ inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(gz::msgs::Vector3d *_msg, const gz::math::Vector3d &_data)
+inline void Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(
+    gz::msgs::Vector3d *_msg, const gz::math::Vector3d &_data)
 {
   _msg->set_x(_data.X());
   _msg->set_y(_data.Y());
@@ -39,7 +40,8 @@ inline void Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(gz::msgs::Vec
 }
 
 template<>
-inline void Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(gz::math::Vector3d *_data, const gz::msgs::Vector3d &_msg)
+inline void Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(
+    gz::math::Vector3d *_data, const gz::msgs::Vector3d &_msg)
 {
   _data->Set(_msg.x(), _msg.y(), _msg.z());
 }
@@ -55,5 +57,4 @@ inline gz::math::Vector3d Convert(const gz::msgs::Vector3d &_msg)
 }
 }  // namespace
 }  // namespace gz::msgs
-
 #endif  // GZ_MSGS_CONVERT_VECTOR3_HH_

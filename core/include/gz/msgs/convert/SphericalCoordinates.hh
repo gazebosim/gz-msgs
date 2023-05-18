@@ -31,7 +31,10 @@ inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::SphericalCoordinates, gz::math::SphericalCoordinates>::Set(gz::msgs::SphericalCoordinates *_msg, const gz::math::SphericalCoordinates &_data)
+inline void
+Converter<gz::msgs::SphericalCoordinates, gz::math::SphericalCoordinates>::Set(
+    gz::msgs::SphericalCoordinates *_msg,
+    const gz::math::SphericalCoordinates &_data)
 {
   if (_data.Surface() == math::SphericalCoordinates::EARTH_WGS84)
   {
@@ -62,7 +65,10 @@ inline void Converter<gz::msgs::SphericalCoordinates, gz::math::SphericalCoordin
 }
 
 template<>
-inline void Converter<gz::msgs::SphericalCoordinates, gz::math::SphericalCoordinates>::Set(gz::math::SphericalCoordinates *_data, const gz::msgs::SphericalCoordinates &_msg)
+inline void
+Converter<gz::msgs::SphericalCoordinates, gz::math::SphericalCoordinates>::Set(
+    gz::math::SphericalCoordinates *_data,
+    const gz::msgs::SphericalCoordinates &_msg)
 {
   if (_msg.surface_model() == msgs::SphericalCoordinates::EARTH_WGS84)
   {
@@ -100,18 +106,19 @@ inline void Converter<gz::msgs::SphericalCoordinates, gz::math::SphericalCoordin
   _data->SetElevationReference(_msg.elevation());
 }
 
-inline gz::msgs::SphericalCoordinates Convert(const gz::math::SphericalCoordinates &_data)
+inline gz::msgs::SphericalCoordinates
+Convert(const gz::math::SphericalCoordinates &_data)
 {
-  return Converter<gz::msgs::SphericalCoordinates, gz::math::SphericalCoordinates>::Convert(_data);
+  return Converter<gz::msgs::SphericalCoordinates,
+                   gz::math::SphericalCoordinates>::Convert(_data);
 }
 
-inline gz::math::SphericalCoordinates Convert(const gz::msgs::SphericalCoordinates &_msg)
+inline gz::math::SphericalCoordinates
+  Convert(const gz::msgs::SphericalCoordinates &_msg)
 {
-  return Converter<gz::msgs::SphericalCoordinates, gz::math::SphericalCoordinates>::Convert(_msg);
+  return Converter<gz::msgs::SphericalCoordinates,
+                   gz::math::SphericalCoordinates>::Convert(_msg);
 }
-
-
 }  // namespce
 }  // namespace gz::msgs
-
 #endif  // GZ_MSGS_CONVERT_VECTOR3_HH_

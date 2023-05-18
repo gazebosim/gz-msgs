@@ -35,8 +35,9 @@ namespace gz::msgs {
 
   /// \class MessageFactory MessageFactory.hh
   /// \brief A factory that generates protobuf message based on a string type.
-  /// This class will also try to load all Protobuf descriptors in paths provided in
-  /// LoadDescriptors as well as the GZ_DESCRIPTOR_PATH environment variable.
+  /// This class will also try to load all Protobuf descriptors in paths
+  /// provided in LoadDescriptors as well as the GZ_DESCRIPTOR_PATH
+  /// environment variable.
   class GZ_MSGS_VISIBLE MessageFactory
   {
     /// \brief Base message type

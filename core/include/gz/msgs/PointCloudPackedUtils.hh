@@ -26,6 +26,7 @@
 #include <cstdarg>
 #include <sstream>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "gz/msgs/config.hh"

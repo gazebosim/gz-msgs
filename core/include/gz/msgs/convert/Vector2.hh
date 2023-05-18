@@ -31,14 +31,16 @@ inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
 template<>
-inline void Converter<gz::msgs::Vector2d, gz::math::Vector2d>::Set(gz::msgs::Vector2d *_msg, const gz::math::Vector2d &_data)
+inline void Converter<gz::msgs::Vector2d, gz::math::Vector2d>::Set(
+    gz::msgs::Vector2d *_msg, const gz::math::Vector2d &_data)
 {
   _msg->set_x(_data.X());
   _msg->set_y(_data.Y());
 }
 
 template<>
-inline void Converter<gz::msgs::Vector2d, gz::math::Vector2d>::Set(gz::math::Vector2d *_data, const gz::msgs::Vector2d &_msg)
+inline void Converter<gz::msgs::Vector2d, gz::math::Vector2d>::Set(
+    gz::math::Vector2d *_data, const gz::msgs::Vector2d &_msg)
 {
   _data->Set(_msg.x(), _msg.y());
 }
@@ -52,8 +54,6 @@ inline gz::math::Vector2d Convert(const gz::msgs::Vector2d &_msg)
 {
   return Converter<gz::msgs::Vector2d, gz::math::Vector2d>::Convert(_msg);
 }
-
 }  // namespce
 }  // namespace gz::msgs
-
 #endif  // GZ_MSGS_CONVERT_VECTOR3_HH_
