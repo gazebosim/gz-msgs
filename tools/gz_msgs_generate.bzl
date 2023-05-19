@@ -4,7 +4,6 @@ load(
     "declare_out_files",
     "get_include_directory",
     "get_out_dir",
-    "proto_path_to_generated_filename",
     "protos_from_context",
 )
 
