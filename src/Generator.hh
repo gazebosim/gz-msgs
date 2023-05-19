@@ -25,8 +25,6 @@ namespace google {
 namespace protobuf {
 namespace compiler {
 namespace cpp {
-class GeneratorContext;
-
 /// \cond
 /// \brief Google protobuf message generator for igntion::msgs
 class Generator : public CodeGenerator
