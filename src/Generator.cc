@@ -149,7 +149,7 @@ bool Generator::Generate(const FileDescriptor *_file,
 
     auto ns = getNamespaces(_file->package());
 
-    for (auto name : ns)
+    for (const auto name : ns)
         printer.PrintRaw("namespace " + name + " {\n");
 
     for (auto i = 0; i < _file->message_type_count(); ++i)
