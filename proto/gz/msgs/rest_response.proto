@@ -30,7 +30,7 @@ message RestResponse
 {
   enum Type
   {
-    /// \brief Rest service call was successfull
+    /// \brief Rest service call was successful
     SUCCESS = 0;
 
     /// \brief Error calling rest service
