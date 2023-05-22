@@ -60,13 +60,13 @@ namespace gz::msgs {
 
     /// \brief Register a message.
     /// \param[in] _msgType Type of message to register.
-    /// \param[in] _factoryfn Function that generates the message.
+    /// \param[in] _factoryFn Function that generates the message.
     public: void Register(const std::string &_msgType, FactoryFn _factoryFn);
 
     /// \brief Register a collection of messages.
     /// \param[in] _functions Collection of messages to register.
     /// \return Number of registered message types
-    public: int RegisterCollection(FactoryFnCollection &_funtions);
+    public: int RegisterCollection(FactoryFnCollection &_functions);
 
     /// \brief Create a new instance of a message.
     /// \param[in] _msgType Type of message to create.
