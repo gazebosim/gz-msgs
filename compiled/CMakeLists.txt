@@ -20,7 +20,7 @@ gz_msgs_generate_messages_impl(
   PROTO_PATH
     ${PROJECT_SOURCE_DIR}/proto
   MSGS_LIB
-    gz-msgs10
+    gz-msgs${PROJECT_VERSION_MAJOR}
   TARGET
     gz_msgs_msgs
 )

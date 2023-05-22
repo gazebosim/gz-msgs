@@ -45,11 +45,11 @@ function(gz_msgs_protoc)
   endif()
 
   if(gz_msgs_protoc_GENERATE_CPP)
-    # Full path to generated header (${PROJECT_BINARY_DIR}/include/gz/msgs/foo.pb.h)
+    # Full path to gazeob-specific header (${PROJECT_BINARY_DIR}/include/gz/msgs/foo.pb.h)
     set(output_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}/${proto_package_dir}/${FIL_WE}.pb.h")
-    # Full path to generated detail header (${PROJECT_BINARY_DIR}/include/gz/msgs/details/foo.pb.h)
+    # Full path to generated protobuf header (${PROJECT_BINARY_DIR}/include/gz/msgs/details/foo.pb.h)
     set(output_detail_header "${gz_msgs_protoc_OUTPUT_CPP_DIR}/${proto_package_dir}/details/${FIL_WE}.pb.h")
-    # Full path to generated ignition header (${PROJECT_BINARY_DIR}/include/foo.pb.cc)
+    # Full path to generated protobuf source (${PROJECT_BINARY_DIR}/include/foo.pb.cc)
     set(output_source "${gz_msgs_protoc_OUTPUT_CPP_DIR}/${proto_package_dir}/${FIL_WE}.pb.cc")
 
     # Full path to an index file, which contains all defined message types for that proto file

@@ -9,5 +9,5 @@ gz_build_tests(TYPE INTEGRATION SOURCES ${tests} TEST_LIST test_targets)
 
 foreach(test ${test_targets})
   target_include_directories(${test} PUBLIC ${PROJECT_BINARY_DIR}/gz_msgs_gen )
-  target_link_libraries(${test} gz-msgs10-compiled)
+  target_link_libraries(${test} gz-msgs${PROJECT_VERSION_MAJOR}-compiled)
 endforeach()

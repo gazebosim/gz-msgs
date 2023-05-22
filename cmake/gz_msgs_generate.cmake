@@ -31,8 +31,6 @@ function(gz_msgs_generate_messages_impl)
     list(APPEND depends_includes ${dep_proto_include_path})
   endforeach()
 
-  message(STATUS "Dependencies: ${generate_messages_DEPENDENCIES} (${depends_proto_paths}) (${depends_includes})")
-
   foreach(proto_file ${generate_messages_INPUT_PROTOS})
     gz_msgs_protoc(
       MSGS_GEN_SCRIPT
