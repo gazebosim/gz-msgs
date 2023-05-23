@@ -21,7 +21,7 @@ option java_package = "com.gz.msgs";
 option java_outer_classname = "ProjectorProtos";
 
 /// \ingroup gz.msgs
-/// \interface Projector 
+/// \interface Projector
 /// \brief Information about a projector
 
 import "gz/msgs/pose.proto";
@@ -39,4 +39,12 @@ message Projector
   double near_clip     = 6;
   double far_clip      = 7;
   bool enabled         = 8;
+
+  /// \brief Unique ID associated with the projector
+  uint32 id            = 9;
+
+  /// \brief Visibility flags of a projector. When a camera's visibility_mask
+  /// & (bitwise AND) the projector's visibility_flags evaluates to non-zero,
+  /// the projected pattern will be visible to the camera.
+  uint32 visibility_flags = 10;
 }
