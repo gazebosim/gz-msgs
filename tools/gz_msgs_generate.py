@@ -35,7 +35,14 @@ def main(argv=sys.argv[1:]):
         help='Flag to indicate if C++ bindings should be generated',
         action='store_true')
     parser.add_argument(
+        '--generate-python',
+        help='Flag to indicate if Python bindings should be generated',
+        action='store_true')
+    parser.add_argument(
         '--output-cpp-path',
+        help='The basepath of the generated C++ files')
+    parser.add_argument(
+        '--output-python-path',
         help='The basepath of the generated C++ files')
     parser.add_argument(
         '--proto-path',
@@ -52,7 +59,7 @@ def main(argv=sys.argv[1:]):
         help='The location of the protos')
     args = parser.parse_args(argv)
 
-    # First generate the base cpp files
+    # First generate the base cpp and python files
     cmd = [args.protoc_exec]
 
     for path in args.proto_path:
@@ -66,9 +73,11 @@ def main(argv=sys.argv[1:]):
         cmd += [f'--plugin=protoc-gen-ignmsgs={args.gz_generator_bin}']
         cmd += [f'--cpp_out={args.output_cpp_path}']
         cmd += [f'--ignmsgs_out={args.output_cpp_path}']
+        os.makedirs(args.output_cpp_path, exist_ok=True)
+    if args.generate_python:
+        cmd += [f'--python_out={args.output_python_path}']
+        os.makedirs(args.output_python_path, exist_ok=True)
     cmd += [args.input_path]
-
-    os.makedirs(args.output_cpp_path, exist_ok=True)
 
     try:
         subprocess.check_call(cmd)
@@ -76,32 +85,36 @@ def main(argv=sys.argv[1:]):
         print(f'Failed to execute protoc compiler: {e}')
         sys.exit(-1)
 
-    # Move original generated cpp to details/
-    proto_file = os.path.splitext(os.path.relpath(args.input_path, args.proto_path[0]))[0]
-    detail_proto_file = proto_file.split(os.sep)
+    if args.generate_cpp:
+        # Move original generated cpp to details/
+        proto_file = os.path.splitext(
+            os.path.relpath(args.input_path, args.proto_path[0]))[0]
+        detail_proto_file = proto_file.split(os.sep)
 
-    detail_proto_dir = detail_proto_file[:-1]
-    detail_proto_dir.append('details')
-    detail_proto_dir = os.path.join(*detail_proto_dir)
-    detail_proto_file.insert(-1, 'details')
-    detail_proto_file = os.path.join(*detail_proto_file)
+        detail_proto_dir = detail_proto_file[:-1]
+        detail_proto_dir.append('details')
+        detail_proto_dir = os.path.join(*detail_proto_dir)
+        detail_proto_file.insert(-1, 'details')
+        detail_proto_file = os.path.join(*detail_proto_file)
 
-    header = os.path.join(args.output_cpp_path, proto_file + ".pb.h")
-    gz_header = os.path.join(args.output_cpp_path, proto_file + ".gz.h")
-    detail_header = os.path.join(args.output_cpp_path, detail_proto_file + ".pb.h")
+        header = os.path.join(args.output_cpp_path, proto_file + ".pb.h")
+        gz_header = os.path.join(args.output_cpp_path, proto_file + ".gz.h")
+        detail_header = os.path.join(args.output_cpp_path,
+                                     detail_proto_file + ".pb.h")
 
-    try:
-        os.makedirs(os.path.join(args.output_cpp_path, detail_proto_dir),
-                exist_ok=True)
-        # Windows cannot rename a file to an existing file
-        if os.path.exists(detail_header):
-            os.remove(detail_header)
+        try:
+            os.makedirs(os.path.join(args.output_cpp_path, detail_proto_dir),
+                        exist_ok=True)
+            # Windows cannot rename a file to an existing file
+            if os.path.exists(detail_header):
+                os.remove(detail_header)
 
-        os.rename(header, detail_header)
-        os.rename(gz_header, header)
-    except Exception as e:
-        print(f'Failed to manipulate gz-msgs headers: {e}')
-        sys.exit(-1)
+            os.rename(header, detail_header)
+            os.rename(gz_header, header)
+        except Exception as e:
+            print(f'Failed to manipulate gz-msgs headers: {e}')
+            sys.exit(-1)
+
 
 if __name__ == '__main__':
     sys.exit(main())

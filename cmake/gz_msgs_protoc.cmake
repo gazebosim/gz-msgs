@@ -2,6 +2,7 @@
 # A function that calls protoc on a protobuf file
 # Options:
 #   GENERATE_CPP        - generates c++ code for the message if specified
+#   GENERATE_PYTHON       - generates python code for the message if specified
 # One value arguments:
 #   MSGS_GEN_SCRIPT     - Path to the message generation python script
 #   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
@@ -9,15 +10,17 @@
 #   GZ_PROTOC_PLUGIN    - Path to the gazebo-specific protobuf compiler executable
 #   INPUT_PROTO         - Path to the input .proto file
 #   OUTPUT_CPP_DIR      - Path where C++ files are saved
+#   OUTPUT_PYTHON_DIR     - Path where Python files are saved
 #   OUTPUT_INCLUDES     - A CMake variable name containing a list that the C++ header path should be appended to
 #   OUTPUT_CPP_HH_VAR   - A CMake variable name containing a list generated headers should be appended to
 #   OUTPUT_DETAIL_CPP_HH_VAR - A CMake variable name containing a list that the C++ detail headers should be appended to
 #   OUTPUT_CPP_CC_VAR   - A Cmake variable name containing a list that the C++ source files should be appended to
+#   OUTPUT_PYTHON_VAR     - A Cmake variable name containing a list that the python file should be appended to
 # Multi value arguments
 #   PROTO_PATH          - Passed to protoc --proto_path
 #   DEPENDENCY_PROTO_PATHS - Passed to protoc --proto_path
 function(gz_msgs_protoc)
-  set(options GENERATE_CPP)
+  set(options GENERATE_CPP GENERATE_PYTHON)
   set(oneValueArgs
     MSGS_GEN_SCRIPT
     PROTO_PACKAGE
@@ -25,10 +28,12 @@ function(gz_msgs_protoc)
     GZ_PROTOC_PLUGIN
     INPUT_PROTO
     OUTPUT_CPP_DIR
+    OUTPUT_PYTHON_DIR
     OUTPUT_INCLUDES
     OUTPUT_CPP_HH_VAR
     OUTPUT_DETAIL_CPP_HH_VAR
-    OUTPUT_CPP_CC_VAR)
+    OUTPUT_CPP_CC_VAR
+    OUTPUT_PYTHON_VAR)
   set(multiValueArgs PROTO_PATH DEPENDENCY_PROTO_PATHS)
 
   cmake_parse_arguments(gz_msgs_protoc "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -40,6 +45,9 @@ function(gz_msgs_protoc)
   set(output_files)
 
   _gz_msgs_proto_pkg_to_path(${gz_msgs_protoc_PROTO_PACKAGE} proto_package_dir)
+
+  # Variable to hold which language is being generated. It'll be used in the comment of add_custom_command below
+  set(output_language)
 
   if(gz_msgs_protoc_GENERATE_CPP)
     # Full path to gazeob-specific header (${PROJECT_BINARY_DIR}/include/gz/msgs/foo.pb.h)
@@ -71,11 +79,23 @@ function(gz_msgs_protoc)
     set(${gz_msgs_protoc_OUTPUT_DETAIL_CPP_HH_VAR} ${${gz_msgs_protoc_OUTPUT_DETAIL_CPP_HH_VAR}} PARENT_SCOPE)
     set(${gz_msgs_protoc_OUTPUT_CPP_HH_VAR} ${${gz_msgs_protoc_OUTPUT_CPP_HH_VAR}} PARENT_SCOPE)
     set(${gz_msgs_protoc_OUTPUT_CPP_CC_VAR} ${${gz_msgs_protoc_OUTPUT_CPP_CC_VAR}} PARENT_SCOPE)
+
+    set(output_language "(C++)")
   endif()
+
+  if(gz_msgs_protoc_GENERATE_PYTHON)
+    file(MAKE_DIRECTORY ${gz_msgs_protoc_OUTPUT_PYTHON_DIR})
+    # Note: Both proto2 and proto3 use the _pb2.py suffix (https://protobuf.dev/reference/python/python-generated/#invocation)
+    set(output_python "${gz_msgs_protoc_OUTPUT_PYTHON_DIR}/${proto_package_dir}/${FIL_WE}_pb2.py")
+    list(APPEND ${gz_msgs_protoc_OUTPUT_PYTHON_VAR} ${output_python})
+    list(APPEND output_files ${output_python})
+    set(${gz_msgs_protoc_OUTPUT_PYTHON_VAR} ${${gz_msgs_protoc_OUTPUT_PYTHON_VAR}} PARENT_SCOPE)
+    set(output_language "(Python)")
+  endif()
+
 
   set(GENERATE_ARGS
       --protoc-exec "$<TARGET_FILE:${gz_msgs_protoc_PROTOC_EXEC}>"
-      --gz-generator-bin "${gz_msgs_protoc_GZ_PROTOC_PLUGIN}"
       --proto-path "${gz_msgs_protoc_PROTO_PATH}"
       --input-path "${ABS_FIL}"
   )
@@ -89,7 +109,14 @@ function(gz_msgs_protoc)
   if(${gz_msgs_protoc_GENERATE_CPP})
     list(APPEND GENERATE_ARGS
       --generate-cpp
+      --gz-generator-bin "${gz_msgs_protoc_GZ_PROTOC_PLUGIN}"
       --output-cpp-path "${gz_msgs_protoc_OUTPUT_CPP_DIR}")
+  endif()
+
+  if(${gz_msgs_protoc_GENERATE_PYTHON})
+    list(APPEND GENERATE_ARGS
+      --generate-python
+      --output-python-path "${gz_msgs_protoc_OUTPUT_PYTHON_DIR}")
   endif()
 
   add_custom_command(
@@ -101,7 +128,7 @@ function(gz_msgs_protoc)
     # While the script is executed in the source directory, it does not write
     # to the source tree.  All outputs are stored in the build directory.
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-    COMMENT "Running protoc on ${gz_msgs_protoc_INPUT_PROTO}"
+    COMMENT "Running protoc ${output_language} on ${gz_msgs_protoc_INPUT_PROTO}"
     VERBATIM
   )
 

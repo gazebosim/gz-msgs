@@ -117,6 +117,9 @@ add_subdirectory(tools)
 # projects.
 add_subdirectory(proto)
 
+# Generate python
+add_subdirectory(python)
+
 #============================================================================
 # Create package information
 #============================================================================
