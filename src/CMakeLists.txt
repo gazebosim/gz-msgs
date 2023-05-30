@@ -24,35 +24,35 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter)
 ##################################################
 # A function that calls protoc on a protobuf file
 # Options:
-#   GENERATE_RUBY       - generates ruby code for the message if specified
+#   GENERATE_PYTHON       - generates python code for the message if specified
 #   GENERATE_CPP        - generates c++ code for the message if specified
 # One value arguments:
 #   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. ".gz.msgs")
 #   PROTOC_EXEC         - Path to protoc
 #   INPUT_PROTO         - Path to the input .proto file
 #   OUTPUT_CPP_DIR      - Path where C++ files are saved
-#   OUTPUT_RUBY_DIR     - Path where Ruby files are saved
+#   OUTPUT_PYTHON_DIR     - Path where Python files are saved
 #   OUTPUT_INCLUDES     - A CMake variable name containing a list that the C++ header path should be appended to
 #   OUTPUT_CPP_HH_VAR   - A CMake variable name containing a list that the C++ header path should be appended to
 #   OUTPUT_GZ_CPP_HH_VAR - A CMake variable name containing a list that the C++ header path should be appended to
 #   OUTPUT_CPP_CC_VAR   - A Cmake variable name containing a list that the C++ source path should be appended to
-#   OUTPUT_RUBY_VAR     - A Cmake variable name containing a list that the ruby file should be apenned to
+#   OUTPUT_PYTHON_VAR     - A Cmake variable name containing a list that the python file should be appended to
 # Multi value arguments
 #   PROTO_PATH          - Passed to protoc --proto_path
 function(gz_msgs_protoc)
-  set(options GENERATE_RUBY GENERATE_CPP)
+  set(options GENERATE_PYTHON GENERATE_CPP)
   set(oneValueArgs
     PROTO_PACKAGE
     PROTOC_EXEC
     INPUT_PROTO
     OUTPUT_CPP_DIR
-    OUTPUT_RUBY_DIR
+    OUTPUT_PYTHON_DIR
     OUTPUT_INCLUDES
     OUTPUT_CPP_HH_VAR
     OUTPUT_GZ_CPP_HH_VAR
     OUTPUT_DETAIL_CPP_HH_VAR
     OUTPUT_CPP_CC_VAR
-    OUTPUT_RUBY_VAR)
+    OUTPUT_PYTHON_VAR)
   set(multiValueArgs PROTO_PATH)
 
   cmake_parse_arguments(gz_msgs_protoc "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -97,13 +97,13 @@ function(gz_msgs_protoc)
     set(${gz_msgs_protoc_OUTPUT_CPP_CC_VAR} ${${gz_msgs_protoc_OUTPUT_CPP_CC_VAR}} PARENT_SCOPE)
   endif()
 
-  if(gz_msgs_protoc_GENERATE_RUBY)
-    file(MAKE_DIRECTORY ${gz_msgs_protoc_OUTPUT_RUBY_DIR})
-    set(output_ruby "${gz_msgs_protoc_OUTPUT_RUBY_DIR}${proto_package_dir}/${FIL_WE}_pb.rb")
-    list(APPEND ${gz_msgs_protoc_OUTPUT_RUBY_VAR} ${output_ruby})
-    list(APPEND output_files ${output_ruby})
-    list(APPEND protoc_args "--ruby_out=${gz_msgs_protoc_OUTPUT_RUBY_DIR}")
-    set(${gz_msgs_protoc_OUTPUT_RUBY_VAR} ${${gz_msgs_protoc_OUTPUT_RUBY_VAR}} PARENT_SCOPE)
+  if(gz_msgs_protoc_GENERATE_PYTHON)
+    file(MAKE_DIRECTORY ${gz_msgs_protoc_OUTPUT_PYTHON_DIR})
+    # Note: Both proto2 and proto3 use the _pb2.py suffix (https://protobuf.dev/reference/python/python-generated/#invocation)
+    set(output_python "${gz_msgs_protoc_OUTPUT_PYTHON_DIR}${proto_package_dir}/${FIL_WE}_pb2.py")
+    list(APPEND ${gz_msgs_protoc_OUTPUT_PYTHON_VAR} ${output_python})
+    list(APPEND output_files ${output_python})
+    set(${gz_msgs_protoc_OUTPUT_PYTHON_VAR} ${${gz_msgs_protoc_OUTPUT_PYTHON_VAR}} PARENT_SCOPE)
   endif()
 
 
@@ -120,10 +120,10 @@ function(gz_msgs_protoc)
       --output-cpp-path "${gz_msgs_protoc_OUTPUT_CPP_DIR}")
   endif()
 
-  if(${gz_msgs_protoc_GENERATE_RUBY})
+  if(${gz_msgs_protoc_GENERATE_PYTHON})
     list(APPEND GENERATE_ARGS
-      --generate-ruby
-      --output-ruby-path "${gz_msgs_protoc_OUTPUT_RUBY_DIR}")
+      --generate-python
+      --output-python-path "${gz_msgs_protoc_OUTPUT_PYTHON_DIR}")
   endif()
 
   add_custom_command(
@@ -151,15 +151,15 @@ foreach(proto_file ${proto_files})
     PROTO_PACKAGE
       .gz.msgs
     GENERATE_CPP
-    GENERATE_RUBY
+    GENERATE_PYTHON
     INPUT_PROTO
       ${proto_file}
     PROTOC_EXEC
       protobuf::protoc
     OUTPUT_CPP_DIR
       "${PROJECT_BINARY_DIR}/include"
-    OUTPUT_RUBY_DIR
-      "${PROJECT_BINARY_DIR}/ruby"
+    OUTPUT_PYTHON_DIR
+      "${PROJECT_BINARY_DIR}/python"
     OUTPUT_INCLUDES
       gen_includes
     OUTPUT_CPP_HH_VAR
@@ -170,8 +170,8 @@ foreach(proto_file ${proto_files})
       gen_ign_headers
     OUTPUT_CPP_CC_VAR
       gen_sources
-    OUTPUT_RUBY_VAR
-      gen_ruby_scripts
+    OUTPUT_PYTHON_VAR
+      gen_python_scripts
     PROTO_PATH
       "${PROJECT_SOURCE_DIR}/proto")
 endforeach()
@@ -193,11 +193,11 @@ if(MSVC)
   add_definitions(/bigobj)
 endif()
 
-set_source_files_properties(${gen_headers} ${gen_ign_headers} ${gen_detail_headers} ${gen_sources} ${gen_ruby_scripts}
+set_source_files_properties(${gen_headers} ${gen_ign_headers} ${gen_detail_headers} ${gen_sources} ${gen_python_scripts}
   PROPERTIES GENERATED TRUE)
 
-message(STATUS "Installing Ruby messages to ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/ruby/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}")
-install(FILES ${gen_ruby_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/ruby/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR})
+message(STATUS "Installing Python messages to ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/python/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}")
+install(FILES ${gen_python_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/python/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR})
 
 # Install gz/msgs
 gz_install_includes(
