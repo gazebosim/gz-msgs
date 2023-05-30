@@ -67,6 +67,10 @@ MessageFactory::MessagePtr MessageFactory::New(
   {
     type = "gz.msgs." + _msgType.substr(8);
   }
+  if (_msgType.find(".gz_msgs.") == 0)
+  {
+    type = "gz.msgs." + _msgType.substr(9);
+  }
   // Convert ".gz.msgs." to "gz_msgs.".
   else if (_msgType.find(".gz.msgs.") == 0)
   {

@@ -63,3 +63,9 @@ endif()
 if (TARGET UNIT_PointCloudPackedUtils_TEST)
   target_link_messages(TARGET UNIT_PointCloudPackedUtils_TEST MSG_TARGETS gz_msgs_msgs)
 endif()
+
+##################################################
+# gz msgs command
+if(NOT WIN32)
+  add_subdirectory(src/cmd)
+endif()

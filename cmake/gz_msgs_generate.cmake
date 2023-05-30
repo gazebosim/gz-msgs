@@ -94,7 +94,7 @@ function(gz_msgs_generate_messages_impl)
   if(NOT MSVC)
     # -Wno-switch-default flags is required for suppressing a warning in some of
     # the generated protobuf files.
-    set_source_files_properties(${gen_sources} COMPILE_FLAGS -Wno-switch-default)
+    set_source_files_properties(${gen_sources} COMPILE_FLAGS "-Wno-switch-default -Wno-float-equal")
   endif()
 
   add_library(${generate_messages_TARGET} STATIC ${gen_sources} ${gen_factory_sources})
