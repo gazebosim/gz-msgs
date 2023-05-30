@@ -27,7 +27,7 @@ gz_msgs_generate_messages(
 add_executable(${PROJECT_NAME} main.cc)
 
 # Automatically uses whole-archive linking to get all the messages available
-target_link_messages(TARGET ${PROJECT_NAME} PUBLIC MSG_TARGETS gz_msgs_gen)
+target_link_messages(TARGET ${PROJECT_NAME} PRIVATE MSG_TARGETS gz_msgs_gen)
 
 install(TARGETS ${PROJECT_NAME}
         LIBRARY DESTINATION lib
