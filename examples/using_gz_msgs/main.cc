@@ -8,7 +8,7 @@
 // With no arguments, it will list all known messages
 //   ./using_gz_msgs
 // With an argument, it will display that message, if found
-//   ./using_gz_msgs gz.msg.Vector3d
+//   ./using_gz_msgs gz.msgs.Vector3d
 int main(int argc, char** argv)
 {
   if (argc == 1)
