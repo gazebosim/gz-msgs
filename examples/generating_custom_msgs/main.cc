@@ -6,10 +6,8 @@
 // A simple example that demonstrates the use of the message factory
 //
 // Usage:
-// With no arguments, it will list all known messages
-//   ./using_gz_msgs
-// With an argument, it will display that message, if found
-//   ./using_gz_msgs gz.msg.Vector3d
+// Print text description of original and custom Vector3d msgs.
+//   ./generating_custom_messages
 int main(int argc, char** argv)
 {
   (void) argc;
