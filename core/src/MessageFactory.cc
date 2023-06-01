@@ -62,12 +62,13 @@ MessageFactory::MessagePtr MessageFactory::New(
     const std::string &_msgType)
 {
   std::string type;
+
   // Convert "gz.msgs." to "gz_msgs.".
   if (_msgType.find("gz_msgs.") == 0)
   {
     type = "gz.msgs." + _msgType.substr(8);
   }
-  if (_msgType.find(".gz_msgs.") == 0)
+  else if (_msgType.find(".gz_msgs.") == 0)
   {
     type = "gz.msgs." + _msgType.substr(9);
   }
