@@ -17,9 +17,10 @@
 #ifndef GZ_MSGS_MESSAGE_FACTORY_HH_
 #define GZ_MSGS_MESSAGE_FACTORY_HH_
 
-#include <string>
+#include <functional>
 #include <map>
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "gz/msgs/config.hh"
