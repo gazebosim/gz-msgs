@@ -5,6 +5,15 @@ Deprecated code produces compile-time warnings. These warning serve as
 notification to users that their code should be upgraded. The next major
 release will remove the deprecated code.
 
+## Gazebo Msgs 9.X to 10.X
+
+### Breaking changes
+
+1. The way that messages are included by downstream projects has been changed.  
+  The messages package will now only install `.proto` files, and it is the responsibility of downstream
+  users of the msgs library to generate corresponding headers and source files via cmake macros.
+  For more information, consult the `using_gz_msgs` example.
+
 ## Gazebo Msgs 8.X to 9.X
 
 1. **SuppressWarnings.hh** is deprecated and isn't part of `msgs.hh` anymore.
