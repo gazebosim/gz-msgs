@@ -112,6 +112,10 @@ function(gz_msgs_generate_messages_impl)
   set_target_properties(${generate_messages_TARGET} PROPERTIES PROTO_DIR "${PROTO_DIR}")
   set_target_properties(${generate_messages_TARGET} PROPERTIES PROTO_INCLUDE_DIR "${PROTO_INCLUDE_DIR}")
 
+  foreach(dep ${generate_messages_DEPENDENCIES})
+    add_dependencies(${generate_messages_TARGET} ${dep})
+  endforeach()
+
   target_link_libraries(${generate_messages_TARGET} PUBLIC protobuf::libprotobuf ${generate_messages_MSGS_LIB})
   target_include_directories(${generate_messages_TARGET} PUBLIC ${PROJECT_BINARY_DIR}/${gen_dir}_gen ${depends_includes})
 endfunction()
