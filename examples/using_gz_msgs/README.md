@@ -2,7 +2,7 @@
 
 With the new message generation pipeline, downstream users of `gz-msgs` must now generate messages as part of their build process.
 
-The example in this folder demonstrate how to build messages as part of your build.
+The example in this folder demonstrates how to build messages as part of your build.
 
 
 ## Finding gz-cmake

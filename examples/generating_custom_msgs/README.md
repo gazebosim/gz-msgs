@@ -1,6 +1,6 @@
 # Creating custom gz-msgs entries
 
-The example in this folder demonstrate how to create your own message defintions. 
+The example in this folder demonstrates how to create your own message defintions. 
 
 Most of the setup is the same as the `using_gz_msgs` example, so if you are not familiar, view that first.
 
