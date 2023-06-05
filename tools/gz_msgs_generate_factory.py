@@ -16,6 +16,7 @@
 
 import argparse
 import os
+import pathlib
 import sys
 
 # Create <gz/msgs/MessageTypes.hh>
@@ -135,7 +136,8 @@ def main(argv=sys.argv[1:]):
         proto_file = os.path.splitext(os.path.relpath(proto, args.proto_path))[0]
         header = proto_file + ".pb.h"
         headers.append(f"#include <{header}>")
-        proto_file = proto_file.replace('/', '_')
+
+        proto_file = '_'.join(pathlib.Path(proto_file).parts)
 
         # The gazebo extensions to the gazebo compiler write out a series of index files
         # which capture the message types
