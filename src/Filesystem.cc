@@ -220,7 +220,7 @@ namespace gz
 #endif  // _WIN32
 
     //////////////////////////////////////////////////
-    const std::string separator(const std::string &_p)
+    std::string separator(const std::string &_p)
     {
       return _p + preferred_separator;
     }

@@ -131,7 +131,7 @@ message FuelMetadata
   /// \brief Authors of this resource.
   repeated Contact authors = 6;
 
-  /// \brief Legal information, such as copyright and license specificiations.
+  /// \brief Legal information, such as copyright and license specifications.
   Legal legal              = 7;
 
   /// \brief Tags for a resource.
