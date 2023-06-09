@@ -44,7 +44,7 @@ using namespace gz;
 using namespace msgs;
 
 //////////////////////////////////////////////////
-extern "C" GZ_MSGS_VISIBLE
+extern "C" GZ_MSGS_COMPILED_VISIBLE
 void cmdMsgInfo(const char *_msg)
 {
   gz::msgs::RegisterAll();
@@ -70,7 +70,7 @@ void cmdMsgInfo(const char *_msg)
 }
 
 //////////////////////////////////////////////////
-extern "C" GZ_MSGS_VISIBLE
+extern "C" GZ_MSGS_COMPILED_VISIBLE
 void cmdMsgList()
 {
   gz::msgs::RegisterAll();
@@ -82,7 +82,7 @@ void cmdMsgList()
 }
 
 //////////////////////////////////////////////////
-extern "C" GZ_MSGS_VISIBLE
+extern "C" GZ_MSGS_COMPILED_VISIBLE
 const char *gzMsgsVersion()
 {
   return GZ_MSGS_VERSION_FULL;
