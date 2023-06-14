@@ -20,6 +20,7 @@
 #include <type_traits>
 #include <google/protobuf/message.h>
 
+#include "gz/msgs/config.hh"
 #include "gz/msgs/Export.hh"
 
 namespace gz::msgs {
@@ -31,7 +32,7 @@ template <typename MessageT,
   std::enable_if_t<
     std::is_base_of_v<
       google::protobuf::Message, MessageT>, bool> = true>
-struct GZ_MSGS_VISIBLE Converter
+struct Converter
 {
   static void Set(MessageT *_msg, const DataT &_data);
   static void Set(DataT *_data, const MessageT &_msg);
@@ -54,7 +55,7 @@ template <typename MessageT,
   std::enable_if_t<
     std::is_base_of_v<
       google::protobuf::Message, MessageT>, bool> = true>
-GZ_MSGS_VISIBLE void Set(MessageT *_msg, const DataT &_data)
+void Set(MessageT *_msg, const DataT &_data)
 {
   Converter<MessageT, DataT>::Set(_msg, _data);
 }
@@ -64,7 +65,7 @@ template <typename MessageT,
   std::enable_if_t<
     std::is_base_of_v<
       google::protobuf::Message, MessageT>, bool> = true>
-GZ_MSGS_VISIBLE void Set(DataT *_data , const MessageT &_msg)
+void Set(DataT *_data , const MessageT &_msg)
 {
   Converter<MessageT, DataT>::Set(_data, _msg);
 }

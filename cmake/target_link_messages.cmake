@@ -34,6 +34,14 @@ function(target_link_messages)
       # linking generator expressions as described here:
       # https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html#genex:LINK_LIBRARY
       target_link_libraries(${target_link_messages_TARGET} ${VISIBILITY} -WHOLEARCHIVE:$<TARGET_FILE:${message_lib}>)
+
+      # Explicitly add dependency, link libraries, and includes as the WHOLEARCHIVE flag doesn't 
+      # do that on Windows.
+      add_dependencies(${target_link_messages_TARGET} ${message_lib})
+      get_target_property(message_lib_INCLUDES ${message_lib} INTERFACE_INCLUDE_DIRECTORIES)
+      get_target_property(message_lib_LIBS ${message_lib} INTERFACE_LINK_LIBRARIES)
+      target_include_directories(${target_link_messages_TARGET} PRIVATE ${message_lib_INCLUDES})
+      target_link_libraries(${target_link_messages_TARGET} ${message_lib_LIBS})
     else()
       target_link_libraries(${target_link_messages_TARGET} ${VISIBILITY}
           $<$<CXX_COMPILER_ID:GNU>:-Wl,--whole-archive>
