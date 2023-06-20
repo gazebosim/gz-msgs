@@ -12,7 +12,8 @@ release will remove the deprecated code.
 1. The way that messages are included by downstream projects has been changed.  
   The messages package will now only install `.proto` files, and it is the responsibility of downstream
   users of the msgs library to generate corresponding headers and source files via cmake macros.
-  For more information, consult the `using_gz_msgs` example.
+  * For more information, consult the `using_gz_msgs` example.
+  * Note that there will no longer be Ruby generated messages, this support will be restored as-needed. 
 
 ## Gazebo Msgs 8.X to 9.X
 
