@@ -90,7 +90,6 @@ _gz_msgs_generate_gen = rule(
             cfg = "host",
         ),
     },
-    output_to_genfiles = True,
     implementation = _gz_msgs_generate_impl,
 )
 
