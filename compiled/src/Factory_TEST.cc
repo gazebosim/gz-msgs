@@ -27,7 +27,15 @@
 
 using namespace gz;
 
+namespace {
 static constexpr const char * kMsgsTestPath = GZ_MSGS_TEST_PATH;
+
+#ifdef _WIN32
+static constexpr char kEnvironmentVariableSeparator = ';';
+#else
+static constexpr char kEnvironmentVariableSeparator = ':';
+#endif
+}  // namespace
 
 /////////////////////////////////////////////////
 TEST(FactoryTest, Type)
@@ -76,7 +84,7 @@ TEST(FactoryTest, NewDynamicFactory)
 
   std::filesystem::path test_path(kMsgsTestPath);
   paths += (test_path / "desc").string();
-  paths += ":";
+  paths += kEnvironmentVariableSeparator;
   paths += test_path.string();
 
   msgs::Factory::LoadDescriptors(paths);

@@ -22,9 +22,14 @@
 #include "DynamicFactory.hh"
 #include "gz/utils/Environment.hh"
 
-static constexpr const char * kDescriptorEnv = "GZ_DESCRIPTOR_PATH";
-
 namespace {
+static constexpr const char * kDescriptorEnv = "GZ_DESCRIPTOR_PATH";
+#ifdef _WIN32
+static constexpr char kEnvironmentVariableSeparator = ';';
+#else
+static constexpr char kEnvironmentVariableSeparator = ':';
+#endif
+
 //////////////////////////////////////////////////
 /// \brief split at a one character delimiter to get a vector of something
 /// \param[in] _orig The string to split
@@ -66,7 +71,8 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     return;
 
   // Split all the directories containing .desc files.
-  std::vector<std::string> descDirs = split(_paths, ':');
+  std::vector<std::string> descDirs =
+    split(_paths, kEnvironmentVariableSeparator);
 
   for (const std::string &descDir : descDirs)
   {

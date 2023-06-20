@@ -47,6 +47,12 @@ class DynamicFactory
   public: using Message = google::protobuf::Message;
   public: using MessagePtr = std::unique_ptr<Message>;
 
+#ifdef WIN32
+  public: static constexpr char kEnvironmentVariableSeparator = ';';
+#else
+  public: static constexpr char kEnvironmentVariableSeparator = ':';
+#endif
+
   //////////////////////////////////////////////////
   /// \brief Constructor.
   /// The constructor will try to load all descriptors specified in the
