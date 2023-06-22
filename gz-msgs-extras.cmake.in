@@ -16,6 +16,7 @@
 
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
+include(${@PROJECT_NAME@_DIR}/gz_msgs_string_utils.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_protoc.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_factory.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_generate.cmake)

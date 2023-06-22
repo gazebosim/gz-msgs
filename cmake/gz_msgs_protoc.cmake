@@ -39,10 +39,7 @@ function(gz_msgs_protoc)
   set(protoc_args)
   set(output_files)
 
-  set(proto_package_dir ".")
-  if(gz_msgs_protoc_PROTO_PACKAGE)
-    string(REPLACE "." "/" proto_package_dir ${gz_msgs_protoc_PROTO_PACKAGE})
-  endif()
+  _gz_msgs_proto_pkg_to_path(${gz_msgs_protoc_PROTO_PACKAGE} proto_package_dir)
 
   if(gz_msgs_protoc_GENERATE_CPP)
     # Full path to gazeob-specific header (${PROJECT_BINARY_DIR}/include/gz/msgs/foo.pb.h)
@@ -52,10 +49,10 @@ function(gz_msgs_protoc)
     # Full path to generated protobuf source (${PROJECT_BINARY_DIR}/include/foo.pb.cc)
     set(output_source "${gz_msgs_protoc_OUTPUT_CPP_DIR}/${proto_package_dir}/${FIL_WE}.pb.cc")
 
+    _gz_msgs_proto_to_unique(${gz_msgs_protoc_INPUT_PROTO} ${gz_msgs_protoc_PROTO_PACKAGE} UNIQUE_NAME)
+
     # Full path to an index file, which contains all defined message types for that proto file
-    string(REPLACE "." "_" PACKAGE_UNDER ${gz_msgs_protoc_PROTO_PACKAGE})
-    string(REPLACE "." "_" MESSAGE_UNDER ${FIL_WE})
-    set(output_index "${gz_msgs_protoc_OUTPUT_CPP_DIR}/${PACKAGE_UNDER}_${MESSAGE_UNDER}.pb_index")
+    set(output_index "${gz_msgs_protoc_OUTPUT_CPP_DIR}/${UNIQUE_NAME}.pb_index")
 
     # Generate a clean relative path (gz/msgs/foo.pb.h)
     string(REPLACE "${PROJECT_BINARY_DIR}/include/" "" output_include ${output_header})

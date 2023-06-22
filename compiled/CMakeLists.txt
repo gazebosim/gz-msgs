@@ -1,3 +1,4 @@
+include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_string_utils.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_factory.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_generate.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_protoc.cmake)

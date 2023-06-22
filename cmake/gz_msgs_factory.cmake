@@ -25,10 +25,7 @@ function(gz_msgs_factory)
 
   cmake_parse_arguments(gz_msgs_factory "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-  set(proto_package_dir ".")
-  if(gz_msgs_factory_PROTO_PACKAGE)
-    string(REPLACE "." "/" proto_package_dir ${gz_msgs_factory_PROTO_PACKAGE})
-  endif()
+  _gz_msgs_proto_pkg_to_path(${gz_msgs_factory_PROTO_PACKAGE} proto_package_dir)
 
   set(output_header "${gz_msgs_factory_OUTPUT_CPP_DIR}/${proto_package_dir}/MessageTypes.hh")
   set(output_source "${gz_msgs_factory_OUTPUT_CPP_DIR}/${proto_package_dir}/register.cc")
@@ -43,13 +40,11 @@ function(gz_msgs_factory)
   set(${gz_msgs_factory_OUTPUT_CPP_CC_VAR} ${${gz_msgs_factory_OUTPUT_CPP_CC_VAR}} PARENT_SCOPE)
 
   set(depends_index)
-
   # Full path to an index file, which contains all defined message types for that proto file
   foreach(proto_file ${gz_msgs_factory_INPUT_PROTOS})
-    get_filename_component(FIL_WE ${proto_file} NAME_WE)
-    string(REPLACE "." "_" PACKAGE_UNDER ${gz_msgs_factory_PROTO_PACKAGE})
-    string(REPLACE "." "_" MESSAGE_UNDER ${FIL_WE})
-    set(input_index "${gz_msgs_factory_OUTPUT_CPP_DIR}/${PACKAGE_UNDER}_${MESSAGE_UNDER}.pb_index")
+    # Get a unique path (gz.msgs.foo -> gz_msgs_foo) for naming the index
+    _gz_msgs_proto_to_unique(${proto_file} ${gz_msgs_factory_PROTO_PACKAGE} UNIQUE_NAME)
+    set(input_index "${gz_msgs_factory_OUTPUT_CPP_DIR}/${UNIQUE_NAME}.pb_index")
     list(APPEND depends_index ${input_index})
   endforeach()
 

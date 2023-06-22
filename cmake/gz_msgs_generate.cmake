@@ -20,7 +20,7 @@ function(gz_msgs_generate_messages_impl)
   set(multiValueArgs INPUT_PROTOS DEPENDENCIES)
 
   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-  string(REPLACE "." "_" gen_dir ${generate_messages_PROTO_PACKAGE})
+  _gz_msgs_proto_pkg_to_path(${generate_messages_PROTO_PACKAGE} gen_dir)
 
   # Extract dependency information from targets
   set(depends_proto_paths)
@@ -101,6 +101,9 @@ function(gz_msgs_generate_messages_impl)
   endif()
 
   add_library(${generate_messages_TARGET} STATIC ${gen_sources} ${gen_factory_sources})
+
+  # Use position indepedent code (-fPIC), because this library may be linked
+  # into a shared library by the consumer
   set_property(TARGET ${generate_messages_TARGET} PROPERTY POSITION_INDEPENDENT_CODE ON)
 
   # Export the messages path and dependency messages paths for potential dependent message libs
