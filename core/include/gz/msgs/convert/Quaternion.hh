@@ -17,8 +17,6 @@
 #ifndef GZ_MSGS_CONVERT_QUATERNION_HH_
 #define GZ_MSGS_CONVERT_QUATERNION_HH_
 
-#include <gz/msgs/Converter.hh>
-
 // Message Headers
 #include "gz/msgs/quaternion.pb.h"
 
@@ -30,9 +28,7 @@ namespace gz::msgs {
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
-template<>
-inline void Converter<gz::msgs::Quaternion, gz::math::Quaterniond>::Set(
-    gz::msgs::Quaternion *_msg, const gz::math::Quaterniond &_data)
+inline void Set(gz::msgs::Quaternion *_msg, const gz::math::Quaterniond &_data)
 {
   _msg->set_w(_data.W());
   _msg->set_x(_data.X());
@@ -40,24 +36,24 @@ inline void Converter<gz::msgs::Quaternion, gz::math::Quaterniond>::Set(
   _msg->set_z(_data.Z());
 }
 
-template<>
-inline void Converter<gz::msgs::Quaternion, gz::math::Quaterniond>::Set(
-    gz::math::Quaterniond *_data, const gz::msgs::Quaternion &_msg)
+inline void Set(gz::math::Quaterniond *_data, const gz::msgs::Quaternion &_msg)
 {
   _data->Set(_msg.w(), _msg.x(), _msg.y(), _msg.z());
 }
 
 inline gz::msgs::Quaternion Convert(const gz::math::Quaterniond &_data)
 {
-  return Converter<gz::msgs::Quaternion, gz::math::Quaterniond>::Convert(_data);
+  gz::msgs::Quaternion ret;
+  Set(&ret, _data);
+  return ret;
 }
 
 inline gz::math::Quaterniond Convert(const gz::msgs::Quaternion &_msg)
 {
-  return Converter<gz::msgs::Quaternion, gz::math::Quaterniond>::Convert(_msg);
+  gz::math::Quaterniond ret;
+  Set(&ret, _msg);
+  return ret;
 }
-
-
 }  // namespce
 }  // namespace gz::msgs
 

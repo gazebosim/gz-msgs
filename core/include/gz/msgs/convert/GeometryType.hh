@@ -150,7 +150,6 @@ inline std::string ConvertGeometryType(const msgs::Geometry::Type _type)
   }
   return result;
 }
-
 }  // namespce
 }  // namespace gz::msgs
 

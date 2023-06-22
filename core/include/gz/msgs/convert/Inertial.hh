@@ -17,7 +17,6 @@
 #ifndef GZ_MSGS_CONVERT_INERTIAL_HH_
 #define GZ_MSGS_CONVERT_INERTIAL_HH_
 
-#include <gz/msgs/Converter.hh>
 #include <gz/msgs/convert/Pose.hh>
 #include <gz/msgs/convert/Vector3.hh>
 
@@ -33,9 +32,7 @@ namespace gz::msgs {
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
-template<>
-inline void Converter<gz::msgs::Inertial, gz::math::MassMatrix3d>::Set(
-    gz::msgs::Inertial *_msg, const gz::math::MassMatrix3d &_data)
+inline void Set(gz::msgs::Inertial *_msg, const gz::math::MassMatrix3d &_data)
 {
   _msg->set_mass(_data.Mass());
   _msg->set_ixx(_data.Ixx());
@@ -47,9 +44,7 @@ inline void Converter<gz::msgs::Inertial, gz::math::MassMatrix3d>::Set(
   _msg->mutable_pose()->mutable_orientation()->set_w(1);
 }
 
-template<>
-inline void Converter<gz::msgs::Inertial, gz::math::MassMatrix3d>::Set(
-    gz::math::MassMatrix3d *_data, const gz::msgs::Inertial &_msg)
+inline void Set(gz::math::MassMatrix3d *_data, const gz::msgs::Inertial &_msg)
 {
   _data->SetMass(_msg.mass());
   _data->SetIxx(_msg.ixx());
@@ -62,25 +57,16 @@ inline void Converter<gz::msgs::Inertial, gz::math::MassMatrix3d>::Set(
 
 inline gz::msgs::Inertial Convert(const gz::math::MassMatrix3d &_data)
 {
-  return Converter<gz::msgs::Inertial, gz::math::MassMatrix3d>::Convert(_data);
+  gz::msgs::Inertial ret;
+  Set(&ret, _data);
+  return ret;
 }
-
-/*
-inline gz::math::MassMatrix3d Convert(const gz::msgs::Inertial &_msg)
-{
-  return Converter<gz::msgs::Inertial, gz::math::MassMatrix3d>::Convert(_msg);
-}
-*/
 
 /////////////////////////////////
-template<>
-inline void Converter<gz::msgs::Inertial, gz::math::Inertiald>::Set(
-    gz::msgs::Inertial *_msg, const gz::math::Inertiald &_data)
+inline void Set(gz::msgs::Inertial *_msg, const gz::math::Inertiald &_data)
 {
-  Converter<gz::msgs::Inertial, gz::math::MassMatrix3d>::Set(
-        _msg, _data.MassMatrix());
-  Converter<gz::msgs::Pose, gz::math::Pose3d>::Set(
-        _msg->mutable_pose(), _data.Pose());
+  Set(_msg, _data.MassMatrix());
+  Set(_msg->mutable_pose(), _data.Pose());
 
   if (_data.FluidAddedMass().has_value())
   {
@@ -108,16 +94,14 @@ inline void Converter<gz::msgs::Inertial, gz::math::Inertiald>::Set(
   }
 }
 
-template<>
-inline void Converter<gz::msgs::Inertial, gz::math::Inertiald>::Set(
-    gz::math::Inertiald *_data, const gz::msgs::Inertial &_msg)
+inline void Set(gz::math::Inertiald *_data, const gz::msgs::Inertial &_msg)
 {
   gz::math::MassMatrix3d to_set = _data->MassMatrix();
-  Converter<gz::msgs::Inertial, gz::math::MassMatrix3d>::Set(&to_set, _msg);
+  Set(&to_set, _msg);
   _data->SetMassMatrix(to_set);
 
   gz::math::Pose3d pose_to_set = _data->Pose();
-  Converter<gz::msgs::Pose, gz::math::Pose3d>::Set(&pose_to_set, _msg.pose());
+  Set(&pose_to_set, _msg.pose());
   _data->SetPose(pose_to_set);
 
   if (_msg.fluid_added_mass_size() == 21)
@@ -171,12 +155,16 @@ inline void Converter<gz::msgs::Inertial, gz::math::Inertiald>::Set(
 
 inline gz::msgs::Inertial Convert(const gz::math::Inertiald &_data)
 {
-  return Converter<gz::msgs::Inertial, gz::math::Inertiald>::Convert(_data);
+  gz::msgs::Inertial ret;
+  Set(&ret, _data);
+  return ret;
 }
 
 inline gz::math::Inertiald Convert(const gz::msgs::Inertial &_msg)
 {
-  return Converter<gz::msgs::Inertial, gz::math::Inertiald>::Convert(_msg);
+  gz::math::Inertiald ret;
+  Set(&ret, _msg);
+  return ret;
 }
 }  // namespce
 }  // namespace gz::msgs

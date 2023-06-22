@@ -17,8 +17,6 @@
 #ifndef GZ_MSGS_CONVERT_SPHERICALCOORDINATES_HH_
 #define GZ_MSGS_CONVERT_SPHERICALCOORDINATES_HH_
 
-#include <gz/msgs/Converter.hh>
-
 // Message Headers
 #include "gz/msgs/spherical_coordinates.pb.h"
 
@@ -30,11 +28,8 @@ namespace gz::msgs {
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
-template<>
-inline void
-Converter<gz::msgs::SphericalCoordinates, gz::math::SphericalCoordinates>::Set(
-    gz::msgs::SphericalCoordinates *_msg,
-    const gz::math::SphericalCoordinates &_data)
+inline void Set(gz::msgs::SphericalCoordinates *_msg,
+                const gz::math::SphericalCoordinates &_data)
 {
   if (_data.Surface() == math::SphericalCoordinates::EARTH_WGS84)
   {
@@ -64,11 +59,8 @@ Converter<gz::msgs::SphericalCoordinates, gz::math::SphericalCoordinates>::Set(
   _msg->set_heading_deg(_data.HeadingOffset().Degree());
 }
 
-template<>
-inline void
-Converter<gz::msgs::SphericalCoordinates, gz::math::SphericalCoordinates>::Set(
-    gz::math::SphericalCoordinates *_data,
-    const gz::msgs::SphericalCoordinates &_msg)
+inline void Set(gz::math::SphericalCoordinates *_data,
+                const gz::msgs::SphericalCoordinates &_msg)
 {
   if (_msg.surface_model() == msgs::SphericalCoordinates::EARTH_WGS84)
   {
@@ -109,15 +101,17 @@ Converter<gz::msgs::SphericalCoordinates, gz::math::SphericalCoordinates>::Set(
 inline gz::msgs::SphericalCoordinates
 Convert(const gz::math::SphericalCoordinates &_data)
 {
-  return Converter<gz::msgs::SphericalCoordinates,
-                   gz::math::SphericalCoordinates>::Convert(_data);
+  gz::msgs::SphericalCoordinates ret;
+  Set(&ret, _data);
+  return ret;
 }
 
 inline gz::math::SphericalCoordinates
   Convert(const gz::msgs::SphericalCoordinates &_msg)
 {
-  return Converter<gz::msgs::SphericalCoordinates,
-                   gz::math::SphericalCoordinates>::Convert(_msg);
+  gz::math::SphericalCoordinates ret;
+  Set(&ret, _msg);
+  return ret;
 }
 }  // namespce
 }  // namespace gz::msgs

@@ -17,7 +17,6 @@
 #ifndef GZ_MSGS_CONVERT_PLANE_HH_
 #define GZ_MSGS_CONVERT_PLANE_HH_
 
-#include <gz/msgs/Converter.hh>
 #include <gz/msgs/convert/Vector2.hh>
 #include <gz/msgs/convert/Vector3.hh>
 
@@ -32,39 +31,36 @@ namespace gz::msgs {
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
-template<>
-inline void Converter<gz::msgs::PlaneGeom, gz::math::Planed>::Set(
-    gz::msgs::PlaneGeom *_msg, const gz::math::Planed &_data)
+inline void Set(gz::msgs::PlaneGeom *_msg, const gz::math::Planed &_data)
 {
-  Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(
-        _msg->mutable_normal(), _data.Normal());
+  Set(_msg->mutable_normal(), _data.Normal());
   _msg->mutable_size()->set_x(_data.Size().X());
   _msg->mutable_size()->set_y(_data.Size().Y());
   _msg->set_d(_data.Offset());
 }
 
-template<>
-inline void Converter<gz::msgs::PlaneGeom, gz::math::Planed>::Set(
-    gz::math::Planed *_data, const gz::msgs::PlaneGeom &_msg)
+inline void Set(gz::math::Planed *_data, const gz::msgs::PlaneGeom &_msg)
 {
   _data->Set(
-    Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Convert(_msg.normal()),
-    Converter<gz::msgs::Vector2d, gz::math::Vector2d>::Convert(_msg.size()),
+    Convert(_msg.normal()),
+    Convert(_msg.size()),
     _msg.d()
   );
 }
 
 inline gz::msgs::PlaneGeom Convert(const gz::math::Planed &_data)
 {
-  return Converter<gz::msgs::PlaneGeom, gz::math::Planed>::Convert(_data);
+  gz::msgs::PlaneGeom ret;
+  Set(&ret, _data);
+  return ret;
 }
 
 inline gz::math::Planed Convert(const gz::msgs::PlaneGeom &_msg)
 {
-  return Converter<gz::msgs::PlaneGeom, gz::math::Planed>::Convert(_msg);
+  gz::math::Planed ret;
+  Set(&ret, _msg);
+  return ret;
 }
-
-
 }  // namespce
 }  // namespace gz::msgs
 

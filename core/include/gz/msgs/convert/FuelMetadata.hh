@@ -33,7 +33,7 @@ inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////////////////////
 inline bool ConvertFuelMetadata(const std::string &_modelConfigStr,
-                         msgs::FuelMetadata &_meta)
+                                msgs::FuelMetadata &_meta)
 {
   gz::msgs::FuelMetadata meta;
 
@@ -184,7 +184,7 @@ inline bool ConvertFuelMetadata(const std::string &_modelConfigStr,
 
 /////////////////////////////////////////////////
 inline bool ConvertFuelMetadata(const msgs::FuelMetadata &_meta,
-                         std::string &_modelConfigStr)
+                                std::string &_modelConfigStr)
 {
   std::ostringstream out;
 
@@ -252,7 +252,6 @@ inline bool ConvertFuelMetadata(const msgs::FuelMetadata &_meta,
   _modelConfigStr = out.str();
   return true;
 }
-
 }  // namespce
 }  // namespace gz::msgs
 

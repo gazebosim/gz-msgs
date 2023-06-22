@@ -17,7 +17,6 @@
 #ifndef GZ_MSGS_CONVERT_POSE_HH_
 #define GZ_MSGS_CONVERT_POSE_HH_
 
-#include <gz/msgs/Converter.hh>
 #include <gz/msgs/convert/Vector3.hh>
 #include <gz/msgs/convert/Quaternion.hh>
 
@@ -33,39 +32,32 @@ namespace gz::msgs {
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
-template<>
-inline void Converter<gz::msgs::Pose, gz::math::Pose3d>::Set(
-    gz::msgs::Pose *_msg, const gz::math::Pose3d &_data)
+inline void Set(gz::msgs::Pose *_msg, const gz::math::Pose3d &_data)
 {
-  Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(
-        _msg->mutable_position(), _data.Pos());
-  Converter<gz::msgs::Quaternion, gz::math::Quaterniond>::Set(
-        _msg->mutable_orientation(), _data.Rot());
+  Set(_msg->mutable_position(), _data.Pos());
+  Set(_msg->mutable_orientation(), _data.Rot());
 }
 
-template<>
-inline void Converter<gz::msgs::Pose, gz::math::Pose3d>::Set(
-    gz::math::Pose3d *_data, const gz::msgs::Pose &_msg)
+inline void Set(gz::math::Pose3d *_data, const gz::msgs::Pose &_msg)
 {
-  auto pos = Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Convert(
-        _msg.position());
-  auto orientation =
-      Converter<gz::msgs::Quaternion, gz::math::Quaterniond>::Convert(
-        _msg.orientation());
+  auto pos = Convert(_msg.position());
+  auto orientation = Convert(_msg.orientation());
   _data->Set(pos, orientation);
 }
 
 inline gz::msgs::Pose Convert(const gz::math::Pose3d &_data)
 {
-  return Converter<gz::msgs::Pose, gz::math::Pose3d>::Convert(_data);
+  gz::msgs::Pose ret;
+  Set(&ret, _data);
+  return ret;
 }
 
 inline gz::math::Pose3d Convert(const gz::msgs::Pose &_msg)
 {
-  return Converter<gz::msgs::Pose, gz::math::Pose3d>::Convert(_msg);
+  gz::math::Pose3d ret;
+  Set(&ret, _msg);
+  return ret;
 }
-
-
 }  // namespce
 }  // namespace gz::msgs
 

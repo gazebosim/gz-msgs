@@ -17,7 +17,6 @@
 #ifndef GZ_MSGS_CONVERT_AXISALIGNEDBOX_HH_
 #define GZ_MSGS_CONVERT_AXISALIGNEDBOX_HH_
 
-#include <gz/msgs/Converter.hh>
 #include <gz/msgs/convert/Vector3.hh>
 
 // Message Headers
@@ -31,38 +30,33 @@ namespace gz::msgs {
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
-template<>
-inline void
-Converter<gz::msgs::AxisAlignedBox, gz::math::AxisAlignedBox>::Set(
-    gz::msgs::AxisAlignedBox *_msg, const gz::math::AxisAlignedBox &_data)
+inline void Set(gz::msgs::AxisAlignedBox *_msg,
+                const gz::math::AxisAlignedBox &_data)
 {
-  using Vector3Converter = Converter<gz::msgs::Vector3d, gz::math::Vector3d>;
-  Vector3Converter::Set(_msg->mutable_min_corner(), _data.Min());
-  Vector3Converter::Set(_msg->mutable_max_corner(), _data.Max());
+  Set(_msg->mutable_min_corner(), _data.Min());
+  Set(_msg->mutable_max_corner(), _data.Max());
 }
 
-template<>
-inline void Converter<gz::msgs::AxisAlignedBox, gz::math::AxisAlignedBox>::Set(
-    gz::math::AxisAlignedBox *_data, const gz::msgs::AxisAlignedBox &_msg)
+inline void Set(gz::math::AxisAlignedBox *_data,
+                const gz::msgs::AxisAlignedBox &_msg)
 {
-  using Vector3Converter = Converter<gz::msgs::Vector3d, gz::math::Vector3d>;
-  Vector3Converter::Set(&_data->Min(), _msg.min_corner());
-  Vector3Converter::Set(&_data->Max(), _msg.max_corner());
+  Set(&_data->Min(), _msg.min_corner());
+  Set(&_data->Max(), _msg.max_corner());
 }
 
 inline gz::msgs::AxisAlignedBox Convert(const gz::math::AxisAlignedBox &_data)
 {
-  return Converter<gz::msgs::AxisAlignedBox,
-                   gz::math::AxisAlignedBox>::Convert(_data);
+  gz::msgs::AxisAlignedBox ret;
+  Set(&ret, _data);
+  return ret;
 }
 
 inline gz::math::AxisAlignedBox Convert(const gz::msgs::AxisAlignedBox &_msg)
 {
-  return Converter<gz::msgs::AxisAlignedBox,
-                   gz::math::AxisAlignedBox>::Convert(_msg);
+  gz::math::AxisAlignedBox ret;
+  Set(&ret, _msg);
+  return ret;
 }
-
-
 }  // namespce
 }  // namespace gz::msgs
 

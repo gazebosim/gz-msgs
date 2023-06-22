@@ -17,8 +17,6 @@
 #ifndef GZ_MSGS_CONVERT_COLOR_HH_
 #define GZ_MSGS_CONVERT_COLOR_HH_
 
-#include <gz/msgs/Converter.hh>
-
 // Message Headers
 #include "gz/msgs/color.pb.h"
 
@@ -30,9 +28,7 @@ namespace gz::msgs {
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
-template<>
-inline void Converter<gz::msgs::Color, gz::math::Color>::Set(
-    gz::msgs::Color *_msg, const gz::math::Color &_data)
+inline void Set(gz::msgs::Color *_msg, const gz::math::Color &_data)
 {
   _msg->set_r(_data.R());
   _msg->set_g(_data.G());
@@ -40,24 +36,24 @@ inline void Converter<gz::msgs::Color, gz::math::Color>::Set(
   _msg->set_a(_data.A());
 }
 
-template<>
-inline void Converter<gz::msgs::Color, gz::math::Color>::Set(
-    gz::math::Color *_data, const gz::msgs::Color &_msg)
+inline void Set(gz::math::Color *_data, const gz::msgs::Color &_msg)
 {
   _data->Set(_msg.r(), _msg.g(), _msg.b(), _msg.a());
 }
 
 inline gz::msgs::Color Convert(const gz::math::Color &_data)
 {
-  return Converter<gz::msgs::Color, gz::math::Color>::Convert(_data);
+  gz::msgs::Color ret;
+  Set(&ret, _data);
+  return ret;
 }
 
 inline gz::math::Color Convert(const gz::msgs::Color &_msg)
 {
-  return Converter<gz::msgs::Color, gz::math::Color>::Convert(_msg);
+  gz::math::Color ret;
+  Set(&ret, _msg);
+  return ret;
 }
-
-
 }  // namespce
 }  // namespace gz::msgs
 

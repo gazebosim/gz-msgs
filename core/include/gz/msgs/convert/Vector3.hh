@@ -17,8 +17,6 @@
 #ifndef GZ_MSGS_CONVERT_VECTOR3_HH_
 #define GZ_MSGS_CONVERT_VECTOR3_HH_
 
-#include <gz/msgs/Converter.hh>
-
 // Message Headers
 #include "gz/msgs/vector3d.pb.h"
 
@@ -30,30 +28,30 @@ namespace gz::msgs {
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
-template<>
-inline void Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(
-    gz::msgs::Vector3d *_msg, const gz::math::Vector3d &_data)
+inline void Set(gz::msgs::Vector3d *_msg, const gz::math::Vector3d &_data)
 {
   _msg->set_x(_data.X());
   _msg->set_y(_data.Y());
   _msg->set_z(_data.Z());
 }
 
-template<>
-inline void Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Set(
-    gz::math::Vector3d *_data, const gz::msgs::Vector3d &_msg)
+inline void Set(gz::math::Vector3d *_data, const gz::msgs::Vector3d &_msg)
 {
   _data->Set(_msg.x(), _msg.y(), _msg.z());
 }
 
 inline gz::msgs::Vector3d Convert(const gz::math::Vector3d &_data)
 {
-  return Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Convert(_data);
+  gz::msgs::Vector3d ret;
+  Set(&ret, _data);
+  return ret;
 }
 
 inline gz::math::Vector3d Convert(const gz::msgs::Vector3d &_msg)
 {
-  return Converter<gz::msgs::Vector3d, gz::math::Vector3d>::Convert(_msg);
+  gz::math::Vector3d ret;
+  Set(&ret, _msg);
+  return ret;
 }
 }  // namespace
 }  // namespace gz::msgs

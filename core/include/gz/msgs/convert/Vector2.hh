@@ -17,8 +17,6 @@
 #ifndef GZ_MSGS_CONVERT_VECTOR2_HH_
 #define GZ_MSGS_CONVERT_VECTOR2_HH_
 
-#include <gz/msgs/Converter.hh>
-
 // Message Headers
 #include "gz/msgs/vector2d.pb.h"
 
@@ -30,29 +28,29 @@ namespace gz::msgs {
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 /////////////////////////////////
-template<>
-inline void Converter<gz::msgs::Vector2d, gz::math::Vector2d>::Set(
-    gz::msgs::Vector2d *_msg, const gz::math::Vector2d &_data)
+inline void Set(gz::msgs::Vector2d *_msg, const gz::math::Vector2d &_data)
 {
   _msg->set_x(_data.X());
   _msg->set_y(_data.Y());
 }
 
-template<>
-inline void Converter<gz::msgs::Vector2d, gz::math::Vector2d>::Set(
-    gz::math::Vector2d *_data, const gz::msgs::Vector2d &_msg)
+inline void Set(gz::math::Vector2d *_data, const gz::msgs::Vector2d &_msg)
 {
   _data->Set(_msg.x(), _msg.y());
 }
 
 inline gz::msgs::Vector2d Convert(const gz::math::Vector2d &_data)
 {
-  return Converter<gz::msgs::Vector2d, gz::math::Vector2d>::Convert(_data);
+  gz::msgs::Vector2d ret;
+  Set(&ret, _data);
+  return ret;
 }
 
 inline gz::math::Vector2d Convert(const gz::msgs::Vector2d &_msg)
 {
-  return Converter<gz::msgs::Vector2d, gz::math::Vector2d>::Convert(_msg);
+  gz::math::Vector2d ret;
+  Set(&ret, _msg);
+  return ret;
 }
 }  // namespce
 }  // namespace gz::msgs
