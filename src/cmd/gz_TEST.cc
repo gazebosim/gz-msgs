@@ -29,13 +29,14 @@
 #endif
 
 // Set from preprocessor defines
-std::string kMsgsVersion = GZ_MSGS_VERSION_FULL;
-std::string kExecutablePath = GZ_MSGS_EXECUTABLE_PATH;
-std::string kCompletionScriptPath = GZ_MSGS_COMPLETION_SCRIPT_PATH;
+static constexpr const char * kMsgsVersion = GZ_MSGS_VERSION_FULL;
+static constexpr const char * kExecutablePath = GZ_MSGS_EXECUTABLE_PATH;
+static constexpr const char * kCompletionScriptPath = GZ_MSGS_COMPLETION_SCRIPT_PATH;
 
+/////////////////////////////////////////////////
 std::string make_exec_string(const std::string &_args)
 {
-  return kExecutablePath + " " + _args;
+  return std::string(kExecutablePath) + " " + _args;
 }
 
 /////////////////////////////////////////////////
@@ -104,7 +105,7 @@ TEST(CmdLine, GZ_UTILS_TEST_DISABLED_ON_WIN32(MsgHelpVsCompletionFlags))
 
   // Equivalent to:
   // sh -c "bash -c \". /path/to/msgs.bash_completion.sh; _gz_msgs_flags\""
-  std::string cmd = "bash -c \". " + kCompletionScriptPath +
+  std::string cmd = "bash -c \". " + std::string(kCompletionScriptPath) +
     "; _gz_msgs_flags\"";
   std::string scriptOutput = custom_exec_str(cmd);
 
