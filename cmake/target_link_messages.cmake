@@ -57,7 +57,9 @@ function(target_link_messages)
       get_target_property(message_lib_INCLUDES ${message_lib} INTERFACE_INCLUDE_DIRECTORIES)
       get_target_property(message_lib_LIBS ${message_lib} INTERFACE_LINK_LIBRARIES)
       target_include_directories(${target_link_messages_TARGET} ${VISIBILITY} ${message_lib_INCLUDES})
-      target_link_libraries(${target_link_messages_TARGET} ${VISIBILITY} ${message_lib_LIBS})
+      # Note: not using visibility here because it conflicts with gazebo-built tests that don't use 
+      # any visiblity parameter
+      target_link_libraries(${target_link_messages_TARGET} ${message_lib_LIBS})
     else()
       target_link_libraries(${target_link_messages_TARGET} ${VISIBILITY}
           $<$<CXX_COMPILER_ID:GNU>:-Wl,--whole-archive>
