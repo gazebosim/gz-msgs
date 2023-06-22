@@ -98,13 +98,6 @@ gz_find_package(gz-utils2 REQUIRED COMPONENTS cli)
 set(GZ_UTILS_VER ${gz-utils2_VERSION_MAJOR})
 
 #--------------------------------------
-# Find if command is available. This is used to enable tests.
-# Note that CLI files are installed regardless of whether the dependency is
-# available during build time
-find_program(HAVE_GZ_TOOLS gz)
-set(GZ_TOOLS_VER 1)
-
-#--------------------------------------
 # Find Tinyxml2
 gz_find_package(TINYXML2 REQUIRED PRIVATE PRETTY tinyxml2)
 
@@ -117,11 +110,6 @@ gz_configure_build(QUIT_IF_BUILD_ERRORS)
 # gz command line support
 #============================================================================
 add_subdirectory(conf)
-
-#============================================================================
-# Test the command line commands
-#============================================================================
-add_subdirectory(tools)
 
 #============================================================================
 # Install proto files

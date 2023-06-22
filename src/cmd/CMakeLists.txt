@@ -13,3 +13,43 @@ target_link_libraries(${msgs_executable}
   ${PROJECT_LIBRARY_TARGET_NAME}
 )
 install(TARGETS ${msgs_executable} DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}/)
+
+
+
+#===============================================================================
+# Used for the installed version.
+# Generate the ruby script that gets installed.
+# Note that the major version of the library is included in the name.
+# Ex: cmdplugin2.rb
+set(cmd_script_generated "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/cmd${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}.rb")
+set(cmd_script_configured "${CMAKE_CURRENT_BINARY_DIR}/cmd${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}.rb.configured")
+
+# Set the library_location variable to the relative path to the library file
+# within the install directory structure.
+set(plugin_exe_location "../../../${EXE_INSTALL_DIR}/$<TARGET_FILE_NAME:${msgs_executable}>")
+
+configure_file(
+  "cmd${GZ_DESIGNATION}.rb.in"
+  "${cmd_script_configured}"
+  @ONLY)
+
+file(GENERATE
+  OUTPUT "${cmd_script_generated}"
+  INPUT  "${cmd_script_configured}")
+
+# Install the ruby command line library in an unversioned location.
+install(FILES ${cmd_script_generated} DESTINATION lib/ruby/gz)
+
+gz_build_tests(
+  TYPE UNIT
+  SOURCES gz_TEST.cc
+  LIB_DEPS
+    gz
+  TEST_LIST test_targets)
+
+foreach(test ${test_targets})
+  target_compile_definitions(${test} PRIVATE
+    "GZ_MSGS_EXECUTABLE_PATH=\"$<TARGET_FILE:${msgs_executable}>\""
+    "GZ_MSGS_VERSION_FULL=\"${PROJECT_VERSION}\""
+    "GZ_MSGS_COMPLETION_SCRIPT_PATH=\"${PROJECT_SOURCE_DIR}/src/cmd/msgs.bash_completion.sh\"")
+  endforeach()

@@ -15,24 +15,32 @@
  *
 */
 
+#include <gtest/gtest.h>
+
 #include <filesystem>
 #include <fstream>
 #include <string>
-#include <gtest/gtest.h>
-#include <gz/msgs/config.hh>
-#include "test_config.hh"
+
+#include <gz/utils/ExtraTestMacros.hh>
 
 #ifdef _MSC_VER
 #    define popen _popen
 #    define pclose _pclose
 #endif
 
-static const std::string g_version(std::string(GZ_MSGS_VERSION_FULL));
+// Set from preprocessor defines
+std::string kMsgsVersion = GZ_MSGS_VERSION_FULL;
+std::string kExecutablePath = GZ_MSGS_EXECUTABLE_PATH;
+std::string kCompletionScriptPath = GZ_MSGS_COMPLETION_SCRIPT_PATH;
+
+std::string make_exec_string(const std::string &_args)
+{
+  return kExecutablePath + " " + _args;
+}
 
 /////////////////////////////////////////////////
 std::string custom_exec_str(std::string _cmd)
 {
-  _cmd += " 2>&1";
   FILE *pipe = popen(_cmd.c_str(), "r");
 
   if (!pipe)
@@ -54,30 +62,27 @@ std::string custom_exec_str(std::string _cmd)
 /////////////////////////////////////////////////
 TEST(CmdLine, Versions)
 {
-  auto outputDebug = custom_exec_str("gz");
-  auto output = custom_exec_str("gz msg --versions");
-  EXPECT_NE(std::string::npos, output.find(g_version));
+  auto output = custom_exec_str(make_exec_string("--version"));
+  EXPECT_NE(std::string::npos, output.find(kMsgsVersion));
 }
 
 /////////////////////////////////////////////////
 TEST(CmdLine, Help)
 {
-  auto output =
-    custom_exec_str("gz msg --force-version " + g_version + " --help");
+  auto output = custom_exec_str(make_exec_string("--help"));
   EXPECT_NE(std::string::npos, output.find("list"));
 
-  output = custom_exec_str("gz msg --force-version " + g_version + " -h");
+  output = custom_exec_str(make_exec_string("-h"));
   EXPECT_NE(std::string::npos, output.find("list"));
 
-  output = custom_exec_str("gz msg --force-version " + g_version);
+  output = custom_exec_str(make_exec_string(""));
   EXPECT_NE(std::string::npos, output.find("list"));
 }
 
 /////////////////////////////////////////////////
 TEST(CmdLine, MsgList)
 {
-  auto output = custom_exec_str("gz msg --list --force-version " +
-    g_version);
+  auto output = custom_exec_str(make_exec_string("--list"));
   EXPECT_NE(std::string::npos, output.find("gz_msgs.WorldControl"))
     << output;
 }
@@ -85,26 +90,22 @@ TEST(CmdLine, MsgList)
 /////////////////////////////////////////////////
 TEST(CmdLine, MsgInfo)
 {
-  auto output = custom_exec_str("gz msg --info gz_msgs.WorldControl "
-    "--force-version " + g_version);
+  auto output =
+    custom_exec_str(make_exec_string("--info gz_msgs.WorldControl"));
   EXPECT_NE(std::string::npos, output.find("message WorldControl {"))
     << output;
 }
 
 /////////////////////////////////////////////////
-TEST(CmdLine, MsgHelpVsCompletionFlags)
+TEST(CmdLine, GZ_UTILS_TEST_DISABLED_ON_WIN32(MsgHelpVsCompletionFlags))
 {
   // Flags in help message
-  auto helpOutput = custom_exec_str("gz msg --help --force-version "
-    + g_version);
-
-  // Call the output function in the bash completion script
-  std::filesystem::path scriptPath = PROJECT_SOURCE_PATH;
-  scriptPath = scriptPath / "src" / "cmd" / "msgs.bash_completion.sh";
+  auto helpOutput = custom_exec_str(make_exec_string("--help"));
 
   // Equivalent to:
   // sh -c "bash -c \". /path/to/msgs.bash_completion.sh; _gz_msgs_flags\""
-  std::string cmd = "bash -c \". " + scriptPath.string() + "; _gz_msgs_flags\"";
+  std::string cmd = "bash -c \". " + kCompletionScriptPath +
+    "; _gz_msgs_flags\"";
   std::string scriptOutput = custom_exec_str(cmd);
 
   // Tokenize script output
@@ -119,26 +120,4 @@ TEST(CmdLine, MsgHelpVsCompletionFlags)
   {
     EXPECT_NE(std::string::npos, helpOutput.find(flag)) << helpOutput;
   }
-}
-
-/////////////////////////////////////////////////
-/// Main
-int main(int argc, char **argv)
-{
-  // Set GZ_CONFIG_PATH to the directory where the .yaml configuration files
-  // is located.
-  setenv("GZ_CONFIG_PATH", GZ_CONFIG_PATH, 1);
-
-  // Make sure that we load the library recently built and not the one installed
-  // in your system.
-  // Add the directory where Gazebo msgs has been built.
-  std::string value = std::string(GZ_TEST_LIBRARY_PATH);
-  // Save the current value of LD_LIBRARY_PATH.
-  auto cvalue = std::getenv("LD_LIBRARY_PATH");
-  if (cvalue)
-    value += ":" + std::string(cvalue);
-  setenv("LD_LIBRARY_PATH", value.c_str(), 1);
-
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
 }
