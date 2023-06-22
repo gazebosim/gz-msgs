@@ -114,7 +114,8 @@ bool Generator::Generate(const FileDescriptor *_file,
     sourceFilename += part.string() + "/";
   }
 
-  auto message_type_index = _generatorContext->Open(identifier + fileStem + ".pb_index");
+  auto message_type_index =
+    _generatorContext->Open(identifier + fileStem + ".pb_index");
   io::Printer index_printer(message_type_index, '$');
 
   identifier += fileStem;
