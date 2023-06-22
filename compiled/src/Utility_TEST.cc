@@ -322,8 +322,8 @@ TEST(MsgsTest, ConvertMathMassMatrix3ToMsgs)
   EXPECT_DOUBLE_EQ(0.2, msg.ixz());
   EXPECT_DOUBLE_EQ(0.3, msg.iyz());
 
-  auto converted_pose = msgs::Convert(msg.pose());
-  EXPECT_TRUE(converted_pose.Equal(math::Pose3d::Zero, 1e-1));
+  auto convertedPose = msgs::Convert(msg.pose());
+  EXPECT_TRUE(convertedPose.Equal(math::Pose3d::Zero, 1e-1));
 }
 
 /////////////////////////////////////////////////
