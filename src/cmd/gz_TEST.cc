@@ -31,7 +31,8 @@
 // Set from preprocessor defines
 static constexpr const char * kMsgsVersion = GZ_MSGS_VERSION_FULL;
 static constexpr const char * kExecutablePath = GZ_MSGS_EXECUTABLE_PATH;
-static constexpr const char * kCompletionScriptPath = GZ_MSGS_COMPLETION_SCRIPT_PATH;
+static constexpr const char * kCompletionScriptPath =
+  GZ_MSGS_COMPLETION_SCRIPT_PATH;
 
 /////////////////////////////////////////////////
 std::string make_exec_string(const std::string &_args)
