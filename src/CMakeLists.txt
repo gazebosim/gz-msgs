@@ -239,7 +239,6 @@ gz_create_core_library(SOURCES
   ${gen_sources}
   ${PROJECT_SOURCE_DIR}/src/Factory.cc
   ${PROJECT_SOURCE_DIR}/src/Filesystem.cc
-  ${PROJECT_SOURCE_DIR}/src/gz.cc
   ${PROJECT_SOURCE_DIR}/src/Utility.cc
 )
 

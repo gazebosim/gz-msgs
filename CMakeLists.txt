@@ -93,6 +93,11 @@ gz_find_package(gz-math7 REQUIRED)
 set(GZ_MATH_VER ${gz-math7_VERSION_MAJOR})
 
 #--------------------------------------
+# Find gz-utils
+gz_find_package(gz-utils2 REQUIRED COMPONENTS cli)
+set(GZ_UTILS_VER ${gz-utils2_VERSION_MAJOR})
+
+#--------------------------------------
 # Find if command is available. This is used to enable tests.
 # Note that CLI files are installed regardless of whether the dependency is
 # available during build time
