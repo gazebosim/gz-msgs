@@ -26,6 +26,7 @@
 #include "gz/msgs/config.hh"
 #include "gz/msgs/Export.hh"
 #include "gz/msgs/detail/dynamic_message_cast.hh"
+#include <gz/utils/ImplPtr.hh>
 
 namespace gz::msgs {
   /// Forward declarations
@@ -113,7 +114,7 @@ namespace gz::msgs {
     private: FactoryFnCollection msgMap;
 
     /// \brief Pointer to dynamic factory implementation
-    private: std::unique_ptr<gz::msgs::DynamicFactory> dynamicFactory;
+    GZ_UTILS_UNIQUE_IMPL_PTR_FWD(gz::msgs::DynamicFactory, dynamicFactory)
   };
 }
 }  // namespace gz::msgs

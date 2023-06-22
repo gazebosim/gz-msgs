@@ -26,13 +26,14 @@
 
 #include "DynamicFactory.hh"
 #include "gz/msgs/MessageFactory.hh"
+#include <gz/utils/ImplPtr.hh>
 
 namespace gz::msgs
 {
 
 /////////////////////////////////////////////////
 MessageFactory::MessageFactory():
-  dynamicFactory(std::make_unique<gz::msgs::DynamicFactory>())
+  dynamicFactory(gz::utils::MakeUniqueImpl<gz::msgs::DynamicFactory>())
 {
 }
 
