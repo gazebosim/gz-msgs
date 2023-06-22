@@ -18,30 +18,16 @@
 # factory registration is needed. Whole archive linking guarantees that the
 # messages are correctly registered with the factory.
 # Alternatively, use the `RegisterAll` generated method to manually register.
-# Options:
-#   PUBLIC              - Use public visibility when linking messages target
-#   PUBLIC              - Use privatevisibility when linking messages target
 # One value arguments:
 #   TARGET              - Target to link MSGS_TARGETS messages into
 # Multi value arguments
 #   MSGS_TARGETS        - List of generated messages targets to link into TARGET
 function(target_link_messages)
-  set(options PUBLIC PRIVATE)
+  set(options)
   set(oneValueArgs TARGET)
   set(multiValueArgs MSG_TARGETS)
 
   cmake_parse_arguments(target_link_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-  if (target_link_messages_PUBLIC AND target_link_messages_PRIVATE)
-    message(ERROR "target_link_messages given both PUBLIC and PRIVATE keywords, defaulting to PUBLIC.")
-    set (VISIBILITY PUBLIC)
-  elseif(target_link_messages_PUBLIC)
-    set(VISIBILITY PUBLIC)
-  elseif (target_link_messages_PRIVATE)
-    set(VISIBILITY PRIVATE)
-  else()
-    set(VISIBILITY PUBLIC)
-  endif()
 
   foreach(message_lib ${target_link_messages_MSG_TARGETS})
     if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
@@ -49,23 +35,24 @@ function(target_link_messages)
       # TODO(mjcarroll) When CMake 3.24 is genrally available, use
       # linking generator expressions as described here:
       # https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html#genex:LINK_LIBRARY
-      target_link_libraries(${target_link_messages_TARGET} ${VISIBILITY} -WHOLEARCHIVE:$<TARGET_FILE:${message_lib}>)
+      target_link_libraries(${target_link_messages_TARGET} -WHOLEARCHIVE:$<TARGET_FILE:${message_lib}>)
 
-      # Explicitly add dependency, link libraries, and includes as the WHOLEARCHIVE flag doesn't
-      # do that on Windows.
-      add_dependencies(${target_link_messages_TARGET} ${message_lib})
-      get_target_property(message_lib_INCLUDES ${message_lib} INTERFACE_INCLUDE_DIRECTORIES)
-      get_target_property(message_lib_LIBS ${message_lib} INTERFACE_LINK_LIBRARIES)
-      target_include_directories(${target_link_messages_TARGET} ${VISIBILITY} ${message_lib_INCLUDES})
-      # Note: not using visibility here because it conflicts with gazebo-built tests that don't use 
-      # any visiblity parameter
-      target_link_libraries(${target_link_messages_TARGET} ${message_lib_LIBS})
     else()
-      target_link_libraries(${target_link_messages_TARGET} ${VISIBILITY}
+      target_link_libraries(${target_link_messages_TARGET}
           $<$<CXX_COMPILER_ID:GNU>:-Wl,--whole-archive>
           $<$<CXX_COMPILER_ID:Clang>:-force_load>
           $<$<CXX_COMPILER_ID:AppleClang>:-force_load> ${message_lib}
           $<$<CXX_COMPILER_ID:GNU>:-Wl,--no-whole-archive>)
     endif()
+
+    # Explicitly add dependency, link libraries, and includes as the WHOLEARCHIVE flag doesn't
+    # do that on Windows.
+    add_dependencies(${target_link_messages_TARGET} ${message_lib})
+    get_target_property(message_lib_INCLUDES ${message_lib} INTERFACE_INCLUDE_DIRECTORIES)
+    get_target_property(message_lib_LIBS ${message_lib} INTERFACE_LINK_LIBRARIES)
+    target_include_directories(${target_link_messages_TARGET} PRIVATE ${message_lib_INCLUDES})
+    # Note: not using visibility here because it conflicts with gazebo-built tests that don't use
+    # any visiblity parameter
+    target_link_libraries(${target_link_messages_TARGET} ${message_lib_LIBS})
   endforeach()
 endfunction()
