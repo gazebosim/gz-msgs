@@ -47,17 +47,6 @@ void MessageFactory::Register(const std::string &_msgType,
 }
 
 /////////////////////////////////////////////////
-int MessageFactory::RegisterCollection(FactoryFnCollection &_functions)
-{
-  int registered = 0;
-  for (auto it : _functions) {
-    this->Register(it.first, it.second);
-    registered++;
-  }
-  return registered;
-}
-
-/////////////////////////////////////////////////
 MessageFactory::MessagePtr MessageFactory::New(
     const std::string &_msgType)
 {

@@ -76,19 +76,26 @@ cc_source = """/*
 #include "gz/msgs/MessageFactory.hh"
 #include "{package_path}/MessageTypes.hh"
 
-#include <map>
+#include <array>
 
 namespace {{
-gz::msgs::MessageFactory::FactoryFnCollection kFactoryFunctions = {{
+    using NamedFactoryFn = std::pair<std::string, gz::msgs::MessageFactory::FactoryFn>;
+
+    std::array<NamedFactoryFn, {nRegistrations}> kFactoryFunctions = {{{{
 {registrations}
-}};
+}}}};
 }}  // namespace
 """
 
 cc_factory = """
 namespace {namespace} {{
 int RegisterAll() {{
-  return gz::msgs::Factory::RegisterCollection(kFactoryFunctions);
+  size_t registered = 0;
+  for (const auto &entry: kFactoryFunctions) {{
+    gz::msgs::Factory::Register(entry.first, entry.second);
+    registered++;
+  }}
+  return registered;
 }}
 
 static int kMessagesRegistered = RegisterAll();
@@ -159,6 +166,7 @@ def main(argv=sys.argv[1:]):
 
     with open(os.path.join(args.output_cpp_path, *package, 'register.cc'), 'w') as f:
         f.write((cc_source.format(registrations='\n'.join(registrations),
+                                  nRegistrations=len(registrations),
                                   namespace=namespace,
                                   package_path=package_path) +
                  cc_factory.format(namespace=namespace)))

@@ -20,7 +20,7 @@ function(gz_msgs_generate_messages_impl)
   set(multiValueArgs INPUT_PROTOS DEPENDENCIES)
 
   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-  _gz_msgs_proto_pkg_to_path(${generate_messages_PROTO_PACKAGE} gen_dir)
+  _gz_msgs_proto_pkg_to_string(${generate_messages_PROTO_PACKAGE} gen_dir)
 
   # Extract dependency information from targets
   set(depends_proto_paths)

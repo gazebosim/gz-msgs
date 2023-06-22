@@ -72,11 +72,6 @@ namespace gz::msgs
     public: static void Register(const std::string &_msgType,
                                  FactoryFn _factoryfn);
 
-    /// \brief Register a collection of messages.
-    /// \param[in] _functions message generation functions
-    /// \return Number of registered message types
-    public: static int RegisterCollection(FactoryFnCollection &_functions);
-
     /// \brief Create a new instance of a message.
     /// \param[in] _msgType Type of message to create.
     /// \return Pointer to a google protobuf message. Null if the message

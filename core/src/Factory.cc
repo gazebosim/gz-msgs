@@ -35,12 +35,6 @@ void Factory::Register(const std::string &_msgType,
 }
 
 /////////////////////////////////////////////////
-int Factory::RegisterCollection(FactoryFnCollection &_functions)
-{
-  return Factory::Instance().RegisterCollection(_functions);
-}
-
-/////////////////////////////////////////////////
 void Factory::Types(std::vector<std::string> &_types)
 {
   Factory::Instance().Types(_types);
