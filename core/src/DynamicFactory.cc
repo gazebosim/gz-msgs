@@ -116,15 +116,13 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
 //////////////////////////////////////////////////
 DynamicFactory::MessagePtr DynamicFactory::New(const std::string &_msgType)
 {
-  auto msgType = _msgType;
-
   // Shortcut if the type has been already registered.
-  auto message_it = dynamicMsgMap.find(msgType);
-  if (message_it != dynamicMsgMap.end())
-    return message_it ->second();
+  auto messageIt = dynamicMsgMap.find(_msgType);
+  if (messageIt != dynamicMsgMap.end())
+    return messageIt ->second();
 
   // Nothing to do if we don't know about this type in the descriptor map.
-  auto descriptor = pool.FindMessageTypeByName(msgType);
+  auto descriptor = pool.FindMessageTypeByName(_msgType);
   if (!descriptor)
     return nullptr;
 
