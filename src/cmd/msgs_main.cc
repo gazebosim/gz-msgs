@@ -34,11 +34,10 @@ enum class MsgCommand
 struct MsgOptions
 {
   /// \brief Command to execute
-  MsgCommand command{MsgCommand::kNone};
+  MsgCommand command {MsgCommand::kNone};
 
-  int verboseLevel = 0;
-
-  std::string msgName;
+  /// \brief List of messages for message info command
+  std::vector<std::string> msgNames;
 };
 
 //////////////////////////////////////////////////
@@ -47,7 +46,14 @@ void runMsgCommand(const MsgOptions &_opt)
   switch(_opt.command)
   {
     case MsgCommand::kMsgInfo:
-      cmdMsgInfo(_opt.msgName.c_str());
+      if (_opt.msgNames.size() == 0) {
+        cmdMsgInfo("");
+      } else {
+        for (auto msgName: _opt.msgNames)
+        {
+          cmdMsgInfo(msgName.c_str());
+        }
+      }
       break;
     case MsgCommand::kMsgList:
       cmdMsgList();
@@ -65,19 +71,20 @@ void addMsgFlags(CLI::App &_app)
 {
   auto opt = std::make_shared<MsgOptions>();
 
-  _app.add_flag_callback("-l,--list",
+  auto listOpt = _app.add_flag_callback("-l,--list",
      [opt](){
        opt->command = MsgCommand::kMsgList;
      }, "List all message types.");
 
-  _app.add_option_function<std::string>("-i,--info",
-     [opt](const std::string &_msgName){
-        opt->command = MsgCommand::kMsgInfo;
-        opt->msgName = _msgName;
-     }, "Get info about the specified message type.");
+  auto infoOpt = _app.add_option("-i,--info",
+    opt->msgNames, "Get info about the specified message type.")
+    ->excludes(listOpt)
+    ->expected(0, 1);
 
-
-  _app.callback([opt](){
+  _app.callback([opt, infoOpt](){
+    if(infoOpt->count() > 0) {
+      opt->command = MsgCommand::kMsgInfo;
+    }
     runMsgCommand(*opt);
   });
 }

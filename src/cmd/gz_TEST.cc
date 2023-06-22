@@ -98,6 +98,27 @@ TEST(CmdLine, MsgInfo)
     << output;
 }
 
+/*
+\TODO(mjcarroll) these tests won't work until custom_exec_str captures stderr
+/////////////////////////////////////////////////
+TEST(CmdLine, MsgInfoEmpty)
+{
+  auto output =
+    custom_exec_str(make_exec_string("--info"));
+  EXPECT_NE(std::string::npos, output.find("Unable to create message of type[]"))
+    << output;
+}
+
+/////////////////////////////////////////////////
+TEST(CmdLine, MsgInfoMultiple)
+{
+  auto output =
+    custom_exec_str(make_exec_string("--info gz_msgs.WorldControl gz_msgs.Wrench"));
+  EXPECT_NE(std::string::npos, output.find("--info: At Most 1 required but received 2"))
+    << output;
+}
+*/
+
 /////////////////////////////////////////////////
 TEST(CmdLine, GZ_UTILS_TEST_DISABLED_ON_WIN32(MsgHelpVsCompletionFlags))
 {

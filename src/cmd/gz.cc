@@ -55,7 +55,6 @@ void cmdMsgInfo(const char *_msg)
       auto fileDescriptor = descriptor->file();
       std::cout << "Name: " << descriptor->full_name() << std::endl;
       std::cout << "File: " << fileDescriptor->name() << std::endl << std::endl;
-
       std::cout << descriptor->DebugString() << std::endl;
     }
     else
