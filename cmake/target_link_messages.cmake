@@ -14,6 +14,17 @@
 
 ##################################################
 # A function that does whole-archive linking for messages
+# This is only required in the case that the static initialization based
+# factory registration is needed. Whole archive linking guarantees that the
+# messages are correctly registered with the factory.
+# Alternatively, use the `RegisterAll` generated method to manually register.
+# Options:
+#   PUBLIC              - Use public visibility when linking messages target
+#   PUBLIC              - Use privatevisibility when linking messages target
+# One value arguments:
+#   TARGET              - Target to link MSGS_TARGETS messages into
+# Multi value arguments
+#   MSGS_TARGETS        - List of generated messages targets to link into TARGET
 function(target_link_messages)
   set(options PUBLIC PRIVATE)
   set(oneValueArgs TARGET)
@@ -21,7 +32,7 @@ function(target_link_messages)
 
   cmake_parse_arguments(target_link_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-  if (target_link_messages_PUBLIC)
+  if (target_link_messages_PUBLIC AND target_link_messages_PRIVATE)
     set(VISIBILITY PUBLIC)
   elseif (target_link_messages_PRIVATE)
     set(VISIBILITY PRIVATE)
@@ -35,13 +46,13 @@ function(target_link_messages)
       # https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html#genex:LINK_LIBRARY
       target_link_libraries(${target_link_messages_TARGET} ${VISIBILITY} -WHOLEARCHIVE:$<TARGET_FILE:${message_lib}>)
 
-      # Explicitly add dependency, link libraries, and includes as the WHOLEARCHIVE flag doesn't 
+      # Explicitly add dependency, link libraries, and includes as the WHOLEARCHIVE flag doesn't
       # do that on Windows.
       add_dependencies(${target_link_messages_TARGET} ${message_lib})
       get_target_property(message_lib_INCLUDES ${message_lib} INTERFACE_INCLUDE_DIRECTORIES)
       get_target_property(message_lib_LIBS ${message_lib} INTERFACE_LINK_LIBRARIES)
-      target_include_directories(${target_link_messages_TARGET} PRIVATE ${message_lib_INCLUDES})
-      target_link_libraries(${target_link_messages_TARGET} ${message_lib_LIBS})
+      target_include_directories(${target_link_messages_TARGET} ${VISIBILITY }${message_lib_INCLUDES})
+      target_link_libraries(${target_link_messages_TARGET} ${VISIBILITY} ${message_lib_LIBS})
     else()
       target_link_libraries(${target_link_messages_TARGET} ${VISIBILITY}
           $<$<CXX_COMPILER_ID:GNU>:-Wl,--whole-archive>
