@@ -797,9 +797,12 @@ TEST(MsgsTest, SetSphericalCoordinates)
 TEST(MsgsTest, SetStringMsg)
 {
   msgs::StringMsg msg;
-  msgs::Set(&msg, std::string("a string msg"));
 
+  msgs::Set(&msg, "a string msg");
   EXPECT_EQ("a string msg", msg.data());
+
+  msgs::Set(&msg, std::string("a string msg2"));
+  EXPECT_EQ("a string msg2", msg.data());
 }
 
 /////////////////////////////////////////////////

@@ -106,6 +106,11 @@ inline std::string Convert(const gz::msgs::StringMsg &_msg)
   return Converter<gz::msgs::StringMsg, std::string>::Convert(_msg);
 }
 
+inline void Set(gz::msgs::StringMsg *_msg, const char *_data)
+{
+  _msg->set_data(_data);
+}
+
 /////////////////////////////////
 template<>
 inline void Converter<gz::msgs::Boolean, bool>::Set(
