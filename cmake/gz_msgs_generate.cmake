@@ -11,9 +11,12 @@
 #   TARGET              - Target (static library) to create
 # Multi value arguments
 #   INPUT_PROTOS        - List of input proto files
+#   DEPENDENCIES        - List of generated messages targets that these messages depend on
+#                         Primarily used when generating new custom messages downstream
+#                         that depend on gz-msgs
 function(gz_msgs_generate_messages_impl)
   set(options "")
-  set(oneValueArgs MSGS_PATH TARGET PROTO_PACKAGE MSGS_GEN_SCRIPT GZ_PROTOC_PLUGIN FACTORY_GEN_SCRIPT MSGS_LIB PROTO_PATH)
+  set(oneValueArgs TARGET PROTO_PACKAGE MSGS_GEN_SCRIPT GZ_PROTOC_PLUGIN FACTORY_GEN_SCRIPT MSGS_LIB PROTO_PATH)
   set(multiValueArgs INPUT_PROTOS DEPENDENCIES)
 
   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
