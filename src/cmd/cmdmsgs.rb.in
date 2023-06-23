@@ -15,12 +15,13 @@
 # limitations under the License.
 
 require 'open3'
+require 'pathname'
 
 # Constants.
-LIBRARY_VERSION = '@PROJECT_VERSION_FULL@'
+LIBRARY_VERSION = '@PROJECT_VERSION_FULL@'.freeze
 COMMANDS = {
-  "plugin" => "@plugin_exe_location@",
-}
+  'msg' => '@executable_location@'
+}.freeze
 
 #
 # Class for the Gazebo @GZ_DESIGNATION@ command line tools.
@@ -30,7 +31,7 @@ class Cmd
     command = args[0]
     exe_name = COMMANDS[command]
 
-    if exe_name[0] == '/'
+    if Pathname.new(exe_name).absolute?
       # If the first character is a slash, we'll assume that we've been given an
       # absolute path to the executable. This is only used during test mode.
     else
