@@ -116,7 +116,7 @@ bool Generator::Generate(const FileDescriptor *_file,
 
   auto message_type_index =
     _generatorContext->Open(identifier + fileStem + ".pb_index");
-  io::Printer index_printer(message_type_index, '$');
+  io::Printer indexPrinter(message_type_index, '$');
 
   identifier += fileStem;
   headerFilename += fileStem + ".gz.h";
@@ -155,8 +155,8 @@ bool Generator::Generate(const FileDescriptor *_file,
       auto desc = _file->message_type(i);
       std::string ptrTypes;
 
-      index_printer.PrintRaw(desc->name());
-      index_printer.PrintRaw("\n");
+      indexPrinter.PrintRaw(desc->name());
+      indexPrinter.PrintRaw("\n");
 
       // Define std::unique_ptr types for our messages
       ptrTypes += "typedef std::unique_ptr<"
