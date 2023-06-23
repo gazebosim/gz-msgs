@@ -15,6 +15,8 @@
  *
  */
 
+#include <string>
+
 #include <gz/utils/cli/CLI.hpp>
 #include <gz/utils/cli/GzFormatter.hpp>
 
@@ -49,7 +51,7 @@ void runMsgCommand(const MsgOptions &_opt)
       if (_opt.msgNames.size() == 0) {
         cmdMsgInfo("");
       } else {
-        for (auto msgName: _opt.msgNames)
+        for(auto msgName : _opt.msgNames)
         {
           cmdMsgInfo(msgName.c_str());
         }
