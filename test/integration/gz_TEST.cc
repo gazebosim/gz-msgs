@@ -20,19 +20,27 @@
 #include <string>
 #include <gtest/gtest.h>
 #include <gz/msgs/config.hh>
-#include "test_config.hh"
 
 #ifdef _MSC_VER
 #    define popen _popen
 #    define pclose _pclose
 #endif
 
-static const std::string g_version(std::string(GZ_MSGS_VERSION_FULL));
+// Set from preprocessor defines
+static constexpr const char * kMsgsVersion = GZ_MSGS_VERSION_FULL;
+static constexpr const char * kExecutablePath = GZ_MSGS_EXECUTABLE_PATH;
+static constexpr const char * kCompletionScriptPath =
+  GZ_MSGS_COMPLETION_SCRIPT_PATH;
+
+/////////////////////////////////////////////////
+std::string make_exec_string(const std::string &_args)
+{
+  return std::string(kExecutablePath) + " " + _args;
+}
 
 /////////////////////////////////////////////////
 std::string custom_exec_str(std::string _cmd)
 {
-  _cmd += " 2>&1";
   FILE *pipe = popen(_cmd.c_str(), "r");
 
   if (!pipe)
@@ -52,59 +60,83 @@ std::string custom_exec_str(std::string _cmd)
 }
 
 /////////////////////////////////////////////////
-TEST(CmdLine, Versions)
+TEST(CmdLine, Version)
 {
-  auto outputDebug = custom_exec_str("gz");
-  auto output = custom_exec_str("gz msg --versions");
-  EXPECT_NE(std::string::npos, output.find(g_version));
+  auto output = custom_exec_str(make_exec_string("--version"));
+  EXPECT_NE(std::string::npos, output.find(kMsgsVersion));
 }
 
 /////////////////////////////////////////////////
 TEST(CmdLine, Help)
 {
-  auto output =
-    custom_exec_str("gz msg --force-version " + g_version + " --help");
-  EXPECT_NE(std::string::npos, output.find("list"));
+  {
+    // Full argument
+    auto output = custom_exec_str(make_exec_string("--help"));
+    EXPECT_NE(std::string::npos, output.find("list"));
+    EXPECT_NE(std::string::npos, output.find("info"));
+  }
 
-  output = custom_exec_str("gz msg --force-version " + g_version + " -h");
-  EXPECT_NE(std::string::npos, output.find("list"));
+  {
+    // Short flag
+    auto output = custom_exec_str(make_exec_string("-h"));
+    EXPECT_NE(std::string::npos, output.find("list"));
+    EXPECT_NE(std::string::npos, output.find("info"));
+  }
 
-  output = custom_exec_str("gz msg --force-version " + g_version);
-  EXPECT_NE(std::string::npos, output.find("list"));
+  {
+    // Print help with no other args
+    auto output = custom_exec_str(make_exec_string(""));
+    EXPECT_NE(std::string::npos, output.find("list"));
+    EXPECT_NE(std::string::npos, output.find("info"));
+  }
 }
 
 /////////////////////////////////////////////////
 TEST(CmdLine, MsgList)
 {
-  auto output = custom_exec_str("gz msg --list --force-version " +
-    g_version);
-  EXPECT_NE(std::string::npos, output.find("gz.msgs.Boolean"))
-    << output;
+  auto output = custom_exec_str(make_exec_string("--list"));
+  EXPECT_NE(std::string::npos, output.find("gz.msgs.WorldControl"));
 }
 
 /////////////////////////////////////////////////
 TEST(CmdLine, MsgInfo)
 {
-  auto output = custom_exec_str("gz msg --info gz_msgs.Boolean"
-    " --force-version " + g_version);
-  EXPECT_NE(std::string::npos, output.find("message Boolean {"))
-    << output;
+  // Underscore separated
+  {
+    auto output =
+      custom_exec_str(make_exec_string("--info gz_msgs.WorldControl"));
+    EXPECT_NE(std::string::npos, output.find("message WorldControl {"))
+      << output;
+  }
+
+  // Period separated
+  {
+    auto output =
+      custom_exec_str(make_exec_string("--info gz.msgs.WorldControl"));
+    EXPECT_NE(std::string::npos, output.find("message WorldControl {"))
+      << output;
+  }
+
+  // Multiple arguments
+  {
+    auto output = custom_exec_str(make_exec_string(
+      "--info gz.msgs.WorldControl gz.msgs.Wrench"));
+    EXPECT_NE(std::string::npos, output.find("message WorldControl {"));
+    EXPECT_NE(std::string::npos, output.find("message Wrench {"));
+  }
 }
 
 /////////////////////////////////////////////////
 TEST(CmdLine, MsgHelpVsCompletionFlags)
 {
   // Flags in help message
-  auto helpOutput = custom_exec_str("gz msg --help --force-version "
-    + g_version);
-
-  // Call the output function in the bash completion script
-  std::filesystem::path scriptPath = PROJECT_SOURCE_PATH;
-  scriptPath = scriptPath / "core" / "src" / "cmd" / "msgs.bash_completion.sh";
+  auto helpOutput = custom_exec_str(make_exec_string("--help"));
 
   // Equivalent to:
   // sh -c "bash -c \". /path/to/msgs.bash_completion.sh; _gz_msgs_flags\""
-  std::string cmd = "bash -c \". " + scriptPath.string() + "; _gz_msgs_flags\"";
+  std::string cmd = "bash -c \". "
+    + std::string(kCompletionScriptPath)
+    + "; _gz_msgs_flags\"";
   std::string scriptOutput = custom_exec_str(cmd);
 
   // Tokenize script output
@@ -115,30 +147,8 @@ TEST(CmdLine, MsgHelpVsCompletionFlags)
   EXPECT_GT(flags.size(), 0u);
 
   // Match each flag in script output with help message
-  for (std::string flag : flags)
+  for (const auto &flag : flags)
   {
     EXPECT_NE(std::string::npos, helpOutput.find(flag)) << helpOutput;
   }
-}
-
-/////////////////////////////////////////////////
-/// Main
-int main(int argc, char **argv)
-{
-  // Set GZ_CONFIG_PATH to the directory where the .yaml configuration files
-  // is located.
-  setenv("GZ_CONFIG_PATH", GZ_CONFIG_PATH, 1);
-
-  // Make sure that we load the library recently built and not the one installed
-  // in your system.
-  // Add the directory where Gazebo msgs has been built.
-  std::string value = std::string(GZ_TEST_LIBRARY_PATH);
-  // Save the current value of LD_LIBRARY_PATH.
-  auto cvalue = std::getenv("LD_LIBRARY_PATH");
-  if (cvalue)
-    value += ":" + std::string(cvalue);
-  setenv("LD_LIBRARY_PATH", value.c_str(), 1);
-
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
 }

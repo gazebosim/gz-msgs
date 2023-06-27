@@ -21,6 +21,7 @@
 #include <cstddef>
 #include <filesystem>
 
+#include "gz/msgs/MessageTypes.hh"
 #include "gz/msgs/vector3d.pb.h"
 #include "gz/msgs/serialized_map.pb.h"
 #include "gz/msgs/Factory.hh"
@@ -214,4 +215,12 @@ TEST(FactoryTest, MultipleMessagesInAProto)
     gz::msgs::ConstSerializedStepMapSharedPtr ptr{nullptr};
     EXPECT_EQ(nullptr, ptr);
   }
+}
+
+/////////////////////////////////////////////////
+int main(int _argc, char **_argv)
+{
+  gz::msgs::RegisterAll();
+  testing::InitGoogleTest(&_argc, _argv);
+  return RUN_ALL_TESTS();
 }
