@@ -10,6 +10,9 @@ set(EXE_INSTALL_DIR ${CMAKE_INSTALL_LIBEXECDIR}/gz/${GZ_DESIGNATION}${PROJECT_VE
 install(TARGETS ${msgs_executable} DESTINATION ${EXE_INSTALL_DIR})
 set(executable_location "../../../${EXE_INSTALL_DIR}/$<TARGET_FILE_NAME:${msgs_executable}>")
 
+message(STATUS ${EXE_INSTALL_DIR})
+message(STATUS ${executable_location})
+
 configure_file(
   "cmd${GZ_DESIGNATION}.rb.in"
   "${cmd_script_configured}"
