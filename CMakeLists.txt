@@ -23,7 +23,7 @@ gz_configure_project(VERSION_SUFFIX
 # Install cmake support files
 install(
   DIRECTORY cmake/
-  DESTINATION "lib/cmake/${PROJECT_NAME}"
+  DESTINATION "${PROJECT_CMAKE_EXTRAS_INSTALL_DIR}"
 )
 
 #============================================================================

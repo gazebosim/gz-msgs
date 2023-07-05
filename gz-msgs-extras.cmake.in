@@ -22,7 +22,7 @@ include(${@PROJECT_NAME@_DIR}/gz_msgs_factory.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_generate.cmake)
 include(${@PROJECT_NAME@_DIR}/target_link_messages.cmake)
 
-set(@PROJECT_NAME@_INSTALL_PATH "${@PROJECT_NAME@_DIR}/../../..")
+set(@PROJECT_NAME@_INSTALL_PATH "${@PROJECT_NAME@_DIR}/@PROJECT_CMAKE_EXTRAS_PATH_TO_PREFIX@")
 cmake_path(NORMAL_PATH @PROJECT_NAME@_INSTALL_PATH OUTPUT_VARIABLE @PROJECT_NAME@_INSTALL_PATH)
 set(PROTOC_NAME "@PROJECT_NAME@_protoc_plugin")
 set(PROTO_SCRIPT_NAME "@PROJECT_NAME@_generate.py")
@@ -40,7 +40,7 @@ function(gz_msgs_get_installed_messages)
 
   cmake_parse_arguments(get_installed_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-  set(@PROJECT_NAME@_INSTALL_PATH "${@PROJECT_NAME@_DIR}/../../..")
+  set(@PROJECT_NAME@_INSTALL_PATH "${@PROJECT_NAME@_DIR}/@PROJECT_CMAKE_EXTRAS_PATH_TO_PREFIX@")
   cmake_path(NORMAL_PATH @PROJECT_NAME@_INSTALL_PATH OUTPUT_VARIABLE @PROJECT_NAME@_INSTALL_PATH)
 
   set(@PROJECT_NAME@_PROTO_PATH ${@PROJECT_NAME@_INSTALL_PATH}/share/protos)
