@@ -1,6 +1,7 @@
 ##################################################
 # Build a custom protoc plugin
 gz_add_executable(gz_msgs_gen Generator.cc generator_main.cc)
+find_package(Protobuf REQUIRED)
 target_link_libraries(gz_msgs_gen
   protobuf::libprotoc
   protobuf::libprotobuf)

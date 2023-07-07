@@ -82,10 +82,7 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
 
 #--------------------------------------
 # Find Protobuf
-gz_find_package(GzProtobuf
-                 REQUIRED
-                 COMPONENTS all
-                 PRETTY Protobuf)
+find_package(Protobuf MODULE REQUIRED)
 
 #--------------------------------------
 # Find gz-math
