@@ -78,7 +78,7 @@ TEST(CmdLine, MsgList)
 {
   auto output = custom_exec_str("gz msg --list --force-version " +
     g_version);
-  EXPECT_NE(std::string::npos, output.find("gz.msgs.WorldControl"))
+  EXPECT_NE(std::string::npos, output.find("gz_msgs.WorldControl"))
     << output;
 }
 
@@ -100,7 +100,7 @@ TEST(CmdLine, MsgHelpVsCompletionFlags)
 
   // Call the output function in the bash completion script
   std::filesystem::path scriptPath = PROJECT_SOURCE_PATH;
-  scriptPath = scriptPath / "compiled" / "src" / "cmd" / "msgs.bash_completion.sh";
+  scriptPath = scriptPath / "src" / "cmd" / "msgs.bash_completion.sh";
 
   // Equivalent to:
   // sh -c "bash -c \". /path/to/msgs.bash_completion.sh; _gz_msgs_flags\""
