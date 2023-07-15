@@ -19,8 +19,6 @@ if(INSTALL_GZ_MSGS_GEN_EXECUTABLE)
   install(FILES $<TARGET_FILE:gz_msgs_gen> DESTINATION ${GZ_BIN_INSTALL_DIR} RENAME ign_msgs_gen PERMISSIONS OWNER_EXECUTE)
 endif()
 
-find_package(Python3 REQUIRED COMPONENTS Interpreter)
-
 ##################################################
 # A function that calls protoc on a protobuf file
 # Options:
@@ -196,8 +194,20 @@ endif()
 set_source_files_properties(${gen_headers} ${gen_ign_headers} ${gen_detail_headers} ${gen_sources} ${gen_python_scripts}
   PROPERTIES GENERATED TRUE)
 
-message(STATUS "Installing Python messages to ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/python/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}")
-install(FILES ${gen_python_scripts} DESTINATION ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/python/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR})
+if(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION)
+  message("Python3_SITELIB ${Python3_SITELIB}")
+  if(USE_DIST_PACKAGES_FOR_PYTHON)
+    string(REPLACE "site-packages" "dist-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+  else()
+    # Python3_SITELIB might use dist-packages in some platforms
+    string(REPLACE "dist-packages" "site-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+  endif()
+else()
+  # If not a system installation, respect local paths
+  set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
+endif()
+message(STATUS "Installing Python messages to ${GZ_PYTHON_INSTALL_PATH}/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}")
+install(FILES ${gen_python_scripts} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR})
 
 # Install gz/msgs
 gz_install_includes(

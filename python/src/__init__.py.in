@@ -22,8 +22,9 @@
 # imports with or without the major version number will work properly.
 
 import sys
-unversioned_module = 'gz.msgs'
-versioned_module = "{}{}".format(unversioned_module, @PROJECT_VERSION_MAJOR@)
+
+unversioned_module = "gz.msgs"
+versioned_module = "gz.msgs@PROJECT_VERSION_MAJOR@"
 if unversioned_module in sys.modules:
     print("Looks like you are combining different versions of {}. Found {} and"
           "{} This is not supported".format(sys.modules[unversioned_module],
