@@ -195,7 +195,6 @@ set_source_files_properties(${gen_headers} ${gen_ign_headers} ${gen_detail_heade
   PROPERTIES GENERATED TRUE)
 
 if(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION)
-  message("Python3_SITELIB ${Python3_SITELIB}")
   if(USE_DIST_PACKAGES_FOR_PYTHON)
     string(REPLACE "site-packages" "dist-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
   else()
