@@ -6,3 +6,5 @@ libprotoc-dev
 libtinyxml2-dev
 protobuf-compiler
 ruby
+python3-pytest
+python3-protobuf
