@@ -5,7 +5,7 @@
 set(python_init_file ${PROJECT_BINARY_DIR}/python/gz/${GS_DESIGNATION}/__init__.py_configured)
 configure_file(${PROJECT_SOURCE_DIR}/python/src/__init__.py.in ${python_init_file})
 
-install(FILES ${python_init_file} DESTINATION ${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/python/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR} RENAME __init__.py)
+install(FILES ${python_init_file} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR} RENAME __init__.py)
 
 if (BUILD_TESTING AND NOT WIN32)
   set(python_tests
