@@ -76,7 +76,7 @@ message Entity
   /// \brief Optional header data
   Header header = 1;
 
-  /// \brief Entity unique identifier accross all types. Defaults to null
+  /// \brief Entity unique identifier across all types. Defaults to null
   /// entity (0).
   uint64 id = 2;
 

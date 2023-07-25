@@ -67,14 +67,14 @@ message Marker
   /// \brief How to interpret the data.
   enum Action
   {
-    /// \brief Use this action to create a new marker or modify an exisiting
+    /// \brief Use this action to create a new marker or modify an existing
     /// marker. A marker will be created if the provided id does not match
-    /// an exisiting marker, otherwise the marker with the provided id will
+    /// an existing marker, otherwise the marker with the provided id will
     /// be modified.
     ADD_MODIFY     = 0;
 
     /// \brief Use this action to delete an existing marking.
-    /// Nothing will happend if the provided id does not match an exisiting
+    /// Nothing will happened if the provided id does not match an existing
     /// marker.
     DELETE_MARKER  = 1;
 

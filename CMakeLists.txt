@@ -59,6 +59,15 @@ set(
   "gz_msgs_gen executable used in the gz_msgs_protoc CMake function.")
 mark_as_advanced(GZ_MSGS_GEN_EXECUTABLE)
 
+# Python interfaces vars
+option(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION
+      "Install python modules in standard system paths in the system"
+      OFF)
+
+option(USE_DIST_PACKAGES_FOR_PYTHON
+      "Use dist-packages instead of site-package to install python modules"
+      OFF)
+
 #============================================================================
 # Search for project-specific dependencies
 #============================================================================
@@ -66,9 +75,7 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
 
 #--------------------------------------
 # Find Protobuf
-set(REQ_PROTOBUF_VER 3)
 gz_find_package(GzProtobuf
-                 VERSION ${REQ_PROTOBUF_VER}
                  REQUIRED
                  COMPONENTS all
                  PRETTY Protobuf)
@@ -89,6 +96,21 @@ set(GZ_TOOLS_VER 1)
 # Find Tinyxml2
 gz_find_package(TINYXML2 REQUIRED PRIVATE PRETTY tinyxml2)
 
+#--------------------------------------
+# Find Python
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
+
+if(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION)
+  if(USE_DIST_PACKAGES_FOR_PYTHON)
+    string(REPLACE "site-packages" "dist-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+  else()
+    # Python3_SITELIB might use dist-packages in some platforms
+    string(REPLACE "dist-packages" "site-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+  endif()
+else()
+  # If not a system installation, respect local paths
+  set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
+endif()
 #============================================================================
 # Configure the build
 #============================================================================
@@ -112,6 +134,9 @@ add_subdirectory(tools)
 # gz_msgs_protoc to get uniform support for proto messages across all Gazebo
 # projects.
 add_subdirectory(proto)
+
+# Generate python
+add_subdirectory(python)
 
 #============================================================================
 # Create package information

@@ -35,14 +35,14 @@ def main(argv=sys.argv[1:]):
         help='Flag to indicate if C++ bindings should be generated',
         action='store_true')
     parser.add_argument(
-        '--generate-ruby',
-        help='Flag to indicate if Ruby bindings should be generated',
+        '--generate-python',
+        help='Flag to indicate if Python bindings should be generated',
         action='store_true')
     parser.add_argument(
         '--output-cpp-path',
         help='The basepath of the generated C++ files')
     parser.add_argument(
-        '--output-ruby-path',
+        '--output-python-path',
         help='The basepath of the generated C++ files')
     parser.add_argument(
         '--proto-path',
@@ -57,7 +57,7 @@ def main(argv=sys.argv[1:]):
     args = parser.parse_args(argv)
 
     for input_file in args.input_path:
-        # First generate the base cpp and ruby files
+        # First generate the base cpp and python files
         cmd = [args.protoc_exec]
 
         for pp in args.proto_path:
@@ -67,11 +67,12 @@ def main(argv=sys.argv[1:]):
             cmd += [f'--plugin=protoc-gen-ignmsgs={args.gz_generator_bin}']
             cmd += [f'--cpp_out=dllexport_decl=GZ_MSGS_VISIBLE:{args.output_cpp_path}']
             cmd += [f'--ignmsgs_out={args.output_cpp_path}']
-        if args.generate_ruby:
-            cmd += [f'--ruby_out=dllexport_decl=GZ_MSGS_VISIBLE:{args.output_ruby_path}']
+        if args.generate_python:
+            cmd += [f'--python_out={args.output_python_path}']
         cmd += [input_file]
 
         try:
+            print("cmd:", cmd)
             subprocess.check_call(cmd)
         except subprocess.CalledProcessError as e:
             print(f'Failed to execute protoc compiler: {e}')
