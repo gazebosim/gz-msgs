@@ -14,9 +14,6 @@ endif()
 if(INSTALL_GZ_MSGS_GEN_EXECUTABLE)
   set_target_properties(gz_msgs_gen PROPERTIES VERSION ${PROJECT_VERSION_FULL})
   install(TARGETS gz_msgs_gen DESTINATION ${GZ_BIN_INSTALL_DIR})
-
-  # TODO(chapulina) Deprecated. Remove on v10.
-  install(FILES $<TARGET_FILE:gz_msgs_gen> DESTINATION ${GZ_BIN_INSTALL_DIR} RENAME ign_msgs_gen PERMISSIONS OWNER_EXECUTE)
 endif()
 
 ##################################################

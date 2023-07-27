@@ -84,19 +84,8 @@ class DynamicFactory
     const char *descPaths = std::getenv("GZ_DESCRIPTOR_PATH");
     if (!descPaths)
     {
-      // TODO(CH3): Deprecated. Remove on tock.
-      // Remember to still return !!
-      descPaths = std::getenv("IGN_DESCRIPTOR_PATH");
-
-      if (!descPaths)
-      {
-        return;
-      }
-      else
-      {
-        std::cerr << "IGN_DESCRIPTOR_PATH is deprecated and will be removed! "
-                  << "Use GZ_DESCRIPTOR_PATH instead!" << std::endl;
-      }
+      std::cerr << "IGN_DESCRIPTOR_PATH is deprecated and will be removed! "
+                << "Use GZ_DESCRIPTOR_PATH instead!" << std::endl;
     }
 
     // Load all the descriptors found in the paths set with GZ_DESCRIPTOR_PATH.
