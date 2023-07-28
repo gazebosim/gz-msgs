@@ -13,7 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+*/
 
-#include <gz/msgs/PointCloudPackedUtils.hh>
-#include <ignition/msgs/config.hh>
+syntax = "proto3";
+package gz.msgs;
+option java_package = "com.gz.msgs";
+option java_outer_classname = "ParameterNameProtos";
+
+/// \ingroup gz.msgs
+/// \interface ParameterName
+/// \brief Parameter name, used as a request to get a parameter.
+
+message ParameterName
+{
+  /// \brief Parameter name.
+  string name = 1;
+};

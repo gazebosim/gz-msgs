@@ -20,7 +20,7 @@ package gz.msgs;
 option java_package = "com.gz.msgs";
 option java_outer_classname = "LensProtos";
 
-/// \ingroup ignition.msgs
+/// \ingroup gz.msgs
 /// \interface Lens
 /// \brief Information about a lens element
 

@@ -16,16 +16,18 @@
 */
 
 #include <gtest/gtest.h>
+
 #include <algorithm>
 #include <cstddef>
+#include <filesystem>
 
 #include "gz/msgs/vector3d.pb.h"
 #include "gz/msgs/serialized_map.pb.h"
-
 #include "gz/msgs/Factory.hh"
-#include "test_config.hh"
 
 using namespace gz;
+
+static constexpr const char * kMsgsTestPath = GZ_MSGS_TEST_PATH;
 
 /////////////////////////////////////////////////
 TEST(FactoryTest, Type)
@@ -72,11 +74,12 @@ TEST(FactoryTest, NewDynamicFactory)
   auto msg = msgs::Factory::New("example.msgs.StringMsg");
   EXPECT_TRUE(msg.get() == nullptr);
 
-  paths =
-      PROJECT_SOURCE_PATH "/test/desc:"
-      PROJECT_SOURCE_PATH "/test";
-  msgs::Factory::LoadDescriptors(paths);
+  std::filesystem::path test_path(kMsgsTestPath);
+  paths += (test_path / "desc").string();
+  paths += ":";
+  paths += test_path.string();
 
+  msgs::Factory::LoadDescriptors(paths);
   msg = msgs::Factory::New("example.msgs.StringMsg");
   EXPECT_TRUE(msg.get() != nullptr);
 }

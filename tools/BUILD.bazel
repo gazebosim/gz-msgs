@@ -1,0 +1,7 @@
+load("@gz//bazel/skylark:gz_py.bzl", "gz_py_binary")
+
+gz_py_binary(
+    name = "gz_msgs_generate_py",
+    srcs = ["gz_msgs_generate.py"],
+    visibility = ["//visibility:public"],
+)

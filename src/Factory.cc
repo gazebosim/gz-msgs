@@ -105,7 +105,7 @@ class DynamicFactory
 
   //////////////////////////////////////////////////
   /// \brief Load descriptors into the descriptor pool.
-  /// \param[in] _paths A set of directories containing .desc decriptor files.
+  /// \param[in] _paths A set of directories containing .desc descriptor files.
   /// Each directory should be separated by ":".
   public: void LoadDescriptors(const std::string &_paths)
   {

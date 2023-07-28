@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Open Source Robotics Foundation
+ * Copyright (C) 2022 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+*/
 
-#include <gz/msgs/Utility.hh>
-#include <ignition/msgs/config.hh>
+syntax = "proto3";
+package gz.msgs;
+option java_package = "com.gz.msgs";
+option java_outer_classname = "ParameterDeclarationProtos";
+
+/// \ingroup gz.msgs
+/// \interface ParameterDeclaration
+/// \brief Representation of a parameter declaration.
+
+message ParameterDeclaration
+{
+  /// \brief Parameter name.
+  string name = 1;
+
+  /// \brief Parameter type, i.e. the associated protobuf type.
+  string type = 2;
+};

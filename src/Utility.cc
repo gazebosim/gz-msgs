@@ -23,13 +23,6 @@
 #include <gz/math/SemanticVersion.hh>
 #include "gz/msgs/Utility.hh"
 
-#ifdef _WIN32
-  static const auto &ignstrtok = strtok_s;
-#else
-  static const auto &ignstrtok = strtok_r;
-#endif
-
-
 namespace gz
 {
   namespace msgs
@@ -1018,6 +1011,10 @@ namespace gz
           return "NEW_CONNECTION";
         case msgs::Discovery::END_CONNECTION:
           return "END_CONNECTION";
+        case msgs::Discovery::SUBSCRIBERS_REQ:
+          return "SUBSCRIBERS_REQ";
+        case msgs::Discovery::SUBSCRIBERS_REP:
+          return "SUBSCRIBERS_REP";
       };
     }
 

@@ -13,7 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+*/
 
-#include <gz/msgs/Export.hh>
-#include <ignition/msgs/config.hh>
+syntax = "proto3";
+package gz.msgs;
+option java_package = "com.gz.msgs";
+option java_outer_classname = "DVLRangeEstimateProtos";
+
+/// \ingroup gz.msgs
+/// \interface DVLRangeEstimate
+/// \brief Range estimate as reported by a Doppler Velocity Log sensor. This estimate is
+/// characterized by mean and variance of some implicit scalar distribution (typically a 
+/// normal distribution).
+
+message DVLRangeEstimate
+{
+   /// \brief Estimate mean.
+   double mean = 1;
+
+   /// \brief Estimate variance.
+   double variance = 2;
+}

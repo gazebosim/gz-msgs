@@ -32,28 +32,34 @@ message Discovery
   enum Type
   {
     /// \brief Type not initialized.
-    UNINITIALIZED  = 0;
+    UNINITIALIZED   = 0;
 
     /// \brief Advertise message.
-    ADVERTISE      = 1;
+    ADVERTISE       = 1;
 
     /// \brief Subscribe message.
-    SUBSCRIBE      = 2;
+    SUBSCRIBE       = 2;
 
     /// \brief Unadvertise message.
-    UNADVERTISE    = 3;
+    UNADVERTISE     = 3;
 
     /// \brief Hearbeat message.
-    HEARTBEAT      = 4;
+    HEARTBEAT       = 4;
 
     /// \brief Bye message.
-    BYE            = 5;
+    BYE             = 5;
 
     /// \brief New connection message.
-    NEW_CONNECTION = 6;
+    NEW_CONNECTION  = 6;
 
     /// \brief End connection message.
-    END_CONNECTION = 7;
+    END_CONNECTION  = 7;
+
+    /// \brief Request the list of subscribers.
+    SUBSCRIBERS_REQ = 8;
+
+    /// \brief Reply to a SUBSCRIBERS_REQ.
+    SUBSCRIBERS_REP = 9;
   }
 
   /// \brief Discovery flags.

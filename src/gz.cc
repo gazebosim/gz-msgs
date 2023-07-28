@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * */
+ *
+*/
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -47,7 +48,7 @@ void cmdMsgInfo(const char *_msg)
 {
   if (_msg)
   {
-    auto msg = gz::msgs::Factory::New(_msg);
+    auto msg = Factory::New(_msg);
     if (msg)
     {
       auto descriptor = msg->GetDescriptor();
@@ -62,7 +63,7 @@ void cmdMsgInfo(const char *_msg)
   }
   else
   {
-    std::cerr << "Messsage type is null\n";
+    std::cerr << "Message type is null\n";
   }
 }
 
@@ -71,7 +72,7 @@ extern "C" GZ_MSGS_VISIBLE
 void cmdMsgList()
 {
   std::vector<std::string> types;
-  gz::msgs::Factory::Types(types);
+  Factory::Types(types);
 
   for (auto const &type : types)
     std::cout << type << std::endl;
