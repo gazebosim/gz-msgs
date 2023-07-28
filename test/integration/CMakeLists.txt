@@ -2,6 +2,10 @@ gz_get_sources(tests)
 
 list(REMOVE_ITEM tests Utility_TEST.cc PointCloudPackedUtils_TEST.cc Factory_TEST.cc headers.cc)
 
+if (NOT HAVE_GZ_TOOLS)
+  list(REMOVTE_ITEM tests gz_TEST.cc)
+endif()
+
 gz_build_tests(TYPE INTEGRATION SOURCES ${tests} TEST_LIST test_targets)
 
 foreach(test ${test_targets})

@@ -104,7 +104,10 @@ set(GZ_TOOLS_VER 1)
 # Find Tinyxml2
 gz_find_package(TINYXML2 REQUIRED PRIVATE PRETTY tinyxml2)
 
-gz_find_package(DL REQUIRED PRIVATE)
+#--------------------------------------
+# Find DL
+# Required for properly doing relocatable installation
+gz_find_package(DL REQUIRED)
 
 #--------------------------------------
 # Find Python

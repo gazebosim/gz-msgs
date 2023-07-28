@@ -2,6 +2,7 @@
 # A function that calls protoc on a protobuf file
 # Options:
 #   GENERATE_CPP        - generates c++ code for the message if specified
+#   GENERATE_PYTHON     - generates python code for the message if specified
 # One value arguments:
 #   MSGS_GEN_SCRIPT     - Path to the message generation python script
 #   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
@@ -9,15 +10,17 @@
 #   GZ_PROTOC_PLUGIN    - Path to the gazebo-specific protobuf compiler executable
 #   INPUT_PROTO         - Path to the input .proto file
 #   OUTPUT_CPP_DIR      - Path where C++ files are saved
+#   OUTPUT_PYTON_DIR    - Path where Python files are saved
 #   OUTPUT_INCLUDES     - A CMake variable name containing a list that the C++ header path should be appended to
 #   OUTPUT_CPP_HH_VAR   - A CMake variable name containing a list generated headers should be appended to
 #   OUTPUT_DETAIL_CPP_HH_VAR - A CMake variable name containing a list that the C++ detail headers should be appended to
 #   OUTPUT_CPP_CC_VAR   - A Cmake variable name containing a list that the C++ source files should be appended to
+#   OUTPUT_PYTHON_VAR - A Cmake variable name containing a list that the Python source files should be appended to
 # Multi value arguments
 #   PROTO_PATH          - Passed to protoc --proto_path
 #   DEPENDENCY_PROTO_DESC - Passed to protoc --proto_path
 function(gz_msgs_protoc)
-  set(options GENERATE_CPP)
+  set(options GENERATE_CPP GENERATE_PYTHON)
   set(oneValueArgs
     MSGS_GEN_SCRIPT
     PROTO_PACKAGE
@@ -28,7 +31,9 @@ function(gz_msgs_protoc)
     OUTPUT_INCLUDES
     OUTPUT_CPP_HH_VAR
     OUTPUT_DETAIL_CPP_HH_VAR
-    OUTPUT_CPP_CC_VAR)
+    OUTPUT_CPP_CC_VAR
+    OUTPUT_PYTHON_DIR
+    OUTPUT_PYTHON_VAR)
   set(multiValueArgs PROTO_PATH DEPENDENCY_PROTO_DESCS)
 
   cmake_parse_arguments(gz_msgs_protoc "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -73,6 +78,15 @@ function(gz_msgs_protoc)
     set(${gz_msgs_protoc_OUTPUT_CPP_CC_VAR} ${${gz_msgs_protoc_OUTPUT_CPP_CC_VAR}} PARENT_SCOPE)
   endif()
 
+  if(gz_msgs_protoc_GENERATE_PYTHON)
+    file(MAKE_DIRECTORY ${gz_msgs_protoc_OUTPUT_PYTHON_DIR})
+    # Note: Both proto2 and proto3 use the _pb2.py suffix (https://protobuf.dev/reference/python/python-generated/#invocation)
+    set(output_python "${gz_msgs_protoc_OUTPUT_PYTHON_DIR}${proto_package_dir}/${FIL_WE}_pb2.py")
+    list(APPEND ${gz_msgs_protoc_OUTPUT_PYTHON_VAR} ${output_python})
+    list(APPEND output_files ${output_python})
+    set(${gz_msgs_protoc_OUTPUT_PYTHON_VAR} ${${gz_msgs_protoc_OUTPUT_PYTHON_VAR}} PARENT_SCOPE)
+  endif()
+
   set(GENERATE_ARGS
       --protoc-exec "$<TARGET_FILE:${gz_msgs_protoc_PROTOC_EXEC}>"
       --gz-generator-bin "${gz_msgs_protoc_GZ_PROTOC_PLUGIN}"
@@ -90,6 +104,12 @@ function(gz_msgs_protoc)
     list(APPEND GENERATE_ARGS
       --generate-cpp
       --output-cpp-path "${gz_msgs_protoc_OUTPUT_CPP_DIR}")
+  endif()
+
+  if(${gz_msgs_protoc_GENERATE_PYTHON})
+    list(APPEND GENERATE_ARGS
+      --generate-python
+      --output-python-path "${gz_msgs_protoc_OUTPUT_PYTHON_DIR}")
   endif()
 
   add_custom_command(

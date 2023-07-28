@@ -34,22 +34,25 @@ function(gz_msgs_generate_messages_impl)
     list(APPEND depends_msgs_desc ${msgs_desc_file})
   endforeach()
 
-
   foreach(proto_file ${generate_messages_INPUT_PROTOS})
     gz_msgs_protoc(
       MSGS_GEN_SCRIPT
         ${generate_messages_MSGS_GEN_SCRIPT}
       PROTO_PACKAGE
         ${generate_messages_PROTO_PACKAGE}
-      GENERATE_CPP
       INPUT_PROTO
         ${proto_file}
       PROTOC_EXEC
         protobuf::protoc
       GZ_PROTOC_PLUGIN
         ${generate_messages_GZ_PROTOC_PLUGIN}
-      OUTPUT_CPP_DIR
-        "${PROJECT_BINARY_DIR}/${gen_dir}_gen"
+      PROTO_PATH
+        ${generate_messages_PROTO_PATH}
+      DEPENDENCY_PROTO_DESCS
+        ${depends_msgs_desc}
+
+      # Cpp Specific arguments
+      GENERATE_CPP
       OUTPUT_INCLUDES
         gen_includes
       OUTPUT_CPP_HH_VAR
@@ -58,10 +61,15 @@ function(gz_msgs_generate_messages_impl)
         gen_detail_headers
       OUTPUT_CPP_CC_VAR
         gen_sources
-      PROTO_PATH
-        ${generate_messages_PROTO_PATH}
-      DEPENDENCY_PROTO_DESCS
-        ${depends_msgs_desc}
+      OUTPUT_CPP_DIR
+        "${PROJECT_BINARY_DIR}/${gen_dir}_gen"
+
+      # Python Specific arguments
+      GENERATE_PYTHON
+      OUTPUT_PYTHON_VAR
+        gen_sources_py
+      OUTPUT_PYTHON_DIR
+        "${PROJECT_BINARY_DIR}/${gen_dir}_gen/python/"
     )
   endforeach()
 
@@ -152,6 +160,10 @@ function(gz_msgs_generate_messages_impl)
   install(FILES ${gen_headers} ${gen_factory_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/${proto_package_dir})
   install(FILES ${gen_detail_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/${proto_package_dir}/details)
   install(FILES ${PROJECT_BINARY_DIR}/${gen_dir}_gen/${generate_messages_TARGET}.gz_desc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gz)
+
+message(STATUS "Installing Python messages to ${GZ_PYTHON_INSTALL_PATH}/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}")
+install(FILES ${gen_sources_py} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR})
+
 
   set(component_name msgs)
   set(component_pkg_name ${generate_messages_TARGET})

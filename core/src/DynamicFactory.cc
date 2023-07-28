@@ -25,11 +25,11 @@
 #include <gz/msgs/InstallationDirectories.hh>
 
 namespace {
-static constexpr const char * kDescriptorEnv = "GZ_DESCRIPTOR_PATH";
+constexpr const char * kDescriptorEnv = "GZ_DESCRIPTOR_PATH";
 #ifdef _WIN32
-static constexpr char kEnvironmentVariableSeparator = ';';
+constexpr char kEnvironmentVariableSeparator = ';';
 #else
-static constexpr char kEnvironmentVariableSeparator = ':';
+constexpr char kEnvironmentVariableSeparator = ':';
 #endif
 
 //////////////////////////////////////////////////
@@ -67,7 +67,8 @@ DynamicFactory::DynamicFactory()
   else
   {
     // Load descriptors from the global share path
-    this->LoadDescriptors(std::filesystem::path(gz::msgs::getInstallPrefix()) / "share" / "gz");
+    this->LoadDescriptors(std::filesystem::path(
+      gz::msgs::getInstallPrefix()) / "share" / "gz");
   }
 }
 
@@ -87,7 +88,8 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     for (auto const &dirIter : std::filesystem::directory_iterator{descDir})
     {
       // Ignore files without the .desc extension.
-      if (dirIter.path().extension() != ".desc" && dirIter.path().extension() != ".gz_desc")
+      if (dirIter.path().extension() != ".desc" &&
+          dirIter.path().extension() != ".gz_desc")
         continue;
 
       std::ifstream ifs(dirIter.path().string(), std::ifstream::in);
@@ -110,7 +112,7 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
       for (const google::protobuf::FileDescriptorProto &fileDescriptorProto :
            fileDescriptorSet.file())
       {
-        if (!pool.BuildFile(fileDescriptorProto))
+        if (!static_cast<bool>(pool.BuildFile(fileDescriptorProto)))
         {
           std::cerr << "DynamicFactory(). Unable to place descriptors from ["
                     << dirIter.path()
@@ -129,7 +131,7 @@ void DynamicFactory::Types(std::vector<std::string> &_types)
 {
   std::vector<std::string> messages;
   db.FindAllMessageNames(&messages);
-  for (auto message: messages)
+  for (const auto &message : messages)
   {
     _types.push_back(message);
   }
@@ -144,8 +146,8 @@ DynamicFactory::MessagePtr DynamicFactory::New(const std::string &_msgType)
     return messageIt ->second();
 
   // Nothing to do if we don't know about this type in the descriptor map.
-  auto descriptor = pool.FindMessageTypeByName(_msgType);
-  if (!descriptor)
+  const auto *descriptor = pool.FindMessageTypeByName(_msgType);
+  if (!static_cast<bool>(descriptor))
     return nullptr;
 
   google::protobuf::Message *msgPtr(
