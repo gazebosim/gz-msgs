@@ -9,7 +9,7 @@ project(gz-msgs10 VERSION 10.0.0)
 # Find gz-cmake
 #============================================================================
 # If you get an error at this line, you need to install gz-cmake
-find_package(gz-cmake4 REQUIRED)
+find_package(gz-cmake3 REQUIRED)
 
 #============================================================================
 # Configure the project
@@ -82,8 +82,8 @@ gz_find_package(GzProtobuf
 
 #--------------------------------------
 # Find gz-math
-gz_find_package(gz-math8 REQUIRED)
-set(GZ_MATH_VER ${gz-math8_VERSION_MAJOR})
+gz_find_package(gz-math7 REQUIRED)
+set(GZ_MATH_VER ${gz-math7_VERSION_MAJOR})
 
 #--------------------------------------
 # Find if command is available. This is used to enable tests.
