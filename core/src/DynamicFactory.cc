@@ -68,7 +68,7 @@ DynamicFactory::DynamicFactory()
   {
     // Load descriptors from the global share path
     this->LoadDescriptors(std::filesystem::path(
-      gz::msgs::getInstallPrefix()) / "share" / "gz");
+      gz::msgs::getInstallPrefix()) / "share" / "gz" / "protos");
   }
 }
 

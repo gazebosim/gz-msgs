@@ -79,7 +79,6 @@ def main(argv=sys.argv[1:]):
     cmd += [args.input_path]
 
     try:
-        print("cmd:", cmd)
         subprocess.check_call(cmd)
     except subprocess.CalledProcessError as e:
         print(f'Failed to execute protoc compiler: {e}')

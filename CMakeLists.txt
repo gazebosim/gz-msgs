@@ -142,10 +142,6 @@ add_subdirectory(tools)
 #============================================================================
 # Install proto files
 #============================================================================
-# TODO: Consider tweaking gz_configure_build() to call add_subdirectory(proto)
-# whenever a proto subdirectory exists. This could be used alongside
-# gz_msgs_protoc to get uniform support for proto messages across all Gazebo
-# projects.
 add_subdirectory(proto)
 
 # Generate python

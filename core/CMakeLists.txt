@@ -17,16 +17,33 @@ endif()
 
 install(TARGETS ${PROTOC_PLUGIN} DESTINATION ${GZ_BIN_INSTALL_DIR})
 
-
 ##################################################
 # Build core library
 gz_get_libsources_and_unittests(sources gtest_sources)
 
-gz_create_core_library(SOURCES
-  src/gz.cc
+add_library(${PROJECT_LIBRARY_TARGET_NAME}-core
   src/Factory.cc
   src/MessageFactory.cc
   src/DynamicFactory.cc
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_LIBRARY_TARGET_NAME}_get_install_prefix_impl.cc
+)
+
+target_include_directories(
+  ${PROJECT_LIBRARY_TARGET_NAME}-core
+  PUBLIC
+    "$<INSTALL_INTERFACE:${GZ_INCLUDE_INSTALL_DIR_FULL}/>"
+    "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/core/include>"
+    "$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/core/include>"
+)
+
+target_link_libraries(
+  ${PROJECT_LIBRARY_TARGET_NAME}-core
+  PUBLIC
+    gz-utils${GZ_UTILS_VER}::gz-utils${GZ_UTILS_VER}
+)
+
+gz_create_core_library(SOURCES
+  src/gz.cc
 )
 
 include(GzRelocatableBinaries)
@@ -34,11 +51,20 @@ gz_add_get_install_prefix_impl(GET_INSTALL_PREFIX_FUNCTION gz::msgs::getInstallP
                                GET_INSTALL_PREFIX_HEADER gz/msgs/InstallationDirectories.hh
                                OVERRIDE_INSTALL_PREFIX_ENV_VARIABLE GZ_MSGS_INSTALL_PREFIX)
 
+install(
+  TARGETS ${PROJECT_LIBRARY_TARGET_NAME}-core
+  EXPORT ${PROJECT_LIBRARY_TARGET_NAME}
+  LIBRARY DESTINATION ${GZ_LIB_INSTALL_DIR}
+  ARCHIVE DESTINATION ${GZ_LIB_INSTALL_DIR}
+  RUNTIME DESTINATION ${GZ_BIN_INSTALL_DIR}
+  COMPONENT libraries)
+
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
+    ${PROJECT_LIBRARY_TARGET_NAME}-core
+    ${PROJECT_LIBRARY_TARGET_NAME}-msgs
     protobuf::libprotobuf
     gz-math${GZ_MATH_VER}::gz-math${GZ_MATH_VER}
-  PRIVATE
     TINYXML2::TINYXML2
 )
 

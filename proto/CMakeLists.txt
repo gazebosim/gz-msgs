@@ -3,20 +3,7 @@ include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_factory.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_generate.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_protoc.cmake)
 
-set(proto_files
-  ${PROJECT_SOURCE_DIR}/proto/gz/msgs/boolean.proto
-  ${PROJECT_SOURCE_DIR}/proto/gz/msgs/bytes.proto
-  ${PROJECT_SOURCE_DIR}/proto/gz/msgs/clock.proto
-  ${PROJECT_SOURCE_DIR}/proto/gz/msgs/empty.proto
-  ${PROJECT_SOURCE_DIR}/proto/gz/msgs/header.proto
-  ${PROJECT_SOURCE_DIR}/proto/gz/msgs/image.proto
-  ${PROJECT_SOURCE_DIR}/proto/gz/msgs/int32.proto
-  ${PROJECT_SOURCE_DIR}/proto/gz/msgs/int32_v.proto
-  ${PROJECT_SOURCE_DIR}/proto/gz/msgs/statistic.proto
-  ${PROJECT_SOURCE_DIR}/proto/gz/msgs/stringmsg.proto
-  ${PROJECT_SOURCE_DIR}/proto/gz/msgs/time.proto
-  ${PROJECT_SOURCE_DIR}/proto/gz/msgs/vector3d.proto
-  )
+file(GLOB proto_files ${PROJECT_SOURCE_DIR}/proto/gz/msgs/*.proto)
 
 # Using the impl, rather than the extras function because we are building in-source
 gz_msgs_generate_messages_impl(
@@ -33,9 +20,9 @@ gz_msgs_generate_messages_impl(
   PROTO_PATH
     ${PROJECT_SOURCE_DIR}/proto
   MSGS_LIB
-    gz-msgs${PROJECT_VERSION_MAJOR}
+    gz-msgs${PROJECT_VERSION_MAJOR}-core
   TARGET
-    gz-msgs${PROJECT_VERSION_MAJOR}-msgs
+    msgs
 )
 
 install(

@@ -17,7 +17,6 @@
 #ifndef GZ_MSGS_UTILITY_HH_
 #define GZ_MSGS_UTILITY_HH_
 
-/*
 #include <gz/msgs/convert/AxisAlignedBox.hh>
 #include <gz/msgs/convert/Color.hh>
 #include <gz/msgs/convert/Inertial.hh>
@@ -35,6 +34,5 @@
 #include <gz/msgs/convert/JointType.hh>
 #include <gz/msgs/convert/PixelFormatType.hh>
 #include <gz/msgs/convert/ShaderType.hh>
-*/
 
 #endif  // GZ_MSGS_UTILITY_HH_
