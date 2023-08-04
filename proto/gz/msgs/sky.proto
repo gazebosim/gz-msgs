@@ -41,4 +41,7 @@ message Sky
   Color cloud_ambient   = 7;
   double humidity       = 8;
   double mean_cloud_size = 9;
+
+  /// \brief Cubemap URI for the sky, usually a .dds file.
+  string cubemap_uri    = 10;
 }

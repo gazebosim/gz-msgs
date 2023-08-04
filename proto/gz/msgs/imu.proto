@@ -27,14 +27,24 @@ option java_outer_classname = "IMUProtos";
 import "gz/msgs/header.proto";
 import "gz/msgs/vector3d.proto";
 import "gz/msgs/quaternion.proto";
+import "gz/msgs/float_v.proto";
 
 message IMU
 {
   /// \brief Optional header data
-  Header header                = 1;
+  Header header                          = 1;
+                                         
+  string entity_name                     = 2;
 
-  string entity_name           = 2;
-  Quaternion orientation       = 3;
-  Vector3d angular_velocity    = 4;
-  Vector3d linear_acceleration = 5;
+  Quaternion orientation                 = 3;
+  /// Row major about x, y, z
+  Float_V orientation_covariance         = 4;
+
+  Vector3d angular_velocity              = 5;
+  /// Row major about x, y, z
+  Float_V angular_velocity_covariance    = 6;
+
+  Vector3d linear_acceleration           = 7;
+  /// Row major about x, y, z
+  Float_V linear_acceleration_covariance = 8;
 }
