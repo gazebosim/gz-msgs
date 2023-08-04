@@ -23,13 +23,6 @@
 #include <gz/math/SemanticVersion.hh>
 #include "gz/msgs/Utility.hh"
 
-#ifdef _WIN32
-  static const auto &ignstrtok = strtok_s;
-#else
-  static const auto &ignstrtok = strtok_r;
-#endif
-
-
 namespace gz
 {
   namespace msgs

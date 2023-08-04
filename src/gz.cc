@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * */
+ *
+*/
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -62,7 +63,7 @@ void cmdMsgInfo(const char *_msg)
   }
   else
   {
-    std::cerr << "Messsage type is null\n";
+    std::cerr << "Message type is null\n";
   }
 }
 
