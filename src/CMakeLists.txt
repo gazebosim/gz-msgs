@@ -204,7 +204,7 @@ gz_install_includes(
 
 # Install gz/msgs/details
 gz_install_includes(
-  "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${IGN_DESIGNATION}/details"
+  "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}/gz/${GZ_DESIGNATION}/details"
   ${gen_detail_headers})
 
 ##################################################
