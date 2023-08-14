@@ -89,7 +89,7 @@ bool Generator::Generate(const FileDescriptor *_file,
   auto parent_path = filePath.parent_path();
   auto fileStem = filePath.stem().string();
 
-  // protoc generates ignition/msgs/msg.pb.cc and ignition/msgs/msg.pb.hh
+  // protoc generates gz/msgs/msg.pb.cc and gz/msgs/msg.pb.hh
   // This generator injects code into the msg.pb.cc file, but generates
   // a completely new header that wraps the original protobuf header
   //
