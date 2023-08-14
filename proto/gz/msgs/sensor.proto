@@ -25,6 +25,7 @@ option java_outer_classname = "SensorProtos";
 /// \brief Information about a sensor element
 
 import "gz/msgs/altimeter_sensor.proto";
+import "gz/msgs/air_speed_sensor.proto";
 import "gz/msgs/camerasensor.proto";
 import "gz/msgs/contactsensor.proto";
 import "gz/msgs/air_pressure_sensor.proto";
@@ -101,4 +102,7 @@ message Sensor
 
   /// \brief Description of a lidar sensor
   LidarSensor lidar                    = 20;
+
+  /// \brief Description of a airspeed sensor
+  AirSpeedSensor air_speed             = 21;
 }
