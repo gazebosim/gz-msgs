@@ -87,4 +87,6 @@ gz_build_tests(TYPE UNIT
 )
 
 add_subdirectory(include/gz/msgs)
-add_subdirectory(src/cmd)
+if(NOT WIN32)
+  add_subdirectory(src/cmd)
+endif()
