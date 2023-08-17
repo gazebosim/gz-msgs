@@ -40,6 +40,7 @@ target_link_libraries(
   ${PROJECT_LIBRARY_TARGET_NAME}-core
   PUBLIC
     gz-utils${GZ_UTILS_VER}::gz-utils${GZ_UTILS_VER}
+    protobuf::libprotobuf
 )
 
 gz_create_core_library(SOURCES
@@ -63,7 +64,6 @@ target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
     ${PROJECT_LIBRARY_TARGET_NAME}-core
     ${PROJECT_LIBRARY_TARGET_NAME}-msgs
-    protobuf::libprotobuf
     gz-math${GZ_MATH_VER}::gz-math${GZ_MATH_VER}
     TINYXML2::TINYXML2
 )
