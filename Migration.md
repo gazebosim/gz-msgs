@@ -5,6 +5,14 @@ Deprecated code produces compile-time warnings. These warning serve as
 notification to users that their code should be upgraded. The next major
 release will remove the deprecated code.
 
+## Gazebo Msgs 9.X to 10.X
+
+### Modifications 
+
+1. Th message generation pipeline is now accessible in downstream packages .
+  * For more information, consult the `using_gz_msgs` example.
+  * Note that there will no longer be Ruby generated messages, this support will be restored as-needed. 
+
 ## Gazebo Msgs 8.X to 9.X
 
 1. **SuppressWarnings.hh** is deprecated and isn't part of `msgs.hh` anymore.

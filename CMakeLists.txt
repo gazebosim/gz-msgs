@@ -17,13 +17,14 @@ find_package(gz-cmake3 REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-gz_configure_project(VERSION_SUFFIX)
+gz_configure_project(VERSION_SUFFIX
+  CONFIG_EXTRAS "gz-msgs-extras.cmake.in")
 
-if (UNIX AND NOT APPLE)
-  set (EXTRA_TEST_LIB_DEPS stdc++fs)
-else()
-  set (EXTRA_TEST_LIB_DEPS)
-endif()
+# Install cmake support files
+install(
+  DIRECTORY cmake/
+  DESTINATION "${PROJECT_CMAKE_EXTRAS_INSTALL_DIR}"
+)
 
 #============================================================================
 # Set project-specific options
@@ -81,9 +82,16 @@ gz_find_package(GzProtobuf
                  PRETTY Protobuf)
 
 #--------------------------------------
+# Find gz-utils
+gz_find_package(gz-utils2 REQUIRED)
+set(GZ_UTILS_VER ${gz-utils2_VERSION_MAJOR})
+
+#--------------------------------------
 # Find gz-math
 gz_find_package(gz-math7 REQUIRED)
 set(GZ_MATH_VER ${gz-math7_VERSION_MAJOR})
+
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
 #--------------------------------------
 # Find if command is available. This is used to enable tests.
@@ -95,6 +103,8 @@ set(GZ_TOOLS_VER 1)
 #--------------------------------------
 # Find Tinyxml2
 gz_find_package(TINYXML2 REQUIRED PRIVATE PRETTY tinyxml2)
+
+gz_find_package(DL REQUIRED PRIVATE)
 
 #--------------------------------------
 # Find Python

@@ -6,3 +6,6 @@ build_*
 .DS_Store
 *.swp
 *.orig
+
+# Python generated files 
+__pycache__
