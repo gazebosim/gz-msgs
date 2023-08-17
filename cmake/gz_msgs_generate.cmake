@@ -34,9 +34,6 @@ function(gz_msgs_generate_messages_impl)
 
   foreach(dep ${generate_messages_DEPENDENCIES})
     get_target_property(msgs_desc_file ${dep} GZ_MSGS_DESC_FILE)
-
-    message(STATUS ${dep} "--" ${msgs_desc_file})
-
     list(APPEND depends_msgs_desc ${msgs_desc_file})
   endforeach()
 

@@ -3,6 +3,8 @@ include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_factory.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_generate.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_protoc.cmake)
 
+# Generate impl expects this to be set
+set(GZ_MSGS_VER ${PROJECT_VERSION_MAJOR})
 file(GLOB proto_files ${PROJECT_SOURCE_DIR}/proto/gz/msgs/*.proto)
 
 # Using the impl, rather than the extras function because we are building in-source
