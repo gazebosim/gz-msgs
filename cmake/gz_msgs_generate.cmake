@@ -28,7 +28,9 @@ function(gz_msgs_generate_messages_impl)
   _gz_msgs_proto_pkg_to_string(${generate_messages_PROTO_PACKAGE} gen_dir)
   _gz_msgs_proto_pkg_to_path(${generate_messages_PROTO_PACKAGE} proto_package_dir)
   set(output_directory ${generate_messages_OUTPUT_DIRECTORY})
+
   file(MAKE_DIRECTORY ${output_directory})
+  file(MAKE_DIRECTORY ${output_directory}/${proto_package_dir})
 
   foreach(proto_file ${generate_messages_INPUT_PROTOS})
     gz_msgs_protoc(
@@ -216,7 +218,7 @@ function(gz_msgs_generate_messages_lib)
     OUTPUT_FILENAME "${target_name}.gz_desc"
   )
 
-  add_library(${target_name} SHARED ${gen_sources} ${gen_factory_sources} ${target_name}.gz_desc)
+  add_library(${target_name} SHARED ${generated_sources})
 
   foreach(dep ${generate_messages_DEPENDENCIES})
     add_dependencies(${target_name} ${dep})
@@ -244,8 +246,8 @@ function(gz_msgs_generate_messages_lib)
     RUNTIME DESTINATION ${GZ_BIN_INSTALL_DIR}
     COMPONENT libraries)
 
-  install(FILES ${gen_headers} ${gen_factory_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/${proto_package_dir})
-  install(FILES ${gen_detail_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/${proto_package_dir}/details)
+  install(FILES ${generated_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/${proto_package_dir})
+  install(FILES ${generated_detail_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/${proto_package_dir}/details)
   install(FILES ${output_directory}/${target_name}.gz_desc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gz/protos/)
 
   if (NOT GZ_PYTHON_INSTALL_PATH)
@@ -262,7 +264,7 @@ function(gz_msgs_generate_messages_lib)
       set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
     endif()
   endif()
-  install(FILES ${gen_sources_py} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs${GZ_MSGS_VER})
+  install(FILES ${generated_python} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs${GZ_MSGS_VER})
 
   set(component_name ${generate_messages_TARGET})
   set(component_pkg_name ${target_name})

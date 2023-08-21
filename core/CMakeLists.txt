@@ -56,7 +56,7 @@ gz_msgs_generate_desc_impl(
   PROTO_PATH ${PROJECT_SOURCE_DIR}/proto
   DEPENDENCY_DESCRIPTIONS ${depends_msgs_desc}
   OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/gz_msgs_gen
-  OUTPUT_FILENAME "gz-msgs${PROJECT_VERSION_MAJOR}.gz_desc"
+  OUTPUT_FILENAME gz-msgs${PROJECT_VERSION_MAJOR}.gz_desc
 )
 
 ##################################################
@@ -69,10 +69,20 @@ gz_create_core_library(SOURCES
   src/MessageFactory.cc
   src/DynamicFactory.cc
   ${msgs_sources}
+  gz-msgs${PROJECT_VERSION_MAJOR}.gz_desc
 )
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME} PUBLIC
   "$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/gz_msgs_gen>")
+
+set_target_properties(
+  ${PROJECT_LIBRARY_TARGET_NAME}
+    PROPERTIES
+      SOVERSION ${PROJECT_VERSION_MAJOR}
+      VERSION ${PROJECT_VERSION_FULL}
+      GZ_MSGS_DESC_FILE "\$\{_IMPORT_PREFIX\}/share/gz/protos/gz-msgs${PROJECT_VERSION_MAJOR}.gz_desc"
+      )
+set_property(TARGET ${PROJECT_LIBRARY_TARGET_NAME} PROPERTY EXPORT_PROPERTIES "GZ_MSGS_DESC_FILE")
 
 include(GzRelocatableBinaries)
 gz_add_get_install_prefix_impl(GET_INSTALL_PREFIX_FUNCTION gz::msgs::getInstallPrefix
