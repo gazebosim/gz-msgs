@@ -15,6 +15,7 @@
  *
 */
 
+#include <algorithm>
 #include <fstream>
 #include <filesystem>
 #include <vector>
