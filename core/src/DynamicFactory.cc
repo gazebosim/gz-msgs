@@ -19,7 +19,7 @@
 #include <filesystem>
 #include <vector>
 
-#include "DynamicFactory.hh"
+#include "./DynamicFactory.hh"
 #include "gz/utils/Environment.hh"
 
 #include <gz/msgs/InstallationDirectories.hh>
@@ -67,8 +67,8 @@ DynamicFactory::DynamicFactory()
   else
   {
     // Load descriptors from the global share path
-    this->LoadDescriptors(std::filesystem::path(
-      gz::msgs::getInstallPrefix()) / "share" / "gz" / "protos");
+    this->LoadDescriptors((std::filesystem::path(
+      gz::msgs::getInstallPrefix()) / "share" / "gz" / "protos").string());
   }
 }
 
@@ -131,10 +131,7 @@ void DynamicFactory::Types(std::vector<std::string> &_types)
 {
   std::vector<std::string> messages;
   db.FindAllMessageNames(&messages);
-  for (const auto &message : messages)
-  {
-    _types.push_back(message);
-  }
+  std::copy(messages.begin(), messages.end(), std::back_inserter(_types));
 }
 
 //////////////////////////////////////////////////
