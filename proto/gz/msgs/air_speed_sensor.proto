@@ -33,12 +33,6 @@ message AirSpeedSensor
   /// \brief header data
   Header header               = 1;
 
-  /// \brief Differential pressure (hPa).
-  double diff_pressure        = 2;
-
-  /// \brief Temperature (kelvin).
-  double temperature          = 3;
-
   /// \brief Sensor speed noise.
   SensorNoise pressure_noise     = 4;
 }

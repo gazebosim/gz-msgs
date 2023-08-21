@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Open Source Robotics Foundation
+ * Copyright (C) 2023 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,30 +18,23 @@
 syntax = "proto3";
 package gz.msgs;
 option java_package = "com.gz.msgs";
-option java_outer_classname = "SkyProtos";
+option java_outer_classname = "AirSpeedProtos";
 
 /// \ingroup gz.msgs
-/// \interface Sky 
-/// \brief Information about the sky
+/// \interface AirSpeed
+/// \brief Definition of an air speed
 
-import "gz/msgs/color.proto";
 import "gz/msgs/header.proto";
 
-message Sky
+/// \brief Message that describes an air speed sensor.
+message AirSpeed
 {
-  /// \brief Optional header data
-  Header header         = 1;
+  /// \brief header data
+  Header header               = 1;
 
-  double time           = 2;
-  double sunrise        = 3;
-  double sunset         = 4;
+  /// \brief Differential pressure (hPa).
+  double diff_pressure        = 2;
 
-  double wind_speed     = 5;
-  double wind_direction = 6;
-  Color cloud_ambient   = 7;
-  double humidity       = 8;
-  double mean_cloud_size = 9;
-
-  /// \brief Cubemap URI for the sky, usually a .dds file.
-  string cubemap_uri    = 10;
+  /// \brief Temperature (kelvin).
+  double temperature          = 3;
 }
