@@ -112,6 +112,7 @@ function(gz_msgs_generate_messages_impl)
   set(${generate_messages_OUTPUT_SOURCES} ${${generate_messages_OUTPUT_SOURCES}} PARENT_SCOPE)
   set(${generate_messages_OUTPUT_HEADERS} ${${generate_messages_OUTPUT_HEADERS}} PARENT_SCOPE)
   set(${generate_messages_OUTPUT_DETAIL_HEADERS} ${${generate_messages_OUTPUT_DETAIL_HEADERS}} PARENT_SCOPE)
+  set(${generate_messages_OUTPUT_PYTHON} ${${generate_messages_OUTPUT_PYTHON}} PARENT_SCOPE)
 endfunction()
 
 ##################################################
