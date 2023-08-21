@@ -19,7 +19,7 @@
 #include <filesystem>
 #include <vector>
 
-#include "./DynamicFactory.hh"
+#include "DynamicFactory.hh"
 #include "gz/utils/Environment.hh"
 
 #include <gz/msgs/InstallationDirectories.hh>
