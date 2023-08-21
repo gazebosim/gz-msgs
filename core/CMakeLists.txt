@@ -75,7 +75,7 @@ install(FILES ${PROJECT_BINARY_DIR}/gz_msgs_gen/gz-msgs${PROJECT_VERSION_MAJOR}.
     set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
   endif()
 endif()
-install(FILES ${msgs_python} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs${GZ_MSGS_VER})
+install(FILES ${msgs_python} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs${PROJECT_VERSION_MAJOR})
 
 ##################################################
 # Build core library
@@ -98,20 +98,14 @@ gz_add_get_install_prefix_impl(GET_INSTALL_PREFIX_FUNCTION gz::msgs::getInstallP
                                GET_INSTALL_PREFIX_HEADER gz/msgs/InstallationDirectories.hh
                                OVERRIDE_INSTALL_PREFIX_ENV_VARIABLE GZ_MSGS_INSTALL_PREFIX)
 
-
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
     gz-math${GZ_MATH_VER}::gz-math${GZ_MATH_VER}
     TINYXML2::TINYXML2
     protobuf::libprotobuf
 )
-
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   SYSTEM PUBLIC $<TARGET_PROPERTY:protobuf::libprotobuf,INTERFACE_INCLUDE_DIRECTORIES>)
-
-foreach(header ${msgs_headers})
-  message(STATUS ${header})
-endforeach()
 
 install(FILES ${msgs_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/${proto_package_dir})
 install(FILES ${msgs_detail_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/${proto_package_dir}/details)
