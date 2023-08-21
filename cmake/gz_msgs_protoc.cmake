@@ -11,7 +11,6 @@
 #   INPUT_PROTO         - Path to the input .proto file
 #   OUTPUT_CPP_DIR      - Path where C++ files are saved
 #   OUTPUT_PYTON_DIR    - Path where Python files are saved
-#   OUTPUT_INCLUDES     - A CMake variable name containing a list that the C++ header path should be appended to
 #   OUTPUT_CPP_HH_VAR   - A CMake variable name containing a list generated headers should be appended to
 #   OUTPUT_DETAIL_CPP_HH_VAR - A CMake variable name containing a list that the C++ detail headers should be appended to
 #   OUTPUT_CPP_CC_VAR   - A Cmake variable name containing a list that the C++ source files should be appended to
@@ -28,7 +27,6 @@ function(gz_msgs_protoc)
     GZ_PROTOC_PLUGIN
     INPUT_PROTO
     OUTPUT_CPP_DIR
-    OUTPUT_INCLUDES
     OUTPUT_CPP_HH_VAR
     OUTPUT_DETAIL_CPP_HH_VAR
     OUTPUT_CPP_CC_VAR
@@ -61,7 +59,6 @@ function(gz_msgs_protoc)
 
     # Generate a clean relative path (gz/msgs/foo.pb.h)
     string(REPLACE "${PROJECT_BINARY_DIR}/include/" "" output_include ${output_header})
-    list(APPEND ${gz_msgs_protoc_OUTPUT_INCLUDES} "${output_include}")
 
     list(APPEND ${gz_msgs_protoc_OUTPUT_CPP_HH_VAR} ${output_header})
     list(APPEND ${gz_msgs_protoc_OUTPUT_CPP_CC_VAR} ${output_source})
@@ -72,7 +69,6 @@ function(gz_msgs_protoc)
     list(APPEND output_files ${output_source})
     list(APPEND output_files ${output_index})
 
-    set(${gz_msgs_protoc_OUTPUT_INCLUDES} ${${gz_msgs_protoc_OUTPUT_INCLUDES}} PARENT_SCOPE)
     set(${gz_msgs_protoc_OUTPUT_DETAIL_CPP_HH_VAR} ${${gz_msgs_protoc_OUTPUT_DETAIL_CPP_HH_VAR}} PARENT_SCOPE)
     set(${gz_msgs_protoc_OUTPUT_CPP_HH_VAR} ${${gz_msgs_protoc_OUTPUT_CPP_HH_VAR}} PARENT_SCOPE)
     set(${gz_msgs_protoc_OUTPUT_CPP_CC_VAR} ${${gz_msgs_protoc_OUTPUT_CPP_CC_VAR}} PARENT_SCOPE)

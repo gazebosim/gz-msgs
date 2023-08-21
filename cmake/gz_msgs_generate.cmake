@@ -7,35 +7,28 @@
 #   GZ_PROTOC_PLUGIN    - Location of the gazebo generator plugin
 #   PROTO_PATH          - Base directory of the proto files
 #   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
-#   MSGS_LIB            - gz-msgs library to link to
-#   TARGET              - Target (static library) to create
 # Multi value arguments
 #   INPUT_PROTOS        - List of input proto files
-#   DEPENDENCIES        - List of generated messages targets that these messages depend on
-#                         Primarily used when generating new custom messages downstream
-#                         that depend on gz-msgs
 function(gz_msgs_generate_messages_impl)
   set(options "")
-  set(oneValueArgs TARGET PROTO_PACKAGE MSGS_GEN_SCRIPT GZ_PROTOC_PLUGIN FACTORY_GEN_SCRIPT MSGS_LIB PROTO_PATH)
-  set(multiValueArgs INPUT_PROTOS DEPENDENCIES)
+  set(oneValueArgs
+    # Inputs
+    PROTO_PACKAGE MSGS_GEN_SCRIPT GZ_PROTOC_PLUGIN FACTORY_GEN_SCRIPT PROTO_PATH
+    DEPENDENCY_DESCRIPTIONS
+    OUTPUT_DIRECTORY
+    # Outputs
+    OUTPUT_SOURCES
+    OUTPUT_HEADERS
+    OUTPUT_DETAIL_HEADERS
+    OUTPUT_PYTHON
+  )
+  set(multiValueArgs INPUT_PROTOS)
 
   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
   _gz_msgs_proto_pkg_to_string(${generate_messages_PROTO_PACKAGE} gen_dir)
   _gz_msgs_proto_pkg_to_path(${generate_messages_PROTO_PACKAGE} proto_package_dir)
-
-  # Extract dependency information from targets
-  set(depends_proto_paths)
-  set(depends_includes)
-
-  set(target_name ${PROJECT_NAME}-${generate_messages_TARGET})
-
-  set(output_directory ${PROJECT_BINARY_DIR}/${target_name}_genmsg)
+  set(output_directory ${generate_messages_OUTPUT_DIRECTORY})
   file(MAKE_DIRECTORY ${output_directory})
-
-  foreach(dep ${generate_messages_DEPENDENCIES})
-    get_target_property(msgs_desc_file ${dep} GZ_MSGS_DESC_FILE)
-    list(APPEND depends_msgs_desc ${msgs_desc_file})
-  endforeach()
 
   foreach(proto_file ${generate_messages_INPUT_PROTOS})
     gz_msgs_protoc(
@@ -52,24 +45,23 @@ function(gz_msgs_generate_messages_impl)
       PROTO_PATH
         ${generate_messages_PROTO_PATH}
       DEPENDENCY_PROTO_DESCS
-        ${depends_msgs_desc}
+        ${generate_messages_DEPENDENCY_DESCRIPTIONS}
 
       # Cpp Specific arguments
       GENERATE_CPP
-      OUTPUT_INCLUDES
-        gen_includes
       OUTPUT_CPP_HH_VAR
-        gen_headers
+        ${generate_messages_OUTPUT_HEADERS}
       OUTPUT_DETAIL_CPP_HH_VAR
-        gen_detail_headers
+        ${generate_messages_OUTPUT_DETAIL_HEADERS}
       OUTPUT_CPP_CC_VAR
-        gen_sources
+        ${generate_messages_OUTPUT_SOURCES}
       OUTPUT_CPP_DIR
         ${output_directory}
 
       # Python Specific arguments
       GENERATE_PYTHON
       OUTPUT_PYTHON_VAR
+        ${generate_messages_OUTPUT_PYTHON}
         gen_sources_py
       OUTPUT_PYTHON_DIR
         ${output_directory}/python/
@@ -86,49 +78,141 @@ function(gz_msgs_generate_messages_impl)
     OUTPUT_CPP_DIR
       ${output_directory}
     OUTPUT_CPP_HH_VAR
-      gen_factory_headers
+      ${generate_messages_OUTPUT_HEADERS}
     OUTPUT_CPP_CC_VAR
-      gen_factory_sources
+      ${generate_messages_OUTPUT_SOURCES}
     PROTO_PATH
       ${generate_messages_PROTO_PATH}
   )
 
   set_source_files_properties(
-    ${gen_headers}
-    ${gen_detail_headers}
-    ${gen_sources}
-    ${gen_factory_headers}
-    ${gen_factory_sources}
+    ${${generate_messages_OUTPUT_SOURCES}}
+    ${${generate_messages_OUTPUT_HEADERS}}
+    ${${generate_messages_OUTPUT_DETAIL_HEADERS}}
     PROPERTIES GENERATED TRUE)
 
   if(WIN32)
-    set_source_files_properties(${gen_sources}
+    set_source_files_properties(${${generate_messages_OUTPUT_SOURCES}}
       COMPILE_FLAGS "/wd4100 /wd4512 /wd4127 /wd4068 /wd4244 /wd4267 /wd4251 /wd4146")
   endif()
 
   if(NOT MSVC)
     # -Wno-switch-default flags is required for suppressing a warning in some of
     # the generated protobuf files.
-    set_source_files_properties(${gen_sources} COMPILE_FLAGS "-Wno-switch-default -Wno-float-equal")
+    set_source_files_properties(${${generate_messages_OUTPUT_SOURCES}}
+      COMPILE_FLAGS "-Wno-switch-default -Wno-float-equal")
   endif()
+
+  if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    # Disable warning in generated *.pb.cc code
+    set_source_files_properties(${${generate_messges_OUTPUT_SOURCES}}
+      COMPILE_FLAGS "-Wno-invalid-offsetof")
+  endif()
+
+  set(${generate_messages_OUTPUT_SOURCES} ${${generate_messages_OUTPUT_SOURCES}} PARENT_SCOPE)
+  set(${generate_messages_OUTPUT_HEADERS} ${${generate_messages_OUTPUT_HEADERS}} PARENT_SCOPE)
+  set(${generate_messages_OUTPUT_DETAIL_HEADERS} ${${generate_messages_OUTPUT_DETAIL_HEADERS}} PARENT_SCOPE)
+endfunction()
+
+##################################################
+# Options:
+# One value arguments:
+#   PROTO_PATH          - Base directory of the proto files
+#   DEPENDENCY_DESCRIPTIONS - Variable containing all depedency description files
+#   OUTPUT_DIRECTORY - Directory of output gz_desc file
+#   OUTPUT_FILENAME - Name of output gz_desc file
+# Multi value arguments
+#   INPUT_PROTOS        - List of input proto files
+function(gz_msgs_generate_desc_impl)
+  set(options "")
+  set(oneValueArgs
+    # Inputs
+    PROTO_PATH
+    DEPENDENCY_DESCRIPTIONS
+    OUTPUT_DIRECTORY
+    OUTPUT_FILENAME)
+  set(multiValueArgs INPUT_PROTOS)
+
+  cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
   set(ARGS)
   list(APPEND ARGS -I${generate_messages_PROTO_PATH})
-  list(APPEND ARGS --descriptor_set_out="${target_name}.gz_desc")
+  list(APPEND ARGS --descriptor_set_out=${generate_messages_OUTPUT_FILENAME})
 
-  foreach(dep ${generate_messages_DEPENDENCIES})
+  foreach(dep ${generate_messages_DEPENDENCY_DESCRIPTIONS})
     list(APPEND ARGS --descriptor_set_in="${msgs_desc_file}")
   endforeach()
 
   list(APPEND ARGS ${generate_messages_INPUT_PROTOS})
 
   add_custom_command(
-    OUTPUT "${target_name}.gz_desc"
+    OUTPUT ${generate_messages_OUTPUT_FILENAME}
     COMMAND protobuf::protoc
     ARGS ${ARGS}
     DEPENDS ${generate_messages_INPUT_PROTOS}
-    WORKING_DIRECTORY ${output_directory}
+    WORKING_DIRECTORY ${generate_messages_OUTPUT_DIRECTORY}
     COMMENT "Generating descriptor set"
+  )
+endfunction()
+
+##################################################
+
+# Options:
+# One value arguments:
+#   MSGS_GEN_SCRIPT     - Location of the messge generator script
+#   FACTORY_GEN_SCRIPT  - Location of the factory generator script
+#   GZ_PROTOC_PLUGIN    - Location of the gazebo generator plugin
+#   PROTO_PATH          - Base directory of the proto files
+#   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
+#   MSGS_LIB            - gz-msgs library to link to
+#   TARGET              - Target (static library) to create
+# Multi value arguments
+#   INPUT_PROTOS        - List of input proto files
+#   DEPENDENCIES        - List of generated messages targets that these messages depend on
+#                         Primarily used when generating new custom messages downstream
+#                         that depend on gz-msgs
+function(gz_msgs_generate_messages_lib)
+  set(options "")
+  set(oneValueArgs TARGET PROTO_PACKAGE MSGS_GEN_SCRIPT GZ_PROTOC_PLUGIN FACTORY_GEN_SCRIPT MSGS_LIB PROTO_PATH)
+  set(multiValueArgs INPUT_PROTOS DEPENDENCIES)
+
+  cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+  # Set up output destination
+  _gz_msgs_proto_pkg_to_string(${generate_messages_PROTO_PACKAGE} gen_dir)
+  _gz_msgs_proto_pkg_to_path(${generate_messages_PROTO_PACKAGE} proto_package_dir)
+  set(target_name ${PROJECT_NAME}-${generate_messages_TARGET})
+  set(output_directory ${PROJECT_BINARY_DIR}/${target_name}_genmsg)
+
+  # Extract dependency information from targets
+  set(depends_proto_paths)
+  set(depends_includes)
+  foreach(dep ${generate_messages_DEPENDENCIES})
+    get_target_property(msgs_desc_file ${dep} GZ_MSGS_DESC_FILE)
+    list(APPEND depends_msgs_desc ${msgs_desc_file})
+  endforeach()
+
+  gz_msgs_generate_messages_impl(
+    PROTO_PACKAGE ${generate_messages_PROTO_PACKAGE}
+    MSGS_GEN_SCRIPT ${generate_message_MSGS_GEN_SCRIPT}
+    GZ_PROTOC_PLUGIN ${generate_message_GZ_PROTOC_PLUGIN}
+    FACTORY_GEN_SCRIPT ${generate_messages_FACTORY_GEN_SCRIPT}
+    PROTO_PATH ${generate_messages_PROTO_PATH}
+    DEPENDENCY_DESCRIPTIONS ${depends_msgs_desc}
+    INPUT_PROTOS ${generate_messages_INPUT_PROTOS}
+    OUTPUT_DIRECTORY ${output_directory}
+    OUTPUT_SOURCES generated_sources
+    OUTPUT_HEADERS generated_headers
+    OUTPUT_DETAIL_HEADERS generated_detail_headers
+    OUTPUT_PYTHON generated_python
+  )
+
+  gz_msgs_generate_desc_impl(
+    INPUT_PROTOS ${generate_messages_INPUT_PROTOS}
+    PROTO_PATH ${generate_messages_PROTO_PATH}
+    DEPENDENCY_DESCRIPTIONS ${depends_msgs_desc}
+    OUTPUT_DIRECTORY ${output_directory}
+    OUTPUT_FILENAME "${target_name}.gz_desc"
   )
 
   add_library(${target_name} SHARED ${gen_sources} ${gen_factory_sources} ${target_name}.gz_desc)

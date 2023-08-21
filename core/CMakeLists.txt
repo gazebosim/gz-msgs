@@ -18,63 +18,103 @@ endif()
 install(TARGETS ${PROTOC_PLUGIN} DESTINATION ${GZ_BIN_INSTALL_DIR})
 
 ##################################################
+# Generate messages
+file(GLOB proto_files ${PROJECT_SOURCE_DIR}/proto/gz/msgs/*.proto)
+
+include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_factory.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_generate.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_protoc.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_string_utils.cmake)
+
+gz_msgs_generate_messages_impl(
+  MSGS_GEN_SCRIPT
+    ${PROJECT_SOURCE_DIR}/tools/gz_msgs_generate.py
+  FACTORY_GEN_SCRIPT
+    ${PROJECT_SOURCE_DIR}/tools/gz_msgs_generate_factory.py
+  GZ_PROTOC_PLUGIN
+    $<TARGET_FILE:${PROJECT_NAME}_protoc_plugin>
+  INPUT_PROTOS
+    ${proto_files}
+  PROTO_PACKAGE
+    "gz.msgs"
+  PROTO_PATH
+    ${PROJECT_SOURCE_DIR}/proto
+  OUTPUT_DIRECTORY
+    ${PROJECT_BINARY_DIR}/gz_msgs_gen
+  OUTPUT_SOURCES
+    msgs_sources
+  OUTPUT_HEADERS
+    msgs_headers
+  OUTPUT_DETAIL_HEADERS
+    msgs_detail_headers
+  OUTPUT_PYTHON
+    msgs_python
+)
+
+gz_msgs_generate_desc_impl(
+  INPUT_PROTOS ${proto_files}
+  PROTO_PATH ${PROJECT_SOURCE_DIR}/proto
+  DEPENDENCY_DESCRIPTIONS ${depends_msgs_desc}
+  OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/gz_msgs_gen
+  OUTPUT_FILENAME "gz-msgs${PROJECT_VERSION_MAJOR}.gz_desc"
+)
+install(FILES ${PROJECT_BINARY_DIR}/gz_msgs_gen/gz-msgs${PROJECT_VERSION_MAJOR}.gz_desc
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gz/protos/)
+
+  if (NOT GZ_PYTHON_INSTALL_PATH)
+  find_package(Python3 REQUIRED COMPONENTS Interpreter)
+  if(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION)
+    if(USE_DIST_PACKAGES_FOR_PYTHON)
+      string(REPLACE "site-packages" "dist-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+    else()
+      # Python3_SITELIB might use dist-packages in some platforms
+      string(REPLACE "dist-packages" "site-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+    endif()
+  else()
+    # If not a system installation, respect local paths
+    set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
+  endif()
+endif()
+install(FILES ${msgs_python} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs${GZ_MSGS_VER})
+
+##################################################
 # Build core library
 gz_get_libsources_and_unittests(sources gtest_sources)
 
-add_library(${PROJECT_LIBRARY_TARGET_NAME}-core
+gz_create_core_library(SOURCES
+  src/gz.cc
   src/Factory.cc
   src/MessageFactory.cc
   src/DynamicFactory.cc
-  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_LIBRARY_TARGET_NAME}_get_install_prefix_impl.cc
+  ${msgs_sources}
+  gz-msgs${PROJECT_VERSION_MAJOR}.gz_desc
 )
 
-target_include_directories(
-  ${PROJECT_LIBRARY_TARGET_NAME}-core
-  PUBLIC
-    "$<INSTALL_INTERFACE:${GZ_INCLUDE_INSTALL_DIR_FULL}/>"
-    "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/core/include>"
-    "$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/core/include>"
-)
-
-target_link_libraries(
-  ${PROJECT_LIBRARY_TARGET_NAME}-core
-  PUBLIC
-    gz-utils${GZ_UTILS_VER}::gz-utils${GZ_UTILS_VER}
-    protobuf::libprotobuf
-)
-
-gz_create_core_library(SOURCES
-  src/gz.cc
-)
+target_include_directories(${PROJECT_LIBRARY_TARGET_NAME} PUBLIC
+  "$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/gz_msgs_gen>")
 
 include(GzRelocatableBinaries)
 gz_add_get_install_prefix_impl(GET_INSTALL_PREFIX_FUNCTION gz::msgs::getInstallPrefix
                                GET_INSTALL_PREFIX_HEADER gz/msgs/InstallationDirectories.hh
                                OVERRIDE_INSTALL_PREFIX_ENV_VARIABLE GZ_MSGS_INSTALL_PREFIX)
 
-install(
-  TARGETS ${PROJECT_LIBRARY_TARGET_NAME}-core
-  EXPORT ${PROJECT_LIBRARY_TARGET_NAME}
-  LIBRARY DESTINATION ${GZ_LIB_INSTALL_DIR}
-  ARCHIVE DESTINATION ${GZ_LIB_INSTALL_DIR}
-  RUNTIME DESTINATION ${GZ_BIN_INSTALL_DIR}
-  COMPONENT libraries)
 
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
-    ${PROJECT_LIBRARY_TARGET_NAME}-core
-    ${PROJECT_LIBRARY_TARGET_NAME}-msgs
     gz-math${GZ_MATH_VER}::gz-math${GZ_MATH_VER}
     TINYXML2::TINYXML2
+    protobuf::libprotobuf
 )
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   SYSTEM PUBLIC $<TARGET_PROPERTY:protobuf::libprotobuf,INTERFACE_INCLUDE_DIRECTORIES>)
 
-if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  # Disable warning in generated *.pb.cc code
-  target_compile_options(${PROJECT_LIBRARY_TARGET_NAME} PRIVATE -Wno-invalid-offsetof)
-endif()
+foreach(header ${msgs_headers})
+  message(STATUS ${header})
+endforeach()
+
+install(FILES ${msgs_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/${proto_package_dir})
+install(FILES ${msgs_detail_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/${proto_package_dir}/details)
 
 ##################################################
 # Build unit tests
