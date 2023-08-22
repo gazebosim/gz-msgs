@@ -153,7 +153,6 @@ function(gz_msgs_generate_desc_impl)
     COMMAND protobuf::protoc
     ARGS ${ARGS}
     DEPENDS ${generate_messages_INPUT_PROTOS}
-    WORKING_DIRECTORY ${generate_messages_OUTPUT_DIRECTORY}
     COMMENT "Generating descriptor set"
   )
 endfunction()
@@ -197,8 +196,8 @@ function(gz_msgs_generate_messages_lib)
 
   gz_msgs_generate_messages_impl(
     PROTO_PACKAGE ${generate_messages_PROTO_PACKAGE}
-    MSGS_GEN_SCRIPT ${generate_message_MSGS_GEN_SCRIPT}
-    GZ_PROTOC_PLUGIN ${generate_message_GZ_PROTOC_PLUGIN}
+    MSGS_GEN_SCRIPT ${generate_messages_MSGS_GEN_SCRIPT}
+    GZ_PROTOC_PLUGIN ${generate_messages_GZ_PROTOC_PLUGIN}
     FACTORY_GEN_SCRIPT ${generate_messages_FACTORY_GEN_SCRIPT}
     PROTO_PATH ${generate_messages_PROTO_PATH}
     DEPENDENCY_DESCRIPTIONS ${depends_msgs_desc}
@@ -214,7 +213,6 @@ function(gz_msgs_generate_messages_lib)
     INPUT_PROTOS ${generate_messages_INPUT_PROTOS}
     PROTO_PATH ${generate_messages_PROTO_PATH}
     DEPENDENCY_DESCRIPTIONS ${depends_msgs_desc}
-    OUTPUT_DIRECTORY ${output_directory}
     OUTPUT_FILENAME "${target_name}.gz_desc"
   )
 
@@ -248,7 +246,7 @@ function(gz_msgs_generate_messages_lib)
 
   install(FILES ${generated_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/${proto_package_dir})
   install(FILES ${generated_detail_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/${proto_package_dir}/details)
-  install(FILES ${output_directory}/${target_name}.gz_desc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gz/protos/)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${target_name}.gz_desc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gz/protos/)
 
   if (NOT GZ_PYTHON_INSTALL_PATH)
     find_package(Python3 REQUIRED COMPONENTS Interpreter)

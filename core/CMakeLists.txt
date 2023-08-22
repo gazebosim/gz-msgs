@@ -59,6 +59,27 @@ gz_msgs_generate_desc_impl(
   OUTPUT_FILENAME gz-msgs${PROJECT_VERSION_MAJOR}.gz_desc
 )
 
+install(FILES ${msgs_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/gz/msgs)
+install(FILES ${msgs_detail_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/gz/msgs/details)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/gz-msgs${PROJECT_VERSION_MAJOR}.gz_desc
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gz/protos/)
+
+if (NOT GZ_PYTHON_INSTALL_PATH)
+  find_package(Python3 REQUIRED COMPONENTS Interpreter)
+  if(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION)
+    if(USE_DIST_PACKAGES_FOR_PYTHON)
+      string(REPLACE "site-packages" "dist-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+    else()
+      # Python3_SITELIB might use dist-packages in some platforms
+      string(REPLACE "dist-packages" "site-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+    endif()
+  else()
+    # If not a system installation, respect local paths
+    set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
+  endif()
+endif()
+install(FILES ${msgs_python} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs${PROJECT_VERSION_MAJOR})
+
 ##################################################
 # Build core library
 gz_get_libsources_and_unittests(sources gtest_sources)
@@ -97,27 +118,6 @@ target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
 )
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   SYSTEM PUBLIC $<TARGET_PROPERTY:protobuf::libprotobuf,INTERFACE_INCLUDE_DIRECTORIES>)
-install(FILES ${msgs_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/gz/msgs)
-install(FILES ${msgs_detail_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/gz/msgs/details)
-
-install(FILES ${PROJECT_BINARY_DIR}/gz_msgs_gen/gz-msgs${PROJECT_VERSION_MAJOR}.gz_desc
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gz/protos/)
-
-if (NOT GZ_PYTHON_INSTALL_PATH)
-  find_package(Python3 REQUIRED COMPONENTS Interpreter)
-  if(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION)
-    if(USE_DIST_PACKAGES_FOR_PYTHON)
-      string(REPLACE "site-packages" "dist-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
-    else()
-      # Python3_SITELIB might use dist-packages in some platforms
-      string(REPLACE "dist-packages" "site-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
-    endif()
-  else()
-    # If not a system installation, respect local paths
-    set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
-  endif()
-endif()
-install(FILES ${msgs_python} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs${PROJECT_VERSION_MAJOR})
 
 ##################################################
 # Build unit tests
