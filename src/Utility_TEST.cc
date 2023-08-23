@@ -399,6 +399,46 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
 }
 
 /////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMsgsSphericalCoordinatesTypeToMath)
+{
+  EXPECT_EQ(Convert(msgs::SphericalCoordinatesType::ECEF),
+    math::SphericalCoordinates::CoordinateType::ECEF);
+  EXPECT_EQ(Convert(msgs::SphericalCoordinatesType::GLOBAL),
+    math::SphericalCoordinates::CoordinateType::GLOBAL);
+  EXPECT_EQ(Convert(msgs::SphericalCoordinatesType::SPHERICAL),
+    math::SphericalCoordinates::CoordinateType::SPHERICAL);
+  EXPECT_EQ(Convert(msgs::SphericalCoordinatesType::LOCAL),
+    math::SphericalCoordinates::CoordinateType::LOCAL);
+  EXPECT_EQ(Convert(msgs::SphericalCoordinatesType::LOCAL2),
+    math::SphericalCoordinates::CoordinateType::LOCAL2);
+  EXPECT_EQ(Convert((msgs::SphericalCoordinatesType)500000),
+    math::SphericalCoordinates::CoordinateType::LOCAL2);
+}
+
+/////////////////////////////////////////////////
+TEST(MsgsTest, ConvertMathSphericalCoordinatedTypeToMsg)
+{
+  EXPECT_EQ(msgs::ConvertCoord(
+      math::SphericalCoordinates::CoordinateType::ECEF),
+    msgs::SphericalCoordinatesType::ECEF);
+  EXPECT_EQ(msgs::ConvertCoord(
+      math::SphericalCoordinates::CoordinateType::GLOBAL),
+    msgs::SphericalCoordinatesType::GLOBAL);
+  EXPECT_EQ(msgs::ConvertCoord(
+      math::SphericalCoordinates::CoordinateType::SPHERICAL),
+    msgs::SphericalCoordinatesType::SPHERICAL);
+  EXPECT_EQ(msgs::ConvertCoord(
+      math::SphericalCoordinates::CoordinateType::LOCAL),
+    msgs::SphericalCoordinatesType::LOCAL);
+  EXPECT_EQ(msgs::ConvertCoord(
+      math::SphericalCoordinates::CoordinateType::LOCAL2),
+    msgs::SphericalCoordinatesType::LOCAL2);
+  EXPECT_EQ(msgs::ConvertCoord(
+    (math::SphericalCoordinates::CoordinateType)500000),
+    msgs::SphericalCoordinatesType::LOCAL2);
+}
+
+/////////////////////////////////////////////////
 TEST(UtilityTest, ConvertStringMsg)
 {
   msgs::StringMsg msg = msgs::Convert(std::string("a string msg"));
