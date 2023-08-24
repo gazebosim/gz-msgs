@@ -141,6 +141,7 @@ function(gz_msgs_generate_desc_impl)
   set(ARGS)
   list(APPEND ARGS -I${generate_messages_PROTO_PATH})
   list(APPEND ARGS --descriptor_set_out=${generate_messages_OUTPUT_FILENAME})
+  list(APPEND ARGS --include_imports)
 
   foreach(dep ${generate_messages_DEPENDENCY_DESCRIPTIONS})
     list(APPEND ARGS --descriptor_set_in="${msgs_desc_file}")
@@ -213,10 +214,10 @@ function(gz_msgs_generate_messages_lib)
     INPUT_PROTOS ${generate_messages_INPUT_PROTOS}
     PROTO_PATH ${generate_messages_PROTO_PATH}
     DEPENDENCY_DESCRIPTIONS ${depends_msgs_desc}
-    OUTPUT_FILENAME "${target_name}.gz_desc"
+    OUTPUT_FILENAME ${target_name}.gz_desc
   )
 
-  add_library(${target_name} SHARED ${generated_sources})
+  add_library(${target_name} SHARED ${generated_sources} ${target_name}.gz_desc)
 
   foreach(dep ${generate_messages_DEPENDENCIES})
     add_dependencies(${target_name} ${dep})
