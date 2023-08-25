@@ -27,6 +27,26 @@ option java_outer_classname = "SphericalCoordinatesProtos";
 import "gz/msgs/entity.proto";
 import "gz/msgs/header.proto";
 
+enum SphericalCoordinatesType
+{
+  /// \brief Latitude, Longitude and Altitude by SurfaceType
+  SPHERICAL = 0;
+
+  /// \brief Earth centered, earth fixed Cartesian
+  ECEF = 1;
+
+  /// \brief Local tangent plane (East, North, Up)
+  GLOBAL = 2;
+
+  /// \brief Heading-adjusted tangent plane (X, Y, Z)
+  /// This has kept a bug for backwards compatibility, use
+  /// LOCAL2 for the correct behaviour.
+  LOCAL = 3;
+
+  /// \brief Heading-adjusted tangent plane (X, Y, Z)
+  LOCAL2 = 4;
+}
+
 message SphericalCoordinates
 {
   /// \brief Planetary surface models.

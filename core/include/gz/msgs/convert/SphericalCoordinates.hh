@@ -27,6 +27,56 @@ namespace gz::msgs {
 // Inline bracket to help doxygen filtering.
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
+
+msgs::SphericalCoordinatesType ConvertCoord(
+  const math::SphericalCoordinates::CoordinateType &_sc)
+{
+  auto result = msgs::SphericalCoordinatesType::LOCAL2;
+  switch (_sc)
+  {
+    case math::SphericalCoordinates::CoordinateType::ECEF:
+      result = msgs::SphericalCoordinatesType::ECEF;
+      break;
+    case math::SphericalCoordinates::CoordinateType::GLOBAL:
+      result = msgs::SphericalCoordinatesType::GLOBAL;
+      break;
+    case math::SphericalCoordinates::CoordinateType::SPHERICAL:
+      result = msgs::SphericalCoordinatesType::SPHERICAL;
+      break;
+    case math::SphericalCoordinates::CoordinateType::LOCAL:
+      result = msgs::SphericalCoordinatesType::LOCAL;
+      break;
+    case math::SphericalCoordinates::CoordinateType::LOCAL2:
+      result = msgs::SphericalCoordinatesType::LOCAL2;
+      break;
+    default:
+      std::cerr << "Invalid coordinate type passed" << std::endl;
+  }
+  return result;
+}
+
+/////////////////////////////////////////////
+math::SphericalCoordinates::CoordinateType Convert(
+  const msgs::SphericalCoordinatesType &_sc)
+{
+  switch (_sc)
+  {
+    case msgs::SphericalCoordinatesType::ECEF:
+      return math::SphericalCoordinates::CoordinateType::ECEF;
+    case msgs::SphericalCoordinatesType::GLOBAL:
+      return math::SphericalCoordinates::CoordinateType::GLOBAL;
+    case msgs::SphericalCoordinatesType::SPHERICAL:
+      return math::SphericalCoordinates::CoordinateType::SPHERICAL;
+    case msgs::SphericalCoordinatesType::LOCAL:
+      return math::SphericalCoordinates::CoordinateType::LOCAL;
+    case msgs::SphericalCoordinatesType::LOCAL2:
+      return math::SphericalCoordinates::CoordinateType::LOCAL2;
+    default:
+      std::cerr << "Invalid coordinate type passed" << std::endl;
+  }
+  return math::SphericalCoordinates::CoordinateType::LOCAL2;
+}
+
 /////////////////////////////////
 inline void Set(gz::msgs::SphericalCoordinates *_msg,
                 const gz::math::SphericalCoordinates &_data)
