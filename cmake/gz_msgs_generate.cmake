@@ -238,10 +238,21 @@ function(gz_msgs_generate_messages_lib)
     ${target_name}
       PROPERTIES
         SOVERSION ${PROJECT_VERSION_MAJOR}
-        VERSION ${PROJECT_VERSION_FULL}
+        VERSION ${PROJECT_VERSION}
         GZ_MSGS_DESC_FILE "\$\{_IMPORT_PREFIX\}/share/gz/protos/${generate_messages_TARGET}.gz_desc"
         )
   set_property(TARGET ${target_name} PROPERTY EXPORT_PROPERTIES "GZ_MSGS_DESC_FILE")
+
+  # If this isn't being done as part of a gazebo project, set installation paths
+  # to reasonable defaults
+  if (NOT GZ_LIB_INSTALL_DIR)
+    set(GZ_LIB_INSTALL_DIR lib)
+    set(GZ_BIN_INSTALL_DIR bin)
+    set(GZ_INCLUDE_INSTALL_DIR_FULL include)
+    set(CMAKE_INSTALL_DATAROOTDIR share)
+    set(NO_GZ_PACKAGE true)
+  endif()
+
 
   install(
     TARGETS ${target_name}
@@ -271,8 +282,10 @@ function(gz_msgs_generate_messages_lib)
   endif()
   install(FILES ${generated_python} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs${GZ_MSGS_VER})
 
-  set(component_name ${generate_messages_TARGET})
-  set(component_pkg_name ${target_name})
-  _gz_create_cmake_package(COMPONENT ${component_name})
-  _gz_create_pkgconfig(COMPONENT ${component_name})
+  if (NOT NO_GZ_PACKAGE)
+    set(component_name ${generate_messages_TARGET})
+    set(component_pkg_name ${target_name})
+    _gz_create_cmake_package(COMPONENT ${component_name})
+    _gz_create_pkgconfig(COMPONENT ${component_name})
+  endif()
 endfunction()

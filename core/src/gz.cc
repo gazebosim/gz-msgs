@@ -26,7 +26,6 @@
 #pragma warning(pop)
 #endif
 
-#include <filesystem>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -34,8 +33,6 @@
 #include <gz/msgs/config.hh>
 #include <gz/msgs/Factory.hh>
 #include <gz/msgs/gz.hh>
-
-#include <gz/msgs/InstallationDirectories.hh>
 
 #ifdef _MSC_VER
 # pragma warning(disable: 4503)

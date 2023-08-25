@@ -120,7 +120,7 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
                     << "] in the descriptor pool" << std::endl;
         }
 
-        db.Add(fileDescriptorProto);
+        this->db.Add(fileDescriptorProto);
       }
     }
   }
@@ -131,7 +131,7 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
 void DynamicFactory::Types(std::vector<std::string> &_types)
 {
   std::vector<std::string> messages;
-  db.FindAllMessageNames(&messages);
+  this->db.FindAllMessageNames(&messages);
   std::copy(messages.begin(), messages.end(), std::back_inserter(_types));
 }
 

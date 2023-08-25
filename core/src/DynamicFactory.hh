@@ -43,7 +43,7 @@ namespace gz::msgs {
 /// their message descriptors. The location of the .desc files is expected
 /// via the GZ_DESCRIPTOR_PATH environment variable. This environment
 /// variable expects paths to directories containing .desc files.
-/// Any file without the .desc extension will be ignored.
+/// Any file without the .desc or .gz_desc extension will be ignored.
 class DynamicFactory
 {
   public: using Message = google::protobuf::Message;
@@ -86,6 +86,8 @@ class DynamicFactory
   /// \brief We store the descriptors here.
   private: google::protobuf::DescriptorPool pool;
 
+  /// \brief Descriptor database to allow us to retrieve all
+  /// message types from the descriptor files
   private: google::protobuf::SimpleDescriptorDatabase db;
 
   /// \brief Used to create a message from a descriptor.
