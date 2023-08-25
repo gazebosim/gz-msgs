@@ -2,11 +2,17 @@
 # The implementation of gz_msgs_generate_messages
 # Options:
 # One value arguments:
-#   MSGS_GEN_SCRIPT     - Location of the messge generator script
-#   FACTORY_GEN_SCRIPT  - Location of the factory generator script
-#   GZ_PROTOC_PLUGIN    - Location of the gazebo generator plugin
-#   PROTO_PATH          - Base directory of the proto files
 #   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
+#   MSGS_GEN_SCRIPT     - Location of the messge generator script
+#   GZ_PROTOC_PLUGIN    - Location of the gazebo generator plugin
+#   FACTORY_GEN_SCRIPT  - Location of the factory generator script
+#   PROTO_PATH          - Base directory of the proto files
+#   DEPENDENCY_DESCRIPTIONS - .gz_desc files for each dependency
+#   OUTPUT_DIRECTORY    - CMake binary directoy to place generated artifacts
+#   OUTPUT_SOURCES      - Variable to contain list of generated source files
+#   OUTPUT_HEADERS      - Variable to contain list of generated header files
+#   OUTPUT_DETAIL_HEADERS - Variable to contain list of generated detail header files
+#   OUTPUT_PYTHON       - Variable to contain list of generated python files
 # Multi value arguments
 #   INPUT_PROTOS        - List of input proto files
 function(gz_msgs_generate_messages_impl)
@@ -162,13 +168,13 @@ endfunction()
 
 # Options:
 # One value arguments:
-#   MSGS_GEN_SCRIPT     - Location of the messge generator script
-#   FACTORY_GEN_SCRIPT  - Location of the factory generator script
-#   GZ_PROTOC_PLUGIN    - Location of the gazebo generator plugin
-#   PROTO_PATH          - Base directory of the proto files
-#   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
-#   MSGS_LIB            - gz-msgs library to link to
 #   TARGET              - Target (static library) to create
+#   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
+#   MSGS_GEN_SCRIPT     - Location of the messge generator script
+#   GZ_PROTOC_PLUGIN    - Location of the gazebo generator plugin
+#   FACTORY_GEN_SCRIPT  - Location of the factory generator script
+#   MSGS_LIB            - gz-msgs library to link to
+#   PROTO_PATH          - Base directory of the proto files
 # Multi value arguments
 #   INPUT_PROTOS        - List of input proto files
 #   DEPENDENCIES        - List of generated messages targets that these messages depend on
