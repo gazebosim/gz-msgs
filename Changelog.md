@@ -1,5 +1,38 @@
 ## Gazebo Msgs 9.x
 
+### Gazebo Msgs 9.5.0 (2023-08-25)
+
+1. Remove deprecated flag output_to_genfiles
+    * [Pull request #347](https://github.com/gazebosim/gz-msgs/pull/347)
+
+1. GzProtobuf: Do not require version 3
+    * [Pull request #346](https://github.com/gazebosim/gz-msgs/pull/346)
+
+1. Fix typos
+    * [Pull request #344](https://github.com/gazebosim/gz-msgs/pull/344)
+    * [Pull request #314](https://github.com/gazebosim/gz-msgs/pull/314)
+
+1. Few clangtidy fixes
+    * [Pull request #343](https://github.com/gazebosim/gz-msgs/pull/343)
+
+1. Remove unused load in gz_msgs_generate
+    * [Pull request #342](https://github.com/gazebosim/gz-msgs/pull/342)
+
+1. Remove unused ignstrtok variable
+    * [Pull request #340](https://github.com/gazebosim/gz-msgs/pull/340)
+
+1. Adds a message that allows loading environments via a topic
+    * [Pull request #320](https://github.com/gazebosim/gz-msgs/pull/320)
+
+1. Rename COPYING to LICENSE
+    * [Pull request #330](https://github.com/gazebosim/gz-msgs/pull/330)
+
+1. Infrastructure
+    * [Pull request #370](https://github.com/gazebosim/gz-msgs/pull/370)
+    * [Pull request #369](https://github.com/gazebosim/gz-msgs/pull/369)
+    * [Pull request #331](https://github.com/gazebosim/gz-msgs/pull/331)
+
+
 ### Gazebo Msgs 9.4.0 (2023-03-10)
 
 1. Support for bazel in garden
