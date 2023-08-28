@@ -20,7 +20,6 @@ include(${@PROJECT_NAME@_DIR}/gz_msgs_string_utils.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_protoc.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_factory.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_generate.cmake)
-include(${@PROJECT_NAME@_DIR}/target_link_messages.cmake)
 
 set(@PROJECT_NAME@_INSTALL_PATH "${@PROJECT_NAME@_DIR}/@PROJECT_CMAKE_EXTRAS_PATH_TO_PREFIX@")
 cmake_path(NORMAL_PATH @PROJECT_NAME@_INSTALL_PATH OUTPUT_VARIABLE @PROJECT_NAME@_INSTALL_PATH)
@@ -33,6 +32,31 @@ set(@PROJECT_NAME@_PROTO_GENERATOR_PLUGIN ${@PROJECT_NAME@_INSTALL_PATH}/bin/${P
 set(@PROJECT_NAME@_PROTO_GENERATOR_SCRIPT ${@PROJECT_NAME@_INSTALL_PATH}/bin/${PROTO_SCRIPT_NAME})
 set(@PROJECT_NAME@_FACTORY_GENERATOR_SCRIPT ${@PROJECT_NAME@_INSTALL_PATH}/bin/${FACTORY_SCRIPT_NAME})
 
+##################################################
+# A function to generate a target mesage library from a group of protobuf files .
+# The generation follows the conventions to make the messages available in gazebo tooling
+#
+# For an example use, consult gz-msgs/examples/generating_custom_messages
+#
+# Generally, the structure should be:
+#     protos/your/package/foo.proto
+#     protos/your/package/bar.proto
+#
+# In that case, the arguments would be
+#     MSGS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/protos
+#     PROTO_PACKAGE "your.package"
+#     MSGS_PROTOS
+#       protos/your/package/foo.proto
+#       protos/your/package/bar.proto
+#
+# One value arguments:
+#   MSG_PATHS           - The base path of the proto files
+#                         All proto imports are relative to this path
+#   PROTO_PACKAGE       - The name of the proto package to generate
+#   TARGET              - The name of the generated output target
+# Multi value arguments
+#   MSGS_PROTOS         - List of input proto files
+#   DEPENDENCIES        - List of message libraries this message library depends on
 function(gz_msgs_generate_messages)
   set(options "")
   set(oneValueArgs MSGS_PATH TARGET PROTO_PACKAGE OUTPUT_DIRECTORY)
