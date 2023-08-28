@@ -28,7 +28,8 @@ namespace gz::msgs {
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
 
-msgs::SphericalCoordinatesType ConvertCoord(
+/////////////////////////////////////////////
+inline msgs::SphericalCoordinatesType ConvertCoord(
   const math::SphericalCoordinates::CoordinateType &_sc)
 {
   auto result = msgs::SphericalCoordinatesType::LOCAL2;
@@ -56,7 +57,7 @@ msgs::SphericalCoordinatesType ConvertCoord(
 }
 
 /////////////////////////////////////////////
-math::SphericalCoordinates::CoordinateType Convert(
+inline math::SphericalCoordinates::CoordinateType Convert(
   const msgs::SphericalCoordinatesType &_sc)
 {
   switch (_sc)

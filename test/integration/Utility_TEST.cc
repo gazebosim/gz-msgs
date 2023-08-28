@@ -329,6 +329,28 @@ TEST(MsgsTest, ConvertMathMassMatrix3ToMsgs)
 /////////////////////////////////////////////////
 TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
 {
+  EXPECT_EQ(msgs::SphericalCoordinatesType::ECEF,
+    msgs::ConvertCoord(math::SphericalCoordinates::CoordinateType::ECEF));
+  EXPECT_EQ(msgs::SphericalCoordinatesType::GLOBAL,
+    msgs::ConvertCoord(math::SphericalCoordinates::CoordinateType::GLOBAL));
+  EXPECT_EQ(msgs::SphericalCoordinatesType::SPHERICAL,
+    msgs::ConvertCoord(math::SphericalCoordinates::CoordinateType::SPHERICAL));
+  EXPECT_EQ(msgs::SphericalCoordinatesType::LOCAL,
+    msgs::ConvertCoord(math::SphericalCoordinates::CoordinateType::LOCAL));
+  EXPECT_EQ(msgs::SphericalCoordinatesType::LOCAL2,
+    msgs::ConvertCoord(math::SphericalCoordinates::CoordinateType::LOCAL2));
+
+  EXPECT_EQ(math::SphericalCoordinates::CoordinateType::ECEF,
+    msgs::Convert(msgs::SphericalCoordinatesType::ECEF));
+  EXPECT_EQ(math::SphericalCoordinates::CoordinateType::GLOBAL,
+    msgs::Convert(msgs::SphericalCoordinatesType::GLOBAL));
+  EXPECT_EQ(math::SphericalCoordinates::CoordinateType::SPHERICAL,
+    msgs::Convert(msgs::SphericalCoordinatesType::SPHERICAL));
+  EXPECT_EQ(math::SphericalCoordinates::CoordinateType::LOCAL,
+    msgs::Convert(msgs::SphericalCoordinatesType::LOCAL));
+  EXPECT_EQ(math::SphericalCoordinates::CoordinateType::LOCAL2,
+    msgs::Convert(msgs::SphericalCoordinatesType::LOCAL2));
+
   auto msg = msgs::Convert(
       math::SphericalCoordinates(
       math::SphericalCoordinates::SurfaceType::EARTH_WGS84,
