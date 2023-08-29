@@ -79,8 +79,6 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
   if (_paths.empty())
     return;
 
-  std::cout << "DynamicFactory::LoadDescriptors(" << _paths << "\n";
-
   // Split all the directories containing .desc files.
   std::vector<std::string> descDirs =
     split(_paths, kEnvironmentVariableSeparator);
