@@ -79,6 +79,8 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
   if (_paths.empty())
     return;
 
+  std::cout << "DynamicFactory::LoadDescriptors(" << _paths << "\n";
+
   // Split all the directories containing .desc files.
   std::vector<std::string> descDirs =
     split(_paths, kEnvironmentVariableSeparator);
@@ -113,6 +115,16 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
       for (const google::protobuf::FileDescriptorProto &fileDescriptorProto :
            fileDescriptorSet.file())
       {
+        // If the descriptor already exists in the database, then skip it.
+        // This may happen as gz_desc files can potentially contain the
+        // transitive message definitions
+        google::protobuf::FileDescriptorProto checkDescriptorProto;
+        if (this->db.FindFileByName(
+          fileDescriptorProto.name(), &checkDescriptorProto))
+        {
+          continue;
+        }
+
         if (!static_cast<bool>(pool.BuildFile(fileDescriptorProto)))
         {
           std::cerr << "DynamicFactory(). Unable to place descriptors from ["
