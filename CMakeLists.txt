@@ -20,12 +20,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 gz_configure_project(VERSION_SUFFIX
   CONFIG_EXTRAS "gz-msgs-extras.cmake.in")
 
-# Install cmake support files
-install(
-  DIRECTORY cmake/
-  DESTINATION "${PROJECT_CMAKE_EXTRAS_INSTALL_DIR}"
-)
-
 #============================================================================
 # Set project-specific options
 #============================================================================
@@ -152,6 +146,22 @@ add_subdirectory(python)
 # Create package information
 #============================================================================
 gz_create_packages()
+
+#============================================================================
+# Install cmake extras for downstream users
+#============================================================================
+# Necessary to populate generator expressions
+file(
+  GENERATE
+  OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/gz-cmake/gz-msgs-extras.cmake"
+  INPUT "${CMAKE_CURRENT_BINARY_DIR}/gz-cmake/gz-msgs-extras.cmake"
+)
+
+# Install cmake support files
+install(
+  DIRECTORY cmake/
+  DESTINATION "${PROJECT_CMAKE_EXTRAS_INSTALL_DIR}"
+)
 
 #============================================================================
 # Create documentation
