@@ -23,13 +23,14 @@
 #include "ignition/msgs/MessageTypes.hh"
 #include "ignition/msgs/Factory.hh"
 
-using namespace ignition;
+using Factory = ignition::msgs::Factory;
+using Vector3d = ignition::msgs::Vector3d;
 
 /////////////////////////////////////////////////
 TEST(FactoryTest, Type)
 {
   std::vector<std::string> types;
-  msgs::Factory::Types(types);
+  Factory::Types(types);
   EXPECT_FALSE(types.empty());
   EXPECT_TRUE(std::find(types.begin(), types.end(),
         std::string("ign_msgs.Vector3d")) !=
@@ -39,7 +40,8 @@ TEST(FactoryTest, Type)
 /////////////////////////////////////////////////
 TEST(FactoryTest, New)
 {
-  auto msg = msgs::Factory::New<msgs::Vector3d>("ign_msgs.Vector3d");
+  // Correct call, using periods, fully qualified
+  auto msg = Factory::New<Vector3d>("ignition.msgs.Vector3d");
 
   ASSERT_TRUE(msg.get() != nullptr);
 
@@ -47,7 +49,7 @@ TEST(FactoryTest, New)
   msg->set_y(2.0);
   msg->set_z(3.0);
 
-  auto msgFilled = msgs::Factory::New<msgs::Vector3d>(
+  auto msgFilled = Factory::New<Vector3d>(
       "ign_msgs.Vector3d", "x: 1.0, y: 2.0, z: 3.0");
   ASSERT_TRUE(msgFilled.get() != nullptr);
 
@@ -55,10 +57,11 @@ TEST(FactoryTest, New)
   EXPECT_DOUBLE_EQ(msg->y(), msgFilled->y());
   EXPECT_DOUBLE_EQ(msg->z(), msgFilled->z());
 
-  msg = msgs::Factory::New<msgs::Vector3d>("ignition.msgs.Vector3d");
+  // Various other supported ways of specifying gz.msgs
+  msg = Factory::New<Vector3d>("ign_msgs.Vector3d");
   EXPECT_TRUE(msg.get() != nullptr);
 
-  msg = msgs::Factory::New<msgs::Vector3d>(".ignition.msgs.Vector3d");
+  msg = Factory::New<Vector3d>(".ignition.msgs.Vector3d");
   EXPECT_TRUE(msg.get() != nullptr);
 }
 
@@ -67,15 +70,15 @@ TEST(FactoryTest, NewDynamicFactory)
 {
   std::string paths;
 
-  auto msg = msgs::Factory::New("example.msgs.StringMsg");
+  auto msg = Factory::New("example.msgs.StringMsg");
   EXPECT_TRUE(msg.get() == nullptr);
 
   paths =
       PROJECT_SOURCE_PATH "/test/desc:"
       PROJECT_SOURCE_PATH "/test";
-  msgs::Factory::LoadDescriptors(paths);
+  Factory::LoadDescriptors(paths);
 
-  msg = msgs::Factory::New("example.msgs.StringMsg");
+  msg = Factory::New("example.msgs.StringMsg");
   EXPECT_TRUE(msg.get() != nullptr);
 }
 
@@ -83,12 +86,12 @@ TEST(FactoryTest, NewDynamicFactory)
 TEST(FactoryTest, NewAllRegisteredTypes)
 {
   std::vector<std::string> types;
-  msgs::Factory::Types(types);
+  Factory::Types(types);
   EXPECT_FALSE(types.empty());
 
   for (const auto &type : types)
   {
-    auto msg = msgs::Factory::New(type);
+    auto msg = Factory::New(type);
     ASSERT_NE(nullptr, msg.get()) << type;
   }
 }
@@ -104,7 +107,7 @@ TEST(FactoryTest, MultipleMessagesInAProto)
   };
 
   std::vector<std::string> types;
-  msgs::Factory::Types(types);
+  Factory::Types(types);
   EXPECT_FALSE(types.empty());
 
   for (auto type : typesInSameFile)
@@ -114,59 +117,59 @@ TEST(FactoryTest, MultipleMessagesInAProto)
         types.end()) << type;
 
     // Check all types can be newed
-    auto msg = msgs::Factory::New(type);
+    auto msg = Factory::New(type);
     EXPECT_NE(nullptr, msg.get()) << type;
   }
 
   // Compile-time check that pointer types exist
   {
-    msgs::SerializedEntityMapUniquePtr ptr{nullptr};
+    ignition::msgs::SerializedEntityMapUniquePtr ptr{nullptr};
     EXPECT_EQ(nullptr, ptr);
   }
   {
-    msgs::ConstSerializedEntityMapUniquePtr ptr{nullptr};
+    ignition::msgs::ConstSerializedEntityMapUniquePtr ptr{nullptr};
     EXPECT_EQ(nullptr, ptr);
   }
   {
-    msgs::SerializedEntityMapSharedPtr ptr{nullptr};
+    ignition::msgs::SerializedEntityMapSharedPtr ptr{nullptr};
     EXPECT_EQ(nullptr, ptr);
   }
   {
-    msgs::ConstSerializedEntityMapSharedPtr ptr{nullptr};
-    EXPECT_EQ(nullptr, ptr);
-  }
-
-  {
-    msgs::SerializedStateMapUniquePtr ptr{nullptr};
-    EXPECT_EQ(nullptr, ptr);
-  }
-  {
-    msgs::ConstSerializedStateMapUniquePtr ptr{nullptr};
-    EXPECT_EQ(nullptr, ptr);
-  }
-  {
-    msgs::SerializedStateMapSharedPtr ptr{nullptr};
-    EXPECT_EQ(nullptr, ptr);
-  }
-  {
-    msgs::ConstSerializedStateMapSharedPtr ptr{nullptr};
+    ignition::msgs::ConstSerializedEntityMapSharedPtr ptr{nullptr};
     EXPECT_EQ(nullptr, ptr);
   }
 
   {
-    msgs::SerializedStepMapUniquePtr ptr{nullptr};
+    ignition::msgs::SerializedStateMapUniquePtr ptr{nullptr};
     EXPECT_EQ(nullptr, ptr);
   }
   {
-    msgs::ConstSerializedStepMapUniquePtr ptr{nullptr};
+    ignition::msgs::ConstSerializedStateMapUniquePtr ptr{nullptr};
     EXPECT_EQ(nullptr, ptr);
   }
   {
-    msgs::SerializedStepMapSharedPtr ptr{nullptr};
+    ignition::msgs::SerializedStateMapSharedPtr ptr{nullptr};
     EXPECT_EQ(nullptr, ptr);
   }
   {
-    msgs::ConstSerializedStepMapSharedPtr ptr{nullptr};
+    ignition::msgs::ConstSerializedStateMapSharedPtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+
+  {
+    ignition::msgs::SerializedStepMapUniquePtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    ignition::msgs::ConstSerializedStepMapUniquePtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    ignition::msgs::SerializedStepMapSharedPtr ptr{nullptr};
+    EXPECT_EQ(nullptr, ptr);
+  }
+  {
+    ignition::msgs::ConstSerializedStepMapSharedPtr ptr{nullptr};
     EXPECT_EQ(nullptr, ptr);
   }
 }
