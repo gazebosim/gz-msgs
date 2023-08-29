@@ -75,6 +75,13 @@ TEST(FactoryTest, New)
 }
 
 /////////////////////////////////////////////////
+TEST(FactoryTest, DeprecatedNonFullyQualified)
+{
+  auto msg = msgs::Factory::New("StringMsg");
+  EXPECT_TRUE(msg.get() != nullptr);
+}
+
+/////////////////////////////////////////////////
 TEST(FactoryTest, NewDynamicFactory)
 {
   std::string paths;
