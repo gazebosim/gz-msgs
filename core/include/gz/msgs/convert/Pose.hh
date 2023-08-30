@@ -40,8 +40,17 @@ inline void Set(gz::msgs::Pose *_msg, const gz::math::Pose3d &_data)
 
 inline void Set(gz::math::Pose3d *_data, const gz::msgs::Pose &_msg)
 {
-  auto pos = Convert(_msg.position());
-  auto orientation = Convert(_msg.orientation());
+  gz::math::Vector3d pos;
+  gz::math::Quaterniond orientation;
+
+  if (_msg.has_position())
+    pos = Convert(_msg.position());
+
+  // This bit is critical.  If orientation hasn't been set in the message,
+  // then we want the quaternion to default to identity.
+  if (_msg.has_orientation())
+    orientation = Convert(_msg.orientation());
+
   _data->Set(pos, orientation);
 }
 

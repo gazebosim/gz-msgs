@@ -123,6 +123,23 @@ TEST(UtilityTest, ConvertMsgPoseToMath)
 }
 
 /////////////////////////////////////////////////
+TEST(UtilityTest, ConvertMsgPoseToMathIdentity)
+{
+  // Setting position but not orientation should still
+  // result in a valid identity quaternion
+  msgs::Pose msg;
+  msg.mutable_position()->set_x(1.0);
+  msg.mutable_position()->set_y(2.0);
+  msg.mutable_position()->set_z(2.0);
+
+  math::Pose3d v = msgs::Convert(msg);
+  EXPECT_TRUE(math::equal(v.Rot().W(), 1.0));
+  EXPECT_TRUE(math::equal(v.Rot().X(), 0.0));
+  EXPECT_TRUE(math::equal(v.Rot().Y(), 0.0));
+  EXPECT_TRUE(math::equal(v.Rot().Z(), 0.0));
+}
+
+/////////////////////////////////////////////////
 TEST(MsgsTest, ConvertMathColorToMsgs)
 {
   msgs::Color msg = msgs::Convert(math::Color(.1f, .2f, .3f, 1.0f));
