@@ -10,6 +10,7 @@
     * [Pull request #368](https://github.com/gazebosim/gz-msgs/pull/368)
     * [Pull request #374](https://github.com/gazebosim/gz-msgs/pull/374)
     * [Pull request #377](https://github.com/gazebosim/gz-msgs/pull/377)
+    * [Pull request #379](https://github.com/gazebosim/gz-msgs/pull/379)
 
 1. Add python message generation
     * [Pull request #362](https://github.com/gazebosim/gz-msgs/pull/362)
