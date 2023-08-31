@@ -8,6 +8,7 @@
 #   FACTORY_GEN_SCRIPT  - Location of the factory generator script
 #   PROTO_PATH          - Base directory of the proto files
 #   DEPENDENCY_DESCRIPTIONS - .gz_desc files for each dependency
+#   DLLEXPORT_DECL      - Visibilty macro to apply to messages
 #   OUTPUT_DIRECTORY    - CMake binary directoy to place generated artifacts
 #   OUTPUT_SOURCES      - Variable to contain list of generated source files
 #   OUTPUT_HEADERS      - Variable to contain list of generated header files
@@ -21,6 +22,7 @@ function(gz_msgs_generate_messages_impl)
     # Inputs
     PROTO_PACKAGE MSGS_GEN_SCRIPT GZ_PROTOC_PLUGIN FACTORY_GEN_SCRIPT PROTO_PATH
     DEPENDENCY_DESCRIPTIONS
+    DLLEXPORT_DECL
     OUTPUT_DIRECTORY
     # Outputs
     OUTPUT_SOURCES
@@ -57,6 +59,8 @@ function(gz_msgs_generate_messages_impl)
 
       # Cpp Specific arguments
       GENERATE_CPP
+      DLLEXPORT_DECL
+        ${generate_messages_DLLEXPORT_DECL}
       OUTPUT_CPP_HH_VAR
         ${generate_messages_OUTPUT_HEADERS}
       OUTPUT_DETAIL_CPP_HH_VAR

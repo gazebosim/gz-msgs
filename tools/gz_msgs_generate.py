@@ -57,6 +57,9 @@ def main(argv=sys.argv[1:]):
         '--dependency-proto-descs',
         nargs='*',
         help='The location of proto descriptor files these messages depend on')
+    parser.add_argument(
+        '--dllexport-decl',
+        help='The DLL visibility macro to use, if not set, no macro will be used')
     args = parser.parse_args(argv)
 
     # First generate the base cpp files
@@ -71,7 +74,11 @@ def main(argv=sys.argv[1:]):
 
     if args.generate_cpp:
         cmd += [f'--plugin=protoc-gen-gzmsgs={args.gz_generator_bin}']
-        cmd += [f'--cpp_out=dllexport_decl=GZ_MSGS_VISIBLE:{args.output_cpp_path}']
+        if args.dllexport_decl:
+            cmd += [f'--cpp_out=dllexport_decl={args.dllexport_decl}:{args.output_cpp_path}']
+        else:
+            cmd += [f'--cpp_out={args.output_cpp_path}']
+
         cmd += [f'--gzmsgs_out={args.output_cpp_path}']
     if args.generate_python:
         cmd += [f'--python_out={args.output_python_path}']

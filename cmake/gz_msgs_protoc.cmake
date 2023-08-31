@@ -8,6 +8,7 @@
 #   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
 #   PROTOC_EXEC         - Path to protoc
 #   GZ_PROTOC_PLUGIN    - Path to the gazebo-specific protobuf compiler executable
+#   DLLEXPORT_DECL      - DLL visibility macro (eg GZ_MSGS_VISIBLE)
 #   INPUT_PROTO         - Path to the input .proto file
 #   OUTPUT_CPP_DIR      - Path where C++ files are saved
 #   OUTPUT_PYTON_DIR    - Path where Python files are saved
@@ -25,6 +26,7 @@ function(gz_msgs_protoc)
     PROTO_PACKAGE
     PROTOC_EXEC
     GZ_PROTOC_PLUGIN
+    DLLEXPORT_DECL
     INPUT_PROTO
     OUTPUT_CPP_DIR
     OUTPUT_CPP_HH_VAR
@@ -93,6 +95,12 @@ function(gz_msgs_protoc)
   if(gz_msgs_protoc_DEPENDENCY_PROTO_DESCS)
     list(APPEND GENERATE_ARGS
       --dependency-proto-descs "${gz_msgs_protoc_DEPENDENCY_PROTO_DESCS}"
+    )
+  endif()
+
+  if(gz_msgs_protoc_DLLEXPORT_DECL)
+    list(APPEND GENERATE_ARGS
+      --dllexport-decl "${gz_msgs_protoc_DLLEXPORT_DECL}"
     )
   endif()
 
