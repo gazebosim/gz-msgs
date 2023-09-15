@@ -2,6 +2,12 @@
 
 ### Gazebo Msgs 10.0.0 (202x-xx-xx)
 
+1. Add missing `<functional>` header
+    * [Pull request #382](https://github.com/gazebosim/gz-msgs/pull/382)
+
+1. Documentation fixes
+    * [Pull request #381](https://github.com/gazebosim/gz-msgs/pull/381)
+
 1. Generate messages in downstream builds
     * [Pull request #339](https://github.com/gazebosim/gz-msgs/pull/339)
     * [Pull request #356](https://github.com/gazebosim/gz-msgs/pull/356)
@@ -11,6 +17,8 @@
     * [Pull request #374](https://github.com/gazebosim/gz-msgs/pull/374)
     * [Pull request #377](https://github.com/gazebosim/gz-msgs/pull/377)
     * [Pull request #379](https://github.com/gazebosim/gz-msgs/pull/379)
+    * [Pull request #386](https://github.com/gazebosim/gz-msgs/pull/386)
+    * [Pull request #384](https://github.com/gazebosim/gz-msgs/pull/384)
 
 1. Add python message generation
     * [Pull request #362](https://github.com/gazebosim/gz-msgs/pull/362)
@@ -35,33 +43,11 @@
 1. Added cubemap_uri to sky
     * [Pull request #306](https://github.com/gazebosim/gz-msgs/pull/306)
 
-1. Remove deprecated flag output_to_genfiles
-    * [Pull request #347](https://github.com/gazebosim/gz-msgs/pull/347)
-
-1. GzProtobuf: Do not require version 3
-    * [Pull request #346](https://github.com/gazebosim/gz-msgs/pull/346)
-
 1. Add id and visibility flags field to projector msg
     * [Pull request #345](https://github.com/gazebosim/gz-msgs/pull/345)
 
-1. Fix typos
-    * [Pull request #344](https://github.com/gazebosim/gz-msgs/pull/344)
-    * [Pull request #314](https://github.com/gazebosim/gz-msgs/pull/314)
-
-1. Few clangtidy fixes
-    * [Pull request #343](https://github.com/gazebosim/gz-msgs/pull/343)
-
-1. Remove unused load in gz_msgs_generate
-    * [Pull request #342](https://github.com/gazebosim/gz-msgs/pull/342)
-
-1. Remove unused ignstrtok variable
-    * [Pull request #340](https://github.com/gazebosim/gz-msgs/pull/340)
-
-1. Adds a message that allows loading environments via a topic
-    * [Pull request #320](https://github.com/gazebosim/gz-msgs/pull/320)
-
-1. Rename COPYING to LICENSE
-    * [Pull request #330](https://github.com/gazebosim/gz-msgs/pull/330)
+1. Add new discovery types
+    * [Pull request #322](https://github.com/gazebosim/gz-msgs/pull/322)
 
 1. ⬆️  Bump main to 10.0.0~pre1
     * [Pull request #292](https://github.com/gazebosim/gz-msgs/pull/292)
