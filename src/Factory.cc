@@ -251,7 +251,12 @@ std::unique_ptr<google::protobuf::Message> Factory::New(
   std::unique_ptr<google::protobuf::Message> msg = New(_msgType);
   if (msg)
   {
-    google::protobuf::TextFormat::ParseFromString(_args, msg.get());
+    if (!google::protobuf::TextFormat::ParseFromString(_args, msg.get()))
+    {
+      // The user-provided string was invalid,
+      // return nullptr rather than an empty message.
+      msg.reset();
+    }
   }
 
   return msg;
