@@ -53,22 +53,9 @@ TEST(FactoryTest, Type)
 /////////////////////////////////////////////////
 TEST(FactoryTest, New)
 {
-  // Correct call, using periods, fully qualified
+  // Preferred call, using periods, fully qualified
   auto msg = Factory::New<Vector3d>("gz.msgs.Vector3d");
-
   ASSERT_TRUE(msg.get() != nullptr);
-
-  msg->set_x(1.0);
-  msg->set_y(2.0);
-  msg->set_z(3.0);
-
-  auto msgFilled = Factory::New<Vector3d>(
-      "gz_msgs.Vector3d", "x: 1.0, y: 2.0, z: 3.0");
-  ASSERT_TRUE(msgFilled.get() != nullptr);
-
-  EXPECT_DOUBLE_EQ(msg->x(), msgFilled->x());
-  EXPECT_DOUBLE_EQ(msg->y(), msgFilled->y());
-  EXPECT_DOUBLE_EQ(msg->z(), msgFilled->z());
 
   // Various other supported ways of specifying gz.msgs
   msg = Factory::New<Vector3d>("gz_msgs.Vector3d");
@@ -79,6 +66,33 @@ TEST(FactoryTest, New)
 
   msg = Factory::New<Vector3d>(".gz_msgs.Vector3d");
   EXPECT_TRUE(msg.get() != nullptr);
+}
+
+/////////////////////////////////////////////////
+TEST(FactoryTest, NewWithWellFormedData)
+{
+  gz::msgs::Vector3d msg;
+  msg.set_x(1.0);
+  msg.set_y(2.0);
+  msg.set_z(3.0);
+
+  auto msgFilled = Factory::New<gz::msgs::Vector3d>(
+      "gz.msgs.Vector3d", "x: 1.0, y: 2.0, z: 3.0");
+  ASSERT_TRUE(nullptr != msgFilled);
+
+  EXPECT_DOUBLE_EQ(msg.x(), msgFilled->x());
+  EXPECT_DOUBLE_EQ(msg.y(), msgFilled->y());
+  EXPECT_DOUBLE_EQ(msg.z(), msgFilled->z());
+}
+
+
+/////////////////////////////////////////////////
+TEST(FactoryTest, NewWithMalformedData)
+{
+  /// Passing bad data to New results in a nullptr
+  auto msgFilled = Factory::New<gz::msgs::Vector3d>(
+      "gz.msgs.Vector3d", "x: 1.0, y: asdf, z: 3.0");
+  ASSERT_TRUE(nullptr == msgFilled);
 }
 
 /////////////////////////////////////////////////
