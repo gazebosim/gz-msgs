@@ -24,6 +24,7 @@
 #include <gz/msgs/pointcloud_packed.pb.h>
 
 #include <cstdarg>
+#include <functional>
 #include <sstream>
 #include <string>
 #include <utility>
