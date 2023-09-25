@@ -35,7 +35,6 @@ gz_msgs_generate_messages(
 
 add_executable(${PROJECT_NAME} main.cc)
 
-# Automatically uses whole-archive linking to get all the messages available
 target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_NAME}-msgs)
 
 install(TARGETS ${PROJECT_NAME}
