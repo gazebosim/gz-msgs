@@ -15,7 +15,10 @@ set(GZ_MSGS_VER ${gz-msgs10_VERSION_MAJOR})
 
 # Example of custom messages that depend on gz.msgs
 set(MSGS_PROTOS
-   ${CMAKE_CURRENT_SOURCE_DIR}/proto/gz/custom_msgs/vector3d.proto)
+   ${CMAKE_CURRENT_SOURCE_DIR}/proto/gz/custom_msgs/foo.proto
+   ${CMAKE_CURRENT_SOURCE_DIR}/proto/gz/custom_msgs/bar.proto
+   ${CMAKE_CURRENT_SOURCE_DIR}/proto/gz/custom_msgs/baz.proto
+)
 
 gz_msgs_generate_messages(
   # The cmake target to be generated for libraries/executables to link
