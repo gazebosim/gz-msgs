@@ -57,10 +57,3 @@ gz_msgs_generate_messages(
   # List of message targets this library imports from
   DEPENDENCIES gz_msgs_gen)
 ```
-
-Be sure to link all dependent message targets:
-
-```
-# Automatically uses whole-archive linking to get all the messages available
-target_link_messages(TARGET ${PROJECT_NAME} PUBLIC MSG_TARGETS custom_msgs_gen gz_msgs_gen)
-```
