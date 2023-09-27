@@ -80,7 +80,7 @@ place to make the messages usable across the Gazebo stack.
 To begin with, each message definition is passed through the `gz_msgs_protoc` 
 function:
 
-![gz_msgs_protoc](files/gz_msgs_protoc.svg)
+\image html files/gz_msgs_protoc.svg
 
 For each file:
 
@@ -102,7 +102,7 @@ scripts and executables:
 After individual message files have been generated, all of the definitions
 are grouped and processed via `gz_msgs_factory`
 
-![gz_msgs_factory](files/gz_msgs_factory.svg)
+\image html files/gz_msgs_factory.svg
 
 For the collection, `gz_msgs_factory` generates:
 
@@ -220,7 +220,7 @@ This allow for the messages to be used without any sort of reflection/introspect
 Include the headers and interact with the messages using the generated
 bindings according to the [language guide](https://protobuf.dev/reference/cpp/cpp-generated/)
 
-```c++
+```cpp
 #include <gz/custom_msgs/baz.pb.h>
 
 int main(int argc, char** argv)

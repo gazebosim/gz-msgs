@@ -173,6 +173,7 @@ configure_file(${CMAKE_SOURCE_DIR}/tutorials.md.in ${CMAKE_BINARY_DIR}/tutorials
 gz_create_docs(
   API_MAINPAGE_MD "${CMAKE_BINARY_DIR}/api.md"
   TUTORIALS_MAINPAGE_MD "${CMAKE_BINARY_DIR}/tutorials.md"
+  IMAGE_PATH_DIRS "${CMAKE_SOURCE_DIR}/tutorials/files"
   TAGFILES
     "${GZ-MATH_DOXYGEN_TAGFILE} = ${GZ-MATH_API_URL}"
 )

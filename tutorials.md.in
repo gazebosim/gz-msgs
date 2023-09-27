@@ -8,6 +8,7 @@ Gazebo @GZ_DESIGNATION_CAP@ library and how to use the library effectively.
 
 1. \subpage install "Installation"
 2. \subpage cppgetstarted "C++ Get Started"
+3. \subpage messagegeneration "Message Generation"
 
 ## License
 
