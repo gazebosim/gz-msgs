@@ -1,6 +1,6 @@
 ## Gazebo Msgs 10.x
 
-### Gazebo Msgs 10.0.0 (202x-xx-xx)
+### Gazebo Msgs 10.0.0 (2023-09-29)
 
 1. Add missing `<functional>` header
     * [Pull request #382](https://github.com/gazebosim/gz-msgs/pull/382)
