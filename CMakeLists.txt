@@ -17,7 +17,7 @@ find_package(gz-cmake3 REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-gz_configure_project(VERSION_SUFFIX pre4
+gz_configure_project(VERSION_SUFFIX
   CONFIG_EXTRAS "gz-msgs-extras.cmake.in")
 
 #============================================================================
