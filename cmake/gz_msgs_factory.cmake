@@ -6,7 +6,7 @@
 # One value arguments:
 #   FACTORY_GEN_SCRIPT  - Location of the factory generator script
 #   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
-#   PROTOC_EXEC         - Path to protoc
+#   PYTHON_INTERPRETER  - Target or path to the Python interpreter to use to execute the generator script
 #   OUTPUT_CPP_DIR      - Path where C++ files are saved
 #   OUTPUT_CPP_HH_VAR   - A CMake variable name containing a list that the C++ headers should be appended to
 #   OUTPUT_CPP_CC_VAR   - A Cmake variable name containing a list that the C++ sources should be appended to
@@ -18,12 +18,18 @@ function(gz_msgs_factory)
   set(oneValueArgs
     FACTORY_GEN_SCRIPT
     PROTO_PACKAGE
+    PYTHON_INTERPRETER
     OUTPUT_CPP_DIR
     OUTPUT_CPP_HH_VAR
     OUTPUT_CPP_CC_VAR)
   set(multiValueArgs INPUT_PROTOS PROTO_PATH)
 
   cmake_parse_arguments(gz_msgs_factory "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+  # Default values for optional parameters
+  if (NOT DEFINED gz_msgs_factory_PYTHON_INTERPRETER)
+    set(gz_msgs_factory_PYTHON_INTERPRETER Python3::Interpreter)
+  endif()
 
   _gz_msgs_proto_pkg_to_path(${gz_msgs_factory_PROTO_PACKAGE} proto_package_dir)
 
@@ -57,7 +63,7 @@ function(gz_msgs_factory)
 
   add_custom_command(
     OUTPUT ${output_files}
-    COMMAND Python3::Interpreter
+    COMMAND ${gz_msgs_factory_PYTHON_INTERPRETER}
     ARGS ${gz_msgs_factory_FACTORY_GEN_SCRIPT} ${GENERATE_ARGS}
     DEPENDS
       ${depends_index}

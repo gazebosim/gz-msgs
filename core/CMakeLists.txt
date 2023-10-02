@@ -26,13 +26,23 @@ include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_generate.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_protoc.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/gz_msgs_string_utils.cmake)
 
+if(TARGET ${${PROJECT_NAME}_PROTO_GENERATOR_PLUGIN})
+  set(${PROJECT_NAME}_PROTO_GENERATOR_PLUGIN_FILE $<TARGET_FILE:${${PROJECT_NAME}_PROTO_GENERATOR_PLUGIN}>)
+else()
+  set(${PROJECT_NAME}_PROTO_GENERATOR_PLUGIN_FILE ${${PROJECT_NAME}_PROTO_GENERATOR_PLUGIN})
+endif()
+
 gz_msgs_generate_messages_impl(
   MSGS_GEN_SCRIPT
     ${PROJECT_SOURCE_DIR}/tools/gz_msgs_generate.py
   FACTORY_GEN_SCRIPT
     ${PROJECT_SOURCE_DIR}/tools/gz_msgs_generate_factory.py
+  PYTHON_INTERPRETER
+    ${${PROJECT_NAME}_PYTHON_INTERPRETER}
+  PROTOC_EXEC
+    ${${PROJECT_NAME}_PROTOC_EXECUTABLE}
   GZ_PROTOC_PLUGIN
-    $<TARGET_FILE:${PROJECT_NAME}_protoc_plugin>
+    ${${PROJECT_NAME}_PROTO_GENERATOR_PLUGIN_FILE}
   INPUT_PROTOS
     ${proto_files}
   DLLEXPORT_DECL
@@ -54,6 +64,7 @@ gz_msgs_generate_messages_impl(
 )
 
 gz_msgs_generate_desc_impl(
+  PROTOC_EXEC ${${PROJECT_NAME}_PROTOC_EXECUTABLE}
   INPUT_PROTOS ${proto_files}
   PROTO_PATH ${PROJECT_SOURCE_DIR}/proto
   DEPENDENCY_DESCRIPTIONS ${depends_msgs_desc}
