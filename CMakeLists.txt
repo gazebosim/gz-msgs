@@ -123,16 +123,18 @@ endif()
 # Find Python
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
-if(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION)
-  if(USE_DIST_PACKAGES_FOR_PYTHON)
-    string(REPLACE "site-packages" "dist-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+if(NOT GZ_PYTHON_INSTALL_PATH)
+  if(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION)
+    if(USE_DIST_PACKAGES_FOR_PYTHON)
+      string(REPLACE "site-packages" "dist-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+    else()
+      # Python3_SITELIB might use dist-packages in some platforms
+      string(REPLACE "dist-packages" "site-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+    endif()
   else()
-    # Python3_SITELIB might use dist-packages in some platforms
-    string(REPLACE "dist-packages" "site-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+    # If not a system installation, respect local paths
+    set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
   endif()
-else()
-  # If not a system installation, respect local paths
-  set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
 endif()
 #============================================================================
 # Configure the build
