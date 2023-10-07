@@ -4,7 +4,8 @@ if (NOT HAVE_GZ_TOOLS)
   list(REMOVE_ITEM tests gz_TEST.cc)
 endif()
 
-gz_build_tests(TYPE INTEGRATION SOURCES ${tests} TEST_LIST test_targets)
+gz_build_tests(TYPE INTEGRATION SOURCES ${tests} TEST_LIST test_targets
+               ENVIRONMENT GZ_MSG_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX})
 
 foreach(test ${test_targets})
   target_link_libraries(${test} ${PROJECT_LIBRARY_TARGET_NAME})
