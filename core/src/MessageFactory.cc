@@ -28,6 +28,8 @@
 #include "gz/msgs/MessageFactory.hh"
 #include <gz/utils/ImplPtr.hh>
 
+static constexpr const char * kGzMsgsPrefix = "gz.msgs.";
+
 namespace gz::msgs
 {
 
@@ -53,35 +55,57 @@ MessageFactory::MessagePtr MessageFactory::New(
 {
   std::string type;
 
-  // Convert "gz.msgs." to "gz_msgs.".
+  // Convert "gz_msgs." prefix
   if (_msgType.find("gz_msgs.") == 0)
   {
-    type = "gz.msgs." + _msgType.substr(8);
+    type = kGzMsgsPrefix + _msgType.substr(8);
   }
+  // Convert ".gz_msgs." prefix
   else if (_msgType.find(".gz_msgs.") == 0)
   {
-    type = "gz.msgs." + _msgType.substr(9);
+    type = kGzMsgsPrefix +  _msgType.substr(9);
   }
-  // Convert ".gz.msgs." to "gz_msgs.".
+  // Convert ".gz.msgs." prefix
   else if (_msgType.find(".gz.msgs.") == 0)
   {
-    type = "gz.msgs." + _msgType.substr(9);
+    type = kGzMsgsPrefix + _msgType.substr(9);
   }
   else
   {
     type = _msgType;
   }
 
-  if (msgMap.find(type) != msgMap.end())
+  auto getMessagePtr = [this](const std::string &_type)
   {
-    // Create a new message if a FactoryFn has been assigned to the message type
-    return msgMap[type]();
-  }
-  else
+    MessageFactory::MessagePtr ret = nullptr;
+    if (msgMap.find(_type) != msgMap.end())
+    {
+      // Create a new message via FactoryFn
+      ret = msgMap[_type]();
+    }
+    else
+    {
+      // Create a new message via dynamic descriptors
+      ret = dynamicFactory->New(_type);
+    }
+    return ret;
+  };
+
+  auto ret = getMessagePtr(type);
+
+  // Message was not found in either static or dynamic message types,
+  // try again adding the gz.msgs prefix
+  if (nullptr == ret)
   {
-    // Check if we have the message descriptor.
-    return dynamicFactory->New(type);
+    ret = getMessagePtr(kGzMsgsPrefix + type);
+    if (nullptr != ret)
+    {
+      std::cerr << "Message (" << kGzMsgsPrefix + type
+          << ") was retrieved with non-fully qualified name. "
+          << "This behavior is deprecated in msgs10" << std::endl;
+    }
   }
+  return ret;
 }
 
 /////////////////////////////////////////////////
@@ -91,7 +115,12 @@ MessageFactory::MessagePtr MessageFactory::New(
   std::unique_ptr<google::protobuf::Message> msg = New(_msgType);
   if (msg)
   {
-    google::protobuf::TextFormat::ParseFromString(_args, msg.get());
+    if (!google::protobuf::TextFormat::ParseFromString(_args, msg.get()))
+    {
+      // The user-provided string was invalid,
+      // return nullptr rather than an empty message.
+      msg.reset();
+    }
   }
   return msg;
 }

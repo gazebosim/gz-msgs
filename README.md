@@ -19,7 +19,7 @@ framework, a set of libraries designed to rapidly develop robot applications.
 
 ## Installation
 
-See the [installation tutorial](https://gazebosim.org/api/msgs/7.0/install.html).
+See the [installation tutorial](https://gazebosim.org/api/msgs/10/install.html).
 
 ## Known issue of command line tools
 
@@ -29,7 +29,7 @@ line tools from `gz-tools` may not work correctly.
 A workaround for a single package is to define the environment variable
 `GZ_CONFIG_PATH` to point to the location of the Gazebo library installation,
 where the YAML file for the package is found, such as
-```
+```{.sh}
 export GZ_CONFIG_PATH=/usr/local/share/gz
 ```
 
@@ -38,7 +38,7 @@ installations from source are in different locations, only one can be specified.
 
 Another workaround for working with multiple Gazebo libraries on the command
 line is using symbolic links to each library's YAML file.
-```
+```{.sh}
 mkdir ~/.gz/tools/configs -p
 cd ~/.gz/tools/configs/
 ln -s /usr/local/share/gz/fuel8.yaml .

@@ -20,12 +20,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 gz_configure_project(VERSION_SUFFIX
   CONFIG_EXTRAS "gz-msgs-extras.cmake.in")
 
-# Install cmake support files
-install(
-  DIRECTORY cmake/
-  DESTINATION "${PROJECT_CMAKE_EXTRAS_INSTALL_DIR}"
-)
-
 #============================================================================
 # Set project-specific options
 #============================================================================
@@ -114,16 +108,18 @@ endif()
 # Find Python
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
-if(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION)
-  if(USE_DIST_PACKAGES_FOR_PYTHON)
-    string(REPLACE "site-packages" "dist-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+if(NOT GZ_PYTHON_INSTALL_PATH)
+  if(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION)
+    if(USE_DIST_PACKAGES_FOR_PYTHON)
+      string(REPLACE "site-packages" "dist-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+    else()
+      # Python3_SITELIB might use dist-packages in some platforms
+      string(REPLACE "dist-packages" "site-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+    endif()
   else()
-    # Python3_SITELIB might use dist-packages in some platforms
-    string(REPLACE "dist-packages" "site-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITELIB})
+    # If not a system installation, respect local paths
+    set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
   endif()
-else()
-  # If not a system installation, respect local paths
-  set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
 endif()
 #============================================================================
 # Configure the build
@@ -154,6 +150,22 @@ add_subdirectory(python)
 gz_create_packages()
 
 #============================================================================
+# Install cmake extras for downstream users
+#============================================================================
+# Necessary to populate generator expressions
+file(
+  GENERATE
+  OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/gz-cmake/gz-msgs-extras.cmake"
+  INPUT "${CMAKE_CURRENT_BINARY_DIR}/gz-cmake/gz-msgs-extras.cmake"
+)
+
+# Install cmake support files
+install(
+  DIRECTORY cmake/
+  DESTINATION "${PROJECT_CMAKE_EXTRAS_INSTALL_DIR}"
+)
+
+#============================================================================
 # Create documentation
 #============================================================================
 configure_file(${CMAKE_SOURCE_DIR}/api.md.in ${CMAKE_BINARY_DIR}/api.md)
@@ -163,6 +175,7 @@ configure_file(${CMAKE_SOURCE_DIR}/tutorials.md.in ${CMAKE_BINARY_DIR}/tutorials
 gz_create_docs(
   API_MAINPAGE_MD "${CMAKE_BINARY_DIR}/api.md"
   TUTORIALS_MAINPAGE_MD "${CMAKE_BINARY_DIR}/tutorials.md"
+  IMAGE_PATH_DIRS "${CMAKE_SOURCE_DIR}/tutorials/files"
   TAGFILES
     "${GZ-MATH_DOXYGEN_TAGFILE} = ${GZ-MATH_API_URL}"
 )
