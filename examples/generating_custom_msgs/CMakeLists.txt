@@ -10,8 +10,8 @@ project(generating_custom_messages VERSION 1.0.0)
 #============================================================================
 find_package(gz-cmake3 REQUIRED)
 
-find_package(gz-msgs10 REQUIRED)
-set(GZ_MSGS_VER ${gz-msgs10_VERSION_MAJOR})
+find_package(gz-msgs11 REQUIRED)
+set(GZ_MSGS_VER ${gz-msgs11_VERSION_MAJOR})
 
 # Example of custom messages that depend on gz.msgs
 set(MSGS_PROTOS
