@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from gz.msgs10.vector3d_pb2 import Vector3d
+from gz.msgs11.vector3d_pb2 import Vector3d
 
 import unittest
 

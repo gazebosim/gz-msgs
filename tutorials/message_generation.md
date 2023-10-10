@@ -16,7 +16,7 @@ so that messages are easily used from your language of choice.
 ### File structure
 
 Gazebo message definitions are stored in the 
-[proto](https://github.com/gazebosim/gz-msgs/tree/gz-msgs10/proto) folder.
+[proto](https://github.com/gazebosim/gz-msgs/tree/main/proto) folder.
 
 Messages may additionally belong to a `package`, which allows for convenient
 namespacing or grouping of common messages.
@@ -120,13 +120,13 @@ Now that we understand the components of the message generation pipeline,
 we can use them in our own custom package.
 
 The `cmake` functionality is exported from the `gz-msgs` library, via the `gz-cmake` [`extras` functionality](https://github.com/gazebosim/gz-cmake/pull/345).
-To make the functions available, simply `find_package(gz-msgs10)` in your `CMakeLists.txt`:
+To make the functions available, simply `find_package(gz-msgs11)` in your `CMakeLists.txt`:
 
 ```cmake
 cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 project(my_custom_package VERSION 0.0.1)
 find_package(gz-cmake3 REQUIRED)
-find_package(gz-msgs10 REQUIRED)
+find_package(gz-msgs11 REQUIRED)
 ```
 
 Next, create a directory for your custom message definitions:

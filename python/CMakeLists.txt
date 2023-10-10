@@ -1,7 +1,7 @@
 # Append `_configured` to the file name so it doesn't interfere with tests.
 # This happens because pytest will load the `gz.msgs` package from the build directory
 # (because there's an __init__.py file there) instead of being redirected to
-# `gz.msgs10` in the install directory, which is the intent of this `__init__.py` file.
+# `gz.msgs11` in the install directory, which is the intent of this `__init__.py` file.
 set(python_init_file ${PROJECT_BINARY_DIR}/python/gz/${GS_DESIGNATION}/__init__.py_configured)
 configure_file(${PROJECT_SOURCE_DIR}/python/src/__init__.py.in ${python_init_file})
 
