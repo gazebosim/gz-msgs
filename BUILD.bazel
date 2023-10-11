@@ -9,8 +9,8 @@ load(
 )
 load(
     "@gz//msgs/tools:gz_msgs_generate.bzl",
-    "get_proto_headers",
-    "gz_msgs_generate",
+    "gz_proto_library",
+    "gz_proto_factory",
 )
 
 package(
@@ -24,46 +24,38 @@ exports_files(["LICENSE"])
 
 gz_configure_header(
     name = "msgs_config_hh",
-    src = "include/gz/msgs/config.hh.in",
+    src = "core/include/gz/msgs/config.hh.in",
     cmakelists = ["CMakeLists.txt"],
     package = "msgs",
 )
 
 gz_export_header(
-    name = "include/gz/msgs/Export.hh",
+    name = "core/include/gz/msgs/Export.hh",
     export_base = "GZ_MSGS",
     lib_name = "gz-msgs",
     visibility = ["//visibility:private"],
 )
 
 public_headers_no_gen = glob([
-    "include/gz/msgs/*.hh",
-    "include/gz/msgs/detail/*.hh",
+    "core/include/gz/msgs/*.hh",
+    "core/include/gz/msgs/convert/*.hh",
+    "core/include/gz/msgs/detail/*.hh",
 ])
 
 protos = glob(["proto/gz/msgs/*.proto"])
 
 gz_include_header(
-    name = "messagetypes_hh_genrule",
-    out = "include/gz/msgs/MessageTypes.hh",
-    hdrs = get_proto_headers(protos),
-    strip_prefix = ["gz_msgs"],
-)
-
-gz_include_header(
     name = "msgs_hh_genrule",
     out = "include/gz/msgs.hh",
     hdrs = public_headers_no_gen + [
-        "include/gz/msgs/config.hh",
-        "include/gz/msgs/Export.hh",
-        "include/gz/msgs/MessageTypes.hh",
+        "core/include/gz/msgs/config.hh",
+        "core/include/gz/msgs/Export.hh",
     ],
 )
 
 public_headers = public_headers_no_gen + [
-    "include/gz/msgs/config.hh",
-    "include/gz/msgs/Export.hh",
-    "include/gz/msgs/MessageTypes.hh",
+    "core/include/gz/msgs/config.hh",
+    "core/include/gz/msgs/Export.hh",
     "include/gz/msgs.hh",
 ]
 
@@ -71,9 +63,9 @@ public_headers = public_headers_no_gen + [
 cc_binary(
     name = "gz_msgs_gen",
     srcs = [
-        "src/Generator.cc",
-        "src/Generator.hh",
-        "src/generator_main.cc",
+        "core/generator_lite/Generator.cc",
+        "core/generator_lite/Generator.hh",
+        "core/generator_lite/generator_main.cc",
     ],
     deps = [
         "@com_google_protobuf//:protobuf",
@@ -91,26 +83,37 @@ proto_library(
     ],
 )
 
-gz_msgs_generate(
-    name = "gzmsgs_cc_proto",
-    deps = [
-        ":gzmsgs_proto",
-        "@com_google_protobuf//:any_proto",
-    ],
+gz_proto_library(
+  name = "gzmsgs_cc_proto",
+  proto_deps = [":gzmsgs_proto"],
+  deps = [
+    "@com_google_protobuf//:protobuf",
+  ]
+)
+
+gz_proto_factory(
+  name = "gzmsgs_proto_factory",
+  deps = [":gzmsgs_proto"],
+  namespace = "gz::msgs",
+  cc_output = "core/src/RegisterMsgs.cc",
+  hh_output = "core/src/MessageTypes.hh"
 )
 
 cc_library(
     name = "msgs",
     srcs = [
-        "src/Factory.cc",
-        "src/Filesystem.cc",
-        "src/Utility.cc",
-        ":gzmsgs_cc_proto",
+        "core/src/Factory.cc",
+        "core/src/DynamicFactory.cc",
+        "core/src/DynamicFactory.hh",
+        "core/src/MessageFactory.cc",
+        "core/src/impl/InstallationDirectories.cc",
+        "core/src/RegisterMsgs.cc"
     ],
     hdrs = public_headers,
-    includes = ["include"],
+    includes = ["core/include", "core/src"],
     deps = [
         ":gzmsgs_cc_proto",
+        ":gzmsgs_proto_factory",
         GZ_ROOT + "math",
         "@com_google_protobuf//:protobuf",
         "@tinyxml2",
@@ -138,3 +141,50 @@ test_sources = glob(
         "@gtest//:gtest_main",
     ],
 ) for src in test_sources]
+
+
+cc_test(
+  name = "INTEGRATION_headers",
+  srcs = ["test/integration/headers.cc"],
+  deps = [
+      ":gzmsgs_cc_proto",
+      "@gtest",
+      "@gtest//:gtest_main",
+  ],
+)
+
+cc_test(
+  name = "INTEGRATION_image_msg",
+  srcs = ["test/integration/image_msg.cc"],
+  deps = [
+      ":gzmsgs_cc_proto",
+      "@gtest",
+      "@gtest//:gtest_main",
+  ],
+)
+
+cc_test(
+  name = "INTEGRATION_Utility",
+  srcs = ["test/integration/Utility_TEST.cc"],
+  deps = [
+      ":msgs",
+      GZ_ROOT + "common/testing",
+      "@gtest",
+      "@gtest//:gtest_main",
+  ],
+)
+
+cc_test(
+  name = "INTEGRATION_Factory",
+  srcs = ["test/integration/Factory_TEST.cc"],
+  data = ["test/desc/stringmsg.desc"],
+  deps = [
+      ":msgs",
+      GZ_ROOT + "common/testing",
+      "@gtest",
+      "@gtest//:gtest_main",
+  ],
+  defines = [
+      'GZ_MSGS_TEST_PATH=\\"msgs/test\\"',
+    ],
+)
