@@ -129,6 +129,7 @@ find_package(gz-cmake3 REQUIRED)
 find_package(gz-msgs10 REQUIRED)
 ```
 
+
 Next, create a directory for your custom message definitions:
 
 ```sh
@@ -189,9 +190,17 @@ message BazStamped
 ```
 
 
-Then, back in the `CMakeLists.txt` file, generate the message library.
+Then, back in the `CMakeLists.txt` file, add following lines to generate the message library:
 
 ```cmake
+# Define a variable 'MSGS_PROTOS' listing the .proto files
+set(MSGS_PROTOS
+     ${CMAKE_CURRENT_SOURCE_DIR}/proto/gz/custom_msgs/foo.proto
+     ${CMAKE_CURRENT_SOURCE_DIR}/proto/gz/custom_msgs/bar.proto
+     ${CMAKE_CURRENT_SOURCE_DIR}/proto/gz/custom_msgs/baz.proto
+)
+
+# Call 'gz_msgs_generate_messages()' to process the .proto files
 gz_msgs_generate_messages(
   # The cmake target to be generated for libraries/executables to link
   TARGET msgs
@@ -200,11 +209,29 @@ gz_msgs_generate_messages(
   # The path to the base directory of the proto files
   # All import paths should be relative to this (eg gz/custom_msgs/vector3d.proto)
   MSGS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/proto
-  # List of proto files to generate
+  # List of proto files to process
   MSGS_PROTOS ${MSGS_PROTOS}
-  DEPENDENCIES gz-msgs${GZ_MSGS_VER}::gz-msgs${GZ_MSGS_VER}
+  # Depenency on gz-msgs
+  DEPENDENCIES gz-msgs10::gz-msgs10
 )
 ```
+
+</br>
+
+In order to reduce the amount of edits needed upon a version change of `gz-msgs`, it is common to:
+
+ - Define a variable `GZ_MSGS_VER`, holding the version number:
+   ```cmake
+   find_package(gz-msgs10 REQUIRED)
+   set(GZ_MSGS_VER ${gz-msgs10_VERSION_MAJOR})
+   ```
+ - And change the dependency line in above code block to:
+   ```cmake
+   DEPENDENCIES gz-msgs${GZ_MSGS_VER}::gz-msgs${GZ_MSGS_VER}
+   ```
+
+</br>
+
 
 ### Using Custom messages
 
@@ -270,7 +297,7 @@ $ cd build/
 $ export GZ_DESCRIPTOR_PATH=`pwd`
 
 $ gz msg -l | grep "custom_msgs" | wc -l
-6
+4
 
 $ gz msg --info gz.custom_msgs.Foo                      
 Name: gz.custom_msgs.Foo
