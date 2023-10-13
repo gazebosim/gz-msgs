@@ -65,11 +65,15 @@ DynamicFactory::DynamicFactory()
     // Load all the descriptors found in the paths set with GZ_DESCRIPTOR_PATH.
     this->LoadDescriptors(descPaths);
   }
-  else
+
+  auto globalPath =
+    std::filesystem::path(gz::msgs::getInstallPrefix()) /
+    "share" / "gz" / "protos";
+
+  if (std::filesystem::exists(globalPath))
   {
     // Load descriptors from the global share path
-    this->LoadDescriptors((std::filesystem::path(
-      gz::msgs::getInstallPrefix()) / "share" / "gz" / "protos").string());
+    this->LoadDescriptors(globalPath.string());
   }
 }
 
