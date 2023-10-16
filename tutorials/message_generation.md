@@ -119,6 +119,10 @@ For the collection, `gz_msgs_factory` generates:
 Now that we understand the components of the message generation pipeline, 
 we can use them in our own custom package.
 
+The code for this example can be found in the `gz-msgs` [repository](https://github.com/gazebosim/gz-msgs/tree/gz-msgs10), in the [`examples/generating_custom_msgs`](https://github.com/gazebosim/gz-msgs/tree/gz-msgs10/examples/generating_custom_msgs) folder.
+
+</br>
+
 The `cmake` functionality is exported from the `gz-msgs` library, via the `gz-cmake` [`extras` functionality](https://github.com/gazebosim/gz-cmake/pull/345).
 To make the functions available, simply `find_package(gz-msgs10)` in your `CMakeLists.txt`:
 
