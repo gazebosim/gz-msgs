@@ -8,7 +8,7 @@ project(generating_custom_messages VERSION 1.0.0)
 #============================================================================
 # Find gz-cmake
 #============================================================================
-find_package(gz-cmake3 REQUIRED)
+find_package(gz-cmake4 REQUIRED)
 
 find_package(gz-msgs11 REQUIRED)
 set(GZ_MSGS_VER ${gz-msgs11_VERSION_MAJOR})

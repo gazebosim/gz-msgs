@@ -9,7 +9,7 @@ project(gz-msgs11 VERSION 11.0.0)
 # Find gz-cmake
 #============================================================================
 # If you get an error at this line, you need to install gz-cmake
-find_package(gz-cmake3 REQUIRED)
+find_package(gz-cmake4 REQUIRED)
 
 #============================================================================
 # Configure the project
