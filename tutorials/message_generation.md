@@ -125,7 +125,7 @@ To make the functions available, simply `find_package(gz-msgs11)` in your `CMake
 ```cmake
 cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 project(my_custom_package VERSION 0.0.1)
-find_package(gz-cmake3 REQUIRED)
+find_package(gz-cmake4 REQUIRED)
 find_package(gz-msgs11 REQUIRED)
 ```
 
