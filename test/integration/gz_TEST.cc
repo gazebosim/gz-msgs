@@ -27,6 +27,9 @@
 #    define pclose _pclose
 #endif
 
+// DETAIL_GZ_CONFIG_PATH is compiler definition set in CMake.
+#define GZ_CONFIG_PATH DETAIL_GZ_CONFIG_PATH
+
 static const std::string g_version(std::string(GZ_MSGS_VERSION_FULL));
 
 /////////////////////////////////////////////////
