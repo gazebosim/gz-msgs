@@ -114,9 +114,9 @@ bool Generator::Generate(const FileDescriptor *_file,
     sourceFilename += part.string() + "/";
   }
 
-  auto message_type_index =
-    _generatorContext->Open(identifier + fileStem + ".pb_index");
-  io::Printer indexPrinter(message_type_index, '$');
+  std::unique_ptr<io::ZeroCopyOutputStream> message_type_index(
+    _generatorContext->Open(identifier + fileStem + ".pb_index"));
+  io::Printer indexPrinter(message_type_index.get(), '$');
 
   identifier += fileStem;
   headerFilename += fileStem + ".gz.h";
