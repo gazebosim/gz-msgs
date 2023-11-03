@@ -220,8 +220,6 @@ gz_msgs_generate_messages(
 )
 ```
 
-</br>
-
 In order to reduce the amount of edits needed upon a version change of `gz-msgs`, it is common to:
 
  - Define a variable `GZ_MSGS_VER`, holding the version number:
@@ -233,9 +231,6 @@ In order to reduce the amount of edits needed upon a version change of `gz-msgs`
    ```cmake
    DEPENDENCIES gz-msgs${GZ_MSGS_VER}::gz-msgs${GZ_MSGS_VER}
    ```
-
-</br>
-
 
 ### Using Custom messages
 
