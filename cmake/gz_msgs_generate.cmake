@@ -2,6 +2,7 @@
 # The implementation of gz_msgs_generate_messages
 # Options:
 # One value arguments:
+#   PYTHON_INTERPRETER  - Target or path to the python interpreter used
 #   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
 #   MSGS_GEN_SCRIPT     - Location of the messge generator script
 #   GZ_PROTOC_PLUGIN    - Location of the gazebo generator plugin
@@ -20,6 +21,8 @@ function(gz_msgs_generate_messages_impl)
   set(options "")
   set(oneValueArgs
     # Inputs
+    PYTHON_INTERPRETER
+    PROTOC_EXEC
     PROTO_PACKAGE MSGS_GEN_SCRIPT GZ_PROTOC_PLUGIN FACTORY_GEN_SCRIPT PROTO_PATH
     DEPENDENCY_DESCRIPTIONS
     DLLEXPORT_DECL
@@ -33,6 +36,15 @@ function(gz_msgs_generate_messages_impl)
   set(multiValueArgs INPUT_PROTOS)
 
   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+  # Default values for optional parameters
+  if (NOT DEFINED generate_messages_PYTHON_INTERPRETER)
+    set(generate_messages_PYTHON_INTERPRETER Python3::Interpreter)
+  endif()
+  if (NOT DEFINED generate_messages_PROTOC_EXEC)
+    set(generate_messages_PROTOC_EXEC protobuf::protoc)
+  endif()
+
   _gz_msgs_proto_pkg_to_string(${generate_messages_PROTO_PACKAGE} gen_dir)
   _gz_msgs_proto_pkg_to_path(${generate_messages_PROTO_PACKAGE} proto_package_dir)
   set(output_directory ${generate_messages_OUTPUT_DIRECTORY})
@@ -42,6 +54,8 @@ function(gz_msgs_generate_messages_impl)
 
   foreach(proto_file ${generate_messages_INPUT_PROTOS})
     gz_msgs_protoc(
+      PYTHON_INTERPRETER
+        ${generate_messages_PYTHON_INTERPRETER}
       MSGS_GEN_SCRIPT
         ${generate_messages_MSGS_GEN_SCRIPT}
       PROTO_PACKAGE
@@ -49,7 +63,7 @@ function(gz_msgs_generate_messages_impl)
       INPUT_PROTO
         ${proto_file}
       PROTOC_EXEC
-        protobuf::protoc
+        ${generate_messages_PROTOC_EXEC}
       GZ_PROTOC_PLUGIN
         ${generate_messages_GZ_PROTOC_PLUGIN}
       PROTO_PATH
@@ -81,6 +95,8 @@ function(gz_msgs_generate_messages_impl)
   endforeach()
 
   gz_msgs_factory(
+    PYTHON_INTERPRETER
+      ${generate_messages_PYTHON_INTERPRETER}
     FACTORY_GEN_SCRIPT
       ${generate_messages_FACTORY_GEN_SCRIPT}
     PROTO_PACKAGE
@@ -130,6 +146,7 @@ endfunction()
 ##################################################
 # Options:
 # One value arguments:
+#   PROTOC_EXEC         - protoc target or executable to use
 #   PROTO_PATH          - Base directory of the proto files
 #   DEPENDENCY_DESCRIPTIONS - Variable containing all depedency description files
 #   OUTPUT_DIRECTORY - Directory of output gz_desc file
@@ -140,6 +157,7 @@ function(gz_msgs_generate_desc_impl)
   set(options "")
   set(oneValueArgs
     # Inputs
+    PROTOC_EXEC
     PROTO_PATH
     DEPENDENCY_DESCRIPTIONS
     OUTPUT_DIRECTORY
@@ -147,6 +165,10 @@ function(gz_msgs_generate_desc_impl)
   set(multiValueArgs INPUT_PROTOS)
 
   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+  if (NOT DEFINED generate_messages_PROTOC_EXEC)
+    set(generate_messages_PROTOC_EXEC protobuf::protoc)
+  endif()
 
   set(ARGS)
   list(APPEND ARGS -I${generate_messages_PROTO_PATH})
@@ -161,7 +183,7 @@ function(gz_msgs_generate_desc_impl)
 
   add_custom_command(
     OUTPUT ${generate_messages_OUTPUT_FILENAME}
-    COMMAND protobuf::protoc
+    COMMAND ${generate_messages_PROTOC_EXEC}
     ARGS ${ARGS}
     DEPENDS ${generate_messages_INPUT_PROTOS}
     COMMENT "Generating descriptor set"
@@ -175,6 +197,8 @@ endfunction()
 #   TARGET              - Target (static library) to create
 #   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
 #   MSGS_GEN_SCRIPT     - Location of the messge generator script
+#   PYTHON_INTERPRETER  - Target or path to the python interpreter used
+#   PROTOC_EXEC         - Protoc target or executable to use
 #   GZ_PROTOC_PLUGIN    - Location of the gazebo generator plugin
 #   FACTORY_GEN_SCRIPT  - Location of the factory generator script
 #   MSGS_LIB            - gz-msgs library to link to
@@ -186,7 +210,7 @@ endfunction()
 #                         that depend on gz-msgs
 function(gz_msgs_generate_messages_lib)
   set(options "")
-  set(oneValueArgs TARGET PROTO_PACKAGE MSGS_GEN_SCRIPT GZ_PROTOC_PLUGIN FACTORY_GEN_SCRIPT MSGS_LIB PROTO_PATH)
+  set(oneValueArgs TARGET PROTO_PACKAGE MSGS_GEN_SCRIPT PYTHON_INTERPRETER PROTOC_EXEC GZ_PROTOC_PLUGIN FACTORY_GEN_SCRIPT MSGS_LIB PROTO_PATH)
   set(multiValueArgs INPUT_PROTOS DEPENDENCIES)
 
   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -205,9 +229,19 @@ function(gz_msgs_generate_messages_lib)
     list(APPEND depends_msgs_desc ${msgs_desc_file})
   endforeach()
 
+  # Default values for optional parameters
+  if (NOT DEFINED generate_messages_PYTHON_INTERPRETER)
+    set(generate_messages_PYTHON_INTERPRETER Python3::Interpreter)
+  endif()
+  if (NOT DEFINED generate_messages_PROTOC_EXEC)
+    set(generate_messages_PROTOC_EXEC protobuf::protoc)
+  endif()
+
   gz_msgs_generate_messages_impl(
     PROTO_PACKAGE ${generate_messages_PROTO_PACKAGE}
     MSGS_GEN_SCRIPT ${generate_messages_MSGS_GEN_SCRIPT}
+    PYTHON_INTERPRETER ${generate_messages_PYTHON_INTERPRETER}
+    PROTOC_EXEC ${generate_messages_PROTOC_EXEC}
     GZ_PROTOC_PLUGIN ${generate_messages_GZ_PROTOC_PLUGIN}
     FACTORY_GEN_SCRIPT ${generate_messages_FACTORY_GEN_SCRIPT}
     PROTO_PATH ${generate_messages_PROTO_PATH}
@@ -221,6 +255,7 @@ function(gz_msgs_generate_messages_lib)
   )
 
   gz_msgs_generate_desc_impl(
+    PROTOC_EXEC ${generate_messages_PROTOC_EXEC}
     INPUT_PROTOS ${generate_messages_INPUT_PROTOS}
     PROTO_PATH ${generate_messages_PROTO_PATH}
     DEPENDENCY_DESCRIPTIONS ${depends_msgs_desc}

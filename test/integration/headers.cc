@@ -16,7 +16,6 @@
 */
 #include <gtest/gtest.h>
 
-#include <gz/msgs/Export.hh>
 #include "gz/msgs/contact.pb.h"
 
 /////////////////////////////////////////////////
