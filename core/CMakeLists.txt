@@ -140,6 +140,8 @@ gz_build_tests(TYPE UNIT
     ${gtest_sources}
   LIB_DEPS
       TINYXML2::TINYXML2
+  ENVIRONMENT
+    GZ_MSG_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
 )
 
 add_subdirectory(include/gz/msgs)
