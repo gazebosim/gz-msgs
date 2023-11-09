@@ -40,4 +40,6 @@ message GUICamera
 
   /// \brief Type of projection: "perspective" or "orthographic".
   string projection_type       = 6;
+  /// \brief The duration in seconds of the camera motion to the new camera pose.
+  double duration               = 7;
 }
