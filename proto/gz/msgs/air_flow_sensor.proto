@@ -34,14 +34,14 @@ message AirFlowSensor
   Header header               = 1;
 
   /// \brief airflow speed Mag in the xy plane (m/s).
-  double xy_speed        = 2;
+  double xy_speed             = 2;
 
   /// \brief airflow direction in xy plane (rad).
-  double xy_direction          = 3;
+  double xy_direction         = 3;
 
   /// \brief Sensor speed noise.
   SensorNoise speed_noise     = 4;
 
   /// \brief Sensor direction noise.
-  SensorNoise direction_noise     = 5;
+  SensorNoise direction_noise = 5;
 }
