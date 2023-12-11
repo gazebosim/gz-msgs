@@ -2,7 +2,7 @@ load("@gz//bazel/skylark:build_defs.bzl", "gz_py_binary")
 
 gz_py_binary(
     name = "gz_msgs_generate_py",
-    main = "gz_msgs_generate.py",
     srcs = ["gz_msgs_generate.py"],
+    main = "gz_msgs_generate.py",
     visibility = ["//visibility:public"],
 )
