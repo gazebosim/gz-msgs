@@ -129,7 +129,7 @@ test_sources = glob(
         "test/desc",
     ],
     defines = [
-      'GZ_MSGS_TEST_PATH=\\"msgs/test\\"',
+        'GZ_MSGS_TEST_PATH=\\"msgs/test\\"',
     ],
     deps = [
         ":msgs",
