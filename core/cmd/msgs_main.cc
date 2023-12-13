@@ -15,6 +15,7 @@
  *
  */
 
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -48,7 +49,7 @@ struct MsgOptions
 //////////////////////////////////////////////////
 void runMsgInfo(const MsgOptions &_opt)
 {
-  for (auto msgName: _opt.msgNames)
+  for (const auto &msgName: _opt.msgNames)
   {
     auto msg = gz::msgs::Factory::New(msgName);
     if (msg)
