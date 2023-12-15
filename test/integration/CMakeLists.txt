@@ -6,10 +6,6 @@ endif()
 
 gz_build_tests(TYPE INTEGRATION SOURCES ${tests} TEST_LIST test_targets)
 
-foreach(test ${test_targets})
-  target_link_libraries(${test} ${PROJECT_LIBRARY_TARGET_NAME} gz_msgs_msgs)
-endforeach()
-
 if(TARGET INTEGRATION_gz_TEST)
   target_compile_definitions(INTEGRATION_gz_TEST PRIVATE
     "GZ_MSGS_EXECUTABLE_PATH=\"$<TARGET_FILE:gz-msgs>\""
