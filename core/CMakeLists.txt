@@ -53,8 +53,6 @@ gz_msgs_generate_messages_impl(
     msgs_python
 )
 
-message(STATUS ${msgs_sources})
-
 gz_msgs_generate_desc_impl(
   INPUT_PROTOS ${proto_files}
   PROTO_PATH ${PROJECT_SOURCE_DIR}/proto
