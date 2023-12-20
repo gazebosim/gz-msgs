@@ -123,8 +123,6 @@ int main(int argc, char** argv)
 {
   CLI::App app{"Print information about Gazebo messages"};
 
-  gz::msgs::RegisterAll();
-
   app.add_flag_callback("-v,--version", [](){
       std::cout << GZ_MSGS_VERSION_FULL << std::endl;
       throw CLI::Success();

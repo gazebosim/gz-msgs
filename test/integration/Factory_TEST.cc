@@ -220,7 +220,6 @@ TEST(FactoryTest, MultipleMessagesInAProto)
 /////////////////////////////////////////////////
 int main(int _argc, char **_argv)
 {
-  gz::msgs::RegisterAll();
   testing::InitGoogleTest(&_argc, _argv);
   return RUN_ALL_TESTS();
 }
