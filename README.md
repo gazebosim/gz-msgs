@@ -9,7 +9,7 @@
 
 Build | Status
 -- | --
-Test coverage | [![codecov](https://codecov.io/gh/gazebosim/gz-msgs/branch/main/graph/badge.svg)](https://codecov.io/gh/gazebosim/gz-msgs)
+Test coverage | [![codecov](https://codecov.io/gh/gazebosim/gz-msgs/tree/gz-msgs10/graph/badge.svg)](https://codecov.io/gh/gazebosim/gz-msgs/tree/gz-msgs10)
 Ubuntu Jammy  | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-ci-gz-msgs10-jammy-amd64)](https://build.osrfoundation.org/job/gz_msgs-ci-gz-msgs10-jammy-amd64)
 Homebrew      | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-ci-gz-msgs10-homebrew-amd64)](https://build.osrfoundation.org/job/gz_msgs-ci-gz-msgs10-homebrew-amd64)
 Windows       | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-10-win)](https://build.osrfoundation.org/job/gz_msgs-10-win)
