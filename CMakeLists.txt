@@ -77,7 +77,7 @@ gz_find_package(GzProtobuf
 
 #--------------------------------------
 # Find gz-utils
-gz_find_package(gz-utils3 REQUIRED)
+gz_find_package(gz-utils3 REQUIRED COMPONENTS cli)
 set(GZ_UTILS_VER ${gz-utils3_VERSION_MAJOR})
 
 #--------------------------------------
@@ -96,7 +96,7 @@ set(GZ_TOOLS_VER 1)
 
 #--------------------------------------
 # Find Tinyxml2
-gz_find_package(TINYXML2 REQUIRED PRIVATE PRETTY tinyxml2)
+gz_find_package(TINYXML2 REQUIRED PRETTY tinyxml2)
 
 #--------------------------------------
 # Find DL if doing relocatable installation
@@ -171,7 +171,6 @@ install(
 #============================================================================
 configure_file(${CMAKE_SOURCE_DIR}/api.md.in ${CMAKE_BINARY_DIR}/api.md)
 configure_file(${CMAKE_SOURCE_DIR}/tutorials.md.in ${CMAKE_BINARY_DIR}/tutorials.md)
-
 
 gz_create_docs(
   API_MAINPAGE_MD "${CMAKE_BINARY_DIR}/api.md"

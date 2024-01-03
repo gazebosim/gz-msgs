@@ -87,7 +87,6 @@ install(FILES ${msgs_python} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs${PROJ
 gz_get_libsources_and_unittests(sources gtest_sources)
 
 gz_create_core_library(SOURCES
-  src/gz.cc
   src/Factory.cc
   src/MessageFactory.cc
   src/DynamicFactory.cc
@@ -121,17 +120,5 @@ target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   SYSTEM PUBLIC $<TARGET_PROPERTY:protobuf::libprotobuf,INTERFACE_INCLUDE_DIRECTORIES>)
 
-##################################################
-# Build unit tests
-# Build the unit tests.
-gz_build_tests(TYPE UNIT
-  SOURCES
-    ${gtest_sources}
-  LIB_DEPS
-      TINYXML2::TINYXML2
-)
-
 add_subdirectory(include/gz/msgs)
-if(NOT WIN32)
-  add_subdirectory(src/cmd)
-endif()
+add_subdirectory(cmd)

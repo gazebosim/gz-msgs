@@ -24,8 +24,7 @@ GZ_MSGS_COMPLETION_LIST="
   -i --info
   -l --list
   -h --help
-  --force-version
-  --versions
+  --version
 "
 
 function _gz_msg
