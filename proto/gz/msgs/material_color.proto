@@ -19,13 +19,14 @@
 syntax = "proto3";
 package gz.msgs;
 option java_package = "com.gz.msgs";
-option java_outer_classname = "MaterialProtos";
+option java_outer_classname = "MaterialColorProtos";
 
 /// \ingroup gz.msgs
 /// \interface MaterialColor
 /// \brief Color description for an entities link-visual material.
 
 import "gz/msgs/color.proto";
+import "gz/msgs/entity.proto";
 import "gz/msgs/header.proto";
 
 message MaterialColor
@@ -33,21 +34,39 @@ message MaterialColor
   /// \brief Optional header data
   Header header          = 1;
 
-  /// \brief Name of link-visual.
-  string name            = 2;
-
-  /// \brief Name of parent enitity for link-visual.
-  string parent_name     = 3;
+  /// \brief Entity for which material colors are going to be modified.
+  ///
+  /// The entity should be a visual element of a link that may exist
+  /// in a world or model.
+  /// The entity name (entity.name) will be used as an scoped name.
+  /// For example, in this
+  /// hierarchy:
+  ///
+  /// world_name
+  ///   model_name
+  ///     link_name
+  ///       visual_name
+  ///
+  /// All these names will return the link entity:
+  ///
+  /// * world_name::model_name::link_name::visual_name
+  /// * model_name::link_name::visual_name
+  /// * link_name::visual_name
+  /// * visual_name
+  Entity entity          = 2;
 
   /// \brief Ambient color
-  Color ambient          = 4;
+  Color ambient          = 3;
 
   /// \brief Diffuse color
-  Color diffuse          = 5;
+  Color diffuse          = 4;
 
   /// \brief Specular color
-  Color specular         = 6;
+  Color specular         = 5;
 
   /// \brief Emissive color
-  Color emissive         = 7;
+  Color emissive         = 6;
+
+  /// \brief Specular exponent
+  double shininess       = 7;
 }
