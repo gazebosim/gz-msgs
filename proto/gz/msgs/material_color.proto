@@ -31,8 +31,18 @@ import "gz/msgs/header.proto";
 
 message MaterialColor
 {
+  /// \brief Entities that match to apply material color.
+  enum EntityMatch
+  {
+    /// \brief Apply material color to first matching entity.
+    FIRST = 0;
+
+    /// \brief Apply material color to all matching entities.
+    ALL = 1;
+  }
+
   /// \brief Optional header data
-  Header header          = 1;
+  Header header             = 1;
 
   /// \brief Entity for which material colors are going to be modified.
   ///
@@ -53,20 +63,23 @@ message MaterialColor
   /// * model_name::link_name::visual_name
   /// * link_name::visual_name
   /// * visual_name
-  Entity entity          = 2;
+  Entity entity             = 2;
 
   /// \brief Ambient color
-  Color ambient          = 3;
+  Color ambient             = 3;
 
   /// \brief Diffuse color
-  Color diffuse          = 4;
+  Color diffuse             = 4;
 
   /// \brief Specular color
-  Color specular         = 5;
+  Color specular            = 5;
 
   /// \brief Emissive color
-  Color emissive         = 6;
+  Color emissive            = 6;
 
   /// \brief Specular exponent
-  double shininess       = 7;
+  double shininess          = 7;
+
+  /// \brief Entities that match to apply material color.
+  EntityMatch entity_match  = 8;
 }
