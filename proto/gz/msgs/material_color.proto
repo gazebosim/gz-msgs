@@ -31,6 +31,16 @@ import "gz/msgs/header.proto";
 
 message MaterialColor
 {
+  /// \brief Entities to apply material color.
+  enum Apply
+  {
+    /// \brief Apply material color to first matching entity.
+    FIRST = 0;
+
+    /// \brief Apply material color to all matching entities.
+    ALL = 1;
+  }
+
   /// \brief Optional header data
   Header header          = 1;
 
@@ -69,4 +79,7 @@ message MaterialColor
 
   /// \brief Specular exponent
   double shininess       = 7;
+
+  /// \brief Entities to apply material color
+  Apply apply           = 8;
 }
