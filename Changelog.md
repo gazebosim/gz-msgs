@@ -1,6 +1,6 @@
 ## Gazebo Msgs 10.x
 
-### Gazebo Msgs 10.1.0 (2024-01-17)
+### Gazebo Msgs 10.1.0 (2024-01-22)
 
 1. Add proto message for MaterialColor.
     * [Pull request #414](https://github.com/gazebosim/gz-msgs/pull/414)
