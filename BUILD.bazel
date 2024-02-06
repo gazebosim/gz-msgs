@@ -53,12 +53,6 @@ gz_include_header(
     ],
 )
 
-public_headers = public_headers_no_gen + [
-    "core/include/gz/msgs/config.hh",
-    "core/include/gz/msgs/Export.hh",
-    "include/gz/msgs.hh",
-]
-
 # Custom Gazebo Protoc plugin
 cc_binary(
     name = "gz_msgs_gen",
@@ -96,8 +90,16 @@ gz_proto_factory(
   deps = [":gzmsgs_proto"],
   namespace = "gz::msgs",
   cc_output = "core/src/RegisterMsgs.cc",
-  hh_output = "core/src/MessageTypes.hh"
+  hh_output = "include/gz/msgs/MessageTypes.hh"
 )
+
+public_headers = public_headers_no_gen + [
+    "core/include/gz/msgs/config.hh",
+    "core/include/gz/msgs/Export.hh",
+    "include/gz/msgs.hh",
+    "include/gz/msgs/MessageTypes.hh"
+]
+
 
 cc_library(
     name = "msgs",

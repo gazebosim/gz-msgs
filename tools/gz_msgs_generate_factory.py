@@ -141,7 +141,7 @@ def main(argv=sys.argv[1:]):
     args = parser.parse_args(argv)
 
     package_re = re.compile('^package (.*);$')
-    message_re = re.compile('message (.*)')
+    message_re = re.compile(r'message (\w*)\s?{?$')
 
     registrations = []
     gz_msgs_headers = []
