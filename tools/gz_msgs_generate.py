@@ -19,7 +19,7 @@ import os
 import subprocess
 import sys
 
-def parse_args(argv=sys.argv[1:]):
+def main(argv=sys.argv[1:]):
     parser = argparse.ArgumentParser(
         description='Generate protobuf support files',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -43,7 +43,7 @@ def parse_args(argv=sys.argv[1:]):
         help='The basepath of the generated C++ files')
     parser.add_argument(
         '--output-python-path',
-        help='The basepath of the generated Python files')
+        help='The basepath of the generated C++ files')
     parser.add_argument(
         '--proto-path',
         required=True,
@@ -52,8 +52,7 @@ def parse_args(argv=sys.argv[1:]):
     parser.add_argument(
         '--input-path',
         required=True,
-        help='The location of the template files',
-        action='append')
+        help='The location of the template files')
     parser.add_argument(
         '--dependency-proto-descs',
         nargs='*',
@@ -62,14 +61,16 @@ def parse_args(argv=sys.argv[1:]):
         '--dllexport-decl',
         help='The DLL visibility macro to use, if not set, no macro will be used')
     args = parser.parse_args(argv)
-    return args
 
-def generate_proto(input_file, args):
     # First generate the base cpp files
     cmd = [args.protoc_exec]
 
     for path in args.proto_path:
         cmd += [f'--proto_path={path}']
+
+    if args.dependency_proto_descs:
+        for path in args.dependency_proto_descs:
+            cmd += [f'--descriptor_set_in={path}']
 
     if args.generate_cpp:
         cmd += [f'--plugin=protoc-gen-gzmsgs={args.gz_generator_bin}']
@@ -81,7 +82,14 @@ def generate_proto(input_file, args):
         cmd += [f'--gzmsgs_out={args.output_cpp_path}']
     if args.generate_python:
         cmd += [f'--python_out={args.output_python_path}']
-    cmd += [input_file]
+
+    cmd += [args.input_path]
+
+    try:
+        subprocess.check_call(cmd)
+    except subprocess.CalledProcessError as e:
+        print(f'Failed to execute protoc compiler: {e}')
+        sys.exit(-1)
 
     os.makedirs(args.output_cpp_path, exist_ok=True)
 
@@ -92,14 +100,9 @@ def generate_proto(input_file, args):
         sys.exit(-1)
 
     # Move original generated cpp to details/
-    proto_file = None
-    for proto_path in args.proto_path:
-        if input_file.find(proto_path) == 0:
-            proto_file = os.path.splitext(os.path.relpath(input_file, proto_path))[0]
-    if not proto_file:
-        return
-
+    proto_file = os.path.splitext(os.path.relpath(args.input_path, args.proto_path[0]))[0]
     detail_proto_file = proto_file.split(os.sep)
+
     detail_proto_dir = detail_proto_file[:-1]
     detail_proto_dir.append('details')
     detail_proto_dir = os.path.join(*detail_proto_dir)
@@ -109,9 +112,6 @@ def generate_proto(input_file, args):
     header = os.path.join(args.output_cpp_path, proto_file + ".pb.h")
     gz_header = os.path.join(args.output_cpp_path, proto_file + ".gz.h")
     detail_header = os.path.join(args.output_cpp_path, detail_proto_file + ".pb.h")
-
-    if proto_file.find('google/protobuf') >= 0:
-        return
 
     try:
         os.makedirs(os.path.join(args.output_cpp_path, detail_proto_dir),
@@ -127,6 +127,4 @@ def generate_proto(input_file, args):
         sys.exit(-1)
 
 if __name__ == '__main__':
-    args = parse_args()
-    for input_file in args.input_path:
-        generate_proto(input_file, args)
+    sys.exit(main())
