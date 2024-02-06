@@ -19,7 +19,7 @@ import os
 import subprocess
 import sys
 
-def main(argv=sys.argv[1:]):
+def parse_args(argv=sys.argv[1:]):
     parser = argparse.ArgumentParser(
         description='Generate protobuf support files',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -62,68 +62,71 @@ def main(argv=sys.argv[1:]):
         '--dllexport-decl',
         help='The DLL visibility macro to use, if not set, no macro will be used')
     args = parser.parse_args(argv)
+    return args
 
-    for input_file in args.input_path:
-        # First generate the base cpp files
-        cmd = [args.protoc_exec]
+def generate_proto(input_file, args):
+    # First generate the base cpp files
+    cmd = [args.protoc_exec]
 
-        for path in args.proto_path:
-            cmd += [f'--proto_path={path}']
+    for path in args.proto_path:
+        cmd += [f'--proto_path={path}']
 
-        if args.generate_cpp:
-            cmd += [f'--plugin=protoc-gen-gzmsgs={args.gz_generator_bin}']
-            if args.dllexport_decl:
-                cmd += [f'--cpp_out=dllexport_decl={args.dllexport_decl}:{args.output_cpp_path}']
-            else:
-                cmd += [f'--cpp_out={args.output_cpp_path}']
+    if args.generate_cpp:
+        cmd += [f'--plugin=protoc-gen-gzmsgs={args.gz_generator_bin}']
+        if args.dllexport_decl:
+            cmd += [f'--cpp_out=dllexport_decl={args.dllexport_decl}:{args.output_cpp_path}']
+        else:
+            cmd += [f'--cpp_out={args.output_cpp_path}']
 
-            cmd += [f'--gzmsgs_out={args.output_cpp_path}']
-        if args.generate_python:
-            cmd += [f'--python_out={args.output_python_path}']
-        cmd += [input_file]
+        cmd += [f'--gzmsgs_out={args.output_cpp_path}']
+    if args.generate_python:
+        cmd += [f'--python_out={args.output_python_path}']
+    cmd += [input_file]
 
-        os.makedirs(args.output_cpp_path, exist_ok=True)
+    os.makedirs(args.output_cpp_path, exist_ok=True)
 
-        try:
-            subprocess.check_call(cmd)
-        except subprocess.CalledProcessError as e:
-            print(f'Failed to execute protoc compiler: {e}')
-            sys.exit(-1)
+    try:
+        subprocess.check_call(cmd)
+    except subprocess.CalledProcessError as e:
+        print(f'Failed to execute protoc compiler: {e}')
+        sys.exit(-1)
 
-        # Move original generated cpp to details/
-        proto_file = None
-        for proto_path in args.proto_path:
-            if input_file.find(proto_path) == 0:
-                proto_file = os.path.splitext(os.path.relpath(input_file, proto_path))[0]
-        if not proto_file:
-            continue
+    # Move original generated cpp to details/
+    proto_file = None
+    for proto_path in args.proto_path:
+        if input_file.find(proto_path) == 0:
+            proto_file = os.path.splitext(os.path.relpath(input_file, proto_path))[0]
+    if not proto_file:
+        return
 
-        detail_proto_file = proto_file.split(os.sep)
-        detail_proto_dir = detail_proto_file[:-1]
-        detail_proto_dir.append('details')
-        detail_proto_dir = os.path.join(*detail_proto_dir)
-        detail_proto_file.insert(-1, 'details')
-        detail_proto_file = os.path.join(*detail_proto_file)
+    detail_proto_file = proto_file.split(os.sep)
+    detail_proto_dir = detail_proto_file[:-1]
+    detail_proto_dir.append('details')
+    detail_proto_dir = os.path.join(*detail_proto_dir)
+    detail_proto_file.insert(-1, 'details')
+    detail_proto_file = os.path.join(*detail_proto_file)
 
-        header = os.path.join(args.output_cpp_path, proto_file + ".pb.h")
-        gz_header = os.path.join(args.output_cpp_path, proto_file + ".gz.h")
-        detail_header = os.path.join(args.output_cpp_path, detail_proto_file + ".pb.h")
+    header = os.path.join(args.output_cpp_path, proto_file + ".pb.h")
+    gz_header = os.path.join(args.output_cpp_path, proto_file + ".gz.h")
+    detail_header = os.path.join(args.output_cpp_path, detail_proto_file + ".pb.h")
 
-        if proto_file.find('google/protobuf') >= 0:
-            continue
+    if proto_file.find('google/protobuf') >= 0:
+        return
 
-        try:
-            os.makedirs(os.path.join(args.output_cpp_path, detail_proto_dir),
-                    exist_ok=True)
-            # Windows cannot rename a file to an existing file
-            if os.path.exists(detail_header):
-                os.remove(detail_header)
+    try:
+        os.makedirs(os.path.join(args.output_cpp_path, detail_proto_dir),
+                exist_ok=True)
+        # Windows cannot rename a file to an existing file
+        if os.path.exists(detail_header):
+            os.remove(detail_header)
 
-            os.rename(header, detail_header)
-            os.rename(gz_header, header)
-        except Exception as e:
-            print(f'Failed to manipulate gz-msgs headers: {e}')
-            sys.exit(-1)
+        os.rename(header, detail_header)
+        os.rename(gz_header, header)
+    except Exception as e:
+        print(f'Failed to manipulate gz-msgs headers: {e}')
+        sys.exit(-1)
 
 if __name__ == '__main__':
-    sys.exit(main())
+    args = parse_args()
+    for input_file in args.input_file:
+        generate_proto(input_file, args)
