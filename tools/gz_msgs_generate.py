@@ -128,5 +128,5 @@ def generate_proto(input_file, args):
 
 if __name__ == '__main__':
     args = parse_args()
-    for input_file in args.input_file:
+    for input_file in args.input_path:
         generate_proto(input_file, args)
