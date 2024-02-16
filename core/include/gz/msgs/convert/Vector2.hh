@@ -17,6 +17,8 @@
 #ifndef GZ_MSGS_CONVERT_VECTOR2_HH_
 #define GZ_MSGS_CONVERT_VECTOR2_HH_
 
+#include <gz/msgs/config.hh>
+
 // Message Headers
 #include "gz/msgs/vector2d.pb.h"
 
