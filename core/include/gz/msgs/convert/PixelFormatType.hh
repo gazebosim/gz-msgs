@@ -17,6 +17,8 @@
 #ifndef GZ_MSGS_CONVERT_PIXELFORMATTYPE_HH_
 #define GZ_MSGS_CONVERT_PIXELFORMATTYPE_HH_
 
+#include <gz/msgs/config.hh>
+
 // Message Headers
 #include "gz/msgs/image.pb.h"
 

@@ -17,6 +17,8 @@
 #ifndef GZ_MSGS_CONVERT_JOINTTYPE_HH_
 #define GZ_MSGS_CONVERT_JOINTTYPE_HH_
 
+#include <gz/msgs/config.hh>
+
 // Message Headers
 #include "gz/msgs/joint.pb.h"
 

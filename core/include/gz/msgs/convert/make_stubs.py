@@ -46,6 +46,7 @@ template = """/*
 #define GZ_MSGS_CONVERT_{header}_HH_
 
 #include <gz/msgs/Converter.hh>
+#include <gz/msgs/config.hh>
 
 // Message Headers
 {msg_headers}

@@ -18,6 +18,7 @@
 #define GZ_MSGS_CONVERT_STDTYPES_HH_
 
 #include <gz/math/Helpers.hh>
+#include <gz/msgs/config.hh>
 
 // Message Headers
 #include "gz/msgs/boolean.pb.h"

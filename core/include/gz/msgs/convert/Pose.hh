@@ -17,6 +17,7 @@
 #ifndef GZ_MSGS_CONVERT_POSE_HH_
 #define GZ_MSGS_CONVERT_POSE_HH_
 
+#include <gz/msgs/config.hh>
 #include <gz/msgs/convert/Vector3.hh>
 #include <gz/msgs/convert/Quaternion.hh>
 

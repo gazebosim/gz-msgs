@@ -17,6 +17,8 @@
 #ifndef GZ_MSGS_CONVERT_FUELMETADATA_HH_
 #define GZ_MSGS_CONVERT_FUELMETADATA_HH_
 
+#include <gz/msgs/config.hh>
+
 // Message Headers
 #include "gz/msgs/fuel_metadata.pb.h"
 

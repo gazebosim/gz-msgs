@@ -17,6 +17,8 @@
 #ifndef GZ_MSGS_CONVERT_SPHERICALCOORDINATES_HH_
 #define GZ_MSGS_CONVERT_SPHERICALCOORDINATES_HH_
 
+#include <gz/msgs/config.hh>
+
 // Message Headers
 #include "gz/msgs/spherical_coordinates.pb.h"
 
