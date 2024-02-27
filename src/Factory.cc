@@ -25,6 +25,7 @@
 #include <google/protobuf/text_format.h>
 
 #include <cstdlib>
+#include <filesystem>
 #include <fstream>
 #include <functional>
 #include <iostream>
@@ -115,40 +116,54 @@ class DynamicFactory
     // Split all the directories containing .desc files.
     std::vector<std::string> descDirs = split(_paths, ':');
 
+    auto loadDescFile = [this](const std::string &descFile)
+    {
+      // Ignore files without the correct extensions.
+      if (descFile.rfind(".desc") == std::string::npos &&
+          descFile.rfind(".proto") == std::string::npos &&
+          descFile.rfind(".proto.bin") == std::string::npos)
+        return;
+
+      // Parse the .desc file.
+      std::ifstream ifs(descFile);
+      if (!ifs.is_open())
+      {
+        std::cerr << "DynamicFactory(): Unable to open [" << descFile << "]"
+                  << std::endl;
+        return;
+      }
+
+      google::protobuf::FileDescriptorSet fileDescriptorSet;
+      if (!fileDescriptorSet.ParseFromIstream(&ifs))
+      {
+        std::cerr << "DynamicFactory(): Unable to parse descriptor set from ["
+                  << descFile << "]" << std::endl;
+        return;
+      }
+
+      // Place the real descriptors in the descriptor pool.
+      for (const google::protobuf::FileDescriptorProto &fileDescriptorProto :
+           fileDescriptorSet.file())
+      {
+        if (!this->pool.BuildFile(fileDescriptorProto))
+        {
+          std::cerr << "DynamicFactory(). Unable to place descriptors from ["
+                    << descFile << "] in the descriptor pool" << std::endl;
+        }
+      }
+    };
+
     for (const std::string &descDir : descDirs)
     {
-      for (DirIter dirIter(descDir); dirIter != DirIter(); ++dirIter)
+      if (!std::filesystem::is_directory(descDir))
       {
-        // Ignore files without the .desc extension.
-        if ((*dirIter).rfind(".desc") == std::string::npos)
-          continue;
-
-        // Parse the .desc file.
-        std::ifstream ifs(*dirIter);
-        if (!ifs.is_open())
+        loadDescFile(descDir);
+      }
+      else
+      {
+        for (DirIter dirIter(descDir); dirIter != DirIter(); ++dirIter)
         {
-          std::cerr << "DynamicFactory(): Unable to open [" << *dirIter << "]"
-                    << std::endl;
-          continue;
-        }
-
-        google::protobuf::FileDescriptorSet fileDescriptorSet;
-        if (!fileDescriptorSet.ParseFromIstream(&ifs))
-        {
-          std::cerr << "DynamicFactory(): Unable to parse descriptor set from ["
-                    << *dirIter << "]" << std::endl;
-          continue;
-        }
-
-        // Place the real descriptors in the descriptor pool.
-        for (const google::protobuf::FileDescriptorProto &fileDescriptorProto :
-             fileDescriptorSet.file())
-        {
-          if (!pool.BuildFile(fileDescriptorProto))
-          {
-            std::cerr << "DynamicFactory(). Unable to place descriptors from ["
-                      << *dirIter << "] in the descriptor pool" << std::endl;
-          }
+          loadDescFile(*dirIter);
         }
       }
     }
