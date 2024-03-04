@@ -6,7 +6,7 @@ load(
 
 gz_py_binary(
     name = "gz_msgs_generate_factory_py",
-    srcs = ["gz_msgs_generate_factory.py"],
-    main = "gz_msgs_generate_factory.py",
+    srcs = ["gz_msgs_generate_factory_lite.py"],
+    main = "gz_msgs_generate_factory_lite.py",
     visibility = GZ_VISIBILITY,
 )

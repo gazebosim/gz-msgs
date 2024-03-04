@@ -16,7 +16,7 @@
 
 import argparse
 import os
-import pathlib
+import re
 import sys
 
 # Create <gz/msgs/MessageTypes.hh>
@@ -74,7 +74,7 @@ cc_source = """/*
 
 #include "gz/msgs/Factory.hh"
 #include "gz/msgs/MessageFactory.hh"
-#include "{package_path}/MessageTypes.hh"
+#include "{include_path}/MessageTypes.hh"
 
 #include <array>
 
@@ -110,15 +110,19 @@ def main(argv=sys.argv[1:]):
         description='Generate protobuf factory file',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument(
-        '--output-cpp-path',
+        '--cc-output',
         required=True,
-        help='The basepath of the generated C++ files')
+        help='The path to the generated cpp file')
     parser.add_argument(
-        '--proto-package',
+        '--hh-output',
         required=True,
-        help='The basepath of the generated C++ files')
+        help='The path to the generated hh file')
     parser.add_argument(
         '--proto-path',
+        required=True,
+        help='The location of the protos')
+    parser.add_argument(
+        '--proto-include-path',
         required=True,
         help='The location of the protos')
     parser.add_argument(
@@ -131,45 +135,55 @@ def main(argv=sys.argv[1:]):
 
     args = parser.parse_args(argv)
 
-    headers = []
-    registrations = []
+    package_re = re.compile('^package (.*);$')
+    message_re = re.compile(r'message (\w*)\s?{?$')
 
-    package = [p for p in args.proto_package.split('.') if len(p)]
-    namespace = '::'.join(package)
-    package_str = '.'.join(package)
-    package_path = '/'.join(package)
+    registrations = dict()
+    gz_msgs_headers = []
+    package = []
+    messages = []
 
     for proto in args.protos:
-        proto_file = os.path.splitext(os.path.relpath(proto, args.proto_path))[0]
-        header = proto_file + ".pb.h"
-        headers.append(f"#include <{header}>")
+        try:
+            with open(proto, 'r') as f:
+                content = f.readlines()
+                for line in content:
+                    package_found = package_re.match(line)
+                    if package_found:
+                        package = package_found.group(1).split('.')
 
-        proto_file = '_'.join(pathlib.Path(proto_file).parts)
+                    message_found = message_re.match(line)
+                    if message_found:
+                        messages.append(message_found.group(1))
+        except:
+            pass
 
-        # The gazebo extensions to the gazebo compiler write out a series of index files
-        # which capture the message types
-        index = os.path.join(args.output_cpp_path, proto_file + ".pb_index")
-        with open(index, "r") as index_f:
-            for line in index_f.readlines():
-                line = line.strip()
+        if package and messages:
+            for message in messages:
+                registrations['_'.join([*package, message])] = register_fn.format(
+                    package_str='.'.join(package),
+                    message_str=message,
+                    message_cpp_type='::'.join([*package, message])
+                )
 
-                message_str = line
-                message_cpp_type = '::'.join(package) + '::' + message_str
+            split = proto.replace(args.proto_include_path, '')
+            split = [s for s in split.split("/") if s]
+            split[-1] = split[-1].replace(".proto", ".pb.h")
+            gz_msgs_headers.append("#include <" + "/".join(split) + ">")
 
-                registrations.append(register_fn.format(
-                    package_str=package_str,
-                    message_str=message_str,
-                    message_cpp_type=message_cpp_type))
+    namespace = '::'.join(package)
+    include_path = '/'.join(package)
 
-    with open(os.path.join(args.output_cpp_path, *package, 'MessageTypes.hh'), 'w') as f:
-        f.write(cc_header.format(gz_msgs_headers='\n'.join(headers), namespace=namespace))
-
-    with open(os.path.join(args.output_cpp_path, *package, 'register.cc'), 'w') as f:
-        f.write((cc_source.format(registrations='\n'.join(registrations),
-                                  nRegistrations=len(registrations),
+    with open(os.path.join(args.cc_output), 'w') as f:
+        f.write((cc_source.format(registrations='\n'.join(registrations.values()),
+                                  nRegistrations=len(registrations.values()),
                                   namespace=namespace,
-                                  package_path=package_path) +
+                                  include_path=include_path) +
                  cc_factory.format(namespace=namespace)))
+
+    with open(os.path.join(args.hh_output), 'w') as f:
+        f.write(cc_header.format(namespace=namespace,
+                                 gz_msgs_headers='\n'.join(gz_msgs_headers)))
 
 if __name__ == '__main__':
     sys.exit(main())
