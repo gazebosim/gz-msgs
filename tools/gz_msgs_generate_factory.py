@@ -72,10 +72,9 @@ cc_source = """/*
  * Do not edit this directly
  */
 
-#include "MessageTypes.hh"
-
 #include "gz/msgs/Factory.hh"
 #include "gz/msgs/MessageFactory.hh"
+#include "{include_path}/MessageTypes.hh"
 
 #include <array>
 
@@ -119,10 +118,6 @@ def main(argv=sys.argv[1:]):
         required=True,
         help='The path to the generated hh file')
     parser.add_argument(
-        '--namespace',
-        required=True,
-        help='The namespace to use')
-    parser.add_argument(
         '--proto-path',
         required=True,
         help='The location of the protos')
@@ -143,13 +138,12 @@ def main(argv=sys.argv[1:]):
     package_re = re.compile('^package (.*);$')
     message_re = re.compile(r'message (\w*)\s?{?$')
 
-    registrations = []
+    registrations = dict()
     gz_msgs_headers = []
+    package = None
+    messages = []
 
     for proto in args.protos:
-        package = None
-        messages = []
-
         try:
             with open(proto, 'r') as f:
                 content = f.readlines()
@@ -166,28 +160,29 @@ def main(argv=sys.argv[1:]):
 
         if package and messages:
             for message in messages:
-                registrations.append(register_fn.format(
+                registrations['_'.join([*package, message])] = register_fn.format(
                     package_str='.'.join(package),
                     message_str=message,
                     message_cpp_type='::'.join([*package, message])
-                ))
-
+                )
 
             split = proto.replace(args.proto_include_path, '')
             split = [s for s in split.split("/") if s]
             split[-1] = split[-1].replace(".proto", ".pb.h")
-            print(split)
-
             gz_msgs_headers.append("#include <" + "/".join(split) + ">")
 
+    namespace = '::'.join(package)
+    include_path = '/'.join(package)
+
     with open(os.path.join(args.cc_output), 'w') as f:
-        f.write((cc_source.format(registrations='\n'.join(registrations),
-                                  nRegistrations=len(registrations),
-                                  namespace=args.namespace) +
-                 cc_factory.format(namespace=args.namespace)))
+        f.write((cc_source.format(registrations='\n'.join(registrations.values()),
+                                  nRegistrations=len(registrations.values()),
+                                  namespace=namespace,
+                                  include_path=include_path) +
+                 cc_factory.format(namespace=namespace)))
 
     with open(os.path.join(args.hh_output), 'w') as f:
-        f.write(cc_header.format(namespace=args.namespace,
+        f.write(cc_header.format(namespace=namespace,
                                  gz_msgs_headers='\n'.join(gz_msgs_headers)))
 
 if __name__ == '__main__':

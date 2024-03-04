@@ -51,8 +51,9 @@ def _gz_proto_factory_impl(ctx):
         for proto in src[ProtoInfo].direct_sources:
             in_protos.append(proto)
 
-        for proto in src[ProtoInfo].transitive_sources.to_list():
-            in_protos.append(proto)
+        #for proto in src[ProtoInfo].transitive_sources.to_list():
+        #    print('transitive: ', proto)
+        #    in_protos.append(proto)
 
     in_protos = depset(in_protos).to_list()
     arguments = [
@@ -64,7 +65,6 @@ def _gz_proto_factory_impl(ctx):
         arguments.append("--proto-path=" + include_dir)
 
     arguments.append("--proto-include-path=" + out_dir.path)
-    arguments.append("--namespace=" + ctx.attr.namespace)
     arguments.append("--protos")
     for proto in in_protos:
       arguments.append(proto.path)
@@ -91,9 +91,6 @@ _gz_proto_factory = rule(
             mandatory = True,
             allow_empty = False,
             providers = [ProtoInfo],
-        ),
-        "namespace": attr.string(
-            mandatory = True,
         ),
         "cc_output": attr.output(mandatory = True),
         "hh_output": attr.output(mandatory = True),

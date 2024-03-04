@@ -46,7 +46,7 @@ protos = glob(["proto/gz/msgs/*.proto"])
 
 gz_include_header(
     name = "msgs_hh_genrule",
-    out = "include/gz/msgs.hh",
+    out = "core/include/gz/msgs.hh",
     hdrs = public_headers_no_gen + [
         "core/include/gz/msgs/config.hh",
         "core/include/gz/msgs/Export.hh",
@@ -88,16 +88,15 @@ gz_proto_library(
 gz_proto_factory(
   name = "gzmsgs_proto_factory",
   deps = [":gzmsgs_proto"],
-  namespace = "gz::msgs",
   cc_output = "core/src/RegisterMsgs.cc",
-  hh_output = "include/gz/msgs/MessageTypes.hh"
+  hh_output = "core/include/gz/msgs/MessageTypes.hh"
 )
 
 public_headers = public_headers_no_gen + [
     "core/include/gz/msgs/config.hh",
     "core/include/gz/msgs/Export.hh",
-    "include/gz/msgs.hh",
-    "include/gz/msgs/MessageTypes.hh"
+    "core/include/gz/msgs.hh",
+    "core/include/gz/msgs/MessageTypes.hh"
 ]
 
 
