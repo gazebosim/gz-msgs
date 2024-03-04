@@ -58,7 +58,7 @@ def _gz_proto_factory_impl(ctx):
     in_protos = depset(in_protos).to_list()
     arguments = [
         "--cc-output=" + ctx.outputs.cc_output.path,
-        "--hh-output=" + ctx.outputs.hh_output.path
+        "--hh-output=" + ctx.outputs.hh_output.path,
     ]
 
     for include_dir in include_dirs.to_list():
@@ -67,7 +67,7 @@ def _gz_proto_factory_impl(ctx):
     arguments.append("--proto-include-path=" + out_dir.path)
     arguments.append("--protos")
     for proto in in_protos:
-      arguments.append(proto.path)
+        arguments.append(proto.path)
 
     ctx.actions.run(
         inputs = protos,
@@ -143,7 +143,7 @@ def _gz_proto_library_impl(ctx):
     arguments.append("--gzmsgs_out=" + out_dir.path)
 
     for proto in in_protos:
-      arguments.append(proto.path)
+        arguments.append(proto.path)
 
     cc_files = declare_out_files(out_protos, ctx, "{}.pb.cc")
     hh_files = declare_out_files(out_protos, ctx, "{}.pb.h")
@@ -189,19 +189,18 @@ _gz_proto_library = rule(
 )
 
 def gz_proto_library(
-    name,
-    proto_deps,
-    **kwargs):
+        name,
+        proto_deps,
+        **kwargs):
+    _gz_proto_library(name = name + "_pb", deps = proto_deps)
 
-  _gz_proto_library(name = name + "_pb", deps = proto_deps)
+    filter_files(name = name + "_srcs", target = ":" + name + "_pb", extensions = ["cc"])
+    filter_files(name = name + "_hdrs", target = ":" + name + "_pb", extensions = ["h"])
+    kwargs["deps"].append(":" + name + "_pb")
 
-  filter_files(name=name + "_srcs", target=":" + name + "_pb", extensions=["cc"])
-  filter_files(name=name + "_hdrs", target=":" + name + "_pb", extensions=["h"])
-  kwargs['deps'].append(":" + name + "_pb")
-
-  native.cc_library(
-    name = name,
-    srcs = [name + "_srcs"],
-    hdrs = [name + "_hdrs"],
-    **kwargs
-  )
+    native.cc_library(
+        name = name,
+        srcs = [name + "_srcs"],
+        hdrs = [name + "_hdrs"],
+        **kwargs
+    )
