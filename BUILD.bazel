@@ -53,7 +53,8 @@ public_headers_no_gen = glob([
     "core/include/gz/msgs/detail/*.hh",
 ])
 
-protos = glob(["proto/gz/msgs/*.proto"])
+msgs_protos = glob(["proto/gz/msgs/*.proto"])
+std_msgs_protos = glob(["proto/gz/std_msgs/*.proto"])
 
 gz_include_header(
     name = "msgs_hh_genrule",
@@ -81,13 +82,12 @@ cc_binary(
 # Create a library of our protobuf message files
 proto_library(
     name = "gzmsgs_proto",
-    srcs = protos,
+    srcs = msgs_protos,
     strip_import_prefix = "proto",
     deps = [
         "@com_google_protobuf//:any_proto",
     ],
 )
-
 gz_proto_library(
     name = "gzmsgs_cc_proto",
     proto_deps = [":gzmsgs_proto"],
@@ -95,12 +95,36 @@ gz_proto_library(
         "@com_google_protobuf//:protobuf",
     ],
 )
-
 gz_proto_factory(
     name = "gzmsgs_proto_factory",
-    cc_output = "core/src/RegisterMsgs.cc",
+    cc_output = "core/src/msgs/RegisterMsgs.cc",
     hh_output = "core/include/gz/msgs/MessageTypes.hh",
     deps = [":gzmsgs_proto"],
+)
+
+
+proto_library(
+    name = "gzstd_msgs_proto",
+    srcs = std_msgs_protos,
+    strip_import_prefix = "proto",
+    deps = [
+        ":gzmsgs_proto",
+        "@com_google_protobuf//:any_proto",
+    ],
+)
+gz_proto_library(
+    name = "gzstd_msgs_cc_proto",
+    proto_deps = [":gzstd_msgs_proto"],
+    deps = [
+        "@com_google_protobuf//:protobuf",
+        ":gzmsgs_cc_proto"
+    ],
+)
+gz_proto_factory(
+    name = "gzstd_msgs_proto_factory",
+    cc_output = "core/src/std_msgs/RegisterMsgs.cc",
+    hh_output = "core/include/gz/std_msgs/MessageTypes.hh",
+    deps = [":gzstd_msgs_proto"],
 )
 
 public_headers = public_headers_no_gen + [
@@ -108,6 +132,7 @@ public_headers = public_headers_no_gen + [
     "core/include/gz/msgs/Export.hh",
     "core/include/gz/msgs.hh",
     "core/include/gz/msgs/MessageTypes.hh",
+    "core/include/gz/std_msgs/MessageTypes.hh",
 ]
 
 cc_library(
@@ -117,8 +142,9 @@ cc_library(
         "core/src/DynamicFactory.hh",
         "core/src/Factory.cc",
         "core/src/MessageFactory.cc",
-        "core/src/RegisterMsgs.cc",
         "core/src/impl/InstallationDirectories.cc",
+        "core/src/msgs/RegisterMsgs.cc",
+        "core/src/std_msgs/RegisterMsgs.cc",
     ],
     hdrs = public_headers,
     includes = [
@@ -128,6 +154,8 @@ cc_library(
     deps = [
         ":gzmsgs_cc_proto",
         ":gzmsgs_proto_factory",
+        ":gzstd_msgs_cc_proto",
+        ":gzstd_msgs_proto_factory",
         GZ_ROOT + "math",
         "@com_google_protobuf//:protobuf",
         "@tinyxml2",
