@@ -87,58 +87,66 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
   std::vector<std::string> descDirs =
     split(_paths, kEnvironmentVariableSeparator);
 
+  auto loadDescFile = [this](const std::string &descFile)
+  {
+    std::cout << "Loading: " << descFile << std::endl;
+
+    // Ignore files without the correct extensions.
+    if (descFile.rfind(".desc") == std::string::npos &&
+        descFile.rfind(".proto") == std::string::npos &&
+        descFile.rfind(".proto.bin") == std::string::npos)
+      return;
+
+    // Parse the .desc file.
+    std::ifstream ifs(descFile);
+    if (!ifs.is_open())
+    {
+      std::cerr << "DynamicFactory(): Unable to open [" << descFile << "]"
+                << std::endl;
+      return;
+    }
+
+    google::protobuf::FileDescriptorSet fileDescriptorSet;
+    if (!fileDescriptorSet.ParseFromIstream(&ifs))
+    {
+      std::cerr << "DynamicFactory(): Unable to parse descriptor set from ["
+                << descFile << "]" << std::endl;
+      return;
+    }
+
+    // Place the real descriptors in the descriptor pool.
+    for (const google::protobuf::FileDescriptorProto &fileDescriptorProto :
+         fileDescriptorSet.file())
+    {
+      if (!static_cast<bool>(this->pool.BuildFile(fileDescriptorProto)))
+      {
+        std::cerr << "DynamicFactory(). Unable to place descriptors from ["
+                  << descFile << "] in the descriptor pool" << std::endl;
+      }
+      else
+      {
+        this->db.Add(fileDescriptorProto);
+      }
+
+    }
+
+  };
+
 
   for (const std::string &descDir : descDirs)
   {
-    for (auto const &dirIter : std::filesystem::directory_iterator{descDir})
+    if (!std::filesystem::is_directory(descDir))
     {
-      // Ignore files without the .desc extension.
-      if (dirIter.path().extension() != ".desc" &&
-          dirIter.path().extension() != ".gz_desc")
-        continue;
-
-      std::ifstream ifs(dirIter.path().string(), std::ifstream::in);
-      if (!ifs.is_open())
+      loadDescFile(descDir);
+    }
+    else
+    {
+      for (auto const &dirIter : std::filesystem::directory_iterator{descDir})
       {
-        std::cerr << "DynamicFactory(): Unable to open ["
-                  << dirIter.path() << "]"
-                  << std::endl;
-        continue;
-      }
-
-      google::protobuf::FileDescriptorSet fileDescriptorSet;
-      if (!fileDescriptorSet.ParseFromIstream(&ifs))
-      {
-        std::cerr << "DynamicFactory(): Unable to parse descriptor set from ["
-                  << dirIter.path() << "]" << std::endl;
-        continue;
-      }
-
-      for (const google::protobuf::FileDescriptorProto &fileDescriptorProto :
-           fileDescriptorSet.file())
-      {
-        // If the descriptor already exists in the database, then skip it.
-        // This may happen as gz_desc files can potentially contain the
-        // transitive message definitions
-        google::protobuf::FileDescriptorProto checkDescriptorProto;
-        if (this->db.FindFileByName(
-          fileDescriptorProto.name(), &checkDescriptorProto))
-        {
-          continue;
-        }
-
-        if (!static_cast<bool>(pool.BuildFile(fileDescriptorProto)))
-        {
-          std::cerr << "DynamicFactory(). Unable to place descriptors from ["
-                    << dirIter.path()
-                    << "] in the descriptor pool" << std::endl;
-        }
-
-        this->db.Add(fileDescriptorProto);
+        loadDescFile(dirIter.path());
       }
     }
   }
-
 }
 
 //////////////////////////////////////////////////
