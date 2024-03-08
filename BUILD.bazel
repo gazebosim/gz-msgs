@@ -3,6 +3,7 @@ load(
     "GZ_FEATURES",
     "GZ_ROOT",
     "GZ_VISIBILITY",
+    "gz_configure_file",
     "gz_configure_header",
     "gz_export_header",
     "gz_include_header",
@@ -200,6 +201,36 @@ cc_test(
         "@gtest",
         "@gtest//:gtest_main",
     ],
+)
+
+gz_configure_file(
+  name = "msgs_yaml",
+  src = "conf/msgs.yaml.in",
+  out = "msgs.yaml",
+  package = "msgs",
+  defines = [
+    "PROJECT_NAME_NO_VERSION_LOWER=msgs",
+    "gz_library_path=msgs/cmdmsgs",
+  ]
+
+)
+
+gz_configure_file(
+  name = "msgs_rb",
+  src = "core/src/cmd/cmdmsgs.rb.in",
+  out = "cmdmsgs.rb",
+  package = "msgs",
+  defines = [
+    "library_location=libgz-msgs.so",
+  ]
+)
+
+cc_binary(
+  name = "gz-msgs",
+  linkshared = True,
+  srcs = ["core/src/gz.cc"],
+  data = [":msgs_yaml", ":msgs_rb", ":gzmsgs_proto"],
+  deps = [":msgs"]
 )
 
 add_lint_tests()
