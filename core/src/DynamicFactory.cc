@@ -16,9 +16,12 @@
 */
 
 #include <algorithm>
+#include <cstddef>
 #include <fstream>
 #include <filesystem>
 #include <iostream>
+#include <iterator>
+#include <string>
 #include <vector>
 
 #include "DynamicFactory.hh"
