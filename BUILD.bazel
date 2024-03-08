@@ -37,12 +37,13 @@ exports_files(["LICENSE"])
 gz_configure_header(
     name = "msgs_config_hh",
     src = "core/include/gz/msgs/config.hh.in",
+    out = "include/gz/msgs/config.hh",
     cmakelists = ["CMakeLists.txt"],
     package = "msgs",
 )
 
 gz_export_header(
-    name = "core/include/gz/msgs/Export.hh",
+    name = "include/gz/msgs/Export.hh",
     export_base = "GZ_MSGS",
     lib_name = "gz-msgs",
     visibility = ["//visibility:private"],
@@ -58,10 +59,10 @@ protos = glob(["proto/gz/msgs/*.proto"])
 
 gz_include_header(
     name = "msgs_hh_genrule",
-    out = "core/include/gz/msgs.hh",
+    out = "include/gz/msgs.hh",
     hdrs = public_headers_no_gen + [
-        "core/include/gz/msgs/config.hh",
-        "core/include/gz/msgs/Export.hh",
+        "include/gz/msgs/config.hh",
+        "include/gz/msgs/Export.hh",
     ],
 )
 
@@ -100,15 +101,15 @@ gz_proto_library(
 gz_proto_factory(
     name = "gzmsgs_proto_factory",
     cc_output = "core/src/RegisterMsgs.cc",
-    hh_output = "core/include/gz/msgs/MessageTypes.hh",
+    hh_output = "include/gz/msgs/MessageTypes.hh",
     deps = [":gzmsgs_proto"],
 )
 
 public_headers = public_headers_no_gen + [
-    "core/include/gz/msgs/config.hh",
-    "core/include/gz/msgs/Export.hh",
-    "core/include/gz/msgs.hh",
-    "core/include/gz/msgs/MessageTypes.hh",
+    "include/gz/msgs/config.hh",
+    "include/gz/msgs/Export.hh",
+    "include/gz/msgs.hh",
+    "include/gz/msgs/MessageTypes.hh",
 ]
 
 cc_library(
@@ -125,6 +126,7 @@ cc_library(
     includes = [
         "core/include",
         "core/src",
+        "include",
     ],
     deps = [
         ":gzmsgs_cc_proto",
@@ -228,9 +230,9 @@ cc_binary(
     name = "gz-msgs",
     srcs = ["core/src/gz.cc"],
     data = [
-        ":gzmsgs_proto",
         "cmdmsgs.rb",
         "msgs.yaml",
+        ":gzmsgs_proto",
     ],
     linkshared = True,
     linkstatic = True,
