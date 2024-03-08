@@ -90,8 +90,6 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
 
   auto loadDescFile = [this](const std::string &descFile)
   {
-    std::cout << "Loading: " << descFile << std::endl;
-
     // Ignore files without the correct extensions.
     if (descFile.rfind(".desc") == std::string::npos &&
         descFile.rfind(".proto") == std::string::npos &&
@@ -128,9 +126,7 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
       {
         this->db.Add(fileDescriptorProto);
       }
-
     }
-
   };
 
 
