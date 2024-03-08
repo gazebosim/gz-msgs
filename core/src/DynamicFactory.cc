@@ -140,7 +140,7 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     {
       for (auto const &dirIter : std::filesystem::directory_iterator{descDir})
       {
-        loadDescFile(dirIter.path());
+        loadDescFile(dirIter.path().string());
       }
     }
   }
