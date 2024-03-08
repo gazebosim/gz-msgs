@@ -43,7 +43,19 @@ TEST(FactoryTest, DynamicFactory)
   EXPECT_EQ(nullptr, gz::msgs::Factory::New("testing.BarMessage"));
   EXPECT_EQ(nullptr, gz::msgs::Factory::New("testing.BazMessage"));
 
-  // Test loading an empty file
+  // Test loading an incorrect extension
+  {
+    std::filesystem::path test_path(kMsgsTestPath);
+    std::string paths = (test_path / "desc" / "testing.invalid").string();
+    gz::msgs::Factory::LoadDescriptors(paths);
+  }
+  EXPECT_EQ(nullptr, gz::msgs::Factory::New("example.msgs.StringMsg"));
+  EXPECT_EQ(nullptr, gz::msgs::Factory::New("testing.Bytes"));
+  EXPECT_EQ(nullptr, gz::msgs::Factory::New("testing.FooMessage"));
+  EXPECT_EQ(nullptr, gz::msgs::Factory::New("testing.BarMessage"));
+  EXPECT_EQ(nullptr, gz::msgs::Factory::New("testing.BazMessage"));
+
+  // Test loading a file with invalid content
   {
     std::filesystem::path test_path(kMsgsTestPath);
     std::string paths = (test_path / "desc" / "testing.proto").string();
@@ -80,5 +92,4 @@ TEST(FactoryTest, DynamicFactory)
   EXPECT_NE(nullptr, gz::msgs::Factory::New("testing.FooMessage"));
   EXPECT_NE(nullptr, gz::msgs::Factory::New("testing.BarMessage"));
   EXPECT_NE(nullptr, gz::msgs::Factory::New("testing.BazMessage"));
-
 }
