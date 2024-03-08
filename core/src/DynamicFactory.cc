@@ -18,6 +18,7 @@
 #include <algorithm>
 #include <fstream>
 #include <filesystem>
+#include <iostream>
 #include <vector>
 
 #include "DynamicFactory.hh"
