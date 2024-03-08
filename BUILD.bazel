@@ -229,10 +229,11 @@ cc_binary(
     srcs = ["core/src/gz.cc"],
     data = [
         ":gzmsgs_proto",
-        ":msgs_rb",
-        ":msgs_yaml",
+        "cmdmsgs.rb",
+        "msgs.yaml",
     ],
     linkshared = True,
+    linkstatic = True,
     deps = [":msgs"],
 )
 
