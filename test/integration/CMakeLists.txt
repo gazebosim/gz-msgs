@@ -6,3 +6,8 @@ if(MSVC)
 endif()
 
 gz_build_tests(TYPE INTEGRATION SOURCES ${tests})
+
+if (TARGET INTEGRATION_descriptors)
+  target_compile_definitions(INTEGRATION_descriptors
+    PRIVATE GZ_MSGS_TEST_PATH="${PROJECT_SOURCE_DIR}/test")
+endif()
