@@ -51,10 +51,6 @@ def _gz_proto_factory_impl(ctx):
         for proto in src[ProtoInfo].direct_sources:
             in_protos.append(proto)
 
-        #for proto in src[ProtoInfo].transitive_sources.to_list():
-        #    print('transitive: ', proto)
-        #    in_protos.append(proto)
-
     in_protos = depset(in_protos).to_list()
     arguments = [
         "--cc-output=" + ctx.outputs.cc_output.path,
