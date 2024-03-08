@@ -1,3 +1,5 @@
+"""Helper functions for generating gz-msgs compatible messages"""
+
 load("@rules_proto//proto:defs.bzl", "ProtoInfo")
 load(
     "@gz//bazel/skylark:protobuf.bzl",
@@ -6,8 +8,6 @@ load(
     "get_out_dir",
     "protos_from_context",
 )
-
-_VIRTUAL_IMPORTS = "/_virtual_imports/"
 
 def _filter_files_impl(ctx):
     """Filter the files in DefaultInfo."""
@@ -34,6 +34,9 @@ filter_files = rule(
 )
 
 def get_proto_headers(protos):
+    """
+    Get headers for a set of proto files
+    """
     out = []
     for proto in protos:
         split = proto.split("/")[1:]
@@ -42,6 +45,9 @@ def get_proto_headers(protos):
     return out
 
 def _gz_proto_factory_impl(ctx):
+    """
+    Implementation of gz_proto_factory rule
+    """
     protos = protos_from_context(ctx)
     out_dir = get_out_dir(protos, ctx)
     in_protos = []
@@ -102,12 +108,18 @@ _gz_proto_factory = rule(
 def gz_proto_factory(
         deps,
         **kwargs):
+    """
+    gz_proto_factory rule implementation wrapper
+    """
     _gz_proto_factory(
         deps = deps,
         **kwargs
     )
 
 def _gz_proto_library_impl(ctx):
+    """
+    Implementation of the gz_proto_library rule
+    """
     protos = protos_from_context(ctx)
     out_dir = get_out_dir(protos, ctx)
 
@@ -188,6 +200,9 @@ def gz_proto_library(
         name,
         proto_deps,
         **kwargs):
+    """
+    gz_proto_library rule implementation wrapper
+    """
     _gz_proto_library(name = name + "_pb", deps = proto_deps)
 
     filter_files(name = name + "_srcs", target = ":" + name + "_pb", extensions = ["cc"])
