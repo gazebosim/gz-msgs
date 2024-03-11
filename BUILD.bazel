@@ -205,6 +205,21 @@ cc_test(
     ],
 )
 
+cc_test(
+    name = "INTEGRATION_descriptors",
+    srcs = ["test/integration/descriptors.cc"],
+    data = ["test/desc"],
+    defines = [
+        'GZ_MSGS_TEST_PATH=\\"msgs/test\\"',
+    ],
+    deps = [
+        ":msgs",
+        GZ_ROOT + "common/testing",
+        "@gtest",
+        "@gtest//:gtest_main",
+    ],
+)
+
 gz_configure_file(
     name = "msgs_yaml",
     src = "conf/msgs.yaml.in",
