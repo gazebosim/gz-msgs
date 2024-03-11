@@ -1,8 +1,12 @@
-load("@gz//bazel/skylark:build_defs.bzl", "gz_py_binary")
+load(
+    "@gz//bazel/skylark:build_defs.bzl",
+    "GZ_VISIBILITY",
+    "gz_py_binary",
+)
 
 gz_py_binary(
-    name = "gz_msgs_generate_py",
-    srcs = ["gz_msgs_generate.py"],
-    main = "gz_msgs_generate.py",
-    visibility = ["//visibility:public"],
+    name = "gz_msgs_generate_factory_py",
+    srcs = ["gz_msgs_generate_factory_lite.py"],
+    main = "gz_msgs_generate_factory_lite.py",
+    visibility = GZ_VISIBILITY,
 )
