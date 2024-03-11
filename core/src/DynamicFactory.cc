@@ -93,8 +93,9 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
 
   auto loadDescFile = [this](const std::string &descFile)
   {
-    // Ignore files without the correct extensions.
+    // Ignore files without the .desc extension.
     if (descFile.rfind(".desc") == std::string::npos &&
+        descFile.rfind(".gz_desc") == std::string::npos &&
         descFile.rfind(".proto") == std::string::npos &&
         descFile.rfind(".proto.bin") == std::string::npos)
       return;
@@ -131,7 +132,6 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
       }
     }
   };
-
 
   for (const std::string &descDir : descDirs)
   {
