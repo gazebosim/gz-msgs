@@ -22,7 +22,7 @@
 #include <gz/msgs/convert/Quaternion.hh>
 
 // Message Headers
-#include "gz/msgs/details/quaternion.pb.h"
+#include "gz/msgs/quaternion.pb.h"
 #include "gz/msgs/pose.pb.h"
 
 // Data Headers

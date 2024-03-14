@@ -4,6 +4,40 @@
 
 ## Gazebo Msgs 10.x
 
+### Gazebo Msgs 10.1.0 (2024-01-22)
+
+1. Add proto message for MaterialColor.
+    * [Pull request #414](https://github.com/gazebosim/gz-msgs/pull/414)
+    * [Pull request #415](https://github.com/gazebosim/gz-msgs/pull/415)
+    * [Pull request #416](https://github.com/gazebosim/gz-msgs/pull/416)
+
+1. Update CI badges in README
+    * [Pull request #412](https://github.com/gazebosim/gz-msgs/pull/412)
+
+1. Ensure that tests pass fine with GZ_RELOCATABLE_INSTALL option enabled
+    * [Pull request #394](https://github.com/gazebosim/gz-msgs/pull/394)
+
+1. Added missing parts to the `CMakeLists.txt` code.
+    * [Pull request #400](https://github.com/gazebosim/gz-msgs/pull/400)
+
+1. Miscellaneous cleanups of protobuf generator plugin
+    * [Pull request #405](https://github.com/gazebosim/gz-msgs/pull/405)
+
+1. Fix memory leak in generator plugin code
+    * [Pull request #404](https://github.com/gazebosim/gz-msgs/pull/404)
+
+1. Enables cmd commands on Windows
+    * [Pull request #402](https://github.com/gazebosim/gz-msgs/pull/402)
+
+1. Miscellaneous housekeeping
+    * [Pull request #398](https://github.com/gazebosim/gz-msgs/pull/398)
+
+1. Fix cross-compilation support for gz-msg10
+    * [Pull request #392](https://github.com/gazebosim/gz-msgs/pull/392)
+
+1. Do not redefine GZ_PYTHON_INSTALL_PATH if it is already defined
+    * [Pull request #393](https://github.com/gazebosim/gz-msgs/pull/393)
+
 ### Gazebo Msgs 10.0.0 (2023-09-29)
 
 1. Add missing `<functional>` header

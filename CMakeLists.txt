@@ -25,34 +25,49 @@ gz_configure_project(VERSION_SUFFIX
 #============================================================================
 
 # Cross-compilation related options
-# In a cross-compilation scenario, it is possible that the gz_msgs_gen
+# In a cross-compilation scenario, it is possible that the
+# ${PROJECT_NAME}_protoc_plugin
 # generator compiled for the target machine cannot be used to generate
-# the C++ code corresponding to the .proto definition. For this scenario,
-# the following two options can be used as follows.
+# the C++ code corresponding to the .proto definition.
+# Similarly, it is possible that Python3::Interpreter and protobuf::protoc
+# found via find_package are not executable that can be run during the build.
+# To avoid, that the following options can be used as follows.
 # First of all, gz-msgs is compiled targeting the host machine, and in the
-# build targeting the host, the INSTALL_GZ_MSGS_GEN_EXECUTABLE option is
-# enabled:
-# > cmake -DINSTALL_GZ_MSGS_GEN_EXECUTABLE:BOOL=ON ..
-# ensuring that the gz_msgs_gen is installed in
-# <host_install_prefix>/bin/gz_msgs_gen . Then, the same version of gz-msgs
+# build targeting the host, ensuring that the ${PROJECT_NAME}_protoc_plugin
+# is installed in <host_install_prefix>/bin/${PROJECT_NAME}_protoc_plugin .
+# Then, the same version of gz-msgs
 # can be cross-compiled, and in the cross-compilation build the location of the
-# host gz_msgs_gen is specified via the GZ_MSGS_GEN_EXECUTABLE
-# CMake cache variable:
-# > cmake -GZ_MSGS_GEN_EXECUTABLE=<host_install_prefix>/bin/gz_msgs_gen ..
-
-option(
-  INSTALL_GZ_MSGS_GEN_EXECUTABLE
-  "Install the gz_msgs_gen executable."
-  OFF)
-
-mark_as_advanced(INSTALL_GZ_MSGS_GEN_EXECUTABLE)
+# host gz_msgs_gen is specified via the GZ_MSGS_GEN_EXECUTABLE CMake option.
+# Similarly to gz-msgs, also a copy of protoc and of the Python interpreter need
+# to be installed in the host at <host_install_prefix>/bin, and they can be passed
+# to the build appropriate CMake options:
+# > cmake -Dgz-msgs<MajVer>_PROTO_GENERATOR_PLUGIN=gz-msgs<MajVer>_protoc_plugin
+# >       -Dgz-msgs<MajVer>_PROTOC_EXECUTABLE=<host_install_prefix>/bin/protoc
+# >       -Dgz-msgs<MajVer>_PYTHON_INTERPRETER=<host_install_prefix>/bin/python
+# >        ..
+# In case the gz-msgs CMake functions are used also in downstream projects,
+# the same variables can be passed when configuring the downsream projects.
 
 set(
-  GZ_MSGS_GEN_EXECUTABLE
-  "$<TARGET_FILE:gz_msgs_gen>"
+  ${PROJECT_NAME}_PROTO_GENERATOR_PLUGIN
+  "${PROJECT_NAME}_protoc_plugin"
   CACHE STRING
-  "gz_msgs_gen executable used in the gz_msgs_protoc CMake function.")
-mark_as_advanced(GZ_MSGS_GEN_EXECUTABLE)
+  "gz_msgs_gen executable used in the gz-msgs CMake functions.")
+mark_as_advanced(${PROJECT_NAME}_PROTO_GENERATOR_PLUGIN)
+
+set(
+  ${PROJECT_NAME}_PROTOC_EXECUTABLE
+  protobuf::protoc
+  CACHE STRING
+  "protoc target or executable used in the gz-msgs CMake functions.")
+mark_as_advanced(${PROJECT_NAME}_PROTOC_EXECUTABLE)
+
+set(
+  ${PROJECT_NAME}_PYTHON_INTERPRETER
+  Python3::Interpreter
+  CACHE STRING
+  "python target or executable used in the gz-msgs CMake functions.")
+mark_as_advanced(${PROJECT_NAME}_PYTHON_INTERPRETER)
 
 # Python interfaces vars
 option(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION
@@ -92,7 +107,7 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter)
 # Note that CLI files are installed regardless of whether the dependency is
 # available during build time
 find_program(HAVE_GZ_TOOLS gz)
-set(GZ_TOOLS_VER 1)
+set(GZ_TOOLS_VER 2)
 
 #--------------------------------------
 # Find Tinyxml2

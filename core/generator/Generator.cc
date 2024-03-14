@@ -43,21 +43,7 @@
 
 #include "Generator.hh"
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
-
-/////////////////////////////////////////////////
-void replaceAll(std::string &_src, const std::string &_oldValue,
-  const std::string &_newValue)
-{
-    for (size_t i = 0; (i = _src.find(_oldValue, i)) != std::string::npos;)
-    {
-      _src.replace(i, _oldValue.length(), _newValue);
-      i += _newValue.length() - _oldValue.length() + 1;
-    }
-}
+namespace google::protobuf::compiler::cpp {
 
 /////////////////////////////////////////////////
 std::vector<std::string> getNamespaces(const std::string &_package)
@@ -65,12 +51,11 @@ std::vector<std::string> getNamespaces(const std::string &_package)
   std::vector<std::string> result;
   std::stringstream ss(_package);
   std::string item;
-  while (getline (ss, item, '.')) {
-    result.push_back (item);
+  while(getline (ss, item, '.')) {
+    result.push_back(item);
   }
   return result;
 }
-
 
 /////////////////////////////////////////////////
 Generator::Generator(const std::string &/*_name*/)
@@ -102,26 +87,23 @@ bool Generator::Generate(const FileDescriptor *_file,
   std::string identifier;
   std::string headerFilename;
   std::string newHeaderFilename;
-  std::string sourceFilename;
 
   // Can't use pathJoin because protoc always expects forward slashes
   // regardless of platform
-  for (auto part : parent_path)
+  for (const auto &part : parent_path)
   {
     identifier += part.string() + "_";
     headerFilename += part.string() + "/";
     newHeaderFilename += part.string() + "/";
-    sourceFilename += part.string() + "/";
   }
 
-  auto message_type_index =
-    _generatorContext->Open(identifier + fileStem + ".pb_index");
-  io::Printer indexPrinter(message_type_index, '$');
+  std::unique_ptr<io::ZeroCopyOutputStream> message_type_index(
+    _generatorContext->Open(identifier + fileStem + ".pb_index"));
+  io::Printer indexPrinter(message_type_index.get(), '$');
 
   identifier += fileStem;
   headerFilename += fileStem + ".gz.h";
   newHeaderFilename += "details/" + fileStem + ".pb.h";
-  sourceFilename += fileStem + ".pb.cc";
 
   std::map<std::string, std::string> variables;
   variables["filename"] = _file->name();
@@ -154,7 +136,7 @@ bool Generator::Generate(const FileDescriptor *_file,
 
     for (auto i = 0; i < _file->message_type_count(); ++i)
     {
-      auto desc = _file->message_type(i);
+      const auto *desc = _file->message_type(i);
       std::string ptrTypes;
 
       indexPrinter.PrintRaw(desc->name());
@@ -195,7 +177,4 @@ bool Generator::Generate(const FileDescriptor *_file,
 
   return true;
 }
-}
-}
-}
-}
+}  // namespace google::protobuf::compiler::cpp
