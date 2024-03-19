@@ -47,7 +47,7 @@ inline void Set(gz::msgs::Time *_msg,
         gz::math::durationToSecNsec(_data);
   msgs::Time msg;
   _msg->set_sec(timeSecAndNsecs.first);
-  _msg->set_nsec(timeSecAndNsecs.second);
+  _msg->set_nsec(static_cast<int32_t>(timeSecAndNsecs.second));
 }
 
 inline void Set(std::chrono::steady_clock::duration *_data,
