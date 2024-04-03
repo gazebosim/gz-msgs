@@ -23,5 +23,5 @@ namespace gz::msgs
 {
 inline namespace GZ_MSGS_VERSION_NAMESPACE {
 std::string getInstallPrefix() { return {};}
-}  // namespcae
+}  // namespace
 }  // namespace gz::msgs

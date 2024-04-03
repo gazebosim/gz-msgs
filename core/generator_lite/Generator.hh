@@ -26,7 +26,7 @@ namespace protobuf {
 namespace compiler {
 namespace cpp {
 /// \cond
-/// \brief Google protobuf message generator for igntion::msgs
+/// \brief Google protobuf message generator for gz::msgs
 class Generator : public CodeGenerator
 {
   /// \brief Constructor
@@ -47,7 +47,6 @@ class Generator : public CodeGenerator
               OutputDirectory *_generatorContext,
               std::string *_error) const;
 
-  // private: GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Generator);
 };
 /// \endcond
 }
