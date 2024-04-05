@@ -62,7 +62,7 @@ TEST(FactoryTest, DynamicFactory)
     gz::msgs::Factory::LoadDescriptors(paths);
   }
   EXPECT_EQ(nullptr, gz::msgs::Factory::New("example.msgs.StringMsg"));
-  EXPECT_EQ(nullptr, gz::msgs::Factory::New("testing.Bytes"));
+  EXPECT_EQ(nullptr, gz::msgs::Factory::New("testing.BarBytes"));
   EXPECT_EQ(nullptr, gz::msgs::Factory::New("testing.FooMessage"));
   EXPECT_EQ(nullptr, gz::msgs::Factory::New("testing.BarMessage"));
   EXPECT_EQ(nullptr, gz::msgs::Factory::New("testing.BazMessage"));
@@ -88,7 +88,7 @@ TEST(FactoryTest, DynamicFactory)
   }
 
   EXPECT_NE(nullptr, gz::msgs::Factory::New("example.msgs.StringMsg"));
-  EXPECT_NE(nullptr, gz::msgs::Factory::New("testing.Bytes"));
+  EXPECT_NE(nullptr, gz::msgs::Factory::New("testing.FooBytes"));
   EXPECT_NE(nullptr, gz::msgs::Factory::New("testing.FooMessage"));
   EXPECT_NE(nullptr, gz::msgs::Factory::New("testing.BarMessage"));
   EXPECT_NE(nullptr, gz::msgs::Factory::New("testing.BazMessage"));
