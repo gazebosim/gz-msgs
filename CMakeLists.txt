@@ -175,7 +175,7 @@ file(
 # Install cmake support files
 install(
   DIRECTORY cmake/
-  DESTINATION "${PROJECT_CMAKE_EXTRAS_INSTALL_DIR}"
+  DESTINATION "${PROJECT_CMAKE_EXTRAS_RELATIVE_INSTALL_DIR}"
 )
 
 #============================================================================
