@@ -1,5 +1,16 @@
 ## Gazebo Msgs 10.x
 
+### Gazebo Msgs 10.1.2 (2024-04-08)
+
+1. Use relative install paths for gz tool data and extra cmake files
+    * [Pull request #436](https://github.com/gazebosim/gz-msgs/pull/436)
+
+1. Bazel updates for Harmonic
+    * [Pull request #397](https://github.com/gazebosim/gz-msgs/pull/397)
+
+1. Fix MSVC "possible loss of data" warning
+    * [Pull request #434](https://github.com/gazebosim/gz-msgs/pull/434)
+
 ### Gazebo Msgs 10.1.1 (2024-03-14)
 
 1. Allow topic and service to construct messages from description files
