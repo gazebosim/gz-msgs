@@ -16,8 +16,12 @@
 */
 
 #include <algorithm>
+#include <cstddef>
 #include <fstream>
 #include <filesystem>
+#include <iostream>
+#include <iterator>
+#include <string>
 #include <vector>
 
 #include "DynamicFactory.hh"
@@ -101,9 +105,10 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     if (!ifs.is_open())
     {
       std::cerr << "DynamicFactory(): Unable to open [" << descFile << "]"
-        << std::endl;
-        return;
+                << std::endl;
+      return;
     }
+
     google::protobuf::FileDescriptorSet fileDescriptorSet;
     if (!fileDescriptorSet.ParseFromIstream(&ifs))
     {
@@ -111,11 +116,12 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
                 << descFile << "]" << std::endl;
       return;
     }
+
     // Place the real descriptors in the descriptor pool.
     for (const google::protobuf::FileDescriptorProto &fileDescriptorProto :
          fileDescriptorSet.file())
     {
-      if (!this->pool.BuildFile(fileDescriptorProto))
+      if (!static_cast<bool>(this->pool.BuildFile(fileDescriptorProto)))
       {
         std::cerr << "DynamicFactory(). Unable to place descriptors from ["
                   << descFile << "] in the descriptor pool" << std::endl;

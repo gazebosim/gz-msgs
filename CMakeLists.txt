@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(gz-msgs10 VERSION 10.1.1)
+project(gz-msgs10 VERSION 10.1.2)
 
 #============================================================================
 # Find gz-cmake
@@ -175,7 +175,7 @@ file(
 # Install cmake support files
 install(
   DIRECTORY cmake/
-  DESTINATION "${PROJECT_CMAKE_EXTRAS_INSTALL_DIR}"
+  DESTINATION "${PROJECT_CMAKE_EXTRAS_RELATIVE_INSTALL_DIR}"
 )
 
 #============================================================================
