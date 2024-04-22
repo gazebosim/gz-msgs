@@ -122,11 +122,11 @@ cc_library(
         "core/src/RegisterMsgs.cc",
         "core/src/impl/InstallationDirectories.cc",
     ],
-    copts = [
-      "-Wno-duplicate-decl-specifier",
-      "-fexceptions",
-    ],
     hdrs = public_headers,
+    copts = [
+        "-Wno-duplicate-decl-specifier",
+        "-fexceptions",
+    ],
     includes = [
         "core/include",
         "core/src",
