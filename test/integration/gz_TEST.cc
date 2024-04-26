@@ -20,6 +20,7 @@
 #include <string>
 #include <gtest/gtest.h>
 #include <gz/msgs/config.hh>
+#include <gz/utils/ExtraTestMacros.hh>
 #include "test_config.hh"
 
 #ifdef _MSC_VER
@@ -95,7 +96,7 @@ TEST(CmdLine, MsgInfo)
 }
 
 /////////////////////////////////////////////////
-TEST(CmdLine, MsgHelpVsCompletionFlags)
+TEST(CmdLine, GZ_UTILS_TEST_DISABLED_ON_WIN32(MsgHelpVsCompletionFlags))
 {
   // Flags in help message
   auto helpOutput = custom_exec_str("gz msg --help --force-version "
