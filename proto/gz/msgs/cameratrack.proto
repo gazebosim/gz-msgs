@@ -33,15 +33,19 @@ message CameraTrack
   {
     /// \brief Defaults to no tracking mode.
     NONE              = 0;
-    /// \brief TRACK observes a target from fixed x,y,z world camera point with pgain allowing only for orientation change.
+    /// \brief TRACK observes a target from fixed x,y,z world 
+    ///   camera point with pgain allowing only for orientation change.
     TRACK             = 1;
-    /// \brief FOLLOW moves with a target with an offset x,y,z camera and following pgain.
+    /// \brief FOLLOW moves with a target with an offset x,y,z camera and pgain.
     FOLLOW            = 2;
-    /// \brief FOLLOW_FREE_LOOK moves with a target with an offset x,y,z camera and following pgain but allows for changing orientation for free looking around.
+    /// \brief FOLLOW_FREE_LOOK moves with a target with an offset x,y,z camera
+    ///   and pgain but allows for changing orientation for free looking around.
     FOLLOW_FREE_LOOK  = 3;
-    /// \brief FOLLOW_LOOK_AT moves with a target with an offset x,y,z camera and following pgain while looking at a specified target.
+    /// \brief FOLLOW_LOOK_AT moves with a target with an offset x,y,z camera
+    ///   and pgain while looking at a specified target.
     FOLLOW_LOOK_AT    = 4;
-    /// \brief USE_LAST updates offsets and pgains without changing the fundamental track mode or target(s)
+    /// \brief USE_LAST updates offsets and pgains without changing the
+    ///   fundamental track_mode or target(s)
     USE_LAST          = 5;
   }
 
