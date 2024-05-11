@@ -24,6 +24,7 @@ option java_outer_classname = "CameraTrackProtos";
 /// \interface CameraTrack
 /// \brief Message for camera tracking
 
+import "gz/msgs/entity.proto";
 import "gz/msgs/header.proto";
 import "gz/msgs/vector3d.proto";
 
@@ -52,8 +53,8 @@ message CameraTrack
   /// \brief Optional header data
   Header header           = 1;
   TrackMode track_mode    = 2;
-  string follow_target    = 3;
-  string track_target     = 4;
+  Entity follow_target    = 3;
+  Entity track_target     = 4;
   Vector3d follow_offset  = 5;
   Vector3d track_offset   = 6;
   double follow_pgain     = 7;
