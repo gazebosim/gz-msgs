@@ -55,6 +55,8 @@ message ParticleEmitter
     CYLINDER  = 2;
     /// \brief Ellipsoid emitter.
     ELLIPSOID = 3;
+    /// \brief Cone emitter.
+    CONE = 4;
   }
   /// \brief The emitter type.
   EmitterType type              = 4;
