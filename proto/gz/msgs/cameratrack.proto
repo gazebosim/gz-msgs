@@ -52,11 +52,18 @@ message CameraTrack
 
   /// \brief Optional header data
   Header header           = 1;
+  /// \brief Tracking mode.
   TrackMode track_mode    = 2;
+  /// \brief Target entity to follow.
   Entity follow_target    = 3;
+  /// \brief Target entity to track.
   Entity track_target     = 4;
+  /// \brief Follow offset in local target frame.
   Vector3d follow_offset  = 5;
+  /// \brief Track offset in local target frame.
   Vector3d track_offset   = 6;
+  /// \brief Follow pgain for following a target.
   double follow_pgain     = 7;
+  /// \brief Track pgain for following a target.
   double track_pgain      = 8;
 }
