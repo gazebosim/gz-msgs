@@ -41,6 +41,10 @@ inline msgs::Geometry::Type ConvertGeometryType(const std::string &_str)
   {
     result = msgs::Geometry::CAPSULE;
   }
+  else if (_str == "cone")
+  {
+    result = msgs::Geometry::CONE;
+  }
   else if (_str == "cylinder")
   {
     result = msgs::Geometry::CYLINDER;
@@ -98,6 +102,11 @@ inline std::string ConvertGeometryType(const msgs::Geometry::Type _type)
     case msgs::Geometry::CAPSULE:
     {
       result = "capsule";
+      break;
+    }
+  case msgs::Geometry::CONE:
+    {
+      result = "cone";
       break;
     }
     case msgs::Geometry::CYLINDER:
