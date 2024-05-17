@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(gz-msgs10 VERSION 10.1.2)
+project(gz-msgs10 VERSION 10.2.0)
 
 #============================================================================
 # Find gz-cmake
@@ -25,7 +25,7 @@ gz_configure_project(VERSION_SUFFIX
 #============================================================================
 
 # Cross-compilation related options
-# In a cross-compilation scenario, it is possible that the 
+# In a cross-compilation scenario, it is possible that the
 # ${PROJECT_NAME}_protoc_plugin
 # generator compiled for the target machine cannot be used to generate
 # the C++ code corresponding to the .proto definition.
@@ -34,7 +34,7 @@ gz_configure_project(VERSION_SUFFIX
 # To avoid, that the following options can be used as follows.
 # First of all, gz-msgs is compiled targeting the host machine, and in the
 # build targeting the host, ensuring that the ${PROJECT_NAME}_protoc_plugin
-# is installed in <host_install_prefix>/bin/${PROJECT_NAME}_protoc_plugin . 
+# is installed in <host_install_prefix>/bin/${PROJECT_NAME}_protoc_plugin .
 # Then, the same version of gz-msgs
 # can be cross-compiled, and in the cross-compilation build the location of the
 # host gz_msgs_gen is specified via the GZ_MSGS_GEN_EXECUTABLE CMake option.
@@ -43,9 +43,9 @@ gz_configure_project(VERSION_SUFFIX
 # to the build appropriate CMake options:
 # > cmake -Dgz-msgs<MajVer>_PROTO_GENERATOR_PLUGIN=gz-msgs<MajVer>_protoc_plugin
 # >       -Dgz-msgs<MajVer>_PROTOC_EXECUTABLE=<host_install_prefix>/bin/protoc
-# >       -Dgz-msgs<MajVer>_PYTHON_INTERPRETER=<host_install_prefix>/bin/python 
+# >       -Dgz-msgs<MajVer>_PYTHON_INTERPRETER=<host_install_prefix>/bin/python
 # >        ..
-# In case the gz-msgs CMake functions are used also in downstream projects, 
+# In case the gz-msgs CMake functions are used also in downstream projects,
 # the same variables can be passed when configuring the downsream projects.
 
 set(
