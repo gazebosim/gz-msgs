@@ -1,5 +1,19 @@
 ## Gazebo Msgs 10.x
 
+### Gazebo Msgs 10.2.0 (2024-05-17)
+
+1. CameraTrack message for advanced tracking and following.
+    * [Pull request #440](https://github.com/gazebosim/gz-msgs/pull/440)
+
+1. Update minimum version of gz-cmake3
+    * [Pull request #439](https://github.com/gazebosim/gz-msgs/pull/439)
+
+1. bazel: lint
+    * [Pull request #438](https://github.com/gazebosim/gz-msgs/pull/438)
+
+1. Add package.xml
+    * [Pull request #432](https://github.com/gazebosim/gz-msgs/pull/432)
+
 ### Gazebo Msgs 10.1.2 (2024-04-08)
 
 1. Use relative install paths for gz tool data and extra cmake files
