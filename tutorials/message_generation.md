@@ -127,7 +127,7 @@ The `cmake` functionality is exported from the `gz-msgs` library, via the `gz-cm
 To make the functions available, simply `find_package(gz-msgs11)` in your `CMakeLists.txt`:
 
 ```cmake
-cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.22.1 FATAL_ERROR)
 project(my_custom_package VERSION 0.0.1)
 find_package(gz-cmake4 REQUIRED)
 find_package(gz-msgs11 REQUIRED)
