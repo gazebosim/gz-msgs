@@ -22,14 +22,7 @@ include(${@PROJECT_NAME@_DIR}/gz_msgs_factory.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_generate.cmake)
 
 set(@PROJECT_NAME@_INSTALL_PATH "${@PROJECT_NAME@_DIR}/@PROJECT_CMAKE_EXTRAS_PATH_TO_PREFIX@")
-
-if(CMAKE_VERSION VERSION_LESS "3.20.0") 
-  file(TO_CMAKE_PATH @PROJECT_NAME@_INSTALL_PATH NORMALIZED_PATH)  # Converts native path to CMake style with forward slashes.
-  get_filename_component(ABSOLUTE_PATH "${NORMALIZED_PATH}" ABSOLUTE)  # Extracts the absolute path component.
-  set(@PROJECT_NAME@_INSTALL_PATH "${ABSOLUTE_PATH}")  # Stores the normalized absolute path back to the original variable.
-else()
-  cmake_path(NORMAL_PATH @PROJECT_NAME@_INSTALL_PATH OUTPUT_VARIABLE @PROJECT_NAME@_INSTALL_PATH)
-endif()
+cmake_path(NORMAL_PATH @PROJECT_NAME@_INSTALL_PATH OUTPUT_VARIABLE @PROJECT_NAME@_INSTALL_PATH)
 
 set(PROTOC_NAME "$<TARGET_FILE_NAME:@PROJECT_NAME@_protoc_plugin>")
 set(PROTO_SCRIPT_NAME "@PROJECT_NAME@_generate.py")
