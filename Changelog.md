@@ -4,6 +4,51 @@
 
 ## Gazebo Msgs 10.x
 
+### Gazebo Msgs 10.2.0 (2024-05-17)
+
+1. CameraTrack message for advanced tracking and following.
+    * [Pull request #440](https://github.com/gazebosim/gz-msgs/pull/440)
+
+1. Update minimum version of gz-cmake3
+    * [Pull request #439](https://github.com/gazebosim/gz-msgs/pull/439)
+
+1. bazel: lint
+    * [Pull request #438](https://github.com/gazebosim/gz-msgs/pull/438)
+
+1. Add package.xml
+    * [Pull request #432](https://github.com/gazebosim/gz-msgs/pull/432)
+
+### Gazebo Msgs 10.1.2 (2024-04-08)
+
+1. Use relative install paths for gz tool data and extra cmake files
+    * [Pull request #436](https://github.com/gazebosim/gz-msgs/pull/436)
+
+1. Bazel updates for Harmonic
+    * [Pull request #397](https://github.com/gazebosim/gz-msgs/pull/397)
+
+1. Fix MSVC "possible loss of data" warning
+    * [Pull request #434](https://github.com/gazebosim/gz-msgs/pull/434)
+
+### Gazebo Msgs 10.1.1 (2024-03-14)
+
+1. Allow topic and service to construct messages from description files
+    * [Pull request #428](https://github.com/gazebosim/gz-msgs/pull/428)
+
+1. Conditionally use cmake_path on cmake < 3.20
+    * [Pull request #424](https://github.com/gazebosim/gz-msgs/pull/424)
+
+1. Remove duplicate find_package(Python3) call
+    * [Pull request #420](https://github.com/gazebosim/gz-msgs/pull/420)
+
+1. Bazel: Fix py_binary location
+    * [Pull request #406](https://github.com/gazebosim/gz-msgs/pull/406)
+
+1. Fix compiler warning in `generator.cc`
+    * [Pull request #403](https://github.com/gazebosim/gz-msgs/pull/403)
+
+1. Set GZ_TOOLS_VER to 2 for consistency with rest of Garden and Harmonic libraries
+    * [Pull request #391](https://github.com/gazebosim/gz-msgs/pull/391)
+
 ### Gazebo Msgs 10.1.0 (2024-01-22)
 
 1. Add proto message for MaterialColor.

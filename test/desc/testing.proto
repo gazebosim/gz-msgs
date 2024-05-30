@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package testing;
 
-message Bytes
+message BarBytes
 {
   bytes data    = 1;
 }
