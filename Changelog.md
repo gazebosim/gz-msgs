@@ -1,5 +1,10 @@
 ## Gazebo Msgs 10.x
 
+### Gazebo Msgs 10.3.0 (2024-06-18)
+
+1. Backport: Adding cone primitives.
+    * [Pull request #442](https://github.com/gazebosim/gz-msgs/pull/442)
+
 ### Gazebo Msgs 10.2.0 (2024-05-17)
 
 1. CameraTrack message for advanced tracking and following.
