@@ -125,8 +125,11 @@ bool Generator::Generate(const FileDescriptor *_file,
 #include <memory>
 
 #include <gz/msgs/Export.hh>
+#include <gz/utils/SuppressWarning.hh>
 
+GZ_UTILS_WARN_IGNORE__DEPRECATED_DECLARATION
 #include <$detail_header$>
+GZ_UTILS_WARN_RESUME__DEPRECATED_DECLARATION
 )");
 
     auto ns = getNamespaces(_file->package());
