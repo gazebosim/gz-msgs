@@ -5,6 +5,12 @@ Deprecated code produces compile-time warnings. These warning serve as
 notification to users that their code should be upgraded. The next major
 release will remove the deprecated code.
 
+## Gazebo Msgs 10.X to 11.X
+### Deprecations
+
+1. **spherical_coordinates.proto**
+    + The `LOCAL2` field in `SphericalCoordinatesType` is deprecated, use `LOCAL` instead. See https://github.com/gazebosim/gz-math/pull/616 for more details
+
 ## Gazebo Msgs 9.X to 10.X
 
 ### Modifications 
