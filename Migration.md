@@ -9,7 +9,24 @@ release will remove the deprecated code.
 ### Deprecations
 
 1. **spherical_coordinates.proto**
-    + The `LOCAL2` field in `SphericalCoordinatesType` is deprecated, use `LOCAL` instead. See https://github.com/gazebosim/gz-math/pull/616 for more details
+    + The `LOCAL2` field in `SphericalCoordinatesType` is deprecated, use `LOCAL` instead. See https://github.com/gazebosim/gz-math/pull/616 for more details.
+      When converting and passing the value to `gz::math::SphericalCoordinates` class for processing, beware that in gz-math 9, some methods yield different
+      results when they are passed a `gz::math::Vector3d` in `LOCAL` frame (wrong, but backwards-compatible ones) and different ones when passed a
+      `gz::math::CoordinateVector3` (the correct ones). Passing `Vector3d` to the `SphericalCoordinates` methods will be removed in gz-math 10.
+      You need to carefully consider this during migration. This table should help with the migration decisions:
+
+      | Old frame | Old vector type | Migrated frame | Migrated vector type | Behavior |
+      |-----------|-----------------|----------------|----------------------|----------|
+      | `LOCAL2`  | `Vector3d`       | `LOCAL` | `CoordinateVector3` | no behavior change, correct computation |
+      | `LOCAL2`  | `Vector3d`       | `LOCAL` | `Vector3d` |  **behavior change**, wrong computation (before was correct computation), deprecated call (removed in gz-math 10)  |
+      | `LOCAL2`  | `Vector3d`       | `LOCAL2` | `CoordinateVector3` | no behavior change, correct computation, deprecated constant (removed in gz-math 10) |
+      | `LOCAL2`  | `Vector3d`       | `LOCAL2` | `Vector3d` | no behavior change, correct computation, deprecated constant and call (removed in gz-math 10) |
+      | `LOCAL`  | `Vector3d`       | `LOCAL` | `CoordinateVector3` | **behavior change**, correct computation (before was wrong computation) |
+      | `LOCAL`  | `Vector3d`       | `LOCAL` | `Vector3d` | no behavior change, wrong computation, deprecated call (removed in gz-math 10) |
+
+      When the table says behavior change, it means that the wrong computation incorrectly worked in West-South-Up frame, even though it told it works in East-North-Up frame.
+      The old code using the wrong computation had to either (i) flip the sign of latitude and longitude, or (ii) rotate the results by 180 degrees in heading. When you
+      migrate away from the wrong computations, you should drop these corrections.
 
 ## Gazebo Msgs 9.X to 10.X
 
