@@ -5,7 +5,7 @@
 1. Improve migration note on SphericalCoordinates
     * [Pull request #452](https://github.com/gazebosim/gz-msgs/pull/452)
 
-1.  Deprecate LOCAL2 in SphericalCoordinates
+1. Deprecate LOCAL2 in SphericalCoordinates
     * [Pull request #451](https://github.com/gazebosim/gz-msgs/pull/451)
 
 1. Backport: Adding cone primitives.
