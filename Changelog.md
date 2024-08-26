@@ -1,6 +1,40 @@
 ## Gazebo Msgs 11.x
 
-### Gazebo Msgs 11.x.x (202X-XX-XX)
+### Gazebo Msgs 11.0.0 (2024-08-26)
+
+1. Improve migration note on SphericalCoordinates
+    * [Pull request #452](https://github.com/gazebosim/gz-msgs/pull/452)
+
+1. Deprecate LOCAL2 in SphericalCoordinates
+    * [Pull request #451](https://github.com/gazebosim/gz-msgs/pull/451)
+
+1. Backport: Adding cone primitives.
+    * [Pull request #442](https://github.com/gazebosim/gz-msgs/pull/442)
+
+1. Remove cone shape from particle emitter
+    * [Pull request #446](https://github.com/gazebosim/gz-msgs/pull/446)
+
+1. Enable 24.04 CI, require cmake 3.22.1
+    * [Pull request #444](https://github.com/gazebosim/gz-msgs/pull/444)
+
+1. Include config.hh to get needed macros
+    * [Pull request #426](https://github.com/gazebosim/gz-msgs/pull/426)
+
+1. Remove HIDE_SYMBOLS_BY_DEFAULT: replace by a default configuration in gz-cmake.
+    * [Pull request #413](https://github.com/gazebosim/gz-msgs/pull/413)
+
+1. Support standalone executable in gz-msgs11
+    * [Pull request #357](https://github.com/gazebosim/gz-msgs/pull/357)
+
+1. Added motion duration to gui_camera.proto
+    * [Pull request #408](https://github.com/gazebosim/gz-msgs/pull/408)
+
+1. Use HIDE_SYMBOLS_BY_DEFAULT
+    * [Pull request #407](https://github.com/gazebosim/gz-msgs/pull/407)
+
+1. Bumps in ionic : ci_matching_branch/bump_ionic_gz-msgs11
+    * [Pull request #401](https://github.com/gazebosim/gz-msgs/pull/401)
+
 
 ## Gazebo Msgs 10.x
 
