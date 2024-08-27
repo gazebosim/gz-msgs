@@ -10,7 +10,7 @@ Changes since 13.4.0:
 1. Deprecate LOCAL2 in SphericalCoordinates
     * [Pull request #451](https://github.com/gazebosim/gz-msgs/pull/451)
 
-1. Backport: Adding cone primitives.
+1. Adding cone primitives.
     * [Pull request #442](https://github.com/gazebosim/gz-msgs/pull/442)
 
 1. Remove cone shape from particle emitter
