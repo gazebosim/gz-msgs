@@ -2,7 +2,10 @@
 
 ### Gazebo Msgs 11.0.0 (2024-09-xx)
 
-Changes since 10.3.0:
+1. **Baseline:** this includes all changes from 10.3.0 and earlier.
+
+1. Update gz-msgs11 badge URLs
+    * [Pull request #455](https://github.com/gazebosim/gz-msgs/pull/455)
 
 1. Improve migration note on SphericalCoordinates
     * [Pull request #452](https://github.com/gazebosim/gz-msgs/pull/452)
