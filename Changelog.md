@@ -2,6 +2,8 @@
 
 ### Gazebo Msgs 11.0.0 (2024-08-26)
 
+Changes since 13.4.0:
+
 1. Improve migration note on SphericalCoordinates
     * [Pull request #452](https://github.com/gazebosim/gz-msgs/pull/452)
 
