@@ -2,12 +2,10 @@
 
 ### Gazebo Msgs 11.0.0 (2024-09-xx)
 
-Changes since 13.4.0:
+Changes since 10.3.0:
 
 1. Improve migration note on SphericalCoordinates
     * [Pull request #452](https://github.com/gazebosim/gz-msgs/pull/452)
-
-1. Deprecate LOCAL2 in SphericalCoordinates
     * [Pull request #451](https://github.com/gazebosim/gz-msgs/pull/451)
 
 1. Adding cone primitives.
