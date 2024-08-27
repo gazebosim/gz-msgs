@@ -1,6 +1,6 @@
 ## Gazebo Msgs 11.x
 
-### Gazebo Msgs 11.0.0 (2024-08-26)
+### Gazebo Msgs 11.0.0 (2024-09-xx)
 
 Changes since 13.4.0:
 
