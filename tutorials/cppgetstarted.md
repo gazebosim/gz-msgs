@@ -60,6 +60,7 @@ To compile the code create a `CMakeLists.txt`:
 
 ```
 cmake_minimum_required(VERSION 3.22.1 FATAL_ERROR)
+project(gz-msgs-example)
 
 # Find the Gazebo msgs library
 find_package(gz-msgs11 QUIET REQUIRED)
