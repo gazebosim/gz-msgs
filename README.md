@@ -19,7 +19,7 @@ framework, a set of libraries designed to rapidly develop robot applications.
 
 ## Installation
 
-See the [installation tutorial](https://gazebosim.org/api/msgs/10/install.html).
+See the [installation tutorial](https://gazebosim.org/api/msgs/11/install.html).
 
 ## Known issue of command line tools
 
