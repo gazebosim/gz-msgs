@@ -26,27 +26,12 @@ See the [installation tutorial](https://gazebosim.org/api/msgs/11/install.html).
 In the event that the installation is a mix of Debian and from source, command
 line tools from `gz-tools` may not work correctly.
 
-A workaround for a single package is to define the environment variable
-`GZ_CONFIG_PATH` to point to the location of the Gazebo library installation,
-where the YAML file for the package is found, such as
-```{.sh}
-export GZ_CONFIG_PATH=/usr/local/share/gz
+A workaround is to define the environment variable
+`GZ_CONFIG_PATH` to point to the different locations of the Gazebo libraries installations,
+where the YAML files for the packages are found, such as
+```
+export GZ_CONFIG_PATH=/usr/local/share/gz:$HOME/ws/install/share/gz
 ```
 
-However, that environment variable only takes a single path, which means if the
-installations from source are in different locations, only one can be specified.
-
-Another workaround for working with multiple Gazebo libraries on the command
-line is using symbolic links to each library's YAML file.
-```{.sh}
-mkdir ~/.gz/tools/configs -p
-cd ~/.gz/tools/configs/
-ln -s /usr/local/share/gz/fuel8.yaml .
-ln -s /usr/local/share/gz/transport14.yaml .
-ln -s /usr/local/share/gz/transportlog14.yaml .
-...
-export GZ_CONFIG_PATH=$HOME/.gz/tools/configs
-```
-
-This issue is tracked [here](https://github.com/gazebosim/gz-tools/issues/8).
+where `$HOME/ws` is an example colcon workspace used to build Gazebo
 
