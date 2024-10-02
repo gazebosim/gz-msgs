@@ -14,8 +14,6 @@
 
 # copied from gz-msgs/gz-msgs-extras.cmake
 
-find_package(Python3 REQUIRED COMPONENTS Interpreter)
-
 include(${@PROJECT_NAME@_DIR}/gz_msgs_string_utils.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_protoc.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_factory.cmake)
@@ -37,6 +35,7 @@ if(NOT DEFINED @PROJECT_NAME@_PROTOC_EXECUTABLE)
   set(@PROJECT_NAME@_PROTOC_EXECUTABLE protobuf::protoc)
 endif()
 if(NOT DEFINED @PROJECT_NAME@_PYTHON_INTERPRETER)
+  find_package(Python3 REQUIRED COMPONENTS Interpreter)
   set(@PROJECT_NAME@_PYTHON_INTERPRETER Python3::Interpreter)
 endif()
 set(@PROJECT_NAME@_PROTO_GENERATOR_SCRIPT ${@PROJECT_NAME@_INSTALL_PATH}/bin/${PROTO_SCRIPT_NAME})
