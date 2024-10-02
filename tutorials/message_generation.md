@@ -21,8 +21,7 @@ Gazebo message definitions are stored in the
 Messages may additionally belong to a `package`, which allows for convenient
 namespacing or grouping of common messages.
 Currently, all `gz-msgs` definitions reside in the `gz.msgs` package, which
-generates the corresponding `gz::msgs` namespace in C++ and `gz.msgs` in
-Python.
+generates the corresponding `gz::msgs` namespace in C++ and `gz․msgs` in Python.
 
 ### Proto files
 
