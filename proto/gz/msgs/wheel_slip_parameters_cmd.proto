@@ -69,4 +69,15 @@ message WheelSlipParametersCmd
   /// the linear wheel spin velocity and divided by the wheel normal force
   /// parameter specified in the sdf.
   double slip_compliance_longitudinal = 5;
+
+  /// \brief Lateral friction coefficient.
+  ///
+  /// Friction coefficient that should be applied with the pyramid friction
+  /// model in the lateral wheel direction.
+  double friction_lateral      = 6;
+  /// \brief Longitudinal friction coefficient.
+  ///
+  /// Friction coefficient that should be applied with the pyramid friction
+  /// model in the longitudinal wheel direction.
+  double friction_longitudinal = 7;
 }
