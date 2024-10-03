@@ -1,14 +1,23 @@
 ## Gazebo Msgs 11.x
 
-### Gazebo Msgs 11.0.0 (2024-08-26)
+### Gazebo Msgs 11.0.0 (2024-09-25)
+
+1. **Baseline:** this includes all changes from 10.3.0 and earlier.
+
+1. Miscellaneous documentation fixes
+    * [Pull request #458](https://github.com/gazebosim/gz-msgs/pull/458)
+    * [Pull request #461](https://github.com/gazebosim/gz-msgs/pull/461)
+    * [Pull request #459](https://github.com/gazebosim/gz-msgs/pull/459)
+    * [Pull request #457](https://github.com/gazebosim/gz-msgs/pull/457)
+
+1. Update gz-msgs11 badge URLs
+    * [Pull request #455](https://github.com/gazebosim/gz-msgs/pull/455)
 
 1. Improve migration note on SphericalCoordinates
     * [Pull request #452](https://github.com/gazebosim/gz-msgs/pull/452)
-
-1. Deprecate LOCAL2 in SphericalCoordinates
     * [Pull request #451](https://github.com/gazebosim/gz-msgs/pull/451)
 
-1. Backport: Adding cone primitives.
+1. Adding cone primitives.
     * [Pull request #442](https://github.com/gazebosim/gz-msgs/pull/442)
 
 1. Remove cone shape from particle emitter
