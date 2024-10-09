@@ -5,8 +5,8 @@ The example in this folder demonstrates how to use messages as part of your buil
 To use messages as part of your project, simply find the gz-msgs package
 
 ```
-find_package(gz-msgs11 REQUIRED)
-set(GZ_MSGS_VER ${gz-msgs11_VERSION_MAJOR}
+find_package(gz-msgs12 REQUIRED)
+set(GZ_MSGS_VER ${gz-msgs12_VERSION_MAJOR}
 ```
 
 And link the messages library to your library or executable

@@ -10,9 +10,9 @@ project(generating_custom_messages VERSION 1.0.0)
 #============================================================================
 find_package(gz-cmake4 REQUIRED)
 
-find_package(gz-msgs11 REQUIRED)
+find_package(gz-msgs12 REQUIRED)
 # Define a variable 'GZ_MSGS_VER' holding the version number
-set(GZ_MSGS_VER ${gz-msgs11_VERSION_MAJOR})
+set(GZ_MSGS_VER ${gz-msgs12_VERSION_MAJOR})
 
 # Define a variable 'MSGS_PROTOS' listing the .proto files
 set(MSGS_PROTOS

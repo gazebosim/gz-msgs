@@ -102,7 +102,7 @@ MessageFactory::MessagePtr MessageFactory::New(
     {
       std::cerr << "Message (" << kGzMsgsPrefix + type
           << ") was retrieved with non-fully qualified name. "
-          << "This behavior is deprecated in msgs11" << std::endl;
+          << "This behavior is deprecated in msgs12" << std::endl;
     }
   }
   return ret;
