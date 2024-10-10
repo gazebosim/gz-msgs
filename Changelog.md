@@ -1,5 +1,10 @@
 ## Gazebo Msgs 11.x
 
+### Gazebo Msgs 11.0.1 (2024-10-10)
+
+1. Fix bash completion script install path
+    * [Pull request #469](https://github.com/gazebosim/gz-msgs/pull/469)
+
 ### Gazebo Msgs 11.0.0 (2024-09-25)
 
 1. **Baseline:** this includes all changes from 10.3.0 and earlier.
