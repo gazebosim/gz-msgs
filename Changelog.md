@@ -1,3 +1,7 @@
+## Gazebo Msgs 12.x
+
+### Gazebo Msgs 12.0.0 (20XX-XX-XX)
+
 ## Gazebo Msgs 11.x
 
 ### Gazebo Msgs 11.0.0 (2024-09-25)

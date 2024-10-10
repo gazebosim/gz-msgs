@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.22.1 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(gz-msgs11 VERSION 11.0.0)
+project(gz-msgs12 VERSION 12.0.0)
 
 #============================================================================
 # Find gz-cmake
@@ -17,7 +17,7 @@ find_package(gz-cmake4 REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-gz_configure_project(VERSION_SUFFIX
+gz_configure_project(VERSION_SUFFIX pre1
   CONFIG_EXTRAS "gz-msgs-extras.cmake.in")
 
 #============================================================================
