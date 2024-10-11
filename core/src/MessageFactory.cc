@@ -62,6 +62,11 @@ MessageFactory::MessagePtr MessageFactory::New(
   {
     type = kGzMsgsPrefix + _msgType.substr(8);
   }
+  // Convert ".gz.msgs." prefix
+  else if (_msgType.find(".gz.msgs.") == 0)
+  {
+    type = kGzMsgsPrefix + _msgType.substr(9);
+  }
   // Convert ".gz_msgs." prefix
   else if (_msgType.find(".gz_msgs.") == 0)
   {
