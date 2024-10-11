@@ -15,6 +15,8 @@
  *
 */
 
+#include <unordered_set>
+
 #ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable: 4146 4251)
@@ -60,15 +62,15 @@ MessageFactory::MessagePtr MessageFactory::New(
   {
     type = kGzMsgsPrefix + _msgType.substr(8);
   }
-  // Convert ".gz_msgs." prefix
-  else if (_msgType.find(".gz_msgs.") == 0)
-  {
-    type = kGzMsgsPrefix +  _msgType.substr(9);
-  }
   // Convert ".gz.msgs." prefix
   else if (_msgType.find(".gz.msgs.") == 0)
   {
     type = kGzMsgsPrefix + _msgType.substr(9);
+  }
+  // Convert ".gz_msgs." prefix
+  else if (_msgType.find(".gz_msgs.") == 0)
+  {
+    type = kGzMsgsPrefix +  _msgType.substr(9);
   }
   else
   {
@@ -130,15 +132,21 @@ void MessageFactory::Types(std::vector<std::string> &_types)
 {
   _types.clear();
 
+  // Add the types loaded from descriptor files
+  std::vector<std::string> dynTypes;
+  this->dynamicFactory->Types(dynTypes);
+
+  // Use set to remove duplicates
+  std::unordered_set<std::string> typesSet(dynTypes.begin(), dynTypes.end());
+
   // Return the list of all known message types.
   std::map<std::string, FactoryFn>::const_iterator iter;
   for (iter = msgMap.begin(); iter != msgMap.end(); ++iter)
   {
-    _types.push_back(iter->first);
+    typesSet.insert(iter->first);
   }
 
-  // Add the types loaded from descriptor files
-  this->dynamicFactory->Types(_types);
+  std::copy(typesSet.begin(), typesSet.end(), std::back_inserter(_types));
 }
 
 /////////////////////////////////////////////////
