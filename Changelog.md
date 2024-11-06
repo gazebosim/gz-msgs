@@ -1,5 +1,19 @@
 ## Gazebo Msgs 9.x
 
+### Gazebo Msgs 9.5.1 (2024-11-06)
+
+1. Allow topic and service to construct messages from description files
+    * [Pull request #428](https://github.com/gazebosim/gz-msgs/pull/428)
+
+1. Bazel: Fix `py_binary` location
+    * [Pull request #406](https://github.com/gazebosim/gz-msgs/pull/406)
+
+1. Fix compiler warning in `generator.cc`
+    * [Pull request #403](https://github.com/gazebosim/gz-msgs/pull/403)
+
+1. Set `GZ_TOOLS_VER` to 2 for consistency with rest of Garden and Harmonic libraries
+    * [Pull request #391](https://github.com/gazebosim/gz-msgs/pull/391)
+
 ### Gazebo Msgs 9.5.0 (2023-08-25)
 
 1. Remove deprecated flag output_to_genfiles
