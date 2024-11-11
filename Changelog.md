@@ -1,5 +1,13 @@
 ## Gazebo Msgs 10.x
 
+### Gazebo Msgs 10.3.1 (2024-11-11)
+
+1. Add rule to build python version of protos
+    * [Pull request #474](https://github.com/gazebosim/gz-msgs/pull/474)
+
+1. Return only unique message types in `MessageFactory::Types` function
+    * [Pull request #472](https://github.com/gazebosim/gz-msgs/pull/472)
+   
 ### Gazebo Msgs 10.3.0 (2024-06-18)
 
 1. Backport: Adding cone primitives.
