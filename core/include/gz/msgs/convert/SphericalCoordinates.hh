@@ -34,9 +34,7 @@ inline namespace GZ_MSGS_VERSION_NAMESPACE {
 inline msgs::SphericalCoordinatesType ConvertCoord(
   const math::SphericalCoordinates::CoordinateType &_sc)
 {
-  GZ_UTILS_WARN_IGNORE__DEPRECATED_DECLARATION
-  auto result = msgs::SphericalCoordinatesType::LOCAL2;
-  GZ_UTILS_WARN_RESUME__DEPRECATED_DECLARATION
+  auto result = msgs::SphericalCoordinatesType::LOCAL;
   switch (_sc)
   {
     case math::SphericalCoordinates::CoordinateType::ECEF:
@@ -51,11 +49,6 @@ inline msgs::SphericalCoordinatesType ConvertCoord(
     case math::SphericalCoordinates::CoordinateType::LOCAL:
       result = msgs::SphericalCoordinatesType::LOCAL;
       break;
-    GZ_UTILS_WARN_IGNORE__DEPRECATED_DECLARATION
-    case math::SphericalCoordinates::CoordinateType::LOCAL2:
-      result = msgs::SphericalCoordinatesType::LOCAL2;
-      break;
-    GZ_UTILS_WARN_RESUME__DEPRECATED_DECLARATION
     default:
       std::cerr << "Invalid coordinate type passed" << std::endl;
   }
@@ -76,16 +69,10 @@ inline math::SphericalCoordinates::CoordinateType Convert(
       return math::SphericalCoordinates::CoordinateType::SPHERICAL;
     case msgs::SphericalCoordinatesType::LOCAL:
       return math::SphericalCoordinates::CoordinateType::LOCAL;
-    GZ_UTILS_WARN_IGNORE__DEPRECATED_DECLARATION
-    case msgs::SphericalCoordinatesType::LOCAL2:
-      return math::SphericalCoordinates::CoordinateType::LOCAL2;
-    GZ_UTILS_WARN_RESUME__DEPRECATED_DECLARATION
     default:
       std::cerr << "Invalid coordinate type passed" << std::endl;
   }
-  GZ_UTILS_WARN_IGNORE__DEPRECATED_DECLARATION
-  return math::SphericalCoordinates::CoordinateType::LOCAL2;
-  GZ_UTILS_WARN_RESUME__DEPRECATED_DECLARATION
+  return math::SphericalCoordinates::CoordinateType::LOCAL;
 }
 
 /////////////////////////////////

@@ -354,10 +354,6 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
     msgs::ConvertCoord(math::SphericalCoordinates::CoordinateType::SPHERICAL));
   EXPECT_EQ(msgs::SphericalCoordinatesType::LOCAL,
     msgs::ConvertCoord(math::SphericalCoordinates::CoordinateType::LOCAL));
-  GZ_UTILS_WARN_IGNORE__DEPRECATED_DECLARATION
-  EXPECT_EQ(msgs::SphericalCoordinatesType::LOCAL2,
-    msgs::ConvertCoord(math::SphericalCoordinates::CoordinateType::LOCAL2));
-  GZ_UTILS_WARN_RESUME__DEPRECATED_DECLARATION
 
   EXPECT_EQ(math::SphericalCoordinates::CoordinateType::ECEF,
     msgs::Convert(msgs::SphericalCoordinatesType::ECEF));
@@ -367,10 +363,6 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatesToMsgs)
     msgs::Convert(msgs::SphericalCoordinatesType::SPHERICAL));
   EXPECT_EQ(math::SphericalCoordinates::CoordinateType::LOCAL,
     msgs::Convert(msgs::SphericalCoordinatesType::LOCAL));
-  GZ_UTILS_WARN_IGNORE__DEPRECATED_DECLARATION
-  EXPECT_EQ(math::SphericalCoordinates::CoordinateType::LOCAL2,
-    msgs::Convert(msgs::SphericalCoordinatesType::LOCAL2));
-  GZ_UTILS_WARN_RESUME__DEPRECATED_DECLARATION
 
 
   auto msg = msgs::Convert(
@@ -457,12 +449,8 @@ TEST(MsgsTest, ConvertMsgsSphericalCoordinatesTypeToMath)
     math::SphericalCoordinates::CoordinateType::SPHERICAL);
   EXPECT_EQ(Convert(msgs::SphericalCoordinatesType::LOCAL),
     math::SphericalCoordinates::CoordinateType::LOCAL);
-  GZ_UTILS_WARN_IGNORE__DEPRECATED_DECLARATION
-  EXPECT_EQ(Convert(msgs::SphericalCoordinatesType::LOCAL2),
-    math::SphericalCoordinates::CoordinateType::LOCAL2);
   EXPECT_EQ(Convert((msgs::SphericalCoordinatesType)500000),
-    math::SphericalCoordinates::CoordinateType::LOCAL2);
-  GZ_UTILS_WARN_RESUME__DEPRECATED_DECLARATION
+    math::SphericalCoordinates::CoordinateType::LOCAL);
 }
 
 /////////////////////////////////////////////////
@@ -480,14 +468,9 @@ TEST(MsgsTest, ConvertMathSphericalCoordinatedTypeToMsg)
   EXPECT_EQ(msgs::ConvertCoord(
       math::SphericalCoordinates::CoordinateType::LOCAL),
     msgs::SphericalCoordinatesType::LOCAL);
-  GZ_UTILS_WARN_IGNORE__DEPRECATED_DECLARATION
-  EXPECT_EQ(msgs::ConvertCoord(
-      math::SphericalCoordinates::CoordinateType::LOCAL2),
-    msgs::SphericalCoordinatesType::LOCAL2);
   EXPECT_EQ(msgs::ConvertCoord(
     (math::SphericalCoordinates::CoordinateType)500000),
-    msgs::SphericalCoordinatesType::LOCAL2);
-  GZ_UTILS_WARN_RESUME__DEPRECATED_DECLARATION
+    msgs::SphericalCoordinatesType::LOCAL);
 }
 
 /////////////////////////////////////////////////

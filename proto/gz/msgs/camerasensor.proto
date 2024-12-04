@@ -75,7 +75,7 @@ message CameraSensor
   Vector2d image_size   = 3;
 
   /// \brief Image format. This field is deprecated, please use pixel_format.
-  string image_format   = 4;
+  string image_format   = 4 [deprecated = true];
 
   /// \brief Near clip distance in meters.
   double near_clip      = 5;

@@ -24,12 +24,16 @@ option java_outer_classname = "Protos";
 /// \interface GPSSensor
 /// \brief Information about a GPS sensor element
 /// This message will be deprecated in favor of NavSat sensor.
+/// Remove this message in gz-msgs13.
 
 import "gz/msgs/sensor_noise.proto";
 import "gz/msgs/header.proto";
 
 message GPSSensor
 {
+  /// \brief Deprecated message.
+  option deprecated = true;
+
   /// \brief Sensing information
   message Sensing
   {

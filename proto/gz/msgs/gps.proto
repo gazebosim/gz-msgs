@@ -24,11 +24,15 @@ option java_outer_classname = "GPSProtos";
 /// \interface GPS
 /// \brief Data from a GPS sensor
 /// This message will be deprecated, use NavSat instead.
+/// Remove this message in gz-msgs13.
 
 import "gz/msgs/header.proto";
 
 message GPS
 {
+  /// \brief Deprecated message.
+  option deprecated = true;
+
   /// \brief Optional header data
   Header header                = 1;
 
