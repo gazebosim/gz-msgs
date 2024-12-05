@@ -24,7 +24,7 @@ release will remove the deprecated code.
     + The `LOCAL2` item has been removed from the 
       `msgs::SphericalCoordinatesType` enum.
 
-1. **spherical_coordinates.hh**
+1. **SphericalCoordinates.hh**
     + The function `inline msgs::SphericalCoordinatesType ConvertCoord(
    const math::SphericalCoordinates::CoordinateType &_sc)`
       does not accept `math::SphericalCoordinates::CoordinatesType::LOCAL2` anymore.
