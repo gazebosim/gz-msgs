@@ -18,6 +18,9 @@ release will remove the deprecated code.
 1. **gps_sensor.proto**
     + This message is deprecated. Use `NavSat` instead.
 
+1. **sensor.proto**
+    + The `gps` field is deprecated. Use `navsat` instead.
+
 ### Removals
 
 1. **spherical_coordinates.proto**
