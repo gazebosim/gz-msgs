@@ -40,9 +40,6 @@ enum SphericalCoordinatesType
 
   /// \brief Heading-adjusted tangent plane (X, Y, Z)
   LOCAL = 3;
-
-  /// \brief Heading-adjusted tangent plane (X, Y, Z)
-  LOCAL2 = 4  [deprecated=true];
 }
 
 message SphericalCoordinates

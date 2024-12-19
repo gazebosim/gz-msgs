@@ -35,6 +35,7 @@ import "gz/msgs/imu_sensor.proto";
 import "gz/msgs/lidar_sensor.proto";
 import "gz/msgs/logical_camera_sensor.proto";
 import "gz/msgs/magnetometer_sensor.proto";
+import "gz/msgs/navsat.proto";
 import "gz/msgs/pose.proto";
 
 message Sensor
@@ -86,7 +87,7 @@ message Sensor
 
   /// \brief Description of a gps sensor
   /// TODO(chapulina) Migrate to NavSat
-  GPSSensor gps          = 15;
+  GPSSensor gps          = 15 [deprecated = true];
 
   /// \brief Description of an IMU sensor
   IMUSensor imu          = 16;
@@ -105,4 +106,7 @@ message Sensor
 
   /// \brief Description of a airspeed sensor
   AirSpeedSensor air_speed             = 21;
+
+  /// \brief Description of a GNSS sensor
+  NavSat navsat          = 22;
 }

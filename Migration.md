@@ -5,6 +5,41 @@ Deprecated code produces compile-time warnings. These warning serve as
 notification to users that their code should be upgraded. The next major
 release will remove the deprecated code.
 
+## Gazebo Msgs 11.X to 12.X
+
+### Deprecations
+
+1. **camerasensor.proto**
+    + The `image_format` field is deprecated. Use `pixel_format` instead.
+
+1. **gps.proto**
+    + This message is deprecated. Use `NavSat` instead.
+
+1. **gps_sensor.proto**
+    + This message is deprecated. Use `NavSatSensor` instead.
+
+1. **sensor.proto**
+    + The `gps` field is deprecated. Use `navsat` instead.
+
+### Removals
+
+1. **spherical_coordinates.proto**
+    + The `LOCAL2` item has been removed from the 
+      `msgs::SphericalCoordinatesType` enum.
+
+1. **SphericalCoordinates.hh**
+    + The function `inline msgs::SphericalCoordinatesType ConvertCoord(
+   const math::SphericalCoordinates::CoordinateType &_sc)`
+      does not accept `math::SphericalCoordinates::CoordinatesType::LOCAL2` anymore.
+    + The function `inline math::SphericalCoordinates::CoordinateType Convert(
+  const msgs::SphericalCoordinatesType &_sc)`
+      does not accept `msgs::SphericalCoordinatesType::LOCAL2` anymore.
+
+1. **MessageFactory.hh**
+    + The function `MessageFactory::MessagePtr MessageFactory::New(
+    const std::string &_msgType)` does not accept non-fully qualified names
+    anymore.
+
 ## Gazebo Msgs 10.X to 11.X
 ### Deprecations
 
