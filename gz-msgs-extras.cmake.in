@@ -14,7 +14,9 @@
 
 # copied from gz-msgs/gz-msgs-extras.cmake
 
-find_package(Python3 REQUIRED COMPONENTS Interpreter)
+if(NOT TARGET Python3::Interpreter)
+  find_package(Python3 REQUIRED COMPONENTS Interpreter)
+endif()
 
 include(${@PROJECT_NAME@_DIR}/gz_msgs_string_utils.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_protoc.cmake)
