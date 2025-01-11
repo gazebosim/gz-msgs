@@ -1,5 +1,13 @@
 ## Gazebo Msgs 11.x
 
+### Gazebo Msgs 11.0.2 (2025-01-10)
+
+1. cmake extras: only find Python3 if needed
+    * [Pull request #479](https://github.com/gazebosim/gz-msgs/pull/479)
+
+1. ci.yml: run cppcheck, cpplint on noble
+    * [Pull request #478](https://github.com/gazebosim/gz-msgs/pull/478)
+
 ### Gazebo Msgs 11.0.1 (2024-10-10)
 
 1. Fix bash completion script install path
