@@ -1,5 +1,20 @@
 ## Ignition Msgs 5.x
 
+### Gazebo Msgs 5.11.1 (2025-01-29)
+
+1. GzProtobuf: Do not require version 3
+    * [Pull request #346](https://github.com/gazebosim/gz-msgs/pull/346)
+
+1. Infrastructure
+    * [Pull request #409](https://github.com/gazebosim/gz-msgs/pull/409)
+    * [Pull request #331](https://github.com/gazebosim/gz-msgs/pull/331)
+
+1. Rename COPYING to LICENSE
+    * [Pull request #330](https://github.com/gazebosim/gz-msgs/pull/330)
+
+1. Fix typo in changelog
+    * [Pull request #314](https://github.com/gazebosim/gz-msgs/pull/314)
+
 ### Ignition Msgs 5.11.0 (2022-10-10)
 
 1. Ignition to Gazebo renaming.
