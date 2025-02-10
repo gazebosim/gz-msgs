@@ -1,5 +1,10 @@
 ## Gazebo Msgs 10.x
 
+### Gazebo Msgs 10.3.2 (2025-02-10)
+
+1. cmake extras: only find Python3 if needed
+    * [Pull request #479](https://github.com/gazebosim/gz-msgs/pull/479)
+
 ### Gazebo Msgs 10.3.1 (2024-11-11)
 
 1. Add rule to build python version of protos
