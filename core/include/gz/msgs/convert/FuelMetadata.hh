@@ -254,7 +254,7 @@ inline bool ConvertFuelMetadata(const msgs::FuelMetadata &_meta,
   _modelConfigStr = out.str();
   return true;
 }
-}  // namespce
+}  // namespace
 }  // namespace gz::msgs
 
 #endif  // GZ_MSGS_CONVERT_FUELMETADATA_HH_

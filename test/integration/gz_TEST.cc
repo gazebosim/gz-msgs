@@ -40,7 +40,7 @@ std::string make_exec_string(const std::string &_args)
 }
 
 /////////////////////////////////////////////////
-std::string custom_exec_str(std::string _cmd)
+std::string custom_exec_str(const std::string &_cmd)
 {
   FILE *pipe = popen(_cmd.c_str(), "r");
 
@@ -48,7 +48,7 @@ std::string custom_exec_str(std::string _cmd)
     return "ERROR";
 
   char buffer[128];
-  std::string result = "";
+  std::string result;
 
   while (!feof(pipe))
   {

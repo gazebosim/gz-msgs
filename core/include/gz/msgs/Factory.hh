@@ -47,7 +47,7 @@ namespace gz::msgs
     /// \brief A map of message types as strings to factory functions
     public: using FactoryFnCollection = MessageFactory::FactoryFnCollection;
 
-    /// \brief Private constuctor
+    /// \brief Private constructor
     private: Factory() = default;
 
     /// \brief Deleted copy constructor
@@ -113,7 +113,7 @@ namespace gz::msgs
     public: static void Types(std::vector<std::string> &_types);
 
     /// \brief Load a collection of descriptor .desc files.
-    /// \param[in] _paths A set of directories containing .desc decriptor
+    /// \param[in] _paths A set of directories containing .desc descriptor
     /// files. Each directory should be separated by ":".
     public: static void LoadDescriptors(const std::string &_paths);
   };
