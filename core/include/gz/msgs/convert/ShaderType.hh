@@ -98,7 +98,7 @@ inline std::string ConvertShaderType(const msgs::Material::ShaderType &_type)
   return result;
 }
 
-}  // namespce
+}  // namespace
 }  // namespace gz::msgs
 
 #endif  // GZ_MSGS_CONVERT_SHADERTYPE_HH_

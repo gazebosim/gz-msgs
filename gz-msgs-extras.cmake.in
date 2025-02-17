@@ -43,7 +43,7 @@ set(@PROJECT_NAME@_PROTO_GENERATOR_SCRIPT ${@PROJECT_NAME@_INSTALL_PATH}/bin/${P
 set(@PROJECT_NAME@_FACTORY_GENERATOR_SCRIPT ${@PROJECT_NAME@_INSTALL_PATH}/bin/${FACTORY_SCRIPT_NAME})
 
 ##################################################
-# A function to generate a target mesage library from a group of protobuf files .
+# A function to generate a target message library from a group of protobuf files .
 # The generation follows the conventions to make the messages available in gazebo tooling
 #
 # For an example use, consult gz-msgs/examples/generating_custom_messages

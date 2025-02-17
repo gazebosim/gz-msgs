@@ -156,7 +156,7 @@ inline std::string ConvertPixelFormatType(const msgs::PixelFormatType &_t)
 }
 
 
-}  // namespce
+}  // namespace
 }  // namespace gz::msgs
 
 #endif  // GZ_MSGS_CONVERT_PIXELFORMATTYPE_HH_

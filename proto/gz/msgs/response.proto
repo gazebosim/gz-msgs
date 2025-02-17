@@ -22,7 +22,7 @@ option java_outer_classname = "ResponseProtos";
 
 /// \ingroup gz.msgs
 /// \interface Response 
-/// \brief Message that encapsulates a respons message with a type description
+/// \brief Message that encapsulates a response message with a type description
 
 import "gz/msgs/header.proto";
 

@@ -7,11 +7,8 @@
 // A simple example that demonstrates the use of the message factory
 //
 //   ./generating_custom_messages
-int main(int argc, char** argv)
+int main()
 {
-  (void) argc;
-  (void) argv;
-
   gz::custom_msgs::BazStamped msg;
 
   // msg has header and baz field
@@ -45,7 +42,7 @@ int main(int argc, char** argv)
   auto *bar = baz->mutable_bar();
 
   {
-    // Set the values of our custom sub-messges
+    // Set the values of our custom sub-messages
     foo->set_value(1.0);
     bar->set_value(1.0);
   }
@@ -63,6 +60,6 @@ int main(int argc, char** argv)
   {
     // Print the populated values of a message
     std::cout << "===============================" << std::endl;
-    std::cout << "Pouplated Message: \n" << msg.DebugString() << std::endl;
+    std::cout << "Populated Message: \n" << msg.DebugString() << std::endl;
   }
 }

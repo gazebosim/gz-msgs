@@ -106,7 +106,7 @@ namespace gz::msgs {
     public: void Types(std::vector<std::string> &_types);
 
     /// \brief Load a collection of descriptor .desc files.
-    /// \param[in] _paths A set of directories containing .desc decriptor
+    /// \param[in] _paths A set of directories containing .desc descriptor
     /// files. Each directory should be separated by ":".
     public: void LoadDescriptors(const std::string &_paths);
 
