@@ -62,7 +62,7 @@ inline gz::math::Planed Convert(const gz::msgs::PlaneGeom &_msg)
   Set(&ret, _msg);
   return ret;
 }
-}  // namespce
+}  // namespace
 }  // namespace gz::msgs
 
 #endif  // GZ_MSGS_CONVERT_VECTOR3_HH_

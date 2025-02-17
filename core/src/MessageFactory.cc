@@ -62,6 +62,14 @@ MessageFactory::MessagePtr MessageFactory::New(
   {
     type = kGzMsgsPrefix + _msgType.substr(8);
   }
+<<<<<<< HEAD
+=======
+  // Convert ".gz_msgs." prefix
+  else if (_msgType.find(".gz_msgs.") == 0)
+  {
+    type = kGzMsgsPrefix + _msgType.substr(9);
+  }
+>>>>>>> 9f05e35 (Code cleanup (#485))
   // Convert ".gz.msgs." prefix
   else if (_msgType.find(".gz.msgs.") == 0)
   {
@@ -79,11 +87,11 @@ MessageFactory::MessagePtr MessageFactory::New(
 
   auto getMessagePtr = [this](const std::string &_type)
   {
-    MessageFactory::MessagePtr ret = nullptr;
-    if (msgMap.find(_type) != msgMap.end())
+    MessageFactory::MessagePtr ret;
+    if (auto it = msgMap.find(_type); it != msgMap.end())
     {
       // Create a new message via FactoryFn
-      ret = msgMap[_type]();
+      ret = it->second();
     }
     else
     {
@@ -140,8 +148,7 @@ void MessageFactory::Types(std::vector<std::string> &_types)
   std::unordered_set<std::string> typesSet(dynTypes.begin(), dynTypes.end());
 
   // Return the list of all known message types.
-  std::map<std::string, FactoryFn>::const_iterator iter;
-  for (iter = msgMap.begin(); iter != msgMap.end(); ++iter)
+  for (auto iter = msgMap.begin(); iter != msgMap.end(); ++iter)
   {
     typesSet.insert(iter->first);
   }

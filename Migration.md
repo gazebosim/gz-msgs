@@ -45,7 +45,7 @@ release will remove the deprecated code.
 3. Protobuf messages and packages will no longer use `ignition.msgs`, use `gz.msgs` instead
 4. `INSTALL_IGN_MSGS_GEN_EXECUTABLE` and `IGN_MSGS_GEN_EXECUTABLE` are deprecated and will be removed. Use `INSTALL_GZ_MSGS_GEN_EXECUTABLE` and `GZ_MSGS_GEN_EXECUTABLE` instead.
 5. `IGN_DESCRIPTOR_PATH` is deprecated and will be removed. Use `GZ_DESCRIPTOR_PATH` instead.
-6. `camerasensor.proto` has deprected the `string image_format = 4`. Please
+6. `camerasensor.proto` has deprecated the `string image_format = 4`. Please
    use `PixelFormatType pixel_format = 21;`
 ### Breaking Changes
 

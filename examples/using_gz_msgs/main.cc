@@ -18,7 +18,7 @@ int main(int argc, char** argv)
     std::cout << "Known types: " << std::endl;
     for (const auto &t: known_types)
     {
-        std::cout << t << std::endl;
+      std::cout << t << std::endl;
     }
   }
   else

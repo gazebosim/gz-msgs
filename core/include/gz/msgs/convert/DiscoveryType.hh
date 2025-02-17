@@ -118,7 +118,7 @@ inline std::string ToString(const msgs::Discovery::Type &_t)
 {
   return ConvertDiscoveryType(_t);
 }
-}  // namespce
+}  // namespace
 }  // namespace gz::msgs
 
 #endif  // GZ_MSGS_CONVERT_DISCOVERYTYPE_HH_

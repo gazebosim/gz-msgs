@@ -43,7 +43,7 @@ message Discovery
     /// \brief Unadvertise message.
     UNADVERTISE     = 3;
 
-    /// \brief Hearbeat message.
+    /// \brief Heartbeat message.
     HEARTBEAT       = 4;
 
     /// \brief Bye message.
