@@ -214,7 +214,7 @@ gz_msgs_generate_messages(
   MSGS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/proto
   # List of proto files to process
   MSGS_PROTOS ${MSGS_PROTOS}
-  # Depenency on gz-msgs
+  # Dependency on gz-msgs
   DEPENDENCIES gz-msgs11::gz-msgs11
 )
 ```
@@ -286,7 +286,7 @@ Unable to create message of type[gz.custom_msgs.Foo] with data[value: 1.0].
 ```
 
 To use the new messages, point the `GZ_DESCRIPTOR_PATH` environment variable to
-the location of the `build` folder or where you have choosen to install the
+the location of the `build` folder or where you have chosen to install the
 `.gz_desc` file:
 
 ```sh

@@ -67,9 +67,9 @@ Generator::~Generator() = default;
 
 /////////////////////////////////////////////////
 bool Generator::Generate(const FileDescriptor *_file,
-                               const std::string &/*_parameter*/,
-                               OutputDirectory *_generatorContext,
-                               std::string * /*_error*/) const
+                         const std::string &/*_parameter*/,
+                         OutputDirectory *_generatorContext,
+                         std::string * /*_error*/) const
 {
   auto filePath = std::filesystem::path(_file->name());
   auto parent_path = filePath.parent_path();

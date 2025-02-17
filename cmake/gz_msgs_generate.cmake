@@ -4,13 +4,13 @@
 # One value arguments:
 #   PYTHON_INTERPRETER  - Target or path to the python interpreter used
 #   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
-#   MSGS_GEN_SCRIPT     - Location of the messge generator script
+#   MSGS_GEN_SCRIPT     - Location of the message generator script
 #   GZ_PROTOC_PLUGIN    - Location of the gazebo generator plugin
 #   FACTORY_GEN_SCRIPT  - Location of the factory generator script
 #   PROTO_PATH          - Base directory of the proto files
 #   DEPENDENCY_DESCRIPTIONS - .gz_desc files for each dependency
-#   DLLEXPORT_DECL      - Visibilty macro to apply to messages
-#   OUTPUT_DIRECTORY    - CMake binary directoy to place generated artifacts
+#   DLLEXPORT_DECL      - Visibility macro to apply to messages
+#   OUTPUT_DIRECTORY    - CMake binary directory to place generated artifacts
 #   OUTPUT_SOURCES      - Variable to contain list of generated source files
 #   OUTPUT_HEADERS      - Variable to contain list of generated header files
 #   OUTPUT_DETAIL_HEADERS - Variable to contain list of generated detail header files
@@ -133,7 +133,7 @@ function(gz_msgs_generate_messages_impl)
 
   if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     # Disable warning in generated *.pb.cc code
-    set_source_files_properties(${${generate_messges_OUTPUT_SOURCES}}
+    set_source_files_properties(${${generate_messages_OUTPUT_SOURCES}}
       COMPILE_FLAGS "-Wno-invalid-offsetof")
   endif()
 
@@ -148,7 +148,7 @@ endfunction()
 # One value arguments:
 #   PROTOC_EXEC         - protoc target or executable to use
 #   PROTO_PATH          - Base directory of the proto files
-#   DEPENDENCY_DESCRIPTIONS - Variable containing all depedency description files
+#   DEPENDENCY_DESCRIPTIONS - Variable containing all dependency description files
 #   OUTPUT_DIRECTORY - Directory of output gz_desc file
 #   OUTPUT_FILENAME - Name of output gz_desc file
 # Multi value arguments
@@ -196,7 +196,7 @@ endfunction()
 # One value arguments:
 #   TARGET              - Target (static library) to create
 #   PROTO_PACKAGE       - Protobuf package the file belongs to (e.g. "gz.msgs")
-#   MSGS_GEN_SCRIPT     - Location of the messge generator script
+#   MSGS_GEN_SCRIPT     - Location of the message generator script
 #   PYTHON_INTERPRETER  - Target or path to the python interpreter used
 #   PROTOC_EXEC         - Protoc target or executable to use
 #   GZ_PROTOC_PLUGIN    - Location of the gazebo generator plugin
