@@ -100,8 +100,6 @@ set(GZ_UTILS_VER ${gz-utils3_VERSION_MAJOR})
 gz_find_package(gz-math8 REQUIRED)
 set(GZ_MATH_VER ${gz-math8_VERSION_MAJOR})
 
-find_package(Python3 REQUIRED COMPONENTS Interpreter)
-
 #--------------------------------------
 # Find if command is available. This is used to enable tests.
 # Note that CLI files are installed regardless of whether the dependency is

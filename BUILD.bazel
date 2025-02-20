@@ -18,6 +18,7 @@ load(
     "gz_proto_library",
 )
 load("@rules_license//rules:license.bzl", "license")
+load("@rules_python//python:proto.bzl", "py_proto_library")
 
 package(
     default_applicable_licenses = [GZ_ROOT + "msgs:license"],
@@ -88,6 +89,11 @@ proto_library(
     deps = [
         "@com_google_protobuf//:any_proto",
     ],
+)
+
+py_proto_library(
+    name = "gzmsgs_proto_py_pb2",
+    deps = [":gzmsgs_proto"]
 )
 
 gz_proto_library(
