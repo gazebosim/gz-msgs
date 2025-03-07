@@ -62,7 +62,7 @@ message FooMessage
 
 Note that each field has a corresponding *field number*.
 Each field must be given an ID between `1` and `536,870,911`, with the following
-restrctions (from the [language guide](https://protobuf.dev/programming-guides/proto3/#assigning)):
+restrictions (from the [language guide](https://protobuf.dev/programming-guides/proto3/#assigning)):
 
 * The given number must be unique among all fields for that message.
 * Field numbers `19,000` to `19,999` are reserved for the Protocol Buffers implementation.
