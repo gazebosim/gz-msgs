@@ -53,6 +53,6 @@ message DataLoadPathOptions
     /// Units
     DataAngularUnits units = 7;
 
-    /// Spherical Coodinate type
+    /// Spherical Coordinate type
     gz.msgs.SphericalCoordinatesType coordinate_type = 8;
 }

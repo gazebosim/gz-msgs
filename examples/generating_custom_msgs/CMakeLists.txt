@@ -32,7 +32,7 @@ gz_msgs_generate_messages(
   MSGS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/proto
   # List of proto files to process
   MSGS_PROTOS ${MSGS_PROTOS}
-  # Depenency on gz-msgs
+  # Dependency on gz-msgs
   DEPENDENCIES gz-msgs${GZ_MSGS_VER}::gz-msgs${GZ_MSGS_VER}
 )
 

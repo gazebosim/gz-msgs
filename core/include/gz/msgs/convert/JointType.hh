@@ -143,7 +143,7 @@ inline std::string ConvertJointType(const msgs::Joint::Type &_type)
   return result;
 }
 
-}  // namespce
+}  // namespace
 }  // namespace gz::msgs
 
 #endif  // GZ_MSGS_CONVERT_JOINTTYPE_HH_

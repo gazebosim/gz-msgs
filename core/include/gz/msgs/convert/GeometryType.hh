@@ -161,7 +161,7 @@ inline std::string ConvertGeometryType(const msgs::Geometry::Type _type)
   }
   return result;
 }
-}  // namespce
+}  // namespace
 }  // namespace gz::msgs
 
 #endif  // GZ_MSGS_CONVERT_GEOMETRYTYPE_HH_

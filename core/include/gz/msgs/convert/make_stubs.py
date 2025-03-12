@@ -60,7 +60,7 @@ inline namespace GZ_MSGS_VERSION_NAMESPACE {{
 
 {conversions}
 
-}}  // namespce
+}}  // namespace
 }}  // namespace gz::msgs
 
 #endif  // GZ_MSGS_CONVERT_VECTOR3_HH_
