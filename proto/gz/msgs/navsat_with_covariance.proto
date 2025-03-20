@@ -1,0 +1,96 @@
+/*
+ * Copyright (C) 2025 Open Source Robotics Foundation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+*/
+
+syntax = "proto3";
+package gz.msgs;
+option java_package = "com.gz.msgs";
+option java_outer_classname = "NavSatWithCovarianceProtos";
+
+/// \ingroup gz.msgs
+/// \interface NavSatWithCovariance
+/// \brief Data with covariance from a NavSat sensor
+/// This replaces the NavSat message.
+
+import "gz/msgs/header.proto";
+import "gz/msgs/float_v.proto";
+
+message NavSatWithCovariance
+{
+  /// \brief Optional header data
+  Header header                   = 1;
+
+  /// \brief Latitude in degrees
+  double latitude_deg             = 2;
+
+  /// \brief Longitude in degrees
+  double longitude_deg            = 3;
+
+  /// \brief Altitude in meters
+  double altitude                 = 4;
+   
+  /// \brief Covariance or dilution of precision (DoP) 9 of the position
+  /// Position covariance [m^2] defined relative to a tangential plane
+  /// through the reported position. The components are East, North, and
+  /// Up (ENU), in row-major order.
+  /// For more information see From Global Positioning System: Signals,
+  /// Measurements, and Performance section 6.1.2
+  Float_V position_covariance    = 5;
+  
+  /// \brief Position covariance information availability
+  /// If the Dilution of Precision or covariance of the fix is known, fill
+  /// it in completely. If the GPS receiver provides the variance of each
+  /// measurement, put them along the diagonal. If only DoP parameters are
+  /// available, estimate an approximate covariance from that.
+  /// Possible values are:
+  /// - COVARIANCE_TYPE_UNKNOWN = 0
+  /// - COVARIANCE_TYPE_APPROXIMATED = 1
+  /// - COVARIANCE_TYPE_DIAGONAL_KNOWN = 2
+  /// - COVARIANCE_TYPE_KNOWN = 3
+  uint32 position_covariance_type = 6;
+
+  /// \brief East velocity in the ENU frame, in m / s
+  double velocity_east            = 7;
+
+  /// \brief North velocity in the ENU frame, in m / s
+  double velocity_north           = 8;
+
+  /// \brief Up velocity in the ENU frame, in m / s
+  double velocity_up              = 9;
+
+  /// \brief Covariance or dilution of precision (DoP) 9 of the velocity
+  /// Position covariance [(m/s)^2] defined relative to a tangential plane
+  /// through the reported position. The components are East, North, and
+  /// Up (ENU), in row-major order.
+  /// For more information see From Global Positioning System: Signals,
+  /// Measurements, and Performance section 6.2.1
+  Float_V velocity_covariance    = 10;
+  
+  /// \brief Velocity covariance information availability
+  /// If the Dilution of Precision or covariance of the fix is known, fill
+  /// it in completely. If the GPS receiver provides the variance of each
+  /// measurement, put them along the diagonal. If only DoP parameters are
+  /// available, estimate an approximate covariance from that.
+  /// Possible values are:
+  /// - COVARIANCE_TYPE_UNKNOWN = 0
+  /// - COVARIANCE_TYPE_APPROXIMATED = 1
+  /// - COVARIANCE_TYPE_DIAGONAL_KNOWN = 2
+  /// - COVARIANCE_TYPE_KNOWN = 3
+  uint32 velocity_covariance_type = 11;
+
+  /// \brief ID of reference frame
+  string frame_id                 = 12;
+}
