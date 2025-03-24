@@ -132,7 +132,11 @@ GZ_UTILS_WARN_IGNORE__DEPRECATED_DECLARATION
 GZ_UTILS_WARN_RESUME__DEPRECATED_DECLARATION
 )");
 
+#if GOOGLE_PROTOBUF_VERSION >= 6030000
+    auto ns = getNamespaces(std::string(_file->package()));
+#else
     auto ns = getNamespaces(_file->package());
+#endif
 
     for (const auto &name : ns)
         printer.PrintRaw("namespace " + name + " {\n");
@@ -140,32 +144,32 @@ GZ_UTILS_WARN_RESUME__DEPRECATED_DECLARATION
     for (auto i = 0; i < _file->message_type_count(); ++i)
     {
       const auto *desc = _file->message_type(i);
-      std::string ptrTypes;
+      std::stringstream ptrTypes;
 
       indexPrinter.PrintRaw(desc->name());
       indexPrinter.PrintRaw("\n");
 
       // Define std::unique_ptr types for our messages
-      ptrTypes += "typedef std::unique_ptr<"
-        + desc->name() + "> "
-        + desc->name() + "UniquePtr;\n";
+      ptrTypes << "typedef std::unique_ptr<"
+        << desc->name() << "> "
+        << desc->name() << "UniquePtr;\n";
 
       // Define const std::unique_ptr types for our messages
-      ptrTypes += "typedef std::unique_ptr<const "
-        + desc->name() + "> Const"
-        + desc->name() + "UniquePtr;\n";
+      ptrTypes << "typedef std::unique_ptr<const "
+        << desc->name() << "> Const"
+        << desc->name() << "UniquePtr;\n";
 
       // Define std::shared_ptr types for our messages
-      ptrTypes += "typedef std::shared_ptr<"
-        + desc->name() + "> "
-        + desc->name() + "SharedPtr;\n";
+      ptrTypes << "typedef std::shared_ptr<"
+        << desc->name() << "> "
+        << desc->name() << "SharedPtr;\n";
 
       // Define const std::shared_ptr types for our messages
-      ptrTypes += "typedef std::shared_ptr<const "
-        + desc->name() + "> Const"
-        + desc->name() + "SharedPtr;\n";
+      ptrTypes << "typedef std::shared_ptr<const "
+        << desc->name() << "> Const"
+        << desc->name() << "SharedPtr;\n";
 
-      printer.PrintRaw(ptrTypes.c_str());
+      printer.PrintRaw(ptrTypes.str());
     }
 
     for (auto name = ns.rbegin(); name != ns.rend(); name++)
