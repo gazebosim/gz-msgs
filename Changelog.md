@@ -4,6 +4,19 @@
 
 ## Gazebo Msgs 11.x
 
+### Gazebo Msgs 11.0.2 (2025-01-10)
+
+1. cmake extras: only find Python3 if needed
+    * [Pull request #479](https://github.com/gazebosim/gz-msgs/pull/479)
+
+1. ci.yml: run cppcheck, cpplint on noble
+    * [Pull request #478](https://github.com/gazebosim/gz-msgs/pull/478)
+
+### Gazebo Msgs 11.0.1 (2024-10-10)
+
+1. Fix bash completion script install path
+    * [Pull request #469](https://github.com/gazebosim/gz-msgs/pull/469)
+
 ### Gazebo Msgs 11.0.0 (2024-09-25)
 
 1. **Baseline:** this includes all changes from 10.3.0 and earlier.
@@ -50,6 +63,24 @@
 
 
 ## Gazebo Msgs 10.x
+
+### Gazebo Msgs 10.3.2 (2025-02-10)
+
+1. cmake extras: only find Python3 if needed
+    * [Pull request #479](https://github.com/gazebosim/gz-msgs/pull/479)
+
+### Gazebo Msgs 10.3.1 (2024-11-11)
+
+1. Add rule to build python version of protos
+    * [Pull request #474](https://github.com/gazebosim/gz-msgs/pull/474)
+
+1. Return only unique message types in `MessageFactory::Types` function
+    * [Pull request #472](https://github.com/gazebosim/gz-msgs/pull/472)
+   
+### Gazebo Msgs 10.3.0 (2024-06-18)
+
+1. Backport: Adding cone primitives.
+    * [Pull request #442](https://github.com/gazebosim/gz-msgs/pull/442)
 
 ### Gazebo Msgs 10.2.0 (2024-05-17)
 
