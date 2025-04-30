@@ -91,7 +91,7 @@ if (NOT GZ_PYTHON_INSTALL_PATH)
     set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
   endif()
 endif()
-install(FILES ${msgs_python} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs${PROJECT_VERSION_MAJOR})
+install(FILES ${msgs_python} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs)
 
 ##################################################
 # Build core library
