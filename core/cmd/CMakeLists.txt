@@ -1,5 +1,10 @@
-set(msgs_executable gz-msgs)
+# Define the desired output name of the executable
+set(msgs_executable_output_name gz-msgs)
+# Append "-exe" to cmake target name to differ from the library target name
+set(msgs_executable gz-msgs-exe)
 add_executable(${msgs_executable} msgs_main.cc)
+set_target_properties(${msgs_executable}
+  PROPERTIES OUTPUT_NAME ${msgs_executable_output_name})
 target_link_libraries(${msgs_executable}
   ${PROJECT_LIBRARY_TARGET_NAME}
   gz-utils::cli
