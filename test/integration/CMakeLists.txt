@@ -9,7 +9,7 @@ gz_build_tests(TYPE INTEGRATION SOURCES ${tests} TEST_LIST test_targets
 
 if(TARGET INTEGRATION_gz_TEST)
   target_compile_definitions(INTEGRATION_gz_TEST PRIVATE
-    "GZ_MSGS_EXECUTABLE_PATH=\"$<TARGET_FILE:gz-msgs>\""
+    "GZ_MSGS_EXECUTABLE_PATH=\"$<TARGET_FILE:gz-msgs-exe>\""
     "GZ_MSGS_COMPLETION_SCRIPT_PATH=\"${PROJECT_SOURCE_DIR}/core/cmd/msgs.bash_completion.sh\"")
 endif()
 
