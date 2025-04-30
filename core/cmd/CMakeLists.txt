@@ -2,7 +2,7 @@ set(msgs_executable gz-msgs)
 add_executable(${msgs_executable} msgs_main.cc)
 target_link_libraries(${msgs_executable}
   ${PROJECT_LIBRARY_TARGET_NAME}
-  gz-utils${GZ_UTILS_VER}::cli
+  gz-utils::cli
 )
 
 set(EXE_INSTALL_DIR ${CMAKE_INSTALL_LIBEXECDIR}/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}/)

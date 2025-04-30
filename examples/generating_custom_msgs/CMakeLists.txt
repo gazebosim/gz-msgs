@@ -8,11 +8,9 @@ project(generating_custom_messages VERSION 1.0.0)
 #============================================================================
 # Find gz-cmake
 #============================================================================
-find_package(gz-cmake4 REQUIRED)
+find_package(gz-cmake REQUIRED)
 
-find_package(gz-msgs12 REQUIRED)
-# Define a variable 'GZ_MSGS_VER' holding the version number
-set(GZ_MSGS_VER ${gz-msgs12_VERSION_MAJOR})
+find_package(gz-msgs REQUIRED)
 
 # Define a variable 'MSGS_PROTOS' listing the .proto files
 set(MSGS_PROTOS
@@ -33,7 +31,7 @@ gz_msgs_generate_messages(
   # List of proto files to process
   MSGS_PROTOS ${MSGS_PROTOS}
   # Dependency on gz-msgs
-  DEPENDENCIES gz-msgs${GZ_MSGS_VER}::gz-msgs${GZ_MSGS_VER}
+  DEPENDENCIES gz-msgs::gz-msgs
 )
 
 add_executable(${PROJECT_NAME} main.cc)

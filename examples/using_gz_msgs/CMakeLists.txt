@@ -8,13 +8,12 @@ project(using_gz_msgs VERSION 1.0.0)
 #============================================================================
 # Find gz-cmake
 #============================================================================
-find_package(gz-cmake4 REQUIRED)
+find_package(gz-cmake REQUIRED)
 
-find_package(gz-msgs12 REQUIRED)
-set(GZ_MSGS_VER ${gz-msgs12_VERSION_MAJOR})
+find_package(gz-msgs REQUIRED)
 
 add_executable(${PROJECT_NAME} main.cc)
-target_link_libraries(${PROJECT_NAME} PRIVATE gz-msgs${GZ_MSGS_VER})
+target_link_libraries(${PROJECT_NAME} PRIVATE gz-msgs)
 
 install(TARGETS ${PROJECT_NAME}
         LIBRARY DESTINATION lib

@@ -5,15 +5,14 @@ The example in this folder demonstrates how to use messages as part of your buil
 To use messages as part of your project, simply find the gz-msgs package
 
 ```
-find_package(gz-msgs12 REQUIRED)
-set(GZ_MSGS_VER ${gz-msgs12_VERSION_MAJOR}
+find_package(gz-msgs REQUIRED)
 ```
 
 And link the messages library to your library or executable
 
 ```
 add_executable(${PROJECT_NAME} main.cc)
-target_link_libraries(${PROJECT_NAME} PRIVATE gz-msgs${GZ_MSGS_VER})
+target_link_libraries(${PROJECT_NAME} PRIVATE gz-msgs)
 ```
 
 For a more advanced example generating custom message types, consult the generating custom mgs tutorial

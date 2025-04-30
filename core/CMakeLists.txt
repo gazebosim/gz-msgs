@@ -124,7 +124,7 @@ gz_add_get_install_prefix_impl(GET_INSTALL_PREFIX_FUNCTION gz::msgs::getInstallP
 
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
-    gz-math${GZ_MATH_VER}::gz-math${GZ_MATH_VER}
+    gz-math::gz-math
     TINYXML2::TINYXML2
     protobuf::libprotobuf
 )

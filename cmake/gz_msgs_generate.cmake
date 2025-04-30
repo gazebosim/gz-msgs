@@ -319,7 +319,7 @@ function(gz_msgs_generate_messages_lib)
       set(GZ_PYTHON_INSTALL_PATH ${GZ_LIB_INSTALL_DIR}/python)
     endif()
   endif()
-  install(FILES ${generated_python} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs${GZ_MSGS_VER})
+  install(FILES ${generated_python} DESTINATION ${GZ_PYTHON_INSTALL_PATH}/gz/msgs)
 
   if (NOT NO_GZ_PACKAGE)
     set(component_name ${generate_messages_TARGET})
