@@ -63,7 +63,7 @@ cmake_minimum_required(VERSION 3.22.1 FATAL_ERROR)
 project(gz-msgs-example)
 
 # Find the Gazebo msgs library
-find_package(gz-msgs12 QUIET REQUIRED)
+find_package(gz-msgs QUIET REQUIRED)
 
 add_executable(gz-msgs-example main.cc)
 target_link_libraries(gz-msgs-example ${GZ-MSGS_LIBRARIES})
