@@ -1,5 +1,7 @@
 load("@rules_gazebo//gazebo:headers.bzl", "gz_configure_header", "gz_export_header")
 load("@rules_license//rules:license.bzl", "license")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_python//python:proto.bzl", "py_proto_library")
 load(
     "//tools:gz_msgs_generate.bzl",
     "gz_proto_factory",
@@ -75,10 +77,10 @@ proto_library(
     ],
 )
 
-# py_proto_library(
-#     name = "gzmsgs_proto_py_pb2",
-#     deps = [":gzmsgs_proto"]
-# )
+py_proto_library(
+    name = "gzmsgs_proto_py_pb2",
+    deps = [":gzmsgs_proto"]
+)
 
 gz_proto_library(
     name = "gzmsgs_cc_proto",
