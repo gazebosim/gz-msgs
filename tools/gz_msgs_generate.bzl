@@ -5,34 +5,6 @@ load("@rules_proto//proto:defs.bzl", "ProtoInfo")
 _PROTO_EXTENSION = ".proto"
 _VIRTUAL_IMPORTS = "/_virtual_imports/"
 
-def well_known_proto_libs():
-    return [
-        "@com_google_protobuf//:any_proto",
-        "@com_google_protobuf//:api_proto",
-        "@com_google_protobuf//:compiler_plugin_proto",
-        "@com_google_protobuf//:descriptor_proto",
-        "@com_google_protobuf//:duration_proto",
-        "@com_google_protobuf//:empty_proto",
-        "@com_google_protobuf//:field_mask_proto",
-        "@com_google_protobuf//:source_context_proto",
-        "@com_google_protobuf//:struct_proto",
-        "@com_google_protobuf//:timestamp_proto",
-        "@com_google_protobuf//:type_proto",
-        "@com_google_protobuf//:wrappers_proto",
-    ]
-
-def get_proto_root(workspace_root):
-    """Gets the root protobuf directory.
-    Args:
-      workspace_root: context.label.workspace_root
-    Returns:
-      The directory relative to which generated include paths should be.
-    """
-    if workspace_root:
-        return "/{}".format(workspace_root)
-    else:
-        return ""
-
 def _strip_proto_extension(proto_filename):
     if not proto_filename.endswith(_PROTO_EXTENSION):
         fail('"{}" does not end with "{}"'.format(
@@ -83,42 +55,6 @@ def get_include_directory(source_file):
     else:
         return source_file.root.path if source_file.root.path else "."
 
-def get_plugin_args(
-        plugin,
-        flags,
-        dir_out,
-        generate_mocks,
-        plugin_name = "PLUGIN"):
-    """Returns arguments configuring protoc to use a plugin for a language.
-    Args:
-      plugin: An executable file to run as the protoc plugin.
-      flags: The plugin flags to be passed to protoc.
-      dir_out: The output directory for the plugin.
-      generate_mocks: A bool indicating whether to generate mocks.
-      plugin_name: A name of the plugin, it is required to be unique when there
-      are more than one plugin used in a single protoc command.
-    Returns:
-      A list of protoc arguments configuring the plugin.
-    """
-    augmented_flags = list(flags)
-    if generate_mocks:
-        augmented_flags.append("generate_mock_code=true")
-
-    augmented_dir_out = dir_out
-    if augmented_flags:
-        augmented_dir_out = ",".join(augmented_flags) + ":" + dir_out
-
-    return [
-        "--plugin=protoc-gen-{plugin_name}={plugin_path}".format(
-            plugin_name = plugin_name,
-            plugin_path = plugin.path,
-        ),
-        "--{plugin_name}_out={dir_out}".format(
-            plugin_name = plugin_name,
-            dir_out = augmented_dir_out,
-        ),
-    ]
-
 def _get_staged_proto_file(context, source_file):
     if source_file.dirname == context.label.package or \
        is_in_virtual_imports(source_file):
@@ -148,30 +84,6 @@ def protos_from_context(context):
         for file in src[ProtoInfo].direct_sources:
             protos.append(_get_staged_proto_file(context, file))
     return protos
-
-def includes_from_deps(deps):
-    """Get includes from rule dependencies."""
-    return [
-        file
-        for src in deps
-        for file in src[ProtoInfo].transitive_imports.to_list()
-    ]
-
-def get_proto_arguments(protos, genfiles_dir_path):
-    """Get the protoc arguments specifying which protos to compile."""
-    arguments = []
-    for proto in protos:
-        strip_prefix_len = 0
-        if is_in_virtual_imports(proto):
-            incl_directory = get_include_directory(proto)
-            if proto.path.startswith(incl_directory):
-                strip_prefix_len = len(incl_directory) + 1
-        elif proto.path.startswith(genfiles_dir_path):
-            strip_prefix_len = len(genfiles_dir_path) + 1
-
-        arguments.append(proto.path[strip_prefix_len:])
-
-    return arguments
 
 def declare_out_files(protos, context, generated_file_format):
     """Declares and returns the files to be generated."""
@@ -259,17 +171,6 @@ filter_files = rule(
         ),
     },
 )
-
-def get_proto_headers(protos):
-    """
-    Get headers for a set of proto files
-    """
-    out = []
-    for proto in protos:
-        split = proto.split("/")[1:]
-        split[2] = split[2].replace(".proto", ".pb.h")
-        out.append("/".join(split))
-    return out
 
 def _gz_proto_factory_impl(ctx):
     """
