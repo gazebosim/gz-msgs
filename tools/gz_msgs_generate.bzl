@@ -125,11 +125,6 @@ def get_out_dir(protos, context):
             fail("Proto sources must be either all virtual imports or all real")
     if at_least_one_virtual:
         out_dir = get_include_directory(protos[0])
-        ws_root = protos[0].owner.workspace_root
-        if ws_root and out_dir.find(ws_root) >= 0:
-            out_dir = "".join(out_dir.rsplit(ws_root, 1))
-        if out_dir.startswith(context.genfiles_dir.path + "/"):
-            out_dir = context.bin_dir.path + out_dir[len(context.genfiles_dir.path):]
         return struct(
             path = out_dir,
             import_path = out_dir[out_dir.find(_VIRTUAL_IMPORTS) + 1:],
