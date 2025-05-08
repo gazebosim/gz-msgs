@@ -107,7 +107,7 @@ public_headers = public_headers_no_gen + [
 ]
 
 cc_library(
-    name = "msgs",
+    name = "gz-msgs",
     srcs = [
         "core/src/DynamicFactory.cc",
         "core/src/DynamicFactory.hh",
@@ -233,13 +233,13 @@ gz_configure_file(
     src = "core/cmd/cmdmsgs.rb.in",
     out = "cmdmsgs.rb",
     defines = [
-        "executable_location=gz-msgs",
+        "executable_location=cmd-gz-msgs",
     ],
     package_xml = "package.xml",
 )
 
 cc_binary(
-    name = "gz-msgs",
+    name = "cmd-gz-msgs",
     srcs = ["core/cmd/msgs_main.cc"],
     data = [
         "cmdmsgs.rb",
@@ -248,7 +248,7 @@ cc_binary(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        ":msgs",
+        ":gz-msgs",
         "@gz-utils//cli",
     ],
 )
