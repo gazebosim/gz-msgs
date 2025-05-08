@@ -2,6 +2,8 @@
 
 load("@rules_proto//proto:defs.bzl", "ProtoInfo")
 
+visibility("public")
+
 _PROTO_EXTENSION = ".proto"
 _VIRTUAL_IMPORTS = "/_virtual_imports/"
 

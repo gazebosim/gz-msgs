@@ -1,4 +1,4 @@
-load("@rules_gazebo//gazebo:headers.bzl", "gz_configure_header", "gz_export_header")
+load("@rules_gazebo//gazebo:headers.bzl", "gz_configure_file", "gz_configure_header", "gz_export_header")
 load("@rules_license//rules:license.bzl", "license")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_python//python:proto.bzl", "py_proto_library")
@@ -72,6 +72,7 @@ proto_library(
     name = "gzmsgs_proto",
     srcs = protos,
     strip_import_prefix = "proto",
+    visibility = ["//visibility:public"],
     deps = [
         "@com_google_protobuf//:any_proto",
     ],
@@ -79,12 +80,14 @@ proto_library(
 
 py_proto_library(
     name = "gzmsgs_proto_py_pb2",
-    deps = [":gzmsgs_proto"]
+    visibility = ["//visibility:public"],
+    deps = [":gzmsgs_proto"],
 )
 
 gz_proto_library(
     name = "gzmsgs_cc_proto",
     proto_deps = [":gzmsgs_proto"],
+    visibility = ["//visibility:public"],
     deps = [
         "@com_google_protobuf//:protobuf",
     ],
@@ -122,6 +125,7 @@ cc_library(
         "core/src",
         "include",
     ],
+    visibility = ["//visibility:public"],
     deps = [
         ":gzmsgs_cc_proto",
         ":gzmsgs_proto_factory",
@@ -212,3 +216,39 @@ cc_test(
 #         "@gtest//:gtest_main",
 #     ],
 # )
+
+gz_configure_file(
+    name = "msgs_yaml",
+    src = "conf/msgs.yaml.in",
+    out = "msgs.yaml",
+    defines = [
+        "PROJECT_NAME_NO_VERSION_LOWER=msgs",
+        "gz_library_path=msgs/cmdmsgs",
+    ],
+    package_xml = "package.xml",
+)
+
+gz_configure_file(
+    name = "msgs_rb",
+    src = "core/cmd/cmdmsgs.rb.in",
+    out = "cmdmsgs.rb",
+    defines = [
+        "executable_location=gz-msgs",
+    ],
+    package_xml = "package.xml",
+)
+
+cc_binary(
+    name = "gz-msgs",
+    srcs = ["core/cmd/msgs_main.cc"],
+    data = [
+        "cmdmsgs.rb",
+        "msgs.yaml",
+        ":gzmsgs_proto",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":msgs",
+        "@gz-utils//cli",
+    ],
+)
