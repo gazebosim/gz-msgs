@@ -1,7 +1,7 @@
 ## MODULE.bazel
 module(
-    name = "msgs",
-    repo_name = "org_gazebosim_msgs",
+    name = "gz-msgs",
+    repo_name = "org_gazebosim_gz-msgs",
 )
 
 bazel_dep(name = "googletest", version = "1.14.0")
