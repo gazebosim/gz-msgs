@@ -89,7 +89,7 @@ gz_proto_library(
     features = [
         # Layering check fails for clang build due to no module exporting
         # `port_def.inc` and `port_undef.inc`. Unfortunately, the bazel target
-        # that exports these headers in protobuf are private.
+        # that exports these headers in protobuf is private.
         "-layering_check",
     ],
     proto_deps = [":gzmsgs_proto"],
