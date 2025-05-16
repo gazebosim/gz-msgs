@@ -94,6 +94,19 @@ MessageFactory::MessagePtr MessageFactory::New(
   };
 
   auto ret = getMessagePtr(type);
+
+  // Message was not found in either static or dynamic message types,
+  // try again adding the gz.msgs prefix
+  if (nullptr == ret)
+  {
+    ret = getMessagePtr(kGzMsgsPrefix + type);
+    if (nullptr != ret)
+    {
+      std::cerr << "Message (" << kGzMsgsPrefix + type
+          << ") was retrieved with non-fully qualified name. "
+          << "This behavior is deprecated in msgs12" << std::endl;
+    }
+  }
   return ret;
 }
 
