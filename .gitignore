@@ -9,3 +9,6 @@ build_*
 
 # Python generated files 
 __pycache__
+
+# Bazel generated files
+bazel-*
