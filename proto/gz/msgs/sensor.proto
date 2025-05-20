@@ -35,7 +35,7 @@ import "gz/msgs/imu_sensor.proto";
 import "gz/msgs/lidar_sensor.proto";
 import "gz/msgs/logical_camera_sensor.proto";
 import "gz/msgs/magnetometer_sensor.proto";
-import "gz/msgs/navsat.proto";
+import "gz/msgs/navsat_sensor.proto";
 import "gz/msgs/pose.proto";
 
 message Sensor
@@ -108,5 +108,5 @@ message Sensor
   AirSpeedSensor air_speed             = 21;
 
   /// \brief Description of a GNSS sensor
-  NavSat navsat          = 22;
+  NavSatSensor navsat    = 22;
 }
