@@ -30,7 +30,7 @@ class Cmd
     unless Pathname.new(exe_name).absolute?
       # We're assuming that the library path is relative to the current
       # location of this script.
-      exe_name = File.expand_path(File.join(File.dirname(__FILE__), LIBRARY_NAME))
+      exe_name = File.expand_path(File.join(File.dirname(__FILE__), exe_name))
     end
 
     # Drop command from list of arguments
