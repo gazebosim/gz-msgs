@@ -7,6 +7,10 @@ release will remove the deprecated code.
 
 ## Gazebo Msgs 11.X to 12.X
 
+1. The major version has been removed from the cmake project name and the
+   package.xml package name. Use `find_package(gz-msgs)` instead of
+   `find_package(gz-msgsX)` going forward.
+
 ### Deprecations
 
 1. **camerasensor.proto**

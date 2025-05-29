@@ -10,7 +10,7 @@ target_link_libraries(${msgs_executable}
   gz-utils::cli
 )
 
-set(EXE_INSTALL_DIR ${CMAKE_INSTALL_LIBEXECDIR}/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}/)
+set(EXE_INSTALL_DIR ${CMAKE_INSTALL_LIBEXECDIR}/gz/${GZ_DESIGNATION}/)
 install(TARGETS ${msgs_executable} DESTINATION ${EXE_INSTALL_DIR})
 set(executable_location "../../../${EXE_INSTALL_DIR}/$<TARGET_FILE_NAME:${msgs_executable}>")
 
