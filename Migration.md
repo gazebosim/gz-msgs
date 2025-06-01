@@ -39,6 +39,11 @@ release will remove the deprecated code.
   const msgs::SphericalCoordinatesType &_sc)`
       does not accept `msgs::SphericalCoordinatesType::LOCAL2` anymore.
 
+1. **MessageFactory.hh**
+    + The function `MessageFactory::MessagePtr MessageFactory::New(
+    const std::string &_msgType)` does not accept non-fully qualified names
+    anymore.
+
 ## Gazebo Msgs 10.X to 11.X
 ### Deprecations
 
