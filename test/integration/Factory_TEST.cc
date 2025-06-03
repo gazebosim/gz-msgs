@@ -100,7 +100,7 @@ TEST(FactoryTest, NewWithMalformedData)
 TEST(FactoryTest, DeprecatedNonFullyQualified)
 {
   auto msg = Factory::New("StringMsg");
-  EXPECT_TRUE(msg.get() != nullptr);
+  EXPECT_TRUE(msg.get() == nullptr);
 }
 
 /////////////////////////////////////////////////
