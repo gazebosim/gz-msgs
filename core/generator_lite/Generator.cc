@@ -60,8 +60,8 @@ bool Generator::Generate(const FileDescriptor *_file,
                                std::string * /*_error*/) const
 {
   std::string delim = ".proto";
-  auto headerFilename = _file->name();
-  auto sourceFilename = _file->name();
+  std::string headerFilename(_file->name());
+  std::string sourceFilename(_file->name());
 
   {
     auto pos = headerFilename.rfind(delim);
@@ -90,23 +90,23 @@ bool Generator::Generate(const FileDescriptor *_file,
 
       // Define std::unique_ptr types for our messages
       ptrTypes += "typedef std::unique_ptr<"
-        + desc->name() + "> "
-        + desc->name() + "UniquePtr;\n";
+        + std::string(desc->name()) + "> "
+        + std::string(desc->name()) + "UniquePtr;\n";
 
       // Define const std::unique_ptr types for our messages
       ptrTypes += "typedef std::unique_ptr<const "
-        + desc->name() + "> Const"
-        + desc->name() + "UniquePtr;\n";
+        + std::string(desc->name()) + "> Const"
+        + std::string(desc->name()) + "UniquePtr;\n";
 
       // Define std::shared_ptr types for our messages
       ptrTypes += "typedef std::shared_ptr<"
-        + desc->name() + "> "
-        + desc->name() + "SharedPtr;\n";
+        + std::string(desc->name()) + "> "
+        + std::string(desc->name()) + "SharedPtr;\n";
 
       // Define const std::shared_ptr types for our messages
       ptrTypes += "typedef std::shared_ptr<const "
-        + desc->name() + "> Const"
-        + desc->name() + "SharedPtr;\n";
+        + std::string(desc->name()) + "> Const"
+        + std::string(desc->name()) + "SharedPtr;\n";
 
       printer.PrintRaw(ptrTypes.c_str());
     }
