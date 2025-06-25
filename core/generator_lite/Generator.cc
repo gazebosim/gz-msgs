@@ -87,26 +87,27 @@ bool Generator::Generate(const FileDescriptor *_file,
     {
       const auto *desc = _file->message_type(i);
       std::string ptrTypes;
+      std::string descName(desc->name());
 
       // Define std::unique_ptr types for our messages
       ptrTypes += "typedef std::unique_ptr<"
-        + std::string(desc->name()) + "> "
-        + std::string(desc->name()) + "UniquePtr;\n";
+        + descName + "> "
+        + descName + "UniquePtr;\n";
 
       // Define const std::unique_ptr types for our messages
       ptrTypes += "typedef std::unique_ptr<const "
-        + std::string(desc->name()) + "> Const"
-        + std::string(desc->name()) + "UniquePtr;\n";
+        + descName + "> Const"
+        + descName + "UniquePtr;\n";
 
       // Define std::shared_ptr types for our messages
       ptrTypes += "typedef std::shared_ptr<"
-        + std::string(desc->name()) + "> "
-        + std::string(desc->name()) + "SharedPtr;\n";
+        + descName + "> "
+        + descName + "SharedPtr;\n";
 
       // Define const std::shared_ptr types for our messages
       ptrTypes += "typedef std::shared_ptr<const "
-        + std::string(desc->name()) + "> Const"
-        + std::string(desc->name()) + "SharedPtr;\n";
+        + descName + "> Const"
+        + descName + "SharedPtr;\n";
 
       printer.PrintRaw(ptrTypes.c_str());
     }
