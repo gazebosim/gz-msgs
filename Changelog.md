@@ -1,6 +1,6 @@
 ## Gazebo Msgs 12.x
 
-### Gazebo Msgs 12.0.0 (2025-08-26)
+### Gazebo Msgs 12.0.0 (2025-08-XX)
 
 1. **Baseline:** this includes all changes from 11.1.0 and earlier.
 
@@ -32,17 +32,8 @@
 1. Bump gz-cmake and others in jetty
     * [Pull request #506](https://github.com/gazebosim/gz-msgs/pull/506)
 
-1. Fix compatibility with protobuf v30 (cpp 6.30.0)
-    * [Pull request #499](https://github.com/gazebosim/gz-msgs/pull/499)
-
 1. docs: fix typo in tutorials/message_generation.md
     * [Pull request #494](https://github.com/gazebosim/gz-msgs/pull/494)
-
-1. Update maintainer email
-    * [Pull request #487](https://github.com/gazebosim/gz-msgs/pull/487)
-
-1. Code cleanup
-    * [Pull request #485](https://github.com/gazebosim/gz-msgs/pull/485)
 
 1. Remove deprecations: tock
     * [Pull request #476](https://github.com/gazebosim/gz-msgs/pull/476)
