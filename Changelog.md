@@ -1,6 +1,6 @@
 ## Gazebo Msgs 12.x
 
-### Gazebo Msgs 12.0.0 (2025-08-XX)
+### Gazebo Msgs 12.0.0 (2025-09-XX)
 
 1. **Baseline:** this includes all changes from 11.1.0 and earlier.
 
