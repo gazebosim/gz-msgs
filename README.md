@@ -9,10 +9,11 @@
 
 Build | Status
 -- | --
-Test coverage | [![codecov](https://codecov.io/gh/gazebosim/gz-msgs/tree/main/graph/badge.svg)](https://codecov.io/gh/gazebosim/gz-msgs/tree/main)
-Ubuntu Noble  | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-ci-main-noble-amd64)](https://build.osrfoundation.org/job/gz_msgs-ci-main-noble-amd64)
-Homebrew      | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-ci-main-homebrew-amd64)](https://build.osrfoundation.org/job/gz_msgs-ci-main-homebrew-amd64)
-Windows       | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-main-clowin)](https://build.osrfoundation.org/job/gz_msgs-main-clowin)
+Test coverage | [![codecov](https://codecov.io/gh/gazebosim/gz-msgs/tree/gz-msgs12/graph/badge.svg)](https://codecov.io/gh/gazebosim/gz-msgs/tree/gz-msgs12)
+Ubuntu Noble  | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-ci-gz-msgs12-noble-amd64)](https://build.osrfoundation.org/job/gz_msgs-ci-gz-msgs12-noble-amd64)
+Homebrew      | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-ci-gz-msgs12-homebrew-amd64)](https://build.osrfoundation.org/job/gz_msgs-ci-gz-msgs12-homebrew-amd64)
+Windows       | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_msgs-12-cnlwin)](https://build.osrfoundation.org/job/gz_msgs-12-cnlwin)
+
 
 Gazebo Messages is a component in the [Gazebo](http://gazebosim.org)
 framework, a set of libraries designed to rapidly develop robot applications.
