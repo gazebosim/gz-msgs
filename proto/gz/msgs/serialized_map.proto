@@ -32,7 +32,7 @@ message SerializedEntityMap
   uint64 id = 1;
 
   /// \brief All the components belonging to the entity.
-  map<int64, SerializedComponent> components = 2;
+  map<uint64, SerializedComponent> components = 2;
 
   /// \brief Whether the entity and all its components should be removed at the
   /// current state.
