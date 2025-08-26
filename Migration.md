@@ -11,6 +11,11 @@ release will remove the deprecated code.
    package.xml package name. Use `find_package(gz-msgs)` instead of
    `find_package(gz-msgsX)` going forward.
 
+### Modifications
+
+1. **serialized_map.proto**
+  + In the `components` field of `SerializedEntityMap`, the key of the map has been changed from `int64` to `uint64`.
+
 ### Deprecations
 
 1. **camerasensor.proto**
