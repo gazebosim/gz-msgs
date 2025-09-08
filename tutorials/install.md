@@ -90,7 +90,7 @@ sudo make uninstall
 
 1. Clone the repository
   ```
-  git clone https://github.com/gazebosim/gz-msgs -b ign-msgs<#>
+  git clone https://github.com/gazebosim/gz-msgs -b gz-msgs<#>
   ```
   Be sure to replace `<#>` with a number value, such as 1 or 2, depending on
   which version you need.
