@@ -54,5 +54,5 @@ message AttachDetachResponse
   bool success = 1;
 
   /// \brief Additional message or error description
-  string message
+  string message = 2;
 }
