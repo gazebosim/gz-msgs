@@ -12,14 +12,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
-*/
+ */
 
-// Contributor : Adarsh Karan K P
+// Contributor: Adarsh Karan K P
 // Neobotix GmbH
 
 syntax = "proto3";
+
 package gz.msgs;
+
 option java_package = "com.gz.msgs";
 option java_outer_classname = "DynamicDetachableJointProtos";
 
@@ -31,24 +32,27 @@ import "gz/msgs/header.proto";
 
 message AttachDetachRequest
 {
-    /// \brief Optional header data
+  // TODO: Add optional header data
+  // gz.msgs.Header header = 1;
 
-    /// \brief 
-    string child_model_name                    = 1;
+  /// \brief Name of the child model
+  string child_model_name = 1;
 
-    /// \brief 
-    string child_link_name                    = 2;
+  /// \brief Name of the child link
+  string child_link_name = 2;
 
-    /// \brief 
-    string command                     = 3;
-
+  /// \brief Command to attach or detach
+  string command = 3;
 }
 
-/// \brief 
 message AttachDetachResponse
 {
-    /// \brief Optional header data
+  // TODO: Add optional header data
+  // gz.msgs.Header header = 1;
 
-    bool success = 1;
-    string message = 2;
+  /// \brief True if the operation was successful
+  bool success = 1;
+
+  /// \brief Additional message or error description
+  string message
 }
