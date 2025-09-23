@@ -4,7 +4,16 @@
 
 1. **Baseline:** this includes all changes from 11.1.0 and earlier.
 
+1. Use uint64 type for component IDs
+    * [Pull request #529](https://github.com/gazebosim/gz-msgs/pull/529)
+
+1. Tutorial updates:
+    * [Pull request #532](https://github.com/gazebosim/gz-msgs/pull/532)
+    * [Pull request #531](https://github.com/gazebosim/gz-msgs/pull/531)
+    * [Pull request #494](https://github.com/gazebosim/gz-msgs/pull/494)
+
 1. Bazel updates
+    * [Pull request #530](https://github.com/gazebosim/gz-msgs/pull/530)
     * [Pull request #521](https://github.com/gazebosim/gz-msgs/pull/521)
     * [Pull request #519](https://github.com/gazebosim/gz-msgs/pull/519)
     * [Pull request #514](https://github.com/gazebosim/gz-msgs/pull/514)
@@ -31,9 +40,6 @@
 
 1. Bump gz-cmake and others in jetty
     * [Pull request #506](https://github.com/gazebosim/gz-msgs/pull/506)
-
-1. docs: fix typo in tutorials/message_generation.md
-    * [Pull request #494](https://github.com/gazebosim/gz-msgs/pull/494)
 
 1. Remove deprecations: tock
     * [Pull request #476](https://github.com/gazebosim/gz-msgs/pull/476)
