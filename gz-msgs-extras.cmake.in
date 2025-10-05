@@ -14,10 +14,6 @@
 
 # copied from gz-msgs/gz-msgs-extras.cmake
 
-if(NOT TARGET Python3::Interpreter)
-  find_package(Python3 REQUIRED COMPONENTS Interpreter)
-endif()
-
 include(${@PROJECT_NAME@_DIR}/gz_msgs_string_utils.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_protoc.cmake)
 include(${@PROJECT_NAME@_DIR}/gz_msgs_factory.cmake)
@@ -73,6 +69,10 @@ function(gz_msgs_generate_messages)
   set(options "")
   set(oneValueArgs MSGS_PATH TARGET PROTO_PACKAGE OUTPUT_DIRECTORY)
   set(multiValueArgs MSGS_PROTOS DEPENDENCIES)
+
+  if(@PROJECT_NAME@_PYTHON_INTERPRETER STREQUAL "Python3::Interpreter" AND NOT TARGET Python3::Interpreter)
+    find_package(Python3 REQUIRED COMPONENTS Interpreter)
+  endif()
 
   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
   gz_msgs_generate_messages_lib(

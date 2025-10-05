@@ -31,6 +31,10 @@ function(gz_msgs_factory)
     set(gz_msgs_factory_PYTHON_INTERPRETER Python3::Interpreter)
   endif()
 
+  if(gz_msgs_factory_PYTHON_INTERPRETER STREQUAL "Python3::Interpreter" AND NOT TARGET Python3::Interpreter)
+    find_package(Python3 REQUIRED COMPONENTS Interpreter)
+  endif()
+
   _gz_msgs_proto_pkg_to_path(${gz_msgs_factory_PROTO_PACKAGE} proto_package_dir)
 
   set(output_header "${gz_msgs_factory_OUTPUT_CPP_DIR}/${proto_package_dir}/MessageTypes.hh")
