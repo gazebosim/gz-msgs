@@ -23,5 +23,6 @@ integration_tests = glob(
         "//:gzmsgs_cc_proto",
         "@googletest//:gtest",
         "@googletest//:gtest_main",
+        "@gz-math",
     ],
 ) for test in integration_tests]
