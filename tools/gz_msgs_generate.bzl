@@ -1,5 +1,8 @@
 """Helper functions for generating gz-msgs compatible messages"""
 
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
+load("@rules_cc//cc/common:cc_common.bzl", "cc_common")
+load("@rules_cc//cc/common:cc_info.bzl", "CcInfo")
 load("@rules_proto//proto:defs.bzl", "ProtoInfo")
 
 visibility("public")
@@ -17,6 +20,7 @@ def _strip_proto_extension(proto_filename):
 
 def proto_path_to_generated_filename(proto_path, fmt_str):
     """Calculates the name of a generated file for a protobuf path.
+
     For example, "examples/protos/helloworld.proto" might map to
       "helloworld.pb.h".
     Args:
@@ -29,9 +33,10 @@ def proto_path_to_generated_filename(proto_path, fmt_str):
     return fmt_str.format(_strip_proto_extension(proto_path))
 
 def get_include_directory(source_file):
-    """Returns the include directory path for the source_file. I.e. all of the
-    include statements within the given source_file are calculated relative to
-    the directory returned by this method.
+    """Returns the include directory path for the source_file.
+
+    I.e. all of the include statements within the given source_file are
+    calculated relative to the directory returned by this method.
     The returned directory path can be used as the "--proto_path=" argument
     value.
     Args:
@@ -76,6 +81,7 @@ def _get_staged_proto_file(context, source_file):
 
 def protos_from_context(context):
     """Copies proto files to the appropriate location.
+
     Args:
       context: The ctx object for the rule.
     Returns:
@@ -88,7 +94,16 @@ def protos_from_context(context):
     return protos
 
 def declare_out_files(protos, context, generated_file_format):
-    """Declares and returns the files to be generated."""
+    """Declares and returns the files to be generated.
+
+    Args:
+      protos: List of protos.
+      context: The ctx object forwarded from the rule.
+      generated_file_format: Formatting string for generated file name.
+        e.g. "{}.pb.cc"
+    Returns:
+      A list of declared out files.
+    """
 
     out_file_paths = []
     for proto in protos:
@@ -109,8 +124,9 @@ def declare_out_files(protos, context, generated_file_format):
     ]
 
 def get_out_dir(protos, context):
-    """ Returns the calculated value for --<lang>_out= protoc argument based on
-    the input source proto files and current context.
+    """ Returns the calculated value for --<lang>_out= protoc argument.
+
+    Computed based on the input source proto files and current context.
     Args:
         protos: A list of protos to be used as source files in protoc command
         context: A ctx object for the rule.
@@ -132,10 +148,11 @@ def get_out_dir(protos, context):
     return struct(path = context.bin_dir.path, import_path = None)
 
 def is_in_virtual_imports(source_file, virtual_folder = _VIRTUAL_IMPORTS):
-    """Determines if source_file is virtual (is placed in _virtual_imports
-    subdirectory). The output of all proto_library targets which use
-    import_prefix  and/or strip_import_prefix arguments is placed under
-    _virtual_imports directory.
+    """Determines if source_file is virtual.
+
+    I.e. whether the source_file is placed in the _virtual_imports subdirectory.
+    The output of all proto_library targets which use import_prefix and/or
+    strip_import_prefix arguments is placed under _virtual_imports directory.
     Args:
         source_file: A proto file.
         virtual_folder: The virtual folder name (is set to "_virtual_imports"
@@ -325,16 +342,20 @@ def gz_proto_library(
         name,
         proto_deps,
         **kwargs):
-    """
-    gz_proto_library rule implementation wrapper
+    """gz_proto_library rule implementation wrapper
+
+    Args:
+        name: Rule name
+        proto_deps: List of proto_library targets to be compiled and included in
+          the wrapped cc_library rule.
+        **kwargs: forwarded to wrapped cc_library.
     """
     _gz_proto_library(name = name + "_pb", deps = proto_deps)
 
     filter_files(name = name + "_srcs", target = ":" + name + "_pb", extensions = ["cc"])
     filter_files(name = name + "_hdrs", target = ":" + name + "_pb", extensions = ["h"])
     kwargs["deps"].append(":" + name + "_pb")
-
-    native.cc_library(
+    cc_library(
         name = name,
         srcs = [name + "_srcs"],
         hdrs = [name + "_hdrs"],
