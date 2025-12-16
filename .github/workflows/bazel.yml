@@ -1,9 +1,10 @@
 name: Bazel CI
 on:
-  push:
-    branches: [gz-msgs11, main]
   pull_request:
-    branches: [gz-msgs11, main]
+  push:
+    branches:
+      - 'gz-msgs[1-9]?[0-9]'
+      - 'main'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
