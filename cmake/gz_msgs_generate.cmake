@@ -131,6 +131,11 @@ function(gz_msgs_generate_messages_impl)
       COMPILE_FLAGS "-Wno-switch-default -Wno-float-equal")
   endif()
 
+  if(APPLE)
+    set_source_files_properties(${${generate_messages_OUTPUT_SOURCES}}
+      COMPILE_FLAGS "-Wno-deprecated-declarations")
+  endif()
+
   if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     # Disable warning in generated *.pb.cc code
     set_source_files_properties(${${generate_messges_OUTPUT_SOURCES}}

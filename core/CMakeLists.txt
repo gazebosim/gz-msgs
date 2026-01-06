@@ -11,6 +11,11 @@ target_link_libraries(${PROTOC_PLUGIN}
 target_include_directories(${PROTOC_PLUGIN} PRIVATE ${PROTOBUF_INCLUDE_DIR})
 target_compile_features(${PROTOC_PLUGIN} PRIVATE ${GZ_CXX_11_FEATURES})
 
+if(APPLE)
+  target_compile_options(${PROTOC_PLUGIN}
+    PRIVATE -Wno-deprecated-declarations)
+endif()
+
 if (UNIX)
   target_link_libraries(${PROTOC_PLUGIN} pthread)
 endif()
@@ -131,12 +136,6 @@ target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
 )
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   SYSTEM PUBLIC $<TARGET_PROPERTY:protobuf::libprotobuf,INTERFACE_INCLUDE_DIRECTORIES>)
-
-# Supress protobuf RepeatedPtrField deprecation warning for macOS Sonoma
-if(APPLE)
-  target_compile_options(${PROJECT_LIBRARY_TARGET_NAME}
-    PRIVATE -Wno-deprecated-declarations)
-endif()
 
 ##################################################
 # Build unit tests
