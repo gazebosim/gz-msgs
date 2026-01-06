@@ -132,6 +132,12 @@ target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   SYSTEM PUBLIC $<TARGET_PROPERTY:protobuf::libprotobuf,INTERFACE_INCLUDE_DIRECTORIES>)
 
+# Supress protobuf RepeatedPtrField deprecation warning for macOS Sonoma
+if(APPLE)
+  target_compile_options(${PROJECT_LIBRARY_TARGET_NAME}
+    PRIVATE -Wno-deprecated-declarations)
+endif()
+
 ##################################################
 # Build unit tests
 # Build the unit tests.
