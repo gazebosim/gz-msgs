@@ -9,7 +9,7 @@ project(gz-msgs VERSION 12.0.0)
 # Find gz-cmake
 #============================================================================
 # If you get an error at this line, you need to install gz-cmake
-find_package(gz-cmake REQUIRED)
+find_package(gz-cmake 5 REQUIRED)
 
 #============================================================================
 # Configure the project
@@ -92,11 +92,11 @@ gz_find_package(GzProtobuf
 
 #--------------------------------------
 # Find gz-utils
-gz_find_package(gz-utils REQUIRED COMPONENTS cli)
+gz_find_package(gz-utils VERSION 4 REQUIRED COMPONENTS cli)
 
 #--------------------------------------
 # Find gz-math
-gz_find_package(gz-math REQUIRED)
+gz_find_package(gz-math VERSION 9 REQUIRED)
 
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
