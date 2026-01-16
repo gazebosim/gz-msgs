@@ -157,6 +157,9 @@ cc_library(
         "@gz-utils//:NeverDestroyed",
         "@tinyxml2",
     ],
+    # Ensure that messages are registered with the Factory.
+    # This is particularly needed on MacOS.
+    alwayslink = 1,
 )
 
 gz_configure_file(
