@@ -1,5 +1,25 @@
 ## Gazebo Msgs 12.x
 
+### Gazebo Msgs 12.0.1 (2026-01-20)
+
+1. [Bazel] Fix CI on MacOS
+    * [Pull request #552](https://github.com/gazebosim/gz-msgs/pull/552)
+
+1. Find jetty packages with explicit version
+    * [Pull request #551](https://github.com/gazebosim/gz-msgs/pull/551)
+
+1. [bazel/infra] Disable windows CI
+    * [Pull request #541](https://github.com/gazebosim/gz-msgs/pull/541)
+
+1. [bazel/infra] Add manual BCR release workflow
+    * [Pull request #540](https://github.com/gazebosim/gz-msgs/pull/540)
+
+1. Bazel updates
+    * [Pull request #537](https://github.com/gazebosim/gz-msgs/pull/537)
+
+1. Only call find_package(Python3 REQUIRED COMPONENTS Interpreter) if strictly necessary
+    * [Pull request #536](https://github.com/gazebosim/gz-msgs/pull/536)
+
 ### Gazebo Msgs 12.0.0 (2025-09-30)
 
 1. **Baseline:** this includes all changes from 11.1.0 and earlier.
