@@ -1,0 +1,20 @@
+syntax = "proto3";
+package gz.msgs;
+import "gz/msgs/header.proto";
+
+message CanFrame
+{
+  Header header = 1;
+
+  uint32 id = 2;
+
+  bool is_rtr = 3;
+
+  bool is_extended = 4;
+
+  bool is_error = 5;
+
+  uint32 dlc = 6;
+
+  bytes data = 7;
+}
