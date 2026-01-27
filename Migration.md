@@ -5,6 +5,10 @@ Deprecated code produces compile-time warnings. These warning serve as
 notification to users that their code should be upgraded. The next major
 release will remove the deprecated code.
 
+
+## Gazebo Msgs 12.X to 13.X
+
+
 ## Gazebo Msgs 11.X to 12.X
 
 1. The major version has been removed from the cmake project name and the
