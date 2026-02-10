@@ -124,7 +124,7 @@ function(gz_msgs_generate_messages_impl)
 
   if(WIN32)
     set_source_files_properties(${${generate_messages_OUTPUT_SOURCES}}
-      COMPILE_FLAGS "/wd4100 /wd4512 /wd4127 /wd4068 /wd4244 /wd4267 /wd4251 /wd4146")
+      COMPILE_FLAGS "/wd4100 /wd4512 /wd4127 /wd4068 /wd4244 /wd4267 /wd4251 /wd4275 /wd4146")
   endif()
 
   if(NOT MSVC)
