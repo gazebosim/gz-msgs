@@ -131,5 +131,24 @@ target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   SYSTEM PUBLIC $<TARGET_PROPERTY:protobuf::libprotobuf,INTERFACE_INCLUDE_DIRECTORIES>)
 
+if (WIN32)
+  set(_gz_msgs_use_protobuf_dlls FALSE)
+  get_target_property(_gz_msgs_protobuf_type protobuf::libprotobuf TYPE)
+  if (_gz_msgs_protobuf_type STREQUAL "SHARED_LIBRARY")
+    set(_gz_msgs_use_protobuf_dlls TRUE)
+  endif()
+  if (NOT _gz_msgs_use_protobuf_dlls)
+    get_target_property(_gz_msgs_protobuf_implib protobuf::libprotobuf IMPORTED_IMPLIB)
+    if (_gz_msgs_protobuf_implib)
+      set(_gz_msgs_use_protobuf_dlls TRUE)
+    endif()
+  endif()
+  if (_gz_msgs_use_protobuf_dlls)
+    # Needed when consuming shared protobuf on Windows to avoid DLL interface warnings.
+    target_compile_definitions(${PROJECT_LIBRARY_TARGET_NAME} PUBLIC PROTOBUF_USE_DLLS)
+    target_compile_definitions(${PROTOC_PLUGIN} PRIVATE PROTOBUF_USE_DLLS)
+  endif()
+endif()
+
 add_subdirectory(include/gz/msgs)
 add_subdirectory(cmd)
