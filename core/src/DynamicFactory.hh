@@ -19,7 +19,7 @@
 
 #ifdef _MSC_VER
 #pragma warning(push)
-#pragma warning(disable: 4146 4251 4275)
+#pragma warning(disable: 4146 4251 4275 4715)
 #endif
 
 #include <google/protobuf/descriptor.pb.h>
