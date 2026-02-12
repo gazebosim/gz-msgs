@@ -17,14 +17,7 @@
 
 #include <unordered_set>
 
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4146 4251)
-#endif
 #include <google/protobuf/text_format.h>
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
 
 #include "DynamicFactory.hh"
 #include "gz/msgs/MessageFactory.hh"

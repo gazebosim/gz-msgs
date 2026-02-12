@@ -20,14 +20,7 @@
 
 #include <memory>
 
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4100 4512 4127 4068 4244 4267 4251 4146)
-#endif
 #include <google/protobuf/message.h>
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
 
 namespace gz::msgs::detail
 {

@@ -26,20 +26,11 @@
 #include <utility>
 #include <vector>
 
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4100 4512 4127 4068 4244 4267 4251 4146)
-#endif
-
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/compiler/code_generator.h>
 #include <google/protobuf/io/printer.h>
 #include <google/protobuf/io/zero_copy_stream.h>
 #include <google/protobuf/descriptor.pb.h>
-
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
 
 #include "Generator.hh"
 
