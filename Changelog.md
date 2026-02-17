@@ -1,5 +1,28 @@
 ## Gazebo Msgs 8.x
 
+### Gazebo Msgs 8.7.1 (2026-02-17)
+
+1. Fortress: disable Ubuntu Focal CI
+    * [Pull request #555](https://github.com/gazebosim/gz-msgs/pull/555)
+
+1. Fix compatibility with protobuf v30 (cpp 6.30.0)
+    * [Pull request #524](https://github.com/gazebosim/gz-msgs/pull/524)
+
+1. Update maintainer email
+    * [Pull request #487](https://github.com/gazebosim/gz-msgs/pull/487)
+
+1. GzProtobuf: Do not require version 3
+    * [Pull request #346](https://github.com/gazebosim/gz-msgs/pull/346)
+
+1. CI workflow: use checkout v3
+    * [Pull request #331](https://github.com/gazebosim/gz-msgs/pull/331)
+
+1. Rename COPYING to LICENSE
+    * [Pull request #330](https://github.com/gazebosim/gz-msgs/pull/330)
+
+1. Fix typo in changelog
+    * [Pull request #314](https://github.com/gazebosim/gz-msgs/pull/314)
+
 ### Gazebo Msgs 8.7.0 (2022-09-27)
 
 1. ign -> gz Redirect Gz Headers
