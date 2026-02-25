@@ -85,12 +85,6 @@ def main(argv=sys.argv[1:]):
 
     cmd += [args.input_path]
 
-    try:
-        subprocess.check_call(cmd)
-    except subprocess.CalledProcessError as e:
-        print(f'Failed to execute protoc compiler: {e}')
-        sys.exit(-1)
-
     os.makedirs(args.output_cpp_path, exist_ok=True)
 
     try:
