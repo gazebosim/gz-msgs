@@ -7,6 +7,14 @@ endif()
 gz_build_tests(TYPE INTEGRATION SOURCES ${tests} TEST_LIST test_targets
                ENVIRONMENT GZ_MSG_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX})
 
+if(MSVC)
+  foreach(target IN LISTS test_targets)
+    if(TARGET ${target})
+      target_compile_options(${target} PRIVATE /wd4275)
+    endif()
+  endforeach()
+endif()
+
 if(TARGET INTEGRATION_gz_TEST)
   target_compile_definitions(INTEGRATION_gz_TEST PRIVATE
     "GZ_MSGS_EXECUTABLE_PATH=\"$<TARGET_FILE:gz-msgs-exe>\""

@@ -17,18 +17,9 @@
 #ifndef DYNAMIC_FACTORY_HH_
 #define DYNAMIC_FACTORY_HH_
 
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4146 4251)
-#endif
-
 #include <google/protobuf/descriptor.pb.h>
 #include <google/protobuf/descriptor_database.h>
 #include <google/protobuf/dynamic_message.h>
-
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
 
 #include <functional>
 #include <map>
