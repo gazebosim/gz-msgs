@@ -10,6 +10,15 @@ target_link_libraries(${msgs_executable}
   gz-utils::cli
 )
 
+if(MSVC)
+  # Suppress protobuf-related DLL interface warnings:
+  # C4251: class needs dll-interface to be used by clients
+  # C4275: non dll-interface class used as base for dll-interface class
+  target_compile_options(${msgs_executable} PRIVATE /wd4251 /wd4275)
+  # Add /LTCG to avoid linker restart when objects are compiled with /GL
+  target_link_options(${msgs_executable} PRIVATE /LTCG)
+endif()
+
 set(EXE_INSTALL_DIR ${CMAKE_INSTALL_LIBEXECDIR}/gz/${GZ_DESIGNATION}/)
 install(TARGETS ${msgs_executable} DESTINATION ${EXE_INSTALL_DIR})
 set(executable_location "../../../${EXE_INSTALL_DIR}/$<TARGET_FILE_NAME:${msgs_executable}>")
