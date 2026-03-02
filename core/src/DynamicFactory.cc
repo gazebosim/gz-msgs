@@ -21,12 +21,14 @@
 #include <filesystem>
 #include <iostream>
 #include <iterator>
+#include <regex>
 #include <string>
 #include <vector>
 
 #include "DynamicFactory.hh"
 #include "gz/utils/Environment.hh"
 
+#include <gz/msgs/config.hh>
 #include <gz/msgs/InstallationDirectories.hh>
 
 namespace {
@@ -141,8 +143,21 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     }
     else
     {
+      // Skip descriptor files from other gz-msgs major versions to avoid
+      // "File already exists in database" protobuf errors when multiple
+      // gz-msgs versions are installed side by side.
+      const std::string ownDescFile =
+        "gz-msgs" + std::to_string(GZ_MSGS_MAJOR_VERSION) + ".gz_desc";
+      const std::regex otherGzMsgsDesc(R"(gz-msgs\d+\.gz_desc)");
+
       for (auto const &dirIter : std::filesystem::directory_iterator{descDir})
       {
+        auto filename = dirIter.path().filename().string();
+        // Fast-path: always accept our own version's descriptor.
+        // For any other file matching the gz-msgs pattern, skip it.
+        if (filename != ownDescFile &&
+            std::regex_match(filename, otherGzMsgsDesc))
+          continue;
         loadDescFile(dirIter.path().string());
       }
     }
