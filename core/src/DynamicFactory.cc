@@ -124,7 +124,8 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     {
       // Skip protos already loaded (e.g. same .gz_desc reached via
       // both GZ_DESCRIPTOR_PATH and the global share directory).
-      if (this->pool.FindFileByName(fileDescriptorProto.name()) != nullptr) {
+      if (this->pool.FindFileByName(fileDescriptorProto.name()) != nullptr)
+      {
         continue;
       }
 
