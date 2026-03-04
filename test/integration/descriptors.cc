@@ -19,8 +19,6 @@
 
 #include <filesystem>
 
-#include <google/protobuf/stubs/logging.h>
-
 #include "gz/msgs/Factory.hh"
 
 static constexpr const char * kMsgsTestPath = GZ_MSGS_TEST_PATH;
@@ -113,26 +111,19 @@ TEST(FactoryTest, NoDuplicateDescriptors)
   std::string paths = path + ":" + path;
 #endif
 
-  // SetLogHandler requires a plain function pointer (no captures), so use a
-  // static flag to detect ERROR-level messages from libprotobuf during loading.
-  static bool s_protobuf_error_seen;
-  s_protobuf_error_seen = false;
-  auto * old_handler = google::protobuf::SetLogHandler(
-    [](google::protobuf::LogLevel level, const char *, int,
-       const std::string &) {
-      if (level == google::protobuf::LOGLEVEL_ERROR) {
-        s_protobuf_error_seen = true;
-      }
-    });
+  // Capture stderr to detect any "already exists in database" errors from
+  // libprotobuf.  Using gtest's CaptureStderr avoids depending on the
+  // protobuf-internal SetLogHandler API, which was removed in protobuf 4.x.
+  ::testing::internal::CaptureStderr();
 
   // Loading the same descriptor twice must not cause protobuf errors.
   // The second occurrence is skipped because the protos are already in the pool.
   gz::msgs::Factory::LoadDescriptors(paths);
 
-  google::protobuf::SetLogHandler(old_handler);
-
-  EXPECT_FALSE(s_protobuf_error_seen)
-    << "libprotobuf ERROR emitted during duplicate descriptor load";
+  std::string stderr_output = ::testing::internal::GetCapturedStderr();
+  EXPECT_EQ(stderr_output.find("already exists in database"), std::string::npos)
+    << "libprotobuf ERROR emitted during duplicate descriptor load: "
+    << stderr_output;
 
   // The message type must remain accessible after duplicate loading.
   EXPECT_NE(nullptr, gz::msgs::Factory::New("example.msgs.StringMsg"));
