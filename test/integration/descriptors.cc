@@ -93,3 +93,28 @@ TEST(FactoryTest, DynamicFactory)
   EXPECT_NE(nullptr, gz::msgs::Factory::New("testing.BarMessage"));
   EXPECT_NE(nullptr, gz::msgs::Factory::New("testing.BazMessage"));
 }
+
+TEST(FactoryTest, NoDuplicateDescriptors)
+{
+  // Regression test for https://github.com/gazebosim/gz-msgs/issues/460
+  // When the same .gz_desc file is reachable via both GZ_DESCRIPTOR_PATH
+  // and the global share directory, the DynamicFactory used to print:
+  //   [libprotobuf ERROR] File already exists in database: ...
+  // The fix silently skips proto definitions already present in the pool.
+
+  std::filesystem::path test_path(kMsgsTestPath);
+  std::string path = (test_path / "desc" / "stringmsg.desc").string();
+
+#ifdef _WIN32
+  std::string paths = path + ";" + path;
+#else
+  std::string paths = path + ":" + path;
+#endif
+
+  // Loading the same descriptor twice must not cause protobuf errors.
+  // The second occurrence is skipped because the protos are already in the pool.
+  gz::msgs::Factory::LoadDescriptors(paths);
+
+  // The message type must remain accessible after duplicate loading.
+  EXPECT_NE(nullptr, gz::msgs::Factory::New("example.msgs.StringMsg"));
+}
