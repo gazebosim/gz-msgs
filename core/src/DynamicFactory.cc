@@ -140,6 +140,9 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     }
   };
 
+  const std::string ownDescFile =
+    "gz-msgs" + std::to_string(GZ_MSGS_MAJOR_VERSION) + ".gz_desc";
+
   for (const std::string &descDir : descDirs)
   {
     if (!std::filesystem::is_directory(descDir))
@@ -149,8 +152,6 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     else
     {
       // Default to loading the descriptor file for this gz-msgs major version if it exists
-      const std::string ownDescFile =
-        "gz-msgs" + std::to_string(GZ_MSGS_MAJOR_VERSION) + ".gz_desc";
       auto ownDescPath = std::filesystem::path(descDir) / ownDescFile;
       if (std::filesystem::exists(ownDescPath))
       {
