@@ -153,8 +153,14 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
 void DynamicFactory::Types(std::vector<std::string> &_types)
 {
   std::vector<std::string> messages;
-  this->db.FindAllMessageNames(&messages);
-  std::copy(messages.begin(), messages.end(), std::back_inserter(_types));
+  if (this->db.FindAllMessageNames(&messages))
+  {
+    std::copy(messages.begin(), messages.end(), std::back_inserter(_types));
+  }
+  else
+  {
+    std::cerr << "DynamicFactory(). Unable to find all message names.\n";
+  }
 }
 
 //////////////////////////////////////////////////
