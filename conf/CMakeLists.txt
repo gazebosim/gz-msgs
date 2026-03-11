@@ -2,8 +2,6 @@
 set(gz_library_path "${CMAKE_BINARY_DIR}/test/lib/$<CONFIG>/ruby/gz/cmd${GZ_DESIGNATION}")
 
 # Generate a configuration file for internal testing.
-# Note that the major version of the library is included in the name.
-# Ex: transport0.yaml
 configure_file(
   "${GZ_DESIGNATION}.yaml.in"
   "${CMAKE_CURRENT_BINARY_DIR}/${GZ_DESIGNATION}.yaml.configured" @ONLY)
@@ -16,8 +14,6 @@ file(GENERATE
 set(gz_library_path "${CMAKE_INSTALL_PREFIX}/lib/ruby/gz/cmd${GZ_DESIGNATION}")
 
 # Generate the configuration file that is installed.
-# Note that the major version of the library is included in the name.
-# Ex: transport0.yaml
 configure_file(
   "${GZ_DESIGNATION}.yaml.in"
   "${CMAKE_CURRENT_BINARY_DIR}/${GZ_DESIGNATION}.yaml" @ONLY)
