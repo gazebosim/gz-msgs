@@ -105,7 +105,6 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter)
 # Note that CLI files are installed regardless of whether the dependency is
 # available during build time
 find_program(HAVE_GZ_TOOLS gz)
-set(GZ_TOOLS_VER 2)
 
 #--------------------------------------
 # Find Tinyxml2
