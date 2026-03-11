@@ -24,23 +24,23 @@ TEST(Messages, NestedHeaders)
   // Empty contact
   gz::msgs::Contact contact;
   std::string contactSerialized;
-  contact.SerializeToString(&contactSerialized);
+  EXPECT_TRUE(contact.SerializeToString(&contactSerialized));
   EXPECT_EQ(0u, contactSerialized.size());
 
   // Empty wrench
   gz::msgs::JointWrench wrench;
   std::string wrenchSerialized;
-  wrench.SerializeToString(&wrenchSerialized);
+  EXPECT_TRUE(wrench.SerializeToString(&wrenchSerialized));
   EXPECT_EQ(0u, wrenchSerialized.size());
 
   // Add header data to the wrench message
   wrench.mutable_header()->mutable_stamp()->set_sec(123);
-  wrench.SerializeToString(&wrenchSerialized);
+  EXPECT_TRUE(wrench.SerializeToString(&wrenchSerialized));
   EXPECT_EQ(6u, wrenchSerialized.size());
 
   // Set the same header data on contact's embedded wrench message
   contact.add_wrench()->mutable_header()->mutable_stamp()->set_sec(123);
-  contact.SerializeToString(&contactSerialized);
+  EXPECT_TRUE(contact.SerializeToString(&contactSerialized));
 
   // The contact message should be a bit larger than the standalone wrench
   // message since the contact message needs to contain information about the
@@ -49,6 +49,6 @@ TEST(Messages, NestedHeaders)
 
   // The contact's embedded wrench message should be the same size as the
   // standalone wrench message.
-  contact.wrench(0).SerializeToString(&contactSerialized);
+  EXPECT_TRUE(contact.wrench(0).SerializeToString(&contactSerialized));
   EXPECT_EQ(wrenchSerialized.size(), contactSerialized.size());
 }
