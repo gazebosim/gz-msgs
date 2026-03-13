@@ -151,7 +151,8 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     }
     else
     {
-      // Default to loading the descriptor file for this gz-msgs major version if it exists
+      // Default to loading the descriptor file for this gz-msgs major
+      // version if it exists
       auto ownDescPath = std::filesystem::path(descDir) / ownDescFile;
       if (std::filesystem::exists(ownDescPath))
       {

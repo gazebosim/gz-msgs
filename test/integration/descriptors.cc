@@ -117,7 +117,8 @@ TEST(FactoryTest, NoDuplicateDescriptors)
   ::testing::internal::CaptureStderr();
 
   // Loading the same descriptor twice must not cause protobuf errors.
-  // The second occurrence is skipped because the protos are already in the pool.
+  // The second occurrence is skipped because the protos are already in the
+  // pool.
   gz::msgs::Factory::LoadDescriptors(paths);
 
   std::string stderr_output = ::testing::internal::GetCapturedStderr();
