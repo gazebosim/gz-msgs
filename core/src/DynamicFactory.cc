@@ -141,8 +141,7 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     }
   };
 
-  const std::string ownDescFile =
-    "gz-msgs" + std::to_string(GZ_MSGS_MAJOR_VERSION) + ".gz_desc";
+  const std::string ownDescFile = GZ_MSGS_DESC_FILENAME;
 
   for (const std::string &descDir : descDirs)
   {
