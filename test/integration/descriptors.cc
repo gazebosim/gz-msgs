@@ -18,6 +18,7 @@
 #include <gtest/gtest.h>
 
 #include <filesystem>
+#include <sstream>
 
 #include "gz/msgs/Factory.hh"
 
@@ -111,16 +112,21 @@ TEST(FactoryTest, NoDuplicateDescriptors)
   std::string paths = path + ":" + path;
 #endif
 
-  ::testing::internal::CaptureStderr();
+  // Redirect std::cerr to a stringstream so we can inspect error output
+  // from libprotobuf (which writes to std::cerr by default).
+  std::stringstream buffer;
+  std::streambuf *old = std::cerr.rdbuf(buffer.rdbuf());
 
   // Loading the same descriptor twice must not cause protobuf errors.
   // The second occurrence is skipped because the protos are already in the pool.
   gz::msgs::Factory::LoadDescriptors(paths);
 
-  std::string stderr_output = ::testing::internal::GetCapturedStderr();
-  EXPECT_EQ(stderr_output.find("already exists in database"), std::string::npos)
+  // Restore std::cerr
+  std::cerr.rdbuf(old);
+
+  EXPECT_EQ(buffer.str().find("already exists in database"), std::string::npos)
     << "libprotobuf ERROR emitted during duplicate descriptor load: "
-    << stderr_output;
+    << buffer.str();
 
   // The message type must remain accessible after duplicate loading.
   EXPECT_NE(nullptr, gz::msgs::Factory::New("example.msgs.StringMsg"));
