@@ -1,7 +1,7 @@
-libgz-cmake-dev
-libgz-math-dev
-libgz-tools-dev
-libgz-utils-cli-dev
+libgz-rotary-cmake-dev
+libgz-rotary-math-dev
+libgz-rotary-tools-dev
+libgz-rotary-utils-cli-dev
 libprotobuf-dev
 libprotoc-dev
 libtinyxml2-dev
