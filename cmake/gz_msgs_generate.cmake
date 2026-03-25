@@ -24,7 +24,6 @@ function(gz_msgs_generate_messages_impl)
     PYTHON_INTERPRETER
     PROTOC_EXEC
     PROTO_PACKAGE MSGS_GEN_SCRIPT GZ_PROTOC_PLUGIN FACTORY_GEN_SCRIPT PROTO_PATH
-    DEPENDENCY_DESCRIPTIONS
     DLLEXPORT_DECL
     OUTPUT_DIRECTORY
     # Outputs
@@ -33,7 +32,7 @@ function(gz_msgs_generate_messages_impl)
     OUTPUT_DETAIL_HEADERS
     OUTPUT_PYTHON
   )
-  set(multiValueArgs INPUT_PROTOS)
+  set(multiValueArgs INPUT_PROTOS DEPENDENCY_DESCRIPTIONS)
 
   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -159,10 +158,9 @@ function(gz_msgs_generate_desc_impl)
     # Inputs
     PROTOC_EXEC
     PROTO_PATH
-    DEPENDENCY_DESCRIPTIONS
     OUTPUT_DIRECTORY
     OUTPUT_FILENAME)
-  set(multiValueArgs INPUT_PROTOS)
+  set(multiValueArgs INPUT_PROTOS DEPENDENCY_DESCRIPTIONS)
 
   cmake_parse_arguments(generate_messages "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -175,9 +173,14 @@ function(gz_msgs_generate_desc_impl)
   list(APPEND ARGS --descriptor_set_out=${generate_messages_OUTPUT_FILENAME})
   list(APPEND ARGS --include_imports)
 
-  foreach(dep ${generate_messages_DEPENDENCY_DESCRIPTIONS})
-    list(APPEND ARGS --descriptor_set_in="${msgs_desc_file}")
-  endforeach()
+  if(generate_messages_DEPENDENCY_DESCRIPTIONS)
+    if(WIN32)
+      list(JOIN generate_messages_DEPENDENCY_DESCRIPTIONS "$<SEMICOLON>" _desc_joined)
+    else()
+      list(JOIN generate_messages_DEPENDENCY_DESCRIPTIONS ":" _desc_joined)
+    endif()
+    list(APPEND ARGS "--descriptor_set_in=${_desc_joined}")
+  endif()
 
   list(APPEND ARGS ${generate_messages_INPUT_PROTOS})
 
@@ -185,7 +188,7 @@ function(gz_msgs_generate_desc_impl)
     OUTPUT ${generate_messages_OUTPUT_FILENAME}
     COMMAND ${generate_messages_PROTOC_EXEC}
     ARGS ${ARGS}
-    DEPENDS ${generate_messages_INPUT_PROTOS}
+    DEPENDS ${generate_messages_INPUT_PROTOS} ${generate_messages_DEPENDENCY_DESCRIPTIONS}
     COMMENT "Generating descriptor set"
   )
 endfunction()
@@ -225,7 +228,17 @@ function(gz_msgs_generate_messages_lib)
   set(depends_proto_paths)
   set(depends_includes)
   foreach(dep ${generate_messages_DEPENDENCIES})
-    get_target_property(msgs_desc_file ${dep} GZ_MSGS_DESC_FILE)
+    # Prefer the build-time path for same-project targets; fall back to
+    # the exported install-prefix path for imported targets.
+    get_target_property(msgs_desc_file ${dep} GZ_MSGS_DESC_FILE_BUILD)
+    if(NOT msgs_desc_file)
+      get_target_property(msgs_desc_file ${dep} GZ_MSGS_DESC_FILE)
+    endif()
+    if(NOT msgs_desc_file)
+      message(FATAL_ERROR
+        "Dependency target '${dep}' does not have a GZ_MSGS_DESC_FILE or "
+        "GZ_MSGS_DESC_FILE_BUILD property. Is it a valid gz-msgs target?")
+    endif()
     list(APPEND depends_msgs_desc ${msgs_desc_file})
   endforeach()
 
@@ -279,6 +292,7 @@ function(gz_msgs_generate_messages_lib)
         SOVERSION ${PROJECT_VERSION_MAJOR}
         VERSION ${PROJECT_VERSION}
         GZ_MSGS_DESC_FILE "\$\{_IMPORT_PREFIX\}/share/gz/protos/${generate_messages_TARGET}.gz_desc"
+        GZ_MSGS_DESC_FILE_BUILD "${CMAKE_CURRENT_BINARY_DIR}/${target_name}.gz_desc"
         )
   set_property(TARGET ${target_name} PROPERTY EXPORT_PROPERTIES "GZ_MSGS_DESC_FILE")
 
