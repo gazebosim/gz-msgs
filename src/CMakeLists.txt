@@ -195,7 +195,7 @@ target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   # Disable warning in generated *.pb.cc code
-  target_compile_options(${PROJECT_LIBRARY_TARGET_NAME} PRIVATE -Wno-extended-offsetof)
+  target_compile_options(${PROJECT_LIBRARY_TARGET_NAME} PRIVATE -Wno-invalid-offsetof)
 endif()
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
