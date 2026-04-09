@@ -1,0 +1,12 @@
+syntax = "proto3";
+package gz.custom_msgs2;
+
+import "gz/msgs/header.proto";
+import "gz/custom_msgs/foo.proto";
+
+message Qux
+{
+  gz.msgs.Header header = 1;
+  gz.custom_msgs.Foo foo = 2;
+  double extra = 3;
+}
