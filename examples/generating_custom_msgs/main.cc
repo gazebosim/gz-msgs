@@ -1,6 +1,7 @@
 #include <gz/custom_msgs/foo.pb.h>
 #include <gz/custom_msgs/bar.pb.h>
 #include <gz/custom_msgs/baz.pb.h>
+#include <gz/custom_msgs2/qux.pb.h>
 
 #include <google/protobuf/text_format.h>
 
@@ -64,5 +65,15 @@ int main(int argc, char** argv)
     // Print the populated values of a message
     std::cout << "===============================" << std::endl;
     std::cout << "Pouplated Message: \n" << msg.DebugString() << std::endl;
+  }
+
+  {
+    // Use Qux from the second message library (depends on both gz.msgs and
+    // gz.custom_msgs).
+    gz::custom_msgs2::Qux qux;
+    qux.mutable_header()->mutable_stamp()->set_sec(42);
+    qux.mutable_foo()->set_value(3.14);
+    qux.set_extra(2.718);
+    std::cout << "Qux Message: \n" << qux.DebugString() << std::endl;
   }
 }
