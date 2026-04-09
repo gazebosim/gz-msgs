@@ -69,8 +69,7 @@ def main(argv=sys.argv[1:]):
         cmd += [f'--proto_path={path}']
 
     if args.dependency_proto_descs:
-        for path in args.dependency_proto_descs:
-            cmd += [f'--descriptor_set_in={path}']
+        cmd += [f'--descriptor_set_in={os.pathsep.join(args.dependency_proto_descs)}']
 
     if args.generate_cpp:
         cmd += [f'--plugin=protoc-gen-gzmsgs={args.gz_generator_bin}']
