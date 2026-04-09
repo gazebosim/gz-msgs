@@ -34,9 +34,27 @@ gz_msgs_generate_messages(
   DEPENDENCIES gz-msgs::gz-msgs
 )
 
+# Second message library with two dependencies.
+# Uses a separate proto2/ directory so that protoc cannot resolve
+# gz/custom_msgs/foo.proto from the filesystem via -I; it must come
+# from the dependency descriptor.
+gz_msgs_generate_messages(
+  TARGET msgs2
+  PROTO_PACKAGE "gz.custom_msgs2"
+  MSGS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/proto2
+  MSGS_PROTOS
+    ${CMAKE_CURRENT_SOURCE_DIR}/proto2/gz/custom_msgs2/qux.proto
+  DEPENDENCIES
+    ${PROJECT_NAME}-msgs
+    gz-msgs::gz-msgs
+)
+
 add_executable(${PROJECT_NAME} main.cc)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_NAME}-msgs)
+target_link_libraries(${PROJECT_NAME} PUBLIC
+  ${PROJECT_NAME}-msgs
+  ${PROJECT_NAME}-msgs2
+)
 
 install(TARGETS ${PROJECT_NAME}
         LIBRARY DESTINATION lib
