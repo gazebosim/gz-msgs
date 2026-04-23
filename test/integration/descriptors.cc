@@ -93,3 +93,39 @@ TEST(FactoryTest, DynamicFactory)
   EXPECT_NE(nullptr, gz::msgs::Factory::New("testing.BarMessage"));
   EXPECT_NE(nullptr, gz::msgs::Factory::New("testing.BazMessage"));
 }
+
+TEST(FactoryTest, NoDuplicateDescriptors)
+{
+  // Regression test for https://github.com/gazebosim/gz-msgs/issues/460
+  // When the same .gz_desc file is reachable via both GZ_DESCRIPTOR_PATH
+  // and the global share directory, the DynamicFactory used to print:
+  //   [libprotobuf ERROR] File already exists in database: ...
+  // The fix silently skips proto definitions already present in the pool.
+
+  std::filesystem::path test_path(kMsgsTestPath);
+  std::string path = (test_path / "desc" / "stringmsg.desc").string();
+
+#ifdef _WIN32
+  std::string paths = path + ";" + path;
+#else
+  std::string paths = path + ":" + path;
+#endif
+
+  // Capture stderr to detect any "already exists in database" errors from
+  // libprotobuf.  Using gtest's CaptureStderr avoids depending on the
+  // protobuf-internal SetLogHandler API, which was removed in protobuf 4.x.
+  ::testing::internal::CaptureStderr();
+
+  // Loading the same descriptor twice must not cause protobuf errors.
+  // The second occurrence is skipped because the protos are already in the
+  // pool.
+  gz::msgs::Factory::LoadDescriptors(paths);
+
+  std::string stderr_output = ::testing::internal::GetCapturedStderr();
+  EXPECT_EQ(stderr_output.find("already exists in database"), std::string::npos)
+    << "libprotobuf ERROR emitted during duplicate descriptor load: "
+    << stderr_output;
+
+  // The message type must remain accessible after duplicate loading.
+  EXPECT_NE(nullptr, gz::msgs::Factory::New("example.msgs.StringMsg"));
+}
