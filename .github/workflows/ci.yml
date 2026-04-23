@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - 'ign-msgs[0-9]?'
-      - 'gz-msgs[0-9]?'
+      - 'gz-msgs[1-9]?[0-9]'
       - 'main'
 
 jobs:
