@@ -34,6 +34,7 @@ gz_configure_header(
     name = "Config",
     src = "core/include/gz/msgs/config.hh.in",
     out = "include/gz/msgs/config.hh",
+    defines = ["GZ_MSGS_DESC_FILENAME=gz-msgs.gz_desc"],
     package_xml = "package.xml",
 )
 

@@ -63,18 +63,20 @@ gz_msgs_generate_messages_impl(
     msgs_python
 )
 
+set(GZ_MSGS_DESC_FILENAME "gz-msgs.gz_desc")
+
 gz_msgs_generate_desc_impl(
   PROTOC_EXEC ${${PROJECT_NAME}_PROTOC_EXECUTABLE}
   INPUT_PROTOS ${proto_files}
   PROTO_PATH ${PROJECT_SOURCE_DIR}/proto
   DEPENDENCY_DESCRIPTIONS ${depends_msgs_desc}
   OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/gz_msgs_gen
-  OUTPUT_FILENAME gz-msgs.gz_desc
+  OUTPUT_FILENAME ${GZ_MSGS_DESC_FILENAME}
 )
 
 install(FILES ${msgs_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/gz/msgs)
 install(FILES ${msgs_detail_headers} DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/gz/msgs/details)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/gz-msgs.gz_desc
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${GZ_MSGS_DESC_FILENAME}
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gz/protos/)
 
 if (NOT GZ_PYTHON_INSTALL_PATH)
@@ -102,7 +104,7 @@ gz_create_core_library(SOURCES
   src/MessageFactory.cc
   src/DynamicFactory.cc
   ${msgs_sources}
-  gz-msgs.gz_desc
+  ${GZ_MSGS_DESC_FILENAME}
 )
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME} PUBLIC
@@ -113,7 +115,7 @@ set_target_properties(
     PROPERTIES
       SOVERSION ${PROJECT_VERSION_MAJOR}
       VERSION ${PROJECT_VERSION_FULL}
-      GZ_MSGS_DESC_FILE "\$\{_IMPORT_PREFIX\}/share/gz/protos/gz-msgs.gz_desc"
+      GZ_MSGS_DESC_FILE "\$\{_IMPORT_PREFIX\}/share/gz/protos/${GZ_MSGS_DESC_FILENAME}"
       )
 set_property(TARGET ${PROJECT_LIBRARY_TARGET_NAME} PROPERTY EXPORT_PROPERTIES "GZ_MSGS_DESC_FILE")
 
