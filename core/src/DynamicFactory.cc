@@ -27,6 +27,7 @@
 #include "DynamicFactory.hh"
 #include "gz/utils/Environment.hh"
 
+#include <gz/msgs/config.hh>
 #include <gz/msgs/InstallationDirectories.hh>
 
 namespace {
@@ -121,6 +122,13 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     for (const google::protobuf::FileDescriptorProto &fileDescriptorProto :
          fileDescriptorSet.file())
     {
+      // Skip protos already loaded (e.g. same .gz_desc reached via
+      // both GZ_DESCRIPTOR_PATH and the global share directory).
+      if (this->pool.FindFileByName(fileDescriptorProto.name()) != nullptr)
+      {
+        continue;
+      }
+
       if (!static_cast<bool>(this->pool.BuildFile(fileDescriptorProto)))
       {
         std::cerr << "DynamicFactory(). Unable to place descriptors from ["
@@ -133,6 +141,8 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     }
   };
 
+  const std::string ownDescFile = GZ_MSGS_DESC_FILENAME;
+
   for (const std::string &descDir : descDirs)
   {
     if (!std::filesystem::is_directory(descDir))
@@ -141,8 +151,19 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     }
     else
     {
+      // Default to loading the descriptor file for this gz-msgs major
+      // version if it exists
+      auto ownDescPath = std::filesystem::path(descDir) / ownDescFile;
+      if (std::filesystem::exists(ownDescPath))
+      {
+        loadDescFile(ownDescPath.string());
+      }
+
       for (auto const &dirIter : std::filesystem::directory_iterator{descDir})
       {
+        auto filename = dirIter.path().filename().string();
+        if (filename == ownDescFile)  // Skip the ownDesc already loaded
+          continue;
         loadDescFile(dirIter.path().string());
       }
     }
