@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 Jiayi Cai
+ * Copyright (C) 2026 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,16 +68,13 @@ message EntityFactoryWithNs
   /// \brief New name for the entity, overrides the name on the SDF.
   string name                      = 8;
 
-  /// \brief Optional new namespace for the entity, overrides the namespace on the SDF.
-  StringMsg ns                        = 9;
-
   /// \brief Whether the server is allowed to rename the entity in case of
   /// overlap with existing entities.
-  bool allow_renaming              = 10;
+  bool allow_renaming              = 9;
 
   /// \brief The pose will be defined relative to this frame. If left empty,
   /// the "world" frame will be used.
-  string relative_to               = 11;
+  string relative_to               = 10;
 
   /// \brief Spherical coordinates where the entity will be spawned in the
   /// world.
@@ -86,5 +83,8 @@ message EntityFactoryWithNs
   ///   elevation.
   /// * `pose.orientation` is used in conjunction with heading:
   ///       Quaternion::fromEuler(0, 0, heading) * pose.orientation
-  SphericalCoordinates spherical_coordinates = 12;
+  SphericalCoordinates spherical_coordinates = 11;
+
+  /// \brief Optional new namespace for the entity, overrides the namespace on the SDF.
+  StringMsg namespace              = 12;
 }
