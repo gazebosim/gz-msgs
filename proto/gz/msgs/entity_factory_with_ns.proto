@@ -86,5 +86,5 @@ message EntityFactoryWithNs
   SphericalCoordinates spherical_coordinates = 11;
 
   /// \brief Optional new namespace for the entity, overrides the namespace on the SDF.
-  StringMsg namespace              = 12;
+  string namespace              = 12;
 }
