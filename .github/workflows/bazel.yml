@@ -16,11 +16,11 @@ jobs:
     with:
       folders: |
         [
-          ".",
+          "."
         ]
       exclude: |
         [
-          {"folder": ".", "bzlmodEnabled": false},
+          {"folder": ".", "bzlmodEnabled": false}
         ]
       exclude_windows: true
       bazel_test_command: "bazel test --test_output=errors //..."
