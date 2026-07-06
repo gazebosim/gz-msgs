@@ -30,7 +30,12 @@ template<typename MsgT>
 std::unique_ptr<MsgT>
 dynamic_message_cast(std::unique_ptr<google::protobuf::Message> &&_baseMsg)
 {
+#if GOOGLE_PROTOBUF_VERSION >= 5028000
+  auto converted = std::unique_ptr<MsgT>{
+      google::protobuf::DynamicCastMessage<MsgT>(_baseMsg.get())};
+#else
   auto converted = std::unique_ptr<MsgT>{dynamic_cast<MsgT*>(_baseMsg.get())};
+#endif
   if (converted) {
     // transfer ownership to a new unique_ptr object by releasing from old one
     (void) _baseMsg.release();
