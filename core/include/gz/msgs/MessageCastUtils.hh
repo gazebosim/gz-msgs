@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Open Source Robotics Foundation
+ * Copyright (C) 2026 Open Source Robotics Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,17 +73,13 @@ template <typename MsgT>
 std::unique_ptr<MsgT> DoDynamicCastMessage(
     std::unique_ptr<google::protobuf::Message>&& _baseMsg)
 {
-#if GOOGLE_PROTOBUF_VERSION >= 5028000
-  auto converted = std::unique_ptr<MsgT>{
-      google::protobuf::DynamicCastMessage<MsgT>(_baseMsg.get())};
-#else
-  auto converted = std::unique_ptr<MsgT>{dynamic_cast<MsgT*>(_baseMsg.get())};
-#endif
-  if (converted) {
+  auto* ptr = DoDynamicCastMessage<MsgT>(_baseMsg.get());
+  if (ptr) {
     // transfer ownership to a new unique_ptr object by releasing from old one
-    (void) _baseMsg.release();
+    (void)_baseMsg.release();
+    return std::unique_ptr<MsgT>(ptr);
   }
-  return converted;
+  return nullptr;
 }
 
 }  // namespace gz::msgs

@@ -25,7 +25,7 @@
 
 #include "gz/msgs/config.hh"
 #include "gz/msgs/Export.hh"
-#include "gz/msgs/Utility.hh"
+#include "gz/msgs/MessageCastUtils.hh"
 #include <gz/utils/ImplPtr.hh>
 
 namespace gz::msgs {
