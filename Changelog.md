@@ -3,7 +3,7 @@
 ### Gazebo Msgs 12.0.2 (2026-07-13)
 
 1. Bazel updates
-    * [Pull request #603](https://github.com/gazebosim/gz-msgs/pull/606)
+    * [Pull request #606](https://github.com/gazebosim/gz-msgs/pull/606)
     * [Pull request #603](https://github.com/gazebosim/gz-msgs/pull/603)
 
 1. Cleanup: use proto DynamicCastMessage if available
