@@ -19,6 +19,7 @@
 #define GZ_MSGS_MESSAGE_CAST_UTILS_HH_
 
 #include <memory>
+#include <utility>
 
 #include <google/protobuf/message.h>
 #include <google/protobuf/message_lite.h>
