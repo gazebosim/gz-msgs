@@ -36,6 +36,7 @@
 #include <gz/msgs/convert/PixelFormatType.hh>
 #include <gz/msgs/convert/ShaderType.hh>
 
+#include <gz/msgs/MessageCastUtils.hh>
 #include <gz/msgs/PointCloudPackedUtils.hh>
 
 #endif  // GZ_MSGS_UTILITY_HH_
