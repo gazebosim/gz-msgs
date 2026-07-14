@@ -23,7 +23,7 @@
 
 #include <google/protobuf/message.h>
 
-#include "gz/msgs/config.hh"
+#include "gz/msgs/Export.hh"
 #include "gz/msgs/MessageCastUtils.hh"
 
 namespace gz::msgs::detail
