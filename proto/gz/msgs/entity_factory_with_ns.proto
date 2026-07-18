@@ -84,6 +84,6 @@ message EntityFactoryWithNs
   ///       Quaternion::fromEuler(0, 0, heading) * pose.orientation
   SphericalCoordinates spherical_coordinates = 11;
 
-  /// \brief Optional new namespace for the entity, overrides the namespace on the SDF.
+  /// \brief Optional new namespace for the entity, overrides the namespace in the SDF.
   string entity_namespace              = 12;
 }
