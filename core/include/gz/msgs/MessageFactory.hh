@@ -110,6 +110,13 @@ namespace gz::msgs {
     /// files. Each directory should be separated by ":".
     public: void LoadDescriptors(const std::string &_paths);
 
+    /// \brief Get the dynamic factory, constructing it on first use.
+    /// Construction scans and parses every descriptor file reachable from
+    /// the GZ_DESCRIPTOR_PATH environment variable and the install share
+    /// directory, so it is deferred until a dynamic lookup needs it.
+    /// \return Reference to the dynamic factory.
+    private: gz::msgs::DynamicFactory &EnsureDynamicFactory();
+
     /// \brief A list of registered message types
     private: FactoryFnCollection msgMap;
 
