@@ -22,6 +22,7 @@
 #include <iostream>
 #include <iterator>
 #include <string>
+#include <system_error>
 #include <vector>
 
 #include "DynamicFactory.hh"
@@ -101,6 +102,15 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
         descFile.rfind(".proto.bin") == std::string::npos)
       return;
 
+    // Skip files that were already loaded, keyed on the canonical path so
+    // that the same file reached via multiple search paths (e.g.
+    // GZ_DESCRIPTOR_PATH and the global share directory) is parsed once.
+    std::error_code pathErr;
+    auto canonicalPath = std::filesystem::weakly_canonical(descFile, pathErr);
+    const std::string pathKey = pathErr ? descFile : canonicalPath.string();
+    if (this->loadedDescFiles.find(pathKey) != this->loadedDescFiles.end())
+      return;
+
     // Parse the .desc file.
     std::ifstream ifs(descFile);
     if (!ifs.is_open())
@@ -117,6 +127,10 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
                 << descFile << "]" << std::endl;
       return;
     }
+
+    // Record the file only after a successful parse so that transient
+    // failures above remain retryable.
+    this->loadedDescFiles.insert(pathKey);
 
     // Place the real descriptors in the descriptor pool.
     for (const google::protobuf::FileDescriptorProto &fileDescriptorProto :
