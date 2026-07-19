@@ -15,6 +15,7 @@
  *
 */
 
+#include <mutex>
 #include <unordered_set>
 
 #ifdef _MSC_VER
@@ -37,12 +38,29 @@ namespace gz::msgs
 
 /////////////////////////////////////////////////
 MessageFactory::MessageFactory():
-  dynamicFactory(gz::utils::MakeUniqueImpl<gz::msgs::DynamicFactory>())
+  dynamicFactory(nullptr,
+    [](gz::msgs::DynamicFactory *_impl) { delete _impl; })
 {
 }
 
 /////////////////////////////////////////////////
 MessageFactory::~MessageFactory() = default;
+
+/////////////////////////////////////////////////
+gz::msgs::DynamicFactory &MessageFactory::EnsureDynamicFactory()
+{
+  // A function-local mutex instead of a member keeps the class layout, and
+  // therefore the ABI, unchanged. The dynamicFactory pointer itself is the
+  // construction state, so multiple factory instances stay independent.
+  static std::mutex dynamicFactoryMutex;
+  std::lock_guard<std::mutex> lock(dynamicFactoryMutex);
+  if (!this->dynamicFactory)
+  {
+    this->dynamicFactory =
+      gz::utils::MakeUniqueImpl<gz::msgs::DynamicFactory>();
+  }
+  return *this->dynamicFactory;
+}
 
 /////////////////////////////////////////////////
 void MessageFactory::Register(const std::string &_msgType,
@@ -88,7 +106,7 @@ MessageFactory::MessagePtr MessageFactory::New(
     else
     {
       // Create a new message via dynamic descriptors
-      ret = dynamicFactory->New(_type);
+      ret = this->EnsureDynamicFactory().New(_type);
     }
     return ret;
   };
@@ -134,7 +152,7 @@ void MessageFactory::Types(std::vector<std::string> &_types)
 
   // Add the types loaded from descriptor files
   std::vector<std::string> dynTypes;
-  this->dynamicFactory->Types(dynTypes);
+  this->EnsureDynamicFactory().Types(dynTypes);
 
   // Use set to remove duplicates
   std::unordered_set<std::string> typesSet(dynTypes.begin(), dynTypes.end());
@@ -151,7 +169,7 @@ void MessageFactory::Types(std::vector<std::string> &_types)
 /////////////////////////////////////////////////
 void MessageFactory::LoadDescriptors(const std::string &_paths)
 {
-  dynamicFactory->LoadDescriptors(_paths);
+  this->EnsureDynamicFactory().LoadDescriptors(_paths);
 }
 
 }  // namespace gz::msgs
