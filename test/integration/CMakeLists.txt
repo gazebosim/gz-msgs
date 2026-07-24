@@ -36,6 +36,11 @@ if(TARGET INTEGRATION_factory_concurrency)
     "GZ_MSGS_TEST_PATH=\"${PROJECT_SOURCE_DIR}/test\"")
 endif()
 
+if(TARGET INTEGRATION_factory_lazy)
+  target_compile_definitions(INTEGRATION_factory_lazy PRIVATE
+    "GZ_MSGS_TEST_PATH=\"${PROJECT_SOURCE_DIR}/test\"")
+endif()
+
 if(TARGET INTEGRATION_gz_TEST)
     target_compile_definitions(INTEGRATION_gz_TEST PUBLIC
       "-DDETAIL_GZ_CONFIG_PATH=\"${CMAKE_BINARY_DIR}/test/conf/$<CONFIG>\"")
