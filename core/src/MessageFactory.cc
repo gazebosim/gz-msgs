@@ -40,9 +40,24 @@ class MessageFactory::Implementation
   public: FactoryFnCollection msgMap;
 
   /// \brief Factory for messages built at runtime from loaded descriptors.
-  public: std::unique_ptr<gz::msgs::DynamicFactory> dynamicFactory =
-      std::make_unique<gz::msgs::DynamicFactory>();
+  public: std::unique_ptr<gz::msgs::DynamicFactory> dynamicFactory;
+
+  /// \brief Get the dynamic factory, constructing it on first use.
+  /// Construction scans and parses every descriptor file reachable from
+  /// the GZ_DESCRIPTOR_PATH environment variable and the install share
+  /// directory, so it is deferred until a dynamic lookup needs it.
+  /// The caller must hold mutex.
+  /// \return Reference to the dynamic factory.
+  public: gz::msgs::DynamicFactory &EnsureDynamicFactory();
 };
+
+/////////////////////////////////////////////////
+gz::msgs::DynamicFactory &MessageFactory::Implementation::EnsureDynamicFactory()
+{
+  if (!this->dynamicFactory)
+    this->dynamicFactory = std::make_unique<gz::msgs::DynamicFactory>();
+  return *this->dynamicFactory;
+}
 
 /////////////////////////////////////////////////
 MessageFactory::MessageFactory():
@@ -100,7 +115,7 @@ MessageFactory::MessagePtr MessageFactory::New(
     else
     {
       // Create a new message via dynamic descriptors
-      return this->dataPtr->dynamicFactory->New(type);
+      return this->dataPtr->EnsureDynamicFactory().New(type);
     }
   }
 
@@ -135,7 +150,7 @@ void MessageFactory::Types(std::vector<std::string> &_types)
 
   // Add the types loaded from descriptor files
   std::vector<std::string> dynTypes;
-  this->dataPtr->dynamicFactory->Types(dynTypes);
+  this->dataPtr->EnsureDynamicFactory().Types(dynTypes);
 
   // Use set to remove duplicates
   std::unordered_set<std::string> typesSet(dynTypes.begin(), dynTypes.end());
@@ -154,7 +169,7 @@ void MessageFactory::Types(std::vector<std::string> &_types)
 void MessageFactory::LoadDescriptors(const std::string &_paths)
 {
   std::lock_guard<std::mutex> lock(this->dataPtr->mutex);
-  this->dataPtr->dynamicFactory->LoadDescriptors(_paths);
+  this->dataPtr->EnsureDynamicFactory().LoadDescriptors(_paths);
 }
 
 }  // namespace gz::msgs
