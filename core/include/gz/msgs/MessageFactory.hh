@@ -37,6 +37,7 @@ namespace gz::msgs {
   /// This class will also try to load all Protobuf descriptors in paths
   /// provided in LoadDescriptors as well as the GZ_DESCRIPTOR_PATH
   /// environment variable.
+  /// All member functions are thread safe.
   class GZ_MSGS_VISIBLE MessageFactory
   {
     /// \brief Base message type

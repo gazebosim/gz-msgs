@@ -15,6 +15,7 @@
  *
 */
 
+#include <mutex>
 #include <unordered_set>
 
 #include <google/protobuf/text_format.h>
@@ -31,6 +32,10 @@ namespace gz::msgs
 /// \brief Private implementation of MessageFactory.
 class MessageFactory::Implementation
 {
+  /// \brief Protects every member below, as well as the dynamic factory
+  /// reached through dynamicFactory, which is not thread safe on its own.
+  public: std::mutex mutex;
+
   /// \brief A list of registered message types.
   public: FactoryFnCollection msgMap;
 
@@ -52,6 +57,7 @@ MessageFactory::~MessageFactory() = default;
 void MessageFactory::Register(const std::string &_msgType,
                               FactoryFn _factoryfn)
 {
+  std::lock_guard<std::mutex> lock(this->dataPtr->mutex);
   this->dataPtr->msgMap[_msgType] = _factoryfn;
 }
 
@@ -81,15 +87,25 @@ MessageFactory::MessagePtr MessageFactory::New(
     type = _msgType;
   }
 
-  if (auto it = this->dataPtr->msgMap.find(type);
-      it != this->dataPtr->msgMap.end())
+  FactoryFn factoryFn;
   {
-    // Create a new message via FactoryFn
-    return it->second();
+    std::lock_guard<std::mutex> lock(this->dataPtr->mutex);
+    if (auto it = this->dataPtr->msgMap.find(type);
+        it != this->dataPtr->msgMap.end())
+    {
+      // Copy the factory function so that it can be invoked outside the
+      // lock, allowing a factory function to call back into this class.
+      factoryFn = it->second;
+    }
+    else
+    {
+      // Create a new message via dynamic descriptors
+      return this->dataPtr->dynamicFactory->New(type);
+    }
   }
 
-  // Create a new message via dynamic descriptors
-  return this->dataPtr->dynamicFactory->New(type);
+  // Create a new message via FactoryFn
+  return factoryFn();
 }
 
 /////////////////////////////////////////////////
@@ -114,6 +130,8 @@ void MessageFactory::Types(std::vector<std::string> &_types)
 {
   _types.clear();
 
+  std::lock_guard<std::mutex> lock(this->dataPtr->mutex);
+
   // Add the types loaded from descriptor files
   std::vector<std::string> dynTypes;
   this->dataPtr->dynamicFactory->Types(dynTypes);
@@ -133,6 +151,7 @@ void MessageFactory::Types(std::vector<std::string> &_types)
 /////////////////////////////////////////////////
 void MessageFactory::LoadDescriptors(const std::string &_paths)
 {
+  std::lock_guard<std::mutex> lock(this->dataPtr->mutex);
   this->dataPtr->dynamicFactory->LoadDescriptors(_paths);
 }
 
