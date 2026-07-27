@@ -19,34 +19,23 @@
 #define GZ_MSGS_DETAIL_DYNAMIC_POINTER_CAST_HH_
 
 #include <memory>
+#include <utility>
 
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4100 4512 4127 4068 4244 4267 4251 4146)
-#endif
 #include <google/protobuf/message.h>
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
+
+#include "gz/msgs/Export.hh"
+#include "gz/msgs/MessageCastUtils.hh"
 
 namespace gz::msgs::detail
 {
 
 /// Cast a base unique pointer to protobuf message type to child type
+/// Deprecated: Use DoDynamicCast instead.
 template<typename MsgT>
-std::unique_ptr<MsgT>
+std::unique_ptr<MsgT> GZ_DEPRECATED(12)
 dynamic_message_cast(std::unique_ptr<google::protobuf::Message> &&_baseMsg)
 {
-#if GOOGLE_PROTOBUF_VERSION >= 5028000
-  auto converted = std::unique_ptr<MsgT>{
-      google::protobuf::DynamicCastMessage<MsgT>(_baseMsg.get())};
-#else
-  auto converted = std::unique_ptr<MsgT>{dynamic_cast<MsgT*>(_baseMsg.get())};
-#endif
-  if (converted) {
-    (void) _baseMsg.release();
-  }
-  return converted;
+ return DoDynamicCastMessage<MsgT>(std::move(_baseMsg));
 }
 
 }  // namespace gz::msgs::detail
