@@ -25,7 +25,7 @@
 
 #include "gz/msgs/config.hh"
 #include "gz/msgs/Export.hh"
-#include "gz/msgs/detail/dynamic_message_cast.hh"
+#include "gz/msgs/MessageCastUtils.hh"
 #include <gz/utils/ImplPtr.hh>
 
 namespace gz::msgs {
@@ -72,7 +72,7 @@ namespace gz::msgs {
     public: template<typename T>
             std::unique_ptr<T> New(const std::string &_msgType)
             {
-              return detail::dynamic_message_cast<T>(New(_msgType));
+              return DoDynamicCastMessage<T>(New(_msgType));
             }
 
     /// \brief Create a new instance of a message.
@@ -84,7 +84,7 @@ namespace gz::msgs {
             std::unique_ptr<T> New(const std::string &_msgType,
                 const std::string &_args)
             {
-              return detail::dynamic_message_cast<T>(New(_msgType, _args));
+              return DoDynamicCastMessage<T>(New(_msgType, _args));
             }
 
     /// \brief Create a new instance of a message.
