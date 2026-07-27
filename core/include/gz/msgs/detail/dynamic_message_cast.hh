@@ -19,6 +19,7 @@
 #define GZ_MSGS_DETAIL_DYNAMIC_POINTER_CAST_HH_
 
 #include <memory>
+#include <utility>
 
 #ifdef _MSC_VER
 #pragma warning(push)
