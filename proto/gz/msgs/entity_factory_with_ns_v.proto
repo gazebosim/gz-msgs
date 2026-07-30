@@ -26,14 +26,9 @@ option java_outer_classname = "EntityFactoryWithNsVProtos";
 //
 import "gz/msgs/entity_factory_with_ns.proto";
 import "gz/msgs/header.proto";
-/// This message will be deprecated, use EntityFactory_V instead.
-/// Remove this message in gz-msgs14.
 
 message EntityFactoryWithNs_V
 {
-  /// \brief Deprecated message.
-  option deprecated = true;
-
   /// \brief Optional header data
   Header header = 1;
 
