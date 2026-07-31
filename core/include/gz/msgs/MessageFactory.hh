@@ -29,9 +29,6 @@
 #include <gz/utils/ImplPtr.hh>
 
 namespace gz::msgs {
-  /// Forward declarations
-  class DynamicFactory;
-
   // Inline bracket to help doxygen filtering.
   inline namespace GZ_MSGS_VERSION_NAMESPACE {
 
@@ -40,6 +37,7 @@ namespace gz::msgs {
   /// This class will also try to load all Protobuf descriptors in paths
   /// provided in LoadDescriptors as well as the GZ_DESCRIPTOR_PATH
   /// environment variable.
+  /// All member functions are thread safe.
   class GZ_MSGS_VISIBLE MessageFactory
   {
     /// \brief Base message type
@@ -110,11 +108,8 @@ namespace gz::msgs {
     /// files. Each directory should be separated by ":".
     public: void LoadDescriptors(const std::string &_paths);
 
-    /// \brief A list of registered message types
-    private: FactoryFnCollection msgMap;
-
-    /// \brief Pointer to dynamic factory implementation
-    GZ_UTILS_UNIQUE_IMPL_PTR_FWD(gz::msgs::DynamicFactory, dynamicFactory)
+    /// \brief Private data pointer.
+    GZ_UTILS_UNIQUE_IMPL_PTR(dataPtr)
   };
 }
 }  // namespace gz::msgs
