@@ -15,6 +15,7 @@
  *
 */
 
+#include <mutex>
 #include <unordered_set>
 
 #include <google/protobuf/text_format.h>
@@ -28,9 +29,24 @@ static constexpr const char * kGzMsgsPrefix = "gz.msgs.";
 namespace gz::msgs
 {
 
+/// \brief Private implementation of MessageFactory.
+class MessageFactory::Implementation
+{
+  /// \brief Protects every member below, as well as the dynamic factory
+  /// reached through dynamicFactory, which is not thread safe on its own.
+  public: std::mutex mutex;
+
+  /// \brief A list of registered message types.
+  public: FactoryFnCollection msgMap;
+
+  /// \brief Factory for messages built at runtime from loaded descriptors.
+  public: std::unique_ptr<gz::msgs::DynamicFactory> dynamicFactory =
+      std::make_unique<gz::msgs::DynamicFactory>();
+};
+
 /////////////////////////////////////////////////
 MessageFactory::MessageFactory():
-  dynamicFactory(gz::utils::MakeUniqueImpl<gz::msgs::DynamicFactory>())
+  dataPtr(gz::utils::MakeUniqueImpl<Implementation>())
 {
 }
 
@@ -41,7 +57,8 @@ MessageFactory::~MessageFactory() = default;
 void MessageFactory::Register(const std::string &_msgType,
                               FactoryFn _factoryfn)
 {
-  msgMap[_msgType] = _factoryfn;
+  std::lock_guard<std::mutex> lock(this->dataPtr->mutex);
+  this->dataPtr->msgMap[_msgType] = _factoryfn;
 }
 
 /////////////////////////////////////////////////
@@ -70,24 +87,26 @@ MessageFactory::MessagePtr MessageFactory::New(
     type = _msgType;
   }
 
-  auto getMessagePtr = [this](const std::string &_type)
+  FactoryFn factoryFn;
   {
-    MessageFactory::MessagePtr ret;
-    if (auto it = msgMap.find(_type); it != msgMap.end())
+    std::lock_guard<std::mutex> lock(this->dataPtr->mutex);
+    if (auto it = this->dataPtr->msgMap.find(type);
+        it != this->dataPtr->msgMap.end())
     {
-      // Create a new message via FactoryFn
-      ret = it->second();
+      // Copy the factory function so that it can be invoked outside the
+      // lock, allowing a factory function to call back into this class.
+      factoryFn = it->second;
     }
     else
     {
       // Create a new message via dynamic descriptors
-      ret = dynamicFactory->New(_type);
+      return this->dataPtr->dynamicFactory->New(type);
     }
-    return ret;
-  };
+  }
 
-  auto ret = getMessagePtr(type);
-  return ret;
+  // Create a new message via FactoryFn
+  if (factoryFn) return factoryFn();
+  return nullptr;
 }
 
 /////////////////////////////////////////////////
@@ -112,26 +131,30 @@ void MessageFactory::Types(std::vector<std::string> &_types)
 {
   _types.clear();
 
+  std::lock_guard<std::mutex> lock(this->dataPtr->mutex);
+
   // Add the types loaded from descriptor files
   std::vector<std::string> dynTypes;
-  this->dynamicFactory->Types(dynTypes);
+  this->dataPtr->dynamicFactory->Types(dynTypes);
 
   // Use set to remove duplicates
   std::unordered_set<std::string> typesSet(dynTypes.begin(), dynTypes.end());
 
   // Return the list of all known message types.
-  for (auto iter = msgMap.begin(); iter != msgMap.end(); ++iter)
+  for (const auto &[typeName, factoryFn] : this->dataPtr->msgMap)
   {
-    typesSet.insert(iter->first);
+    typesSet.insert(typeName);
   }
 
+  _types.reserve(typesSet.size());
   std::copy(typesSet.begin(), typesSet.end(), std::back_inserter(_types));
 }
 
 /////////////////////////////////////////////////
 void MessageFactory::LoadDescriptors(const std::string &_paths)
 {
-  dynamicFactory->LoadDescriptors(_paths);
+  std::lock_guard<std::mutex> lock(this->dataPtr->mutex);
+  this->dataPtr->dynamicFactory->LoadDescriptors(_paths);
 }
 
 }  // namespace gz::msgs
