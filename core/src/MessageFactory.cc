@@ -145,6 +145,7 @@ void MessageFactory::Types(std::vector<std::string> &_types)
     typesSet.insert(typeName);
   }
 
+  _types.reserve(typesSet.size());
   std::copy(typesSet.begin(), typesSet.end(), std::back_inserter(_types));
 }
 
