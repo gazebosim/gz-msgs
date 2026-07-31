@@ -105,7 +105,8 @@ MessageFactory::MessagePtr MessageFactory::New(
   }
 
   // Create a new message via FactoryFn
-  return factoryFn();
+  if (factoryFn) return factoryFn();
+  return nullptr;
 }
 
 /////////////////////////////////////////////////
