@@ -36,6 +36,8 @@ namespace gz::msgs {
 /// via the GZ_DESCRIPTOR_PATH environment variable. This environment
 /// variable expects paths to directories containing .desc files.
 /// Any file without the .desc or .gz_desc extension will be ignored.
+/// This class is not thread safe; MessageFactory serializes all access
+/// to it.
 class DynamicFactory
 {
   public: using Message = google::protobuf::Message;
