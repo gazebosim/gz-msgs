@@ -29,7 +29,7 @@ option java_outer_classname = "EntityFactoryWithNsProtos";
 /// 2. From an SDF file (sdf_filename)
 /// 3. From a message (model / light)
 /// 4. Cloning an existing entity (clone_name)
-/// This message will be deprecated, use EntityFactory instead.
+/// This message is deprecated, use EntityFactory instead.
 /// Remove this message in gz-msgs14.
 
 import "gz/msgs/header.proto";
