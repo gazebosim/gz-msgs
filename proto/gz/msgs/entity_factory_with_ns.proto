@@ -29,6 +29,8 @@ option java_outer_classname = "EntityFactoryWithNsProtos";
 /// 2. From an SDF file (sdf_filename)
 /// 3. From a message (model / light)
 /// 4. Cloning an existing entity (clone_name)
+/// This message is deprecated, use EntityFactory instead.
+/// Remove this message in gz-msgs14.
 
 import "gz/msgs/header.proto";
 import "gz/msgs/light.proto";
@@ -38,6 +40,9 @@ import "gz/msgs/spherical_coordinates.proto";
 
 message EntityFactoryWithNs
 {
+  /// \brief Deprecated message.
+  option deprecated = true;
+
   /// \brief Optional header data
   Header header                    = 1;
 
