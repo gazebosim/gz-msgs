@@ -1,5 +1,35 @@
 ## Gazebo Msgs 10.x
 
+### Gazebo Msgs 10.3.3 (2026-08-11)
+
+1. Rename dynamic_message_cast to DoDynamicCastMessage, and add more overloads.
+    * [Pull request #614](https://github.com/gazebosim/gz-msgs/pull/614)
+
+1. Cleanup: use proto DynamicCastMessage if available
+    * [Pull request #599](https://github.com/gazebosim/gz-msgs/pull/599)
+
+1. Fix Python test PYTHONPATH: use ENVIRONMENT_MODIFICATION instead of ENVIRONMENT
+    * [Pull request #584](https://github.com/gazebosim/gz-msgs/pull/584)
+
+1. Fix multiple dependency descriptor generation
+    * [Pull request #561](https://github.com/gazebosim/gz-msgs/pull/561)
+
+1. Fix unused result warnings
+    * [Pull request #570](https://github.com/gazebosim/gz-msgs/pull/570)
+
+1. Remove duplicated protoc command
+    * [Pull request #566](https://github.com/gazebosim/gz-msgs/pull/566)
+
+1. Backport suppression of deprecation warnings
+    * [Pull request #553](https://github.com/gazebosim/gz-msgs/pull/553)
+
+1. Fix compatibility with protobuf v30 (cpp 6.30.0)
+    * [Pull request #501](https://github.com/gazebosim/gz-msgs/pull/501)
+
+1. Update maintainer email
+    * [Pull request #491](https://github.com/gazebosim/gz-msgs/pull/491)
+
+
 ### Gazebo Msgs 10.3.2 (2025-02-10)
 
 1. cmake extras: only find Python3 if needed
