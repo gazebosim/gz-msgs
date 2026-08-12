@@ -1,6 +1,6 @@
 ## Gazebo Msgs 11.x
 
-### Gazebo Msgs 11.1.1 (2026-08-11)
+### Gazebo Msgs 11.2.0 (2026-08-12)
 
 1. Rename dynamic_message_cast to DoDynamicCastMessage, and add more overloads.
     * [Pull request #613](https://github.com/gazebosim/gz-msgs/pull/613)
@@ -15,8 +15,8 @@
     * [Pull request #511](https://github.com/gazebosim/gz-msgs/pull/511)
     * [Pull request #510](https://github.com/gazebosim/gz-msgs/pull/510)
 
-1. Cleanup: use proto DynamicCastMessage if available (#596)
-    * [Pull request #596) (#598](https://github.com/gazebosim/gz-msgs/pull/596) (#598)
+1. Cleanup: use proto DynamicCastMessage if available
+    * [Pull request #598](https://github.com/gazebosim/gz-msgs/pull/598)
 
 1. Fix Python test PYTHONPATH: use ENVIRONMENT_MODIFICATION instead of ENVIRONMENT
     * [Pull request #584](https://github.com/gazebosim/gz-msgs/pull/584)
@@ -30,14 +30,14 @@
 1. Fix unused result warnings
     * [Pull request #570](https://github.com/gazebosim/gz-msgs/pull/570)
 
-1. Remove duplicated protoc command (#562)
-    * [Pull request #562) (#565](https://github.com/gazebosim/gz-msgs/pull/562) (#565)
+1. Remove duplicated protoc command
+    * [Pull request #565](https://github.com/gazebosim/gz-msgs/pull/565)
 
 1. Fix gz msgs ruby command
     * [Pull request #516](https://github.com/gazebosim/gz-msgs/pull/516)    
 
-1. Fix compatibility with protobuf v30 (cpp 6.30.0) (#499)
-    * [Pull request #499) (#501](https://github.com/gazebosim/gz-msgs/pull/499) (#501)
+1. Fix compatibility with protobuf v30 (cpp 6.30.0)
+    * [Pull request #501](https://github.com/gazebosim/gz-msgs/pull/501)
 
 1. Update maintainer email
     * [Pull request #491](https://github.com/gazebosim/gz-msgs/pull/491)
