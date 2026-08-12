@@ -1,6 +1,6 @@
 ## Gazebo Msgs 10.x
 
-### Gazebo Msgs 10.3.3 (2026-08-11)
+### Gazebo Msgs 10.4.0 (2026-08-12)
 
 1. Rename dynamic_message_cast to DoDynamicCastMessage, and add more overloads.
     * [Pull request #614](https://github.com/gazebosim/gz-msgs/pull/614)
