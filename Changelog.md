@@ -1,5 +1,47 @@
 ## Gazebo Msgs 11.x
 
+### Gazebo Msgs 11.2.0 (2026-08-12)
+
+1. Rename dynamic_message_cast to DoDynamicCastMessage, and add more overloads.
+    * [Pull request #613](https://github.com/gazebosim/gz-msgs/pull/613)
+
+1. Bazel updates:
+    * [Pull request #605](https://github.com/gazebosim/gz-msgs/pull/605)
+    * [Pull request #541](https://github.com/gazebosim/gz-msgs/pull/541)
+    * [Pull request #540](https://github.com/gazebosim/gz-msgs/pull/540)
+    * [Pull request #539](https://github.com/gazebosim/gz-msgs/pull/539)
+    * [Pull request #521](https://github.com/gazebosim/gz-msgs/pull/521)
+    * [Pull request #519](https://github.com/gazebosim/gz-msgs/pull/519)
+    * [Pull request #511](https://github.com/gazebosim/gz-msgs/pull/511)
+    * [Pull request #510](https://github.com/gazebosim/gz-msgs/pull/510)
+
+1. Cleanup: use proto DynamicCastMessage if available
+    * [Pull request #598](https://github.com/gazebosim/gz-msgs/pull/598)
+
+1. Fix Python test PYTHONPATH: use ENVIRONMENT_MODIFICATION instead of ENVIRONMENT
+    * [Pull request #584](https://github.com/gazebosim/gz-msgs/pull/584)
+
+1. ci.yml: fix push branch filter pattern
+    * [Pull request #585](https://github.com/gazebosim/gz-msgs/pull/585)
+
+1. Fix multiple dependency descriptor generation
+    * [Pull request #561](https://github.com/gazebosim/gz-msgs/pull/561)
+
+1. Fix unused result warnings
+    * [Pull request #570](https://github.com/gazebosim/gz-msgs/pull/570)
+
+1. Remove duplicated protoc command
+    * [Pull request #565](https://github.com/gazebosim/gz-msgs/pull/565)
+
+1. Fix gz msgs ruby command
+    * [Pull request #516](https://github.com/gazebosim/gz-msgs/pull/516)    
+
+1. Fix compatibility with protobuf v30 (cpp 6.30.0)
+    * [Pull request #501](https://github.com/gazebosim/gz-msgs/pull/501)
+
+1. Update maintainer email
+    * [Pull request #491](https://github.com/gazebosim/gz-msgs/pull/491)
+
 ### Gazebo Msgs 11.1.0 (2025-05-09)
 
 1. Add CI support for bzlmod
