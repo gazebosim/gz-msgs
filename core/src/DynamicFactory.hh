@@ -25,6 +25,7 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 
@@ -76,6 +77,10 @@ class DynamicFactory
   /// std::unique_ptr to a new empty instance of the message or nullptr if
   /// the message is not registered.
   private: std::map<std::string, FactoryFn> dynamicMsgMap;
+
+  /// \brief Canonical paths of the descriptor files already loaded, used
+  /// to avoid parsing the same file reached via multiple search paths.
+  private: std::unordered_set<std::string> loadedDescFiles;
 
   /// \brief We store the descriptors here.
   private: google::protobuf::DescriptorPool pool;

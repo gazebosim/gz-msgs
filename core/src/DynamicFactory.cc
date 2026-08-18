@@ -22,6 +22,8 @@
 #include <iostream>
 #include <iterator>
 #include <string>
+#include <system_error>
+#include <utility>
 #include <vector>
 
 #include "DynamicFactory.hh"
@@ -101,6 +103,15 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
         descFile.rfind(".proto.bin") == std::string::npos)
       return;
 
+    // Skip files that were already loaded, keyed on the canonical path so
+    // that the same file reached via multiple search paths (e.g.
+    // GZ_DESCRIPTOR_PATH and the global share directory) is parsed once.
+    std::error_code pathErr;
+    auto canonicalPath = std::filesystem::weakly_canonical(descFile, pathErr);
+    const std::string pathKey = pathErr ? descFile : canonicalPath.string();
+    if (this->loadedDescFiles.find(pathKey) != this->loadedDescFiles.end())
+      return;
+
     // Parse the .desc file.
     std::ifstream ifs(descFile);
     if (!ifs.is_open())
@@ -117,6 +128,10 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
                 << descFile << "]" << std::endl;
       return;
     }
+
+    // Record the file only after a successful parse so that transient
+    // failures above remain retryable.
+    this->loadedDescFiles.insert(pathKey);
 
     // Place the real descriptors in the descriptor pool.
     for (const google::protobuf::FileDescriptorProto &fileDescriptorProto :
@@ -188,28 +203,28 @@ void DynamicFactory::Types(std::vector<std::string> &_types)
 DynamicFactory::MessagePtr DynamicFactory::New(const std::string &_msgType)
 {
   // Shortcut if the type has been already registered.
-  auto messageIt = dynamicMsgMap.find(_msgType);
-  if (messageIt != dynamicMsgMap.end())
-    return messageIt ->second();
+  auto messageIt = dynamicMsgMap.lower_bound(_msgType);
+  if (messageIt != dynamicMsgMap.end() && messageIt->first == _msgType)
+    return messageIt->second();
 
   // Nothing to do if we don't know about this type in the descriptor map.
   const auto *descriptor = pool.FindMessageTypeByName(_msgType);
   if (!static_cast<bool>(descriptor))
     return nullptr;
 
-  google::protobuf::Message *msgPtr(
-      dynamicMessageFactory.GetPrototype(descriptor)->New());
+  // The prototype is owned by dynamicMessageFactory, which outlives the
+  // lambda registered below.
+  const auto *prototype = dynamicMessageFactory.GetPrototype(descriptor);
 
   // Create the lambda for registration purposes.
-  auto f = [msgPtr]() -> MessagePtr
+  auto f = [prototype]() -> MessagePtr
   {
-    MessagePtr ptr(msgPtr->New());
-    return ptr;
+    return MessagePtr(prototype->New());
   };
 
-  // Register the new type for the future.
-  dynamicMsgMap[_msgType] = f;
+  // Register the new type for the future, reusing the lookup position.
+  messageIt = dynamicMsgMap.emplace_hint(messageIt, _msgType, std::move(f));
 
-  return f();
+  return messageIt->second();
 }
 }  // namespace gz::msgs
