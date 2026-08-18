@@ -8,6 +8,14 @@ release will remove the deprecated code.
 
 ## Gazebo Msgs 12.X to 13.X
 
+### Deprecations
+
+1. **entity_factory_with_ns.proto**
+    + This message is deprecated. Use `EntityFactory` instead.
+
+1. **entity_factory_with_ns_v.proto**
+    + This message is deprecated. Use `EntityFactory_V` instead.
+
 
 ## Gazebo Msgs 11.X to 12.X
 
