@@ -109,8 +109,9 @@ class DynamicFactory
         if ((*dirIter).rfind(".desc") == std::string::npos)
           continue;
 
-        // Parse the .desc file.
-        std::ifstream ifs(*dirIter);
+        // Parse the .desc file. Binary mode matters on Windows, where a
+        // text mode stream would stop reading at the first 0x1A byte.
+        std::ifstream ifs(*dirIter, std::ios::binary);
         if (!ifs.is_open())
         {
           std::cerr << "DynamicFactory(): Unable to open [" << *dirIter << "]"
