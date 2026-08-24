@@ -128,16 +128,14 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
       return;
     }
 
-    // Record the file only after a successful parse so that transient
-    // failures above remain retryable.
-    this->loadedDescFiles.insert(pathKey);
-
     // Place the real descriptors in the descriptor pool.
+    bool allBuilt = true;
     for (const google::protobuf::FileDescriptorProto &fileDescriptorProto :
          fileDescriptorSet.file())
     {
       if (!static_cast<bool>(this->pool.BuildFile(fileDescriptorProto)))
       {
+        allBuilt = false;
         std::cerr << "DynamicFactory(). Unable to place descriptors from ["
                   << descFile << "] in the descriptor pool" << std::endl;
       }
@@ -146,6 +144,13 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
         this->db.Add(fileDescriptorProto);
       }
     }
+
+    // Record the file only once every descriptor in it reached the pool,
+    // so that failures above remain retryable. In particular a file whose
+    // imports live in another descriptor file that has not been loaded yet
+    // must still be reloadable once that dependency is available.
+    if (allBuilt)
+      this->loadedDescFiles.insert(pathKey);
   };
 
   for (const std::string &descDir : descDirs)
