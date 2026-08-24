@@ -111,8 +111,9 @@ void DynamicFactory::LoadDescriptors(const std::string &_paths)
     if (this->loadedDescFiles.find(pathKey) != this->loadedDescFiles.end())
       return;
 
-    // Parse the .desc file.
-    std::ifstream ifs(descFile);
+    // Parse the .desc file. Binary mode matters on Windows, where a text
+    // mode stream would stop reading at the first 0x1A byte.
+    std::ifstream ifs(descFile, std::ios::binary);
     if (!ifs.is_open())
     {
       std::cerr << "DynamicFactory(): Unable to open [" << descFile << "]"
