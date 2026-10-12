@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 Open Source Robotics Foundation
+ * Copyright (C) 2026 Rudis Laboratories
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +31,43 @@ import "gz/msgs/vector3d.proto";
 /// \brief Message that encapsulates sensor data from a magnetometer.
 message Magnetometer
 {
+  /// \brief Units for the magnetic field measurement.
+  enum MagneticFieldUnit
+  {
+    /// \brief Gauss (1 G = 1e-4 T). Default.
+    GAUSS       = 0;
+
+    /// \brief Tesla (SI unit).
+    TESLA       = 1;
+
+    /// \brief Microtesla (1 uT = 1e-6 T).
+    MICRO_TESLA = 2;
+
+    /// \brief Nanotesla (1 nT = 1e-9 T).
+    NANO_TESLA  = 3;
+  }
+
+  /// \brief Coordinate frame convention for the field vector.
+  enum CoordinateFrame
+  {
+    /// \brief East-North-Up. Default.
+    ENU = 0;
+
+    /// \brief North-East-Down.
+    NED = 1;
+  }
+
   /// \brief Optional header data
   Header header             = 1;
 
-  /// \brief Magnetic field strength (in Tesla) along body-frame axis
+  /// \brief Magnetic field vector along body-frame axes.
+  /// The unit and coordinate frame are indicated by the unit and frame fields.
+  /// Field name kept as field_tesla for protobuf backward compatibility.
   Vector3d field_tesla      = 2;
+
+  /// \brief Unit of the magnetic field measurement.
+  MagneticFieldUnit unit    = 3;
+
+  /// \brief Coordinate frame convention of the field vector.
+  CoordinateFrame frame     = 4;
 }
