@@ -48,4 +48,7 @@ message AttachDetachRequest
 
   /// \brief Command to attach or detach.
   Command command = 3;
+
+  /// \brief Name of the parent link.
+  string parent_link_name = 4;
 }
