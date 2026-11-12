@@ -77,6 +77,23 @@ message Discovery
   message Subscriber
   {
     string topic = 1;
+
+    /// \brief Node UUID of the subscriber.
+    string n_uuid = 2;
+  }
+
+  /// \brief Metadata describing a burst of SUBSCRIBERS_REP messages sent by
+  /// one process in response to a SUBSCRIBERS_REQ. The receiver knows that
+  /// the snapshot is complete when count messages have been received.
+  message SubscribersSnapshot
+  {
+    /// \brief Number of SUBSCRIBERS_REP messages in this burst. Zero when
+    /// the process has no subscriptions.
+    uint32 count = 1;
+
+    /// \brief Subscription generation of the process when the snapshot was
+    /// taken. Monotonically increasing on every subscription change.
+    uint64 generation = 2;
   }
 
   /// \brief Information about a publisher.
@@ -178,4 +195,7 @@ message Discovery
     /// \brief Publisher information.
     Publisher pub     = 7;
   }
+
+  /// \brief Snapshot metadata attached to SUBSCRIBERS_REP messages.
+  SubscribersSnapshot subscribers_snapshot = 8;
 }
