@@ -1,5 +1,22 @@
 ## Gazebo Msgs 11.x
 
+### Gazebo Msgs 11.2.1 (2026-11-17)
+
+1. Update maintainer email
+    * [Pull request #643](https://github.com/gazebosim/gz-msgs/pull/643)
+
+1. Use the SPDX identifier Apache-2.0 in the license declaration
+    * [Pull request #636](https://github.com/gazebosim/gz-msgs/pull/636)
+
+1. Update BCR maintainers
+    * [Pull request #629](https://github.com/gazebosim/gz-msgs/pull/629)
+
+1. Change Bazel to use Clang for layering checks
+    * [Pull request #627](https://github.com/gazebosim/gz-msgs/pull/627)
+
+1. Construct the dynamic message factory lazily
+    * [Pull request #621](https://github.com/gazebosim/gz-msgs/pull/621)
+
 ### Gazebo Msgs 11.2.0 (2026-08-12)
 
 1. Rename dynamic_message_cast to DoDynamicCastMessage, and add more overloads.
