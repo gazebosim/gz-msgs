@@ -1,5 +1,19 @@
 ## Gazebo Msgs 8.x
 
+### Gazebo Msgs 8.7.2 (2026-11-19)
+
+1. Open descriptor files in binary mode so Windows reads them fully
+    * [Pull request #622](https://github.com/gazebosim/gz-msgs/pull/622)
+
+1. Return nullptr when message fails to populate
+    * [Pull request #578](https://github.com/gazebosim/gz-msgs/pull/578)
+
+1. Fix multiple dependency descriptor generation
+    * [Pull request #583](https://github.com/gazebosim/gz-msgs/pull/583)
+
+1. Fix unused result warnings
+    * [Pull request #574](https://github.com/gazebosim/gz-msgs/pull/574)
+
 ### Gazebo Msgs 8.7.1 (2026-02-17)
 
 1. Fortress: disable Ubuntu Focal CI
