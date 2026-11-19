@@ -1,5 +1,13 @@
 ## Gazebo Msgs 10.x
 
+### Gazebo Msgs 10.4.1 (2026-11-19)
+
+1. Update maintainer email
+    * [Pull request #644](https://github.com/gazebosim/gz-msgs/pull/644)
+
+1. Use the SPDX identifier Apache-2.0 in the license declaration
+    * [Pull request #637](https://github.com/gazebosim/gz-msgs/pull/637)
+
 ### Gazebo Msgs 10.4.0 (2026-08-12)
 
 1. Rename dynamic_message_cast to DoDynamicCastMessage, and add more overloads.
