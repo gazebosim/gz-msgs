@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>gz-msgs</name>
-  <version>12.0.2</version>
+  <version>12.1.0</version>
   <description>Gazebo Messages: Protobuf messages and functions for robot applications</description>
   <maintainer email="caguero@honurobotics.com">Carlos Agüero</maintainer>
   <license>Apache-2.0</license>
