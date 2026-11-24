@@ -105,6 +105,7 @@ gz_create_core_library(SOURCES
   src/DynamicFactory.cc
   ${msgs_sources}
   ${GZ_MSGS_DESC_FILENAME}
+  CXX_STANDARD ${CMAKE_CXX_STANDARD}
 )
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME} PUBLIC

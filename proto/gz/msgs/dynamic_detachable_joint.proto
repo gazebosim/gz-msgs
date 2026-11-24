@@ -25,6 +25,9 @@ option java_outer_classname = "DynamicDetachableJointProtos";
 /// \ingroup gz.msgs
 /// \interface AttachDetachRequest
 /// \brief Request to attach or detach a runtime detachable joint.
+
+import "gz/msgs/header.proto";
+
 message AttachDetachRequest
 {
   /// \brief Command to apply.
@@ -40,12 +43,18 @@ message AttachDetachRequest
     DETACH = 2;
   }
 
+  /// \brief Optional header data.
+  Header header = 1;
+
   /// \brief Name of the child model.
-  string child_model_name = 1;
+  string child_model_name = 2;
 
   /// \brief Name of the child link.
-  string child_link_name = 2;
+  string child_link_name = 3;
 
   /// \brief Command to attach or detach.
-  Command command = 3;
+  Command command = 4;
+
+  /// \brief Name of the parent link.
+  string parent_link_name = 5;
 }
