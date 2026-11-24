@@ -4,3 +4,4 @@ make install
 export GZ_CONFIG_PATH=/usr/local/share/gz
 export LD_LIBRARY_PATH=/usr/local/lib
 gz msg
+gz msg -i gz.msgs.Twist gz.msgs.Pose

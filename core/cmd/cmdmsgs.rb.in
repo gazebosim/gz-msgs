@@ -34,7 +34,7 @@ class Cmd
     end
 
     # Drop command from list of arguments
-    Open3.popen2e(exe_name, *args[1..1]) do |_in, out_err, wait_thr|
+    Open3.popen2e(exe_name, *args[1..-1]) do |_in, out_err, wait_thr|
       begin
         out_err.each do |line|
           print line
