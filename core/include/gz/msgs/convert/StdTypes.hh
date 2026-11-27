@@ -46,7 +46,6 @@ inline void Set(gz::msgs::Time *_msg,
 {
   std::pair<uint64_t, uint64_t> timeSecAndNsecs =
         gz::math::durationToSecNsec(_data);
-  msgs::Time msg;
   _msg->set_sec(timeSecAndNsecs.first);
   _msg->set_nsec(static_cast<int32_t>(timeSecAndNsecs.second));
 }
